@@ -1,0 +1,78 @@
+<!--
+工单查询
+ @since 2019-12-25
+ 巫奕海
+-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.mono" hc-label="工单号" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.itemcode" hc-label="产品编码" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.organizationid" hc-label="组织" hc-readonly="true" hc-dict-code="bcs.organizationid">
+                </div>
+                <div hc-input="data.currItem.itemname" hc-label="产品名称" hc-readonly="true" >
+                </div>
+            </div>
+            <div class="row">   
+                <div hc-input="data.currItem.motype" hc-label="工单类型" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.mostatus" hc-label="工单状态" hc-readonly="true">
+                </div> 
+                <div hc-input="data.currItem.qty" hc-label="工单数量" hc-type="number" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.conpleted_qty" hc-label="完工数量" hc-type="number" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">   
+                <!-- <div hc-input="data.currItem.fdiscard_qty" hc-label="报废数量" hc-type="number" hc-readonly="true">
+                </div> 
+                <div hc-input="data.currItem.surplus_qty" hc-label="剩余数量" hc-type="number" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.tolerant_qty" hc-label="允差数量" hc-type="number" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.scan_qty" hc-label="扫描数量" hc-type="number" hc-readonly="true">
+                </div> -->
+                <div hc-input="data.currItem.dif" hc-label="可超数额" hc-blur="checkDif()" hc-type="number"  hc-readonly="!userbean.hasRole('purchase')">
+                </div>
+                <div hc-input="data.currItem.packqty" hc-label="包件数量" hc-required="true"  hc-type="number">
+                </div>
+                <div hc-input="data.currItem.can_generate_qty" hc-label="剩余条码数量" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.can_print_qty" hc-label="可打印数量" hc-readonly="true">
+                </div>
+            </div> 
+            <div class="row"> 
+                <div hc-input="data.currItem.creator" hc-label="创建人" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.createtime" hc-label="创建时间" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.updator" hc-label="更新用户" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.updatetime" hc-label="更新时间" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row"> 
+                <div hc-input="data.currItem.temp_name" hc-label="打印模板"
+                hc-class-id="bcs_print_template" hc-common-search="searchprint"> </div>
+                <div hc-input="data.currItem.temp_width" hc-label="模板长度" hc-readonly="true" hc-unit="mm">
+                </div> 
+                <div hc-input="data.currItem.temp_height" hc-label="模板高度" hc-readonly="true" hc-unit="mm">
+                </div>
+                <div hc-input="data.currItem.factbase" hc-label="基地" hc-dict-code="bcs.factbase" hc-required="true">
+                </div>
+                <!-- <div style="margin-left: 4px;" hc-title="下载模板" hc-button="downLoadFile()"  ng-show="data.currItem.print_software==2"></div>  -->
+            </div>
+           <!--  <div class="row">    
+                <div hc-input="data.currItem.description" hc-label="描述" hc-readonly="true"  hc-col-count="8">
+                </div>
+            </div>-->
+            <div class="row">    
+                <div hc-input="data.currItem.temp_content" hc-label="模板内容" hc-row="10" hc-col-count="8" hc-type="textarea">
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>

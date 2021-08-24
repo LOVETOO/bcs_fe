@@ -1,0 +1,70 @@
+<div hc-div-page hc-init="doInit()" style="height:98%;display: flex;">
+    <div hc-box class="flex1 flex-column flex-start">
+        <div hc-box style="margin: 0;">
+            <div class="row" style="margin-bottom: 0;">
+                <div hc-input="data.currItem.begintime" hc-label="查询时间：" hc-type="date" style="margin-right: 0;" class="searchtime"></div>
+                <div hc-input="data.currItem.endtime" hc-label="到" hc-type="date" class="searchtime" ></div>
+                <div hc-input="data.currItem.barcode" hc-label="条码" hc-type="text"></div>
+                <div hc-title="查找" hc-button="searchbracode()"></div>
+            </div>
+        </div>
+        <div hc-box class="flex1 flex-row ibox-title" style="border-top:1px solid #eeeeee" >
+            <div class="flex-column flex1" id="left" style="flex: 1;">
+                <div hc-box class="flex-column flex1">
+                    <div hc-grid="gridOptions" class="flex1"></div>
+                </div>
+            </div>
+            <div class="flex-column flex3" style="margin-left: 15px;flex: 3;">
+                <div hc-tab="kpi_tab" class="other-h"></div>
+                <div hc-tab-page class="flex-column flex1" >
+                    <div id="map" class="active flex-column flex1">
+                        <div id="context" class="flex-column flex1" >
+                            <div id="anti-counterfeiting-hotspot" class="flex-column flex1">
+                                <hc-chart id="myChart" hc-chart-option="chartOption" hc-chart-as="chart" style="width: 100%;height: 100%;"></hc-chart>
+                            </div>
+                            <div class="fales_title">
+                                <p>全国城市防伪情况</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="list">
+                        <div hc-grid="listOptions" class="flex1"></div>
+                    </div>
+                    <div id="barcode">
+                        <div hc-grid="bracodeOptions" class="flex1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .fales_title {
+        position: absolute;
+    left: 50%;
+        margin-left: -110px;
+        z-index: 99999;
+        width: 220px;
+        height: 30px;
+        display: inline-block;
+        color: #dc3545;
+        text-align: center;
+    }
+    .fales_title>p{
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 2px;
+        font-weight: bold;
+    }
+    #context {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+    .input-inline>label{
+        text-align: center;
+    }
+    .searchtime{
+        min-width: 200px;
+    }
+</style>

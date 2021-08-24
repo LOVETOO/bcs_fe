@@ -1,0 +1,48 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.temp_name" hc-label="模板名称">
+                </div>
+                <div hc-input="data.currItem.temp_desc" hc-label="模板描述">
+                </div>
+                <div hc-input="data.currItem.print_software" hc-dict-code="print_software" hc-label="打印软件">
+                </div>
+                <div style="margin-left: 4px;" hc-title="编辑模板" hc-button="getPrint()"
+                    ng-show="data.currItem.print_software==1"></div>
+                <div style="margin-left: 4px;" hc-title="上传模板" hc-button="chooseFile()"
+                    ng-show="data.currItem.print_software==2"></div>
+                <div style="margin-left: 4px;" hc-title="下载模板" hc-button="downLoadFile()"
+                    ng-show="data.currItem.print_software==2"></div>
+            </div>
+            <div class="row" ng-show="data.currItem.print_software==1">
+                <div hc-input="data.currItem.width" hc-label="模板长度" hc-unit="mm">
+                </div>
+                <div hc-input="data.currItem.height" hc-label="模板宽度" hc-unit="mm">
+                </div>
+                <div hc-input="data.currItem.inneruse" hc-label="内部可用" hc-type="checkbox" hc-true-value="2"
+                    hc-false-value="1" class="oneis"></div>
+                <div hc-input="data.currItem.outeruse" hc-label="外部可用" hc-type="checkbox" hc-true-value="2"
+                    hc-false-value="1" class="oneis"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.temp_content" hc-label="lodop" hc-col-count="8" hc-type="textarea"
+                    hc-row="6" ng-show="data.currItem.print_software==1">
+                </div>
+                <div hc-input="data.currItem.filename" hc-label="label mx" hc-col-count=" 4" hc-type="textarea"
+                    ng-show="data.currItem.print_software==2"></div>
+            </div>
+        </div>
+        <!-- 从表需要加这代码来获取数据 -->
+        <!-- <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div> -->
+        <div hc-tab="reftab" hc-tab-change="onTabChange(params)"></div>
+        <div hc-tab-page class="flex1">
+            <div id="itemclass" class="active">
+                <div hc-box hc-grid="gridOptions_itemclass" class="flex1" style="height:204px"></div>
+            </div>
+            <div id="item">
+                <div hc-box hc-grid="gridOptions" class="flex1" style="height:204px"></div>
+            </div>
+        </div>
+    </div>
+</div>

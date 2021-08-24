@@ -1,0 +1,55 @@
+<!--
+ 条码领用
+ @since 2019-12-18
+ 巫奕海
+-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.code" hc-label="领用单号" hc-readonly="true"></div>
+                <div hc-input="data.currItem.orgname" hc-label="领用部门" hc-required="true" hc-class-id="scporg"
+                    hc-common-search="searchScporg">
+                </div>
+
+
+                <div hc-input="data.currItem.pageno" hc-label="防伪批次号" hc-required="true"></div>
+                <div hc-input="data.currItem.stat" hc-label="单据状态" hc-dict-code="stat" hc-readonly="true"
+                    hc-required="true"></div>
+                <!-- <div hc-input="data.currItem.code" hc-label="条码批次号" hc-required="true"
+                     hc-class-id="bcs_inv_stock" hc-common-search="searchStock"> 
+                </div> -->
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.username" hc-label="领用人" hc-required="true" hc-class-id="scpuser"
+                    hc-common-search="searchScpuser">
+                </div>
+                <div hc-input="data.currItem.purchno" hc-label="EBS领料单号" hc-required="true">
+                </div>
+                <!-- <div hc-input="data.currItem.invqty" hc-label="库存数量" hc-readonly="true">
+                </div> -->
+                <!-- <div hc-input="data.currItem.qty" hc-change="checkQty()" hc-label="领用数量" hc-required="true"> 
+            </div>-->
+                <div hc-input="data.currItem.vendorcode" hc-label="供应商编码"></div>
+                <!-- <div hc-input="data.currItem.createtime" hc-label="创建时间" hc-readonly="true">
+                </div> -->
+                <div hc-input="data.currItem.qty" hc-label="领用数量" hc-required="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.factbase" hc-label="基地" hc-dict-code="bcs.factbase" hc-required="true">
+                </div>
+                <div hc-input="data.currItem.updator" hc-label="更新人" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.updatetime" hc-label="更新时间" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.creator" hc-label="创建人" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.description" hc-label="说明" hc-col-count="8">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

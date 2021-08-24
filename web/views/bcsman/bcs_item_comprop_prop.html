@@ -1,0 +1,26 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.propfield" hc-label="属性字段" hc-col-count="4">
+                </div>
+                <div hc-input="data.currItem.propname" hc-label="属性名称" hc-col-count="4">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.note" hc-label="备注" hc-col-count="8">
+                </div>
+            </div>
+            <div class="row" ng-show="data.currItem.print_software==1">
+                <div hc-input="data.currItem.creator" hc-label="创建人" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.createtime" hc-label="创建时间" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.updator" hc-label="更新人" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.updatetime" hc-label="更新时间" hc-readonly="true">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

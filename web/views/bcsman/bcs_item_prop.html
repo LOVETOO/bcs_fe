@@ -1,0 +1,86 @@
+<!--
+产品资料
+ @since 2020-03-06
+ wzf
+-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.organizationid" hc-label="组织" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.itemcode" hc-label="产品编码" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.itemname" hc-label="产品名称" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.custno" hc-label="客户编码" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.big_category_code" hc-label="大类编码" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.bigcategoryname" hc-label="大类名称" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.middlecategroycode" hc-label="中类编码" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.middlecategroyname" hc-label="中类名称" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.smallcategorycode" hc-label="小类编码" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.smallcategoryname" hc-label="小类名称" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.notes" hc-label="备注" hc-col-count="4" hc-readonly="true"></div>
+            </div>
+            <div class="row"> 
+                <div hc-input="data.currItem.attribute1" hc-label="品名" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.attribute2" hc-label="规格" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.attribute4" hc-label="型号" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.attribute3" hc-label="颜色" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.creator" hc-label="创建人" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.createtime" hc-label="创建时间" hc-readonly="true">
+                </div> 
+                <div hc-input="data.currItem.updator" hc-label="更新人" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.updatetime" hc-label="更新时间" hc-readonly="true" >
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.img_name" hc-label="图片名称" ng-dblclick="open(data.currItem.docid)"
+                     hc-readonly="true" hc-col-count="4">
+                </div>
+                <div hc-label=""> 
+                    <button class="btn btn-white" type="button" ng-click="uploadImg()">
+                        <i class="fa fa-plus">上传图片</i>
+                    </button>
+                    <button class="btn btn_white" type="button" ng-click="clearImg()">
+                        <i class="fa fa-trash">删除图片</i>
+                    </button>
+                </div>
+                <!-- <div class="hc-box-upload"> -->
+                    <!-- src="/downloadfile?docid={{data.currItem.docid}}&viewtype=1" -->
+                <!-- <div class="hc-list" ng-dblclick="open(img)" ng-repeat="img in data.currItem.bcs_itemprops_images"></div> -->
+                <!-- <img title="双击查看大图" ng-dblclick="open(data.currItem.docid)"  ng-hide="data.currItem.docid == 0" class="img" src="/downloadfile?docid={{data.currItem.docid}}&viewtype=1"/> -->
+                <!-- <div class="hc-list-img">
+                        <span class="btn-upload" id="uploadFileFirst" ng-click="uploadFile($index)"
+                            ng-show="!data.currItem.docid">上传照片</span>
+                        <button class="btn btn_del" ng-click="deleteImg($index)"
+                            ng-show="data.currItem.docid&&data.currItem.docid > 0">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div> -->
+                <!-- </div> -->
+            </div>
+        </div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+    </div>
+</div>

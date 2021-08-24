@@ -1,0 +1,126 @@
+<div hc-div-page hc-init="doInit()" style="height:98%;display: flex;">
+    <div hc-box class="flex1 flex-column flex-start">
+        <div hc-box style="margin: 0;">
+            <div class="row" style="margin-bottom: 0;">
+                <div hc-input="data.short_barcode" hc-label="条码查询" style="margin-right: 0;"></div>
+                <div hc-title="查找" hc-button="selectInBcsCode()"></div>
+            </div>
+        </div>
+        <div hc-box class="flex1 flex-row ibox-title" style="border-top:1px solid #eeeeee">
+            <div class="flex-column flex1" id="left" style="flex: 1;">
+                <div hc-box class="flex-column flex1">
+                    <div hc-grid="selectBarcodeOptions" class="flex1"></div>
+                </div>
+            </div>
+            <div class="flex-column flex3" style="margin-left: 15px;flex: 3;">
+                <div hc-tab="kpi_tab" class="other-h"></div>
+                <div hc-tab-page class="flex-column flex1">
+                    <!-- <div hc-tab="tabs_detail" hc-tab-change="onTabChange(params)"></div> -->
+                    <!-- 表格视图  -->
+
+                    <div id="register" class="active flex-column flex1">
+
+                        <div hc-box="注册信息" ng-form="bsc_barcodes"  hc-form-readonly="true">
+                            <div class="row">
+                                <div hc-label="条码值" hc-input="data.currItem.short_barcode"></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="条码类型" hc-input="data.currItem.barcode_type"  hc-dict-code="barcode_type"></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="条码注册时间" hc-input="data.currItem.create_time" hc-type="date"></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="所属批次" hc-input="data.currItem.units"></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="状态" hc-input="data.currItem.enabled"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="produce" class="flex-column flex1">
+        
+                        <div hc-box="生产信息" ng-form="" hc-form-readonly="true">
+                            <div class="row">
+                                <div hc-label="生产工厂" hc-input="data.currItem.pro_factory"></div>
+                            </div>
+                         
+                            <div class="row">
+                                <div hc-label="生产时间"  hc-input="data.currItem.pro_time" hc-type="date"></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="工单号"  hc-input="data.currItem.pro_no"></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="产品编码"  hc-input="data.currItem.pro_code"></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="产品描述"  hc-input="data.currItem.pro_desc"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sale" class="flex-column flex1"> 
+                        <div hc-box="销售信息" ng-form=""  hc-form-readonly="true">
+                            <div class="row">
+                                <div hc-label="发货时间" hc-input="data.currItem.deliver_time" hc-type="date"></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="工单号" hc-input="data.currItem.deliver_no" ></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="订单号" hc-input="data.currItem.orderno" ></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="客户编码" hc-input="data.currItem.customer_code"></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="客户名称" hc-input="data.currItem.customer_name"></div>
+                            </div>
+                            <div class="row">
+                                <div hc-label="扫码员" hc-input="data.currItem.scanner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="queryAction">
+                        <div hc-box="查询日志"></div>
+                        <div hc-grid="queryActionsOptions" class="flex1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .fales_title {
+        position: absolute;
+        left: 50%;
+        margin-left: -110px;
+        z-index: 99999;
+        width: 220px;
+        height: 30px;
+        display: inline-block;
+        color: #dc3545;
+        text-align: center;
+    }
+
+    .fales_title>p {
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 2px;
+        font-weight: bold;
+    }
+
+    #context {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .input-inline>label {
+        text-align: center;
+    }
+
+    .searchtime {
+        min-width: 200px;
+    }
+</style>

@@ -1,0 +1,48 @@
+<!--
+ 条码库管理列表页
+ @since 2019-12-18
+ 巫奕海
+-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.code" hc-label="生成批次号" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.enabled" hc-label="可用状态" hc-readonly="true" hc-dict-code="enabled">
+                </div>
+                <div hc-input="data.currItem.status" hc-label="条码状态" hc-readonly="true"
+                    hc-dict-code="bcs.barcodestatus">
+                </div>
+                <div hc-input="data.currItem.for_print" hc-label="下发状态" hc-dict-code="for_print" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.barcode_type" hc-dict-code="barcode_type" hc-label="条码类型"
+                    hc-required="true">
+                </div>
+                <!-- <div hc-input="data.currItem.factbase" hc-dict-code="factbase" hc-label="基地" hc-required="true">
+                </div>-->
+                <div hc-input="data.currItem.quantity" hc-label="生成数量" hc-required="true" hc-unit="万">
+                </div>
+                <div hc-input="data.currItem.createid" hc-label="创建人" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.createat" hc-label="创建时间" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.pagetype" hc-dict-code="pagetype" hc-label="纸张规格" hc-required="true">
+                </div>
+                <div hc-input="data.currItem.pagesize" hc-label="每卷数量" hc-required="true" hc-unit="个/卷">
+                </div>
+                <div hc-input="data.currItem.brand" hc-dict-code="bcs.brand" hc-label="品牌" hc-required="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.description" hc-label="备注" hc-col-count="8">
+                </div>
+            </div>
+        </div>
+        <!-- <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div> -->
+    </div>
+</div>

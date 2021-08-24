@@ -1,0 +1,28 @@
+<div hc-edit-list>
+    <div hc-box class="other-h">
+        <div class="row">
+            <div hc-input="data.currItem.temp_name" hc-label="模板名称" hc-required="true">
+            </div>
+            <div hc-input="data.currItem.temp_desc" hc-label="模板描述" hc-required="true">
+            </div>
+            <div hc-input="data.currItem.print_software" hc-dict-code="print_software" hc-label="打印软件" hc-required="true">
+            </div>
+            <div style="margin-left: 4px;" hc-title="编辑模板" hc-button="getPrint()"  ng-show="data.currItem.print_software==1"></div>
+            <div style="margin-left: 4px;" hc-title="上传模板" hc-button="chooseFile()"  ng-show="data.currItem.print_software==2"></div> 
+            <div style="margin-left: 4px;" hc-title="下载模板" hc-button="downLoadFile()"  ng-show="data.currItem.print_software==2"></div> 
+        </div> 
+        <div class="row"  ng-show="data.currItem.print_software==1">
+            <div hc-input="data.currItem.width" hc-label="模板长度" hc-unit="mm">
+            </div>
+            <div hc-input="data.currItem.height" hc-label="模板宽度" hc-unit="mm">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.temp_content" hc-label="lodop" hc-col-count="8" hc-type="textarea" hc-row="6"
+                ng-show="data.currItem.print_software==1">
+            </div>
+            <div hc-input="data.currItem.filename" hc-label="label mx" hc-col-count=" 4" hc-type="textarea"
+                ng-show="data.currItem.print_software==2"></div>
+        </div> 
+    </div> 
+</div> 

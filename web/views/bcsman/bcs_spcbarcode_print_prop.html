@@ -1,0 +1,152 @@
+<!--
+龙头产品新标签打印
+2020年10月22日15:06:02
+htp
+-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.pono" hc-label="订单号" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.itemcode" hc-label="产品编码" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.itemname" hc-label="产品名称" hc-readonly="true" hc-col-count="4">
+                </div>
+            </div>
+            <div class="row">
+
+                <div hc-input="data.currItem.qty" hc-label="数量" hc-readonly="true">
+                </div>
+                <!-- <div hc-input="data.currItem.barcode" hc-label="防伪码" hc-readonly="true">
+                </div> -->
+                <div hc-input="data.currItem.dif" hc-label="可超数额" hc-blur="checkDif()" hc-type="number"
+                    hc-readonly="!userbean.hasRole('purchase')">
+                </div>
+                <!-- <div hc-input="data.currItem.can_generate_qty" hc-label="可打印条码" hc-readonly="true">
+                </div> -->
+                <div hc-input="data.currItem.can_print_qty" hc-label="可打印数量" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.deliver_date" hc-type="date" hc-label="预计送货日期">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.printor" hc-label="打印人" hc-readonly="true">
+                </div>
+                <!-- <div hc-input="data.currItem.organizationid" hc-label="组织" hc-readonly="true"
+                    hc-dict-code="bcs.organizationid">
+                </div> -->
+                <div hc-input="data.currItem.itemnotes" hc-label="产品备注" hc-readonly="false" hc-col-count="8">
+                </div>
+                <!-- <div hc-input="data.currItem.custno" hc-label="客户编码" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.custname" hc-label="客户名称" hc-readonly="true">
+                </div> -->
+            </div>
+            <div class="row">
+                <!-- <div hc-input="data.currItem.itemcode" hc-label="产品编码" hc-readonly="true">
+                </div> -->
+                <div hc-input="data.currItem.factbase" hc-label="基地" hc-dict-code="bcs.factbase" hc-required="true">
+                </div>
+                <div hc-input="data.currItem.packqty" hc-label="包件数量" hc-required="true" hc-type="number">
+                </div>
+                <div hc-input="data.currItem.createtime" hc-label="创建时间" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.updatetime" hc-label="更新时间" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.temp_name" hc-label="打印模板" hc-class-id="bcs_print_template"
+                    hc-common-search="searchprint"> </div>
+                <div hc-input="data.currItem.temp_width" hc-label="模板长度" hc-unit="mm">
+                </div>
+                <div hc-input="data.currItem.temp_height" hc-label="模板高度" hc-unit="mm">
+                </div>
+                <!-- <div hc-input="data.currItem.factbase" hc-label="基地" hc-dict-code="bcs.factbase" hc-required="true">
+                </div> -->
+                <!-- <div style="margin-left: 4px;" hc-title="下载模板" hc-button="downLoadFile()"  ng-show="data.currItem.print_software==2"></div>  -->
+            </div>
+            <!-- <div class="row">    
+                <div hc-input="data.currItem.description" hc-label="描述" hc-readonly="true"  hc-col-count="8">
+                </div>
+            </div> -->
+            <div class="row">
+                <div hc-input="data.currItem.docname" hc-label="图片名称"
+                    ng-dblclick="open(data.currItem.docid > 0 ? data.currItem.docid : data.currItem.item.docid)"
+                    hc-readonly="true" hc-col-count="4">
+                </div>
+                <div hc-label="">
+                    <button class="btn btn-white" type="button" ng-click="uploadImg()">
+                        <i class="fa fa-plus">上传图片</i>
+                    </button>
+                    <button class="btn btn_white" type="button" ng-click="clearImg()">
+                        <i class="fa fa-trash">删除图片</i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.temp_content" hc-label="模板内容" hc-row="10" hc-col-count="8"
+                    hc-type="textarea">
+                </div>
+            </div>
+
+            <div class="row">
+                <h5 class="modal-title" style="margin-left: 30px;">请输入产品参数</h5>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.num" hc-label="数量" hc-type="number" hc-unit="套/箱"> </div>
+                <div hc-input="data.currItem.color" hc-label="颜色">
+                </div>
+                <div hc-input="data.currItem.gross_weight" hc-label="毛重" hc-type="number" hc-unit="KG">
+                </div>
+                <div hc-input="data.currItem.net_weight" hc-label="净重" hc-type="number" hc-unit="KG">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.product_date" hc-type="date" hc-label="生产日期">
+                </div>
+                <div hc-input="data.currItem.exe_standard" hc-label="执行标准" hc-col-count="4">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 普通模态框来写入产品参数-->
+<!-- <div class="modal inmodal fade" id="modal_main_item" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header" draggable-model>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">请输入产品参数</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div hc-input="data.currItem.sl" hc-label="数量" hc-unit="套"> </div>
+                        <div hc-input="data.currItem.ys" hc-label="颜色" >
+                        </div> 
+                        <div hc-input="data.currItem.mz" hc-label="毛重" hc-unit="KG">
+                        </div>
+                        <div hc-input="data.currItem.jz" hc-label="净重" hc-unit="KG">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div hc-input="data.currItem.scrq" type="date" hc-label="生产日期" > </div>
+                        <div hc-input="data.currItem.zxbz" hc-label="执行标准" >
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="confirm()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div> -->

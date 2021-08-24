@@ -1,0 +1,71 @@
+<!--
+条码补打
+ @since 2020-03-22
+ wzf
+-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.reprintno" hc-label="补打单号" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.oldbarcode" hc-label="旧条码" hc-class-id="bcs_mo_barcode"
+                    hc-common-search="searchBarcode">
+                </div>
+                <div hc-input="data.currItem.itemcode" hc-label="产品编码" hc-required="true" hc-class-id="bcs_item"
+                    hc-common-search="searchItem">
+                </div>
+                <div hc-input="data.currItem.itemname" hc-label="产品名称" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.warehouse" hc-label="仓库" hc-required="true">
+                </div>
+                <div hc-input="data.currItem.slot" hc-label="货位" hc-required="true">
+                </div>
+                <div hc-input="data.currItem.factbase" hc-label="基地" hc-dict-code="bcs.factbase" hc-required="true">
+                </div>
+                <!-- <div hc-input="data.currItem.barcodetype" hc-label="条码类型" hc-dict-code="barcode_type" hc-label="条码类型"
+                    hc-required="true">
+                </div> -->
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.reprintqty" hc-label="补打数量" hc-type="number" hc-required="true">
+                </div>
+                <div hc-input="data.currItem.surplus_qty" hc-label="剩余数量" hc-type="number" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.creator" hc-label="补打人" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.createtime" hc-label="补打时间" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.updator" hc-label="更新人" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.updatetime" hc-label="更新时间" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.temp_name" hc-label="打印模板" hc-class-id="bcs_print_template"
+                    hc-common-search="searchprint" hc-required="true"> </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.temp_width" hc-label="模板长度" hc-readonly="true" hc-unit="mm">
+                </div>
+                <div hc-input="data.currItem.temp_height" hc-label="模板高度" hc-readonly="true" hc-unit="mm">
+                </div>
+                <div hc-input="data.currItem.packqty" hc-label="包件数量" hc-required="true" hc-type="number">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.reprintnote" hc-label="补打原因" hc-type="textarea" hc-col-count="8"
+                    hc-required="true" hc-row="3">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.temp_content" hc-label="模板内容" hc-row="10" hc-col-count="8"
+                    hc-type="textarea">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
