@@ -1,0 +1,345 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+        <div class="other-h">
+            <div hc-box="基本信息">
+                <div class="row">
+                    <div hc-input="data.currItem.appeal_no"
+                     hc-label="客服系统单号"
+                     hc-readonly="true"></div>    
+
+                     <div hc-input="data.currItem.org_code"
+                     hc-label="机构名称"
+                     hc-required="true"
+                     hc-class-id="scporg"
+                     hc-common-search="commonSearchOfScporg"
+                     ></div>
+					 <div hc-input="data.currItem.org_name"
+                     hc-readonly="true" ></div>
+                </div>
+
+                
+                <div class="row">
+                        <div hc-input="data.currItem.sdispatch_no"
+                         hc-label="呼叫中心单号"
+						 hc-readonly="true"
+                         ></div>
+                         
+                         <div hc-input="data.currItem.fix_org_code"
+                         hc-label="网点名称"    
+                         hc-class-id="css_fix_org"
+                         hc-common-search="commonSearchOfItemFixOrg"
+                         ></div>
+						 <div hc-input="data.currItem.fix_org_name"
+                     hc-readonly="true" ></div>
+                </div>
+                <div class="row">
+                        <div hc-input="data.currItem.stat"
+                            hc-label="单据状态"
+                            hc-dict-code="stat"
+                            hc-readonly="true"
+                        ></div>
+                        
+                        <div hc-input="data.currItem.accept_date"
+                        hc-label="受理时间"
+                        hc-type="date"></div>
+  
+                        <div hc-input="data.currItem.deal_user"
+                            hc-label="受理人员"
+                            hc-readonly="true"
+                        ></div>
+                        <div hc-input="data.currItem.record_no"
+                            hc-label="录单状态"
+                            hc-type="checkbox"
+                            hc-readonly="true"
+                        ></div>
+
+                </div>
+
+
+
+
+            </div>
+
+            <div hc-box="用户信息">
+                <div class="row">
+                    <div hc-input="data.currItem.enduser_name"
+                        hc-label="用户姓名"
+                        hc-required="true"
+                    ></div>
+                    <div hc-input="data.currItem.mobile"
+                    hc-label="手机号"
+                    
+                    ></div>
+                    <div hc-input="data.currItem.tel"
+                    hc-label="家庭电话"
+                    
+                    ></div>
+                </div>
+                <div class="row">
+                    
+					<div hc-input="data.currItem.area_code"
+                        hc-label="区域"
+                        hc-required="true"
+                        hc-class-id="scparea"
+                        hc-col-count="2"
+                        hc-common-search="commonSearchOfScparea"
+                     ></div>
+                    <div hc-input="data.currItem.area_name"
+                         hc-col-count="2"
+                         hc-readonly="true" 
+                     ></div>
+                    <div hc-input="data.currItem.email"
+                    hc-label="电子邮箱"
+                    
+                    ></div>
+                    <div hc-input="data.currItem.office_tel"
+                        hc-label="办公电话" 
+                        
+                    ></div>
+                </div>
+                <div class="row">
+                        
+                    <div hc-input="data.currItem.province_area_name"
+                         hc-label="省份"    
+                         hc-col-count="2"
+                         hc-class-id="scparea"
+                         hc-common-search="commonSearchOfProvince"
+                         ></div>
+					<!-- <div hc-input="data.currItem.province_name"
+                        hc-col-count="2"    hc-col-count="2"
+                        hc-readonly="true" 
+                    ></div> -->
+					<div hc-input="data.currItem.city_area_name"
+                         hc-label="地市"    
+                         hc-class-id="scparea"
+                         hc-common-search="commonSearchOfScpareaCity"
+                         ></div>
+					<!-- <div hc-input="data.currItem.city_areaname"
+                         hc-readonly="true"     city_areacode
+                    ></div> -->
+					<div hc-input="data.currItem.county_area_name"
+                         hc-label="区县"    
+                         hc-class-id="scparea"
+                         hc-common-search="commonSearchOfScpareaVillage"
+                         ></div>
+					<!-- <div hc-input="data.currItem.village_areaname"
+                     hc-readonly="true" ></div> 
+                    village_areacode
+                    -->
+					
+                </div>
+                <div class="row">
+                        <div hc-input="data.currItem.enduser_address"
+                             hc-label="地址"
+                             hc-col-count="6"></div>
+                </div>
+            </div>
+
+            <div hc-box="产品资料">
+                <div class="row">
+                    <div hc-input="data.currItem.item_type_name"
+                         hc-label="产品类别"
+						 hc-required="true"	
+						hc-class-id="item_class"
+						hc-col-count="2"
+						hc-common-search="commonSearchOfItemClass"></div>
+                    <div hc-input="data.currItem.item_code"
+                         hc-col-count="3"
+                         hc-label="产品代码"    
+                         hc-class-id="item_class"
+                         hc-common-search="commonSearchOfItemClassCode"
+                         ></div>
+						<div   hc-input="data.currItem.item_name"
+                                hc-readonly="true" 
+                        ></div>
+					<div hc-input="data.currItem.product_no"
+                         hc-label="产品型号"
+                         hc-class-id=""
+                         hc-common-search=""
+                         ></div>
+					
+                    
+                </div>
+                <div class="row">
+                    <div hc-input="data.currItem.purch_date"
+                     hc-label="购买日期"
+                     hc-type="date"
+                     ></div>
+                     <div hc-input="data.currItem.buy_address"
+                     hc-label="购买商店"
+                     ></div>
+                     <div hc-input="data.currItem.bill_no"
+                     hc-label="票据号"
+                     
+                     ></div>
+                </div>
+                <div class="row">
+                     <div hc-input="data.currItem.shopping_pricce"
+                     hc-label="购买价格"
+                     ></div>
+                     <div hc-input="data.currItem.barcode"
+                     hc-label="产品条码"
+                     ></div>
+                     <div hc-input="data.currItem.pro_batch_no"
+                     hc-label="生产批号"
+                     
+                     ></div>
+                </div>
+            </div>
+            <div hc-box="受理内容">
+
+                <div class="row">
+                    <div hc-input="data.currItem.appeal_kind_id"
+                         hc-label="受理类型"    
+                         hc-required="true"
+                         hc-dict-code="appeal_kind_id"
+						  
+                         ></div>
+					<div hc-input="data.currItem.question_type"
+                         hc-label="咨询类型"
+                         hc-dict-code="question_type"></div>
+					<div hc-input="data.currItem.appeal_location"
+                         hc-label="信息定位"
+                         hc-dict-code="appeal_location"></div>
+                </div>
+                <div class="row">
+                     <div hc-input="data.currItem.problem_name"
+                         hc-label="故障现象"    
+                         hc-class-id=""
+                         hc-common-search=""
+                         ></div>
+					 <div hc-input="data.currItem.problem_name2"
+                         hc-label="故障现象2"    
+                         
+                         hc-class-id=""
+                         hc-common-search=""
+                         ></div>
+					 <div hc-input="data.currItem.problem_name3"
+                         hc-label="故障现象3"    
+                         
+                         hc-class-id=""
+                         hc-common-search=""
+                         ></div>
+                </div>
+				<div class="row">
+					<div hc-input="data.currItem.appeal_source_id"
+                         hc-label="来源方式"    
+                         hc-required="true"
+                         hc-dict-code="appeal_source_id"
+                         ></div>
+					<div hc-input="data.currItem.pp"
+                         hc-label="信息来源"    
+                         
+                         hc-class-id=""
+                         hc-common-search=""
+                         ></div>
+					<div hc-input="data.currItem.is_hasvipcard"
+                        hc-label="Vip卡号"
+						hc-type="checkbox"
+                        ></div>
+					<div hc-input="data.currItem.vip_no"
+                        ></div>
+					
+					
+				</div>
+            </div>
+            <div hc-box="派工资料">
+				<div class="row">
+				<div hc-input="data.currItem.inst_flag"
+                        hc-label="需要安装"
+						hc-type="checkbox"
+                        ></div>
+				<div hc-input="data.currItem.haha"
+                        hc-label="需要派工"
+						hc-type="checkbox"
+                        ></div>
+				<div hc-input="data.currItem.click_fix"
+                        hc-label="指定派工网点"
+                        hc-type="checkbox"
+                        
+                        ></div>
+				<div hc-input="data.currItem.assign_org_name"
+                         hc-class-id="css_fix_org"
+                         hc-common-search="commonSearchOfItemTheFixOrg"
+                         ></div>
+				<div hc-input="data.currItem.the_fix_org_name"
+                     hc-readonly="true" ></div>
+				
+				
+				</div>
+				<div class="row">
+					<div hc-input="data.currItem.settle_rate"
+                        hc-label="结算折扣"
+						hc-type="checkbox"
+                        hc-readonly="true"></div>
+					<div hc-input="data.currItem.is_nowayfee"
+                        hc-label="不计算上门费"
+                        hc-type="checkbox"
+                        hc-dict-code="whether"
+                        ></div>
+					<div hc-input="data.currItem.wd_tel"
+                        hc-label="网点电话"
+						
+                        ></div>
+					
+				</div>
+				<div class="row">
+					<div hc-input="data.currItem.wd_address"
+                        hc-label="网点地址"
+						hc-col-count="6"
+                        ></div>
+                </div>
+				<div class="row">
+					<div hc-input="data.currItem.dealonline"
+                        hc-label="在线处理"
+                        hc-type="checkbox"
+                        hc-dict-code="whether"
+                        ></div>
+                </div>
+                
+				<div class="row">
+					<div hc-input="data.currItem.deal_info_type"
+                        hc-label="处理结果"
+						hc-col-count="6"
+                        hc-type="textarea"
+                        ></div>
+				</div>
+				<div class="row">
+					<div hc-input="data.currItem.sub_time"
+                        hc-label="预约时间"
+						hc-type="date"
+						hc-type="textarea"
+                        ></div>
+					<div hc-input="data.currItem.sub_ontime"
+                        hc-label="预约保存时间"
+						hc-type="date"
+						hc-type="textarea"
+                        ></div>
+				</div>
+				<div class="row">
+					
+					
+					
+				</div>
+				<div class="row">
+					<div hc-input="data.currItem.sub_note"
+                        hc-label="预约说明"
+						hc-col-count="6"
+						hc-type="textarea"
+
+                        ></div>
+				</div>
+				<div class="row">
+					<div hc-input="data.currItem.appeal_content"
+                        hc-label="内容描述"
+						hc-col-count="6"
+						hc-type="textarea"
+                        ></div>
+				</div>
+            </div>
+            
+        </div>
+    </div>
+</div>

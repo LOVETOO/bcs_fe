@@ -1,0 +1,182 @@
+/**
+ * 工程折扣申请 属性表
+ * 2019/6/27
+ * shenguocheng
+ */
+define(
+    ['module', 'controllerApi', 'base_obj_prop'],
+    function (module, controllerApi, base_obj_prop) {
+        'use strict';
+
+        var controller = [
+            //声明依赖注入
+            '$scope',
+            //控制器函数
+            function ($scope) {
+                /*----------------------------------定义数据-------------------------------------------*/
+                $scope.data = {
+                    currItem: {}
+                };
+
+                $scope.gridOptions = {
+                    columnDefs: [{
+                        type: '序号'
+                    }, {
+                        field: 'docment_name',
+                        headerName: '产品编码'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '产品名称'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '产品线'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '型号'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '申请数量'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '已转数量'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '可转数量'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '标准单价'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '工程方单价'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '应用折扣率'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '折后单价'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '折后金额',
+                        type: '金额'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '规格'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '颜色'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '体积(m³)'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '重量(kg)'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '总体积(m³)'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '总重量(kg)'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '单位'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '是否有效',
+                        type: '是否'
+                    }, {
+                        field: 'line_remark',
+                        headerName: '备注'
+                    }]
+                };
+
+                //继承控制器
+                controllerApi.extend({
+                    controller: base_obj_prop.controller,
+                    scope: $scope
+                });
+
+                //指定网格对象,否则左下按钮出不来
+                $scope.data.currGridModel = 'data.currItem.epm_project_signup_docmentofepm_project_signups';
+                $scope.data.currGridOptions = $scope.gridOptions;
+                /*----------------------------------通用查询-------------------------------------------*/
+                //工程项目 查询
+                $scope.commonSearchSettingOfEpmProject = {
+                    postData: {
+                        search_flag: 120
+                    },
+                    sqlWhere: "project_status = '已立项'",
+                    afterOk: function (result) {
+                        $scope.data.currItem.project_id = result.project_id;
+                        $scope.data.currItem.project_code = result.project_code;
+                        $scope.data.currItem.project_name = result.project_name;
+                        $scope.data.currItem.project_type = result.project_type;
+                        $scope.data.currItem.report_type = result.report_type;
+                        $scope.data.currItem.report_time = result.report_time;
+                        $scope.data.currItem.sale_area_name = result.sale_area_name;
+                        $scope.data.currItem.sales_name = result.sales_name;
+                        $scope.data.currItem.partner = result.partner;
+                        $scope.data.currItem.partner_linkman = result.partner_linkman;
+                        $scope.data.currItem.partner_phone_no = result.partner_phone_no;
+                        $scope.data.currItem.bid_url = result.bid_url;
+                        $scope.data.currItem.signup_url = result.signup_url;
+                        $scope.data.currItem.signup_end_time = result.signup_end_time;
+                    }
+                };
+
+                /**
+                 * 新增时初始化数据
+                 */
+                $scope.newBizData = function (bizData) {
+                    $scope.hcSuper.newBizData(bizData);
+                    $scope.data.currItem.epm_project_signup_docmentofepm_project_signups = [{}];
+                    $scope.gridOptions.hcApi.setRowData($scope.data.currItem.epm_project_signup_docmentofepm_project_signups);
+                };
+                /**
+                 * 查看时设置数据
+                 */
+                $scope.setBizData = function (bizData) {
+                    $scope.hcSuper.setBizData(bizData);
+                    $scope.gridOptions.hcApi.setRowData(bizData.epm_project_signup_docmentofepm_project_signups);
+                };
+                /*----------------------------------按钮及标签 定义-------------------------------------------*/
+                /*隐藏底部右边边按钮*/
+                $scope.footerRightButtons.saveThenAdd.hide = true;
+
+                /*删除明细按钮*/
+                $scope.footerLeftButtons.deleteRow.click = function () {
+                    $scope.del_line && $scope.del_line();
+                };
+
+                /*隐藏底部左边按钮*/
+                $scope.footerLeftButtons.topRow.hide = true;
+                $scope.footerLeftButtons.upRow.hide = true;
+                $scope.footerLeftButtons.downRow.hide = true;
+                $scope.footerLeftButtons.bottomRow.hide = true;
+
+                /**
+                 * 删除行明细
+                 */
+                $scope.del_line = function () {
+                    var idx = $scope.gridOptions.hcApi.getFocusedRowIndex();
+                    if (idx < 0) {
+                        swalApi.info('请选中要删除的行');
+                    } else {
+                        $scope.data.currItem.epm_project_signup_docmentofepm_project_signups.splice(idx, 1);
+                        if ($scope.data.currItem.epm_project_signup_docmentofepm_project_signups.length == 0) {
+                            $scope.data.currItem.epm_project_signup_docmentofepm_project_signups.push({});
+                        }
+                        $scope.gridOptions.hcApi.setRowData($scope.data.currItem.epm_project_signup_docmentofepm_project_signups);
+                    }
+                };
+
+            }
+        ];
+
+        //使用控制器Api注册控制器
+        //需传入require模块和控制器定义
+        return controllerApi.controller({
+            module: module,
+            controller: controller
+        });
+    }
+);

@@ -1,0 +1,178 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.bx_no"
+                     hc-label="费用报销单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.year_month"
+                     hc-type="year-month"
+                     hc-change="splitYM()"
+                     hc-required="true"
+                     hc-label="年月">
+                </div>
+
+                <div hc-input="data.currItem.balance_type_name"
+                     hc-label="结算方式"
+                     hc-btn-click="chooseBalanceType()">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.fee_apply_no"
+                     hc-label="费用申请单号"
+                     hc-common-search="getCommonSearchSetting_apply()"
+                     hc-delete-together="fee_apply_id fee_loan_id fee_loan_no purpose"
+                     hc-after-delete="afterDeleteApplyNo()">
+                </div>
+
+                <div hc-input="data.currItem.is_finish_bx"
+                     hc-readonly="!data.currItem.fee_apply_id"
+                     hc-label="已报销完毕"
+                     hc-required="data.currItem.fee_apply_id > 0"
+                     hc-dict-code="yesno">
+                </div>
+
+                <div hc-input="data.currItem.credence_no"
+                     hc-readonly="true"
+                     hc-label="凭证号">
+                </div>
+
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.chap_name"
+                     hc-label="报销人"
+                     hc-btn-click="chooseUser()"
+                     hc-required="!data.currItem.fee_apply_id">
+                </div>
+
+                <div hc-input="data.currItem.org_name"
+                     hc-label="报销部门"
+                     hc-btn-click="chooseOrg()"
+                     hc-required="!data.currItem.fee_apply_id">
+                </div>
+
+                <div hc-input="data.currItem.receiver"
+                     hc-label="收款人">
+                </div>
+
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <!--<div class="row">-->
+
+
+                <!--<div hc-input="data.currItem.fee_loan_no"-->
+                     <!--hc-label="借款申请单号"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+
+                <!--<div hc-input="data.currItem.is_repay_loan"-->
+                     <!--ng-show="data.currItem.fee_loan_id > 0"-->
+                     <!--hc-label="还借款"-->
+                     <!--ng-click="is_repay_loan_clicked()"-->
+                     <!--hc-type="checkbox">-->
+                <!--</div>-->
+
+                <!--<button  ng-show="data.currItem.fee_loan_id > 0"-->
+                         <!--type="button" class="btn btn-link btn-xs tips">-->
+                    <!--借款：{{data.currItem.loan_total_allow_amt}}元 | 未还：{{data.currItem.loan_total_nopay_amt}}元-->
+                <!--</button>-->
+
+
+
+                <!--<div hc-input="data.currItem.total_apply_amt"-->
+                     <!--hc-label="报销申请总额"-->
+                     <!--hc-type="money"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+
+                <!--<div hc-input="data.currItem.total_allow_amt"-->
+                     <!--hc-label="报销批准总额"-->
+                     <!--hc-type="money"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="row" ng-show="data.currItem.receiver">
+                <div hc-input="data.currItem.receive_bank"
+                     hc-label="收款银行">
+                </div>
+
+                <div hc-input="data.currItem.receive_accno"
+                     hc-label="收款账号">
+                </div>
+
+                <div hc-input="data.currItem.purpose"
+                     hc-label="费用用途"
+                     hc-type="textarea"
+                     hc-col-count="4">
+                </div>
+            </div>
+
+            <div class="row" ng-hide="data.currItem.receiver">
+                <div hc-input="data.currItem.purpose"
+                     hc-label="费用用途"
+                     hc-type="textarea"
+                     hc-col-count="8">
+                </div>
+            </div>
+
+            <div class="row" ng-show="data.currItem.is_overproof == 2 && data.currItem.fee_apply_id > 0">
+                <button type="button" class="btn btn-link btn-xs tips" style="margin-left: 80px;">
+                    该费用报销金额已超标！
+                </button>
+
+                <div hc-input="data.currItem.overproof_reason"
+                     hc-label="超标原因"
+                     hc-type="textarea"
+                     hc-col-count="6"
+                     hc-required="data.currItem.is_overproof == 2">
+                </div>
+            </div>
+
+        </div>
+
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+
+        <!-- 关联或添加的发票 -->
+        <div ng-show="data.currItem.fin_fee_record_lines.length > 0">
+            <h5>发票</h5>
+            <div class="photo_view">
+                <div class="photo_div" ng-repeat="invoice in data.currItem.fin_fee_record_lines">
+                    <img ng-show="invoice.doc_id > 0"
+                         src="/downloadfile?docid={{invoice.doc_id}}"
+                         id="invoice_img"
+                         title="双击查看大图"
+                         ng-click="viewFullImg()">
+                    <button class="btn photo_del" ng-click="del_invoice(invoice)" ng-show="invoice.doc_id > 0">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="payList">
+        <div hc-box hc-grid="payListGridOptions" hc-auto-height="grid"></div>
+    </div>
+
+</div>

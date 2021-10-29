@@ -1,0 +1,453 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="ctrl_fin_fee_bx_bill">
+    <div class="wrapper wrapper-content" ng-init="selectCurrenItem()">
+        <ul class="nav nav-tabs p-w-m" id="detailtab">
+            <li class="active">
+                <a data-toggle="tab" href="tabs.html#tab_common">常规</a>
+                <ul class="tips category-list">
+                    <li> 单位 : 元 </li>
+                    <li><i class="fa fa-square text-havetext"></i> 必填</li>
+                    <li><i class="fa fa-square text-relondly"></i> 只读</li>
+                </ul>
+            </li>
+            <li>
+                <a data-toggle="tab" href="tabs.html#tab_wfins">流程</a>
+            </li>
+        </ul>
+        <div class="modal-footflex">
+            <div class="tabs-container">
+                <form method="get" class="form-inline mline ng-pristine ng-valid" name="entityForm" novalidate>
+                    <div class="tab-content">
+                        <div id="tab_common" class="tab-pane active form-inline mline">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <label class="control-label not-null">报销单号</label>
+                                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.bx_no" ng-readonly="true">
+
+                                    <label class=" control-label">制单人</label>
+                                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.creator" ng-readonly="true">
+                                    <label class="control-label">制单时间</label><!--ng-untouched-->
+                                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                           id="creatDate" ng-model="data.currItem   .create_time"
+                                           ng-disabled="true">
+                                    <label class="control-label not-null">单据状态</label>
+                                    <select ng-model="data.currItem.stat"
+                                            class="chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in billStats"
+                                            ng-selected="s.name==data.currItem.stat"
+                                            ng-disabled="true">
+                                    </select>
+
+
+                                </div>
+                                <div class="row">
+                                    <label class="control-label ">申请单号</label>
+                                    <div class="input-group width_m">
+                                        <input type="text"
+                                               class="form-control ng-pristine ng-untouched ng-valid"
+                                               ng-model="data.currItem.fee_apply_no"
+                                               ng-readonly="data.currItem.bx_id>0">
+                                        <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-click="searchApplyNo()"
+                                                ng-disabled="data.currItem.bx_id>0">•••</button>
+                                         </span>
+                                    </div>
+                                    <!--<label class="control-label">借款单号</label>
+                                    <div class="input-group width_m">
+                                        <input type="text"
+                                               class="form-control ng-pristine ng-untouched ng-valid"
+                                               ng-model="data.currItem.loan_no"
+                                               ng-readonly="data.currItem.bx_id>0">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="searchLoanNo()"
+                                                    ng-disabled="data.currItem.bx_id>0 ">•••</button>s
+                                        </span>
+                                    </div>-->
+                                    <label class="control-label" ng-show="routeFlag == 2">工程项目</label>
+                                    <div class="input-group width_m" ng-show="routeFlag == 2">
+                                        <input type="text" class="form-control non-empty" ng-model="data.currItem.project_code"
+                                               ng-readonly="data.currItem.bx_id>0 && data.currItem.stat !=1"
+                                               ng-required="true">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary"  type="button"
+                                                    ng-click="searchItem()"
+                                                    ng-disabled="data.currItem.bx_id>0 && data.currItem.stat !=1">•••</button>
+                                        </div>
+                                    </div>
+                                    <input type="text" class=" form-control width_xm" ng-show="routeFlag == 2"
+                                           ng-model="data.currItem.project_name"  ng-readonly="true">
+
+                                    <label class="control-label" ng-show="routeFlag == 2">销售渠道</label>
+                                    <select ng-model="data.currItem.sale_center" ng-show="routeFlag == 2"
+                                            class="input-sm chosen-select form-control non-empty ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.name as s.name for s in sale_center"
+                                            ng-disabled="onlyOne || data.currItem.stat != 1">
+                                    </select>
+
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">报销人</label>
+                                    <div class="input-group width_m">
+                                        <input type="text"
+                                               class="form-control ng-pristine non-empty ng-untouched ng-valid"
+                                               ng-model="data.currItem.chap_name"
+                                               ng-readonly="data.currItem.bx_id>0 && data.currItem.stat !=1">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary"
+                                                    ng-click="searchEmployeeName()"
+                                                    ng-disabled="data.currItem.bx_id>0 && data.currItem.stat !=1">•••</button>
+                                        </span>
+                                    </div>
+                                    <label class="control-label">报销部门</label>
+                                    <div class="input-group width_m">
+                                        <input type="text"
+                                               class="form-control non-empty ng-pristine ng-untouched ng-valid"
+                                               ng-model="data.currItem.org_code"
+                                               ng-readonly="data.currItem.bx_id>0 && data.currItem.stat !=1">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="searchOrg()"
+                                                    ng-disabled="data.currItem.bx_id>0 && data.currItem.stat !=1">•••</button>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control width_xm"
+                                           ng-model="data.currItem.org_name" ng-readonly="true">
+                                    <label class="control-label">结算方式</label>
+                                    <div class="input-group width_m">
+                                        <input type="text"
+                                               class="form-control non-empty ng-pristine ng-untouched ng-valid"
+                                               ng-model="data.currItem.balance_type_name"
+                                               ng-readonly="data.currItem.bx_id>0 && data.currItem.stat !=1">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="searchBalanceType()"
+                                                    ng-disabled="data.currItem.bx_id>0 && data.currItem.stat !=1">•••</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label  class="control-label ">预算类别</label>
+                                    <div class="input-group width_m">
+                                        <input type="text"
+                                               class="form-control non-empty ng-pristine ng-untouched ng-valid"
+                                               ng-model="data.currItem.bud_type_code"
+                                               ng-readonly="(data.currItem.bx_id>0 && data.currItem.stat !=1) || data.currItem.fee_apply_id>0">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="searchBudType()"
+                                                    ng-disabled="data.currItem.bx_id>0 && data.currItem.stat !=1 || data.currItem.fee_apply_id>0">•••</button>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control width_xm ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.bud_type_name" ng-readonly="true">
+
+                                    <label class="control-label">年度</label>
+                                    <input type="number"
+                                           class="form-control non-empty ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.cyear"
+                                           ng-readonly="data.currItem.bx_id>0 && data.currItem.stat !=1">
+                                    <label class="control-label">月度</label>
+                                    <select ng-model="data.currItem.cmonth"
+                                            class="input-sm non-empty chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in months"
+                                            ng-disabled="data.currItem.bx_id>0 && data.currItem.stat !=1">
+                                    </select>
+
+
+
+                                </div>
+
+                                <div class="row">
+
+                                    <!--<label class="control-label ">付款类型</label>
+                                    <div class="input-group width_m">
+                                        <input type="text"
+                                               class="form-control ng-pristine ng-untouched ng-valid"
+                                               ng-model="data.currItem.payment_type_name"
+                                               ng-readonly="true">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="searchPayType()"
+                                                    ng-disabled="true">•••</button>
+                                        </span>
+                                    </div>-->
+                                    <label class="control-label">申请报销总额</label>
+                                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                           money-format
+                                           ng-model="data.currItem.total_apply_amt" ng-readonly="true">
+                                    <label class="control-label">批准报销总额</label>
+                                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                           money-format
+                                           ng-model="data.currItem.total_allow_amt" ng-readonly="true">
+                                    <label class="control-label">申请单批准总额</label>
+                                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                           money-format
+                                           ng-model="data.currItem.sum_allow_amt" ng-readonly="true">
+                                </div>
+                                <div class="row">
+                                    <label class="control-label ">开户名称</label>
+                                    <input type="text"
+                                           class="form-control width_m ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.bank_code"
+                                           ng-readonly="data.currItem.bx_id>0">
+                                    <label class="control-label">开户行名称</label>
+                                    <input type="text"
+                                           class="form-control width_m ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.bank_name"
+                                           ng-readonly="data.currItem.bx_id>0">
+                                    <label class="control-label">开户行账号</label>
+                                    <input type="text"
+                                           class="form-control width_ml ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.bank_accno"
+                                           ng-readonly="data.currItem.bx_id>0">
+                                </div>
+                                <div class="row">
+                                    <label class="control-label ">费用用途</label>
+                                    <textarea rows="2" style="width: 890px"
+                                           class="form-control non-empty ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.purpose"
+                                           ng-readonly="data.currItem.bx_id>0">
+
+                                    </textarea>
+                                </div>
+                                <div id="lineViewGrid" slick-grid sg-options="lineOptions"
+                                     sg-columns="lineColumns" style="width:100%;height:150px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab_wfins" class="tab-pane">
+                            <div class="scroll550" id="wfinsform">
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" ng-click="addLine()"
+                        ng-disabled="(data.currItem.stat!=1 && data.currItem.bx_id>0) || (data.currItem.fee_apply_id>0) || (data.currItem.loan_id>0)">
+                    增加行
+                </button>
+                <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#attModal">
+                    附件({{data.currItem.objattachs?data.currItem.objattachs.length:0}})
+                </button>
+                <button type="button" class="btn btn-default pull-left" ng-click="viewApplyBill()"
+                        ng-show="data.currItem.fee_apply_id>0">
+                    查看申请单
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="saveData(false)" id="save"
+                        ng-show="data.currItem.stat==1">保存</button>
+                <button type="button" class="btn btn-primary" ng-hide="data.currItem.wfid > 0" ng-click="saveData(true)">保存并提交</button>
+                <button type="button" class="btn btn-white" ng-click="closeWindow()">关闭</button>
+            </div>
+        </div>
+    </div>
+    <!-- 增加明细 -->
+    <div class="modal inmodal fade" id="addLineModal" role="dialog" aria-hidden="true"
+             style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">费用报销明细</h4>
+                </div>
+                <div class="modal-body" style="height: 350px;">
+                    <form method="get" class="form-inline mline ng-pristine ng-valid ibox-content">
+                        <div class="row">
+                            <label class="control-label width_xs">费用项目编码</label>
+                            <div class="input-group width_m">
+                                <input type="text"
+                                       class="form-control non-empty ng-pristine ng-untouched ng-valid"
+                                       ng-model="data.addCurrItem.fee_code">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"
+                                            ng-click="searchFeeItem()">•••</button>
+                                </span>
+                            </div>
+                            <label class="control-label width_xs">费用项目名称</label>
+                            <input type="text" class="form-control width_xm ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.addCurrItem.fee_name" ng-readonly="true">
+                        </div>
+                        <div class="row">
+                            <label class="control-label width_xs">承担部门编码</label>
+                            <div class="input-group width_m">
+                                <input type="text"
+                                       class="form-control non-empty ng-pristine ng-untouched ng-valid"
+                                       ng-model="data.addCurrItem.fee_org_code">
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary" ng-click="searchOrg()">•••</button>
+                            </span>
+                            </div>
+                            <label class="control-label width_xs">承担部门名称</label>
+                            <input type="text" class="form-control width_xm ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.addCurrItem.fee_org_name" ng-readonly="true">
+                        </div>
+                       <!-- <div class="row">
+                            <label class="control-label width_xs">使用对象类型</label>
+                            <select ng-model="data.addCurrItem.useobject_type" id="useobj"
+                                    class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading"
+                                    ng-options="s.id as s.name for s in useObjTypes"
+                                    ng-selected="s.id==data.addCurrItem.useobject_type">
+                            </select>
+                            <label class="control-label width_xs">使用对象编码</label>
+                            <div class="input-group width_m">
+                                <input type="text"
+                                       class="form-control ng-pristine ng-untouched ng-valid"
+                                       ng-model="data.addCurrItem.useobject_code">
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary"
+                                        ng-click="searchAcObj('useObj')">•••</button>
+                            </span>
+                            </div>
+                            <label class="control-label width_xs">费用使用对象</label>
+                            <input type="text" class="form-control width_m ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.addCurrItem.useobject_name" ng-readonly="true">
+                        </div>
+                        <div class="row">
+                            <label class="control-label width_xs">收款对象类型</label>
+                            <select ng-model="data.addCurrItem.receiver_type" id="recobj"
+                                    class="chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                    ng-options="s.id as s.name for s in useObjTypes">
+                            </select>
+                            <label class="control-label width_xs">收款对象编码</label>
+                            <div class="input-group width_m">
+                                <input type="text"
+                                       class="form-control ng-pristine ng-untouched ng-valid"
+                                       ng-model="data.addCurrItem.receiver_code">
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary" ng-click="searchAcObj('ReceiveObj')">•••</button>
+                            </span>
+                            </div>
+                            <label class="control-label width_xs">收款对象名称</label>
+                            <input type="text" class="form-control width_m ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.addCurrItem.receiver_name" ng-readonly="true">
+                        </div>-->
+                        <div class="row">
+                            <label class="control-label width_xs">本次申请报销额</label>
+                            <input type="text"  money-format
+                                   class="form-control non-empty ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.addCurrItem.apply_bx_amt">
+                            <!--<label class="control-label width_xs ">冲销金额</label>
+                            <input type="text" money-format
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.addCurrItem.cx_amt">-->
+                            <label class="control-label width_xs">申请单批准金额</label>
+                            <input type="text" class="form-control width_m ng-pristine ng-untouched ng-valid"
+                                   money-format
+                                   ng-model="data.addCurrItem.allow_amt" ng-readonly="true">
+                        </div>
+                        <div class="row">
+                            <label class="control-label  width_xs">批准报销金额</label>
+                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                   money-format
+                                   ng-model="data.addCurrItem.allow_bx_amt" ng-readonly="true">
+                            <label class="control-label  width_xs">已支付金额</label>
+                            <input type="text" class="form-control width_m ng-pristine ng-untouched ng-valid"
+                                   money-format
+                                   ng-model="data.addCurrItem.pay_amt" ng-readonly="true">
+                            <label class="control-label width_xs">已报销金额</label>
+                            <input type="text" class="form-control width_m ng-pristine ng-untouched ng-valid"
+                                   money-format
+                                   ng-model="data.addCurrItem.finish_bx_amt" ng-readonly="true">
+                        </div>
+                        <div class="row">
+                            <label class="control-label width_xs">备注</label>
+                            <input type="text" class="form-control width_xxxl ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.addCurrItem.note">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="saveAddData()">保存</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--附件模态框-->
+    <div class="modal inmodal fade" id="attModal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">附件</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <table class="table table-bordered ui-widget m-n">
+                            <thead>
+                            <tr>
+                                <td style="width: 50px;">序号</td>
+                                <td>文件名称</td>
+                                <td>操作</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="doc in data.currItem.objattachs">
+                                <td>{{$index+1}}</td>
+                                <td><a href="/downloadfile.do?docid={{doc.docid}}" target="_blank">{{doc.docname}}</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-info viewbtn"
+                                            ng-click="downloadAttFile(doc)">下载
+                                    </button>
+                                    <button class="btn btn-sm btn-info viewbtn" ng-click="deleteFile(doc)"
+                                            ng-hide="data.currItem.stat > 1 || doc.fee_apply_id > 0 || doc.loan_id > 0">删除
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left text-warning p-xxs"><i class="fa fa-info-circle"></i> 提示：单击文件列表即可下载！</div>
+                    <button type="button" class="btn btn-primary" ng-click="addFile()" ng-show="data.currItem.stat == 1">添加附件</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--选择流程模板框-->
+    <div class="modal inmodal fade" id="selectWfTempModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">请选择流程模版</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <ul class="list-group clear-list m-t">
+                            <li class="list-group-item fist-item" ng-repeat="wftmp in data.wftemps"
+                                ng-click="selectWfTemp(wftmp.wftempid)">
+                                <span class="label label-info">{{$index+1}}</span>{{wftmp.wftempname}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确定
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--时间插件引入中文-->
+<script type="text/javascript" src="../../lib/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"
+        charset="UTF-8"></script>
+<style>
+    /*可编辑颜色*/
+    #lineViewGrid .l6.r6{
+        background: #e2fedb!important;
+    }
+</style>
+
+
+

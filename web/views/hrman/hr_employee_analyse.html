@@ -1,0 +1,219 @@
+<div  hc-div-page hc-init="doInit()" style="display: flex;">
+    <div class="" style="width:350px;">
+        <div hc-box="查询条件" class="m-t-sm">
+            <div class="row">
+                <div hc-input="data.currItem.start_date"
+                     hc-label="入职日期:从"
+                     hc-type="date"
+                     hc-col-count="8">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.end_date"
+                     hc-label="至"
+                     hc-type="date"
+                     hc-col-count="8">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.org_name"
+                     hc-label="部门"
+                     hc-class-id="dept"
+                     hc-common-search="commonSearchSettingOfDept"
+                     hc-delete-together="data.currItem.org_ids"
+                     hc-placeholder="默认所有部门"
+                     hc-col-count="8">
+                </div>
+            </div>
+        </div>
+        <div hc-box="统计条件">
+            <div class="row">
+                <div hc-input="data.flag.is_dept_1"
+                     hc-label="组织结构"
+                     hc-type="checkbox"
+                     hc-change="queryChoose('is_dept_1')"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+                <div hc-input="data.flag.is_hometown_9"
+                     hc-label="籍贯地图"
+                     hc-type="checkbox"
+                     hc-change="queryChoose('is_hometown_9')"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.flag.is_rank_7"
+                     hc-label="职级"
+                     hc-type="checkbox"
+                     hc-change="queryChoose('is_rank_7')"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+                <div hc-input="data.flag.is_nation_10"
+                     hc-label="民族"
+                     hc-type="checkbox"
+                     hc-change="queryChoose('is_nation_10')"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.flag.is_career_2"
+                     hc-label="学历"
+                     hc-type="checkbox"
+                     hc-change="queryChoose('is_career_2')"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+                <div hc-input="data.flag.is_positionType_5"
+                     hc-label="职种"
+                     hc-type="checkbox"
+                     hc-change="queryChoose('is_positionType_5')"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.flag.is_positionLevel_8"
+                     hc-label="职等"
+                     hc-type="checkbox"
+                     hc-change="queryChoose('is_positionLevel_8')"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+                <div hc-input="data.flag.is_sex_11"
+                     hc-label="性别"
+                     hc-type="checkbox"
+                     hc-change="queryChoose('is_sex_11')"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.flag.is_age_3"
+                     hc-label="年龄"
+                     hc-type="checkbox"
+                     hc-change="queryChoose('is_age_3')"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+                <div hc-input="data.flag.is_workAge_4"
+                     hc-label="工龄"
+                     hc-type="checkbox"
+                     hc-change="queryChoose('is_workAge_4')"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.flag.is_probationClass_6"
+                     hc-label="职类"
+                     hc-type="checkbox"
+                     hc-change="queryChoose('is_probationClass_6')"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="ibox-tools row" >
+            <div hc-buttons="toolButtons" hc-buttons-pull-right style="margin-right: 15px" ></div>
+            <div hc-modal="ageGroupChange" >
+
+                <div hc-grid="gridOptions_M"  ng-init="doInit()" style="height: 350px" > </div>
+
+            </div>
+        </div>
+
+        <div hc-box="展示方式">
+            <div class="row">
+                <div hc-input="data.view.chart"
+                     hc-label="图表"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+                <div hc-input="data.view.statement"
+                     hc-label="报表"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div style="width:100%;border-left: 1px solid #e3ebf2;" hc-auto-height>
+
+        <div class="m-t-sm" hc-box="组织结构分析"  style="height:calc(70% - 15px);" ng-show="data.currItem.objecttype==1">
+            <hc-org-chart hc-org-chart-option="orgChartOption" class="m-t-sm"/>
+        </div>
+
+        <div class="m-t-sm" hc-box="组织结构分析"  style="height:calc(70% - 15px);" ng-hide="data.currItem.objecttype==1">
+             <hc-chart hc-chart-option="chartOption" hc-chart-as="chart" hc-chart-ready="showProvinces($chart)" class="m-t-sm"  ng-hide="data.view.chart==1" />
+        </div>
+
+        <div class="hc-box m-t" style="height:calc(30% - 30px);" >
+            <div hc-grid="gridOptions"  style="height: 100%" ng-hide="data.view.statement==1" ></div>
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+    .hc-box .hc-box-title {
+        padding-bottom: 0px;
+        font-size: 13px;
+    }
+    hc-chart{
+        width: 780px;
+        height: 400px;
+    }
+    hc-org-chart {
+        position: relative;
+        display: inline-block;
+        top: 0px;
+        left: 0px;
+        height: calc(100% - 30px);
+        width: 100%;
+        border: 0px dashed #aaa;
+        border-radius: 0px;
+        overflow: auto;
+        text-align: center;
+        background: url(img/gooflow_blank.gif)\0;
+        background: -webkit-linear-gradient(top, transparent 11px, rgba(0,0,0,.1) 12px),-webkit-linear-gradient(left, transparent 11px, rgba(0,0,0,.1) 12px);
+        background: -moz-linear-gradient(top, transparent 11px, rgba(0,0,0,.1) 12px),-moz-linear-gradient(left, transparent 11px, rgba(0,0,0,.1) 12px);
+        background: -o-linear-gradient(top, transparent 11px, rgba(0,0,0,.1) 12px),-o-linear-gradient(left, transparent 11px, rgba(0,0,0,.1) 12px);
+        background: -ms-linear-gradient(top, transparent 11px, rgba(0,0,0,.1) 12px),-ms-linear-gradient(left, transparent 11px, rgba(0,0,0,.1) 12px);
+        background: linear-gradient(top, transparent 11px, rgba(0,0,0,.1) 12px),linear-gradient(left, transparent 11px, rgba(0,0,0,.1) 12px);
+        -webkit-background-size: 12px 12px;
+        -moz-background-size: 12px 12px;
+        background-size: 12px 12px;
+        box-shadow: 0px 0px 2px rgba(0,0,0,0.3) inset;
+        border-radius: 0px;
+    }
+
+</style>

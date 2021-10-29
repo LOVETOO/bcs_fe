@@ -1,0 +1,32 @@
+<!--工作日历
+CreateDate: 2019-07-25
+CreateBy: tsl-->
+<div hc-diy-page>
+    <div hc-box class="other-h"  ng-form="form" ng-show="data.currItem">
+        <!--tab标签栏-->
+        <ul class="nav nav-tabs other-h ng-scope" id="detailtab">
+            <li class="active">
+                <a data-toggle="tab" id="tab1" href="tabs.html#tab-conventional" aria-expanded="false">常规</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" id="tab2" href="tabs.html#tab-special" aria-expanded="true">特殊</a>
+            </li>
+        </ul>
+
+        <!--tab标签对应网格-->
+        <div class="tabs-container">
+            <div class="tab-content">
+                <!--常规-->
+                <div id="tab-conventional" class="tab-pane active">
+                    <div class="hc-box" hc-grid="ordinaryOptions" hc-auto-height="grid" ></div>
+                </div>
+                <!--特殊-->
+                <div id="tab-special" class="tab-pane">
+                    <div class="hc-box" hc-grid="specialOptions" hc-auto-height="grid" ></div>
+                </div>
+            </div>
+        </div>  
+
+        <!--添加特殊日期模态框-->
+    </div>
+</div>

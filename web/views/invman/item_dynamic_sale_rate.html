@@ -1,0 +1,126 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+
+        <div class="row">
+            <div hc-input="data.currItem.start_date"
+                 hc-label="起始日期"
+                 hc-type="date"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.end_date"
+                 hc-label="终止日期"
+                 hc-type="date"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.crm_entid"
+                 hc-label="品类"
+                 hc-dict-code="crm_entid">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.item_class1_name"
+                 hc-label="产品大类"
+                 hc-class-id="item_class"
+                 hc-common-search="commonSearchSettingOfItemClass.big"
+                 hc-after-delete="clearItemClass('big')">
+            </div>
+
+            <div hc-input="data.currItem.item_class2_name"
+                 hc-label="产品中类"
+                 hc-class-id="item_class"
+                 hc-common-search="commonSearchSettingOfItemClass.mid"
+                 hc-after-delete="clearItemClass('mid')">
+            </div>
+
+            <div hc-input="data.currItem.item_class3_name"
+                 hc-label="产品小类"
+                 hc-class-id="item_class"
+                 hc-common-search="commonSearchSettingOfItemClass.small"
+                 hc-after-delete="clearItemClass('small')">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.item_code"
+                 hc-label="产品"
+                 hc-class-id="item_org"
+                 hc-common-search="commonSearchSettingOfItem">
+            </div>
+            <div hc-input="data.currItem.item_name"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.hide_zero_dynamic_sale_rate"
+                 hc-label="不显示零动销率"
+                 hc-type="checkbox">
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs other-h" id="detailtab">
+        <li class="active">
+            <a data-toggle="tab" id="tab11" href="tabs.html#tab1">明细</a>
+        </li>
+        <li>
+            <a data-toggle="tab" id="tab22" href="tabs.html#tab2">汇总</a>
+        </li>
+    </ul>
+
+    <div class="tabs-container">
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active">
+                <div hc-grid="gridOptions"
+                     hc-auto-height="grid"></div><!-- class="m-t-xs hc-box ng-scope hc-grid ag-blue"-->
+            </div>
+            <div id="tab2" class="tab-pane">
+                <div hc-grid="groupGridOptions"
+                     hc-auto-height="grid"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 分类汇总 -->
+    <div class="modal inmodal fade" id="groupModal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg" style="width: 500px;">
+            <div class="modal-content">
+
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" style="font-size: 16px;">汇总明细</h4>
+                </div>
+
+                <div class="modal-body" style="height: 90px;">
+                    <form method="get" class="form-inline mline">
+                        <div class="row">
+                            <div style="margin-left: 10px;"
+                                 hc-input="summaryBasis.crm_entid"
+                                 hc-type="checkbox"
+                                 hc-label="按品类">
+                            </div>
+                            <div hc-input="summaryBasis.item_class1_name"
+                                 hc-type="checkbox"
+                                 hc-label="按产品大类">
+                            </div>
+                            <div hc-input="summaryBasis.item_class2_name"
+                                 hc-type="checkbox"
+                                 hc-label="按产品中类">
+                            </div>
+                            <div hc-input="summaryBasis.item_class3_name"
+                                 hc-type="checkbox"
+                                 hc-label="按产品小类">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" ng-click="initGroup()">汇总</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

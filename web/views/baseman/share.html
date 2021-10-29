@@ -1,0 +1,59 @@
+<div>
+    <!-- <div draggable-model class="modal-header" style="width: 100%">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                ng-click="rightscancel(e)"><span aria-hidden="true">&times;</span></button>
+        <h3>文件权限设置</h3>
+    </div> -->
+        <div class="row row_div">
+            <div class="rowL">
+                <div hc-grid="options_acl" sg-options="options_acl" sg-columns="columns_acl"
+                     style="width:100%;height:400px" class=""></div>
+            </div>
+            <div class="rowR">
+                <button class="btn btn-default btn-xs" style="margin-bottom: 5px;" type="button" ng-click="add()" ng-show="data.UserIsManager"><i
+                        class="fa fa-plus-square-o"></i>新增
+                </button>
+                <button class="btn btn-default btn-xs" style="margin-bottom: 5px;" type="button" ng-click="del()" ng-show="data.UserIsManager"><i
+                        class="fa fa-minus-square-o"></i>删除
+                </button>
+                <!--<button class="btn btn-default btn-xs" style="margin-bottom: 5px;" type="button" ng-click="detail()"><i
+                        class="fa fa-trash"></i>属性
+                </button>-->
+            </div>
+        </div>
+   <!-- <div class="modal-footer" style="width: 100%">
+        <a class="btn btn-primary btn-xs" ng-click="rightsok(e)" ng-show="data.UserIsManager">
+            确定
+        </a>
+        <a class="btn btn-default btn-xs" ng-click="rightscancel(e)">
+            取消
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="applyto(e)">
+            应用
+        </a>
+    </div>-->
+</div>
+<style>
+    .rowL{
+        width: calc(100% - 70px);
+        float: left;
+    }
+    .rowR{
+        width: 70px;
+        float: left;
+        padding-left: 5px;
+    }
+    .div_modal {
+        padding-top: 10px;
+        margin-left: 4px;
+        padding-right: 7px !important;
+    }
+
+    .row_div {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+    .modal-content{
+        width: 900px;
+    }
+</style>

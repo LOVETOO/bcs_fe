@@ -1,0 +1,369 @@
+<div hc-obj-prop>
+    <!-- 发文信息 -->
+    <div id="base" class="active">
+        <div hc-box="" class="other-h">
+            <div class="row">
+                <div hc-label="发文编码" hc-input="data.currItem.node" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.noticetype" hc-label="通知类型" hc-required="true" hc-dict-code="noticetype">
+                </div>
+                <div hc-input="data.currItem.publisher" hc-label="发布人" hc-readonly="data.bool" hc-class-id="scpuser"
+                    hc-common-search="commonSearchSetting.scpuser" hc-required="true">
+                </div>
+                <div hc-input="data.currItem.noticewf" hc-label="发布状态" hc-dict-code="new_stat" hc-readonly="true">
+                </div>
+
+            </div>
+            <div class="row">
+                <div hc-label="公告主题" hc-required="true" hc-type="textarea" hc-col-count="4"
+                    hc-input="data.currItem.subject" hc-readonly="data.bool">
+                </div>
+                <div hc-input="data.currItem.publish_dept" hc-label="发布部门" hc-readonly="data.bool" hc-required="true"
+                    hc-readonly="data.bool">
+                </div>
+
+                <div hc-label="创建人" hc-input="data.currItem.creator" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+
+                <div hc-input="data.currItem.pub_time" hc-label="发布时间" hc-type="date"
+                    hc-date-options="{ startDate: 'today' }" hc-required="true" hc-readonly="data.bool"></div>
+
+                <!-- <hc-date-picker
+                        label="发布日期"
+                        value="data.currItem.pub_time"
+                        show-picker="true"
+                        option="publicDateOption"
+                        hc-readonly="data.bool"
+                        hc-required="true"
+                ></hc-date-picker> -->
+
+
+                <div hc-input="data.currItem.expire_date" hc-label="过期时间" hc-type="date"
+                    hc-date-options="{ startDate: 'today' }" hc-readonly="data.bool" hc-required="true">
+                </div>
+                <!-- <hc-date-picker
+                        label="过期日期"
+                        value="data.currItem.expire_date"
+                        show-picker="true"
+                        option="publicDateOption"
+                        hc-readonly="data.bool"
+                        hc-required="true"
+                ></hc-date-picker> -->
+                <div hc-label="创建时间" hc-input="data.currItem.create_time" hc-readonly="true">
+                </div>
+                <div hc-label="创建部门" hc-input="data.currItem.dept_name" hc-readonly="true">
+                </div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.summary" hc-col-count="8" hc-readonly="data.bool" hc-label="备注"
+                    hc-type="textarea">
+                </div>
+            </div>
+            <!-- todo -->
+            <div class="row checkbox-list">
+                <div hc-input="data.currItem.cannot_download_attach" hc-type="checkbox" hc-change="changedAttach"
+                    hc-label="不可下载附件">
+                </div>
+                <div hc-input="data.currItem.cannot_download_dispatch" hc-type="checkbox" hc-change="changedDispatch"
+                    hc-label="不可下载发文">
+                </div>
+                <div hc-input="data.currItem.cannot_show_process" hc-type="checkbox" hc-change="changecShowProcess"
+                    hc-label="不显示流程">
+                </div>
+                <div hc-input="data.currItem.cannot_reading_records" hc-type="checkbox" hc-change="changecRRecords"
+                    hc-label="不显示阅读记录数">
+                </div>
+                <div hc-input="data.currItem.no_unread_peminders" hc-type="checkbox" hc-change="changeuPeminders"
+                    hc-label="不进行未读提醒">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mail-box">
+                    <div class="mail-body" style="padding:0;">
+                        <!-- 正文 -->
+                        <div class="form-group">
+                            <label style='float:left;color: #717171' class="control-label write-label"
+                                hc-required="true">内容</label>
+                            <div id='main' class="write-input ">
+                                <hc-rich-text hc-option="data.noteOption" hc-model="data.currItem.content">
+                                </hc-rich-text>
+
+                            </div>
+                        </div>
+
+                        <!--添加附件-->
+                        <div class="hc-enclosure-list jdslist" style="margin-left: 30px;">
+                            <button class="hc-enclosure-div btn btn-white" ng-show="data.currItem.noticewf == 6"
+                                ng-click="addAttach()">
+                                <i class="iconfont hc-attachment"></i>添加附件
+                            </button><!-- 发布状态编辑中时可见 -->
+                            <!--<button class="hc-enclosure-div btn btn-blue canuse"><i class="iconfont hc-xiazai2"></i>批量下载</button>
+                            <button class="hc-enclosure-div btn btn-orange canuse"><i class="iconfont hc-lajitong"></i>批量删除</button>-->
+
+                            <div ng-repeat="doc in data.currItem.scp_news_attachs track by $index">
+                                <div class="hc-enclosure-div jds" title="{{doc.docname}}">
+
+                                    <img class="jdsimg" ng-click="open(doc)"
+                                        ng-src="{{(isImage(doc.docname))?'/downloadfile?docid='+doc.docid:''}}">
+                                    <!--如果是图片直接显示-->
+
+                                    <i class="del iconfont jdsdel" ng-click="delAttach($index)"
+                                        ng-show="data.currItem.noticewf == 6" style="cursor: pointer" title="删除附件">x</i>
+
+                                    <i class="iconfont" ng-click="open(doc)" ng-class="attachClass($index)"
+                                        ng-hide="isImage(doc.docname)" style="cursor:pointer"></i>
+                                    <!--图片直接显示缩略图，不显示图标-->
+
+                                    <p>{{doc.docname}}</p>
+
+                                    <i class="iconfont hc-icondownload"
+                                        ng-click="$event.stopPropagation();downloadAttach($index)"
+                                        style="cursor: pointer" title="下载附件"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 附件(旧) -->
+                        <!--<div class="form-group" ng-hide="true">
+                            <label style="height: 1px;float: left;" class="write-label"></label>
+                            <div style='float:left;width:70px' class="">
+                                <div class="btn-group">
+                                    <button class="btn btn-toolbar" type="button"
+                                        upload-list="data.currItem.scp_news_attachs"
+                                        ng-model="data.currItem.scp_news_attachs" swf-upload filed='#attach-area'
+                                        style="padding-top: 7px;font-size: 14px;background-color: #fff">
+                                        <i class="fa lightblue  fa-paperclip"></i>
+                                        上传附件
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <ul class="" id="attach-area" style="padding-left: 52px;">
+                            </ul>
+                        </div>
+                        -->
+
+                        <div class="form-group" ng-hide="data.bool">
+                            <div class="row">
+                                <label style="padding-top: 7px;font-size: 14px;">公告范围：</label>
+                                <button class="btn 
+                                type=button "
+                                    style=" padding-top: 7px;font-size: 14px;background-color: #fff; margin-left: 0px"
+                                    ng-click='treeAddDept()'>
+                                    选择机构
+                                </button>
+                                <span class="spansize">|</span>
+                                <button class=" btn  type=button" style=" padding-top: 7px;font-size:
+                                    14px;background-color: #fff;margin-left: 0px;" ng-click="searchWorksDept()">
+                                    选择岗位
+                                </button>
+                                <span class="spansize">|</span>
+                                <button class="btn 
+                                type=button "
+                                    style=" padding-top: 7px;font-size: 14px;background-color: #fff;margin-left: 0px;"
+                                    ng-click='chooseUser()'>
+                                    选择人员
+                                </button>
+                                <span class="spansize">|</span>
+                                <button class="btn 
+                                type=button "
+                                    style=" padding-top: 7px;font-size: 14px;background-color: #fff;margin-left: 0px;"
+                                    ng-click="searchRole()">
+                                    选择角色
+                                </button>
+                                <span class="spansize">|</span>
+                                <button class="btn type=button " style=" padding-left: 20px;;padding-top: 7px;font-size:
+                                    14px;background-color: #fff;margin-left: 0px;" ng-click="clean()">
+                                    清空阅读者
+                                </button>
+                                <!--                        <ul class="dropdown-menu">
+                                <li ng-click="chooseDept()">
+                                    <a>选择机构</a>
+                                </li>
+                                <li ng-click='chooseUser()'>
+                                    <a>选择人员</a>
+                                </li>
+                            </ul> -->
+                                <div hc-input="data.currItem.showwf" hc-label="显示流程" hc-type="checkbox"
+                                    hc-required="true" style=" padding-top: 7px;font-size: 14px;" ng-hide="true">
+                                    <!--不知该字段用意，先隐藏-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style='float:left;' class="control-label write-label">可阅读者</label>
+                            <div class="read">
+                                <span class="readitem" ng-repeat="item in data.currItem.readers">
+                                    <b>{{item.name}}</b>
+                                    <a href="javascript:;" class="addr_del iconfont hc-close" name="del"
+                                        style="padding-left: 2px;padding-right: 2px;font-size: 12px;"
+                                        ng-click="delete($index)" ng-hide="data.bool"></a>
+                                    <span>;</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div hc-if="data.currItem.news_type==2"
+                            style="padding-left:54px;padding-bottom:20px;color:red;">(为空则默认不通知)</div>
+                        <!-- <div hc-if="data.currItem.news_type==2||data.currItem.news_type==3"
+                            style="padding-left:54px;padding-bottom:20px;color:red;">(为空则默认所有人可阅读)</div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div hc-grid="gridOptions" hc-auto-height="grid"></div> -->
+    </div>
+    <!--阅读记录  -->
+    <div id="readed">
+        <div hc-box hc-grid="gridOptions_readed" hc-auto-height="grid"></div>
+    </div>
+    <!-- 未阅读记录 -->
+    <div id="notread">
+        <div hc-box hc-grid="gridOptions_notread" hc-auto-height="grid"></div>
+    </div>
+    <div hc-modal="treeModal">
+        <!-- <div hc-tree="treeSetting"></div> -->
+        <div class="ibox-title h-grid">
+            <ul id="zTree" class="ztree"></ul>
+        </div>
+    </div>
+    <div hc-modal="treeModal_2">
+        <div hc-tree="treeSetting_2"></div>
+    </div>
+</div>
+
+<style>
+    .form-group {
+        margin-top: 15px;
+    }
+
+    .form-group:after {
+        content: '';
+        clear: both;
+        width: 0px;
+        display: block;
+    }
+
+    .swf-pr {
+        padding-right: 8px;
+    }
+
+    .write-input {
+        width: calc(100% - 75px);
+        float: left;
+    }
+
+    .picture {
+        border: 3px #eee dashed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 151px;
+        position: relative;
+    }
+
+    .picture p {
+        text-align: center;
+        margin: 0;
+    }
+
+
+
+    .invoice_div .icon {
+        font-size: 18px;
+        text-align: center;
+        line-height: 130px;
+        font-weight: 200;
+    }
+
+    .invoice_div_img {
+        width: 192px;
+        height: 0;
+        position: absolute;
+        z-index: 3;
+        left: 1px;
+        top: 1px;
+    }
+
+    .invoice_del {
+        display: none;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 5;
+        color: #828282;
+    }
+
+    div.picture:hover .invoice_del {
+        display: block;
+    }
+
+    .none {
+        display: none !important;
+    }
+
+    .read {
+        width: 922.6px;
+        min-height: 100px;
+        border: 1px solid #adadad;
+        float: left;
+    }
+
+    .choosediv {
+        width: 30px;
+        height: 100px;
+        border: 1px solid #adadad;
+        border-left: none;
+        float: left;
+    }
+
+    .table-striped>tbody>tr:nth-of-type(odd) {
+        background-color: #fff;
+    }
+
+    .table-hover>tbody>tr:hover { 
+        background-color: #fff
+    }
+
+    .fixedtop {
+        position: fixed;
+        top: 30px;
+        z-index: 1000;
+    }
+
+    .jds:hover .jdsdel {
+        display: block;
+    }
+
+    .checkbox-list>div>div>div>label {
+        color: #F35A05;
+    }
+
+    .spansize {
+        font-size: 20px;
+        margin-left: 9px;
+    }
+
+    .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        border-top: 1px solid #302e2e;
+    }
+
+    .table-bordered>thead>tr>th,
+    .table-bordered>tbody>tr>th,
+    .table-bordered>tfoot>tr>th,
+    .table-bordered>thead>tr>td,
+    .table-bordered>tbody>tr>td,
+    .table-bordered>tfoot>tr>td {
+        border: 1px solid #302e2e;
+    }
+</style>

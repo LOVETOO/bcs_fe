@@ -1,0 +1,19 @@
+<ul class="hc-nav-tabs {{ classOfUl }}">
+	<li
+		ng-repeat="sortedTab in sortedTabs track by sortedTab.id"
+		ng-init="id = sortedTab.id; tab = sortedTab.tab;"
+		class="{{ classOfLi }}"
+		ng-class="{ active: tab.active }"
+		ng-hide="isTabNeedHide({ id: id, tab: tab })"
+	>
+        <div class="hc-tabs-l"></div>
+            <a
+                class="{{ classOfA }}"
+                hc-tab-id="{{ id }}"
+                data-toggle="tab"
+                data-target="#hc-nav-tabs-{{ navId }} + .tab-content > #{{ id }}"
+                ng-bind="getTitle({ id: id, tab: tab })"
+            ></a>
+        <div class="hc-tabs-r"></div>
+	</li>
+</ul>

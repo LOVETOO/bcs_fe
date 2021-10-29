@@ -1,0 +1,251 @@
+<!--工程项目订单-属性页-->
+<!--Created by shenguocheng-->
+<!--Date:2019-07-24-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box class="grid-other-h">
+            <div class="row">
+                <div hc-input="data.currItem.sa_salebillno"
+                     hc-label="订单编号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.year_month"
+                     hc-label="订单日期"
+                     hc-type="date"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.created_by"
+                     hc-label="申请人"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.bill_type"
+                     hc-label="订单类型"
+                     hc-dict-code="epm.bill_type"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.channel"
+                     hc-label="渠道"
+                     hc-dict-code="epm.channel">
+                </div>
+
+                <div hc-input="data.currItem.order_pdt_line"
+                     hc-label="产品线"
+                     hc-dict-code="epm.order_pdt_line">
+                </div>
+
+                <div hc-input="data.currItem.business_type"
+                     hc-label="业务类型"
+                     hc-dict-code="epm.business_type">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="经销商编码"
+                     hc-class-id="customer_org"
+                     hc-common-search="commonSearch.customerCode"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.customer_name"
+                     hc-label="经销商名称"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.trading_company_name"
+                     hc-label="交易公司">
+                </div>
+
+                <div hc-input="data.currItem.billing_unit_name"
+                     hc-label="开票单位">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.may_consignment_amount"
+                     hc-label="可发货余额"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.payment_type"
+                     hc-label="扣款方式"
+                     hc-readonly="true"
+                     hc-dict-code="epm.payment_type">
+                </div>
+
+                <div hc-input="data.currItem.in_date"
+                     hc-label="期望到达日期"
+                     hc-type="date">
+                </div>
+
+                <div hc-input="data.currItem.parentbillid"
+                     hc-label="工程折扣"
+                     hc-readonly="true">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.created_source"
+                     hc-label="订单来源"
+                     hc-readonly="true"
+                     hc-dict-code="epm.created_source">
+                </div>
+
+                <div hc-input="data.currItem.dhl_no"
+                     hc-label="客户自编号">
+                </div>
+
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-col-count="4">
+                </div>
+            </div>
+
+            <div hc-box="合同信息">
+                <div class="row">
+                    <div hc-input="data.currItem.contract_code"
+                         hc-label="合同信息"
+                         hc-class-id="epm_project_contract"
+                         hc-common-search="commonSearch.contractCode">
+                    </div>
+
+                    <div hc-input="data.currItem.contract_name"
+                         hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.expire_date"
+                         hc-label="合同有效期"
+                         hc-type="date"
+                         hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.contract_type"
+                         hc-label="签约方式"
+                         hc-readonly="true"
+                         hc-dict-code="epm.contract_type">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.project_code"
+                         hc-label="工程信息"
+                         hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.project_name"
+                         hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.stage_name"
+                         hc-label="项目当前进度"
+                         hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.division"
+                         hc-label="事业部"
+                         hc-readonly="true"
+                         hc-dict-code="epm.division">
+                    </div>
+                </div>
+            </div>
+
+            <div hc-box="收货信息">
+                <div class="row">
+                    <div hc-input="data.currItem.take_man"
+                         hc-label="收货人"
+                         hc-class-id="customer_address"
+                         hc-common-search="commonSearch.takeMan">
+                    </div>
+
+                    <div hc-input="data.currItem.phone_code"
+                         hc-label="收货人联系方式"
+                         hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.address1"
+                         hc-label="收货地址"
+                         hc-col-count="4"
+                         hc-readonly="true">
+                    </div>
+                </div>
+            </div>
+
+            <div hc-box="订货信息">
+                <div class="row">
+                    <div hc-input="data.currItem.discount_type"
+                         hc-label="折扣率类型"
+                         hc-readonly="true"
+                         hc-dict-code="epm.discount_type">
+                    </div>
+
+                    <div hc-input="data.currItem.discount_tax"
+                         hc-label="折扣率"
+                         hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.amount_total"
+                         hc-label="折前总金额"
+                         hc-unit="元"
+                         hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.wtamount_bill"
+                         hc-label="折后总金额"
+                         hc-unit="元"
+                         hc-readonly="true">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.is_cal_ad"
+                         hc-label="计广告费"
+                         hc-type="checkbox"
+                         style="width:110px;">
+                    </div>
+
+                    <div hc-input="data.currItem.is_cal_second_year_discount"
+                         hc-label="计次年折扣"
+                         hc-type="checkbox"
+                         style="width:130px;">
+                    </div>
+
+                    <div hc-input="data.currItem.is_deduct_deposit"
+                         hc-label="扣订金"
+                         hc-type="checkbox"
+                         style="width:168px;">
+                    </div>
+
+                    <div hc-input="data.currItem.qty_sum"
+                         hc-label="总数量"
+                         hc-readonly="true"
+                         style="margin-right: 24px">
+                    </div>
+
+                    <div hc-input="data.currItem.total_cubage"
+                         hc-label="总体积"
+                         hc-unit="m³"
+                         hc-readonly="true">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="hc-box" hc-grid="gridOptions" hc-auto-height></div>
+
+    </div>
+</div>

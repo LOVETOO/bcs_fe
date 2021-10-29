@@ -1,0 +1,54 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base"  class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.bill_no"
+                     hc-label="单据号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.year_month"
+                     hc-label="生效年月"
+                     hc-type="year-month"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.add_num"
+                     hc-label="增加人数"
+                     hc-unit="人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.sub_num"
+                     hc-label="减少人数"
+                     hc-unit="人"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.total_change"
+                     hc-label="共变动"
+                     hc-unit="人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.is_confirm"
+                     hc-label="确认状态"
+                     hc-dict-code="is_confirm"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-readonly="true"
+                     hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.attribute1"
+                     hc-label="确认说明"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>
+<style>
+    .hc-box .hc-box{
+        margin: 0px;
+    }
+
+</style>

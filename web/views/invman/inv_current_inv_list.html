@@ -1,0 +1,142 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+        <div class="row">
+            <div hc-input="data.currItem.warehouse_name"
+                 hc-label="仓库"
+                 hc-class-id="warehouse"
+                 hc-common-search="chooseWarehouse">
+            </div>
+            <div hc-input="data.currItem.item_code"
+                 hc-label="产品"
+                 hc-class-id="item_org"
+                 hc-common-search="chooseItem">
+            </div>
+
+            <div hc-input="data.currItem.specs"
+                 hc-label=" 产品型号">
+            </div>
+
+
+            <div hc-input="data.currItem.isdisplayzeroqty"
+                 hc-type="checkbox"
+                 hc-label="不显示零库存记录"></div>
+        </div>
+
+        <div class="row">
+
+            <div hc-input="data.currItem.crm_entid"
+                 hc-label="品类"
+                 hc-dict-code="crm_entid">
+            </div>
+            <div hc-input="data.currItem.entorgid"
+                 hc-label="产品线"
+                 hc-dict-code="entorgid">
+            </div>
+            <div hc-input="data.currItem.item_class1_name"
+                 hc-label="产品大类"
+                 hc-class-id="item_class"
+                 hc-common-search="chooseItemClass">
+            </div>
+            <div hc-input="data.currItem.plan_flag"
+                 hc-type="checkbox"
+                 hc-change="onPlanflagChange()"
+                 hc-label="显示预占库存"></div>
+
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.item_class3_name"
+                 hc-label="产品小类"
+                 hc-class-id="item_class"
+                 hc-common-search="chooseItemClasss">
+            </div>
+            <div hc-input="data.currItem.asset_property"
+                 hc-label="资产所有权"
+                 hc-dict-code="asset_property">
+            </div>
+            <div hc-input="data.currItem.customer_name"
+                 hc-label="客户"
+                 hc-class-id="customer_org"
+                 hc-common-search="chooseCustomer">
+            </div>
+
+            <button type="button" class="btn btn-white" ng-disabled="toolButtons.show_group.title=='显示明细'"
+                    ng-click="showRemain()">查询预占库存量</button>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs other-h" id="detailtab">
+        <li class="active">
+            <a data-toggle="tab" id="tab11" href="tabs.html#tab1">库存明细</a>
+        </li>
+        <li>
+            <a data-toggle="tab" id="tab22" href="tabs.html#tab2">明细汇总</a>
+        </li>
+    </ul>
+
+    <div class="tabs-container">
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active">
+                <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+            </div>
+            <div id="tab2" class="tab-pane">
+                <div hc-grid="groupGridOptions"  hc-auto-height="grid"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 分类汇总 -->
+    <div class="modal inmodal fade" id="groupModal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg" style="width: 500px;">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" style="font-size: 16px;">汇总明细</h4>
+                </div>
+                <div class="modal-body" style="height: 60px;">
+                    <form method="get" class="form-inline mline">
+                        <div class="row">
+                            <div hc-input="warehouse" style="margin-left: 10px;"
+                                 hc-type="checkbox"
+                                 hc-label="按仓库"></div>
+                            <div hc-input="item"
+                                 hc-type="checkbox"
+                                 hc-label="按产品"></div>
+                            <div hc-input="crm_entid"
+                                 hc-type="checkbox"
+                                 hc-label="按品类"></div>
+                            <div hc-input="entorgid"
+                                 hc-type="checkbox"
+                                 hc-label="按产品线"></div>
+                            <div hc-input="item_class"
+                                 hc-type="checkbox"
+                                 hc-label="按产品分类"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" ng-click="initGroup()">汇总</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="remainModal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg" style="width: 900px;">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" style="font-size: 16px;">预占库存量明细</h4>
+                </div>
+                <div class="modal-body" style="height: 400px;">
+                    <div hc-grid="gridOptions1"  style="height: 400px;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

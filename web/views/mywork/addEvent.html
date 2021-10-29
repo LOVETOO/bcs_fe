@@ -1,0 +1,254 @@
+<div class="modal-content" local-storage ng-model="data.currItem">
+	<div class="row" style="width: 100%;margin-left: 0px;">
+		<div class="col-lg-12">
+			<div draggable-model class="modal-header" style="width: 100%">
+				<h3>{{title}}</h3>
+			</div>
+			<div class="modal-body" style="width: 100%">
+				<ul class="btn-group" id="tabs2" class="tri-nav-tabs">
+					<button type="button" class="btn btn-xs btn-white active" ng-click="toggleTab(1)" data-target="#tab_1_11" data-toggle="tab" class="tab-nav">常规
+                    </button>
+					<button type="button" class="btn btn-xs btn-white" ng-click="toggleTab(2)" data-target="#tab_1_12" data-toggle="tab" class="tab-nav">其他
+                    </button>
+				</ul>
+				<div class="tab-content-button">
+					<div id="tab_1_11" class="tab-pane active">
+						<div class="ibox-content">
+							<div class="row">
+								<div class="col-md-2">
+									<label class="form-label-mini not-null ">起止时间</label>
+								</div>
+								<div class="col-md-10">
+									<div class="timecontainer">
+										<i class="fa fa-clock-o" />
+										<select ng-model="data.currItem.starth" ng-change="onchangeStartTime()">
+											<option>00</option>
+											<option>01</option>
+											<option>02</option>
+											<option>03</option>
+											<option>04</option>
+											<option>05</option>
+											<option>06</option>
+											<option>07</option>
+											<option>08</option>
+											<option>09</option>
+											<option>10</option>
+											<option>11</option>
+											<option>12</option>
+											<option>13</option>
+											<option>14</option>
+											<option>15</option>
+											<option>16</option>
+											<option>17</option>
+											<option>18</option>
+											<option>19</option>
+											<option>20</option>
+											<option>21</option>
+											<option>22</option>
+											<option>23</option>
+											<option>24</option>
+
+										</select>
+										<span>:</span>
+										<select ng-model="data.currItem.startm" ng-change="onchangeStartTime()">
+											<option>00</option>
+											<option>05</option>
+											<option>10</option>
+											<option>15</option>
+											<option>20</option>
+											<option>25</option>
+											<option>30</option>
+											<option>35</option>
+											<option>40</option>
+											<option>45</option>
+											<option>50</option>
+											<option>55</option>
+
+										</select>
+										<span>~</span>
+										<select ng-model="data.currItem.endh">
+											<option>00</option>
+											<option>01</option>
+											<option>02</option>
+											<option>03</option>
+											<option>04</option>
+											<option>05</option>
+											<option>06</option>
+											<option>07</option>
+											<option>08</option>
+											<option>09</option>
+											<option>10</option>
+											<option>11</option>
+											<option>12</option>
+											<option>13</option>
+											<option>14</option>
+											<option>15</option>
+											<option>16</option>
+											<option>17</option>
+											<option>18</option>
+											<option>19</option>
+											<option>20</option>
+											<option>21</option>
+											<option>22</option>
+											<option>23</option>
+											<option>24</option>
+										</select>
+										<span>:</span>
+										<select ng-model="data.currItem.endm">
+											<option>00</option>
+											<option>05</option>
+											<option>10</option>
+											<option>15</option>
+											<option>20</option>
+											<option>25</option>
+											<option>30</option>
+											<option>35</option>
+											<option>40</option>
+											<option>45</option>
+											<option>50</option>
+											<option>55</option>
+
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+
+								<div class="col-md-2">
+									<label class="form-label-mini">是否需要提醒</label>
+								</div>
+								<div class="col-md-2">
+									<select chosen-select ng-model="data.currItem.isalert" class="input-sm chosen-select form-control" ng-options="stat.id as stat.name for stat in yesorno">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-md-2">
+									<label class="form-label-mini">提醒时间</label>
+								</div>
+								<div class="col-md-6">
+									<input bs-datetime-picker type="text" format="yyyy-mm-dd hh:ii:ss" ng-model="data.currItem.alerttime" class="input-sm form-control">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<label class="form-label-mini not-null">主题</label>
+								</div>
+								<div class="col-md-10">
+									<input type="text" ng-model="data.currItem.subject" class="input-sm form-control">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<label class="form-label-mini">地点</label>
+								</div>
+								<div class="col-md-10">
+									<input type="text" ng-model="data.currItem.location" class="input-sm form-control">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<label class="form-label-mini">发起人</label>
+								</div>
+								<div class="col-md-10">
+									<input type="text" class="input-sm form-control ng-isolate-scope ng-valid ng-touched" ng-readonly="true" ng-model="data.currItem.ownerid" readonly="readonly">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-2">
+									<label class="form-label-mini">参与人</label>
+								</div>
+								<div class="col-md-10">
+									<input type="text" ng-model="data.currItem.contact" style="display:none;" />
+									<!--input type="text" ng-model="data.currItem.contact" class="form-control"-->
+									<button-edit be-delete="clearUser()" be-search="selectUser()" be-edit="false" ng-model="data.currItem.contactnames" />
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-2">
+									<label class="form-label-mini">参与机构</label>
+								</div>
+								<div class="col-md-10">
+									<!--input type="text" ng-model="data.currItem.contact" class="form-control"-->
+									<input type="text" ng-model="data.currItem.orgids" style="display:none;" />
+									<button-edit be-delete="clearOrgnames()" be-search="selectUser()" be-edit="false" ng-model="data.currItem.orgnames" />
+
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-2">
+									<label rows="1" class="form-label-mini ">详情</label>
+								</div>
+								<div class="col-md-10">
+									<textarea ng-readonly="false" ng-model="data.currItem.note" rows="2" class="form-control noresize ng-pristine ng-valid ng-touched">
+                                    </textarea>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div id="tab_1_12" class="tab-pane">
+						<div class="ibox-content">
+							<h5>创建人: {{data.currItem.creator}}</h5>
+							<h5>创建时间: {{data.currItem.createtime}}</h5>
+							<h5>最后修改人: {{data.currItem.updator}}</h5>
+							<h5>最后修改时间: {{data.currItem.updatetime}}</h5>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer" style="width: 100%">
+				<a class="btn btn-sm btn-primary" ng-if="userid == data.currItem.ownerid" ng-click="ok(e)">
+					确定
+				</a>
+				<a class="btn btn-sm btn-info" ng-click="cancel(e)">
+					取消
+				</a>
+				<a class="btn btn-sm btn-success" ng-if="userid == data.currItem.ownerid && title != '事件详情'" ng-click="applyto(e)">
+					应用
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	div.timecontainer {
+		display: flex;
+		align-items: center;
+		height: 25px;
+		border: 1px #e5e6e7 solid;
+		border-radius: 2px;
+		padding-left: 3px;
+		padding-right: 3px;
+	}
+	
+	div.timecontainer:hover {
+		border-color: #1ab394;
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(26, 179, 148, .6);
+	}
+	
+	div.timecontainer>i {
+		margin-right: 3px;
+	}
+	
+	div.timecontainer>i,
+	div.timecontainer>span {
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+	
+	div.timecontainer>select {
+		flex-grow: 0;
+		flex-shrink: 0;
+		outline: none;
+		border: none;
+		width: 16px;
+		appearance: none;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+	}
+</style>

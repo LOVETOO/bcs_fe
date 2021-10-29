@@ -1,0 +1,168 @@
+
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div class="hc-box  ther-h">
+            <div class="row">
+				<div
+					hc-label="退货单号"
+					hc-input="data.currItem.sa_salebillno"
+					hc-readonly="true"
+				></div>
+				
+				<div
+					hc-label="订单日期"
+                    hc-input="data.currItem.date_invbill"
+                    hc-type="date"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="申请人"
+					hc-input="data.currItem.created_by_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="订单状态"
+					hc-input="data.currItem.order_stat"
+                    hc-dict-code="epm.require_bill.order_stat"
+					hc-readonly="true"
+				></div>
+            </div>
+
+            <div class="row">
+				<div
+					hc-label="客户编码"
+					hc-input="data.currItem.customer_code"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="客户名称"
+                    hc-input="data.currItem.customer_name"
+                    hc-col-count="4"
+					hc-readonly="true"
+                ></div>
+                
+				<div
+					hc-label="订单类型"
+                    hc-input="data.currItem.bill_type" 
+                    hc-dict-code="epm.bill_type"
+                    hc-readonly="true"
+				></div>
+            </div>
+
+            <div class="row">
+				<div
+					hc-label="交易公司"
+                    hc-input="data.currItem.trading_company_name"
+                    hc-readonly="true"
+				>
+				</div>
+
+				<div
+					hc-label="开票单位"
+					hc-input="data.currItem.billing_unit_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="余额账户"
+					hc-input="data.currItem.ext_account_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="业务类型"
+                    hc-input="data.currItem.business_type"
+                    hc-dict-code="epm.business_type"
+					hc-readonly="true"
+				></div>
+            </div>
+            <div class="row">
+				<div
+					hc-label="渠道"
+                    hc-input="data.currItem.channel"
+                    hc-dict-code="sales.channel"
+                    hc-readonly="true"
+				>
+				</div>
+
+				<div
+					hc-label="产品线"
+                    hc-input="data.currItem.order_pdt_line"
+                    hc-dict-code="epm.order_pdt_line"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="出库单号"
+					hc-input="data.currItem.inv_out_bill_code"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="单据来源"
+                    hc-input="data.currItem.created_source"
+                    hc-dict-code="epm.created_source"
+					hc-readonly="true"
+				></div>
+            </div>
+            <div class="row">
+				<div
+					hc-label="合同编码"
+					hc-input="data.currItem.contract_code"
+                    hc-readonly="true"
+				>
+				</div>
+
+				<div
+					hc-label="合同名称"
+					hc-input="data.currItem.contract_name"
+                    hc-readonly="true"
+                    hc-col-count="4"
+				></div>
+
+				<div
+					hc-label="签约类型"
+                    hc-input="data.currItem.contract_type"
+                    hc-dict-code="epm.contract_type"
+					hc-readonly="true"
+				></div>
+            </div>
+            <div class="row">
+				<div
+					hc-label="总体积"
+					hc-input="data.currItem.total_cubage"
+                    hc-readonly="true"
+				>
+				</div>
+
+				<div
+					hc-label="总数量"
+					hc-input="data.currItem.qty_sum"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="总金额"
+					hc-input="data.currItem.wtamount_bill"
+					hc-readonly="true"
+				></div>
+            </div>
+            <div class="row">
+				<div
+					hc-label="备注"
+					hc-input="data.currItem.return_reason"
+                    hc-readonly="true"
+                    hc-type="textarea"
+                    hc-col-count="8"
+				>
+				</div>
+            </div>
+        </div>
+        <div hc-box class="flex1 flex-column">
+            <div hc-grid="gridOptions" style="width:100%;" class="flex1"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.fee_allot_code"
+                     hc-label="摊销单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="申请人"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.dept_name"
+                     hc-label="申请部门"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.allot_dimension"
+                     hc-label="摊销形式"
+                     hc-dict-code="epm.allot_dimension"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-col-count="6">
+                </div>
+            </div>
+        </div>
+
+        <div id="salaryitem"  style="display: flex; height: 86px;">
+            <div hc-box="当前选中项目摊销信息" style="flex: 1; display: flex; flex-direction: column;height: 100%;">
+                <div hc-grid="gridOptions_projects" style="flex: 1;"></div>
+            </div>
+            <div hc-box="当前选中费用记录摊销信息" style="flex: 1; display: flex; flex-direction: column;height: 100%;">
+                <div hc-grid="gridOptions_fin" style="flex: 1;"></div>
+            </div>
+        </div>
+
+        <div hc-box class="flex-box-v h100">
+            <div hc-box  class="flex-auto flex-box-v">
+                <div hc-box hc-grid="gridOptions" class="flex-auto" style="min-height: 300px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .ibox-title {
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    .TreeGridBox{
+        width: calc(100%);
+    }
+    .TreeGridBox .ibox-title{
+        border: none;
+    }
+    #base{
+        height : 100%
+     }
+    .h100{
+        height : calc(100% - 200px)
+    }
+    .flex-box-v {
+        display: flex;
+        flex-direction: column;
+    }
+    .flex-auto {
+        flex: 1;
+    }
+    .tab-content>.flex-box-v.active {
+        display: flex;
+    }
+</style>

@@ -1,0 +1,35 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="ctrl_personnel_association">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <div class="ibox-tools">
+                        <form class="pull-left">
+                            <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                    ng-click="addLine()"><i class="fa fa-plus"></i> 增加记录
+                            </button>
+                            <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                    ng-click="deleteLine()"><i class="fa fa-minus"></i> 删除
+                            </button>
+                        </form>
+                        <form class="pull-right">
+                            <button class="btn btn-white btn-sm" data-toggle="modal"
+                                    ng-click="searchBySql()"><i class="fa fa-search"></i> 查询
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div id="myTabContent" class="tab-content">
+                        <div id='headerGrid' style="height:385px;">
+                        </div>
+                        <div class="page_modal modal-open" page-pagination></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

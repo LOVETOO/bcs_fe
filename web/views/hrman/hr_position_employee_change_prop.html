@@ -1,0 +1,285 @@
+<div hc-obj-prop>
+    <!--基本信息：-->
+    <div id="base" hc-box class="active">
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.change_no"
+                     hc-label="异动单号"
+                     hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.change_date"
+                     hc-label="异动日期"
+                     hc-type="date"
+                     hc-change="isChangeChose('change_date')"
+                     hc-required="true"
+                    ></div>
+
+                <div hc-input="data.currItem.change_type_name"
+                     hc-label="异动类型"
+                     hc-class-id="hr_change_type"
+                     hc-common-search="commonSearchSettingOfchangeType"
+                     hc-required="true"
+                     hc-readonly="data.f"></div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-label="员工姓名"
+                     hc-input="data.currItem.employee_code"
+                     hc-class-id="employee_header"
+                     hc-common-search="commonSearchSettingOfEmployee"
+                     hc-required="true"
+                     hc-readonly="data.f"></div>
+                <div hc-input="data.currItem.employee_name"
+                     hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.reason"
+                     hc-label="异动原因"
+                     hc-required="true"
+                     hc-col-count="4"
+                     hc-change="isChangeChose('reason')"
+                     ></div>
+
+            </div>
+
+        </div>
+
+
+        <!--异动前：-->
+        <div id="req" hc-box="异动前：">
+            <div class="row">
+                <div hc-input="data.currItem.org_name"
+                     hc-label="所属部门"
+                     hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.position_name"
+                     hc-label="职位"
+                     hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.assure_stat"
+                     hc-label="参保状态"
+                     hc-dict-code="assure_stat"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.start_date"
+                     hc-label="入职日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.try_day"
+                     hc-label="试用天数"
+                     hc-unit="天"
+                     hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.formal_date"
+                     hc-label="转正日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+            </div>
+        </div>
+
+        <!--异动后：-->
+        <div hc-box="异动后：">
+            <div class="row">
+                <div hc-input="data.currItem.new_org_name"
+                     hc-label="所属部门"
+                     hc-class-id="dept"
+                     hc-common-search="commonSearchSettingOfDept"></div>
+
+                <div hc-input="data.currItem.new_position_name"
+                     hc-label="职位"
+                     hc-class-id="hr_position"
+                     hc-common-search="commonSearchSettingOfPosition"></div>
+
+                <div hc-input="data.currItem.insrnc_group_name"
+                     hc-label="社保组"
+                     hc-class-id="hr_insrnc_group"
+                     hc-common-search="commonSearchSettingOfnsrncGroup"></div>
+
+                <div hc-input="data.currItem.is_need_insure"
+                     hc-label="需要参保"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1"
+                     hc-change="isChangeChose('is_need_insure')"></div>
+
+                <div hc-input="data.currItem.is_need_stop_insure"
+                     hc-label="需要停保"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1"
+                     hc-change="isChangeChose('is_need_stop_insure')"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.salary_stop_date"
+                     hc-label="薪资截止日期"
+                     hc-type="date"
+                     hc-change="isChangeChose('salary_stop_date')"
+                ></div>
+
+                <div hc-input="data.currItem.new_try_day"
+                     hc-label="试用天数"
+                     hc-type="number"
+                     hc-unit="天"
+                     hc-change="isChangeChose('new_try_day')"></div>
+
+                <div hc-input="data.currItem.new_formal_date"
+                     hc-label="转正日期"
+                     hc-type="date"
+                     hc-change="isChangeChose('new_formal_date')"></div>
+
+                <div hc-input="data.currItem.is_heimingdan"
+                     hc-label="特殊名单标识"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-readonly="data.f||data.lock_flag"
+                     hc-change="isChangeChose('is_heimingdan')"></div>
+
+            </div>
+        </div>
+
+        <div hc-box="" ng-if="!data.f">
+            <div class="row">
+
+                <div ng-show="data.currItem.is_heimingdan==2"
+                     hc-input="data.currItem.lock_type"
+                     hc-label="锁定类型"
+                     hc-change="chLockType()"
+                     hc-dict-code="lock_type"
+                     hc-required="data.currItem.is_heimingdan==2"></div>
+
+                <div ng-show="data.currItem.is_heimingdan==2"
+                     hc-input="data.currItem.lock_start_date"
+                     hc-label="开始锁定日期"
+                     hc-type="date"
+                     hc-readonly="data.currItem.lock_type==1"
+                     hc-required="data.currItem.lock_type==2"></div>
+
+                <div ng-show="data.currItem.is_heimingdan==2"
+                     hc-input="data.currItem.lock_days"
+                     hc-label="锁定天数"
+                     hc-unit="天"
+                     hc-change="setLockEndDate()"
+                     hc-readonly="data.currItem.lock_type==1"
+                     hc-required="data.currItem.lock_type==2"></div>
+
+                <div ng-show="data.currItem.is_heimingdan==2"
+                     hc-input="data.currItem.lock_end_date"
+                     hc-label="截止锁定日期"
+                     hc-type="date"
+                     hc-blur="setEndDay()"
+                     hc-readonly="data.currItem.lock_type==1"
+                     hc-required="data.currItem.lock_type==2"></div>
+            </div>
+            <div class="row" ng-show="data.currItem.is_heimingdan==2">
+                <div hc-input="data.currItem.heimingdan_reson"
+                     hc-label="列入特殊名单原因"
+                     hc-col-count="8"
+                     hc-required="data.currItem.is_heimingdan==2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--薪酬福利信息： -->
+
+    <div id="salary"  hc-box>
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.hr_salary_group_id"
+                     hc-label="所属薪资组"
+                     hc-change="changePosition()"
+                     hc-select-options="salary_groups"
+                     hc-readonly="false"></div>
+            </div>
+        </div>
+
+        <div>
+            <div hc-box hc-grid="gridOptions_fsalay" hc-auto-height="grid"></div>
+        </div>
+
+    </div>
+
+    <!--其他-->
+    <div id="other" hc-box>
+        <div class="other-h">
+            <div class="row">
+
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true"></div>
+
+
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-type="time"
+                     hc-readonly="true"></div>
+
+            </div>
+
+            <div class="row">
+
+                <div hc-input="data.currItem.updator"
+                     hc-label="最后修改人"
+                     hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.update_time"
+                     hc-label="最后修改时间"
+                     hc-type="time"
+                     hc-readonly="true"></div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    .big_div{
+        position: relative;
+    }
+    .invoice_div {
+        border: 2px solid #f5f5f5;
+        width: 110px;
+        min-height: 130px;
+        position: absolute;
+        left: 65px;
+        top: 0px;
+        color: #8d9092;
+        cursor: pointer;
+    }
+    .invoice_div input[type="file"] {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 1;
+    }
+    .invoice_div .icon {
+        font-size: 18px;
+        text-align: center;
+        line-height: 130px;
+        font-weight: 200;
+    }
+    .invoice_div img {
+        /* width: auto;
+        height: auto; */
+        width: 100%;
+        height: auto;
+        /* max-width: 100%;
+        max-height: 100%; */
+        position: absolute;
+        z-index: 3;
+        left: 0px;
+        top: 0px;
+    }
+</style>

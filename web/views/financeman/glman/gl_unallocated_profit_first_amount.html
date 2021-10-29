@@ -1,0 +1,81 @@
+<div hc-init="doInit()" class="ibox" ><!--hc-box-->
+
+    <div class="ibox-title grid-other-h">
+        <div class="ibox-tools">
+            <h4 class="pull-left" ng-show="form.$dirty">
+                <span>已有内容被修改，请选择：</span>
+            </h4>
+            <div hc-buttons="editButtons" hc-buttons-pull-left style="margin-left:8px"></div>
+            <div hc-buttons="toolButtons" hc-buttons-pull-right></div>
+        </div>
+    </div>
+
+    <div class="hc-box grid-other-h " ng-form="form" >
+
+        <ul class="nav nav-tabs other-h ng-scope" id="detailtab">
+            <li class="active">
+                <a data-toggle="tab" id="tab11" href="tabs.html#tab1" aria-expanded="false">常规</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" id="tab22" href="tabs.html#tab2" aria-expanded="true">其它</a>
+            </li>
+        </ul>
+
+        <div class="tabs-container">
+            <div class="tab-content">
+                <div id="tab1" class="tab-pane active">
+                    <div class="row">
+                        <div hc-input="data.currItem.year"
+                             hc-label="年度"
+                             hc-type="year"
+                             hc-required="true">
+                        </div>
+
+                        <div hc-input="data.currItem.first_amount"
+                             hc-label="期初金额"
+                             hc-type="money"
+                             hc-required="true">
+                        </div>
+
+                        <div hc-input="data.currItem.remark"
+                             hc-label="备注"
+                             hc-col-amount="6">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab2" class="tab-pane">
+                    <div class="row">
+                        <div hc-input="data.currItem.created_by"
+                             hc-label="创建人"
+                             hc-readonly="true">
+                        </div>
+
+                        <div hc-input="data.currItem.creation_date"
+                             hc-label="创建日期"
+                             hc-type="date"
+                             hc-readonly="true">
+                        </div>
+
+                        <div hc-input="data.currItem.last_updated_by"
+                             hc-label="修改人"
+                             hc-readonly="true">
+                        </div>
+
+                        <div hc-input="data.currItem.last_update_date"
+                             hc-label="修改日期"
+                             hc-type="date"
+                             hc-readonly="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-w-sm">
+        <div hc-grid="gridOptions" class="m-t-xs" hc-auto-height="grid"></div>
+    </div>
+
+</div>
+

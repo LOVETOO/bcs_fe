@@ -1,0 +1,93 @@
+<div class="modal-content" local-storage ng-model="data.currItem">
+    <div draggable-model class="modal-header" style="width: 100%">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel(e)">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h3>新增联系人分组</h3>
+    </div>
+    <div class="modal-body" style="width: 100%">
+        <div class="row">
+            <div hc-input="data.currItem.list_name"
+                 hc-label="分组名称"
+                 hc-col-count="4">
+            </div>
+        </div>
+
+        <div style='padding-top:15px' class="row">
+            <div class="col-sm-6">
+                <div class="lm_panel1">
+                    <div id="AddrTab" style='display:block'>
+                        <div class="groupopen">
+                            <div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;"><a
+                                    class="lm_rt" fun="g2"></a>公司同事
+                            </div>
+                            <ul id="treeDemo2" class="ztree"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="lm_panel1">
+                    <div id="AddrTab" style='display:block'>
+                        <div class="groupopen">
+                            <div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;"><a
+                                    class="lm_rt" fun="g2">人员名称</a><a style='padding-left:50px' class="lm_rt"
+                                                                      fun="g2">部门</a></div>
+
+                        </div>
+                        <div id="">
+                            <div class="groupsub" key="t3" sub="1">
+                                <div class="groupclose" ng-click='del($index)'
+                                     ng-repeat='item in data.currItem.cpcemail_contact_group_lists'
+                                     style="display:" key="83" sub="0"><a
+                                        style="width:100px;display: -webkit-inline-box;" class="lm_addr">{{item.contactname}}</a><a
+                                        style="width:120px;display: -webkit-inline-box;">{{item.orgname}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--div ag-gridview sg-options="options" sg-columns="columns" style="width:100%;height:590px;padding-top:10px" class=""></div-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="width: 100%">
+        <a class="btn btn-sm btn-primary" ng-click="ok(e)">
+            确定
+        </a>
+        <a class="btn btn-sm btn-default" ng-click="cancel(e)">
+            取消
+        </a>
+    </div>
+</div>
+<link rel="stylesheet" href="js/plugins/z-tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<style>
+    .settingtable {
+        background-color: #eff5fb;
+    }
+
+    .modal-body, .modal-footer {
+        padding: 15px;
+        margin: 0px;
+    }
+
+    fieldset {
+        padding: .35em .425em .25em;
+        margin: 1px 0px 5px;
+        position: relative;
+        border: 1px solid silver;
+    }
+
+    .lm_panel1 {
+        border-style: groove;
+        border: 1px solid rgba(108, 124, 134, 0.39);
+        background: #fff;
+        height: 300px;
+        overflow: auto;
+    }
+
+    .row {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+</style>

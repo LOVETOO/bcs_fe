@@ -1,0 +1,185 @@
+﻿<div local-storage ng-model="data.currItem" class=" bill-form" ng-controller="ctrl_fin_receivable_inyssd">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h3>预收查询(按时点)</h3>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-title">
+                    <a style="font-size: small;font-weight: bold;color:black"><i
+                            ng-click="show_profit()" class={{icon}}></i>查询条件</a>
+                    <div style="float: right;color:gray;">
+                        <button class="btn btn-toolbar" type="button" ng-click="search()">
+                            <i class="fa fa-search"></i>查询
+                        </button>
+                        <button class="btn btn-toolbar" type="button" ng-click="clearSelection()">
+                            <i class="fa fa-trash"></i>清空
+                        </button>
+						<button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i class="fa fa-times"></i>关闭
+						</button>
+                    </div>
+                </div>
+                <div ng-show="profit_stat" class="ibox-content" id="sqlWhereBlock">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini">业务部门名称</label>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <input type="text"  ng-change="changeAreaName()"
+                                       class="input-sm form-control"
+                                       ng-model="data.currItem.org_code">
+                                <a class="input-group-addon" ng-click="cpcorg()">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-2" ng-show="false">
+                            <input type="text" class="input-sm form-control"
+                                   id="org_name"
+                                   name="postdata"
+                                   ng-model="data.currItem.org_name">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="input-sm form-control"
+                                   ng-model="data.currItem.org_name">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label-mini">开始时间</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input bs-datepacker
+                                   type="text" class="input-sm form-control"
+                                   name=">"
+                                   id="start_date"
+                                   ng-model="data.currItem.start_date">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label-mini not-null">结束日期</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input bs-datepacker
+                                   type="text" class="input-sm form-control"
+                                   name="<"
+                                   id="end_date"
+                                   ng-model="data.currItem.end_date">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini">大区</label>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <input type="text" ng-change="change_code()" class="input-sm form-control"
+                                       ng-model="data.currItem.code">
+                                <a class="input-group-addon" ng-click="cpcorg1()">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3" ng-show="false">
+                            <input type="text" class="input-sm form-control"
+                                   name="postdata"
+                                   id="area_code"
+                                   ng-model="data.currItem.area_code">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="input-sm form-control"
+                                   ng-model="data.currItem.area_name">
+                        </div>
+						 <div class="col-md-1">
+                            <label class="form-label-mini">客户</label>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <input type="text" ng-change="change_customer()"
+                                       name="postdata"
+                                       id="cust_name"
+                                       class="input-sm form-control"
+                                       ng-model="data.currItem.cust_name"> <a
+                                    class="input-group-addon" ng-click="customer()"><i
+                                    class="fa fa-ellipsis-h"></i> </a>
+                            </div>
+                        </div>
+                        <div class="col-md-3" ng-show="false">
+                            <input type="text"
+                                   class="input-sm form-control"
+                                   name="postdata"
+                                   id="cust_name"
+                                   ng-model="data.currItem.cust_name">
+                        </div>                   
+                        <div class="col-md-1">
+                            <label class="form-label-mini">PI号</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" ng-model="data.currItem.pi_no"
+                                   name="postdata"
+                                   id="pi_no"
+                                   class="input-sm form-control ng-pristine ng-untouched ng-valid">
+                        </div>
+
+
+                    </div>                
+                </div>
+
+                <ul id="tabs" class="tri-nav-tabs">
+                    <li ng-click="myOptionsResize()" class="active"><a data-target="#tab2" data-toggle="tab"
+                                                                       class="tab-nav"><i
+                            class="fa fa-shopping-cart">明细</i></a></li>
+                    <li ng-click="myOptionsResize()"><a data-target="#tab3" data-toggle="tab" class="tab-nav"><i
+                            class="fa fa-shopping-cart">汇总</i></a></li>
+                </ul>
+
+                <div id="content" class="first tab-content">
+                    <div id="tab2" class="tab-pane active">
+                        <div class="ibox-content">
+                            <div slick-grid
+                                 sg-options="viewOptions"
+                                 sg-data="data.currItem.fin_amount_searchs"
+                                 sg-columns="viewColumns"
+                                 class="slick-grid"
+                                 style="width:100%;height:450px;"></div>
+                        </div>
+                    </div>
+                    <div id="tab3" class="tab-pane">
+                        <div class="col-md-1">
+                            <input type="checkbox"
+                                   ng-click="usable1()"
+                                   ng-model="data.currItem.check1">
+                            按客户</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="checkbox"
+                                   ng-click="usable1()"
+                                   ng-model="data.currItem.check2">
+                            按截止日期</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="checkbox"
+                                   ng-click="usable1()"
+                                   ng-model="data.currItem.check3">
+                            按币种</label>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-sm btn-info dropdown-toggle" type="button" ng-click="groupby()">
+                                开始汇总
+                            </button>
+                        </div>
+                        <div class="ibox-content">
+                            <div slick-grid
+                                 sg-options="viewOptions2"
+                                 sg-data="data.currItem.fin_amount_searchs2"
+                                 sg-columns="viewColumns2"
+                                 class="slick-grid"
+                                 style="width:100%;height:350px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

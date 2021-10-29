@@ -1,0 +1,138 @@
+
+<div hc-diy-page>
+    <div id='calendar'></div>
+    <div hc-modal="scheduleModal" class="scheduleModal"  hc-auto-height>
+        <div hc-box >
+            <div class="row">
+                <div hc-col-count="8"
+                hc-label="主题"
+                hc-required="true"
+                hc-input="data.subject">
+               </div>
+            </div>
+            <div class="row">
+                <div hc-col-count="4"
+                hc-label="地点"
+                hc-input="data.location">
+                </div>
+                <div hc-col-count="2"
+                hc-label="联系人"
+                hc-input="data.contact">
+               </div>
+               <div hc-col-count="2"
+                hc-label="电话"
+                hc-input="data.tel">
+               </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.note"
+                    hc-col-count="8"
+                    hc-label="备注"
+                    hc-type="textarea">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.creator"
+                    hc-col-count="2"
+                    hc-label="创建人"
+                    hc-readonly="true">
+                </div>
+                <div hc-input="data.createtime"
+                    hc-col-count="2"
+                    hc-label="创建时间"
+                    hc-readonly="true">
+                </div>
+                <div hc-input="data.updator"
+                    hc-col-count="2"
+                    hc-label="修改人"
+                    hc-readonly="true">
+                </div>
+                <div hc-input="data.updatetime"
+                    hc-col-count="2"
+                    hc-label="修改时间"
+                    hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div class="wui-area">
+                    <h4 class="h4">开始时间</h4>
+                    <wui-date format="yyyy-mm-dd" ng-show="data._allday=='2'"
+                                placeholder="请选择或开始时间"
+                                ng-model="data.statime"
+                                btns="{'ok':'确定','now':'此刻'}"
+                                >
+                    </wui-date>
+                    <wui-date format="yyyy-mm-dd hh:mm" ng-show="data._allday=='1'"
+                                placeholder="请选择或开始时间"
+                                ng-model="data.statime"
+                                btns="{'ok':'确定','now':'此刻'}"
+                                >
+                                 
+                    </wui-date>
+                   
+                </div>
+                <div class="wui-area" >
+                    <h4 class="h4">结束时间</h4>
+                    <wui-date format="yyyy-mm-dd" ng-show="data._allday=='2'"
+                                placeholder="请选择或结束时间"
+                                ng-model="data.endtime"
+                                btns="{'ok':'确定','now':'此刻'}"
+                                >
+                                
+                    </wui-date>
+                    <wui-date format="yyyy-mm-dd hh:mm" ng-show="data._allday=='1'"
+                                placeholder="请选择或结束时间"
+                                ng-model="data.endtime"
+                                btns="{'ok':'确定','now':'此刻'}"
+                                >
+                                
+                    </wui-date>
+                </div> 
+                <div hc-input="data._allday" hc-label="全天" hc-type="checkbox" class="allday"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <link href='/web/js/plugins/fullcalendar/dist/core/main.css' rel='stylesheet' />
+<link href='/web/js/plugins/fullcalendar/dist/daygrid/main.css' rel='stylesheet' />
+<link href='/web/js/plugins/fullcalendar/dist/timegrid/main.css' rel='stylesheet' />
+<script src='/web/js/plugins/fullcalendar/dist/core/main.js'></script>
+<script src='/web/js/plugins/fullcalendar/dist/interaction/main.js'></script>
+<script src='/web/js/plugins/fullcalendar/dist/daygrid/main.js'></script>
+<script src='/web/js/plugins/fullcalendar/dist/timegrid/main.js'></script> -->
+<style>
+    body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+    }
+    #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+    }
+    .wui-area::after{
+        clear: both;
+    }
+    .wui-area{
+        margin-left: 50px;
+    }
+    .scheduleModal{
+        width: 80%;
+    }
+    .allday{
+        position: relative;
+        top: 40px;
+        left: 50px;
+    }
+    .modal-dialog{
+        width: 900px;
+    }
+    .modal-body{
+        height: 500px;
+    }
+    .calendar_hover{
+        color: black;
+    }
+</style>

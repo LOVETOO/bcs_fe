@@ -1,0 +1,98 @@
+<div hc-edit-list>
+
+    <div hc-box class="other-h">
+        <div class="row">
+            <div hc-input="data.currItem.bill_type_id"
+                 hc-label="单据类型ID"
+                 hc-required="true"
+                 hc-class-id="scpobjconf"
+                 hc-common-search="commonSearchSettingOfObjconf"
+                 hc-readonly="data.currItem.creation_date">
+            </div>
+
+            <div hc-input="data.currItem.organization_id"
+                 hc-label="组织ID"
+                 hc-required="true"
+                 hc-class-id="scpent"
+                 hc-common-search="commonSearchSettingOfEnt" >
+            </div>
+
+            <div hc-input="data.currItem.max_number"
+                 hc-label="当前最大编号"
+                 hc-type="number"
+                 hc-required="true">
+            </div>
+
+
+            <div hc-input="data.currItem.is_month"
+                 hc-label="按月份生成流水号"
+                 hc-type="checkbox">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.prefix"
+                 hc-label="单据号前缀">
+            </div>
+
+            <div hc-input="data.currItem.year_month"
+                 hc-label="当前年月"
+                 hc-change="onYearMonthChange()">
+            </div>
+
+            <div hc-input="data.currItem.created_by"
+                 hc-label="创建者"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.creation_date"
+                 hc-label="创建日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.bill_month"
+                 hc-label="单据月份"
+                 hc-type="month">
+            </div>
+
+            <div hc-input="data.currItem.month_seriallength"
+                 hc-label="流水号长度">
+            </div>
+
+            <div hc-input="data.currItem.last_updated_by"
+                 hc-label="最后修改人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.last_update_date"
+                 hc-label="最后修改日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.descript"
+                 hc-label="描述"
+                 hc-required="true"
+                 hc-col-count="8">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!--
+
+
+<div class="row">
+
+    <div hc-input="data.currItem.unk"
+         hc-label="temp">
+    </div>
+</div>
+
+-->

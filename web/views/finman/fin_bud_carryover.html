@@ -1,0 +1,172 @@
+
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="ctrl_fin_bud_carryover">
+    <div class="wrapper wrapper-content animated fadeInRight"  ng-init="doSearch()">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>预算结转</h5>
+                    <div class="ibox-tools">
+                        <form role="form" class="form-inline">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
+                                        ng-click="searchBySql()"><i class="fa fa-search"></i> 查询
+                                </button>
+                                <!--<button type="button" class="btn btn-default btn-sm" data-toggle="modal"
+                                        data-target="#ImportModal"><i class="fa fa-external-link"></i> 导出
+                                </button>-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade in active" id="Browse">
+                            <div id="headerGrid" slick-grid sg-options="periodOptions"
+                                 sg-columns="periodColumns" style="width:100%;height:320px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--详情模态页面-->
+    <div class="modal inmodal fade" id="detailModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">预算期间</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <form method="get" class="form-inline mline ng-pristine ng-valid">
+                            <div class="row">
+                                <label class="form-label-mini">年度</label>
+                                <input type="number" class="form-control ng-pristine ng-untouched ng-valid"
+                                       ng-model="data.currItem.period_year">
+                                <label class="form-label-mini">预算期间类别</label>
+                                <select ng-model="data.currItem.period_type"
+                                        class="input-sm chosen-select form-control"
+                                        ng-options="s.id as s.name for s in Period_Types">
+                                </select>
+                                <!--<label class="form-label-mini">
+                                    <input type="checkbox" class="i-checks" ng-model="data.currItem.fin_bud_period_lineoffin_bud_period_headers.usable">
+                                     可用
+                                </label>-->
+                            </div>
+                            <div class="row">
+                                <label class="form-label-mini">描述</label>
+                                <input type="text" class="form-control width_xxl" ng-model="data.currItem.description">
+                            </div>
+                            <table></table>
+                        </form>
+                        <div id="linegridview" slick-grid sg-options="lineOptions"
+                             sg-columns="lineColumns" style="width:100%;height:290px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-info dropdown-toggle pull-left"
+                            ng-click="doSettle()" ng-disable="btn_settle"><i class="fa fa-plus"></i> 结转
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm pull-left" ng-click="doUnsettle()">
+                        <i class="fa fa-ban" ng-disable="btn_unSettle"></i> 反结转
+                    </button>
+
+                    <button type="button" class="btn btn-primary" ng-click="saveData()">保存</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--modal-导出-->
+    <!--<div class="modal inmodal fade" id="ImportModal" tabindex="-1" role="dialog" aria-hidden="true"
+             style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                                class="sr-only">Close</span></button>
+                        <h4 class="modal-title">请选择要导出的列</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-condensed table-hover">
+                            <tr>
+                                <th></th>
+                                <th>导出</th>
+                                <th>列名</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <input type="checkbox" value="1" id="Year">
+                                </td>
+                                <td>
+                                    <label for="Year">年度</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>
+                                    <input type="checkbox" value="1" id="BudSort">
+                                </td>
+                                <td>
+                                    <label for="BudSort">预算期间类别</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>
+                                    <input type="checkbox" value="1" id="Description">
+                                </td>
+                                <td>
+                                    <label for="Description">描述</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>-->
+</div>
+
+    <script>
+        //查询model切换select
+		/*selectChang(document.querySelector('.select1'), 1);
+        selectChang(document.querySelector('.select2'), 2);
+
+        function selectChang(obj, index) {
+            var input = `<label>数值` + index + `</label>
+				<input type="text" class="form-control" ng-model="value1>`;
+            var select = `<label>数值` + index + `</label>
+				<select class="form-control" ng-model="value2">
+					<option value="229962">周度</option>
+					<option value="230082">月度</option>
+					<option value="230022">季度</option>
+					<option value="230142">年度</option>
+				</select>`;
+            if (obj.selectedIndex == 1) {
+                $('.select-change' + index).html(select);
+            } else {
+                $('.select-change' + index).html(input);
+            }
+        }*/
+    </script>
+    <style>
+        .slick-cell-checkboxsel {
+            background: #f0f0f0;
+            border-right-color: silver;
+            border-right-style: solid;
+        }
+    </style>
+    <!--时间插件引入中文-->
+    <script type="text/javascript" src="../../lib/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"
+            charset="UTF-8"></script>

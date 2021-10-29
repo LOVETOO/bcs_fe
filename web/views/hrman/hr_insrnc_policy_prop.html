@@ -1,0 +1,29 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.insrnc_group_code"
+                     hc-label="社保组编码"
+                     hc-required="true"
+                     hc-class-id="hr_insrnc_group"
+                     hc-common-search="commonSearchOfInsrncGroup"></div>
+                <div hc-input="data.currItem.insrnc_group_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.start_month"
+                     hc-label="生效日期"
+                     hc-required="true"
+                     hc-type="year-month">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.remark"
+                     hc-label="&nbsp;&nbsp;&nbsp;&nbsp;备&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;"
+                     hc-type="textarea"
+                     hc-col-count="6">
+                </div>
+            </div>
+        </div>
+        <!-- 视图 -->
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>

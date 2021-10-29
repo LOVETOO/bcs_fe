@@ -1,0 +1,108 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fin_bud_make_chang">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{headername}}</h5>
+                    <div class="ibox-tools form-inline">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="saveBtn()"><i
+                                class="fa fa-save"></i> 保存
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm"
+                                ng-click="f5()"><i class="fa fa-refresh"></i> 刷新
+                        </button>
+                        <from method="post" enctype="multipart/form-data" active="">
+                            <button class="btn btn-default btn-sm fileinput-button" ng-click="doUploadFile()">
+                                <i class="glyphicon glyphicon-log-in"></i> 导入
+                            </button>
+                        </from>
+                        <div type="button" class="btn btn-default btn-sm"><i class="fa fa-plus-square-o"></i>
+                            <a href="" target="_blank" id="vbudtmpdocid">下载导入格式</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <!--编辑栏-->
+                    <form method="get" class="form-inline mline title-form">
+                        <div class="row">
+                            <label class="control-label width_sm">预算年度</label>
+                            <input type="number" class="form-control width_no" ng-model="data.bud_year">
+                            <label class="control-label width_sm">预算类别</label>
+                            <div class="input-group width_no">
+                                <input type="text" class="form-control" ng-model="data.bud_type_name" ng-readonly="true">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary" ng-click="viewTypeSearch()">•••</button></span>
+                            </div>
+                            <label class="control-label">费用项目</label>
+                            <select chosen-select ng-model="data.object_id"
+                                    class="input-sm chosen-select form-control width_no"
+                                    ng-options="s.id as s.name for s in object_ids"
+                                    ng-selected="s.id==data.object_id">
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label class="control-label width_sm">超任务释放系数(%)</label>
+                            <input type="number" class="form-control width_no" ng-model="data.beyond_amt">
+                            <label class="control-label width_sm">预算释放比(%)</label>
+                            <input type="text" class="form-control width_no" ng-model="data.bud_free_amt" ng-readonly="true">
+                        </div>
+                        <div class="row">
+                            <label class="control-label width_sm">年度销售总任务(元)</label>
+                            <input type="text" class="form-control width_no" ng-model="data.sale_tasks" ng-readonly="true">
+                            <label class="control-label width_sm">年度标准总预算(元)</label>
+                            <input type="text" class="form-control width_no" ng-model="data.standard_tasks" ng-readonly="true">
+                        </div>
+                    </form>
+                    <!--列表-->
+                    <div class="TreeGridBox">
+                        <!--left-->
+                        <div class="ibox-titleq" style="min-width: 512px;max-width: 512px;width: 512px">
+                            <div id="deptGrid"></div>
+                        </div>
+                        <!--right-->
+                        <div class="grid_modal dbgridR">
+                            <div id="budGrid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /*设置上传按钮样式*/
+    .fileinput-button {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    .fileinput-button input {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        opacity: 0;
+        -ms-filter: "alpha(opacity=0)";
+        font-size: 200px;
+        cursor: pointer;
+    }
+    /*可编辑颜色*/
+    #budGrid .l1.r1,#budGrid .l2.r2,#deptGrid .l3.r3,#deptGrid .l4.r4{
+        background: #e2fedb!important;
+    }
+    /*禁用颜色*/
+    #deptGrid .slick-row.totals,#deptGrid .slick-row.totals .l4.r4,#deptGrid .slick-row.totals .l3.r3,#budGrid .slick-row.totals,#budGrid .slick-row.totals .l1.r1,#budGrid .slick-row.totals .l2.r2{
+        background: #fff8f0!important;
+    }
+    /*合计颜色*/
+    #budGrid .slick-row.totals:last-child,#budGrid .slick-row.totals:last-child .l1.r1,#budGrid .slick-row.totals:last-child .l2.r2{
+        background:#efefef!important
+    }
+    /*金额靠右*/
+    #budGrid .l1.r1,#budGrid .l2.r2,#budGrid .l3.r3,#budGrid .l4.r4,#budGrid .l5.r5,#budGrid .l6.r6,#budGrid .l7.r7,#budGrid .l8.r8,#budGrid .l9.r9,#budGrid .l10.r10,#budGrid .l11.r11,#deptGrid .l3.r3,#deptGrid .l4.r4,[ng-model="data.sale_task"],[ng-model="data.standard_task"]{
+        text-align:right!important;
+    }
+    /*序号居中*/
+    #deptGrid .l0.r0,#budGrid .l12.r12{
+        text-align:center!important;
+    }
+</style>

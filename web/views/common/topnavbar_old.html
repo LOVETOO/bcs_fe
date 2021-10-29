@@ -1,0 +1,386 @@
+<!--<style>-->
+<!--.dropdown-nav {-->
+    <!--top: 0;-->
+    <!--left: 100%;-->
+    <!--margin-top: -6px;-->
+    <!--margin-left: -1px;-->
+    <!--/*-webkit-border-radius:0 6px 6px 6px;-->
+      <!-- -moz-border-radius:0 6px 6px 6px;-->
+    <!--border-radius:0 6px 6px 6px;-->
+	<!--*/-->
+<!--}-->
+
+<!--.dropdown:hover .dropdown-nav {-->
+    <!--display: block;-->
+    <!--border: 2px #ffcc66;-->
+<!--}-->
+
+<!--.divider1 {-->
+    <!--height: 1px;-->
+    <!--margin: 2px 0;-->
+    <!--overflow: hidden;-->
+    <!--background-color: #e5e5e5;-->
+<!--}-->
+
+<!--.tabs nav ul li {-->
+    <!--margin-right: 10px;-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-right .link {-->
+	<!--color: #888;-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-right li:hover .link {-->
+	<!--color: #1ab394;-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-left ul li:hover {-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-left ul .label-close {-->
+    <!--display: none;-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-left ul li:hover .label-close {-->
+    <!--display: block;-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-left ul li:hover .label-close a {-->
+	<!--color: #c4c4c4;-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-left ul li:hover .label-close a:hover {-->
+    <!--color: red;-->
+<!--}-->
+<!--/*-->
+<!--li.tab-current::after {-->
+	<!--content: "";-->
+	<!--background-color: #1ab394;-->
+	<!--height: 5px;-->
+	<!--display: block;-->
+<!--}*/-->
+
+<!--.navbar-top-links .navbar-left .url {-->
+	<!--color: #888;-->
+	<!--padding: 10px 5px 5px 5px;-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-left ul li:hover .url {-->
+    <!--padding: 10px 5px 5px 5px;-->
+	<!--color: #1ab394;-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-left li:hover .tab-current .url {-->
+    <!--padding: 10px 5px 5px 5px;-->
+	<!--color: #1ab394;-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-left .tab-current .url {-->
+    <!--padding: 10px 5px 5px 5px;-->
+	<!--color: #1ab394;-->
+	<!--border-bottom: 3px solid;-->
+<!--}-->
+
+<!--.btn-close {-->
+	<!--border-radius: 10px;-->
+	<!--width: 18px;-->
+	<!--height: 18px;-->
+	<!--padding: 0px;-->
+	<!--margin-left: -15px;-->
+	<!--margin-top: -23px;-->
+	<!--font-size: 12px;-->
+	<!--display: inline-block;-->
+	<!--white-space: nowrap;-->
+	<!--vertical-align: middle;-->
+	<!--text-align: center;-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-left ul .btn-close {-->
+	<!--background: none;-->
+	<!--/*rgb(255, 255, 255) none repeat scroll 0% 0%;*/-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-left ul i.fa.fa-times.fa-close {-->
+	<!--display: none;-->
+<!--}-->
+
+
+<!--.navbar-top-links .navbar-left ul li:hover .btn-close {-->
+    <!--display: inline-block;-->
+	<!--background: #ccccff;-->
+<!--}-->
+
+<!--.navbar-top-links .navbar-left ul li:hover i.fa.fa-times.fa-close {-->
+    <!--display: inline-block;-->
+<!--}-->
+<!--.ngPopup > .container{-->
+    <!--padding: 0;-->
+    <!--width:100%;-->
+    <!--height: 100%;-->
+    <!--position: relative;-->
+    <!--top: 0;-->
+    <!--left: 0;-->
+<!--}-->
+<!--</style>-->
+<!--<div ng-switch="showmode">-->
+	<!--<div ng-switch-when="2">-->
+	<!--</div>-->
+	<!--<div ng-switch-default>-->
+		<!--<div class="row border-bottom" id="MainCtrl" ng-controller="MainCtrl as main">-->
+		    <!--<nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0;z-index: 15;margin-top: -9px;">-->
+		        <!--<span minimaliza-sidebar></span>-->
+		        <!--<ul class="nav navbar-top-links" style="margin-top: 18px !important;">-->
+		            <!--<li class="navbar-left">-->
+		                <!--<ul style="padding: 0px;">-->
+		                    <!--<li ng-repeat="item in toptabs" ng-class="{'tab-current':item.current}">-->
+		                        <!--<a href="{{item.uri}}" class="url"><span>{{item.name}}</span></a>-->
+								<!--<button class="btn btn-close" type="button" ng-class="{'hide':$index<toptabs_baseindex}"-->
+								 <!--ng-click="closetab(item.state, item.current)" ><i class="fa fa-times fa-close"></i></button>-->
+		                    <!--</li>-->
+		                    <!--<li class="dropdown" dropdown ng-class="{'hide': toptabsmore.length==0, 'tab-current': gethidtabstat()}">-->
+		                        <!--<a class="dropdown-toggle url" href dropdown-toggle>-->
+		                            <!--<span class="">更多</span> <i class="fa fa-angle-double-right"></i>-->
+		                        <!--</a>-->
+		                        <!--<ul class="dropdown-menu dropdown-alerts">-->
+		                            <!--<li ng-repeat="item in toptabsmore" ng-class="{'tab-current':item.current}">-->
+		                                <!--<a href="{{item.uri}}"><span>{{item.name}}</span></a>-->
+		                            <!--</li>-->
+		                        <!--</ul>-->
+		                    <!--</li>-->
+		                <!--</ul>-->
+		            <!--</li>-->
+
+		            <!--<li class="navbar-right" style="margin-right: 0px;">-->
+
+		                <!--<ul style="padding: 0px;">-->
+						    <!--<li>-->
+								<!--&lt;!&ndash;a  target="_blank" href="#/crmman/base_drp_cust?showmode=2" class=" count-info link"&ndash;&gt;-->
+								<!--<a onclick="window.open('#/crmman/base_drp_cust?showmode=2','newwindow')" class=" count-info link">-->
+									<!--<i class="fa fa-envelope"></i><span style="right: 90px;" class="label label-warning">{{receivenew_totalqty}}</span>-->
+								<!--</a>-->
+								<!--&lt;!&ndash;-->
+								<!--<a ng-show="hide!=1" id="full-screen" class="link">-->
+									<!--<i class="fa fa-hand-o-up"></i>全屏-->
+								<!--</a>-->
+								<!--<a ng-show="hide==1" id="exit-fullscreen" class="link">-->
+									<!--<i class="fa fa-hand-o-up"></i>退出全屏-->
+								<!--</a>-->
+								<!--&ndash;&gt;-->
+						    <!--</li>-->
+		                    <!--<li class="dropdown" dropdown>-->
+		                        <!--<a class="dropdown-toggle count-info link" href dropdown-toggle>-->
+		                            <!--<i class="fa fa-star"></i> <span class="label label-warning">{{collections.length}}</span>-->
+		                        <!--</a>-->
+		                        <!--<ul class="dropdown-menu dropdown-alerts">-->
+									<!--<li ng-if="collections.length == 0">-->
+
+										<!--<h3>收藏夹为空</h3>-->
+
+									<!--</li>-->
+									<!--<li ng-if="collections.length != 0">-->
+
+										<!--<h3>个人收藏夹</h3>-->
+
+									<!--</li>-->
+									<!--<li class="divider" ng-if="collections.length != 0"></li>-->
+
+
+								<!--<li ng-repeat="c in collections">-->
+		                            <!--<p><a class="text-info" ui-sref="{{c.webrefaddr}}">{{c.modname}}</a> <a ng-click="removecoll($index)" title="取消收藏" class="text-warning pull-right"><i class="fa fa-star"></i></a></p>-->
+		                        <!--</li>-->
+
+
+		                            <!--<li class="divider" ng-hide="currpagefaved()"></li>-->
+		                            <!--<li>-->
+		                                    <!--<a ng-click="addcurcoll()" ng-hide="currpagefaved()">-->
+											<!--<div class="text-danger">-->
+											<!--<i class="fa fa-plus"></i>-->
+		                                        <!--将当前页面添加到收藏夹-->
+											<!--</div> </a>-->
+		                            <!--</li>-->
+		                            <!--<li class="divider" ng-if="getcurrpage().webrefaddr!='crmman.work'"></li>-->
+		                            <!--<li>-->
+		                                    <!--<a ng-click="addtohomepage()" ng-if="!currpageishomepage() &&getcurrpage().webrefaddr!='crmman.work'">-->
+											<!--<div class="text-success">-->
+											<!--<i class="fa fa-plus"></i>-->
+		                                        <!--将当前页面设置为个人主页-->
+											<!--</div> </a>-->
+
+											<!--<a ng-click="removefromhomepage()" ng-if="currpageishomepage()&&getcurrpage().webrefaddr!='crmman.work'">-->
+											<!--<div class="text-success">-->
+											<!--<i class="fa fa-minus"></i>-->
+		                                        <!--将当前页面移出首页-->
+											<!--</div> </a>-->
+		                            <!--</li>-->
+		                        <!--</ul>-->
+		                    <!--</li>-->
+
+		                    <!--<li style="margin-right: 0px;">-->
+		                        <!--<a href="/logout" class="link">-->
+		                            <!--<i class="fa fa-sign-out"></i>退出-->
+		                        <!--</a>-->
+								<!--&lt;!&ndash;-->
+								<!--<a ng-show="hide!=1" id="full-screen" class="link">-->
+		                            <!--<i class="fa fa-hand-o-up"></i>全屏-->
+		                        <!--</a>-->
+								<!--<a ng-show="hide==1" id="exit-fullscreen" class="link">-->
+		                            <!--<i class="fa fa-hand-o-up"></i>退出全屏-->
+		                        <!--</a>-->
+								<!--&ndash;&gt;-->
+		                    <!--</li>-->
+		                <!--</ul>-->
+		            <!--</li>-->
+		        <!--</ul>-->
+
+		    <!--</nav>-->
+
+		    <!--<ul class="popuplist" style="height: 0;margin-bottom: 0;">-->
+		    	<!--<li ng-repeat="item in popupitems">-->
+		    		<!--<ng-pop-up option="item.options"></ng-pop-up>-->
+		    	<!--</li>-->
+		    <!--</ul>-->
+
+
+		<!--</div>-->
+	<!--</div>-->
+<!--</div>-->
+
+
+<div class="row border-bottom white-bg">
+	<div class="navbar-header">
+		<!--<a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#">-->
+			<!--<i class="fa fa-bars"></i>-->
+		<!--</a>-->
+		<span minimaliza-sidebar></span>
+	</div>
+	<ul class="nav navbar-top-links navbar-right">
+		<li>
+			<span class="m-r-sm text-muted welcome-message">欢迎使用华彩智云信息管理平台!</span>
+		</li>
+		<li>
+			<a ui-sref="crmman.myhome" href="crmman.myhome">
+				<i class="fa fa-home"></i>
+			</a>
+		</li>
+		<li class="dropdown">
+			<a class="dropdown-toggle count-info" data-toggle="dropdown" href="mailbox.html#">
+				<i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+			</a>
+
+			<ul class="dropdown-menu dropdown-messages">
+				<li>
+					<div class="dropdown-messages-box">
+						<a href="profile.html" class="pull-left">
+							<img alt="image" class="img-circle" src="img/a7.jpg">
+						</a>
+						<div class="media-body">
+							<small class="pull-right">46小时前</small>
+							<strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>.
+						</div>
+					</div>
+				</li>
+				<li class="divider"></li>
+				<li>
+					<div class="dropdown-messages-box">
+						<a href="profile.html" class="pull-left">
+							<img alt="image" class="img-circle" src="img/a4.jpg">
+						</a>
+						<div class="media-body ">
+							<small class="pull-right text-navy">5小时前</small>
+							<strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>.
+						</div>
+					</div>
+				</li>
+				<li class="divider"></li>
+				<li>
+					<div class="dropdown-messages-box">
+						<a href="profile.html" class="pull-left">
+							<img alt="image" class="img-circle" src="img/profile.jpg">
+						</a>
+						<div class="media-body ">
+							<small class="pull-right">23小时前</small>
+							<strong>Monica Smith</strong> love <strong>Kim Smith</strong>.
+						</div>
+					</div>
+				</li>
+				<li class="divider"></li>
+				<li>
+					<div class="text-center link-block">
+						<a href="mailbox.html">
+							<i class="fa fa-envelope"></i> <strong>查看所有邮件</strong>
+						</a>
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="dropdown">
+			<a class="dropdown-toggle count-info" data-toggle="dropdown" href="mailbox.html#">
+				<i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+			</a>
+			<ul class="dropdown-menu dropdown-alerts">
+				<li>
+					<a href="mailbox.html">
+						<div>
+							<i class="fa fa-envelope fa-fw"></i> 您有16条新消息
+							<span class="pull-right text-muted small">4分钟前</span>
+						</div>
+					</a>
+				</li>
+				<li class="divider"></li>
+				<li>
+					<a href="profile.html">
+						<div>
+							<i class="fa fa-twitter fa-fw"></i> 3份新文件
+							<span class="pull-right text-muted small">12小时前</span>
+						</div>
+					</a>
+				</li>
+				<li class="divider"></li>
+				<li>
+					<div class="text-center link-block">
+						<a href="notifications.html">
+							<strong>查看全部</strong>
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="login.html dropdown-toggle" data-toggle="dropdown">
+				<i class="fa fa-user"></i>
+			</a>
+			<div class="contact-box center-version w_200 adminter dropdown-menu dropdown-alerts">
+				<a href="profile.html">
+					<img alt="image" class="img-circle" src="img/a4.jpg">
+					<h3 class="m-b-xs"><strong>黄小贤</strong></h3>
+					<div class="font-bold">前端开发工程师</div>
+				</a>
+				<div class="contact-box-footer">
+					<div class="m-t-xs btn-group">
+						<a class="btn btn-xs btn-white"><i class="fa fa-user"></i> 个人信息</a>
+						<a class="btn btn-xs btn-white"  href="/logout"><i class="fa fa-power-off"></i> 退出</a>
+					</div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<a href="login.html">
+				<i class="fa fa-cog"></i>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="note-toolbar btn-toolbar navbar_tab">
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" ui-sref="crmman.myhome" href="crmman.myhome">首页</a></li>
+		<li class=""><a data-toggle="tab" ui-sref="crmman.base_org" href="crmman.base_org">机构管理</a></li>
+		<li class=""><a data-toggle="tab" ui-sref="crmman.base_post" href="crmman.base_post">岗位管理</a></li>
+		<li class=""><a data-toggle="tab" ui-sref="crmman.base_role" href="crmman.base_role">角色管理</a></li>
+		<li class=""><a data-toggle="tab" ui-sref="crmman.base_flow" href="crmman.base_flow">流程管理</a></li>
+		<li class=""><a data-toggle="tab" ui-sref="crmman.base_code" href="crmman.base_code">编码管理</a></li>
+	</ul>
+</div>
+<head>
+	<script type="text/javascript"></script>
+</head>

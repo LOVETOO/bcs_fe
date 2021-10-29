@@ -1,0 +1,58 @@
+<script src="https://cdn.jsdelivr.net/npm/metismenu"></script>
+<div id="mymenu">
+    <div id="Popup">
+        <ul class="nav nav-second-level1 collapsing" id="collapsing" ng-mouseleave="mouseleave()">
+            <i></i>
+            <li>
+                <ul class="clearfix item-list collapse" style="display:block;color:#fff">
+                    <li class="subitem">
+                        <dl ng-repeat="c in arrs" class="\" "clearfix=" " item\"="">
+                        <dt><span class="menuname">{{c.menuname}}</span></dt>
+                        <%--<span style="font-size: 18px;font-size: 18px;float: left;position: relative;font-weight: bold;margin: 3px 7px 0px 0px;" class="fa fa-angle-right ng-scope"></span>--%>
+                        <dd>
+                            <em ng-click="select_c($event)" ng-repeat="d in c.submenus | orderBy:'sortindex'"><a  ui-sref="{{d.webrefaddr}}" href="{{d.webrefaddr}}"  target="{{d.blank}}" >{{d.menuname}}</a> </em>
+                        </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul side-navigation class="nav metismenu" id="menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element" style="text-align: center;">
+                        <%
+                        out.println("<img alt=\"image\" style=\"width:174px\" src=\""+avatar+"\" id=\"useravatar\"/>");
+                        %>
+                        <div class="dropdown" dropdown>
+                            <a class="dropdown-toggle" dropdown-toggle>
+								<span class="clear">
+									<span class="text-xs block m-t-sm"><strong>CRM营销管理系统</strong></span>
+								</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="logo-element">CRM</div>
+                </li>
+                <!--开始区-->
+                <li class="" ng-repeat="item in mods.base_modmenus">
+                    <a href="#" ng-click="select_a()" title="{{item.modname}}"><i class="fa {{item.webimageurl}}"></i> <span class="nav-label ng-binding">{{item.modname}}</span> <span class="fa arrow"></span></a>
+                    <ul ng-repeat="a in item.submods" class="nav nav-second-level collapse" style="height: 0px;">
+                        <li ui-sref-active="active" class="">
+                            <a id="label" ng-if="a.rootmenus.length<1" href="{{a.webrefaddr}}" target="{{a.blank}}" ng-click="select_b(a,$event)" class="nv"><!--<i class="fa fa-circle-thin" style="font-size: 12px;"></i>--><!-- ui-sref="{{a.webrefaddr}}" -->
+                                <span id="label" class="nav-label">{{a.modname}}</span>
+                                <span ng-if="a.rootmenus.length>0" style="font-size: 15px;float: right;" class="fa fa-angle-right ng-scope"></span>
+                            </a>
+                            <a id="label"  ng-click="select_b(a,$event)" class="nv"><!--<i class="fa fa-circle-thin" style="font-size: 12px;"></i>-->
+                                <span id="label" class="nav-label">{{a.modname}}</span>
+                                <span ng-if="a.rootmenus.length>0" style="font-size: 15px;float: right;" class="fa fa-angle-right ng-scope"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,577 @@
+/**这是信息查询界面js*/
+function fin_bud_make($scope, $location, $rootScope, $modal, $timeout, BasemanService, notify, $state, localeStorageService, FormValidatorService) {
+
+    //设置标题
+    $scope.headername = "预算编制";
+
+
+    //预留存储
+    $scope.data = {};
+    //储存条件
+    $scope.data.currIterm = {};
+    $scope.data.currIterm.maxsearchrltcmt = 300;
+    $scope.data.currIterm.filtrate='';
+    //储存点击网格
+    $scope.data.currGrid = {};
+
+    $scope.Cost_Objs = [
+        {id: "fee_type_name", name: "销售费用"},
+        {id: "fee_type_name", name: "管理费用"},
+        {id: "fee_type_name", name: "财务费用"},
+    ];
+    $scope.Product_Lines = [
+        {id: "1", name: "所有产品线"},
+    ];
+    $scope.data.currIterm.product_line;
+    $scope.Conditions = [
+        {id: "Bud_Type_Name", name: "类别名称"},
+        {id: "Bud_Type_Code", name: "类别编码"},
+        {id: "Org_Level", name: "机构层级"},
+        {id: "Fee_Type_Level", name: "费用层级"},
+        {id: "Period_Type", name: "预算期间类别"},
+        {id: "Item_Level", name: "产品层级"},
+        {id: "Description", name: "描述"},
+    ];
+    $scope.data.currIterm.condition=$scope.Conditions[0];
+    $scope.Months = [
+        {id: "1", name: "一月"},
+        {id: "2", name: "二月"},
+        {id: "3", name: "三月"},
+        {id: "4", name: "四月"},
+        {id: "5", name: "五月"},
+        {id: "6", name: "六月"},
+        {id: "7", name: "七月"},
+        {id: "8", name: "八月"},
+        {id: "9", name: "九月"},
+        {id: "10", name: "十月"},
+        {id: "11", name: "十一月"},
+        {id: "12", name: "十二月"},
+    ];
+    $scope.data.currIterm.month=$scope.Months[0];
+    $scope.sorts = [
+        {id: "all", name: "所有组织"},
+        {id: "filtrate", name: "资质评审标准"},
+    ];
+    $scope.data.currIterm.sort='all';
+
+
+    //定义网格字段
+    $scope.deptColumns = [
+        {
+            id: "dept_code",
+            name: "机构编码",
+            field: "dept_code",
+            width: 150,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true,
+        }, {
+            id: "dept_name",
+            name: "机构名称",
+            field: "dept_name",
+            editable: false,
+            filter: 'set',
+            width: 150,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }
+    ];
+    //网格设置
+    $scope.deptOptions = {
+        enableCellNavigation: true,
+        enableColumnReorder: false,
+        editable: true,
+        enableAddRow: false,
+        asyncEditorLoading: false,
+        autoEdit: true,
+        autoHeight: true,
+        //check
+        multiSelect: true,
+        autowidth: true
+    };
+    //定义网格字段
+    $scope.budColumns = [
+        {
+            id: "dname",
+            name: "预算期间",
+            field: "dname",
+            width: 150,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true,
+        }, {
+            id: "name",
+            name: "年初预算",
+            field: "name",
+            editable: false,
+            filter: 'set',
+            width: 190,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "name",
+            name: "本期实际预算",
+            field: "name",
+            editable: false,
+            filter: 'set',
+            width: 190,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "name",
+            name: "上期结转金额",
+            field: "name",
+            editable: false,
+            filter: 'set',
+            width: 190,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "name",
+            name: "本期调整金额",
+            field: "name",
+            editable: false,
+            filter: 'set',
+            width: 190,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "name",
+            name: "本期已使用金额",
+            field: "name",
+            editable: false,
+            filter: 'set',
+            width: 190,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "name",
+            name: "本期可使用的金额",
+            field: "name",
+            editable: false,
+            filter: 'set',
+            width: 190,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "name",
+            name: "本期实际与年度预算的差额",
+            field: "name",
+            editable: false,
+            filter: 'set',
+            width: 190,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "name",
+            name: "本期结转金额",
+            field: "name",
+            editable: false,
+            filter: 'set',
+            width: 190,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "usable",
+            name: "是否结转",
+            field: "usable",
+            editable: true,
+            filter: 'set',
+            width: 190,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true,
+            options: [
+                {value: "1", desc: "是"},
+                {value: "2", desc: "否"}
+            ],
+            formatter: Slick.Formatters.SelectOption
+        }
+    ];
+    //网格设置
+    $scope.budOptions = {
+        enableCellNavigation: true,
+        enableColumnReorder: false,
+        editable: true,
+        enableAddRow: false,
+        asyncEditorLoading: false,
+        autoEdit: true,
+        autoHeight: true,
+        //check
+        multiSelect: true,
+        autowidth: true
+    };
+    //定义网格字段
+    $scope.searchColumns = [
+        {
+            id: "bud_type_name",
+            name: "类别名称",
+            field: "bud_type_name",
+            width: 150,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true,
+        }, {
+            id: "bud_type_code",
+            name: "类别编码",
+            field: "bud_type_code",
+            editable: false,
+            filter: 'set',
+            width: 150,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "Org_Level",
+            name: "机构层级",
+            field: "Org_Level",
+            editable: false,
+            filter: 'set',
+            width: 150,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "Fee_Type_Level",
+            name: "费用层级",
+            field: "Fee_Type_Level",
+            editable: false,
+            filter: 'set',
+            width: 150,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "Period_Type",
+            name: "预算期间类别",
+            field: "Period_Type",
+            editable: false,
+            filter: 'set',
+            width: 150,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "Item_Level",
+            name: "产品层级",
+            field: "Item_Level",
+            editable: false,
+            filter: 'set',
+            width: 150,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }, {
+            id: "description",
+            name: "描述",
+            field: "description",
+            editable: false,
+            filter: 'set',
+            width: 150,
+            cellEditor: "文本框",
+            enableRowGroup: true,
+            enablePivot: true,
+            enableValue: true,
+            floatCell: true
+        }
+    ];
+    //网格设置
+    $scope.searchOptions = {
+        enableCellNavigation: true,
+        enableColumnReorder: false,
+        editable: true,
+        enableAddRow: false,
+        asyncEditorLoading: false,
+        autoEdit: true,
+        autoHeight: true
+    };
+
+    //初始化表格
+    $scope.deptGrid = new Slick.Grid("#deptGrid", [], $scope.deptColumns, $scope.deptOptions);
+    $scope.budGrid = new Slick.Grid("#budGrid", [], $scope.budColumns, $scope.budOptions);
+    /*$scope.searchGrid = new Slick.Grid("#searchGrid", [], $scope.searchColumns, $scope.searchOptions);*/
+
+
+
+    //网格绑定事件
+    $scope.budGrid.onClick.subscribe(budClick);
+    $scope.deptGrid.onClick.subscribe(deptClick);
+
+
+    //查询表格单击事件
+    /*function seaClick(e, args) {
+        console.log(args.row);//获取行数
+        console.log(e.target);//获取元素
+        console.log(args.grid.getDataItem(args.row));//获取行所有数据
+        args.grid.setActiveCell(args.row, args.cell);//设置活动单元格
+    }*/
+
+    //dept表单击事件
+    function deptClick(e, args) {
+        console.log(args);
+        BasemanService.RequestPost("fin_bud", "select", {}).then(function (result) {
+            BasemanService.RequestPost("fin_bud_period_header", "search", {}).then(function (result) {
+                BasemanService.RequestPost("fin_bud_period_header","select",{
+                    "period_id": 4//!!!!!要改
+                }).then(function (result) {
+                    $scope.deptGrid.setData(result.fin_bud_period_lineoffin_bud_period_headers.fin_bud_period_lineoffin_bud_period_header);
+                })
+            })
+        })
+        // e.stopImmediatePropagation();
+    }
+
+    //bud网格单击事件
+    function budClick(e, args) {
+        console.log(e,args);
+    }
+
+
+    //ng-model改变时执行
+    $scope.$watch('data.currIterm.sort',function(newValue,oldValue){
+        BasemanService.RequestPost("mis_crm_collate", "getentorgid", {
+
+        });
+    });
+
+
+    //页面-预算类别查询
+    $scope.viewTypeSearch = function () {
+        $scope.FrmInfo = {
+            title: "预算类别",
+            thead: [{
+                name: "类别名称",
+                code: "bud_type_name"
+            }, {
+                name: "类别编码",
+                code: "bud_type_code"
+            }, {
+                name: "机构层级",
+                code: "Org_Level"
+            }, {
+                name: "费用层级",
+                code: "Fee_Type_Level"
+            }, {
+                name: "预算期间类别",
+                code: "Period_Type"
+            }, {
+                name: "产品类别",
+                code: "Item_Level"
+            }, {
+                name: "描述",
+                code: "Description"
+            }],
+            classid: "Fin_Bud_Type_Header",
+            url: "/jsp/authman.jsp",
+            direct: "left",
+            sqlBlock: "",
+            backdatas: "fin_bud_type_headers",
+            ignorecase: "true", //忽略大小写
+            postdata: {
+                maxsearchrltcmt: 10,
+                sqlwhere:" Fin_Bud_Type_Header.Usable=2 and Fin_Bud_Type_Header.Org_Level<>5 "
+            },
+            searchlist: ["sqlwhere", "maxsearchrltcmt"]
+        };
+        BasemanService.open(CommonPopController, $scope).result.then(function (result) {
+
+            BasemanService.RequestPost(
+                "fin_bud_type_header", "select",
+                {
+                    "bud_type_id": /*$scope.data.currGrid.bud_type_id*/1
+                }
+            ).then(function (result) {
+                BasemanService.RequestPost("dept", "search", {})
+                    .then(function (result) {
+                        //清空网格
+                        $scope.deptGrid.setData([]);
+                        //设置数据
+                        $scope.deptGrid.setData(result.depts);
+                        //重绘网格
+                        $scope.deptGrid.render();
+                    })
+                }
+            );
+        })
+    };
+
+
+    //搜索按钮
+    /*$scope.search = function () {
+        console.log($scope.data.currIterm);
+        $scope.sqlwhere = '';
+        if ($scope.data.currIterm.condition && $scope.data.currItem.filtrate) {
+            $scope.sqlwhere += $scope.data.currIterm.Conditions.id + " like '%" + $scope.data.currIterm.filtrate + "%' and ";
+        }
+        $scope.sqlwhere += " Fin_Bud_Type_Header.Usable=2 and Fin_Bud_Type_Header.Org_Level<>5 ";
+        BasemanService.RequestPost("fin_bud_type_header", "search", {
+            "sqlwhere": $scope.sqlwhere,
+            "maxsearchrltcmt": $scope.data.currIterm.maxsearchrltcmt
+        })
+            .then(function (data) {
+                //清空网格
+                $scope.searchGrid.setData([]);
+                //设置数据
+                $scope.searchGrid.setData(data.fin_bud_type_headers);
+                //重绘网格
+                $scope.searchGrid.render();
+            });
+    }*/
+
+
+    //查询窗确定事件
+    /*$scope.confirm = function () {
+        console.log($scope.data.currGrid);
+        BasemanService.RequestPost("fin_bud_type_header", "select", {
+            "bud_type_id": /!*$scope.data.currGrid.bud_type_id*!/1
+        }).then(
+            BasemanService.RequestPost("dept", "search", {})
+                .then(function (data) {
+                    //清空网格
+                    $scope.deptGrid.setData([]);
+                    //设置数据
+                    $scope.deptGrid.setData(data.depts);
+                    //重绘网格
+                    $scope.deptGrid.render();
+                })
+        );
+    }*/
+
+
+    //导出模态窗
+    angular.element('#outModalBtn').click(function () {
+        $('#outModal').modal('show');
+    });
+
+    //导出-机构查询
+    $scope.orgSeach = function () {
+        $scope.FrmInfo = {
+            title: "机构查询",
+            thead: [{
+                name: "机构编码",
+                code: "code"
+            }, {
+                name: "机构名称",
+                code: "orgname"
+            }, {
+                name: "负责人",
+                code: "manager"
+            }, {
+                name: "备注",
+                code: "note"
+            }],
+            classid: "cpcorg",
+            url: "/jsp/authman.jsp",
+            direct: "left",
+            sqlBlock: "",
+            backdatas: "orgs",
+            ignorecase: "true", //忽略大小写
+            postdata: {
+                maxsearchrltcmt: 300,
+                sqlwhere: " CPcOrg.Stat=2 "
+            },
+            searchlist: ["sqlwhere", "maxsearchrltcmt"]
+        };
+        BasemanService.open(CommonPopController, $scope).then(function (result) {
+            console.log(result);
+        })
+    }
+
+    //导出-预算类别查询
+    $scope.typeSeach = function () {
+        $scope.FrmInfo = {
+            title: "预算类别",
+            thead: [{
+                name: "类别名称",
+                code: "bud_type_name"
+            }, {
+                name: "类别编码",
+                code: "bud_type_code"
+            }, {
+                name: "机构层级",
+                code: "Org_Level"
+            }, {
+                name: "费用层级",
+                code: "Fee_Type_Level"
+            }, {
+                name: "预算期间类别",
+                code: "Period_Type"
+            }, {
+                name: "产品类别",
+                code: "Item_Level"
+            }, {
+                name: "描述",
+                code: "Description"
+            }],
+            classid: "fin_bud_type_header",
+            url: "/jsp/authman.jsp",
+            direct: "left",
+            sqlBlock: "",
+            backdatas: "fin_bud_type_headers",
+            ignorecase: "true", //忽略大小写
+            postdata: {
+                maxsearchrltcmt: 300,
+                sqlwhere:" Fin_Bud_Type_Header.Usable=2 "
+            },
+            searchlist: ["sqlwhere", "maxsearchrltcmt"]
+        };
+        BasemanService.open(CommonPopController, $scope).result.then(function (result) {
+            console.log(result)
+        })
+    }
+
+
+    $scope.test=function () {
+        console.log($scope.data.currIterm.sort);
+    }
+
+}
+//注册控制器
+angular.module('inspinia')
+    .controller('fin_bud_make', fin_bud_make)
+

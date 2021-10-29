@@ -1,0 +1,196 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ctrl_callnotify">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content no-padding col-lg-12">
+                    <div class="tabs-container">
+                    	<div class="ibox-content clearborder col-lg-12">
+                    		<div class="col-lg-3">
+				                <div class="widget style1 navy-bg">
+				                        <div class="row">
+				                            <div class="col-xs-4 text-center">
+				                                <i class="fa fa-trophy fa-5x"></i>
+				                            </div>
+				                            <div class="col-xs-8 text-right">
+				                                <span> 未处理完成总数</span>
+				                                <h2 class="font-bold">45</h2>
+				                            </div>
+				                        </div>
+				                </div>
+				            </div>
+                    		<div class="col-lg-3">
+				                <div class="widget style1 yellow-bg">
+				                        <div class="row">
+				                            <div class="col-xs-4 text-center">
+				                                <i class="fa fa-warning fa-5x"></i>
+				                            </div>
+				                            <div class="col-xs-8 text-right">
+				                                <span> 未接单数</span>
+				                                <h2 class="font-bold">20</h2>
+				                            </div>
+				                        </div>
+				                </div>
+				            </div>
+                    		<div class="col-lg-3">
+				                <div class="widget style1 red-bg">
+				                        <div class="row">
+				                            <div class="col-xs-4 text-center">
+				                                <i class="fa fa-bell fa-5x"></i>
+				                            </div>
+				                            <div class="col-xs-8 text-right">
+				                                <span> 未完工数</span>
+				                                <h2 class="font-bold">25</h2>
+				                            </div>
+				                        </div>
+				                </div>
+				            </div>
+                    		<div class="col-lg-3">
+				                <div class="widget style1 lazur-bg">
+				                        <div class="row">
+				                            <div class="col-xs-4 text-center">
+				                                <i class="fa fa-trophy fa-5x"></i>
+				                            </div>
+				                            <div class="col-xs-8 text-right">
+				                                <span> 本月需保养数</span>
+				                                <h2 class="font-bold">60</h2>
+				                            </div>
+				                        </div>
+				                </div>
+				            </div>
+                    	</div>
+						<div class="containers">
+							<div class="ibox-content clearborder">
+								<div class="col-md-12" style="border: 1px solid #ddd;margin-bottom: 10px;">
+									<div class="col-md-6">
+										<table class="table" style="table-layout: fixed;word-wrap:break-word;border-right: 1px solid #ddd;margin-bottom: 0;">
+		                   					<thead class="bold">
+		                   						<tr>
+		                   							<td style="width:160px;">类型/状态</td>
+		                   							<td style="width:200px;">用户信息</td>
+		                   							<td style="width:160px;">单据信息</td>
+		                   						</tr>
+		                   					</thead>
+		                   					<tbody>
+		                   						<tr ng-click="choseone($index,$event)" ng-repeat="item in data.notifies">
+		                   							<td><span class="label inline" ng-class="{true: 'label-danger', false: 'label-primary',undefined:'label-primary'}[item.not_null]"><i class="fa fa-check"></i>{{item.types}}</span></td>
+		                   							<td>
+		                   								<div>
+		                   									{{item.cust_name}}/{{item.mobile}}<br>
+		                   									{{item.address}}
+		                   								</div>
+		                   							</td>
+		                   							<td>
+		                   								{{item.note}}
+		                   							</td>
+		                   						</tr>
+		                   					</tbody>
+		                   				</table>
+									</div>
+									<div class="col-md-6">
+										<table class="table" style="table-layout: fixed;word-wrap:break-word;margin-bottom: 0;margin-left: -8px;">
+		                   					<thead class="bold">
+		                   						<tr>
+		                   							<td>处理情况</td>
+		                   						</tr>
+		                   					</thead>
+		                   					<tbody>
+		                   						<tr>
+		                   							<td>
+	                   									<div class="col-md-12">
+	                   										<div class="col-md-2">
+	                   											<label class="form-label-mini">处理结果:</label>
+	                   										</div>
+	                   										<div class="col-md-10">
+	                   											<input class="input-sm form-control">
+	                   										</div>
+	                   									</div>
+		                   							</td>
+		                   						</tr>
+		                   						<tr>	
+		                   							<td style="border-top: none;">
+		                   								<div class="col-md-12">
+		                   										<div class="col-md-2">
+		                   											<label class="form-label-mini">拒绝原因:</label>
+		                   										</div>
+		                   										<div class="col-md-10">
+		                   											<input class="input-sm form-control">
+		                   										</div>
+		                   									</div>
+		                   							</td>
+		                   						</tr>
+		                   						<tr>	
+		                   							<td style="border-top: none;">
+		                   								<div class="col-md-12">
+	                   										<div class="col-md-2">
+	                   											<label class="form-label-mini">改派说明:</label>
+	                   										</div>
+	                   										<div class="col-md-10">
+	                   											<input class="input-sm form-control">
+	                   										</div>
+	                   									</div>
+		                   							</td>
+		                   						</tr>
+		                   						<tr>	
+		                   							<td style="border-top: none;">
+		                   								<div class="col-md-12">
+		                   									<div class="col-md-2">
+			                   									<label><input type="checkbox">需要延期</label>
+		                   									</div>
+		                   									<div class="col-md-5">
+		                   										<div class="col-md-5"><label class="form-label-mini">预约服务日期:</label></div>
+		                   										<div class="col-md-7">
+		                   											<input class="input-sm form-control" bs-datepacker value="" name="name">
+		                   										</div>
+		                   									</div>
+		                   									<div class="col-md-5">
+		                   										<div class="col-md-4"><label class="form-label-mini">跟进状态:</label></div>
+		                   										<div class="col-md-8">
+		                   											<select ng-model="data.statsk" data-placeholder=" " chosen-select class="input-sm chosen-select form-control" ng-options="s.id as s.name for s in manual_stats">
+								                                        <option value=""></option>
+								                                    </select>
+		                   										</div>
+		                   									</div>
+		                   									
+		                   								</div>
+		                   							</td>
+		                   						</tr>
+		                   						<tr>	
+		                   							<td style="border-top: none;">
+		                   								<div class="col-md-12">
+	                   										<div class="col-md-2">
+	                   											<label class="form-label-mini">跟进内容:</label>
+	                   										</div>
+	                   										<div class="col-md-10">
+	                   											<input class="input-sm form-control">
+	                   										</div>
+	                   									</div>
+		                   							</td>
+		                   						</tr>
+		                   						<tr>	
+		                   							<td style="border-top: none;">
+		                   								<div class="pull-right">
+					                    					<div class="btn_group">
+					                    						<button class="btn btn-w-m btn-success btn-xs">接单</button>
+					                    						<button class="btn btn-w-m btn-success btn-xs">拒单</button>
+					                    						<button class="btn btn-w-m btn-success btn-xs">跟进保存</button>
+					                    						<button class="btn btn-w-m btn-success btn-xs">处理完成</button>
+					                    					</div>
+					                    				</div>
+		                   							</td>
+		                   						</tr>
+		                   					</tbody>
+		                   				</table>	
+									</div>
+								</div>
+								
+                   			</div>
+						</div>
+                    	
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</div>

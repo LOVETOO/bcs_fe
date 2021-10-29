@@ -1,0 +1,58 @@
+<div hc-edit-list>
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.unknown"
+                 hc-label="预算类别"
+                 hc-btn-click="chooseFinType()">
+            </div>
+            <div hc-input="data.currItem.unknown">
+            </div>
+
+            <div hc-input="data.currItem.unknown"
+                 hc-label="费用类别/项目"
+                 hc-btn-click="chooseFeeType()">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.unknown"
+                 hc-label="部门"
+                 hc-btn-click="chooseDept()">
+            </div>
+            <div hc-input="data.currItem.unknown">
+            </div>
+
+            <div hc-input="data.currItem.unknown"
+                 hc-label="品类"
+                 hc-dict-code="crm_entid">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.unknown"
+                 hc-label="预算年度"
+                 hc-type="year">
+            </div>
+
+            <div hc-input="data.currItem.unknown"
+                 hc-label="预算月度"
+                 hc-type="month">
+            </div>
+
+            <!--<div hc-input="data.currItem.unknown"
+                 hc-label=" &#45;&#45;&#45;&#45;  "
+                 hc-type="month">
+            </div>-->
+
+            <button type="button" class="btn btn-primary"
+                    style="margin-left: 30px; width: 100px;"
+                    ng-click="searchByCon()">
+                <i class="fa fa-search"></i> 查询
+            </button>
+        </div>
+
+        <div id="grid" hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+    </div>
+
+</div>

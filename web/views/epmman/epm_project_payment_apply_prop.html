@@ -1,0 +1,120 @@
+<!--项目付款申请-属性页-->
+<!--shenguocheng-->
+<!--2019-07-15-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box class="grid-other-h">
+            <div class="row">
+                <div hc-input="data.currItem.project_payment_apply_no"
+                     hc-label="申请单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.apply_people"
+                     hc-label="申请人"
+                     hc-class-id="base_view_erpemployee_org"
+                     hc-common-search="commonSearch.applyPeople"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.apply_date"
+                     hc-label="申请时间"
+                     hc-type="date"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-class-id="epm_project"
+                     hc-common-search="commonSearch.projectName"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.manager"
+                     hc-label="项目经理"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.contract_code"
+                     hc-label="合同编码"
+                     hc-class-id="epm_project_contract"
+                     hc-common-search="commonSearch.contractName"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.contract_name"
+                     hc-col-count="4"
+                     hc-label="合同名称"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.contract_amt"
+                     hc-label="合同金额"
+                     hc-unit="元"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.apply_amount"
+                     hc-label="本次申请金额"
+                     hc-unit="元"
+                     hc-type="money"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.payee_bank"
+                     hc-label="开户行"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.payee_account"
+                     hc-label="银行账号"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.payee_linkname"
+                     hc-label="收款方">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.addup_amount"
+                     hc-label="已支付金额"
+                     hc-unit="元"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.approved_amount"
+                     hc-label="本次批准金额"
+                     hc-unit="元"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-col-count="4">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>拆分计划行</h3>
+    </div>
+    <div class="modal-body">
+    	<form name="planHeaderEdit" class="form-horizontal form-inline">
+    		
+    		<div class="ibox-content">
+    			<div class="row">
+    				<div class="col-md-2"><label class="form-label-mini ">通知单号:</label></div>
+    				<div class="col-md-10">
+    					<input style="width:94%;" readonly ng-model="notice.notice_no" type="text" class="form-control input-sm">
+    				</div>
+    			</div>
+    			<div class="row">
+					<div class="col-md-2"><label class="form-label-mini ">当前数量:</label></div>
+    				<div class="col-md-4">
+    					<input readonly ng-model="notice.qty" type="text" class="form-control input-sm">
+    				</div>
+					<div class="col-md-2"><label class="form-label-mini ">拆分数量:</label></div>
+    				<div class="col-md-4">
+    					<input ng-model="notice.splice_num" type="text" class="form-control input-sm">
+    				</div>				
+    			</div>
+    	<!--		<div class="row">
+    				
+    				<div class="col-md-2"><label class="form-label-mini ">当前交期:</label></div>
+    				<div class="col-md-4">
+    					<input readonly ng-model="notice.delivery_date" type="text" class="form-control input-sm">
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="col-md-2"><label class="form-label-mini ">订单行号:</label></div>
+    				<div class="col-md-4">
+    					<input readonly ng-model="notice.seq" type="text" class="form-control input-sm">
+    				</div>
+    				<div class="col-md-2"><label class="form-label-mini ">计划行号:</label></div>
+    				<div class="col-md-4">
+    					<input readonly ng-model="notice.shipnotice_line_id" type="text" class="form-control input-sm">
+    				</div>
+    				<div class="col-md-2"><label class="form-label-mini ">拆分后交期:</label></div>
+    				<div class="col-md-4">
+    					<input bs-datepacker ng-model="notice.splice_date" type="text" class="form-control input-sm">
+    				</div>
+    			</div>  -->
+    		</div>
+    		
+        </form> 
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+          确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+          取消
+        </a>
+     </div>
+</div>

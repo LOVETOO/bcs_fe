@@ -1,0 +1,446 @@
+<!--
+	编辑界面
+-->
+<div class="bill-form" ng-controller="oa_employee_info_line" style="width: 100%;">
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-12">
+			<div class="ab-form-title">
+				员工详情
+			</div>
+			<div class="ab-form-toolbar">
+				<div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">
+				</div>
+				<button class="btn btn-white btn-xs" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+				<button class="btn btn-white btn-xs" type="button" ng-hide="searchlist" ng-click="new()"><i class="fa fa-file-o"></i>新增
+                </button>
+				<button class="btn btn-white btn-xs" type="button" ng-hide="searchlist" ng-click="save($event)"><i class="fa fa-floppy-o"></i>保存
+                </button>
+				<button class="btn btn-white btn-xs" type="button" ng-click="refresh()"><i class="fa fa-history"></i>刷新
+                </button>
+				<button class="btn btn-white btn-xs" type="button" ng-hide="searchlist" ng-if="data.currItem.stat==1||searchlist" ng-click="delete()"><i class="fa fa-trash"></i>删除
+                </button>
+				<button ng-click="closefrm()" class="btn btn-white btn-xs" type="button"><i class="fa fa-times"></i>
+                </button>
+			</div>
+		</div>
+	</div>
+	<!---->
+	<div class="wrapper wrapper-content animated fadeInRight  resource-root" style="width: 100%; margin-top: 3.5%;">
+		<div class="row row_div" style="width: 100%;">
+			<div class="col-lg-12">
+				<ul id="maintabs" class="tri-nav-tabs">
+					<li class="active">
+						<a data-target="#tab1" data-toggle="tab" class="tab-nav"><i class="fa fa-desktop"> 常规</i></a>
+					</li>
+					<li ng-click="authority()">
+						<a data-target="#tab2" data-toggle="tab" class="tab-nav"><i class="fa fa-paperclip"> 其它</i></a>
+					</li>
+
+				</ul>
+				<div id="main-tab-content" class="tab-content resource">
+					<div id="tab1" class="main-tab-pane tab-pane active">
+						<div class="ibox-content">
+
+							<!--图片-->
+							<button ng-hide="true" id='dropzone'> 弹出自带</button>
+							<div class="user_photo" ng-click="user_photo()">
+								<p style="font-size: 20px ;" ng-if="data.currItem.avatar_docid==null">上传头像</p>
+								<img ng-if="data.currItem.avatar_docid>0" class="photo" src="/downloadfile.do?docid={{data.currItem.avatar_docid}}&loginguid=" {{ window.strLoginGuid}}>
+							</div>
+
+							<!--第一行-->
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">姓名</label>
+								</div>
+								<div class="col-md-2">
+									<text-input ng-readonly="false" ng-model="data.currItem.emp_name">
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">性别</label>
+								</div>
+								<div class="col-md-2">
+									<select chosen-select ng-readonly="false" ng-model="data.currItem.sex" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in sex">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">系统用户</label>
+								</div>
+								<div class="col-md-2">
+									<button-edit be-delete="empty_user_id()" be-search="user_id()" be-edit="false" ng-model="data.currItem.userid" />
+								</div>
+							</div>
+
+							<!--第二行-->
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">出生日期</label>
+								</div>
+								<div class="col-md-2">
+									<input bs-datepacker="" ng-model="data.currItem.birth_day" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">身份证号码</label>
+								</div>
+								<div class="col-md-2">
+									<text-input ng-readonly="false" ng-model="data.currItem.idcard">
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">婚姻状况</label>
+								</div>
+								<div class="col-md-2">
+									<select chosen-select ng-readonly="false" ng-model="data.currItem.marital_status" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in marital_status">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+
+							<!--第三行-->
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">籍贯</label>
+								</div>
+								<div class="col-md-2">
+									<button-edit be-delete="empty_origo()" be-search="origo_name()" be-edit="false" ng-model="data.currItem.origo_name" />
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">户口所在地</label>
+								</div>
+								<div class="col-md-5">
+									<button-edit be-delete="empty_domicile()" be-search="domicile_name()" be-edit="false" ng-model="data.currItem.domicile_name" />
+								</div>
+							</div>
+
+							<!--第四行-->
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">家庭住址</label>
+								</div>
+								<div class="col-md-2">
+									<button-edit be-delete="empty_address()" be-search="address_name()" be-edit="false" ng-model="data.currItem.address_name" />
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">详细地址</label>
+								</div>
+								<div class="col-md-5">
+									<text-input ng-readonly="false" ng-model="data.currItem.address">
+								</div>
+							</div>
+
+							<!--第五行-->
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">学历</label>
+								</div>
+								<div class="col-md-2">
+									<select chosen-select ng-readonly="false" ng-model="data.currItem.education" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in educations">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">毕业院校</label>
+								</div>
+								<div class="col-md-2">
+									<text-input ng-readonly="false" ng-model="data.currItem.graduated_from">
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">毕业时间</label>
+								</div>
+								<div class="col-md-2">
+									<input bs-datepacker="" ng-model="data.currItem.graduation_time" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+								</div>
+							</div>
+
+							<!--第六行-->
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">入职日期</label>
+								</div>
+								<div class="col-md-2">
+									<input bs-datepacker="" ng-model="data.currItem.hire_date" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">所属部门</label>
+								</div>
+								<div class="col-md-2">
+									<button-edit be-delete="empty_org_name()" be-search="org_name()" be-edit="false" ng-model="data.currItem.org_name" />
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">职务</label>
+								</div>
+								<div class="col-md-2">
+									<text-input ng-readonly="false" ng-model="data.currItem.duties">
+								</div>
+							</div>
+
+							<!--第七行-->
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">职级</label>
+								</div>
+								<div class="col-md-2">
+									<select chosen-select ng-readonly="false" ng-model="data.currItem.ranks" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in rankss">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">合同起始日期</label>
+								</div>
+								<div class="col-md-2">
+									<input bs-datepacker="" ng-model="data.currItem.validity_date" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">合同到期日期</label>
+								</div>
+								<div class="col-md-2">
+									<input bs-datepacker="" ng-model="data.currItem.expiration_date" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">在职状态</label>
+								</div>
+								<div class="col-md-2">
+									<select chosen-select ng-readonly="false" ng-model="data.currItem.status" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in statuss">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+
+							<!--第八行-->
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null" ng-if="data.currItem.status==2">离职日期</label>
+								</div>
+								<div class="col-md-2">
+									<input bs-datepacker="" ng-if="data.currItem.status==2" ng-model="data.currItem.leave_date" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null" ng-if="data.currItem.status==2">离职类型</label>
+								</div>
+								<div class="col-md-2">
+									<select chosen-select ng-readonly="false" ng-if="data.currItem.status==2" ng-model="data.currItem.leave_type" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in leave_types">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null" ng-if="data.currItem.status==2">离职原因</label>
+								</div>
+								<div class="col-md-5">
+									<text-input ng-if="data.currItem.status==2" ng-model="data.currItem.leave_reason">
+								</div>
+							</div>
+
+							<!--第九行-->
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">直属上级</label>
+								</div>
+								<div class="col-md-2">
+									<button-edit be-delete="empty_report_toname()" be-search="report_toname()" be-edit="false" ng-model="data.currItem.report_toname" />
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">备注</label>
+								</div>
+								<div class="col-md-8">
+									<text-input ng-readonly="false" ng-model="data.currItem.note">
+								</div>
+							</div>
+
+							<div class="ibox-content">
+								<div class="row">
+									<div class="ab-option-toolbar">
+										<button class="btn btn-white btn-xs" type="button" ng-click="addItem()"><i class="fa fa-plus-square-o"></i>增加
+                                    </button>
+										<button class="btn btn-white btn-xs" type="button" ng-click="delItem()"><i class="fa fa-minus-square-o"></i>删除
+                                    </button>
+									</div>
+									<div ag-gridview sg-options="opt_itemline" sg-columns="reseau" style="width:100%;height:400px;" class="slick-grid"></div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+					<div id="tab2" class="main-tab-pane tab-pane" style="width: 100%">
+						<div class="ibox-content">
+							<h5>创建人: {{data.currItem.creator}}</h5>
+							<h5>创建时间: {{data.currItem.create_time}}</h5>
+							<h5>最后修改人: {{data.currItem.updator}}</h5>
+							<h5>最后修改时间: {{data.currItem.update_time}}</h5>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<!---->
+	</div>
+</div>
+<style type="text/css">
+	.user_photo {
+		display: flex;
+		width: 22%;
+		height: 168px;
+		position: absolute;
+		right: 17px;
+		background-color: #ddd;
+		border-radius: 3px;
+		background-size: cover;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.photo {
+		max-width: 100%;
+		max-height: 100%;
+	}
+	
+	.resource-tree {
+		width: 288px;
+		flex-shrink: 0;
+		flex-grow: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		margin-right: 10px;
+		border: 1px #ddd solid;
+		border-radius: 2px;
+	}
+	
+	.resource {
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+		flex-shrink: 1;
+		flex-grow: 1;
+		background-color: #fff;
+	}
+	
+	div#rMenu {
+		width: 110px;
+		z-index: 4;
+		position: absolute; //使用绝对定位  
+		visibility: hidden;
+		top: 0;
+		background-color: #f6f6f6;
+		padding: 1px;
+		visibility: hidden;
+		text-align: center;
+	}
+	
+	div#rMenu ul {
+		margin: 0px;
+		padding: 0px;
+		/* border-collapse: separate; */
+		border: 1px solid #808080;
+	}
+	
+	div#rMenu ul li {
+		font-size: 11px;
+		line-height: 20px;
+		margin: 0px;
+		padding: 2px;
+		cursor: pointer;
+		list-style: none outside none; //取消样式
+		background-color: #DFDFDF;
+		border-bottom: 1px solid #d3d3d3;
+		padding-left: 3px;
+		color: #222;
+	}
+	
+	div#rMenu ul li:hover {
+		background: #eee;
+	}
+	
+	div.wrap-height {
+		display: flex;
+	}
+	
+	div.wrap-height>div.ng-scope {
+		display: flex;
+		flex-shrink: 1;
+		flex-grow: 1;
+		width: 100%;
+		height: 100%;
+	}
+	
+	.tab-content>.active {
+		display: block;
+		width: 100%;
+	}
+	
+	.wrapper.animated.fadeInRight.ng-scope {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	.wrapper-content {
+		padding: 0px 0px 10px!important;
+	}
+	
+	.resource-root {
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+		flex-shrink: 1;
+		flex-grow: 1;
+		background-color: #fff;
+		padding: 3px 2px;
+	}
+	
+	div.left-nav-div {
+		width: 180px;
+		flex-grow: 0;
+		flex-shrink: 0;
+		display: flex;
+	}
+	
+	div.client-content {
+		flex-grow: 1;
+		flex-shrink: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	div.more_news {
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	div.ibox-content.modal-open {
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+	
+	.fadeInRight {
+		z-index: 10;
+	}
+	
+	.tab-content {
+		position: initial;
+	}
+	
+	.row_div {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	
+	.wrap-height {
+		height: 334px;
+		margin-right: 0px !important;
+		padding-right: 12px;
+		overflow: hidden;
+		outline: none;
+	}
+	
+	div.col-lg-12 {
+		padding-right: 0px !important;
+		padding-left: 0px!important;
+	}
+</style>

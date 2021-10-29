@@ -1,0 +1,191 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.proj_unfreeze_code"
+                     hc-label="申请单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.createtime"
+                     hc-label="申请日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="申请人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-required="true"
+                     hc-btn-click="searchObjectEpmProject()"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.division_id"
+                     hc-label="所属事业部"
+                     hc-dict-code="epm.division"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.area_full_name"
+                     hc-label="工程所在地"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.address"
+                     hc-label="详细地址"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.is_local"
+                     hc-label="本地/异地"
+                     hc-dict-code="epm.is_local"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.party_a_name"
+                     hc-label="甲方名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.party_b_name"
+                     hc-label="乙方名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+
+            </div>
+            <!--<div class="row">
+                <div hc-input="data.currItem.party_a_link_person"
+                     hc-label="甲方联系人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.party_a_phone"
+                     hc-label="甲方联系电话"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.party_b_link_person"
+                     hc-label="乙方联系人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.party_b_phone"
+                     hc-label="乙方联系电话"
+                     hc-readonly="true"></div>
+            </div>-->
+        </div>
+        <!-- 超项目有效期 -->
+        <div hc-box="解冻申请" hc-if="data.currItem.freeze_type == 1">
+            <div class="row">
+                <div hc-input="data.currItem.freeze_type"
+                     hc-label="冻结原因"
+                     hc-readonly="true"
+                     hc-col-count="6"
+                     hc-dict-code="epm.proj.freeze_type"></div>
+                <div hc-input="data.currItem.freeze_time"
+                     hc-label="冻结时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+               <div hc-input="data.currItem.stage_name_before"
+                    hc-label="当前项目进度"
+                    hc-col-count="4"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.stage_name_after"
+                    hc-label="更新为"
+                    hc-col-count="4"
+                    hc-required="true"
+                    hc-class-id="epm_stage_def"
+                    hc-common-search="commonSearchEpmStageDef"></div>
+           </div>
+           <div class="row">
+               <div hc-input="data.currItem.stage_desc_before"
+                    hc-label="当前进度描述"
+                    hc-col-count="4"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.stage_desc_after"
+                    hc-label="更新为"
+                    hc-col-count="4"
+                    hc-required="true"></div>
+           </div>
+            <div class="row">
+                <div hc-input="data.currItem.reason"
+                     hc-label="申请说明"
+                     hc-required="true"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+            <div class="row" hc-if="data.currItem.reject_reason.length > 0">
+               <div hc-input="data.currItem.reject_reason"
+                    hc-label="拒绝理由"
+                    hc-readonly="true"
+                    hc-col-count="8"></div>
+            </div>
+        </div>
+        <!-- 进度更新超时 -->
+        <div hc-box="解冻申请" hc-if="data.currItem.freeze_type == 2">
+            <div class="row">
+                <div hc-input="data.currItem.freeze_type"
+                     hc-label="冻结原因"
+                     hc-col-count="4"
+                     hc-readonly="true"
+                     hc-dict-code="epm.proj.freeze_type"></div>
+                <div hc-input="data.currItem.stage_date_before"
+                     hc-label="最后更新时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.freeze_time"
+                     hc-label="冻结时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.stage_name_before"
+                     hc-label="当前项目进度"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stage_name_after"
+                     hc-label="更新为"
+                     hc-col-count="4"
+                     hc-required="true"
+                     hc-class-id="epm_stage_def"
+                     hc-common-search="commonSearchEpmStageDef"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.stage_desc_before"
+                     hc-label="当前进度描述"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stage_desc_after"
+                     hc-label="更新为"
+                     hc-col-count="4"
+                     hc-required="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.reason"
+                     hc-label="申请说明"
+                     hc-required="true"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+            <div class="row" hc-if="data.currItem.reject_reason.length > 0">
+               <div hc-input="data.currItem.reject_reason"
+                    hc-label="拒绝理由"
+                    hc-readonly="true"
+                    hc-col-count="8"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .oneis{
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+    [hc-input="data.currItem.reject_reason"] label,
+     [hc-input="data.currItem.reject_reason"] input  {
+        color: #F35A05;
+    }
+</style>
+
+
+
+

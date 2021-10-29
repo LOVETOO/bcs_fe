@@ -2,9 +2,7 @@
  * 演示 - 空白页面
  * @since 2019-04-30
  */
-(function (defineFn) {
-	define(['module', 'controllerApi', 'base_diy_page', 'requireApi', 'directive/hcBox', 'directive/hcChart', 'directive/hcOrgChart', 'directive/hcRichText', 'plugins/echarts/4.2.1/map/js/china', 'plugins/echarts/4.2.1/map/js/china-contour', 'plugins/echarts/4.2.1/map/js/province/guangdong', 'directive/hcSortable'], defineFn);
-})(function (module,   controllerApi,   base_diy_page,   requireApi) {
+define(['module', 'controllerApi', 'base_diy_page', 'requireApi', 'directive/hcBox', 'directive/hcChart', 'directive/hcOrgChart', 'directive/hcRichText', 'plugins/echarts/4.2.1/map/js/china', 'plugins/echarts/4.2.1/map/js/china-contour', 'plugins/echarts/4.2.1/map/js/province/guangdong', 'directive/hcSortable', 'directive/hcAddress'], function (module,   controllerApi, base_diy_page, requireApi) {
 
 	/**
 	 * 控制器

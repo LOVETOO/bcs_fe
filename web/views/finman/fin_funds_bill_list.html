@@ -1,0 +1,155 @@
+<div class="bill-form" ng-controller="fin_funds_bill_list">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                收汇引信保通
+            </div>
+            <div style="float:left">
+                <div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">  
+                </div>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                 <div class="ibox-title">
+                            <h5>搜索条件</h5>
+                            <div ibox-tools></div>
+                        </div>
+                <div id="content" class="first ">
+                    <div id="tab1" class="tab-pane active">
+                        <div class="ibox-content" id="sqlWhereBlock">
+                            <div class="row">
+                               <div class="col-md-1">
+                                    <label class="form-label-mini " >业务部门</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input data-rule-required="true" type="text"
+												id="org_code"
+											   name="like"
+                                               ng-readonly="false" class="input-sm form-control"
+                                               ng-model="data.currItem.org_code">
+                                        <a class="input-group-addon" ng-click="selectorg()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+								 <div class="col-md-2">
+                                    <input type="text" ng-model="data.currItem.org_name" ng-readonly="false"
+                                           class="input-sm form-control">
+                                </div>
+                                   <div class="col-md-1">
+                                    <label class="form-label-mini " >大区</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input data-rule-required="true" type="text"
+												id="area_code"
+											   name="like"
+                                               ng-readonly="false" class="input-sm form-control"
+                                               ng-model="data.currItem.area_code">
+                                        <a class="input-group-addon" ng-click="selectarea()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+								 <div class="col-md-2">
+                                    <input type="text" ng-model="data.currItem.area_name" ng-readonly="false"
+                                           class="input-sm form-control">
+                                </div>
+								 <button class="btn btn-sm btn-info" type="button" ng-click="search()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    释放OMS限额
+                                </button>
+                            </div>
+                           	<div class="row">
+                                 <div class="col-md-1">
+                                    <label class="form-label-mini " >客户</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input data-rule-required="true" type="text"
+                                               ng-readonly="false" class="input-sm form-control"
+											   id="b.sap_code"
+											   name="like"
+                                               ng-model="data.currItem.sap_code">
+                                        <a class="input-group-addon" ng-click="selectcust()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="data.currItem.cust_name" ng-readonly="false"
+											id="a.cust_name"
+											 name="like"
+                                           class="input-sm form-control">
+                                </div>
+								<div class="col-md-1">
+                                    <label class="form-label-mini " >发票号</label>
+                                </div>
+								<div class="col-md-2">
+                                    <input type="text" ng-model="data.currItem.invoice_no" ng-readonly="false"
+											id="a.invoice_no"
+											 name="like"
+                                           class="input-sm form-control">
+                                </div>
+                                  <div class="col-md-2">
+                                 
+								</div>
+                                <button class="btn btn-sm btn-info" type="button" ng-click="search()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    查询
+                                </button>
+                            </div>				
+							<div class="row">
+                               <div class="col-md-1">
+                                    <label class="form-label-mini ">发票日期</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input bs-datepacker ng-disabled="false"
+											id="funds_date>funds_date1"
+											name=">"
+                                           ng-model="data.currItem.funds_date1" type="text"
+                                           class="form-control input-sm">
+                                </div>
+								 <div class="col-md-1">
+									<label class="form-label-mini" style=" margin-right: 8px;">——————————</label>
+								</div>
+								<div class="col-md-2">
+                                    <input bs-datepacker ng-disabled="false"
+											id="funds_date<funds_date2"
+											name="<"
+                                           ng-model="data.currItem.funds_date2" type="text"
+                                           class="form-control input-sm">
+                                </div>
+								<div class="col-md-4">
+								</div>
+								<button class="btn btn-sm btn-info" type="button" ng-click="insertErp()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    传入信保通
+                                </button>
+							</div>
+							<div class="row">    
+								<div class="col-md-12">
+									<div class="ibox-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button style="margin-left:20px;" class="btn btn-toolbar" type="button"
+                                                ng-click="selectGridSelectAll($event,'options_10')"><i
+                                                class="fa fa-paper-plane-o"></i>全选
+                                                </button>
+                                             </div>
+                                        </div>
+										<div ag-gridview sg-options="options_10"
+                                         sg-columns="columns_10" style="width:100%;height:320px;"
+                                         class="slick-grid">
+										</div>
+								</div>
+							</div>
+					 </div>
+			</div>
+        </div>
+     </div>
+</div>    

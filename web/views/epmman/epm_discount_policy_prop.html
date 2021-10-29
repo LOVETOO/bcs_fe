@@ -1,0 +1,126 @@
+<!--
+/**
+ * 折扣政策
+ * zengjinhua
+ * 2020-3-30
+ */
+-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+				<div
+					hc-label="政策申请单号"
+					hc-input="data.currItem.discount_policy_code"
+					hc-readonly="true"
+				></div>
+				
+				<div
+					hc-label="申请人"
+					hc-input="data.currItem.creator_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="申请时间"
+					hc-input="data.currItem.createtime"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="单据状态"
+					hc-input="data.currItem.stat"
+                    hc-dict-code="stat"
+					hc-readonly="true"
+				></div>
+			</div>
+			
+			<div class="row">
+				<div
+					hc-label="政策类型"
+                    hc-input="data.currItem.policy_type"
+                    hc-change="changePolicy()"
+					hc-dict-code="epm.policy_type"
+					hc-required="true"
+                ></div>
+                
+                <div
+					hc-label="政策名称"
+					hc-input="data.currItem.project_name"
+					hc-required="true"
+                ></div>
+                
+                <div
+					hc-label="适用客户"
+                    hc-input="data.currItem.customer_code"
+                    hc-class-id="customer_org"
+					hc-common-search="commonSearch.customer_code"
+                    hc-readonly="data.currItem.policy_type != 1"
+                    hc-required="data.currItem.policy_type == 1"
+				>
+				</div>
+
+                <div
+                    hc-label="适用区域"
+                    hc-input="data.currItem.sale_area_name"
+                    hc-class-id="sale_salearea"
+					hc-common-search="commonSearch.sale_area_name"
+                    hc-readonly="data.currItem.policy_type != 2"
+                    hc-required="data.currItem.policy_type == 2"
+				></div>
+			</div>
+			
+			<div class="row">
+				<div
+					hc-label="适用省份"
+					hc-input="data.currItem.province_name"
+                    hc-class-id="scparea"
+					hc-common-search="commonSearch.province_name"
+                    hc-readonly="data.currItem.policy_type != 4"
+                    hc-required="data.currItem.policy_type == 4"
+                ></div>
+                
+				<div
+					hc-label="适用客户分类"
+					hc-input="data.currItem.customer_class"
+					hc-dict-code="epm.customer_class"
+					hc-readonly="data.currItem.policy_type != 3"
+                    hc-required="data.currItem.policy_type == 3"
+				></div>
+
+				<div
+					hc-label="有效开始日期"
+                    hc-input="data.currItem.effective_date_start"
+                    hc-date-options="{ startDate: 'today' }"
+                    hc-change="changeDate()"
+                    hc-type="date"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="有效结束日期"
+					hc-input="data.currItem.effective_date_end"
+                    hc-type="date"
+                    hc-date-options="{ startDate: 'today' }"
+                    hc-change="changeDate()"
+					hc-required="true"
+				></div>
+            </div>
+
+            <div class="row">
+				<div
+					hc-label="政策描述"
+					hc-input="data.currItem.ecn_reason"
+					hc-required="true"
+					hc-col-count="8"
+                ></div>
+            </div>
+        </div>
+        <div hc-box="产品明细" class="flex1 flex-column" style="min-height: 300px;">
+			<div hc-box hc-grid="gridOptions" class="flex1"></div>
+		</div>
+		<div  hc-box="阶梯政策" class="flex1 flex-column" style="min-height: 300px;">
+			<div hc-box hc-grid="gridOptionsLine" class="flex1"></div>
+		</div>
+    </div>
+</div>

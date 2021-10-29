@@ -1,0 +1,154 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div class="hc-box other-h">
+            <div class="row">
+                <div hc-input="data.currItem.credence_no"
+                     hc-label="凭证号"
+                     hc-readonly="true"
+                >
+                </div>
+
+                <div hc-input="data.currItem.credence_date"
+                     hc-label="记账日期"
+                     hc-readonly="true"
+                >
+                </div>
+
+                <div hc-input="data.currItem.year_month"
+                     hc-label="记账月份"
+                     hc-type="year-month"
+                     hc-readonly="true"
+                >
+                </div>
+
+                <div hc-input="data.currItem.created_by"
+                     hc-label="创建人"
+                     hc-readonly="true"
+                >
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.character_name"
+                     hc-label="凭证字"
+                     hc-readonly="true"
+                >
+                </div>
+
+                <div hc-input="data.currItem.credence_type"
+                     hc-label="凭证类型"
+                     hc-readonly="true"
+                     hc-dict-code="credence_type"
+                >
+                </div>
+
+                <div hc-input="data.currItem.amount_bill"
+                     hc-label="附单据"
+                     hc-type="number"
+                     hc-readonly="true"
+                >
+                </div>
+
+                <div hc-input="data.currItem.is_relation"
+                     hc-label="关联交易"
+                     hc-type="checkbox"
+                     hc-readonly="true"
+                >
+                </div>
+                <!--<button type="button" class="btn btn-primary"-->
+                <!--style="margin-left: 30px; width: 200px;"-->
+                <!--ng-click="searchByCon()">-->
+                <!--<i class="fa fa-search"></i> 查询-->
+                <!--</button>-->
+            </div>
+        </div>
+
+        <div id="grid" hc-grid="gridOptions" hc-auto-height="grid"></div>
+        <div class="hc-box row other-h row-input-s">
+            <!--<button type="button" class="btn btn-link btn-xs" style="font-weight: bold"></button>-->
+            <div hc-input="data.currLine.fund_account_code"
+                 hc-label="资金账号"
+                 hc-readonly="true"
+            >
+            </div>
+            <div hc-input="data.currLine.fund_account_name"
+                 hc-readonly="true"
+                 hc-readonly="true"
+            >
+            </div>
+            <div hc-input="data.currLine.base_ac_object_code"
+                 hc-label="往来对象"
+                 hc-readonly="true"
+            >
+            </div>
+            <div hc-input="data.currLine.base_ac_object_name"
+                 hc-readonly="true"
+            >
+            </div>
+
+            <div hc-input="data.currLine.crm_entid"
+                 hc-label="品类"
+                 hc-dict-code="crm_entid"
+                 hc-readonly="true"
+            >
+            </div>
+        </div>
+        <div class="hc-box row other-h row-input-s">
+            <!--<button type="button" class="btn btn-link btn-xs" style="font-weight: bold"></button>-->
+            <div hc-input="data.currLine.customer_code"
+                 hc-label="客户"
+                 hc-readonly="true"
+            >
+            </div>
+            <div hc-input="data.currLine.customer_name"
+                 hc-col-count="3"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currLine.vendor_code"
+                 hc-label="供应商"
+                 hc-readonly="true"
+            >
+            </div>
+            <div hc-input="data.currLine.vendor_name"
+                 hc-readonly="true"
+            >
+            </div>
+
+            <div hc-input="data.currLine.employee_name"
+                 hc-label="个人"
+                 hc-col-count="3"
+                 hc-readonly="true"
+            >
+            </div>
+        </div>
+
+        <div class="hc-box row other-h row-input-s">
+            <div hc-input="data.currLine.dept_code"
+                 hc-label="部门"
+                 hc-readonly="true"
+            >
+            </div>
+            <div hc-input="data.currLine.dept_name"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currLine.obj_code"
+                 hc-label="资金流向"
+                 hc-readonly="true"
+            >
+            </div>
+            <div hc-input="data.currLine.obj_name"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currLine.sale_area_name"
+                 hc-label="区域"
+                 hc-readonly="true"
+            >
+            </div>
+        </div>
+
+    </div>
+</div>
+

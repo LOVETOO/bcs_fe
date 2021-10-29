@@ -1,0 +1,32 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fd_rebate_head">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <div class="ibox-tools">
+                        <form class="pull-right">
+                            <button class="btn btn-white btn-sm"  ng-click="searchBySql()">
+                                <i class="fa fa-search"></i> 查询
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="刷新"
+                                    ng-click="searchData()"><i class="fa fa-refresh"></i>刷新
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal" data-target="#attributeModal"
+                                    ng-click="detail('','add')" title="新增项目返利单"><i class="fa fa-plus"></i> 新增
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div id="headerGridView" slick-grid sg-options="headerOptions"
+                         sg-columns="headerColumns"
+                         class="slick-grid">
+                    </div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

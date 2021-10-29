@@ -1,0 +1,45 @@
+
+<!-- <div class="ng-cloak" ng-controller="BestTimerCtrl">当前时间：{{clock.now | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+-->
+
+ 
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="myWorkHits">
+
+<div class="row">
+<div class="col-lg-12">
+<div class="ibox float-e-margins">
+<div class="ibox-title" style="padding-top:8px;">
+    <h5 style="margin:0;"><strong>我的工作    - 修改密码</strong></h5>
+    <div ibox-tools class="pull-right"></div>
+  
+</div>
+<div class="ibox-content" style="padding:10px;min-height:420px;">
+	     
+ 
+ 	      <div class="middle-box  " style="margin-top: 0px">
+        <br>  
+		   <div class="control-group" style="width:200px" >
+	               <label class="control-label font-noraml form_label_text" for="item_h_name">旧密码:</label>
+	               <input class="form-control inline input-s-sm-im input-mini" id="oldpass" type="password"  ng-model="oldpass">
+           </div>
+<br>
+		 	<div class="control-group" style="width:200px">
+	              <label class="control-label font-noraml form_label_text" for="item_h_name">新密码:</label>
+	               <input class="form-control inline input-s-sm-im input-mini" id="newpass" type="password"  ng-model="newpass">
+           </div>
+             <br>
+	 	 	<div class="control-group" style="width:200px">
+	                    	<label class="control-label font-noraml form_label_text" for="item_h_name">确认密码:</label>
+	                        <input class="form-control inline input-s-sm-im input-mini" id="renewpass" type="password"  ng-model="renewpass">
+           </div>
+		   <br>
+          <button ng-click="chgpsw()" class="infont btn btn-mini btn-white">	
+			<a class="no-padding"><i class="fa lightblue font-size-15 fa-floppy-o"></i> 确定修改</a>
+		</button>
+</div>
+     
+</div>
+</div>
+</div>
+</div>
+</div>

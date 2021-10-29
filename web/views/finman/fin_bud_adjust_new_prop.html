@@ -1,0 +1,50 @@
+<!-- 预算调整 新 属性页 -->
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.adjust_no"
+                     hc-label="调整单号"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.bud_year"
+                     hc-label="预算年度"
+                     hc-type="year"
+                     hc-change="onBud_YearChange()">
+                </div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.adjust_type"
+                     hc-label="调整类型"
+                     hc-required="true"
+                     hc-dict-code="fin_bud_adjust_type"
+                     hc-change="onAdjust_TypeChange()">
+                </div>
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="调整说明"
+                     hc-col-count="6">
+                </div>
+            </div>
+        </div>
+        <div hc-grid="gridOptions" hc-box hc-auto-height="grid"></div>
+    </div>
+</div>
+
+
+

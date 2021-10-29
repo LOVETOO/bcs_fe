@@ -1,0 +1,120 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.invbillno"
+                     hc-label="其他入库红冲单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.invbilldate"
+                     hc-label="单据日期"
+                     hc-change="onInvbilldateChange()"
+                ></div>
+
+                <!--<div hc-input="data.currItem.year_month"-->
+                     <!--hc-label="记账月份"-->
+                     <!--hc-readonly="true"-->
+                     <!--hc-type="month"></div>-->
+                <div hc-input="data.currItem.invbillno_relevant"
+                     hc-label="其他入库单号"
+                     hc-required="true"
+                     hc-btn-click="chooseInvBill()">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div hc-input="data.currItem.vendor_code"
+                     hc-label="供应商"
+                     hc-readonly="true"
+                     hc-btn-click="chooseVendor()"
+                >
+                </div>
+                <div hc-input="data.currItem.vendor_name"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.in_ware_type_name"
+                     hc-label="入库类别"
+                     hc-btn-click="chooseWareType()"
+                     hc-readonly="true"></div>
+
+
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户"
+                     hc-readonly="true"
+                ></div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.dept_name"
+                     hc-label="部门"
+                     hc-btn-click="chooseDept('checkDetail')">
+                </div>
+
+                <div hc-input="data.currItem.create_date"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+
+                <!--<div hc-input="data.currItem.dept_name">
+                </div>-->
+                <div hc-input="data.currItem.warehouse_code"
+                     hc-label="入库仓"
+                     hc-btn-click="chooseWareHouse()"
+                     hc-readonly="true"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.warehouse_name"
+                     hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="4">
+                </div>
+            </div>
+
+            <!--<div class="row">-->
+                <!--<div hc-input="data.currItem.total_qty"-->
+                     <!--hc-label="合计红冲数量"-->
+                     <!--hc-type="number"-->
+                     <!--hc-readonly="true"></div>&lt;!&ndash;合计入库数量&ndash;&gt;-->
+
+                <!--<div hc-input="data.currItem.amount_total"-->
+                     <!--hc-label="合计红冲金额"-->
+                     <!--hc-type="money"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+                <!--<div hc-input="data.currItem.total_cubage"-->
+                     <!--hc-type="volume"-->
+                     <!--hc-label="合计体积" hc-readonly="true"-->
+                <!--&gt;</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!---->
+            <!--</div>-->
+        </div>
+
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+    </div>
+
+</div>
+
+
+

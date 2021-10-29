@@ -1,0 +1,866 @@
+<div class="modal-content" local-storage ng-model="data.currItem">
+    <div draggable-model class="modal-header" style="width: 100%">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel(e)">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h3>添加联系人</h3>
+    </div>
+    <div class="modal-body" style="width: 100%">
+        <div class="row">
+            <div class="col-xs-3">
+                <div class="lm_panel1">
+                    <div id="AddrTab" style='display:block'>
+                        <div class="lm_sbar">
+                            <a type="button" id="lm15034559988030725050352368402cancel"
+                               class="lm_sopen fa fa-search"></a>
+                            <div>
+                                <input id="lm15034559988030725050352368402searchtext" type="text" class="txt"
+                                       value="" autocomplete="off"
+                                       style="color: rgb(160, 160, 160);width: 300px;">
+                            </div>
+                        </div>
+                        <div class="groupopen" style="display:" key="t3" sub="0">
+                            <div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">
+                                联系人分组<a style='padding-left:40px' class='fa fa-plus' ng-click='addgroup(2)'></a><a
+                                    style='padding-left:10px' class='fa fa-minus' ng-click='delgroup()'></a>
+                            </div>
+                        </div>
+                        <div id="lm150338581407203951792705359891tree">
+                            <div class="groupsub" key="t3" sub="1">
+                                <ul id="treeDemo3" class="ztree"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-5">
+                <div class="lm_panel1">
+                    <div id="AddrTab" style='display:block'>
+                        <div class="groupopen">
+                            <div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;"><a
+                                    class="lm_rt" fun="g2">姓名</a><a style='padding-left:5px' class='fa fa-plus'
+                                                                    ng-click='addgrouppeop_out()'></a><a
+                                    style='padding-left:10px' class='fa fa-minus'
+                                    ng-click='delgrouppeop_out()'></a><a style='padding-left:10px'
+                                                                         class='fa fa-pencil'
+                                                                         ng-click='chagrouppeop_out()'></a><a
+                                    style='padding-left:100px' class="lm_rt" fun="g2">邮箱地址</a></div>
+                        </div>
+                        <div id="">
+                            <div class="groupsub" key="t3" sub="1">
+                                <div class="groupclose" ng-click='addcolor($event,$index)'
+                                     ng-repeat='item in data.cpcorgs' style="display:" key="83" sub="0"><a
+                                        style="width:40%;display: -webkit-inline-box;" class="lm_addr">{{item.contactname}}</a><a
+                                        style="width:60%;display: -webkit-inline-box;">{{item.contactuserid}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-4">
+                <div class="col-xs-2">
+                    <div style="padding-top:80px">
+                        <button style="width:100%" class="btn btn-white btn-xs" type="button"
+                                ng-click="add_sj()">
+                            <i class="fa fa-arrow-right fa-1x"></i>
+                        </button>
+                        <div style='height:5px'></div>
+                        <button style="width:100%;padding-top:5px" class="btn btn-white btn-xs" type="button"
+                                ng-click="del_sj()">
+                            <i class="fa fa-arrow-left fa-1x"></i>
+                        </button>
+                    </div>
+                    <div style="padding-top:180px">
+                        <button style="width:100%" class="btn btn-white btn-xs" type="button"
+                                ng-click="add_cs()">
+                            <i class="fa fa-arrow-right fa-1x"></i>
+                        </button>
+                        <div style='height:5px'></div>
+                        <button style="width:100%;padding-top:5px" class="btn btn-white btn-xs" type="button"
+                                ng-click="del_cs()">
+                            <i class="fa fa-arrow-left fa-1x"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-xs-10">
+                    <div class="lm_panel1">
+                        <div id="AddrTab" style='display:block'>
+                            <div class="groupopen" key="t3" sub="0">
+                                <div class="settingtable qqshowbd"
+                                     style="padding:4px 0 3px 8px;cursor:default;">收件人
+                                </div>
+                            </div>
+                            <div style="height:180px;overflow: auto;" id="lm150338581407203951792705359891tree">
+                                <div class="groupsub" key="t3" sub="1">
+                                    <div ng-click='click_sj($event,$index)'
+                                         ng-repeat='item in data.currItem.sj_people' class="groupclose"
+                                         style="display:" key="8" sub="0"><a unselectable="on" class="lm_addr">{{item.username}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height:180px;overflow: auto;">
+                                <div class="groupopen" style="display:" key="t2" sub="0">
+                                    <div class="settingtable qqshowbd"
+                                         style="padding:4px 0 3px 8px;cursor:default;"><a class="lm_rt"
+                                                                                          fun="g2"></a>抄送人
+                                    </div>
+                                    <div ng-click='click_cs($event,$index)'
+                                         ng-repeat='item in data.currItem.cs_people' class="groupclose"
+                                         style="display:" key="8" sub="0"><a unselectable="on" class="lm_addr">{{item.username}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="width: 100%">
+        <a class="btn btn-sm btn-primary" ng-click="ok(e)">
+            确定
+        </a>
+        <a class="btn btn-sm btn-default" ng-click="cancel(e)">
+            取消
+        </a>
+    </div>
+</div>
+<style>
+    #right_outmail {
+        display: none;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+
+    .hc-menu {
+        background-color: #fff;
+        border: 1px solid #dbe0e8;
+        box-shadow: 1px 3px 4px rgba(189, 201, 214, 0.3);
+        padding: 0px;
+        min-width: 100px;
+        font-size: 10pt;
+        z-index: 99999;
+    }
+
+    .hc-menu li {
+        font-size: 11px;
+        line-height: 20px;
+        margin: 0px;
+        padding: 2px;
+        cursor: pointer;
+        list-style: none outside none;
+        padding-left: 3px;
+        color: #222;
+        line-height: 30px;
+    }
+
+    .hc-menu li:hover {
+        background: #eee;
+    }
+
+    .hc-menu li i{
+        padding-left: 10px;
+    }
+
+    .mr-10 {
+        margin-right: 10px;
+    }
+
+    /*返回后加|*/
+    .btn-after-interval {
+        position: relative;
+    }
+
+    .btn-after-interval:after {
+        content: "";
+        height: 20px;
+        width: 0px;
+        border-right: 1px solid #E2EBF1;
+        position: absolute;
+        left: 70px;
+        top: 4px;
+    }
+
+    /*上下一封按钮禁用样式*/
+    .disUDBtn {
+        color: #a0a0a0;
+        cursor: default;
+    }
+
+    .disUDBtn:hover {
+        color: #a0a0a0;
+    }
+
+    .ud-box {
+        line-height: 27px;
+    }
+
+    .send-button {
+        background-color: #1AB394 !important;
+        color: #fff !important;
+        border: 1px solid #1AB394 !important;
+        transition: all .2s;
+    }
+
+    .send-button:hover {
+        background-color: #18A689 !important;
+        border: 1px solid #18A689 !important;
+    }
+
+    /*textarea插件提示?*/
+    .ui-tooltip.ui-widget.ui-corner-all.ui-widget-content {
+        display: none;
+    }
+
+    .look-body {
+        overflow-y: auto;
+    }
+
+    .look-tool {
+        padding-top: 9px;
+    }
+
+    .lm_sbar a.lm_sopen {
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .width-search-bar #lm15034559988030725050352368402searchtext {
+        width: 100%;
+    }
+
+    .table-box {
+        display: inline-block;
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    .mail-box {
+        margin-bottom: 0px;
+    }
+
+    .mail-foot {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .mail-tools {
+        background-color: #f9f9f9;
+        padding: 7px 20px;
+    }
+
+    .panel {
+        margin-bottom: 0px;
+    }
+
+    .mail-body:after {
+        content: '';
+        clear: both;
+        width: 0px;
+        display: block;
+    }
+
+    .write-input {
+        width: calc(100% - 70px);
+        float: left;
+    }
+
+    .write-title-button {
+        padding-top: 2px;
+    }
+
+    .table.table-mail tr td {
+        padding: 2px 12px;
+    }
+
+    .bill-form {
+        min-width: 992px;
+    }
+
+    .bold {
+        font-weight: bold
+    }
+
+    .star {
+        background: url(../web/img/star.png) no-repeat;
+        background-position: center;
+    }
+
+    .lightstar {
+        background: url(../web/img/lightstar.png) no-repeat;
+        background-position: center;
+    }
+
+    .Rr {
+        background: url(../web/img/open_mail.png) no-repeat;
+        background-position-y: center;
+    }
+
+    .unr {
+        background: url(../web/img/unopen_mail.png) no-repeat;
+        background-position-y: center;
+    }
+
+    table.i td.ci div.cir {
+        width: 18px;
+        height: 16px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .mail-box-header1 {
+        background: url(../web/img/header.jpg) no-repeat;
+    }
+
+    .fadeInRight {
+        z-index: 10;
+    }
+
+    .o_title2 {
+        background: #f2f4f6;
+        margin: 0;
+        padding: 0 0 0 12px;
+        height: 20px;
+    }
+
+    .black {
+        color: #000;
+    }
+
+    .normal {
+        font-weight: normal;
+    }
+
+    .f_size {
+        font-size: 12px;
+    }
+
+    .att_bt {
+        _zoom: 1;
+        padding: 5px 2px;
+        clear: both;
+        margin: 5px 0 10px;
+        min-height: 40px;
+    }
+
+    .ico_big {
+        float: left;
+        margin: 2px 8px 0 0;
+    }
+
+    .name_big {
+        float: left;
+    }
+
+    .graytext {
+        color: #a0a0a0;
+    }
+
+    .name_big .down_big {
+        margin-top: 2px;
+    }
+
+    .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0px;
+    }
+
+    .high {
+        background: #f3f3f3;
+    }
+
+    .tcolor {
+        font: normal 12px "lucida Grande", Verdana, "Microsoft YaHei";
+        color: #7f7f7f;
+    }
+
+    .green,
+    .grn,
+    a.green:link,
+    a.green:visited {
+        color: #5fa207;
+    }
+
+    .qm_ico_flagoff {
+        padding: 0;
+        border: 0;
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+        vertical-align: middle;
+        margin-top: -2px;
+        _margin-top: -7px;
+    }
+
+    .tenxun-color {
+        background-color: #eff5fb
+    }
+
+    .m-t-md {
+        margin-top: 0px;
+    }
+
+    .btn_gray {
+        display: inline-block;
+        height: 22px;
+        min-width: 24px;
+        line-height: 24px;
+        line-height: 23 px\9 \0;
+        _line-height: 26px;
+        _overflow-y: hidden;
+        padding: 0 12px;
+        margin: 0;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        cursor: default;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        border-radius: 3px;
+        color: rgb(104, 107, 109)
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(136, 136, 136);
+        border-image: initial;
+        background: -webkit-linear-gradient(top, rgb(255, 255, 255) 0%, rgb(235, 235, 235) 90%, rgb(243, 243, 243) 100%);
+    }
+
+    .time {
+        color: #364454;
+        font-size: 14px;
+    }
+
+    .lm_panel {
+        border-style: groove;
+        border: 1px solid rgba(108, 124, 134, 0.39);
+        background: #fff;
+        height: 500px;
+        /**overflow: auto;*/
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    .settingtable {
+        background-color: #eff5fb;
+    }
+
+    .lm_sbar .lm_sopen {
+        /* background: url(/zh_CN/htmledition/images/webp/newicon/compose207c92.png) 0 -312px no-repeat; */
+        width: 19px;
+        height: 20.5px;
+        padding: 0;
+        border: 1px solid rgb(169, 169, 169);
+        float: right;
+        border-bottom-left-radius: none;
+        border-left: white;
+    }
+
+    .lm_sbar {
+        border-bottom: 1px solid #ccc;
+        padding: 7px 6px 4px;
+        _padding-left: 3px;
+        line-height: 11px;
+    }
+
+    .cptab {
+        position: absolute;
+        height: 25px;
+        /* border: 1px solid #7f9db9; */
+        border-bottom: none;
+        line-height: 24px;
+        border-bottom: none;
+        width: 98px;
+        text-align: center;
+        background: #eff5fb;
+    }
+
+    .cpslt {
+        background: #fff;
+        height: 25px;
+        font-weight: bold;
+    }
+
+    .lm_sbar div {
+        overflow: hidden;
+    }
+
+    .ds_dialog {
+        z-index: 3002;
+    }
+
+    .groupclose {
+        padding-left: 8px;
+    }
+
+    .note-editor .col-xs-1,
+    .col-sm-1,
+    .col-md-1,
+    .col-lg-1,
+    .col-xs-2,
+    .col-sm-2,
+    .col-md-2,
+    .col-lg-2,
+    .col-xs-3,
+    .col-sm-3,
+    .col-md-3,
+    .col-lg-3,
+    .col-xs-4,
+    .col-sm-4,
+    .col-md-4,
+    .col-lg-4,
+    .col-xs-5,
+    .col-sm-5,
+    .col-md-5,
+    .col-lg-5,
+    .col-xs-6,
+    .col-sm-6,
+    .col-md-6,
+    .col-lg-6,
+    .col-xs-7,
+    .col-sm-7,
+    .col-md-7,
+    .col-lg-7,
+    .col-xs-8,
+    .col-sm-8,
+    .col-md-8,
+    .col-lg-8,
+    .col-xs-9,
+    .col-sm-9,
+    .col-md-9,
+    .col-lg-9,
+    .col-xs-10,
+    .col-sm-10,
+    .col-md-10,
+    .col-lg-10,
+    .col-xs-11,
+    .col-sm-11,
+    .col-md-11,
+    .col-lg-11,
+    .col-xs-12,
+    .col-sm-12,
+    .col-md-12,
+    .col-lg-12 {
+        position: relative;
+        min-height: 1px;
+        padding-left: 1px !important;
+        padding-right: 1px !important;
+    }
+
+    .note-editor .btn-group > .btn-group {
+        float: left;
+        max-width: 80px !important;
+    }
+
+    .note-editor.note-frame .note-statusbar {
+        background-color: #f1f1f1;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+        visibility: hidden;
+    }
+
+    .note-editor .form-group {
+        margin-bottom: 15px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .form-inline {
+        padding: 5px !important
+    }
+
+    button.btn.btn-toolbar,
+    a.btn.btn-toolbar,
+    div.btn.btn-toolbar {
+        background-color: #fff;
+        height: 25px;
+        margin: 0px;
+        padding: 2px 0px 0px 0px;
+        font-size: 1px;
+    }
+
+    /*邮件下拉*/
+
+    .div_txt {
+        border: 1px solid #c3c3c3;
+        border-top: 1px solid #7c7c7c;
+        border-left: 1px solid #9a9a9a;
+        background: 0 -162px #fff repeat-x;
+        padding: 1px;
+        width: auto;
+        height: auto;
+        _height: 16px;
+        min-height: 18px;
+        font-family: Tahoma;
+    }
+
+    .attbg:hover {
+        background-color: #e3e3ec;
+    }
+
+    .attbg_focus {
+        background-color: #FFB951;
+    }
+
+    .addr_text {
+        margin: 1px -13px 1px 0;
+        height: 16px;
+        background: transparent;
+    }
+
+    .addr_base {
+        height: 16px;
+        margin: 1px 3px 1px 3px;
+        cursor: default;
+        color: #2b2828;
+        font-family: "lucida Grande", Verdana, "Microsoft YaHei";
+    }
+
+    ul.autoul {
+        /* 下拉菜单 */
+        width: 216px;
+        margin: 0px;
+        margin-top: -5px;
+        padding: 0px;
+        color: #666;
+        border: 1px solid #e5e6e7;
+        border-top: 0;
+        overflow: hidden;
+    }
+
+    ul.autoul li.autoli {
+        /* 下拉菜单li */
+        height: 30px;
+        display: block;
+        list-style-type: none;
+        text-align: left;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 30px;
+        padding-left: 15px;
+        padding-right: 15px;
+        overflow: hidden;
+        /*当对象内文本溢出时显示省略标记*/
+        text-overflow: ellipsis;
+    }
+
+    .lihover {
+        /* 下拉菜单li高亮样式 */
+        background-color: #eee;
+    }
+
+    .showli {
+        display: block;
+    }
+
+    /* 经过过滤的li的样式 */
+
+    #attach-area table thead {
+        visibility: hidden;
+    }
+
+    .limit {
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    /*.mail-body {
+    border-top: 1px solid #e7eaec;
+    padding: 5px;
+}*/
+
+    .b {
+        margin: 0px;
+        padding: 0px;
+        overflow: auto;
+    }
+
+    .line0 {
+        line-height: 20px;
+        background-color: lightyellow;
+        padding: 0px 15px;
+    }
+
+    .line1 {
+        line-height: 18px;
+        background-color: lightblue;
+        padding: 0px 10px;
+    }
+
+    .w {
+        position: absolute;
+        lift: 10px;
+        top: 10px;
+        width: 1px;
+        height: 300px;
+        overflow: hidden;
+        border: 2px groove #281;
+        cursor: default;
+        -moz-user-select: none;
+        z-index: 10
+    }
+
+    .t {
+        line-height: 20px;
+        height: 20px;
+        width: 160px;
+        overflow: hidden;
+        background-color: #27C;
+        color: white;
+        font-weight: bold;
+        border-bottom: 1px outset blue;
+        text-align: center;
+    }
+
+    .winBody {
+        height: 270px;
+        width: 160px;
+        overflow-x: auto;
+        overflow-y: auto;
+        border-top: 1px inset blue;
+        padding: 10px;
+        background-color: white;
+    }
+
+    .profileTip {
+        padding: 2px;
+        background: #D5D5D5;
+        -moz-border-radius: 3px;
+        -khtml-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        position: absolute;
+        z-index: 21;
+    }
+
+    .infoArrowUp {
+        width: 17px;
+        height: 9px;
+        background: url(/zh_CN/htmledition/images/webp/newicon/infocard1e9c5d.gif) no-repeat 0 0;
+        position: absolute;
+        z-index: 10;
+        margin: -9px 0 0 55px;
+    }
+
+    .profileTip .tipInner {
+        width: 320px;
+        border: 0;
+        background: #FFF;
+        -moz-border-radius: 3px;
+        -khtml-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .profile_inner {
+        padding: 16px;
+        overflow: hidden;
+        _zoom: 1;
+    }
+
+    .profile_inner img {
+        float: left;
+        margin-right: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .profile_inner div {
+        line-height: 20px;
+    }
+
+    .profile_inner div {
+        line-height: 20px;
+        max-width: 238px;
+        _width: 238px;
+        margin-left: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .nowrap {
+        white-space: nowrap;
+    }
+
+    .profile_inner div {
+        line-height: 20px;
+    }
+
+    .profile_ope .pro_ope {
+        width: 100%;
+        border-collapse: collapse;
+        border-top: 1px solid #ddd;
+        background: #f5f5f5;
+    }
+
+    .profile_ope td {
+        height: 25px;
+        text-align: center;
+        border-right: 1px solid #ddd;
+        width: 30%;
+    }
+
+    .ztree {
+        margin: 0;
+        padding: 10px !important;
+        color: #333;
+    }
+</style>
+<link rel="stylesheet" href="js/plugins/z-tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+
+<style>
+    .modal-body,.modal-footer{
+        padding: 15px;
+        margin: 0px;
+    }
+
+    fieldset {
+        padding: .35em .425em .25em;
+        margin: 1px 0px 5px;
+        position: relative;
+        border: 1px solid silver;
+    }
+
+    .lm_panel1 {
+        border-style: groove;
+        border: 1px solid rgba(108, 124, 134, 0.39);
+        background: #fff;
+        height: 400px;
+        overflow: auto;
+    }
+
+    .groupclose {
+        /**border-bottom: 1px solid #ccc;*/
+    }
+
+    .modal-dialog {
+        width: 900px;
+
+    }
+
+    .row {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .note-editor .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+        position: relative;
+        min-height: 1px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .modal {
+        z-index: 2001 !important;
+    }
+
+    .modal-backdrop {
+        z-index: 2001 !important;
+    }
+</style>

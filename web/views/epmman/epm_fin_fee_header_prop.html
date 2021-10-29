@@ -1,0 +1,51 @@
+<!--工程费用项目属性页面-->
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.fee_code"
+               hc-label="费用项目编码"
+               hc-readonly="true">
+            </div>
+            <div hc-input="data.currItem.fee_name"
+                 hc-label="费用项目名称"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.subject_no"
+                 hc-label="会计科目编码">
+
+            </div>
+            <div hc-input="data.currItem.subject_name"
+                 hc-label="会计科目名称">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.apply_type"
+                 hc-label="报销方式"
+                 hc-dict-code="fin_fee_header_apply_type"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.stat"
+                 hc-label="状态"
+                 hc-dict-code="fin_fee_header_stat"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.fee_property"
+                 hc-label="费用类型"
+                 hc-dict-code="fee_property"
+                 hc-required="true">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.subject_desc"
+                 hc-label="报销提示"
+                 hc-col-count="8">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.note"
+                 hc-label="备注"
+                 hc-col-count="8">
+            </div>
+        </div>
+    </div>
+</div>

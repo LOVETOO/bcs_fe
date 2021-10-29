@@ -1,0 +1,73 @@
+<div class="modal-content modal_new" local-storage ng-model="data.currItem" ng-init="clearinformation()">
+    <div draggable-model class="modal-header" style="width: 100%">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                ng-click="cancel(e)"><span aria-hidden="true">&times;</span></button>
+        <h3>文件结构</h3>
+    </div>
+    <div class="modal-body" style="width: 100%">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="ibox-contant">
+                <div class="" style="border-radius:5px;overflow:auto;">
+                    <ul id="treeDemo_frm" class="ztree ztree_1"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="width: 100%">
+        <a class="btn btn-sm btn-primary" ng-click="ok(e)">
+            确定
+        </a>
+        <a class="btn btn-sm btn-default" ng-click="cancel(e)">
+            取消
+        </a>
+    </div>
+</div>
+<style>
+    .modal-body {
+        padding: 15px;
+    }
+
+    .cpcwf-contant {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .subtitle {
+        margin-right: 0px;
+        border-bottom: 1px #e7eaec solid;
+        padding-bottom: 10px;
+    }
+
+    .row {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    div#rMenu ul {
+        margin: 0px;
+        padding: 0px;
+        /* border-collapse: separate; */
+        border: 1px solid #808080;
+    }
+
+    .ztree_1 li {
+        padding: 2px;
+        margin: 0;
+        list-style: none;
+        line-height: 14px;
+        text-align: left;
+        white-space: nowrap;
+        outline: 0;
+    }
+
+    .background {
+        background: white;
+    }
+
+    ul.ztree_1 {
+        border: 1px solid silver;
+        height: 400px;
+        overflow-y: scroll;
+        overflow-x: auto;
+    }
+</style>

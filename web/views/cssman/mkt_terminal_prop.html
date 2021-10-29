@@ -1,0 +1,227 @@
+<!--<div hc-edit-list>-->
+    <div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                    <div hc-input="data.currItem.terminal_code"
+                     hc-label="售点编码"
+                     hc-col-count="2"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.terminal_name"
+                     hc-label="售点名称"
+                     hc-required="true"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.star_class"
+                     hc-label="合伙人星级"
+                     hc-type="star"></div>
+            </div>
+            <!--  hc-required="true" -->
+            <div class="row">
+                <div hc-input="data.currItem.area_code"
+                     hc-label="所属区域"
+                     hc-required="true"
+                     hc-class-id="scparea"
+                     hc-common-search="commonSearchOfScparea"></div>
+                <div hc-input="data.currItem.area_name"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.city_areacode"
+                     hc-label="市/县"
+                     hc-required="true"
+                     hc-class-id="scparea"
+                     hc-common-search="commonSearchOfScpareaCity"></div>
+                <div hc-input="data.currItem.city_areaname"
+                     hc-readonly="true" ></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.org_code"
+                     hc-label="所属部门"
+                     hc-required="true"
+                         hc-class-id="dept"
+                     hc-common-search="commonSearchSettingOfDept"></div>
+                <div hc-input="data.currItem.org_name"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.cust_code"
+                     hc-label="客户"
+                     hc-required="true"
+                     hc-class-id="customer_org"
+                     hc-common-search="commonSearchSettingOfCust"></div>
+                <div hc-input="data.currItem.cust_name"
+                     hc-readonly="true" ></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.sys_code"
+                     hc-label="所属系统"
+                     hc-class-id="mkt_sys"
+                     hc-common-search="commonSearchSettingOfSys"></div>
+                <div hc-input="data.currItem.sys_name"
+                     hc-readonly="true" ></div>
+                <!--终端负责人 employee_header -->
+                <div hc-input="data.currItem.employee_code"
+                     hc-label="终端负责人"
+                     hc-class-id="employee_header"
+                     hc-common-search="commonSearchSettingOfEmployee"></div>
+                <div hc-input="data.currItem.employee_name"
+                     hc-readonly="true" ></div>
+            </div>
+            <div class="row">
+                <!-- 推广代表即推广主管-->
+                <div hc-input="data.currItem.chap_code"
+                     hc-label="推广代表"
+                     hc-class-id="base_view_erpemployee_org"
+                     hc-common-search="commonSearchSettingOfRepEmployee"></div>
+                <div hc-input="data.currItem.chap_name"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.salesman_code"
+                     hc-label="业务员"
+                     hc-class-id="base_view_erpemployee_org"
+                     hc-common-search="commonSearchSettingOfSalesman"></div>
+                <div hc-input="data.currItem.salesman_name"
+                     hc-readonly="true" ></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.delivery_company_code"
+                     hc-label="配送公司"
+                     hc-class-id="kpi_questionnaire_header"
+                     hc-common-search="commonSearchSettingOfSubject"></div>
+                <div hc-input="data.currItem.delivery_company_name"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.fw_company_code"
+                     hc-label="服务公司"
+                     hc-class-id="kpi_questionnaire_header"
+                     hc-common-search="commonSearchSettingOfSubject"></div>
+                <div hc-input="data.currItem.fw_company_name"
+                     hc-readonly="true" ></div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.crm_entid"
+                     hc-label="品类"
+                     hc-dict-code="crm_entid"
+                     ></div>
+                <div hc-input="data.currItem.guider_count"
+                     hc-label="导购人数"
+                     hc-type="number" ></div>
+               <!--  未知字段-->
+                <div hc-input="data.currItem.warehouse_name"
+                     hc-label="代销仓"
+                     hc-col-count="2"
+                     hc-class-id="warehouse"
+                     hc-common-search="commonSearchSettingOfWarehouse"></div>
+            </div>
+            <div class="row">
+                <!--  未知字段-->
+                <div hc-input="data.currItem.itemtype"
+                     hc-label="工商登记号"></div>
+                <div hc-input="data.currItem.subject"
+                     hc-label="注册资金"
+                     hc-type="number" ></div>
+                <div hc-input="data.currItem.usao"
+                     hc-label="是否批发门店"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+            </div>
+            <div class="row">
+                <!--  未知字段-->
+                <div hc-input="data.currItem.law_man"
+                     hc-label="法人代表"></div>
+
+                <div hc-input="data.currItem.bank"
+                     hc-label="往来银行" ></div>
+                <div hc-input="data.currItem.tax_no"
+                     hc-label="税号"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.bank_account"
+                     hc-label="银行账号"></div>
+                <!--  未知字段-->
+                <div hc-input="data.currItem.u"
+                     hc-label="是否是自建终端"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+                <!--  未知字段-->
+                <div hc-input="data.currItem.us"
+                     hc-label="需要交周报"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+                <div hc-input="data.currItem.usable"
+                     hc-label="可用"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.addr"
+                     hc-label="地址"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+
+        </div >
+        <div hc-box="商场负责人信息">
+            <div class="row">
+            <div hc-input="data.currItem.entname"
+                 hc-label="姓名"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.shopmanager_fun"
+                 hc-label="职务"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.shopmanager_old"
+                 hc-label="年龄"
+                 hc-type="number"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.shopmanager_fax"
+                 hc-label="传真"
+                 hc-col-count="2"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.shopmanager_sex"
+                     hc-label="性别"
+                     hc-dict-code="sex"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.shopmanager_phone"
+                     hc-label="电话"
+                     hc-type="number"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.shopmanager_mob"
+                     hc-label="手机"
+                     hc-type="number"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.shopmanager_email"
+                     hc-label="E-mail"
+                     hc-col-count="2"></div>
+            </div>
+        </div>
+            <!--售点负责产品-->
+        <div  hc-box="售点负责产品"   hc-grid="gridOptions_surveyitem_norm" style="height: 200px"></div>
+    </div>
+    <!--终端资产-->
+    <div id="education">
+        <div hc-box hc-grid="gridOptions_education" hc-auto-height="grid"></div>
+    </div>
+    <!--导购员信息-->
+    <div id="line">
+        <div hc-box hc-grid="gridOptions_line" hc-auto-height="grid"></div>
+    </div>
+    </div>
+<!--</div>-->
+<style>
+    /*.ibox-title {
+        display: inline-block;
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    .modal-footer{
+        padding-top: 0px;
+    }
+    .TreeGridBox .ibox-title{
+        border: none;
+    }*/
+</style>

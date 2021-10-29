@@ -1,0 +1,43 @@
+<!--最大库存量维护-编辑列表页-->
+<!--author:shenguocheng-->
+<!--since 2019-08-05-->
+<div hc-edit-list>
+    <div id="base" class="active">
+        <div class="hc-box  other-h">
+            <div class="row">
+                <div hc-input="data.currItem.set_type"
+                     hc-label="类型"
+                     hc-dict-code="epm.max_stock_set_type"
+                     hc-change="changeItemType()">
+                </div>
+                <div hc-input="data.currItem.division_id"
+                     hc-label="事业部"
+                     hc-dict-code="epm.division">
+                </div>
+                <div hc-input="data.currItem.entorgid"
+                     hc-label="产品线"
+                     hc-dict-code="entorgid"
+                     hc-readonly="data.currItem.set_type != 1">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.item_code"
+                     hc-label="产品编号"
+                     hc-class-id="item_org"
+                     hc-common-search="commonSearchOfItemCode"
+                     hc-readonly="data.currItem.set_type == 1">
+                </div>
+                <div hc-input="data.currItem.item_name"
+                     hc-label="产品名称"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.max_stock"
+                     hc-label="最大库存量"
+                     hc-blur="checkMaxInventory()">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

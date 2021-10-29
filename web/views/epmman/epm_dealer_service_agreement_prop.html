@@ -1,0 +1,161 @@
+<!--2019-6-19-->
+<!--经销商服务协议明细页面-->
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+
+        <div hc-box="" class="other-h">
+
+            <div class="row">
+                <div hc-input="data.currItem.bud_type_code"
+                     hc-label="服务合同编号"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.bud_type_name"
+                     hc-label="服务合同名称"
+                     hc-col-count="4"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.fee_type_code"
+                     hc-label="服务合同类型"
+                     hc-required="true"
+                     hc-dict-code="fee_type_level">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.fee_type_level"
+                     hc-label="服务合同签订时间"
+                     hc-type="date"
+                     hc-dict-code="fee_type_level">
+                </div>
+                <div hc-input="data.currItem.period_type"
+                     hc-label="备注"
+                     hc-col-count="6">
+                </div>
+            </div>
+
+        </div>
+
+        <!--工程服务概况-->
+
+        <div hc-box="工程服务概况" class="other-h">
+
+            <div class="row">
+                <div hc-input="data.currItem.bid_open_date"
+                     hc-label="工程合同编号"
+                     hc-required="true"
+                     hc-class-id="fin_fee_type"
+                     hc-common-search="commonSearchSettingOfFinFeeType">
+                </div>
+                <div hc-input="data.currItem.bid_open_method"
+                     hc-label="工程合同名称"
+                     hc-readonly="true"
+                     hc-col-count="4">
+                </div>
+                <div hc-input="data.currItem.bid_open_address"
+                     hc-label="工程项目所在地"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.bid_open_address"
+                     hc-label="工程单位名称"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.bid_open_address"
+                     hc-label="工程项目名称"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+        </div>
+
+        <!--甲方信息-->
+
+        <div hc-box="甲方信息" class="other-h">
+
+            <div class="row">
+                <div hc-input="data.currItem.bid_open_date"
+                     hc-label="甲方名称"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.bid_open_method"
+                     hc-label="甲方地址"
+                     hc-required="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.bid_open_address"
+                     hc-label="甲方联系人"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.bid_open_address"
+                     hc-label="甲方联系电话">
+                </div>
+            </div>
+
+        </div>
+
+        <!--乙方信息-->
+
+        <div hc-box="乙方信息" class="other-h">
+
+            <div class="row">
+                <div hc-input="data.currItem.bid_open_date"
+                     hc-label="乙方名称"
+                     hc-required="true"
+                     hc-class-id="fin_fee_type"
+                     hc-common-search="commonSearchSettingOfFinFeeType">
+                </div>
+                <div hc-input="data.currItem.bid_open_method"
+                     hc-label="乙方地址"
+                     hc-required="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.bid_open_address"
+                     hc-label="乙方联系人"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.bid_open_address"
+                     hc-label="乙方联系电话">
+                </div>
+            </div>
+
+        </div>
+
+        <!--工程服务费结算-->
+
+        <div hc-box="工程服务费结算" class="other-h">
+
+            <div class="row">
+                <div hc-input="data.currItem.bid_open_address"
+                     hc-label="增值税票税率"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.bid_open_address"
+                     hc-label="备注"
+                     hc-col-count="6">
+                </div>
+            </div>
+
+        </div>
+
+        <!--工程服务补充协议-->
+
+        <div hc-box="工程服务补充协议" class="other-h">
+
+        </div>
+
+        <!-- 表格视图 -->
+        <div hc-grid="gridOptions" hc-auto-height="grid" hc-box></div>
+
+        <!--<div class="foot-left-btn">-->
+
+        <!--</div>-->
+
+    </div>
+</div>

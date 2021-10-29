@@ -1,0 +1,166 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.km_code"
+                 hc-required="true"
+                 hc-label="科目代码">
+            </div>
+
+            <div hc-input="data.currItem.help_code"
+                 hc-label="助记码">
+            </div>
+
+            <div hc-input="data.currItem.km_desc"
+                 hc-required="true"
+                 hc-label="科目名称">
+            </div>
+
+            <div hc-input="data.currItem.km_name_en"
+                 hc-label="科目英文名称">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.km_type"
+                 hc-required="true"
+                 hc-label="科目类型"
+                 hc-dict-code="km_type">
+            </div>
+
+            <div hc-input="data.currItem.km_level"
+                 hc-label="科目级别"
+                 hc-readonly="true"
+                 hc-select-options="[{name:'0',value:'0'},{name:'1',value:'1'},{name:'2',value:'2'},{name:'3',value:'3'},{name:'4',value:'4'},{name:'5',value:'5'},{name:'6',value:'6'}]">
+            </div>
+
+
+            <div hc-input="data.currItem.page_type"
+                 hc-label="账页格式"
+                 hc-select-options="[{name:'金额式',value:'1'},{name:'数量金额式',value:'2'}]">
+            </div>
+
+            <div hc-input="data.currItem.km_property"
+                 hc-label="余额方向"
+                 hc-required="true"
+                 hc-select-options="[{name:'借方',value:'1'},{name:'贷方',value:'2'}]">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.currency_code"
+                 hc-label="记账货币代码"
+                 hc-btn-click="chooseCurrency()">
+            </div>
+            <div hc-input="data.currItem.currency_name" hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.first_query_obj"
+                 hc-label="优先查询对象"
+                 hc-select-options="[{name:'部门',value:'1'},{name:'个人',value:'2'},{name:'客户',value:'3'},{name:'供应商',value:'4'},{name:'项目',value:'5'},{name:'物料',value:'6'},{name:'往来单位',value:'7'},{name:'经费科目',value:'8'},{name:'营业单位',value:'9'},{name:'现金流向',value:'10'},{name:'资金帐号',value:'11'},{name:'门店',value:'12'},{name:'区域',value:'13'},{name:'品类',value:'14'},{name:'产品线',value:'15'}]">
+            </div>
+            <!--<div hc-input="data.currItem.km_name"-->
+                 <!--hc-readonly="true"-->
+                 <!--hc-label="科目描述">-->
+            <!--</div>-->
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.customer_calculate"
+                 hc-type="checkbox"
+                 hc-label="客户核算" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.dept_calculate"
+                 hc-type="checkbox"
+                 hc-label="部门核算" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.vendor_calculate"
+                 hc-type="checkbox"
+                 hc-label="供应商核算" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.is_fd_account"
+                 hc-type="checkbox"
+                 hc-label="资金账号核算" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.ac_object_calculate"
+                 hc-type="checkbox"
+                 hc-label="往来单位核算" class="col-sm-2"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.person_calculate"
+                 hc-type="checkbox"
+                 hc-label="个人核算" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.end_km"
+                 hc-type="checkbox"
+                 hc-label="明细科目" hc-readonly="true" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.is_freeze"
+                 hc-type="checkbox"
+                 hc-label="冻结" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.item_calculate"
+                 hc-type="checkbox"
+                 hc-label="物料核算" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.is_fee"
+                 hc-type="checkbox"
+                 hc-label="经费核算" class="col-sm-2"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.is_cash"
+                 hc-type="checkbox"
+                 hc-label="资金类科目" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.is_shop_calculate"
+                 hc-type="checkbox"
+                 hc-label="门店核算" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.is_area_calculate"
+                 hc-type="checkbox"
+                 hc-label="区域核算" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.crm_entid_calculate"
+                 hc-type="checkbox"
+                 hc-label="品类核算" class="col-sm-2"></div>
+
+            <div hc-input="data.currItem.entorgid_calculate"
+                 hc-type="checkbox"
+                 hc-label="产品线核算" class="col-sm-2"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.remark" hc-label="备注" hc-type="textarea"
+                 hc-col-count="8"></div>
+        </div>
+        <!--<div hc-grid="gridOptions" hc-auto-height="grid"></div>-->
+    </div>
+    <!--其他-->
+    <div id="other" hc-box="">
+        <div class="row">
+            <div hc-input="data.currItem.created_by"
+                 hc-readonly="true"
+                 hc-label="创建人">
+            </div>
+            <div hc-input="data.currItem.creation_date"
+                 hc-type="date"
+                 hc-readonly="true"
+                 hc-label="创建时间"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by"
+                 hc-readonly="true"
+                 hc-label="最后修改人">
+            </div>
+            <div hc-input="data.currItem.last_update_date"
+                 hc-type="date"
+                 hc-readonly="true"
+                 hc-label="最后修改时间"></div>
+        </div>
+    </div>
+
+</div>
+
+
+

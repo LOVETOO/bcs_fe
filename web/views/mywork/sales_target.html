@@ -1,0 +1,176 @@
+<div class="wrapper wrapper-content animated fadeInRight ng-scope" ng-controller="sales_target">
+	<div class="containner">
+		<div class="client-content">
+			<div class="more_news ibox-content no-padding">
+				<div style="margin-top: 20px;">
+					<div class="row">
+						<div class="col-md-1">
+							<label class="form-label-mini not-null">统计主体</label>
+						</div>
+						<div class="col-md-2">
+							<select chosen-select ng-readonly="false" ng-model="data.currItem.group_name" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in group_names">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-md-1">
+							<label class="form-label-mini not-null">年度</label>
+						</div>
+						<div class="col-md-2">
+							<input style="text-align: center;" bs-datepacker="" view="decade" format="yyyy" ng-model="data.currItem.iyear" type="text" readonly="readonly" class="form-control input-sm ng-valid ng-touched ng-dirty ng-valid-parse">
+						</div>
+						<div class="col-md-1" style="width: 13%;"></div>
+						<div class="col-md-1">
+							<button style="width: 100px;height: 25px;margin: 0 auto; padding: 2px;" class="btn btn-sm btn-info dropdown-toggle" ng-click="insert()">保存</button>
+						</div>
+						<div class="col-md-1">
+							<button style="width: 100px;height: 25px;margin: 0 auto; padding: 2px;" class="btn btn-sm btn-info dropdown-toggle" ng-click="select_target()">查询</button>
+						</div>
+						<div class="col-md-1">
+							<button style="width: 100px; height: 25px;" class="btn btn-white btn-xs" type="button" ng-click="on_leading()"><i class="fa fa-file-excel-o"></i></i>导入
+               				</button>
+						</div>
+					</div>
+				</div>
+				<div class="resource" style="height: 80%;margin: 20px 20px 0px 20px;">
+					<div ag-gridview sg-options="oa_saledash_data_task" sg-columns="oa_saledash_data_tasks" id='grid' style="height: 95%; width:100%;padding-top:1px" class=""></div>
+					<button ng-hide="true" id='dropzone'> 弹出自带</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	/*弹性布局开始*/
+	
+	div.wrap-height {
+		display: flex;
+	}
+	
+	div.wrap-height>div.ng-scope {
+		display: flex;
+		flex-shrink: 1;
+		flex-grow: 1;
+	}
+	
+	.wrapper.wrapper-content.animated.fadeInRight.ng-scope {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	div.containner {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+		flex-shrink: 1;
+		width: 100%;
+	}
+	
+	div.left-nav-div {
+		width: 180px;
+		flex-grow: 0;
+		flex-shrink: 0;
+		display: flex;
+	}
+	
+	ul.newstypenav {
+		flex-shrink: 1;
+		flex-grow: 1;
+		margin-bottom: 0;
+		padding-top: 20px;
+		margin-right: 10px;
+	}
+	
+	div.client-content {
+		flex-grow: 1;
+		flex-shrink: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	div.more_news {
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	div.ibox-content.modal-open {
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+	/*弹性布局结束*/
+	
+	p {
+		color: rgb(104, 107, 109);
+	}
+	/**标题的内上下边距*/
+	
+	.title {
+		padding-top: 8px;
+		padding-bottom: 8px;
+	}
+	
+	.line {
+		margin-bottom: 10px;
+	}
+	
+	.div {
+		height: 500px;
+	}
+	/*导航区*/
+	
+	.nav {
+		position: static;
+	}
+	/*头部*/
+	
+	.head {
+		position: static;
+		background-color: #FFFFFF;
+	}
+	/*内容区*/
+	
+	.more_news {
+		width: 100%;
+		height: 563px;
+		overflow: auto;
+		overflow-x: hidden;
+		background-color: #FFFFFF;
+	}
+	
+	.wrapper-content {
+		padding: 10px 0px 0px 0px;
+	}
+	
+	.flow_normal:hover {
+		background-color: azure !important;
+	}
+	
+	.flow_high {
+		background-color: #0f7abb !important;
+	}
+	
+	.flow_high:hover {
+		background-color: #0f7abb !important;
+	}
+	
+	.from_contemt {
+		margin-top: 20px;
+		width: 80%;
+		height: 500px;
+		margin: 40px auto;
+		border: 1px solid #ddd;
+	}
+</style>
+<script>
+	setTimeout(function() {
+		$('#grid').height($('#grid').parent().height()+50);
+	}, 500);
+
+	window.onresize = function() {
+		setTimeout(function() {
+			$('#grid').height($('#grid').parent().height()+50);
+		}, 200);
+	}
+</script>

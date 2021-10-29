@@ -1,0 +1,57 @@
+<div jq-widget hc-init="doInit()">
+    <div class="ibox-title other-h">
+        <div
+                hc-input="keyword"
+                hc-btn-click="searchByKeyword()"
+                hc-btn-icon="iconfont hc-search"
+                hc-can-input="true"
+                hc-col-count="6"
+                hc-placeholder="请输入关键字进行搜索"
+                hc-autofocus="true"
+                hc-change="onKeywordChange()"
+                ng-show="gridOptions.hcClassId"
+                class="pull-left"
+        ></div>
+        <div hc-input="searchType"
+             hc-select-options="[{name:'用户',value:1},{name:'机构',value:2}]"
+             hc-change="onSearchTypeChange()"
+             class="pull-left"
+             hc-col-count="1"
+             hc-cant-clean="true"
+             ng-show="isSearchMod"
+        ></div>
+        <div hc-button="isSearchMod = false" ng-show="isSearchMod">退出搜索</div>
+        <div hc-button="locate()" ng-show="isSearchMod">定位</div>
+        <div class="ibox-tools pull-right">
+            <div hc-buttons="toolButtons" hc-buttons-pull-right></div>
+        </div>
+    </div>
+    <div class="tree-grid-box" hc-auto-height hc-splitter-box>
+        <div class="tree-box">
+            <div class="tree-content" ng-hide="isSearchMod">
+                <div class="tree-title" ng-bind="data.title"></div>
+                <div hc-tree="treeSetting"></div>
+            </div>
+        </div>
+        <div class="grid-box">
+            <div hc-grid="gridOptions" hc-auto-height="grid"></div>
+        </div>
+    </div>
+</div>
+<style>
+    .tree-box .ibox-title {
+        padding: 8px 15px 5px;
+    }
+
+    .tree-box .ibox-title .hc-input .form-control {
+        padding: 0px;
+    }
+
+    .grid-box .ibox {
+        margin-left: -15px;
+    }
+
+    .grid-box .pull-right .btn-group button {
+        margin-left: 4px;
+    }
+</style>

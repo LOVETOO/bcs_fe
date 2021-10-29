@@ -1,0 +1,66 @@
+<div hc-obj-list>
+        <!-- 查询条件面板-->
+        <hc-obj-list-search-panel>
+            <!--单体-->
+            <div class="row">
+                <div
+                    hc-label="申请单号"
+                    hc-input="searchObj.proj_unfreeze_code"
+                ></div>
+            
+                <div hc-label="冻结原因"
+                     hc-input="searchObj.freeze_type"
+                     hc-dict-code="epm.proj.freeze_type"
+                     hc-can-delete="true"></div>
+    
+                <div hc-label="项目编码"
+                     hc-input="searchObj.project_code"></div>
+                     
+                <div hc-label="项目名称"
+                     hc-input="searchObj.project_name"></div>
+                
+            </div>
+            <div class="row">
+                <div hc-label="甲方名称"
+                     hc-input="searchObj.party_a_name"></div>
+    
+                <div hc-label="乙方名称"
+                     hc-input="searchObj.party_b_name"></div>
+    
+                <div hc-label="本地/异地"
+                     hc-input="searchObj.is_local"
+                     hc-can-delete="true"
+                     hc-dict-code="epm.is_local"></div>
+    
+               <div
+                    hc-label="审核状态"
+                    hc-select-options="[
+                    { name: '新建', value: '新建' },
+                    { name: '已提交', value: '已提交' },
+                    { name: '审核通过', value: '审核通过' },
+                    { name: '审核拒绝', value: '审核拒绝' }
+                    ]"
+                    hc-can-delete="true"
+                    hc-input="searchObj.audit_stat"
+               ></div>
+            </div>
+            <div class="row">
+                <div hc-label="申请时间从"
+                     hc-can-delete="true"
+                     hc-type="date"
+                     hc-input="searchObj.createtime_start"></div>
+                <div hc-label="申请时间至"
+                     hc-input="searchObj.createtime_end"
+                     hc-can-delete="true"
+                     hc-type="date"></div>
+                <div hc-label="冻结时间从"
+                     hc-input="searchObj.freeze_time_start"
+                     hc-can-delete="true"
+                     hc-type="date"></div>
+                <div hc-label="冻结时间至"
+                     hc-input="searchObj.freeze_time_end"
+                     hc-can-delete="true"
+                     hc-type="date"></div>
+            </div>
+        </hc-obj-list-search-panel>
+    </div>

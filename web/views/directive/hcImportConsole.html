@@ -1,0 +1,31 @@
+<div style="display: flex;">
+	<div
+		style="flex: 1;"
+		hc-label="文件名"
+		hc-input="doc.docname"
+		hc-btn-click="chooseFile()"
+		hc-readonly="status.running"
+	></div>
+
+	<div hc-buttons="buttons"></div>
+</div>
+
+<div style="display: flex; margin-top: 8px;">
+	<span>导入进度：</span>
+
+	<hc-progress class="flex1"></hc-progress>
+</div>
+
+<div hc-grid="gridOptions" style="flex: 1; margin-top: 8px;"></div>
+
+<div style="margin-top: 8px;">
+	<span ng-bind-template="总数：{{count.all}}" style="color:black"></span>
+
+	<span ng-bind-template="等待中：{{count.waiting}}" style="margin-left:8px;color:orange"></span>
+
+	<span ng-bind-template="成功：{{count.succeeded}}" style="margin-left:8px;color:green"></span>
+
+	<span ng-bind-template="失败：{{count.failed}}" style="margin-left:8px;color:red"></span>
+
+	<span ng-bind="currRow.import_msg" style="margin-left:8px"></span>
+</div>

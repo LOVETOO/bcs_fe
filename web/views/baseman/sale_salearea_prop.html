@@ -1,0 +1,49 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.sale_area_code"
+                 hc-label="销售区域编码" hc-readonly = "true">
+            </div>
+
+            <div hc-input="data.currItem.sale_area_name"
+                 hc-label="销售区域名称"  hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.remark"
+                 hc-label="备注"
+                 hc-col-count="4"></div>
+        </div>
+
+        <div hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+    </div>
+
+    <!--其他-->
+    <div id="other" hc-box="">
+        <div class="row">
+            <div hc-input="data.currItem.created_by"
+                 hc-label="创建人">
+            </div>
+
+            <div hc-input="data.currItem.creation_date"
+                 hc-type="date"
+                 hc-label="创建时间"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by"
+                 hc-label="最后修改人">
+            </div>
+
+            <div hc-input="data.currItem.last_update_date"
+                 hc-type="date"
+                 hc-label="最后修改时间"></div>
+        </div>
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,20 @@
+<div
+	ng-repeat="proc in procs" ng-hide="hideProc(proc)"
+	hc-box="过程：{{ proc.procid }} - {{ proc.procname }}"
+>
+	<div
+		class="row"
+		ng-repeat="position in proc.procPositions"
+		ng-hide="hidePosition(position)"
+	>
+		<div
+			hc-label="{{ position.positionid }}"
+			hc-input="position.userid"
+			hc-select-options="position.selectOptions"
+			hc-select-name="position.username"
+			hc-placeholder="请选择 岗位 - {{ position.positionid }}"
+			hc-required="position.selectOptions.length > 1"
+			hc-col-count="4"
+		></div>
+	</div>
+</div>

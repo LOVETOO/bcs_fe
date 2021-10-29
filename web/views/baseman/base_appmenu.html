@@ -1,0 +1,55 @@
+<!--APP模块定义  hjx-->
+<div hc-diy-page ng-init="init()">
+    <div class="TreeGridBox">
+        <div class="ibox-title" style="height: 713px;">
+            <h5>菜单</h5>
+            <ul id="zTree" class="ztree"></ul>
+        </div>
+        <div class="grid_modal tabs-container">
+            <div hc-tab="tabs"></div>
+            <div hc-tab-page class="tab-content ibox-content">
+                <div id='base' hc-box="" class="active">
+                    <div class="row">
+                        <div hc-input="data.currItem.menucode" hc-required="true" hc-label="菜单编码"></div>
+                        <div hc-input="data.currItem.menuname" hc-required="true" hc-label="菜单名称"></div>
+                        <div hc-input="data.currItem.menuaddr" hc-label="菜单地址"></div>
+                        <div hc-input="data.currItem.menuicon" hc-label="菜单图标"></div>
+                    </div>
+                    <div class="row" >
+                        <div hc-input="data.currItem.seq" hc-label="菜单序号" hc-type="number"></div>
+                        <div hc-input="data.currItem.disable" hc-label="禁用" hc-type="checkbox" hc-true-value="2" hc-false-value="1"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.note" hc-label="备注" hc-col-count="6">
+                        </div>
+                    </div>
+                </div>
+                <div id='other' hc-box="">
+                    <div class="row">
+                        <div hc-input="data.currItem.creator" hc-readonly="true" hc-label="创建用户"></div>
+                        <div hc-input="data.currItem.createtime" hc-readonly="true" hc-label="创建时间"></div>
+                        <div hc-input="data.currItem.updator" hc-readonly="true" hc-label="最后修改用户"></div>
+                        <div hc-input="data.currItem.updatetime" hc-readonly="true" hc-label="最后修改时间"></div>
+                    </div>
+
+                    <div class="row">
+                        <div hc-input="data.currItem.appmenuid" hc-readonly="true" hc-label="模块ID"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+
+    div.picture:hover .invoice_del {
+        display: block;
+    }
+
+    .picture p {
+        text-align: center;
+        margin: 0;
+        font-size: 13px;
+        color: #717171;
+    }
+</style>

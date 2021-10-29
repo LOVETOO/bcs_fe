@@ -96,7 +96,15 @@ define(
                             factbase: $scope.data.currItem.factbase,
                             packqty: $scope.data.currItem.packqty,
                             moid: $scope.data.currItem.moid,
-                            itemcode: $scope.data.currItem.itemcode
+                            itemcode: $scope.data.currItem.itemcode,
+                            item_name:$scope.data.currItem.itemname,
+                            pack_size:$scope.data.currItem.pack_size,
+                            pakageno:$scope.data.currItem.pakageno,
+                            qc:$scope.data.currItem.qc,
+                            produce_code:$scope.data.currItem.produce_code,
+                            pack_no:$scope.data.currItem.pack_no,
+                            gweight:$scope.data.currItem.gweight,
+                            factory_workshop:$scope.data.currItem.factory_workshop
                         }
                     }).then(function (val) { 
                         data['barcodes'] = val.barcodes;
@@ -213,7 +221,32 @@ define(
                             }
                         } else if (iLength > 0) {
                             $scope.data.currItem.barcodes.forEach(function (item, index) {
+                                //序号
                                 var serialno = item.serialno;
+                                //产品名称
+                                var item_name = item.item_name;
+                                //产品料号
+                                var erpno = item.erpno;
+                                //包件数
+                                var pack_qty = item.pack_qty;
+                                //包装箱号
+                                var pack_no = item.pack_no;
+                                //毛重
+                                var gweight = item.gweight;
+                                //加工车间
+                                var factory_workshop = item.factory_workshop;
+                                //包装尺寸
+                                var pack_size = item.pack_size;
+                                //包装工号
+                                var pakageno = item.pakageno;
+                                //qc
+                                var qc = item.attribute4;
+                                //生产码
+                                var produce_code = item.attribute5;
+                                //生产企业
+                                var factory_name = item.attribute6;
+                                //生产地址
+                                var factory_address = item.attribute7;
                                 var strStyle = "<style> table,td,th {border-width: 1px;}</style>";
                                 var req = /\"\[/g;
                                 var req0 = /\]\"/g;

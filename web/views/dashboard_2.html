@@ -1,0 +1,279 @@
+<div class="wrapper wrapper-content">
+<div class="row">
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right">本月</span>
+                <h5>销售额</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">886,200</h1>
+
+                <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                <small>月累计发货金额</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right">本年</span>
+                <h5>销售额</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">50,275,800</h1>
+
+                <div class="stat-percent font-bold text-info">80% <i class="fa fa-level-up"></i></div>
+                <small>本年度累计发货金额</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-primary pull-right">本月</span>
+                <h5>订单</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">16,120</h1>
+
+                <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
+                <small>新增订单数量</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-danger pull-right">本年</span>
+                <h5>订单</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">80,600</h1>
+
+                <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
+                <small>新增订单数量</small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>订单概览</h5>
+
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-xs btn-white">今天</button>
+                        <button type="button" class="btn btn-xs btn-white active">本月</button>
+                        <button type="button" class="btn btn-xs btn-white">本年</button>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="flot-chart" ng-controller="dashboardFlotTwo as chart">
+                            <div flot class="flot-chart-content" dataset="chart.flotData" options="chart.flotOptions"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <ul class="stat-list">
+                            <li>
+                                <h2 class="no-margins">2,346</h2>
+                                <small>本月订单累计已发货数</small>
+                                <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
+                                <div class="progress progress-mini">
+                                    <div style="width: 48%;" class="progress-bar"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <h2 class="no-margins ">4,422</h2>
+                                <small>订单累计已发货数</small>
+                                <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
+                                <div class="progress progress-mini">
+                                    <div style="width: 60%;" class="progress-bar"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <h2 class="no-margins ">30,239,180.00</h2>
+                                <small>本年累计收款</small>
+                                <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>
+                                <div class="progress progress-mini">
+                                    <div style="width: 22%;" class="progress-bar"></div>
+                                </div>
+                            </li>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>全球市场</h5>
+                <div ibox-tools></div>
+            </div>
+            <div class="ibox-content">
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <table class="table table-hover margin bottom">
+                            <thead>
+                            <tr>
+                                <th style="width: 1%" class="text-center">No:</th>
+                                <th>国家或地区</th>
+                                <th class="text-center">销售量</th>
+                                <th class="text-center">销售额</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-center"><span class="label label-success">1</span></td>
+                                <td> 美国
+                                    </small></td>
+                                <td class="text-center small">300</td>
+                                <td class="text-center"><span class="label label-primary">$483.00</span></td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-center"><span class="label label-success">2</span></td>
+                                <td> 巴西
+                                </td>
+                                <td class="text-center small">230</td>
+                                <td class="text-center"><span class="label label-primary">$387.00</span></td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-center"><span class="label label-info">3</span></td>
+                                <td> 法国
+                                </td>
+                                <td class="text-center small">120</td>
+                                <td class="text-center"><span class="label label-warning">$344.00</span></td>
+
+                            </tr>
+                            <tr>
+                                <td class="text-center"><span class="label label-info">4</span></td>
+                                <td> 印度</td>
+                                <td class="text-center small">188</td>
+                                <td class="text-center"><span class="label label-primary">$325.00</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"><span class="label label-warning">5</span></td>
+                                <td> 沙特阿拉伯</td>
+                                <td class="text-center small">145</td>
+                                <td class="text-center"><span class="label label-primary">$235.00</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"><span class="label label-warning">6</span></td>
+                                <td> 英国</td>
+                                <td class="text-center small">80</td>
+                                <td class="text-center"><span class="label label-primary">$100.00</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-6" ng-controller="dashboardMap as map">
+                        <div vector-map style="height: 300px;" my-map-data="map.data" on-select="map.selectrg(name)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+</div>
+</div>
+<div class="small-chat-box ng-small-chat fadeInRight animated" ng-show="openChat">
+
+    <div class="heading" draggable="true">
+        <small class="chat-date pull-right">
+            02.19.2015
+        </small>
+        Small chat
+    </div>
+
+    <div class="content" chat-slim-scroll>
+
+        <div class="left">
+            <div class="author-name">
+                Monica Jackson <small class="chat-date">
+                10:02 am
+            </small>
+            </div>
+            <div class="chat-message active">
+                Lorem Ipsum is simply dummy text input.
+            </div>
+
+        </div>
+        <div class="right">
+            <div class="author-name">
+                Mick Smith
+                <small class="chat-date">
+                    11:24 am
+                </small>
+            </div>
+            <div class="chat-message">
+                Lorem Ipsum is simpl.
+            </div>
+        </div>
+        <div class="left">
+            <div class="author-name">
+                Alice Novak
+                <small class="chat-date">
+                    08:45 pm
+                </small>
+            </div>
+            <div class="chat-message active">
+                Check this stock char.
+            </div>
+        </div>
+        <div class="right">
+            <div class="author-name">
+                Anna Lamson
+                <small class="chat-date">
+                    11:24 am
+                </small>
+            </div>
+            <div class="chat-message">
+                The standard chunk of Lorem Ipsum
+            </div>
+        </div>
+        <div class="left">
+            <div class="author-name">
+                Mick Lane
+                <small class="chat-date">
+                    08:45 pm
+                </small>
+            </div>
+            <div class="chat-message active">
+                I belive that. Lorem Ipsum is simply dummy text.
+            </div>
+        </div>
+
+
+    </div>
+    <div class="form-chat">
+        <div class="input-group input-group-sm"><input type="text" class="form-control"> <span class="input-group-btn"> <button
+                class="btn btn-primary" type="button">Send
+        </button> </span></div>
+    </div>
+
+</div>
+<div id="small-chat" ng-click="openChat = !openChat">
+
+    <span class="badge badge-warning pull-right">5</span>
+    <a class="open-small-chat">
+        <i class="fa fa-comments"></i>
+
+    </a>
+</div>

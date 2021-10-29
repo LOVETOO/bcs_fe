@@ -1,0 +1,104 @@
+<div style="height: 100%; display: flex;" ng-show="wf && !flowChartVisible">
+	<div class="process">
+		<div class="flex1-scroll">
+			<div class="process-box" ng-repeat="wfProc in wfProcs" ng-class="wfProc.class">
+				<h3>{{ wfProc.procname }}</h3>
+				<div class="process-state">{{ wfProc.statname }}</div>
+				<div class="process-list" ng-repeat="procUser in wfProc.procuserofwfprocs"
+					ng-class="{'processed':procUser.opinion}">
+					<div class="process-head">
+						<img hc-img="procUser.headimgdocid" hc-img-thumb="true" hc-if="procUser.headimgdocid !='0'">
+						<div>{{procUser.headName}}</div>
+					</div>
+					<div class="process-information">
+						<span class="process-name">{{ procUser.username }}</span>
+						<span class="process-department">[{{ procUser.orgpath.substr(1) }}]</span>
+						<span class="process-time">{{ procUser.signtime }}</span>
+					</div>
+					<p>{{ procUser.opinion }}</p>
+				</div>
+				<div class="wf-progress-bar">
+					<button><i class="iconfont" ng-class="wfProc.icon"></i></button>
+				</div>
+				<i class="iconfont hc-wangxia progress-direction"></i>
+			</div>
+
+			<!--完成节点-->
+			<!-- ng-class="{ plan: wf.stat != 7, done: wf.stat == 7 }" -->
+			<div class="process-box process-end plan" hc-if="wf.stat != 7">
+				<h3>未结束</h3>
+				<div class="wf-progress-bar">
+					<button><i class="iconfont hc-wancheng"></i></button>
+				</div>
+			</div>
+			<div class="process-box process-end done" hc-if="wf.stat == 7">
+				<h3>结束</h3>
+				<div class="wf-progress-bar">
+					<button>
+						<i class="iconfont hc-wancheng"></i>
+						<i class="iconfont hc-dui"></i>
+					</button>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="process-buttons">
+			<div class="btn pull-left" hc-button="openFlowChart()" hc-title="查看流程图" hc-icon="iconfont hc-liucheng">
+			</div>
+			<div class="btn" hc-button="break()" hc-title="中断" hc-icon="iconfont hc-zhongduan"
+				ng-hide="wf.can_not_break_reason"></div>
+			<div class="btn" hc-button="transfer()" hc-title="转办" hc-icon="iconfont hc-zhuanban" ng-hide="true"></div>
+			<div class="btn" hc-button="reject()" hc-title="驳回" hc-icon="iconfont hc-shouzhang"
+				ng-hide="wf.can_not_reject_reason"></div>
+			<div class="btn btn-primary" hc-button="submit()" hc-title="提交" ng-hide="wf.can_not_submit_reason"></div>
+		</div>
+	</div>
+	<div class="approval flex-column flex1">
+		<div class="approval-list showall">
+			<div class="approval-object" ng-repeat="wfObj in wf.wfobjofwfs">
+				<div class="approval-object-box">
+					<i class="iconfont hc-danju" style="cursor: pointer;" ng-click="onClickObj()"></i>
+					<p class="approval-object-name" style="cursor: pointer;"
+						ng-bind-template="{{ wfObj.objtypename }} {{ wfObj.objcode }}" ng-click="onClickObj()"></p>
+					<p class="approval-object-time" ng-bind="wf.statime"></p>
+				</div>
+			</div>
+			<!-- <div class="approval-object">
+				<div class="approval-object-box">
+					<i class="iconfont hc-biaodan2"></i>
+					<p class="approval-object-name" ng-bind="wf.wfname"></p>
+					<p class="approval-object-time" ng-bind="wf.statime"></p>
+				</div>
+			</div>
+			<div class="approval-object">
+				<div class="approval-object-box">
+					<i class="iconfont hc-fujian"></i>
+					<p class="approval-object-name" ng-bind="wf.wfname"></p>
+					<p class="approval-object-time" ng-bind="wf.statime"></p>
+				</div>
+			</div> -->
+			<button class="btn" id="show"><i class="iconfont hc-gengduo"></i></button>
+		</div>
+		<div class="approval-infor flex1 flex-column">
+			<h4><i class="iconfont hc-renyuanguanli"></i>审批意见区</h4>
+			<ul class="flex1-scroll">
+				<li ng-repeat="userOpinion in userOpinions">
+					<p>
+						<button ng-class="userOpinion.btnClass">{{ userOpinion.statname }}</button>
+						{{ userOpinion.signtime }}
+						{{ userOpinion.wfProc.procname }}
+					</p>
+					<p><strong>{{ userOpinion.username }}:</strong>{{ userOpinion.opinion }}</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div style="
+		position: absolute;
+		top: 6px;
+		left: 20px;
+		z-index: 10;
+	" hc-button="flowChartVisible = false" hc-icon="iconfont hc-back" hc-title="返回流程" ng-show="flowChartVisible"></div>

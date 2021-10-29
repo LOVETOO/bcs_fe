@@ -1,0 +1,32 @@
+<div hc-edit-list>
+    <div  hc-box class="other-h">
+        <div class="row">
+            <div hc-input="data.currItem.insrnc_reason_code"
+                 hc-label="原因编码"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.insrnc_reason_name"
+                 hc-label="原因描述"
+                 hc-required="true"
+                 hc-col-count="4">
+            </div>
+            <div hc-input="data.currItem.usable"
+                 hc-label="有效状态"
+                 hc-dict-code="usable_code"
+                 hc-required="true">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.addorsub_type"
+                 hc-label="增减类型"
+                 hc-dict-code="addorsub_type"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.remark"
+                 hc-label="备注"
+                 hc-type="textarea"
+                 hc-col-count="6">
+            </div>
+        </div>
+    </div>
+</div>

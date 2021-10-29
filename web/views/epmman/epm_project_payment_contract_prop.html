@@ -1,0 +1,133 @@
+<!--项目付款合同-属性页-->
+<!--shenguocheng-->
+<!--2019-07-19-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.contract_code"
+                     hc-label="合同编号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.contract_name"
+                     hc-label="合同名称"
+                     hc-col-count="4"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.signed_date"
+                     hc-label="签订时间"
+                     hc-type="date">
+                </div>
+
+                <div hc-input="data.currItem.signed_location"
+                     hc-label="签订地点"
+                     hc-col-count="4">
+                </div>
+
+                <div hc-input="data.currItem.contract_amt"
+                     hc-label="合同总额"
+                     hc-type="money"
+                     hc-unit="元"
+                     hc-blur="checkAMT()">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-class-id="epm_project"
+                     hc-common-search="commonSearchSettingOfEpmProject"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="6"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div hc-box="甲方信息">
+                <div class="row">
+                    <div hc-input="data.currItem.party_a_name"
+                         hc-label="甲方名称"
+                         hc-col-count="6">
+                    </div>
+
+                    <div hc-input="data.currItem.party_a_legal_person"
+                         hc-label="甲方联系人">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.party_a_address"
+                         hc-label="甲方地址"
+                         hc-col-count="6">
+                    </div>
+
+                    <div hc-input="data.currItem.party_a_phone"
+                         hc-label="甲方联系电话"
+                         hc-blur="checkPhone(1)">
+                    </div>
+                </div>
+            </div>
+
+            <div hc-box="乙方信息">
+                <div class="row">
+                    <div hc-input="data.currItem.party_b_name"
+                         hc-label="乙方名称"
+                         hc-col-count="6">
+                    </div>
+
+                    <div hc-input="data.currItem.party_b_legal_person"
+                         hc-label="乙方联系人">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.party_b_address"
+                         hc-label="乙方地址"
+                         hc-col-count="6">
+                    </div>
+
+                    <div hc-input="data.currItem.party_b_phone"
+                         hc-label="乙方联系电话"
+                         hc-blur="checkPhone(2)">
+                    </div>
+                </div>
+            </div>
+
+            <div hc-box="结算信息">
+                <div class="row">
+                    <div hc-input="data.currItem.billing_bank"
+                         hc-label="开户银行"
+                         hc-col-count="4">
+                    </div>
+
+                    <div hc-input="data.currItem.billing_account"
+                         hc-label="银行账号"
+                         hc-col-count="4">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.payment_remark"
+                         hc-label="结算说明"
+                         hc-col-count="8">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

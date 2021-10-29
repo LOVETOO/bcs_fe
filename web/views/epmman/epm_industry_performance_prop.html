@@ -1,0 +1,134 @@
+<div hc-obj-prop>
+
+    <div id="base" class="active" hc-box>
+        <div class="hc-box  other-h">
+            <div class="row">
+                <div hc-input="data.currItem.resource_archives_code"
+                     hc-label="业绩编码"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.resource_identifier"
+                     hc-label="业绩编号"
+                     hc-class-id="epm_project"
+                     hc-common-search="commonSearchSettingOfResouceIdentifier"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.resouce_category_name"
+                     hc-label="业绩类型"
+                     hc-class-id="epm_resouce_archives"
+                     hc-common-search="commonSearchSettingOfResouceCategory"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.is_subcontract"
+                     hc-label="补录业绩"
+                     hc-type="checkbox"
+                     class="oneis">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.resource_name"
+                     hc-label="业绩名称"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.contract_amount"
+                     hc-label="业绩金额"
+                     hc-type="money"
+                     hc-unit="元"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.project_manager"
+                     hc-label="项目经理">
+                </div>
+                <div hc-input="data.currItem.company_type"
+                     hc-label="所属行业"
+                     hc-dict-code="company_type">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.brand"
+                     hc-label="品牌">
+                </div>
+                <div hc-input="data.currItem.square"
+                     hc-label="面积"
+                     hc-unit="㎡">
+                </div>
+                <div hc-input="data.currItem.commencement_date"
+                     hc-label="开工日期"
+                     hc-type="date"
+                     hc-change="setSubtractDays()">
+                </div>
+                <div hc-input="data.currItem.completion_date"
+                     hc-label="验收日期"
+                     hc-type="date"
+                     hc-change="setSubtractDays()">
+                </div>
+            </div>
+
+            <div id="req" hc-box="归档信息">
+                <div class="row">
+                    <div hc-input="data.currItem.contract_code"
+                         hc-label="档案号">
+                    </div>
+                    <div hc-input="data.currItem.keeper_name"
+                         hc-label="保管人"
+                         hc-class-id="scpuser"
+                         hc-common-search="commonSearchSettingOfKeeper"
+                         hc-required="true">
+                    </div>
+                    <div hc-input="data.currItem.address"
+                         hc-label="存放地点">
+                    </div>
+                    <div hc-input="data.currItem.remark"
+                         hc-label="备注">
+                    </div>
+                </div>
+            </div>
+
+            <div hc-box="外借信息">
+                <div class="row">
+                    <div hc-input="data.currItem.loan_date"
+                         hc-label="借出时间"
+                         hc-type="date"
+                         hc-readonly="true">
+                    </div>
+                    <div hc-input="data.currItem.estimated_return_date"
+                         hc-label="预计归还时间"
+                         hc-type="date"
+                         hc-readonly="true">
+                    </div>
+                    <div hc-input="data.currItem.loan_person_name"
+                         hc-label="使用人"
+                         hc-readonly="true">
+                    </div>
+                    <div hc-input="data.currItem.stat"
+                         hc-label="当前状态"
+                         hc-readonly="true">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.loan_project_name"
+                         hc-label="使用项目"
+                         hc-readonly="true">
+                    </div>
+                    <div hc-input="data.currItem.loan_description"
+                         hc-label="使用用途"
+                         hc-readonly="true"
+                         hc-col-count="6">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    .oneis {
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+</style>

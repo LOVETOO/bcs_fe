@@ -1,0 +1,496 @@
+/**
+ * 输入组件
+ * @since 2018-10-02
+ */
+define(
+	['module', 'directiveApi', 'requestApi', 'jquery', 'angular', 'loopApi', 'numberApi', 'angularApi'],
+	function (module, directiveApi, requestApi, $, angular, loopApi, numberApi, angularApi) {
+
+		directiveApi.directiveAll({
+			'hcActualInput': [function () {
+				return {
+					require: ['^hcInput', 'ngModel'],
+					link: function ($scope, $element, $attrs, controllers) {
+						var inputController = controllers[0];	//输入组件控制器
+						var modelController = controllers[1];	//模型控制器
+
+						//互相关联
+						inputController.setModelController(modelController);
+
+						modelController.getInputController = function () {
+							return inputController;
+						};
+
+						/**
+						 * 返回实际的 input 元素
+						 */
+						inputController.getActualInputElement = function () {
+							return $element;
+						};
+					}
+				};
+			}],
+			'hcPlaceholder': [function () {
+				return {
+					link: function ($scope, $element, $attrs) {
+						//若没使用 hc-input 指令，退出
+						if ($attrs.hcInput) return;
+
+						//监视指令指定的表达式，动态设置 placeholder
+						$scope.$watch($attrs.hcPlaceholder, function (newValue, oldValue) {
+							$element.attr('placeholder', newValue);
+						});
+					}
+				};
+			}],
+			'hcRequired': ['$parse', function ($parse) {
+				return {
+					restrict: 'A',
+					require: '?ngModel',
+					link: function ($scope, $element, $attr, modelController) {
+						if (!modelController) return;
+
+						//必填验证器名称
+						var validatorName = 'required';
+
+						//必填验证器
+						function requiredValidator(modelValue, viewValue) {
+							return !modelController.$isEmpty(viewValue);
+						}
+
+						//根据表达式动态切换验证器和结果
+						$scope.$watch($attr.hcRequired, function (newValue) {
+							//若表达式成立，说明需要验证
+							if (newValue) {
+								//若验证器还未加入
+								if (!(validatorName in modelController.$validators)) {
+									//加入验证器
+									modelController.$validators[validatorName] = requiredValidator;
+									//执行验证
+									modelController.$validate();
+								}
+							}
+							//否则不需要验证
+							else {
+								//若验证器已加入
+								if (validatorName in modelController.$validators) {
+									//删除验证器
+									delete modelController.$validators[validatorName];
+									//标记验证通过
+									modelController.$setValidity(validatorName, true);
+								}
+							}
+						});
+					}
+				};
+			}],
+			'hcModelNumber': [function () {
+				return {
+					require: 'ngModel',
+					link: function ($scope, $element, $attrs, modelController) {
+						//监视指令指定的表达式
+						$scope.$watch($attrs.hcModelNumber, function (newValue) {
+							//转数字的解析器
+							var numberParser = numberApi.toNumber;
+							//若表达式为真
+							if (newValue) {
+								//增加转数字的解析器
+								modelController.$parsers.push(numberParser);
+							}
+							//否则，移除该解析器
+							else {
+								var indexToDelete = -1;
+
+								modelController.$parsers.some(function (parser, index) {
+									var result = parser === numberParser;
+									if (result) indexToDelete = index;
+									return result;
+								});
+
+								if (indexToDelete !== -1)
+									modelController.$parsers.splice(indexToDelete, 1);
+							}
+						});
+					}
+				};
+			}],
+			'hcModelMoney': [function () {
+				return {
+					require: 'ngModel',
+					link: function ($scope, $element, $attrs, modelController) {
+						//监视指令指定的表达式
+						$scope.$watch($attrs.hcModelMoney, function (newValue) {
+							//金额格式化器
+							var moneyFormatter = numberApi.toMoney;
+							//若表达式为真
+							if (newValue) {
+								//增加金额格式化器
+								modelController.$formatters.push(moneyFormatter);
+							}
+							//否则，移除该格式化器
+							else {
+								var indexToDelete = -1;
+
+								modelController.$formatters.some(function (formatter, index) {
+									var result = formatter === moneyFormatter;
+									if (result) indexToDelete = index;
+									return result;
+								});
+
+								if (indexToDelete !== -1)
+									modelController.$formatters.splice(indexToDelete, 1);
+							}
+						});
+					}
+				};
+			}],
+			'hcModelDate': [function () {
+				return {
+					require: 'ngModel',
+					link: function ($scope, $element, $attrs, modelController) {
+						//加载 datetimepicker 后
+						require(['datetimepicker.zh-CN'], function () {
+							//增加截掉时分秒的格式化器
+							modelController.$formatters.push(function (value) {
+								if (value && value.length > 10)
+									return value.substr(0, 10);
+
+								return value;
+							});
+
+							$element.datetimepicker({
+								format: 'yyyy-mm-dd',	//格式化
+								autoclose: true,		//自动关闭
+								minView: 'month',		//最小视图：月
+								todayBtn: true,			//显示【今天】按钮
+								todayHighlight: true,	//高亮今天
+								language: 'zh-CN'		//语言：简体中文
+							});
+
+							$scope.btnClick = function () {
+								$element.datetimepicker('show');
+							};
+						});
+					}
+				};
+			}],
+			'hcModelSelect': [function () {
+				return {
+					require: ['^hcInput', 'ngModel'],
+					link: function ($scope, $element, $attrs, controllers) {
+						var inputController = controllers[0];	//输入组件控制器
+						var modelController = controllers[1];	//模型控制器
+
+						var selectOptions = inputController.getSelectOptions();
+
+						modelController.$formatters.push(function (modelValue) {
+							var selectOption = selectOptions.find(function (selectOption) {
+								return selectOption.value == modelValue;
+							});
+
+							return selectOption ? selectOption.name : '';
+						});
+
+						modelController.$parsers.push(function (viewValue) {
+							var selectOption = selectOptions.find(function (selectOption) {
+								return selectOption.name == viewValue;
+							});
+
+							return selectOption ? selectOption.value : undefined;
+						});
+					}
+				};
+			}],
+			'hcModelCheckbox': [function () {
+				return {
+					require: 'ngModel',
+					link: function ($scope, $element, $attrs, modelController) {
+						/* var modelValue = modelController.getModel();
+						if (angular.isUndefined(modelValue)) {
+							modelController.setModel(1); //默认值为1
+						} */
+					}
+				};
+			}]
+		});
+
+		/**
+		 * 输入组件控制器
+		 */
+		HcInputController.$injector = ['$scope', '$element', '$attrs'];
+		function HcInputController($scope, $element, $attrs) {
+			var controller = this;		//输入组件控制器
+			var modelController;		//模型控制器
+			var $parent = $scope.$parent;
+			var $eval = $scope.$eval.bind($scope);
+
+			/**
+			 * 返回模型控制器
+			 * @return {ModelController}
+			 * @since 2018-11-21
+			 */
+			controller.getModelController = function () {
+				return modelController;
+			};
+
+			/**
+			 * 设置模型控制器
+			 * @param {ModelController} modelControllerToSet 模型控制器
+			 * @since 2018-11-21
+			 */
+			controller.setModelController = function (modelControllerToSet) {
+				if (modelController === modelControllerToSet)
+					return;
+
+				if (modelController)
+					throw new Error('与输入组件关联的模型控制器必须唯一');
+
+				modelController = modelControllerToSet;
+
+				$scope.modelController = modelController;
+			};
+
+			/**
+			 * 返回文本标签内容
+			 * @return {string}
+			 * @since 2018-11-22
+			 */
+			controller.getLabel = function () {
+				return $scope.label;
+			};
+
+			/**
+			 * 返回下拉选项
+			 * @return {{ name: string, value: number|string }[]}
+			 * @since 2018-11-27
+			 */
+			controller.getSelectOptions = function () {
+				return $scope.selectOptions;
+			};
+
+			$scope.data = {};
+			$scope.type = $attrs.hcType || 'text';
+			$scope.dictCode = $attrs.hcDictCode;
+			$scope.unit = $attrs.hcUnit;
+			if (!$scope.unit && $scope.type === 'money') $scope.unit = '元';
+			$scope.placeholder = $attrs.hcPlaceholder;
+			$scope.getPlaceholder = function () {
+				var result = $scope.placeholder || '';
+
+				if ($eval('modelController.$dirty && modelController.$error.required')) {
+					if (result)
+						result += ',';
+
+					result += '此项必填';
+				}
+
+				return result;
+			};
+
+			//若指定了【按钮点击事件】，显示按钮
+			$scope.showButton = !!$attrs.hcBtnClick;
+
+			$scope.selectOptions = $scope.getSelectOptions();
+
+			//若指定了【词汇编码】
+			if (angular.isArray($scope.selectOptions) || $scope.dictCode || $scope.type === 'month' || $scope.type === 'year') {
+				if ($scope.type === 'month' || $scope.type === 'year') {}
+				else {
+					//【类型】改为【下拉】
+					$scope.type = 'select';
+				}
+
+				$scope.selectClick = function (selectOption) {
+					controller.getActualInputElement().val(selectOption.name);
+					modelController.$setViewValue(selectOption.name);
+				};
+
+				var applyFn = function () {
+					if (modelController)
+						angularApi.applyToScope($scope, function () {
+							modelController.$viewValue = '';
+							modelController.$modelValue = NaN;
+						});
+				};
+
+				if (angular.isArray($scope.selectOptions)) {
+					applyFn();
+				}
+				else if ($scope.type === 'month') {
+					$scope.type = 'select';
+
+					$scope.selectOptions = [];
+
+					loopApi.forMonth(function (month) {
+						$scope.selectOptions.push({
+							name: month + '月',
+							value: month
+						});
+					});
+
+					applyFn();
+				}
+				else if ($scope.type === 'year') {
+                    $scope.type = 'select';
+
+                    $scope.selectOptions = [];
+
+                    loopApi.forYear(function (year) {
+                        $scope.selectOptions.push({
+                            name: year + '年',
+                            value: year
+                        });
+                    });
+
+                    applyFn();
+                }
+				else {
+					if ($scope.dictCode === 'yesno') {
+						$scope.selectOptions = [{
+							name: '是',
+							value: 2
+						}, {
+							name: '否',
+							value: 1
+						}];
+
+						applyFn();
+					}
+					else if ($scope.dictCode === 'noyes') {
+						$scope.selectOptions = [{
+							name: '是',
+							value: 1
+						}, {
+							name: '否',
+							value: 2
+						}];
+
+						applyFn();
+					}
+					else {
+						$scope.selectOptions = [];
+
+						//请求词汇
+						requestApi.getDict($scope.dictCode)
+							.then(function (dicts) {
+								Array.prototype.push.apply($scope.selectOptions, dicts.map(function (dict) {
+									return {
+										name: dict.dictname,
+										value: dict.dictvalue
+									};
+								}));
+
+								applyFn();
+							});
+					}
+				}
+			}
+
+			$scope.ngClass = (function () {
+				//组件所占列数
+				var colCount = ($attrs.hcColCount || 2) - 0;
+
+				if ($scope.type !== 'checkbox') {
+					//输入框所占列数 = 组件所占列数 - 文本标签所在列数(有标签占1列，无占0列)
+					colCount = colCount - ($scope.label ? 1 : 0);
+				}
+
+				var classObj = {};
+				for (var i = 1; i <= 8; i++) {
+					classObj['hc-w' + i] = colCount === i;
+				}
+
+				classObj.unit = !!$scope.unit;
+
+				return function () {
+					//验证通过
+					classObj['hc-valid'] = $eval('modelController.$valid');
+					//验证不通过
+					classObj['hc-invalid'] = $eval('modelController.$invalid');
+					//必填项
+					classObj['hc-required'] = $eval('!!modelController.$validators.required');
+					return classObj;
+				};
+			})();
+
+			$scope.ngStyle = (function () {
+				var styleObj = {};
+
+				if (
+					false
+					|| $scope.type === 'number'
+					|| $scope.type === 'money'
+					|| $scope.unit
+				)
+					styleObj['text-align'] = 'right';
+
+				return styleObj;
+			})();
+		}
+
+		/**
+		 * 输入组件连接函数
+		 */
+		function inputLink($scope, $element, $attrs, inputController) {
+			if ($scope.type === 'checkbox') {
+				if (!$element.prev().length) {
+					var parent = $element.parent();
+
+					if (parent.hasClass('row'))
+						parent.addClass('checkbox-list');
+				}
+			}
+		}
+
+		/**
+		 * 输入组件指令
+		 */
+		function inputDirective() {
+			return {
+				restrict: 'A',
+				require: 'hcInput',
+				templateUrl: directiveApi.getTemplateUrl(module),
+				scope: {
+					// model: '=hcInput',
+					label: '@hcLabel',
+					btnClick: '&hcBtnClick',
+					ngChange: '&hcChange',
+					ngRequired: '&hcRequired',
+					getSelectOptions: '&hcSelectOptions'
+				},
+				controller: HcInputController,
+				compile: function (tElement, tAttrs) {
+					tElement.addClass('input-inline');
+
+					var inputs = tElement.find('[ng-model]');
+
+					//设置模型表达式和名称
+					inputs.attr('ng-model', '$parent.' + tAttrs.hcInput);
+					inputs.attr('name', (function () {
+						var name;
+
+						var modelExp = tAttrs.hcInput;
+
+						var lastIndexOfDot = modelExp.lastIndexOf('.');
+
+						if (lastIndexOfDot === -1)
+							name = modelExp;
+						else
+							name = modelExp.substr(lastIndexOfDot + 1);
+
+						return name;
+					})());
+
+					return inputLink;
+				}
+			}
+		}
+
+		//使用Api注册指令
+		//需传入require模块和指令定义
+		return directiveApi.directive({
+			module: module,
+			directive: inputDirective
+		});
+	}
+);

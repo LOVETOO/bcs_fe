@@ -1,0 +1,57 @@
+<div hc-diy-page>
+    <!-- 自定义表格 -->
+    <div hc-grid="gridOptions" class="hc-grid " hc-auto-height="grid"></div>
+    <!-- 模态框 -->
+    <div class="modal inmodal fade" id="rptdsModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" style="width:800px">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">数据源</h4>
+                </div>
+                <div class="modal-body" style="height: 320px">
+                    <div class="row">
+                        <div hc-input="data.currItem.dsname" hc-label="名称"></div>
+                        <div hc-input="data.currItem.dsalias" hc-label="别名"></div>
+                        <div hc-input="data.currItem.mrporgid" hc-label="MRP组织号"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.dbname" hc-label="数据库名称"></div>
+                        <div hc-input="data.currItem.dbuser" hc-label="数据库用户名"></div>
+                        <div hc-input="data.currItem.dbpassword" hc-label="数据库密码" hc-type="password"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.dsip" hc-label="IP地址"></div>
+                        <div hc-input="data.currItem.dbport" hc-label="数据库端口号"></div>
+                        <div hc-input="data.currItem.dbtype" hc-label="数据库类型" hc-select-options="[{name:'Oracle',value:'Oracle'},
+                        {name:'SQLServer',value:'SQLServer'},                  
+                        {name:'MySQL',value:'MySQL'},
+                        {name:'SQLServer2008',value:'SQLServer2008'}]"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.dstype" hc-label="数据源类型" hc-select-options="[{name:'报表数据源',value:'0'},{name:'外部同步数据源',value:'1'},{name:'MRP数据源',value:'2'}]"></div>
+                        <div hc-input="data.currItem.pooltype" hc-label="连接池类型" hc-select-options="[{name:'直接连接',value:'0'},{name:'系统缓冲池',value:'1'}]"></div>
+                        <div hc-input="data.currItem.pwdrule" hc-label="密码规则" hc-select-options="[{name:'系统内建',value:'1'},{name:'MD5序列',value:'2'}]"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.dblang" hc-label="语言"></div>
+                        <div hc-input="data.currItem.pause" hc-label="挂起" hc-type="checkbox"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.dbparam" hc-label="JDBC连接参数串" hc-col-count="6"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.note" hc-label="备注" hc-col-count="6"></div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white btn-sm ng-scope ng-isolate-scope" style="float: left"
+                            ng-click="test()">测试连接</button>
+                        <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

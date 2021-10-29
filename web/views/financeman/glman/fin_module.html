@@ -1,0 +1,25 @@
+<div hc-diy-page>
+    <!--查询条件-->
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.year_month"
+                 hc-label="月份"
+                 hc-type="year-month">
+            </div>
+
+            <div hc-input="data.currItem.is_sa"
+                 hc-label="模拟过账"
+                 hc-type="checkbox">
+            </div>
+
+            <button type="button"
+                    class="btn btn-primary"
+                    ng-click="searchByCon()">查询
+            </button>
+        </div>
+
+    </div>
+
+    <!--网格-->
+    <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+</div>

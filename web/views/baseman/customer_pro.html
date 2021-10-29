@@ -1,0 +1,286 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="customer_pro">
+    <div class="wrapper wrapper-content" ng-init="selectCurrenItem()">
+        <div class="modal-footflex">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="tabs.html#tab-common"> 基本信息</a></li>
+                    <li><a data-toggle="tab" href="tabs.html#tab-finance"> 财务信息</a></li>
+                    <li><a data-toggle="tab" href="tabs.html#tab-other"> 其他</a></li>
+                </ul>
+                <form method="get" class=" form-inline mline" name="entityForm" novalidate id="entityForm">
+                    <div class="tab-content">
+                        <div id="tab-common" class="tab-pane active" style="width: 100%;">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">客户编码</label>
+                                        <input type="text" class=" form-control" style="width: 122px;" name="customer_code"
+                                               ng-readonly="true" ng-model="data.currItem.customer_code">
+                                        <label class="control-label" style="width: 38px;">简称</label>
+                                        <input type="text" class=" form-control width_m" name="short_name" ng-model="data.currItem.short_name">
+                                        <label class="control-label">客户类型</label>
+                                        <select ng-model="data.currItem.customer_type" chosen-select
+                                                class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                                ng-options="s.id as s.name for s in customer_types"
+                                                ng-selected="s.id==data.currItem.customer_type">
+                                        </select>
+                                        <label class="control-label" >价格类型</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" class="form-control" ng-model="data.currItem.saleprice_type_name"
+                                                   name="saleprice_type_name">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary" ng-click="searchSpt()" type="button"><i class="fa fa-ellipsis-h"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">客户名称</label>
+                                        <input type="text" class=" form-control  non-empty ng-valid" name="customer_name"
+                                               data-rule-required="true" data-msg-required="客户名称不能为空"
+                                               style="width: 328px;"ng-model="data.currItem.customer_name">
+                                        <label class="control-label">业务员</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" class="form-control" ng-model="data.currItem.employee_code"
+                                                   name="employee_code">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary" ng-readonly="true"  ng-click="searchEmployee()" type="button"><i class="fa fa-ellipsis-h"></i></button>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" ng-readonly="true" style="width: 240px;" name="employee_name" ng-model="data.currItem.employee_name">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <!--<label class="control-label">英文名称</label>
+                                        <input type="text" class=" form-control" name="customer_name_en"  style="width: 333px;"ng-model="data.currItem.customer_name_en">-->
+                                        <label class="control-label">行政区域</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" class="form-control non-empty" ng-model="data.currItem.areacode"
+                                                   data-rule-required="true" data-msg-required="行政区域不能为空"  name="areacode">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary" ng-click="searchArea()" type="button"><i class="fa fa-ellipsis-h"></i></button>
+                                            </div>
+                                        </div>
+                                        <input type="text" class=" form-control"  ng-readonly="true" style="width: 164px;" name="areaname" ng-model="data.currItem.areaname">
+                                        <label class="control-label">电子邮件</label>
+                                        <input type="text" class=" form-control" name="email"  style="width: 150px;margin-right: 0px;"ng-model="data.currItem.email">
+                                        <label class="control-label" style="width: 96px;">预付金比例(%)</label>
+                                        <input type="text" class=" form-control width_m" name="advance_rate"
+                                               ng-model="data.currItem.advance_rate">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">运营中心</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" class="form-control non-empty ng-valid" ng-model="data.currItem.dept_code"
+                                                   data-rule-required="true" data-msg-required="运营中心不能为空" name="dept_code">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary" ng-click="searchDept()" type="button"><i class="fa fa-ellipsis-h"></i></button>
+                                            </div>
+                                        </div>
+                                        <input type="text" class=" form-control" ng-readonly="true" style="width: 164px;" name="dept_name" ng-model="data.currItem.dept_name">
+                                        <label class="control-label">发货类型</label>
+                                        <select ng-model="data.currItem.sale_type" chosen-select style="margin-right: 0px;"
+                                                class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                                ng-options="s.id as s.name for s in sale_types"
+                                                ng-selected="s.id==data.currItem.sale_type">
+                                        </select>
+                                        <label class="control-label">位置代码</label>
+                                        <input type="text" class=" form-control width_m" name="attribute3"
+                                               ng-model="data.currItem.attribute3">
+                                    </div>
+                                </div>
+                                <!--<div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">所属销售区域</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" class="form-control" ng-model="data.currItem.sale_area_code">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary" ng-click="searchSaleArea()" type="button"><i class="fa fa-ellipsis-h"></i></button>
+                                            </div>
+                                        </div>
+                                        <input type="text" class=" form-control" style="width: 234px;" ng-model="data.currItem.sale_area_name">
+                                    </div>
+                                </div>-->
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">简介</label>
+                                        <textarea class="form-control" style="width: 576px;height: 30px" name="note"  ng-model="data.currItem.note" ></textarea>
+                                    </div>
+                                    <label class="control-label">
+                                        <input type="checkbox" class="i-checks" ng-model="data.currItem.usable"
+                                               ng-click="check_usable($event)" ng-checked="data.currItem.usable==2" >可用
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="lineGridView" style="height: 180px;"></div>
+                            <button type="button" class="btn btn-primary footer-btn"
+                                    ng-click="addLineRow()">新增地址
+                            </button>
+                        </div>
+                        <div id="tab-finance" class="tab-pane" style="height:380px">
+                            <div class="panel-body">
+                                <fieldset>
+                                    <legend style="font-size: 15px;font-weight: bold;margin-bottom: 9px;" style="font-size: initial;">财务信息</legend>
+                                    <div class="row">
+                                        <label class="control-label">收入确认方式</label> <!--1 出库确认 2 开票确认-->
+                                        <select ng-model="data.currItem.ar_type" chosen-select
+                                                class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                                ng-options="s.id as s.name for s in ar_types"
+                                                ng-selected="s.id==data.currItem.ar_type">
+                                        </select>
+                                        <label class="control-label">纳税人类型</label><!--1 一般纳税人 2 小规模纳税人-->
+                                        <select ng-model="data.currItem.tax_type" chosen-select
+                                                class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                                ng-options="s.id as s.name for s in tax_types"
+                                                ng-selected="s.id==data.currItem.tax_type">
+                                        </select>
+                                        <label class="control-label">缺省税率(%)</label>
+                                        <input type="number" min="0" step="0.01" class="form-control width_m"
+                                               ng-model="data.currItem.tax_rate">
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label">预计收款天数</label>
+                                        <input  type="number" min="0" step="1" class="form-control width_m"
+                                                ng-model="data.currItem.days_gathering">
+                                        <label class="control-label">长期授信额度</label>
+                                        <input type="number" min="0" step="1" class="form-control width_m"
+                                               ng-model="data.currItem.crebit_amt">
+                                        <label class="form-label-mini"><!--信用控件 1不控制 2控制-->
+                                            <input type="checkbox" class="i-checks" ng-model="data.currItem.crebit_ctrl"
+                                                   ng-click="check_crebit_ctrl($event)" ng-checked="data.currItem.crebit_ctrl=='2'">发货信用控制
+                                        </label>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend style="font-size: 15px;font-weight: bold;margin-bottom: 9px;">开票信息</legend>
+                                    <div class="row">
+                                        <label class="control-label">联系人</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.contact">
+                                        <label class="control-label">住宅手机</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.tel_mb_contact">
+                                        <label class="control-label">联系电话</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.tel_home_contact">
+                                        <label class="control-label">住宅电话</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.tel_home_contact_fn">
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label">开户行</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.bank">
+                                        <label class="control-label">联系传真</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.fax_contact_fn">
+                                        <label class="control-label">地址</label>
+                                        <input type="text" class="form-control" style="width: 398px"
+                                               ng-model="data.currItem.address">
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label">银行帐号</label>
+                                        <input type="text" class="form-control" style="width: 398px"
+                                               ng-model="data.currItem.bank_accno">
+
+                                        <label class="control-label">税务登记号</label>
+                                        <input type="text" class="form-control" style="width: 398px"
+                                               ng-model="data.currItem.tax_no">
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend style="font-size: 15px;font-weight: bold;margin-bottom: 9px;">法人代表资料</legend>
+                                    <div class="row">
+                                        <label class="control-label">法人代表</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.law_man">
+                                        <label class="control-label">办公电话</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.tele_law_man">
+                                        <label class="control-label">传真</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.fax_law_man">
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label">住宅电话</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.tel_home__law_man">
+                                        <label class="control-label">住宅手机</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.tel_mb_law_man">
+                                    </div>
+
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div id="tab-other" class="tab-pane" style="height:380px">
+                            <div class="panel-body">
+                                <!-- <div class="row">
+                                     <div class="form-group">
+                                         <label class="control-label"></label>
+                                     </div>
+                                 </div>-->
+                                <div class="row">
+                                    <label class="control-label"></label>
+                                    <label class="form-label-mini">
+                                        <input type="checkbox" class="i-checks" ng-model="data.currItem.is_groupcustomer"
+                                               ng-click="check_is_groupcustomer($event)" ng-checked="data.currItem.is_groupcustomer==2" >总公司
+                                    </label>
+                                    <label class="control-label"></label>
+                                    <label class="form-label-mini">
+                                        <input type="checkbox" class="i-checks" ng-model="data.currItem.is_relation"
+                                               ng-click="check_is_relation($event)" ng-checked="data.currItem.is_relation==2" >关联客户
+                                    </label>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">总公司</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" class="form-control" ng-model="data.currItem.group_customer_code"
+                                                   name="group_customer_code">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary" ng-click="searchGroupCustomer()" type="button"><i class="fa fa-ellipsis-h"></i></button>
+                                            </div>
+                                        </div>
+                                        <input type="text" class=" form-control" style="width: 244px;" name="group_customer_name" ng-model="data.currItem.group_customer_name">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">创建用户</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.created_by" ng-readonly="true">
+                                        <label class="control-label">创建时间</label>
+                                        <input type="text" class="form-control" style="width: 160px;"
+                                               ng-model="data.currItem.creation_date" ng-readonly="true">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">最后修改用户</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.last_updated_by" ng-readonly="true">
+                                        <label class="control-label">最后修改时间</label>
+                                        <input type="text" class="form-control" style="width: 160px;"
+                                               ng-model="data.currItem.last_update_date" ng-readonly="true">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"  ng-click="save()" >
+                    保存
+                </button>
+                <button type="button" class="btn btn-white" ng-click="closeWindow()">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

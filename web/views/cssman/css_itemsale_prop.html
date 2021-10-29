@@ -1,0 +1,79 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box class="other-h" style="margin-bottom: 30px">
+            <div class="row">
+                <div hc-input="data.currItem.itemsale_no"
+                     hc-label="单据编号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.create_time"
+                     hc-label="制单时间"
+                     hc-type="time"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.creator"
+                     hc-label="制单人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="状态"
+                     hc-readonly="true"
+                     hc-dict-code="stat"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.org_name"
+                     hc-label="所属区域"
+                     hc-col-count="4"
+                     hc-class-id="scporg"
+                     hc-common-search="commonSearchOfScporg"
+                     hc-required="true"
+                     ></div>
+                <div hc-input="data.currItem.fix_org_name"
+                     hc-class-id="css_fix_org"
+                     hc-required="true"
+                     hc-common-search="commonSearchOfFixOrg"
+                     hc-label="网点名称"></div>
+                <div hc-input="data.currItem.warehouse_name"
+                     hc-class-id="warehouse"
+                     hc-common-search="commonSearchOfWareHouse"
+                     hc-required="true"
+                     hc-label="出库仓库"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-col-count="8"
+                     hc-type="textarea"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.total_qty"
+                     hc-label="总数量"
+                     hc-type="number"
+                     hc-readonly="true"   ></div>
+                <div hc-input="data.currItem.total_amount"
+                     hc-label="总金额"
+                     hc-type="money"
+                     hc-readonly="true" ></div>
+            </div>
+        </div>
+        <div hc-box="配件明细" hc-grid="gridOptions_itemsale" style="height: 287px"></div>
+    </div>
+    <div id="extra">
+        <div class="row">
+            <div hc-input="data.currItem.creator"
+                 hc-label="制单人"
+                 hc-readonly="true"></div>
+            <div hc-input="data.currItem.create_time"
+                 type="date"
+                 hc-label="制单时间"
+                 hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.updator"
+                 hc-label="修改人"
+                 hc-readonly="true"></div>
+            <div hc-input="data.currItem.update_time"
+                 type="date"
+                 hc-label="修改时间"
+                 hc-readonly="true"></div>
+        </div>
+    </div>
+</div>
+

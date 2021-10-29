@@ -1,0 +1,32 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="warehouse">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="init();">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <!--<h5>仓库资料</h5>-->
+                    <div class="ibox-tools">
+                        <form class="pull-right">
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="刷新"
+                                    ng-click="refresh()"><i class="fa fa-refresh"></i> 刷新
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal"
+                                    ng-click="add()" title="新建仓库"><i class="fa fa-plus"></i> 新建仓库
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content TreeGridBox">
+                    <div class="ibox-title">
+                        <h5>仓库资料</h5>
+                        <ul id="tree" class="ztree"></ul>
+                    </div>
+                    <div class="grid_modal">
+                        <div id="headerGrid" class="headerGrid"></div>
+                        <div class="page_modal modal-open" page-pagination></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,292 @@
+<div class="bill-form" ng-controller="customerEditController">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h3>客户资料</h3>
+            <!--<button ng-click="newone()" class="btn btn-toolbar">
+                <i class="fa lightblue font-size-15 fa-file-o"></i> 新建
+            </button> -->
+			<button class="btn btn-toolbar" type="button" ng-click="search()"><i class="fa lightblue font-size-15 fa-search"></i>查询</button>
+            <button class="btn btn-toolbar" ng-click="refresh()">
+                <i class="fa lightblue font-size-15 fa-refresh"></i> 刷新
+            </button>
+            <!--<button class="btn btn-toolbar" ng-click="delete()">
+                <i class="fa lightblue font-size-15 fa-times"></i> 删除
+            </button> 
+            <button ng-click="save()" class="btn btn-toolbar">
+                <i class="fa lightblue font-size-15 fa-floppy-o"></i> 保存
+            </button> -->
+			<button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i class="fa fa-times"></i>关闭</button>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul id="tabs" class="tri-nav-tabs">
+                    <li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav"><i
+                            class="fa fa-pencil-square">常规</i></a></li>
+                    <li><a data-target="#tab2" data-toggle="tab" class="tab-nav"><i class="fa fa-shopping-cart">联系人</i></a>
+                    </li>
+                    <li><a data-target="#tab3" data-toggle="tab" class="tab-nav"><i class="fa fa-truck">付款条件</i></a>
+                    </li>
+                    <!--<li><a data-target="#tab4" data-toggle="tab" class="tab-nav"><i class="fa fa-cogs">客户品牌</i></a></li>-->
+                    <li><a data-target="#tab5" data-toggle="tab" class="tab-nav"><i class="fa fa-cogs">银行账号</i></a></li>
+                    <!--<li><a data-target="#tab6" data-toggle="tab" class="tab-nav"><i class="fa fa-cogs">销售组织</i></a></li>-->
+                    <li><a data-target="#tab7" data-toggle="tab" class="tab-nav"><i class="fa fa-cogs">业务员</i></a></li>
+
+                    <div class="btn-group pull-right form-topright-btn">
+                        <a ng-click="close()" class="btn-close"><i class="fa fa-times"></i></a>
+                    </div>
+                </ul>
+                <div id="content" class="first tab-content">
+                    <div id="tab1" class="tab-pane active">
+
+                        <div class="ibox-content">
+                            <div class="row" ng-class="{false:'hide'}[isEdit]">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">创建者:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input readonly type="text" ng-model="customer.creator"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">创建时间:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input readonly date-filter type="text" ng-model="customer.create_time"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">修改人:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input readonly type="text" ng-model="customer.updator"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">修改时间:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input readonly date-filter type="text" ng-model="customer.update_time"
+                                           class="input-sm form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">客户编码:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="customer.cust_code" class="input-sm form-control readonly">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">客户名称:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="customer.cust_name" class="input-sm form-control readonly">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">客户简称:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="customer.short_name" class="input-sm form-control readonly">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">所在国家:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input type="text" class="input-sm form-control" ng-model="customer.area_name">
+                                        <a class="input-group-addon" ng-click="openAreaNameFrm()" id="#abc"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">注册地址:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="customer.reg_address" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">营业地址:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="customer.address" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">法人代表:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="customer.lawman" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">网址:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="customer.web_url" class="input-sm form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">公司规模:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="customer.company_scale" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">注册资本:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="customer.reg_capi" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">业务范围:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="customer.business" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">纳税人识别号:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="customer.reg_code" class="input-sm form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">交易币种:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select style="font-size: 10px;height: 23px;"
+                                            class="input-sm chosen-select form-control"
+                                            ng-model="customer.currency_code"
+                                            ng-change="currency_change()" chosen-select
+                                            ng-options="base_currency.currency_code as base_currency.currency_name  for base_currency in base_currencys">
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">客户类型:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select style="font-size: 10px;height: 23px;"
+                                            class="input-sm chosen-select form-control" ng-model="customer.cust_type"
+                                            chosen-select
+                                            ng-options="cust_type.id as cust_type.name for cust_type in cust_type_list">
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">状态:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select style="font-size: 10px;height: 23px;"
+                                            class="input-sm chosen-select form-control" ng-model="customer.actived"
+                                            chosen-select ng-options="stat.id as stat.name for stat in stat_list">
+                                    </select>
+                                </div>
+								<div class="col-md-1">
+                                    <label class="form-label-mini">部门:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input type="text" class="input-sm form-control" ng-model="customer.org_name">
+                                        <a class="input-group-addon" ng-click="selectorg()" id="org_name"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="tab2" class="tab-pane">
+                        <div class="ibox-content">
+                            <button ng-click="addRelaman()" class="btn btn-toolbar" type="button"><i
+                                    class="fa fa-plus-square-o"></i>增加行
+                            </button>
+                            <button ng-click="deleteRelaman()" class="btn btn-toolbar" type="button"
+                                    ng-click="test('test!!')"><i class="fa fa-minus-square-o"></i>删除行
+                            </button>
+                            <div slick-grid sg-dbclick="test(msg);" sg-options="releman_Options"
+                                 ng-model="customer.customer_relamanofcustomers"
+                                 sg-data="customer.customer_relamanofcustomers" sg-columns="relaman_Columns"
+                                 style="width:100%;height:240px;" class="slick-grid"></div>
+                        </div>
+                    </div>
+                    <div id="tab3" class="tab-pane">
+                        <div class="ibox-content">
+                            <button ng-click="addPaymentType()" class="btn btn-toolbar" type="button"><i
+                                    class="fa fa-plus-square-o"></i>增加行
+                            </button>
+                            <button ng-click="deletePaymentType()" class="btn btn-toolbar" type="button"
+                                    ng-click="test('test!!')"><i class="fa fa-minus-square-o"></i>删除行
+                            </button>
+                            <div slick-grid sg-dbclick="test(msg);" sg-options="paymenttype_Options"
+                                 sg-data="customer.customer_payment_typeofcustomers" sg-columns="paytype_Columns"
+                                 style="width:100%;height:240px;" class="slick-grid"></div>
+                        </div>
+                    </div>
+                    <!--<div id="tab4" class="tab-pane">-->
+                        <!--<div class="ibox-content">-->
+                            <!--<button ng-click="addBrand()" class="btn btn-toolbar" type="button"><i-->
+                                    <!--class="fa fa-plus-square-o"></i>增加行-->
+                            <!--</button>-->
+                            <!--<button ng-click="deleteBrand()" class="btn btn-toolbar" type="button"-->
+                                    <!--ng-click="test('test!!')"><i class="fa fa-minus-square-o"></i>删除行-->
+                            <!--</button>-->
+                            <!--<div slick-grid sg-dbclick="test(msg);" sg-options="brand_Options"-->
+                                 <!--sg-data="customer.customer_brandofcustomers" sg-columns="brand_Columns"-->
+                                 <!--style="width:100%;height:240px;" class="slick-grid"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div id="tab5" class="tab-pane">
+                        <div class="ibox-content">
+                            <button ng-click="addBank()" class="btn btn-toolbar" type="button"><i
+                                    class="fa fa-plus-square-o"></i>增加行
+                            </button>
+                            <button ng-click="deleteBank()" class="btn btn-toolbar" type="button"
+                                    ng-click="test('test!!')">
+                                <i class="fa fa-minus-square-o"></i>删除行
+                            </button>
+                            <div slick-grid sg-dbclick="test(msg);" sg-options="bank_Options"
+                                 sg-data="customer.customer_bankofcustomers" sg-columns="bank_Columns"
+                                 style="width:100%;height:240px;" class="slick-grid"></div>
+                        </div>
+                    </div>
+                    <!--<div id="tab6" class="tab-pane">-->
+                        <!--<div class="ibox-content">-->
+                            <!--<button ng-click="addSaleOrg()" class="btn btn-toolbar" type="button"><i-->
+                                    <!--class="fa fa-plus-square-o"></i>增加行-->
+                            <!--</button>-->
+                            <!--<button ng-click="deleteSaleOrg()" class="btn btn-toolbar" type="button"-->
+                                    <!--ng-click="test('test!!')"><i class="fa fa-minus-square-o"></i>删除行-->
+                            <!--</button>-->
+                            <!--<div slick-grid sg-dbclick="test(msg);" sg-options="salorg_Options"-->
+                                 <!--sg-data="customer.customer_salorgofcustomers" sg-columns="saleorg_Columns"-->
+                                 <!--style="width:100%;height:240px;" class="slick-grid"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!-- 6.业务员-->
+                    <div id="tab7" class="tab-pane">
+                        <div class="ibox-content">
+                            <button class="btn btn-toolbar" type="button" ng-click="addCustomerSales()"><i
+                                    class="fa fa-plus-square-o"></i>增加行
+                            </button>
+                            <button class="btn btn-toolbar" type="button" ng-click="deletCustomerSales()"><i
+                                    class="fa fa-minus-square-o"></i>删除行
+                            </button>
+                            <div slick-grid sg-options="CustomerSalesOptions"
+                                 sg-data="customer.customer_salesofcustomers"
+                                 sg-columns="customersales_Columns" style="width:100%;height:240px;"
+                                 class="slick-grid"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

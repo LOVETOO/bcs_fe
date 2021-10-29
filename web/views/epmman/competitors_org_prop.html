@@ -1,0 +1,127 @@
+<div hc-obj-prop>
+    <!--基本信息：-->
+    <div id="base" hc-box class="active">
+        <div class="row other-h" >
+            <div hc-input="data.currItem.competitors_org_code"
+                 hc-label="竞争对手编码"
+                 hc-readonly="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.competitors_org_name"
+                 hc-label="竞争对手名称"
+                 hc-required="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.registered_capital"
+                 hc-label="注册资金"
+                 hc-type="money"
+                 hc-unit="万元"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.listed"
+                 hc-label="上市板块"
+                 hc-dict-code="listed"
+                 hc-col-count="2"></div>
+        </div>
+
+        <div hc-box="品牌信息" >
+            <div class="row other-h" >
+                <div hc-input="data.currItem.major_qualifications"
+                     hc-label="主要产品"
+                     hc-required="true"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.major_brands"
+                     hc-label="主要品牌"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+            </div>
+            <div class="row other-h" >
+                <div hc-input="data.currItem.awards_honors"
+                     hc-label="奖项及荣誉"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.artisan"
+                     hc-label="优势产品"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+            </div>
+            <div class="row other-h" >
+                <div hc-input="data.currItem.negative"
+                     hc-label="负面信息"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+
+        <div hc-box="市场信息" >
+            <div class="row other-h" >
+                <div hc-input="data.currItem.popularity_reputation"
+                     hc-label="知名度/口碑"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.customer_evaluation"
+                     hc-label="客户评价"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.customer_characteristics"
+                     hc-label="客户特征"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.customer_source"
+                     hc-label="主要客户来源"
+                     hc-col-count="2"></div>
+            </div>
+            <div class="row other-h" >
+                <div hc-input="data.currItem.targetmarket_distribution"
+                     hc-label="目标市场及分布"
+                     hc-type="textarea"
+                     hc-required="true"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.business_model"
+                     hc-label="商业模式"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+            </div>
+            <div class="row other-h" >
+                <div hc-input="data.currItem.marketing_strategy"
+                     hc-label="营销策略"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.sales_policy"
+                     hc-label="销售政策"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+            </div>
+        </div>
+
+        <div hc-box="财务信息" >
+            <div class="row other-h" >
+                <div hc-input="data.currItem.sales_volume"
+                     hc-label="年销售规模"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.tax_grade"
+                     hc-label="纳税等级"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.financial_situation"
+                     hc-label="资金状况"
+                     hc-col-count="2"></div>
+            </div>
+        </div>
+
+        <div hc-box="管理信息" >
+            <div class="row other-h" >
+                <div hc-input="data.currItem.number_employees"
+                     hc-label="员工总数"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.number_managers"
+                     hc-label="管理人员数"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.number_salesmen"
+                     hc-label="营销人员数"
+                     hc-col-count="2"></div>
+            </div>
+            <div class="row other-h" >
+                <div hc-input="data.currItem.analysis"
+                     hc-label="分析"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

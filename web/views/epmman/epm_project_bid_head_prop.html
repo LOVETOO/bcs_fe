@@ -1,0 +1,176 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.project_bid_no"
+                     hc-label="单据编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="创建人"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.createtime"
+                     hc-label="创建时间"
+                     hc-type="date"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true" ></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-required="true"
+                     hc-change="changeEpmProject()"
+                     hc-class-id="epm_project"
+                     hc-common-search="searchObjEpmProject"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.project_source"
+                     hc-label="工程类型"
+                     hc-dict-code="epm.project_source"
+                     hc-readonly="true" ></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.report_time"
+                     hc-label="报备时间"
+                     hc-type="time"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.signup_time"
+                     hc-label="报名时间"
+                     hc-type="date"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.signup_plan_people"
+                     hc-label="报名经办人"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.signup_method"
+                     hc-label="报名方式"
+                     hc-readonly="true" ></div>
+
+            </div>
+        </div>
+        <div hc-box="招标信息">
+            <div class="row">
+                <div hc-input="data.currItem.bid_open_address"
+                     hc-label="开标地点" ></div>
+                <div hc-input="data.currItem.tech_service_type"
+                     hc-label="标书及技术使用"
+                     hc-dict-code="epm.bid_make_method"></div>
+                <div hc-input="data.currItem.bid_open_date"
+                     hc-label="开标时间"
+                     hc-required="true"
+                     hc-type="date"></div>
+                <div hc-input="data.currItem.bid_open_method"
+                     hc-label="开标方式"
+                     hc-dict-code="epm.bid_open_method"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.bid_open_primary"
+                     hc-label="开标授权人"
+                     hc-required="true"
+                     hc-class-id="scpuser"
+                     hc-common-search="searchObjScpuser"></div>
+                <div hc-input="data.currItem.aq_end_date"
+                     hc-label="答疑截止时间"
+                     hc-required="true"
+                     hc-type="date"></div>
+                <div hc-input="data.currItem.bid_security"
+                     hc-label="保证金金额"
+                     hc-required="true"
+                     hc-type="money"></div>
+                <div hc-input="data.currItem.bid_security_end_date"
+                     hc-label="保证金截止时间"
+                     hc-required="true"
+                     hc-type="date"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.bid_org_name"
+                     hc-label="招标机构"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.bid_org_linkman"
+                     hc-label="招标联系人"></div>
+                <div hc-input="data.currItem.bid_org_phoneno"
+                     hc-label="招标联系人电话"></div>
+                <div hc-input="data.currItem.is_to_performance"
+                     hc-label="保证金是否转履约"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     class="locationAdjust"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.bid_org_bank"
+                     hc-label="招标机构开户行"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.bid_org_account"
+                     hc-label="招标机构账号"
+                     hc-col-count="4"></div>
+            </div>
+        </div>
+        <div hc-box="投标注意事项" class="other-h">
+        </div>
+        <div hc-box>
+            <div hc-grid="gridOptions_call" style="height:102px"></div>
+        </div>
+        <div hc-box="项目商务评审" class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.business_meth"
+                     hc-readonly="true"
+                     hc-label="评标方式"
+                     hc-change="changePosition()"
+                     hc-dict-code="epm.bid_meth"></div>
+                <div hc-input="data.currItem.business_result"
+                     hc-readonly="true"
+                     hc-label="评审结果"
+                     hc-dict-code="epm.bid_review_result"></div>
+                <div hc-input="data.currItem.business_analysis"
+                     hc-label="结论分析"
+                     hc-readonly="true"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+            </div>
+        </div>
+        <div hc-box>
+            <div hc-grid="gridOptions_business"  style="height:102px"></div>
+        </div>
+        <div hc-box="项目技术评审" class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.tech_meth"
+                     hc-label="评标方式"
+                     hc-readonly="true"
+                     hc-change="changeTech()"
+                     hc-dict-code="epm.bid_meth"></div>
+                <div hc-input="data.currItem.tech_result"
+                     hc-label="评审结果"
+                     hc-readonly="true"
+                     hc-dict-code="epm.bid_review_result"></div>
+                <div hc-input="data.currItem.tech_analysis"
+                     hc-label="结论分析"
+                     hc-readonly="true"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+            </div>
+        </div>
+        <div hc-box>
+            <div hc-grid="gridOptions_technology" style="height:102px"></div>
+        </div>
+        <div hc-box="封标注意事项" class="other-h">
+        </div>
+        <div hc-box>
+            <div hc-grid="gridOptions_sealed" style="height:102px"></div>
+        </div>
+    </div>
+
+</div>
+<style>
+    .locationAdjust{
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+</style>
+
+

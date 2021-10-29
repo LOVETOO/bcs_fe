@@ -1,0 +1,128 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+
+        <div class="row">
+            <div hc-input="data.currItem.beginyear_month"
+                 hc-label="起始日期"
+                 hc-type="date"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.endyear_month"
+                 hc-label="终止日期"
+                 hc-type="date"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.crm_entid"
+                 hc-label="品类"
+                 hc-dict-code="crm_entid">
+            </div>
+        </div>
+
+        <div class="row">
+            <!--<div hc-input="data.currItem.unknown"
+                 hc-label="产品线"
+                 hc-dict-code="unknown">
+            </div>-->
+            <div hc-input="data.currItem.group_customer_name"
+                 hc-label="总公司"
+                 hc-class-id="customer_org"
+                 hc-common-search="commonSearchSettingOfGroupCustomer">
+            </div>
+            <div hc-input="data.currItem.group_customer_code"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.customer_code"
+                 hc-label="客户"
+                 hc-class-id="customer_org"
+                 hc-common-search="commonSearchSettingOfCustomer">
+            </div>
+            <div hc-input="data.currItem.customer_name"
+                 hc-readonly="true">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.sale_area_code"
+                 hc-label="销售区域"
+                 hc-class-id="sale_salearea"
+                 hc-common-search="commonSearchSettingOfSalearea">
+            </div>
+            <div hc-input="data.currItem.sale_area_name"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.dept_code"
+                 hc-label="部门"
+                 hc-class-id="dept"
+                 hc-common-search="commonSearchSettingOfDept">
+            </div>
+            <div hc-input="data.currItem.dept_name"
+                 hc-readonly="true">
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs other-h" id="detailtab">
+        <li class="active">
+            <a data-toggle="tab" id="tab11" href="tabs.html#tab1">明细</a>
+        </li>
+        <li>
+            <a data-toggle="tab" id="tab22" href="tabs.html#tab2">汇总</a>
+        </li>
+    </ul>
+
+    <div class="tabs-container">
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active">
+                <div class="m-t-xs hc-box ng-scope hc-grid ag-blue" hc-grid="gridOptions" hc-auto-height="grid"></div>
+            </div>
+            <div id="tab2" class="tab-pane">
+                <div class="m-t-xs hc-box ng-scope hc-grid ag-blue" hc-grid="groupGridOptions" hc-auto-height="grid"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 分类汇总 -->
+    <div class="modal inmodal fade" id="groupModal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg" style="width: 500px;">
+            <div class="modal-content">
+
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" style="font-size: 16px;">汇总明细</h4>
+                </div>
+
+                <div class="modal-body" style="height: 90px;">
+                    <form method="get" class="form-inline mline">
+                        <div class="row">
+                            <div style="margin-left: 10px;"
+                                 hc-input="summaryBasis.customer"
+                                 hc-type="checkbox"
+                                 hc-label="按客户"><!--hc-change="onBoxChange('customer')"-->
+                            </div>
+                            <div hc-input="summaryBasis.dept"
+                                 hc-type="checkbox"
+                                 hc-label="按部门"><!--hc-change="onBoxChange('dept')"-->
+                            </div>
+                            <div hc-input="summaryBasis.area"
+                                 hc-type="checkbox"
+                                 hc-label="按区域"><!--hc-change="onBoxChange('area')"-->
+                            </div>
+                            <div hc-input="summaryBasis.group_customer"
+                                 hc-type="checkbox"
+                                 hc-label="按总公司"><!--hc-change="onBoxChange('group_customer')"-->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" ng-click="initGroup()">汇总</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

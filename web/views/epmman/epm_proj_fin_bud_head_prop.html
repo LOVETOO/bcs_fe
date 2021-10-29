@@ -1,0 +1,69 @@
+<!--2019-6-24-->
+<!--shenguocheng-->
+<!--工程预算编制明细页面-->
+<div hc-obj-prop>
+    <div id="base" class="active" hc-box>
+        <div class="hc-box  other-h">
+            <div class="row">
+                <div hc-input="data.currItem.proj_bud_head_no"
+                     hc-label="预算编制编号"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="工程项目名称"
+                     hc-col-count="4"
+                     hc-class-id="epm_project"
+                     hc-common-search="commonSearchSettingOfEpmProject"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.project_manager"
+                     hc-label="项目经理"
+                     hc-class-id="scpuser"
+                     hc-common-search="commonSearchSettingOfProjectManager"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.org_name"
+                     hc-label="所属部门"
+                     hc-class-id="dept"
+                     hc-common-search="commonSearchSettingOfDept"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.contract_amt"
+                     hc-label="合同总额"
+                     hc-type="money"
+                     hc-unit="元"      
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.total_bud_amount"
+                     hc-label="预算总额"
+                     hc-type="money"
+                     hc-unit="元"
+                     hc-readonly="true">
+                </div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.remark"
+                     hc-label="编制说明"
+                     hc-col-count="8">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="hc-box" hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+
+    <div id="contract" hc-box>
+        <div class="hc-box" hc-grid="gridOptions_contract" hc-auto-height></div>
+    </div>
+
+</div>

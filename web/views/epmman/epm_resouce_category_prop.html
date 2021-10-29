@@ -1,0 +1,26 @@
+<div hc-obj-prop >
+    <div id="base" hc-box class="active">
+        <div class="row" >
+            <div hc-input="data.currItem.resouce_category_code"
+                 hc-label="分类编码"
+                 hc-col-count="4"></div>
+            <div hc-input="data.currItem.resouce_category_name"
+                 hc-label="分类名称"
+                 hc-required="true"
+                 hc-col-count="4"></div>
+        </div>
+        <div class="row" >
+            <div hc-input="data.currItem.resouce_type"
+                 hc-label="资源类型"
+                 hc-dict-code="resouce_type"
+                 hc-readonly="data.currItem.resouce_category_pid!=0"
+                 hc-required="true"
+                 hc-col-count="4"></div>
+            <div hc-input="data.currItem.remark"
+                 hc-label="备注"
+                 hc-type="textarea"
+                 hc-col-count="4"></div>
+        </div>
+    </div>
+
+</div>

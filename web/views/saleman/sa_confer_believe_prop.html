@@ -1,0 +1,141 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box="" class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.bill_no"
+                     hc-label="授信单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.bill_date"
+                     hc-label="单据日期"
+                     hc-type="date">
+                </div>
+
+                <div hc-input="data.currItem.is_cancellation"
+                     hc-label="作废"
+                     hc-readonly="true"
+                     hc-dict-code="yesno">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户"
+                     hc-required="true"
+                     hc-class-id="customer_org"
+                     hc-common-search="commonSearchSettingOfCustomer">
+                </div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.employee_name"
+                     hc-label="责任人"
+                     hc-class-id="sale_employee"
+                     hc-common-search="commonSearchSettingOfSaleEmployee">
+                </div>
+
+                <div hc-input="data.currItem.created_by"
+                     hc-label="创建人"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.amount"
+                     hc-label="授信额度"
+                     hc-required="true"
+                     hc-type="money">
+                </div>
+
+                <div hc-input="data.currItem.star_date"
+                     hc-label="生效日期"
+                     hc-required="true"
+                     hc-type="date">
+                </div>
+
+                <div hc-input="data.currItem.end_date"
+                     hc-label="失效日期"
+                     hc-required="true"
+                     hc-type="date">
+                </div>
+
+                <div hc-input="data.currItem.creation_date"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div hc-input="data.currItem.crm_entid"
+                     hc-label="授信品类"
+                     hc-required="true"
+                     hc-dict-code="crm_entid">
+                </div>
+
+                <div hc-input="data.currItem.fact_return_date"
+                     hc-label="承诺还款日期"
+                     hc-required="true"
+                     hc-type="date">
+                </div>
+
+                <div hc-input="data.currItem.floor_type"
+                     hc-label="授信类型"
+                     hc-dict-code="saleman.floor_type">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.cnsx"
+                     hc-label="承诺事项"
+                     hc-col-count="8">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.total_sale_amount"
+                     hc-label="累计销售额"
+                     hc-type="money">
+                </div>
+
+                <div hc-input="data.currItem.total_receive_payment"
+                     hc-label="累计回款"
+                     hc-type="money">
+                </div>
+
+                <div hc-input="data.currItem.current_receive_balance"
+                     hc-label="当前应收余额"
+                     hc-type="money">
+                </div>
+
+                <div hc-input="data.currItem.total_confer_believe_time"
+                     hc-label="累计授信次数"
+                     hc-type="number">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.total_confer_believe_amount"
+                     hc-label="累计授信额度"
+                     hc-type="money">
+                </div>
+
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-col-count="6">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

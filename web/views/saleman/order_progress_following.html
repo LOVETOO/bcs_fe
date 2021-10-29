@@ -1,0 +1,65 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="ctrl_order_progress_following">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <form method="get" class="form-inline mline">
+                        <label class="control-label width_ms">订单号</label>
+                        <div class="input-group width_m">
+                            <input type="text" class="form-control"
+                                   ng-model="data.currItem.sa_salebillno">
+                            <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        ng-click="clearCondition('sabillno')">×</button>
+                            </span>
+                        </div>
+                        <label class="control-label width_s">ERP订单号</label>
+                        <div class="input-group width_m">
+                            <input type="text" class="form-control"
+                                   ng-model="data.currItem.attribute1">
+                            <span class="input-group-btn">
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        ng-click="clearCondition('erpsabillno')">×</button>
+                            </span>
+                        </div>
+
+
+                        <label class="control-label width_s">产品编码</label>
+                        <div class="input-group width_m">
+                            <input type="text" class="form-control  "
+                                   ng-model="data.currItem.item_code" ng-change="codeChange()">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary"
+                                        ng-click="searchitem()">•••</button>
+                                <button type="button"
+                                        class="btn btn-primary"
+                                        ng-click="clearCondition('item')">×</button>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control width_xm " ng-readonly="true"
+                               ng-model="data.currItem.item_name">
+
+                        <button class="btn btn-white btn-sm pull-right"
+                                ng-click="searchByCon()"><i class="fa fa-search"></i> 查询
+                        </button>
+                    </form>
+
+                </div>
+
+
+                <div class="ibox-content">
+                    <div ag-gridview sg-options="headerOptions"
+                         sg-columns="headerColumns" style="height:380px;">
+                    </div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+

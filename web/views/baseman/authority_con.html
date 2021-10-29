@@ -1,0 +1,53 @@
+<div hc-diy-page>
+    <div class="row">
+        <label style="width: 30%;">
+            <label>授权方式:</label>
+            <label>
+                <input type="radio" name="method" value="1" checked ng-click="clickUser();" ng-model="data.flag"> 按人员
+            </label>
+            <label>
+                <input type="radio" name="method" value="2" ng-click="clickDeft();" ng-model="data.flag"> 按部门
+            </label>
+        </label>
+        <div class="row">
+            <div hc-input="data.currItem.code" hc-label="{{data.name}}搜索" hc-btn-click="click1()"></div>
+            <div hc-input="data.currItem.name" hc-label=""></div>
+            <button class="btn btn-white btn-sm" style="float:right" ng-click ="click2()">查询</button>
+            <div hc-input="data.currItem.name3" hc-label="搜索" style="float:right"></div>
+        </div>
+        <!-- <div class="row"> -->
+            <label style="width: 29%;float: right">不能访问的{{ listname }}</label>
+            <label style="width: 41%;float: right">能访问的{{ listname }}</label>
+        <!-- </div> -->
+    </div>
+    <div class="TreeGridBox Gridlist">
+        <!-- 左表 -->
+        <div class="ibox-title" style="height: 858px; width: 30%;">
+            <div hc-grid="gridOptions1" class="hc-grid " hc-auto-height="grid"></div>
+        </div>
+        <!-- 中间表 -->
+        <div class="ibox-title" style="height: 858px; width: 30%;">
+            <div hc-grid="gridOptions2" class="hc-grid " hc-auto-height="grid"></div>
+        </div>
+        <div class="ibox-title" style="width: 10%;">
+            <h5>授权操作</h5>
+            <div class="btnlink" style="margin-left:auto;margin-right:auto"> 
+                <button type="button" class="btn btn-default" ng-click="allAccess()"> 全部授权
+                </button>
+                <br>
+                <button type="button" class="btn btn-default" ng-click="Access()"> 授权
+                </button>
+                <br>
+                <button type="button" class="btn btn-default" ng-click="allCancel()"> 全部取消
+                </button>
+                <br>
+                <button type="button" class="btn btn-default" ng-click="Cancel()"> 取消
+                </button>
+            </div>
+        </div>
+        <!-- 右边表 -->
+        <div class="ibox-title" style="height: 858px; width: 30%;">
+            <div hc-grid="gridOptions3" class="hc-grid " hc-auto-height="grid"></div>
+        </div>
+    </div>
+</div>

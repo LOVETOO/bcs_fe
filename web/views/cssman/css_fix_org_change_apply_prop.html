@@ -1,0 +1,368 @@
+<div hc-obj-prop>
+
+     <div id="base" class="active">
+          <div id="document_info" hc-box="单据信息">
+               <div class="row">
+                    <div hc-input="data.currItem.change_apply_no" hc-label="变更单号" hc-readonly="true">
+                    </div>
+                    <div hc-input="data.currItem.change_type" hc-label="变更类型" hc-required="true"
+                         hc-dict-code="change_type">
+                    </div>
+                    <div hc-input="data.currItem.stat" hc-label="单据状态" hc-readonly="true" hc-dict-code="stat">
+                    </div>
+               </div>
+               <div class="row">
+                    <div hc-input="data.currItem.creator" hc-label="创建人" hc-readonly="true">
+                    </div>
+                    <div hc-input="data.currItem.create_time" hc-label="创建日期" hc-readonly="true" hc-type="date">
+                    </div>
+                    <div hc-input="data.currItem.entname" hc-label="经营单位" hc-readonly="true">
+                    </div>
+               </div>
+          </div>
+          <div id="org_info" hc-box="网点信息">
+               <div class="row">
+                    <div hc-input="data.currItem.fix_org_code" hc-label="网点编码" hc-class-id="css_fix_org"
+                         hc-common-search="commonSearchSettingOfFix.change_fix">
+                    </div>
+
+                    <div hc-input="data.currItem.fix_org_name" hc-label="网点名称" hc-required="true" hc-col-count="4">
+                    </div>
+
+                    <div hc-input="data.currItem.fix_org_type" hc-label="网点类型" hc-required="true"
+                         hc-dict-code="service_store_type">
+                    </div>
+
+                    <div hc-input="data.currItem.fix_org_class" hc-label="网点级别" hc-required="true"
+                         hc-dict-code="service_store_level">
+                    </div>
+               </div>
+
+               <div class="row">
+                    <div hc-input="data.currItem.fixorg_username" hc-label="用户名" hc-required="true">
+                    </div>
+
+                    <div hc-input="data.currItem.old_fix_org_name" hc-label="原网点名称" hc-readonly="true" hc-col-count="4">
+                    </div>
+
+                    <div hc-input="data.currItem.old_fix_org_type" hc-label="原网点类型" hc-readonly="true"
+                         hc-dict-code="service_store_type">
+                    </div>
+
+                    <div hc-input="data.currItem.old_fix_org_class" hc-label="原网点级别" hc-readonly="true"
+                         hc-dict-code="service_store_level">
+                    </div>
+               </div>
+
+               <div class="row">
+                    <div hc-input="data.currItem.star_class" hc-label="标准简称">
+                    </div>
+
+                    <div hc-input="data.currItem.org_code" hc-label="所属分部" hc-class-id="scporg"
+                         hc-common-search="commonSearchSettingOfScporg.org">
+                    </div>
+                    <div hc-input="data.currItem.org_name" hc-readonly="true"></div>
+
+                    <div hc-input="data.currItem.hot_tel" hc-label="服务热线" hc-required="true">
+                    </div>
+
+                    <div hc-input="data.currItem.tele" hc-label="短信号码">
+                    </div>
+               </div>
+
+               <div class="row">
+
+                    <div hc-input="data.currItem.star_class" hc-label="网点星级" hc-dict-code="star_level">
+                    </div>
+
+                    <div hc-input="data.currItem.supper_code" hc-label="上级网点" hc-class-id="css_fix_org"
+                         hc-required="true" hc-common-search="commonSearchSettingOfFix.upper_fix">
+                    </div>
+
+                    <div hc-input="data.currItem.supper_name" hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.post_code" hc-label="邮编" hc-required="true">
+                    </div>
+
+                    <div hc-input="data.currItem.fax" hc-label="传真号">
+                    </div>
+               </div>
+
+               <div class="row">
+                    <div hc-input="data.currItem.licenceno" hc-label="营业执照">
+                    </div>
+
+                    <div hc-input="data.currItem.customer_code" hc-label="CRM经销商" hc-class-id="customer_org"
+                         hc-common-search="commonSearchSettingOfCustomer">
+                    </div>
+                    <div hc-input="data.currItem.customer_name" hc-readonly="true"></div>
+
+                    <div hc-input="data.currItem.fix_org_step" hc-label="服务等级" hc-dict-code="service_level"></div>
+
+                    <div hc-input="data.currItem.fix_org_mode" hc-label="运营模式" hc-dict-code="service_store_op_mode">
+                    </div>
+               </div>
+
+               <div class="row">
+                    <div hc-input="data.currItem.manager" hc-label="负责人" hc-required="true" hc-col-count="2">
+                    </div>
+
+                    <div hc-input="data.currItem.address" hc-label="办公地址" hc-required="true">
+                    </div>
+
+                    <div hc-input="data.currItem.sub_org_code" hc-label="二级分部" hc-class-id="scporg"
+                         hc-common-search="commonSearchSettingOfScporg.sub_org">
+                    </div>
+                    <div hc-input="data.currItem.sub_org_name" hc-readonly="true"></div>
+               </div>
+
+               <div class="row">
+                    <div hc-input="data.currItem.allot_class" hc-label="派工等级" hc-class-id="" hc-common-search="">
+                    </div>
+
+                    <div hc-input="data.currItem.email" hc-label="服务邮箱" hc-col-count="4">
+                    </div>
+
+                    <div hc-input="data.currItem.appeal_desc" hc-label="派工说明" hc-col-count="4">
+                    </div>
+
+               </div>
+
+               <div class="row">
+                    <div hc-input="data.currItem.jingdu" hc-label="经度">
+                    </div>
+
+                    <div hc-input="data.currItem.weidu" hc-label="纬度">
+                    </div>
+
+                    <div hc-input="data.currItem.min_settlefee" hc-label="保底费用">
+                    </div>
+
+                    <div hc-input="data.currItem.is_allotbyself" hc-label="允许自行接单" hc-type="checkbox">
+                    </div>
+
+               </div>
+               <div class="row">
+                    <div hc-input="data.currItem.belong_org_code" hc-label="预算机构" hc-class-id="scporg"
+                         hc-common-search="commonSearchSettingOfScporg.budget_org" hc-required="true">
+                    </div>
+                    <div hc-input="data.currItem.belong_org_name" hc-readonly="true">
+                    </div>
+                    <div hc-input="data.currItem.note" hc-label="备注信息">
+                    </div>
+               </div>
+               <!-- <div class="row">
+                    
+               </div> -->
+
+               <div class="row">
+
+                    <div hc-input="data.currItem.usable" hc-label="可用" hc-type="checkbox"></div>
+
+                    <div hc-input="data.currItem.eanble_appeal" hc-label="接受派工" hc-type="checkbox"></div>
+
+                    <div hc-input="data.currItem.is_asia" hc-label="冻结" hc-type="checkbox"></div>
+
+                    <div hc-input="data.currItem.allow_furway" hc-label="上门权限" hc-type="checkbox"></div>
+
+
+               </div>
+               <div class="row">
+
+                    <div hc-input="data.currItem.allow_dispatch" hc-label="允许加急" hc-type="checkbox"></div>
+
+                    <div hc-input="data.currItem.allow_discount" hc-label="折价" hc-type="checkbox"></div>
+
+                    <div hc-input="data.currItem.isreduce" hc-label="暂停付款" hc-type="checkbox"></div>
+
+                    <div hc-input="data.currItem.is_hx" hc-label="暂停配件核销" hc-type="checkbox"></div>
+               </div>
+               <!-- <div class="row">
+                    <div hc-input="data.currItem.belong_org_code" hc-label="预算机构" hc-class-id="scporg"
+                         hc-common-search="commonSearchSettingOfScporg.budget_org" hc-required="true">
+                    </div>
+                    <div hc-input="data.currItem.belong_org_name" hc-readonly="true">
+                    </div>
+               </div> -->
+               <div class="row">
+
+                    <div hc-input="data.currItem.css_item_sale_type1" hc-label="申请售前配件" hc-type="checkbox"></div>
+
+                    <div hc-input="data.currItem.css_item_sale_type2" hc-label="申请售后配件" hc-type="checkbox"></div>
+
+                    <div hc-input="data.currItem.css_item_sale_type3" hc-label="申请零售配件" hc-type="checkbox"></div>
+               </div>
+
+          </div>
+
+          <div id="bank_info" hc-box="银行信息">
+               <div class="row">
+                    <div hc-input="data.currItem.bank" hc-label="开户银行" hc-required="true" hc-col-count="4">
+                    </div>
+
+                    <div hc-input="data.currItem.accno_name" hc-label="开户名称" hc-required="true" hc-col-count="4">
+                    </div>
+
+               </div>
+
+               <div class="row">
+                    <div hc-input="data.currItem.bank_no" hc-label="银行行号" hc-required="true" hc-col-count="4">
+                    </div>
+                    <div hc-input="data.currItem.bank_accno" hc-label="银行账号" hc-required="true" hc-col-count="4">
+                    </div>
+               </div>
+
+               <div class="row">
+
+
+                    <div hc-input="data.currItem.bank_province_area_code" hc-label="开户行所在省" hc-required="true"
+                         hc-class-id="scparea" hc-common-search="commonSearchSettingOfArea.bank_province"
+                         hc-delete-together="bank_province_area_name bank_city_area_code bank_city_area_name">
+                    </div>
+                    <div hc-input="data.currItem.bank_province_area_name" hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.bank_city_area_code" hc-label="开户行所在市" hc-required="true"
+                         hc-class-id="scparea" hc-common-search="commonSearchSettingOfArea.bank_city"
+                         hc-delete-together="bank_city_area_name">
+                    </div>
+                    <div hc-input="data.currItem.bank_city_area_name" hc-readonly="true">
+                    </div>
+               </div>
+
+               <div class="row">
+                    <div hc-input="data.currItem.last_settle_date" hc-label="最新结算日期" hc-type="date" hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.settle_week" hc-label="结算周期(天)">
+                    </div>
+
+                    <div hc-input="data.currItem.last_bill_date" hc-label="最迟结算单据维修日期" hc-type="date"
+                         hc-readonly="true">
+                    </div>
+               </div>
+
+          </div>
+
+          <div id="accessories_info" hc-box="配件信息">
+
+               <div class="row">
+
+                    <div hc-input="data.currItem.appeal_org_code" hc-label="受理机构" hc-class-id="scporg"
+                         hc-common-search="commonSearchSettingOfScporg.appeal_org"></div>
+
+                    <div hc-input="data.currItem.appeal_org_name" hc-readonly="true"></div>
+
+                    <div hc-input="data.currItem.appeal_fix_org_code" hc-label="受理网点" hc-class-id="css_fix_org"
+                         hc-common-search="commonSearchSettingOfFix.appeal_fix"></div>
+
+                    <div hc-input="data.currItem.appeal_fix_org_name" hc-readonly="true"></div>
+
+               </div>
+
+               <div class="row">
+                    <div hc-input="data.currItem.is_changeappeal" hc-label="在配件申请时可更改受理机构" hc-type="checkbox"></div>
+               </div>
+
+          </div>
+
+          <div id="area_info" hc-box="区域信息">
+               <div class="row">
+                    <div hc-input="data.currItem.province_area_code" hc-label="省份" hc-class-id="scparea"
+                         hc-common-search="commonSearchSettingOfArea.province" hc-delete-together="province_area_name city_area_code city_area_name
+                      county_area_code county_area_name area_code area_name">
+                    </div>
+
+                    <div hc-input="data.currItem.province_area_name" hc-readonly="true"></div>
+
+                    <div hc-input="data.currItem.city_area_code" hc-label="地市" hc-class-id="scparea"
+                         hc-common-search="commonSearchSettingOfArea.city"
+                         hc-delete-together="city_area_name county_area_code county_area_name area_code area_name">
+                    </div>
+                    <div hc-input="data.currItem.city_area_name" hc-readonly="true"></div>
+               </div>
+               <div class="row">
+
+                    <div hc-input="data.currItem.county_area_code" hc-label="区县" hc-class-id="scparea"
+                         hc-common-search="commonSearchSettingOfArea.county"
+                         hc-delete-together="county_area_name area_code area_name"></div>
+
+                    <div hc-input="data.currItem.county_area_name" hc-readonly="true"></div>
+
+                    <div hc-input="data.currItem.area_code" hc-label="区域" hc-class-id="scparea"
+                         hc-common-search="commonSearchSettingOfArea.area" hc-delete-together="area_name"></div>
+
+                    <div hc-input="data.currItem.area_name" hc-readonly="true"></div>
+               </div>
+          </div>
+
+          <div id="protocol_info" hc-box="协议信息">
+
+               <div class="row">
+                    <div hc-input="data.currItem.shop_no" hc-label="门店编号" hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.treaty_no" hc-label="协议编号" hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.xy_start_date" hc-label="协议开始时间" hc-type="date" hc-readonly="true">
+                    </div>
+
+                    <div hc-input="data.currItem.xy_end_date" hc-label="协议结束时间" hc-type="date" hc-readonly="true">
+                    </div>
+               </div>
+
+          </div>
+
+          <div id="other_info" hc-box="其他信息">
+               <div class="row">
+                    <div hc-input="data.currItem.fixorg_rolename" hc-label="网点角色" hc-class-id="scprole"
+                         hc-common-search="commonSearchSettingOfScprole">
+                    </div>
+                    <div hc-input="data.currItem.agent_type" hc-label="代理模式" hc-dict-code="service_store_mode">
+                    </div>
+
+                    <!--<div hc-input="data.currItem.p_agent_fixorg_code"
+                     hc-label="上级代理网点"
+                     hc-class-id="css_fix_org"
+                     hc-common-search="">
+                </div>
+
+                <div hc-input="data.currItem.p_agent_fixorg_name"></div>-->
+
+                    <div hc-input="data.currItem.fix_org_type_hd" hc-label="环境系统类别" hc-dict-code="envir_sys_type">
+                    </div>
+               </div>
+
+               <!--<div class="row">-->
+
+
+
+               <!--<div hc-input="data.currItem.water_class"
+                     hc-label="水质等级"
+                     hc-class-id=""
+                     hc-common-search="">
+                </div>
+                <div hc-input="data.currItem.water_q"
+                     hc-label="水质系数"
+                     hc-readonly="true">
+                </div>-->
+
+               <!--</div>-->
+
+          </div>
+
+     </div>
+
+     <!-- 产品大类明细 -->
+     <div id="item">
+          <div hc-box hc-grid="gridOptions_item" hc-auto-height="grid"></div>
+     </div>
+
+     <!-- 收货信息明细 -->
+     <div id="accept">
+          <div hc-box hc-grid="gridOptions_accept" hc-auto-height="grid"></div>
+     </div>
+
+</div>

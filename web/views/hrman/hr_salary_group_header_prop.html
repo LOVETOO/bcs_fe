@@ -1,0 +1,38 @@
+<div hc-obj-prop>
+    <div id="base" hc-box class="active">
+        <div  hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.salary_group_code"
+                     hc-label="薪资组编码"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.salary_group_name"
+                     hc-label="薪资组名称"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.usable"
+                     hc-label="有效状态"
+                     hc-dict-code="usable_code"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.created_by"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-col-count="6"
+                     hc-type="textarea">
+                </div>
+                <div hc-input="data.currItem.creation_date"
+                     hc-label="创建时间"
+                     hc-readonly="true"
+                     hc-type="time">
+                </div>
+            </div>
+        </div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>

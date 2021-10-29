@@ -1,0 +1,2279 @@
+<div class="bill-form" ng-init="init()">
+    <div class="wrapper wrapper-content ">
+        <div class="row">
+            <div class="col-xs-2" style="width: 220px!important;">
+                <div ng-include="'views/baseman/mail_left.html'"></div>
+            </div>
+
+            <!--收件箱-->
+            <div ng-show="data.show==1" class="col-xs-10 animated fadeInRight box-width">
+                <!--头部-->
+                <div class="mail-box-header other-h">
+                    <form class="pull-right mail-search" style="max-width: 500px;">
+                        <div class="hc-input input-group" style="margin: 5px 0px 0px;width: 500px;">
+                            <input type="text" style="height: 27px;" class="form-control input-sm"
+                                   ng-model="data.sqlwhere" name="search" placeholder="搜索邮件">
+                            <div class="input-group-btn">
+                                <button ng-click="sendReceive_email(1)" class="btn btn-sm btn-primary">
+                                    <i class="iconfont hc-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <h4>
+                        {{data.title}}
+                        <span class="f_size normal black">(共{{data.receivetotal}}封<span>
+						<a ng-show='data.flag<=5&&data.title=="收件箱"' ng-click='unread()' style="color: cadetblue;"
+                           class="f_size normal">,其中未读:{{data.receivenew}}封</a>
+						<a ng-show='data.flag>5&&data.title=="收件箱"' ng-click='unread()' style="color: cadetblue;"
+                           class="f_size normal">,其中未读:{{data.receivenew_out}}封</a>
+							)
+                    </h4>
+                    <!--工具栏-->
+                    <div class="mail-tools tooltip-demo">
+                        <button class="btn btn-white btn-sm" data-toggle="tooltip" ng-click='refresh_emails()'
+                                data-placement="left" title="" data-original-title="Refresh inbox"><i
+                                class="iconfont hc-refresh"></i> 刷新
+                        </button>
+                        <button class="btn btn-white btn-sm" data-toggle="tooltip" ng-click='is_read()'
+                                data-placement="top" title="" data-original-title="Mark as read"><i
+                                class="iconfont hc-read"></i> 已读
+                        </button>
+                        <div class="btn-group">
+                            <button class="btn btn-white btn-sm dropdown-toggle" data-toggle="dropdown" type="button"
+                                    style="line-height: 22px;">
+                                标记为....<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a ng-click='batchstar()'>星标邮件</a>
+                                </li>
+                                <li>
+                                    <a ng-click='batchunread()'>未读</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-white btn-sm dropdown-toggle" data-toggle="dropdown" type="button"
+                                    style="line-height: 22px;">
+                                移动到....<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="item in data.cpcemailc">
+                                    <a ng-click='add_scpemailtrk_s(item)'>{{item.emailcname}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-white btn-sm" data-toggle="tooltip" ng-click='delete_emails()'
+                                data-placement="top" title=""><i class="iconfont hc-delete"></i>
+                            {{data.flag!=4&&data.flag!=4.5&&data.flag!=5?'删除':'彻底删除'}}
+                        </button>
+                        <!--<button class="btn btn-white btn-sm" data-toggle="tooltip" ng-click='open_setting()'
+                                data-placement="top" title=""><i class="iconfont hc-shezhi-copy"></i>设置
+                        </button>-->
+                        <!--<button class="btn btn-white btn-sm" ng-show='data.flag==2||data.flag==1' data-toggle="tooltip"
+                                ng-click='follow_mail()' data-placement="top" title=""><i class="iconfont hc-ic_emailtracking"></i>跟踪
+                        </button>-->
+                        <button class="btn btn-white btn-sm" ng-show='data.flag==2' data-toggle="tooltip"
+                                ng-click='retreat_mail()' data-placement="top" title=""><i
+                                class="iconfont hc-chehui"></i>撤回
+                        </button>
+                        <a class="btn btn-white btn-sm"
+                           href="/web/index.jsp?t=1548654760250#/baseman/mail?title=%E6%88%91%E7%9A%84%E9%82%AE%E7%AE%B1"
+                           target="_blank">
+                            <i class="iconfont hc-quanping"></i>全屏
+                        </a>
+                    </div>
+                    <!--<button class="btn btn-white btn-sm" data-toggle="tooltip" ng-click='delete_emails()'
+                            data-placement="top" title=""><i class="iconfont hc-delete"></i> 删除
+                    </button>
+                    <button class="btn btn-white btn-sm" data-toggle="tooltip" ng-click='open_setting()'
+                            data-placement="top" title=""><i class="iconfont hc-shezhi-copy"></i>设置
+                    </button>
+                    <button class="btn btn-white btn-sm" ng-show='data.flag==2||data.flag==1' data-toggle="tooltip"
+                            ng-click='follow_mail()' data-placement="top" title=""><i class="iconfont hc-ic_emailtracking"></i>跟踪
+                    </button>
+                    <button class="btn btn-white btn-sm" ng-show='data.flag==2' data-toggle="tooltip"
+                            ng-click='retreat_mail()' data-placement="top" title=""><i class="iconfont hc-chehui"></i>撤回
+                    </button>-->
+                </div>
+                <!--主体-->
+                <div class="mail-box limit">
+                    <!--内容-->
+                    <div class="table-box">
+                        <table class="table table-hover table-mail">
+                            <!--收件箱标题-->
+                            <thead>
+                            <tr class="read">
+                                <th style="width:35px;" class="check-mail o_title2">
+                                    <input type="checkbox" ng-click='selectall()' ng-true-value="2" ng-false-value="1"
+                                           ng-model="data.type" class="i-checks">
+
+
+                                    <!-- 复选框 - 新 -->
+                                    <!-- <div ng-switch-when="checkbox" class="i-checks">
+                                        <div class="icheckbox_square-green" style="position:relative;" ng-class="{checked:data.type==2}">
+                                            <input type="checkbox" ng-model="data.type" ng-true-value="2" ng-false-value="1" style="position:absolute;opacity:0;">
+                                            <ins class="iCheck-helper" style="position:absolute;top:0%;left:0%;display:block;width:100%;height:100%;margin:0px;padding:0px;background:rgb(255, 255, 255);border:0px;opacity:0;"></ins>
+                                        </div>
+                                    </div> -->
+
+                                </th>
+                                <th class="o_title2" style="width:30px;"></th>
+                                <th class="o_title2" style="width:150px;">发件人</th>
+                                <th class="o_title2" style="width:100%">
+                                    主题
+                                </th>
+                                <th class="o_title2" style="width:50px;">附件</th>
+
+                                <th class="o_title2" style="width:170px;">时间</th>
+                                <!--<th ng-show='data.flag>5' class="o_title2" style="width: 40px;">类型</th>-->
+                                <th class="o_title2" style="width:90px" ng-show="data.flag!=4&&data.flag!=4.5&&data.flag!=5">阅读状态</th>
+                                <th class="o_title2" style="width:90px" ng-show="data.flag==4">定时发送</th>
+                                <th class="o_title2" style="width: 40px;"></th>
+                            </tr>
+                            </thead>
+
+                            <!--收件箱内容-->
+                            <tbody ng-repeat-start="tbody in tbody_list" ng-show='data[tbody.field].length>0'>
+                            <tr class="time">
+                                <td class="check-mail" colspan="{{data.flag!=4?'8':'7'}}">
+                                    {{tbody.name}}({{data[tbody.field].length}}封)
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tbody ng-repeat-end ng-show='data[tbody.field].length>0'>
+                            <tr class="read" ng-repeat="item in data[tbody.field]">
+                                <!--复选框-->
+                                <td class="check-mail">
+                                    <input type="checkbox" ng-true-value="2" ng-false-value="1" ng-model="item.checkbox"
+                                           class="i-checks">
+                                </td>
+                                <!--已读/未读图标-->
+                                <td ng-click='show(3,item.emailid)'
+                                    ng-class="{true:'cr unr',false:'cr Rr'}[item.flag<2?true:false]" title="新窗口读信">
+                                    &nbsp;
+                                </td>
+                                <!--发件人-->
+                                <td ng-click='show(3,item.emailid)'>
+                                    <a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.fromusername}}</span></a>
+                                </td>
+                                <!--主题-->
+                                <td ng-click='show(3,item.emailid)'
+                                    ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-subject">
+                                    <a><span
+                                            ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.subject}}</span></a>
+                                </td>
+                                <!--附件图标-->
+                                <td ng-click='show(3,item.emailid)'
+                                    ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="">
+                                    <i ng-class="{true:'fa-paperclip',false:''}[item.attachcount>0?true:false]"
+                                       class="fa"></i>
+                                    <span ng-show="item.attachcount>0">{{item.attachcount}}</span>
+                                </td>
+                                <!--时间-->
+                                <td ng-click='show(3,item.emailid)'
+                                    ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-date"><span
+                                        ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.receivetime}}</span>
+                                </td>
+                                <!--类型-->
+                                <!--<td ng-click='show(3,item.emailid)' ng-show='data.flag>5'
+                                    ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="">
+                                    <span ng-class="{true:'bold',false:''}[item.flag<2?true:false]"
+                                      ng-repeat="manual_stat in mailserverids | idadapter:{'value':item.mailserverid}">{{manual_stat.desc}}</span>
+                                </td>-->
+                                <!--阅读状态-->
+                                <td ng-click='follow_mail_new(item)' class="" ng-show="data.flag!=4&&data.flag!=4.5&&data.flag!=5">
+                                    <i class="iconfont hc-ic_emailtracking hc-pointer"></i>
+                                    <span class="hc-pointer">{{item.readinfo?item.readinfo:''}}</span>
+                                </td>
+                                <!--定时发送时间-->
+                                <td ng-show="data.flag==4">
+                                    <span>**月**日</span>
+                                </td>
+                                <!--收藏图标-->
+                                <td ng-click='star($event,item.emailid,item.myflag)'
+                                    ng-class="{true:'lightstar',false:'star'}[item.myflag==999?true:false]"
+                                    class="hc-pointer"></td>
+                            </tr>
+                            </tbody>
+
+
+                            <!--<tbody ng-show='data.today_emails.length>0'>
+                                <tr class="time">
+                                    <td class="check-mail" colspan='7'>今天({{data.today_emails.length}}封)</td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.today_emails.length>0'>
+                                <tr class="read" ng-repeat="item in data.today_emails">
+
+                                    <td class="check-mail">
+                                        <input type="checkbox" ng-true-value="2" ng-false-value="1" ng-model="item.checkbox" class="i-checks">
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'cr unr',false:'cr Rr'}[item.flag<2?true:false]" title="新窗口读信">&nbsp;</td>
+                                    <td width="8%" ng-click='show(3,item.emailid)'>
+                                        <a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.fromusername}}</span ></a></td>
+                                <td width="40%"ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-subject"><a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.subject}}</span></a>
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class=""><i ng-class="{true:'fa-paperclip',false:''}[item.attachcount>0?true:false]" class="fa"></i></td>
+
+                                    <td width="20%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-date"><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.receivetime}}</span></td>
+                                    <td width="10%" ng-click='show(3,item.emailid)' ng-show='data.flag>5' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="">
+                                        <span ng-class="{true:'bold',false:''}[item.flag<2?true:false]" ng-repeat="manual_stat in mailserverids | idadapter:{'value':item.mailserverid}">{{manual_stat.desc}}</span>
+                                    </td>
+                                    <td width="5%" ng-click='star($event,item.emailid,item.myflag)' ng-class="{true:'star',false:'lightstar'}[item.myflag<999?true:false]" class=""></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq6_emails.length>0'>
+                                <tr class="time">
+                                    <td class="check-mail" colspan='7'>星期六({{data.xq6_emails.length}}封)</td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq6_emails.length>0'>
+                                <tr class="read" ng-repeat="item in data.xq6_emails">
+
+                                    <td class="check-mail">
+                                            <input type="checkbox" ng-true-value="2" ng-false-value="1" ng-model="item.checkbox" class="i-checks">
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'cr unr',false:'cr Rr'}[item.flag<2?true:false]" title="新窗口读信">&nbsp;</td>
+                                    <td width="8%" ng-click='show(3,item.emailid)'>
+                                        <a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.fromusername}}</span ></a></td>
+                                <td width="40%"ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-subject"><a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.subject}}</span></a>
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class=""><i ng-class="{true:'fa-paperclip',false:''}[item.attachcount>0?true:false]" class="fa"></i></td>
+
+                                    <td width="20%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-date"><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.receivetime}}</span></td>
+                                    <td width="10%" ng-click='show(3,item.emailid)' ng-show='data.flag>5' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="">
+                                        <span ng-class="{true:'bold',false:''}[item.flag<2?true:false]" ng-repeat="manual_stat in mailserverids | idadapter:{'value':item.mailserverid}">{{manual_stat.desc}}</span>
+                                    </td>
+                                    <td width="5%" ng-click='star($event,item.emailid,item.myflag)' ng-class="{true:'star',false:'lightstar'}[item.myflag<999?true:false]" class=""></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq5_emails.length>0'>
+                                <tr class="time">
+                                    <td class="check-mail" colspan='7'>星期五({{data.xq5_emails.length}}封)</td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq5_emails.length>0'>
+                                <tr class="read" ng-repeat="item in data.xq5_emails">
+
+                                    <td class="check-mail">
+                                            <input type="checkbox" ng-true-value="2" ng-false-value="1" ng-model="item.checkbox" class="i-checks">
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'cr unr',false:'cr Rr'}[item.flag<2?true:false]" title="新窗口读信">&nbsp;</td>
+                                    <td width="8%" ng-click='show(3,item.emailid)'>
+                                        <a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.fromusername}}</span ></a></td>
+                                <td width="40%"ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-subject"><a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.subject}}</span></a>
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class=""><i ng-class="{true:'fa-paperclip',false:''}[item.attachcount>0?true:false]" class="fa"></i></td>
+
+                                    <td width="20%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-date"><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.receivetime}}</span></td>
+                                    <td width="10%" ng-click='show(3,item.emailid)' ng-show='data.flag>5' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="">
+                                        <span ng-class="{true:'bold',false:''}[item.flag<2?true:false]" ng-repeat="manual_stat in mailserverids | idadapter:{'value':item.mailserverid}">{{manual_stat.desc}}</span>
+                                    </td>
+                                    <td width="5%" ng-click='star($event,item.emailid,item.myflag)' ng-class="{true:'star',false:'lightstar'}[item.myflag<999?true:false]" class=""></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq4_emails.length>0'>
+                                <tr class="time">
+                                    <td class="check-mail" colspan='7'>星期四({{data.xq4_emails.length}}封)</td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq4_emails.length>0'>
+                                <tr class="read" ng-repeat="item in data.xq4_emails">
+
+                                    <td class="check-mail">
+                                            <input type="checkbox" ng-true-value="2" ng-false-value="1" ng-model="item.checkbox" class="i-checks">
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'cr unr',false:'cr Rr'}[item.flag<2?true:false]" title="新窗口读信">&nbsp;</td>
+                                    <td width="8%" ng-click='show(3,item.emailid)'>
+                                        <a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.fromusername}}</span ></a></td>
+                                <td width="40%"ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-subject"><a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.subject}}</span></a>
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class=""><i ng-class="{true:'fa-paperclip',false:''}[item.attachcount>0?true:false]" class="fa"></i></td>
+
+                                    <td width="20%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-date"><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.receivetime}}</span></td>
+                                    <td width="10%" ng-click='show(3,item.emailid)' ng-show='data.flag>5' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="">
+                                        <span ng-class="{true:'bold',false:''}[item.flag<2?true:false]" ng-repeat="manual_stat in mailserverids | idadapter:{'value':item.mailserverid}">{{manual_stat.desc}}</span>
+                                    </td>
+                                    <td width="5%" ng-click='star($event,item.emailid,item.myflag)' ng-class="{true:'star',false:'lightstar'}[item.myflag<999?true:false]" class=""></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq3_emails.length>0'>
+                                <tr class="time">
+                                    <td class="check-mail" colspan='7'>星期三({{data.xq3_emails.length}}封)</td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq3_emails.length>0'>
+                                <tr class="read" ng-repeat="item in data.xq3_emails">
+
+                                    <td class="check-mail">
+                                            <input type="checkbox" ng-true-value="2" ng-false-value="1" ng-model="item.checkbox" class="i-checks">
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'cr unr',false:'cr Rr'}[item.flag<2?true:false]" title="新窗口读信">&nbsp;</td>
+                                    <td width="8%" ng-click='show(3,item.emailid)'>
+                                        <a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.fromusername}}</span ></a></td>
+                                <td width="40%"ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-subject"><a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.subject}}</span></a>
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class=""><i ng-class="{true:'fa-paperclip',false:''}[item.attachcount>0?true:false]" class="fa"></i></td>
+
+                                    <td width="20%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-date"><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.receivetime}}</span></td>
+                                    <td width="10%" ng-click='show(3,item.emailid)' ng-show='data.flag>5' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="">
+                                        <span ng-class="{true:'bold',false:''}[item.flag<2?true:false]" ng-repeat="manual_stat in mailserverids | idadapter:{'value':item.mailserverid}">{{manual_stat.desc}}</span>
+                                    </td>
+                                    <td width="5%" ng-click='star($event,item.emailid,item.myflag)' ng-class="{true:'star',false:'lightstar'}[item.myflag<999?true:false]" class=""></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq2_emails.length>0'>
+                                <tr class="time">
+                                    <td class="check-mail" colspan='7'>星期二({{data.xq2_emails.length}}封)</td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq2_emails.length>0'>
+                                <tr class="read" ng-repeat="item in data.xq2_emails">
+
+                                    <td class="check-mail">
+                                            <input type="checkbox" ng-true-value="2" ng-false-value="1" ng-model="item.checkbox" class="i-checks" >
+                                    </td>
+                                    <td width="5%" ng-class="{true:'cr unr',false:'cr Rr'}[item.flag<2?true:false]" title="新窗口读信">&nbsp;</td>
+                                    <td width="8%" ng-click='show(3,item.emailid)'>
+                                        <a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.fromusername}}</span ></a></td>
+                                <td width="40%"ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-subject"><a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.subject}}</span></a>
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class=""><i ng-class="{true:'fa-paperclip',false:''}[item.attachcount>0?true:false]" class="fa"></i></td>
+
+                                    <td width="20%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-date"><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.receivetime}}</span></td>
+                                    <td width="10%" ng-click='show(3,item.emailid)' ng-show='data.flag>5' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="">
+                                        <span ng-class="{true:'bold',false:''}[item.flag<2?true:false]" ng-repeat="manual_stat in mailserverids | idadapter:{'value':item.mailserverid}">{{manual_stat.desc}}</span>
+                                    </td>
+                                    <td width="5%" ng-click='star($event,item.emailid,item.myflag)' ng-class="{true:'star',false:'lightstar'}[item.myflag<999?true:false]" class=""></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq1_emails.length>0'>
+                                <tr class="time">
+                                    <td class="check-mail" colspan='7'>星期一({{data.xq1_emails.length}}封)</td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.xq1_emails.length>0'>
+                                <tr class="read" ng-repeat="item in data.xq1_emails">
+
+                                    <td class="check-mail">
+                                            <input type="checkbox" ng-true-value="2" ng-false-value="1" ng-model="item.checkbox" class="i-checks">
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'cr unr',false:'cr Rr'}[item.flag<2?true:false]" title="新窗口读信">&nbsp;</td>
+                                    <td width="8%" ng-click='show(3,item.emailid)'>
+                                        <a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.fromusername}}</span ></a></td>
+                                <td width="40%"ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-subject"><a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.subject}}</span></a>
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class=""><i ng-class="{true:'fa-paperclip',false:''}[item.attachcount>0?true:false]" class="fa"></i></td>
+
+                                    <td width="20%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-date"><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.receivetime}}</span></td>
+                                    <td width="10%" ng-click='show(3,item.emailid)' ng-show='data.flag>5' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="">
+                                        <span ng-class="{true:'bold',false:''}[item.flag<2?true:false]" ng-repeat="manual_stat in mailserverids | idadapter:{'value':item.mailserverid}">{{manual_stat.desc}}</span>
+                                    </td>
+                                    <td width="5%" ng-click='star($event,item.emailid,item.myflag)' ng-class="{true:'star',false:'lightstar'}[item.myflag<999?true:false]" class=""></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.lastweek_emails.length>0'>
+                                <tr class="time">
+                                    <td class="check-mail" colspan='7'>上周({{data.lastweek_emails.length}}封)</td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.lastweek_emails.length>0'>
+                                <tr class="read" ng-repeat="item in data.lastweek_emails">
+                                    <td class="check-mail">
+                                            <input type="checkbox" ng-true-value="2" ng-false-value="1" ng-model="item.checkbox" class="i-checks">
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'cr unr',false:'cr Rr'}[item.flag<2?true:false]" title="新窗口读信">&nbsp;</td>
+                                    <td width="8%" ng-click='show(3,item.emailid)'>
+                                        <a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.fromusername}}</span ></a></td>
+                                <td width="40%"ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-subject"><a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.subject}}</span></a>
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class=""><i ng-class="{true:'fa-paperclip',false:''}[item.attachcount>0?true:false]" class="fa"></i></td>
+
+                                    <td width="20%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-date"><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.receivetime}}</span></td>
+                                    <td width="10%" ng-click='show(3,item.emailid)' ng-show='data.flag>5' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="">
+                                        <span ng-class="{true:'bold',false:''}[item.flag<2?true:false]" ng-repeat="manual_stat in mailserverids | idadapter:{'value':item.mailserverid}">{{manual_stat.desc}}</span>
+                                    </td>
+                                    <td width="5%" ng-click='star($event,item.emailid,item.myflag)' ng-class="{true:'star',false:'lightstar'}[item.myflag<999?true:false]" class=""></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.early_emails.length>0'>
+                                <tr class="time">
+                                    <td class="check-mail" colspan='7'>更早({{data.early_emails.length}}封)</td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show='data.early_emails.length>0'>
+                                <tr class="read" ng-repeat="item in data.early_emails">
+
+                                    <td class="check-mail">
+                                            <input type="checkbox" ng-true-value="2" ng-false-value="1" ng-model="item.checkbox" class="i-checks">
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'cr unr',false:'cr Rr'}[item.flag<2?true:false]" title="新窗口读信">&nbsp;</td>
+                                    <td width="8%">
+                                        <a ng-click='show(3,item.emailid)'><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.fromusername}}</span ></a></td>
+                                <td width="40%"ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-subject"><a><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.subject}}</span></a>
+                                    </td>
+                                    <td width="5%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class=""><i ng-class="{true:'fa-paperclip',false:''}[item.attachcount>0?true:false]" class="fa"></i></td>
+
+                                    <td width="20%" ng-click='show(3,item.emailid)' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="mail-date"><span ng-class="{true:'bold',false:''}[item.flag<2?true:false]">{{item.receivetime}}</span></td>
+                                    <td width="10%" ng-click='show(3,item.emailid)' ng-show='data.flag>5' ng-class="{true:'bold',false:''}[item.flag<2?true:false]" class="">
+                                        <span ng-class="{true:'bold',false:''}[item.flag<2?true:false]" ng-repeat="manual_stat in mailserverids | idadapter:{'value':item.mailserverid}">{{manual_stat.desc}}</span>
+                                    </td>
+                                    <td width="5%" ng-click='star($event,item.emailid,item.myflag)' ng-class="{true:'star',false:'lightstar'}[item.myflag<999?true:false]" class=""></td>
+                                </tr>
+                            </tbody>-->
+                        </table>
+                    </div>
+                    <!--尾部-->
+                    <div class="mail-body mail-foot">
+                        <div class="btn-group pull-right" ng-show="!hidePage">
+                            <div class="modal-open" page-pagination="">
+                                <div class="span12 pull-right ng-scope">
+                                    <ul class="pagination" style="margin:0;">
+                                        <li title="首页" ng-click="firstpage()"><a><i class="fa fa-angle-double-left"></i></a>
+                                        </li>
+                                        <li title="上一页" ng-click="prevpage()"><a><i class="fa fa-angle-left"></i></a>
+                                        </li>
+                                        <li title="下一页" ng-click="nextpage()"><a><i class="fa fa-angle-right"></i></a>
+                                        </li>
+                                        <li title="末页" ng-click="lastpage()"><a><i class="fa fa-angle-double-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="pull-right inline fs-50 ng-scope" style="margin-right: 10px;"><label
+                                        class="font-noraml">每页</label>
+                                    <div class="inline" style="width: 80px;">
+                                        <select ng-change="pschange(pageSize)"
+                                                ng-model="pageSize"
+                                                class="form-control inline input-sm margin_r50 ng-pristine ng-valid ng-touched"
+                                                style="height: 25px;line-height: 25px;">
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                            <option value="300">300</option>
+                                            <option value="500">500</option>
+                                            <option value="1000">1000</option>
+                                            <option value="10000">10000</option>
+                                        </select>
+                                    </div>
+                                    <span class="ng-binding">当前第
+										<input ng-model="pn" ng-change="pnchange()"
+                                               style="width:50px;"
+                                               class="form-control margin_r50 inline input-sm ng-pristine ng-valid ng-touched"
+                                               type="number" placeholder="1">
+										页,有{{cn}}记录,共{{pc}}页
+									</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--写邮件-->
+            <div id='send_height' ng-show="data.show==2" class="col-xs-10 animated fadeInRight box-width">
+                <div class="mail-box-header">
+                    <div class="pull-right tooltip-demo write-title-button">
+                        <a ng-click="send_email()" class="btn btn-white btn-sm send-button" data-toggle="tooltip"
+                           data-placement="top" title="" data-original-title="Send"><i class="fa fa-reply"></i> 发送</a>
+                        <a ng-click="after_sending()" class="btn btn-white btn-sm" data-toggle="tooltip"
+                           style="padding: 1px 10px 0px 10px;"
+                           data-placement="top"><i class="iconfont hc-dingshi"></i> 定时发送</a>
+                        <a ng-click="send_email(2)" class="btn btn-white btn-sm" data-toggle="tooltip"
+                           data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> 草稿</a>
+                        <a ng-click='send_cancel()' class="btn btn-danger btn-sm" data-toggle="tooltip"
+                           data-placement="top" title="Discard email"><i class="fa fa-times"></i> 取消</a>
+                    </div>
+                    <h4>
+                        发送邮件
+                        <div ng-show='data.flag>5' style="padding-left: 5px; " class="dropdown inline open "
+                             dropdown=" ">
+                            <a class="dropdown-toggle " dropdown-toggle=" " href=" " aria-haspopup="true "
+                               aria-expanded="true ">
+                                <span class="clear "><span class="block m-t-xs ">
+                                    <strong style='font-size: 10px;' class="font-bold ">{{data.email}}</strong>
+                                </span></span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs ">
+                                <li ng-repeat="item in data.usermails "><a
+                                        ng-click="choose_mailbox(item.usermailid, item.email) ">{{item.email}}</a></li>
+                            </ul>
+                        </div>
+                    </h4>
+                </div>
+                <div class="mail-box">
+                    <div class="mail-body" style="padding: 10px 15px;">
+                        <!--写信收件/抄送/内容-->
+                        <div class="form-horizontal" style="width: calc(100% - 250px);float: left;padding-right: 10px;">
+                            <!--收件人-->
+                            <div class="form-group">
+                                <!--ng-click='addpeople($event)'-->
+                                <label style='float:left;' class="control-label write-label">收件人</label>
+                                <div class="ipt write-input">
+                                    <!--div id='snedto' ng-mousedown='mousedown(1)' contenteditable="true" class="noime div_txt note-editable" style='cursor: text; background-color: rgb(255, 255, 255);'>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_base addr_error " style="float:left;white-space:nowrap;" title="该邮件地址不存在 ，请双击修改" addr="111@qq.com" unselectable="on"><b unselectable="on" addr="111@qq.com">111<span class="domain" unselectable="on" addr="111@qq.com">@qq.com</span></b><span class="semicolon">;</span><a href="javascript:;" class="addr_del" name="del"></a></div>
+                                      <div class="addr_text" style="float: left; border: none; overflow: hidden; width: 13px;"><input type="input" class="js_input" style="border:none;outline:none;-webkit-appearance:none;width:100%;" accesskey="t" tabindex="1" autocomplete="off"><div style="width: 1px; height: 1px; overflow: auto; white-space: nowrap; border: none; margin: 0px; padding: 0px; font-family: Tahoma; font-size: 13.3333px; font-weight: normal; line-height: normal; word-spacing: 0px;">111@qq.com;11WW</div></div>
+                                 </div-->
+                                    <div id="toAreaCtrl" ng-mousedown='mousedown(1)' ng-click class="noime div_txt"
+                                         style="cursor: text;">
+                                        <div id='before'
+                                             style="position:absolute;color:#A0A0A0;padding-top:1px;display:none;"></div>
+                                        <div id="final" class="addr_text"
+                                             style="float:left;border:none;overflow:hidden;width:{{data.currItem.search_peop.length*13+13>840?840:data.currItem.search_peop.length*13+13}}px;">
+                                            <input type="input" class="js_input" ng-model="data.currItem.search_peop"
+                                                   style="border:none;outline:none;-webkit-appearance:none;width:100%;"
+                                                   accesskey="t" tabindex="1" autocomplete="off"
+                                                   data-model="search_peop"
+                                                   ng-change="search_change('peop')">
+                                            <div style="width: 1px; height: 1px; overflow: auto; white-space: nowrap; border: none; margin: 0px; padding: 0px; font-family: Tahoma; font-size: 12px; font-weight: normal; line-height: normal; word-spacing: 0px;">
+                                                {{data.currItem.search_peop}}
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;border:none;margin:0;padding:0;" unselectable="on"><input
+                                                type="text"
+                                                style="position:absolute;border:none;padding:0;width:10px;left:-9999px;top:-9999px;"
+                                                tabindex="-1"></div>
+                                    </div>
+                                    <textarea ng-hide='true' style='height:25px;resize:none;' class="col-md-12"
+                                              be-delete="clearspec()" be-search="openuserFrm()" be-edit="true"
+                                              ng-mousedown='mousedown(1)'
+                                              ng-model="data.currItem.snedto"/></textarea>
+                                </div>
+                            </div>
+                            <!--收件机构-->
+                            <div class="form-group">
+                                <label style='float:left;' class="control-label write-label">收件机构</label>
+                                <div class="ipt write-input">
+                                    <div id="toAreaCtrl3" ng-mousedown='mousedown(3)' class="noime div_txt">
+                                        <div id='before3'
+                                             style="position:absolute;color:#A0A0A0;padding-top:1px;display:none;"></div>
+                                        <div id="final3" class="addr_text"
+                                             style="float:left;border:none;overflow:hidden;width:{{data.currItem.search_org.length*13+13>840?840:data.currItem.search_org.length*13+13}}px;">
+                                            <!--取消输入功能-->
+                                            <!--<input type="input" class="js_input" ng-model="data.currItem.search_org"
+                                                   style="border:none;outline:none;-webkit-appearance:none;width:100%;"
+                                                   accesskey="t" tabindex="1" autocomplete="off"
+                                                   data-model="search_org">-->
+                                            <div style="width: 1px; height: 1px; overflow: auto; white-space: nowrap; border: none; margin: 0px; padding: 0px; font-family: Tahoma; font-size: 12px; font-weight: normal; line-height: normal; word-spacing: 0px;">
+                                                {{data.currItem.search_org}}
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;border:none;margin:0;padding:0;" unselectable="on"><input
+                                                type="text"
+                                                style="position:absolute;border:none;padding:0;width:10px;left:-9999px;top:-9999px;"
+                                                tabindex="-1"></div>
+                                    </div>
+                                    <textarea ng-hide='true' style='height:25px;resize:none;' class="col-md-12"
+                                              be-delete="clearspec()" be-search="openuserFrm()" be-edit="true"
+                                              ng-mousedown='mousedown(3)'
+                                              ng-model="data.currItem.snedtoorg"/></textarea>
+                                </div>
+                            </div>
+                            <!--抄送人-->
+                            <div class="form-group">
+                                <label style='float:left;' class="control-label write-label">抄送人</label>
+                                <div class="write-input">
+                                    <div id="toAreaCtrl1" ng-mousedown='mousedown(2)' class="noime div_txt"
+                                         style="cursor: text;">
+                                        <div id='before1'
+                                             style="position:absolute;color:#A0A0A0;padding-top:1px;display:none;"></div>
+                                        <div id="final1" class="addr_text"
+                                             style="float:left;border:none;overflow:hidden;width:{{data.currItem.search_linep.length*13+13>840?840:data.currItem.search_linep.length*13+13}}px;">
+
+                                            <input type="input" class="js_input" ng-model="data.currItem.search_linep"
+                                                   style="border:none;outline:none;-webkit-appearance:none;width:100%;"
+                                                   accesskey="t" tabindex="1" autocomplete="off"
+                                                   data-model="search_linep"
+                                                   ng-change="search_change('linep')">
+                                            <div style="width: 1px; height: 1px; overflow: auto; white-space: nowrap; border: none; margin: 0px; padding: 0px; font-family: Tahoma; font-size: 12px; font-weight: normal; line-height: normal; word-spacing: 0px;">
+                                                {{data.currItem.search_linep}}
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;border:none;margin:0;padding:0;" unselectable="on"><input
+                                                type="text"
+                                                style="position:absolute;border:none;padding:0;width:10px;left:-9999px;top:-9999px;"
+                                                tabindex="-1"></div>
+
+                                    </div>
+                                    <textarea ng-hide='true' style='height:25px;resize:none;' ng-change='get_mail()'
+                                              class="col-md-12" id="mail" be-delete="clearspec()"
+                                              ng-mousedown='mousedown(2)' be-search="sendTo()" be-edit="true"
+                                              ng-model="data.currItem.cc"></textarea>
+                                    <!--div  contenteditable="true" type='text' ng-disabled='false' ng-model="data.currItem.cc" class="div_txt note-editable" id="mail"  title="">
+                                  <div class="chosen-drop">
+                                      <!--ul class="chosen-results autoul">
+                                      <li class="active-result" data-option-array-index="1" style="">冬季产品</li>
+                                      </ul>
+                                  </div>
+                                </div-->
+                                </div>
+                                <ul class="autoul"></ul>
+                            </div>
+                            <!--主题-->
+                            <div class="form-group">
+                                <label style='float:left;'
+                                       class="control-label write-label">主题</label>
+                                <div class="write-input">
+                                    <input id='zuti' style='height:25px;resize:none;'
+                                           ng-model="data.currItem.subject_send" class="col-xs-12">
+                                </div>
+                            </div>
+                            <!--附件-->
+                            <div class="form-group">
+                                <label style="height: 1px;float: left;" class="write-label"></label>
+                                <div style='float:left;width:70px' class="">
+                                    <!--button  swf-upload title="添加" class="btn btn-toolbar" " upload-list="data.currItem.attachofemails1" ng-model="data.currItem.attachofemails1" filed='#attach-area'>
+                                <i class="fa lightblue font-size-15 fa-paperclip">添加</i>
+                            </button-->
+                                    <div class="btn-group">
+                                        <button class="btn btn-toolbar dropdown-toggle" data-toggle="dropdown"
+                                                type="button" style="padding-top: 7px;font-size: 14px;">
+                                            <i class="fa lightblue  fa-paperclip"></i>
+                                            附件
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a ng-disabled='false' upload-list="data.currItem.attachofemails1"
+                                                   ng-model="data.currItem.attachofemails1" swf-upload
+                                                   hc-mailattachsize="data.currItem.mailattachsize"
+                                                   filed='#attach-area'>本地附件</a>
+                                            </li>
+                                            <li>
+                                                <a ng-click='fw_addfile()'>系统附件</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!--button swf-upload title="添加附件" class="btn btn-toolbar" ng-disabled='false' upload-list="data.currItem.attachofemails1" ng-model="data.currItem.attachofemails1" filed='#attach-area'>
+                                        <i class="fa lightblue font-size-15  fa-paperclip"></i> 添加
+                                    </button-->
+                                </div>
+                                <div hc-input="data.currItem.autoreturn"
+                                     hc-label="自动回执"
+                                     hc-type="checkbox"
+                                     style="display: inline-block">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <ul class="" id="attach-area" style="padding-left: 52px;">
+                                </ul>
+                            </div>
+                            <!--正文-->
+                            <div class="form-group">
+                                <label style='float:left;' class="control-label write-label">正文</label>
+                                <div id='main' class="write-input">
+									<textarea type="text" name="text" class="summernote"
+                                              id="contents" title="Contents"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--通讯录/分组  内部邮箱-->
+                        <div ng-show='data.flag<=5' id='addwidth' class="lm_panel" style="float: left;">
+                            <div id="addr_cmd" ng-click='tooglass($event)' class="cptab cpslt">
+                                <a hidefocus="">通讯录</a>
+                            </div>
+                            <div id="stationery_cmd" ng-click='tooglass($event)' class="cptab"
+                                 style="border-left-width:1px;border-left-width:0px;">
+                                <a hidefocus="">分组</a>
+                            </div>
+                            <div style="height:25px;" class="grptitle_tab_"></div>
+
+                            <!--搜索栏-->
+                            <div class="lm_sbar width-search-bar">
+                                <a ng-click='close_people()' type="button"
+                                   id="lm15034559988030725050352368402cancel"
+                                   ng-class="{true:'lm_sopen fa fa-times',false:'lm_sopen fa fa-search'}[data.is_search==2?true:false]"
+                                   class="lm_sopen fa fa-search"></a>
+                                <div>
+                                    <input ng-change='search_peopele()'
+                                           id="lm15034559988030725050352368402searchtext" ng-model='data.username'
+                                           type="text" class="txt" value="" autocomplete="off"
+                                           style="color: rgb(160, 160, 160);">
+                                </div>
+                            </div>
+
+                            <!--通讯录-->
+                            <div id="AddrTab" class="AddrTabH" ng-hide='data.is_search==2'>
+                                <div class="groupopen" key="t3" sub="0">
+                                    <div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">
+                                        最近联系人
+                                    </div>
+                                </div>
+                                <div id="lm150338581407203951792705359891tree">
+                                    <div class="groupsub" key="t3" sub="1">
+                                        <div ng-click='contact_man($event,$index)'
+                                             ng-repeat='item in data.currItem.scpemail_contact_lists' class="groupclose"
+                                             key="8" sub="0">
+                                            <a unselectable="on" class="lm_addr">{{item.contactname}}</a>
+                                        </div>
+                                    </div>
+                                    <div ng-show='data.scporgs.length>0' class="groupopen" key="t2"
+                                         sub="0">
+                                        <div class="settingtable qqshowbd"
+                                             style="padding:4px 0 3px 8px;cursor:default;">
+                                            <a class="lm_rt" fun="g2"></a>公司同事
+                                        </div>
+                                        <ul id="treeDemo" class="ztree"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--分组-->
+                            <div id="stationeryTab" id='addwidth' class="AddrTabH" ng-hide='data.is_search==2'>
+                                <div class="groupopen" key="t3" sub="0">
+                                    <div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">
+                                        联系人分组
+                                        <a style='padding-left:40px' class='fa fa-plus' ng-click='addgroup()'></a>
+                                        <a style='padding-left:10px' class='fa fa-minus' ng-click='delgroup()'></a>
+                                        <a style='padding-left:10px' class='fa fa-pencil' ng-click='group_change()'></a>
+                                    </div>
+                                </div>
+                                <div id="lm150338581407203951792705359891tree">
+                                    <div class="groupsub" key="t3" sub="1">
+                                        <ul id="treeDemo1" class="ztree"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--查找-->
+                            <div class="AddrTabH" ng-hide='data.is_search!=2'>
+                                <div class="groupopen" key="t3" sub="0">
+                                    <div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">
+                                        查找到。。。
+                                    </div>
+                                </div>
+                                <div id="lm150338581407203951792705359891tree">
+                                    <div class="groupsub" key="t3" sub="1">
+                                        <div ng-click='contact_people($event,$index)'
+                                             ng-repeat='item in data.currItem.scporgs'
+                                             class="peoplesearch-div">
+                                            <div class="peoplesearch-l">
+                                                <img ng-src={{(item.headimgdocid&&item.headimgdocid!=0)?"/downloadfile?docid="+item.headimgdocid:"img/head.png"}}>
+                                                <p>{{item.positions}}</p>
+                                            </div>
+                                            <div class="peoplesearch-r">
+                                                <div>{{item.username}}
+                                                    <span ng-show="item.sex==1||item.sex==2"
+                                                          class="iconfont hc-sex-icon"
+                                                          ng-class="{'hc-nan': item.sex==1,'hc-nv': item.sex==2}"></span>
+                                                </div>
+                                                <div>邮箱: {{item.email}}</div>
+                                                <div>手机: {{item.mobil}}</div>
+                                                <div>座机: {{item.telo}}</div>
+                                                <div>部门: {{item.dept}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--内部/外部通讯录  外部邮箱-->
+                        <div ng-show='data.flag>5' id='addwidth1' class="lm_panel" style="float: left;">
+                            <!--div id="addr_cmdout" ng-click='tooglass($event)' class="cptab cpslt" style="_width:74px;">
+                             <a hidefocus="">通讯录</a>
+                         </div-->
+                            <div id="addr_cmdout" ng-click='tooglass_out($event)' class="cptab cpslt">
+                                <a hidefocus="">外部通讯录</a>
+                            </div>
+                            <div id="addr_cmdin" ng-click='tooglass_out($event)' class="cptab"
+                                 style="border-left-width:1px;border-left-width:0px;">
+                                <a hidefocus="">内部通讯录</a>
+                            </div>
+                            <div style="height:25px;" class="grptitle_tab_"></div>
+
+                            <!--搜索栏-->
+                            <div class="lm_sbar width-search-bar">
+                                <a ng-click='close_people()' type="button"
+                                   id="lm15034559988030725050352368402cancel"
+                                   ng-class="{true:'lm_sopen fa fa-times',false:'lm_sopen fa fa-search'}[data.is_search==2?true:false]"
+                                   class="lm_sopen fa fa-search"></a>
+                                <div>
+                                    <input ng-change='search_peopele(2)' ng-model='data.username'
+                                           id="lm15034559988030725050352368402searchtext" type="text" class="txt"
+                                           value="" autocomplete="off" style="color: rgb(160, 160, 160);">
+                                </div>
+                            </div>
+
+                            <!--外部通讯录-->
+                            <div id="addr_out" ng-hide='data.is_search==2' class="AddrTabH">
+                                <div class="groupopen" key="t3" sub="0">
+                                    <div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">
+                                        最近联系人
+                                        <a style="padding-left:10px" class="fa fa-plus"
+                                           ng-click="add_contact_man()"></a>
+                                        <a style="padding-left:10px" class="fa fa-minus"
+                                           ng-click="del_contact_man()"></a>
+                                        <a style='padding-left:10px' class='fa fa-pencil'
+                                           ng-click='cha_contact_man()'></a>
+                                    </div>
+                                </div>
+                                <div id="lm150338581407203951792705359891tree"
+                                     style="overflow-y: auto;height:100%;overflow-x: hidden;">
+                                    <div class="groupsub" key="t3" sub="1">
+                                        <div ng-click='contact_man($event,$index)'
+                                             ng-repeat='item in data.currItem.scpemail_contact_wb_lists'
+                                             class="groupclose" style="display:" key="8" sub="0">
+                                            <a unselectable="on" class="lm_addr">{{item.contactname}}</a>
+                                        </div>
+
+                                    </div>
+                                    <div ng-show='data.scporgs.length>0' class="groupopen" style="display:" key="t2"
+                                         sub="0">
+                                        <div class="settingtable qqshowbd"
+                                             style="padding:4px 0 3px 8px;cursor:default;">
+                                            <a class="lm_rt" fun="g2"></a>分组
+                                            <!--a style="padding-left:40px" class="fa fa-plus" ng-click="addgroup(2)"></a><a style="padding-left:10px" class="fa fa-minus" ng-click="delgroup(2)"></a><a style="padding-left:10px" class="fa fa-pencil" ng-click="group_change(2)"></a-->
+                                            <a style="padding-left:40px" class="fa fa-plus"
+                                               ng-click="addpeople($event)"></a>
+                                            <a style="padding-left:10px" class="fa fa-minus" ng-click="delgroup(2)"></a>
+                                            <a style="padding-left:10px" class="fa fa-pencil"
+                                               ng-click="addpeople($event)"></a>
+                                        </div>
+                                        <ul id="treeDemo_out" class="ztree"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--内部通讯录-->
+                            <div id="addr_in" id='addwidth' class="AddrTabH" ng-hide='data.is_search==2'>
+                                <div class="groupopen" key="t3" sub="0">
+                                    <div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">
+                                        公司同事
+                                    </div>
+                                </div>
+                                <div id="lm150338581407203951792705359891tree">
+                                    <div class="groupsub" key="t3" sub="1">
+                                        <ul id="treeDemo_in" class="ztree"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--查找-->
+                            <div class="AddrTabH" ng-hide='data.is_search!=2'>
+                                <div class="groupopen" key="t3" sub="0">
+                                    <div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">
+                                        查找到。。。
+                                    </div>
+                                </div>
+                                <div id="lm150338581407203951792705359891tree">
+                                    <div class="groupsub" key="t3" sub="1">
+                                        <div ng-click='contact_people($event,$index)'
+                                             ng-repeat='item in data.currItem.scporgs'
+                                             class="peoplesearch-div">
+                                            <div class="peoplesearch-l">
+                                                <img ng-src={{(item.headimgdocid&&item.headimgdocid!=0)?"/downloadfile?docid="+item.headimgdocid:"img/head.png"}}>
+                                                <p>{{item.positions}}</p>
+                                            </div>
+                                            <div class="peoplesearch-r">
+                                                <div>{{item.username}}
+                                                    <span ng-show="item.sex==1||item.sex==2"
+                                                          class="iconfont"
+                                                          ng-class="{'hc-nan': item.sex==1,'hc-nv': item.sex==2}"></span>
+                                                </div>
+                                                <div>邮箱: {{item.email}}</div>
+                                                <div>手机: {{item.mobil}}</div>
+                                                <div>座机: {{item.telo}}</div>
+                                                <div>部门: {{item.dept}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mail-body text-right tooltip-demo mail-foot">
+                    <a ng-click="send_email()" class="btn btn-white btn-sm send-button" data-toggle="tooltip"
+                       data-placement="top" title="" data-original-title="Send"><i class="fa fa-reply"></i> 发送</a>
+                    <a ng-click="after_sending()" class="btn btn-white btn-sm" data-toggle="tooltip"
+                       style="padding: 1px 10px 0px 10px;"
+                       data-placement="top"><i class="iconfont hc-dingshi"></i> 定时发送</a>
+                    <a ng-click="send_email(2)" class="btn btn-white btn-sm" data-toggle="tooltip"
+                       data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> 草稿</a>
+                    <a ng-click='send_cancel()' class="btn btn-danger btn-sm" data-toggle="tooltip"
+                       data-placement="top" title="Discard email"><i class="fa fa-times"></i> 取消</a>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+
+            <!--查看邮件-->
+            <div ng-show='data.show==3' class="col-xs-10 animated fadeInRight box-width">
+                <div class="mail-box-header tenxun-color">
+                    <!--<div class="pull-right tooltip-demo look-tool">
+                        <a ng-click='upMail()' ng-class="{true:'UDBtn',false:'disUDBtn'}[data.disUpBtn!==null]">上一封</a>
+                        <a ng-click='downMail()'
+                           ng-class="{true:'UDBtn',false:'disUDBtn'}[data.disDownBtn!==null]">下一封</a>
+                        <a ng-click='delete_email()' class="btn btn-sm btn-white"><i class="fa fa-trash"></i> 删除</a>
+                        <a ng-click='back()' class="btn btn-sm btn-white"><i class="fa fa-arrow-left"></i> 返回</a>
+                        <a ng-hide="userbean.userauth.supplier==true" ng-click='tansfer()' class="btn btn-sm btn-white"><i
+                                class="fa  fa-arrow-right"></i> 转发</a>
+                        <a ng-hide="userbean.userauth.supplier==true" ng-click='reply_all()'
+                           class="btn btn-sm btn-white"><i class="fa fa-reply"></i> 全部回复</a>
+                        <a ng-hide="userbean.userauth.supplier==true" ng-click='reply()' class="btn btn-sm btn-white"><i
+                                class="fa fa-reply"></i> 回复</a>
+                        &lt;!&ndash;a ng-click='reply_all()' class="btn btn_gray" data-toggle="tooltip" data-placement="top" title="回复"><i class=""></i> 全部回复</a>
+                    <a ng-click='reply()' class="btn btn_gray" data-toggle="tooltip" data-placement="top" title="回复"><i class=""></i> 回复</a>
+                    <a href="#" class="btn btn_gray" data-toggle="tooltip" data-placement="top" title="Print email"><i class="fa fa-print"></i> </a>
+                    <a href="mailbox.html" class="btn btn_gray" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </a&ndash;&gt;
+                        <button ng-hide='true' title="" data-placement="top" data-toggle="tooltip" type="button"
+                                data-original-title="Print" class="btn btn-sm btn-white"><i class="fa fa-print"></i> 打印
+                        </button>
+                        <button ng-hide='true' title="" data-placement="top" data-toggle="tooltip"
+                                data-original-title="Trash" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i>
+                            删除
+                        </button>
+                    </div>-->
+                    <div class="mail-tools tooltip-demo no-borders m-t-md">
+                        <div class="tooltip-demo btn-after-interval">
+                            <a ng-click='back()' class="btn btn-sm btn-white mr-10"><i class="fa fa-arrow-left"></i> 返回</a>
+                            <a ng-hide="userbean.userauth.supplier==true" ng-click='reply()'
+                               class="btn btn-sm btn-white"><i
+                                    class="fa fa-reply"></i> 回复</a>
+                            <a ng-hide="userbean.userauth.supplier==true" ng-click='reply_all()'
+                               class="btn btn-sm btn-white"><i class="fa fa-reply"></i> 全部回复</a>
+                            <a ng-hide="userbean.userauth.supplier==true" ng-click='tansfer()'
+                               class="btn btn-sm btn-white"><i
+                                    class="fa  fa-arrow-right"></i> 转发</a>
+                            <a ng-click='delete_email()' class="btn btn-sm btn-white"><i class="fa fa-trash"></i>
+                                {{data.flag!=4.5&&data.flag!=5?'删除':'彻底删除'}}</a>
+                            <a class="btn btn-white btn-sm hc-icon-mh" ng-click='follow_mail_new(data.currItem)'>
+                                <i class="iconfont hc-ic_emailtracking"></i>阅读跟踪
+                            </a>
+                            <div class="btn-group" ng-hide="!(data.scpemailc&&data.scpemailc.length!=0)">
+                                <button class="btn btn-white btn-sm dropdown-toggle hc-icon-mh" data-toggle="dropdown"
+                                        type="button">
+                                    移动到....<span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="item in data.scpemailc">
+                                        <a ng-click='add_scpemailtrk(item)'>{{item.emailcname}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <button ng-hide='true' title="" data-placement="top" data-toggle="tooltip" type="button"
+                                    data-original-title="Print" class="btn btn-sm btn-white"><i class="fa fa-print"></i>
+                                打印
+                            </button>
+                            <button ng-hide='true' title="" data-placement="top" data-toggle="tooltip"
+                                    data-original-title="Trash" class="btn btn-sm btn-white"><i
+                                    class="fa fa-trash-o"></i>
+                                删除
+                            </button>
+
+                            <div class="pull-right ud-box">
+                                <a ng-click='upMail()' ng-class="{true:'UDBtn',false:'disUDBtn'}[data.disUpBtn!==null]">上一封</a>
+                                <a ng-click='downMail()'
+                                   ng-class="{true:'UDBtn',false:'disUDBtn'}[data.disDownBtn!==null]">下一封</a>
+                            </div>
+                        </div>
+                        <h4>
+                            {{data.currItem.subject}}
+                            <button ng-class="{true:'star',false:'lightstar'}[data.currItem.myflag<999?true:false]"
+                                    class='qm_ico_flagoff'
+                                    ng-click='star($event,data.currItem.emailid)'>
+                            </button>
+                        </h4>
+                        <div>
+                            <span class="tcolor">发&nbsp;<span style="padding: 0px 2px;">件</span>&nbsp;人: </span>
+                            <b id='send_people' class='green'>{{data.currItem.fromuser}}</b>
+                            <div class="profileTip" style=" z-index: 9999;display: none;">
+                                <div class="infoArrowUp" id="infoarrowup__QmProfileTips_" style="display:none;"></div>
+                                <div class="tipWrap ">
+                                    <div class="tipAll" style="width:320px;left:-0px">
+                                        <div class="tipInner">
+                                            <div class="profile_inner">
+                                                <!--<img src="/cgi-bin/getqqicon?uin=&amp;mode=newaddr&amp;mailaddr=no-reply@mail.pgyer.com&amp;sid=hflfWwMFtcwOIHwl" title="" class="iconMask_gray">-->
+                                                <div class="nowrap"><span id="span_displayname_no-reply@mail.pgyer.com"
+                                                                          class="green bold b_size txtflow tip_dispname_long ">{{data.currItem.fromuser_name}}</span>
+                                                </div>
+                                                <!--div class="profile_inner_info"><a href="javascript:;" class="graytext pointer accountFrom" title="给TA写信" style="margin-right:9px;">{{data.currItem.email_name}}</a>
+                                              <a class="pointer" style="display:inline-block;" ></a>
+                                          </div-->
+                                            </div>
+                                            <div class="profile_ope">
+                                                <table class="pro_ope  pro_ope_four">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="reject_td">
+                                                            <a ng-click='sendReceive_email()' class="pointer">往来邮件</a>
+                                                        </td>
+                                                        <td ng-show='data.flag>5' class="addedit_td">
+                                                            <a title="将此发件人添加到通讯录" class="pointer">添加</a>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tipSwitch">
+                                        <div class="tipAllLeft  tipAllLeft_disabled "></div>
+                                        <div class="tipAllRight  tipAllRight_disabled "></div>
+                                    </div>
+                                </div>
+                                <div class="infoArrowDown" id="infoarrowdown__QmProfileTips_"
+                                     style="display:none;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="tcolor">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间: {{data.currItem.sendtime}}</span>
+                        </div>
+                        <!--<div ng-show='data.sizeshow!=1'>
+							<span class="tcolor">收件人:
+                                 <a ng-click='sizeshow(1)' class='pull-right fa fa-angle-double-down'>显示</a>
+							</span>
+                            <span ng-repeat='item in data.currItem.sendtoname_array'
+                                  ng-mouseover='mouseover_sj(item,$index,$event)' style='color:black'>{{item}};</span>
+                        </div>
+                        <div ng-show='data.sizeshow==1'>
+                            <span class="tcolor">收件人: <a ng-click='sizeshow(2)' class='pull-right fa fa-angle-double-up'>隐藏</a></span><span
+                                ng-repeat='item in data.currItem.sendtoname_array'
+                                ng-mouseover='mouseover_sj(item,$index,$event)' style='color:black'>{{item}};</span>
+                        </div>
+                        <div ng-hide='data.currItem.ccname==undefine||data.currItem.ccname==""'>
+                            <span class="tcolor">抄送人: </span><span style='color:black'>{{data.currItem.ccname}}</span>
+                        </div>
+                        <div ng-show='data.sizeshow==1&&data.currItem.attachofemails.length>0'>
+                            <span class="tcolor">附&nbsp&nbsp&nbsp件:</span><span style='color:'>{{data.currItem.attachofemails.length}}个(<a
+                                ng-click='scroll()' class="fa {{data.currItem.attachofemails[0].icon_file}} fa-1x">{{data.currItem.attachofemails[0].refname}}</a>)</span>
+                        </div>
+                        <div ng-show='data.sizeshow==1'>
+                            <span class="tcolor">大&nbsp&nbsp&nbsp小: </span><span style='color:black'>{{data.currItem.contentsize}}KB</span>
+                        </div>-->
+
+                        <div>
+                            <span class="tcolor">收&nbsp;<span style="padding: 0px 2px;">件</span>&nbsp;人: </span>
+                            <span ng-repeat='item in data.currItem.sendtoname_array'
+                                  ng-mouseover='mouseover_sj(item,$index,$event)' style='color:black'>{{item}};</span>
+                        </div>
+                        <div ng-show="data.currItem.sendtoorg_array.length>0">
+                            <span class="tcolor">收件机构: </span>
+                            <span ng-repeat='item in data.currItem.sendtoorg_array'
+                                  style='color:black'>{{item}};</span>
+                        </div>
+                        <div ng-show="data.currItem.ccname_array.length>0">
+                            <span class="tcolor">抄&nbsp;<span style="padding: 0px 2px;">送</span>&nbsp;人: </span>
+                            <span ng-repeat='item in data.currItem.ccname_array'
+                                  style='color:black'>{{item}};</span>
+                        </div>
+                        <div ng-show='data.currItem.attachofemails.length>0'>
+                            <span class="tcolor">附&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件:</span>
+                            <span class="hc-reIcon">
+                                {{data.currItem.attachofemails.length}}个 (
+                                <a ng-repeat="item in data.currItem.attachofemails" class="fa {{item.icon_file}} fa-1x" ng-click='viewDoc(item)'>
+                                    {{item.refname}}
+                                </a>
+                                )
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mail-box">
+                    <div class="look-body">
+                        <div ng-show='data.currItem.contentid>=0' class="mail-body">
+                            <p>
+                                {{data.currItem.content}}
+                            </p>
+                        </div>
+
+                        <div ng-show='data.currItem.contentid<0' id='mail_content' class="mail-body">
+                            <div ng-bind-html='data.contentHtml' style="word-break: break-all;"></div>
+                        </div>
+                        <div class="mail-attachment" ng-show='data.currItem.attachofemails.length>0'>
+                            <p>
+                                <span><i
+                                        class="fa fa-paperclip"></i> {{data.currItem.attachofemails.length}} 附件 - </span>
+                                <a>下载所有</a>
+                            </p>
+
+                            <div class="attachment att_bt" ng-repeat='item in data.currItem.attachofemails'>
+                                <div class="fa {{item.icon_file}} fa-3x ico_big"></div>
+                                <div class="name_big">
+                                    <span>{{item.refname}}</span><span class="graytext">({{item.refsize}}KB)</span>
+                                    <div class="down_big">
+                                        <a ng-show="item.reftype!='999'" target="_blank" ng-click='viewDoc(item)'>查看</a>
+                                        <a style='padding-left:10px' ng-show="item.reftype!='999'" target="_blank"
+                                           href="/downloadfile.do?iswb=true&filecode={{item.downloadcode}}">下载</a>
+                                        <a ng-show="item.reftype=='999'" target="_blank" href="{{item.url}}">查看</a>
+                                        <a ng-hide='item.reftype=="999"' style='padding-left:10px'
+                                           ng-click='server_save(item.refid)'>服务端另存</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <!--div class="clearfix"></div-->
+                    </div>
+                    <div class="mail-body text-right tooltip-demo mail-foot">
+                        <a ng-click='delete_email()' class="btn btn-sm btn-white"><i class="fa fa-trash"></i>
+                            {{data.flag!=4.5&&data.flag!=5?'删除':'彻底删除'}}</a>
+                        <a ng-click='back()' class="btn btn-sm btn-white"><i class="fa fa-arrow-left"></i> 返回</a>
+                        <a ng-hide="userbean.userauth.supplier==true" ng-click='tansfer()' class="btn btn-sm btn-white"><i
+                                class="fa fa-arrow-right"></i> 转发</a>
+                        <a ng-hide="userbean.userauth.supplier==true" ng-click='reply_all()'
+                           class="btn btn-sm btn-white"><i class="fa fa-reply"></i> 全部回复</a>
+                        <a ng-hide="userbean.userauth.supplier==true" ng-click='reply()' class="btn btn-sm btn-white"><i
+                                class="fa fa-reply"></i> 回复</a>
+                        <!--a ng-click='reply_all()' class="btn btn_gray" data-toggle="tooltip" data-placement="top" title="回复"><i class=""></i> 全部回复</a>
+                        <a ng-click='reply()' class="btn btn_gray" data-toggle="tooltip" data-placement="top" title="回复"><i class=""></i> 回复</a>
+                        <a href="#" class="btn btn_gray" data-toggle="tooltip" data-placement="top" title="Print email"><i class="fa fa-print"></i> </a>
+                        <a href="mailbox.html" class="btn btn_gray" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </a-->
+                        <button ng-hide='true' title="" data-placement="top" data-toggle="tooltip" type="button"
+                                data-original-title="Print" class="btn btn-sm btn-white"><i class="fa fa-print"></i> 打印
+                        </button>
+                        <button ng-hide='true' title="" data-placement="top" data-toggle="tooltip"
+                                data-original-title="Trash" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i>
+                            删除
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!--发送成功-->
+            <div ng-show='data.show==4' class="col-xs-10 animated fadeInRight box-width">
+                <div style="margin: 200px 0 0 80px;">
+                    <div>
+                        <div style="margin-bottom:5px;font-weight: bold;font-size: 20px;color: #4a8f00;">{{data.sendSuccess.title}}</div>
+                        <div style="margin-bottom:5px;color: #8E93A9;font-size: 12px;">{{data.sendSuccess.content}}</div>
+                        <div>
+                            <button class="btn btn-white btn-sm" ng-click="show_box(1,$event)">
+                                返回邮件列表
+                            </button>
+                            <button class="btn btn-white btn-sm" ng-click="show(2)">
+                                再写一封
+                            </button>
+                        </div>
+                    </div>
+                    <div style="width: 550px;margin: 18px 0px 15px 0px;padding: 15px;border: 1px solid #C2C5D4;background: #E9EAEF;border-radius: 5px;">
+                        <div>邮件收件人：</div>
+                        <div style="word-break: break-all;">{{data.showSendtoname}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--通讯录悬浮框-->
+<div ng-show="data.addrModalShow" class="hc-addrModal">
+    <div class="addrModal-div">
+        <div class="addrModal-l">
+            <img ng-src={{(data.addrModal.headimgdocid&&data.addrModal.headimgdocid!=0)?"/downloadfile?docid="+data.addrModal.headimgdocid:"img/head.png"}}>
+            <p>{{data.addrModal.positions}}</p>
+        </div>
+        <div class="addrModal-r">
+            <div>{{data.addrModal.username}}
+                <span ng-show="data.addrModal.sex==1||data.addrModal.sex==2"
+                      class="iconfont hc-sex-icon"
+                      ng-class="{'hc-nan': data.addrModal.sex==1,'hc-nv': data.addrModal.sex==2}"></span>
+            </div>
+            <div>邮箱: {{data.addrModal.email}}</div>
+            <div>手机: {{data.addrModal.mobil}}</div>
+            <div>座机: {{data.addrModal.telo}}</div>
+            <div>部门: {{data.addrModal.dept}}</div>
+        </div>
+    </div>
+</div>
+
+<!--模糊查询-悬窗-->
+<ul id="user_search" ng-show="data.user_search_data.length>0">
+    <li class="hc-searchli hc-searchli-title" style="cursor: default;">
+        <span>用户名称</span>
+        <span>所在机构</span>
+        <span>岗位</span>
+        <span>手机号</span>
+        <span>办公电话</span>
+        <span>外部邮箱</span>
+    </li>
+    <div class="hc-searchli-div" style="overflow-y: auto;max-height: 350px;">
+        <div>
+            <li ng-repeat="item in data.user_search_data" class="hc-searchli"
+                ng-click="user_search_click(item)"
+                ng-mouseover="user_search_mouseover(item,$event)"
+                ng-class="{'hc-searchli-hover': item.hcHover==true}">
+                <span>{{item.username}}</span>
+                <span>{{item.namepath}}</span>
+                <span>{{item.position}}</span>
+                <span>{{item.mobil}}</span>
+                <span>{{item.telo}}</span>
+                <span>{{item.email}}</span>
+            </li>
+        </div>
+    </div>
+</ul>
+
+<!--外部邮件-右键菜单-->
+<ul id="right_outmail" class="hc-menu">
+    <li ng-click="menu_rout($event)">
+        <i class='fa fa-download'></i> 收信
+    </li>
+</ul>
+
+<!--收件人/抄送人-右键菜单-->
+<ul id="right_final" class="hc-menu">
+    <li ng-click="right_cut_elem($event)" ng-show="!right_final_isorg">
+        <i class='fa fa-scissors'></i> 剪切
+    </li>
+    <li ng-click="right_copy_elem($event)" ng-show="!right_final_isorg">
+        <i class='fa fa-files-o'></i> 复制
+    </li>
+    <li ng-click="right_edit_elem($event)" ng-show="!right_final_isorg">
+        <i class='fa fa-pencil-square-o'></i> 编辑
+    </li>
+    <li ng-click="right_checkall_elem($event)" ng-show="!right_final_isorg">
+        <i class='fa fa-check-square-o'></i> 全选
+    </li>
+    <li ng-click="right_del_elem($event)">
+        <i class='fa fa-trash-o'></i> 删除
+    </li>
+</ul>
+
+<!--自定义文件夹-右键菜单-->
+<ul id="right_custom" class="hc-menu">
+    <li ng-click="right_rename_custom($event)">
+        <i class='iconfont hc-edit'></i> 重命名
+    </li>
+    <li ng-click="right_del_custom($event)">
+        <i class='iconfont hc-delete'></i> 删除
+    </li>
+</ul>
+
+<!--新建/重命名-自定义文件modal-->
+<div hc-modal="scpemailcModal">
+    <div class="hc-box">
+        <div class="row">
+            <div hc-label="名称" hc-input="data.emailcname" hc-col-count="4"></div>
+        </div>
+    </div>
+</div>
+
+<!--定时发送modal-->
+<div hc-modal="aftersendingModal">
+    <!--<div class="row">
+        <div hc-label="邮件自动发送时间" hc-input="data.sendtime" hc-type="time" hc-col-count="4"></div>
+    </div>-->
+    <div class="row">
+        <span class="placeholder-span"></span>
+        <span class="pull-left">自动发送时间</span>
+    </div>
+    <div class="row">
+        <span class="placeholder-span"></span>
+        <div hc-input="data.date"
+             hc-col-count="1"
+             hc-type="date"
+             class="pull-left">
+        </div>
+        <div hc-input="data.hour"
+             hc-col-count="1"
+             hc-select-options="data.hours"
+             class="pull-left">
+        </div>
+        <span class="pull-left aftersending-label">时</span>
+        <div hc-input="data.minute"
+             hc-col-count="1"
+             hc-select-options="data.minutes"
+             class="pull-left">
+        </div>
+        <span class="pull-left aftersending-label">分</span>
+    </div>
+</div>
+
+<!--收/发-编辑状态输入框-->
+<div class="right_edit_elem_div">
+    <input type="text" class="right_edit_elem_input"
+           ng-model="data.rightEdit.data"
+           ng-show="data.rightEdit.show"
+           ng-blur="right_edit_elem_blur()"
+           ng-change="right_edit_elem_change()"
+           ng-keydown="right_edit_elem_keydown($event)"
+           style="width:{{data.rightEdit.width}}px;border:none;outline:none;-webkit-appearance:none;float: left;">
+</div>
+
+
+<style>
+    /*占位*/
+    .placeholder-span {
+        height: 1px;
+        width: 40px;
+        float: left;
+        display: inline-block;
+    }
+    .aftersending-label{
+        position: relative;
+        top: 6px;
+        right: 20px;
+    }
+
+
+    /*编辑输入框*/
+    .right_edit_elem_div{
+        position: absolute;
+        top: -5000px;
+    }
+
+    /*box宽度*/
+    .box-width {
+        width: calc(100% - 220px) !important;
+    }
+
+    /*附件间隔*/
+    .hc-reIcon > a:not(:last-child) {
+        margin-right: 5px;
+    }
+
+    /*性别悬窗*/
+    .hc-sex-icon {
+        font-size: 12px;
+    }
+
+    /*树图标*/
+    .ztree li span.button.jigou_ico_open,
+    .ztree li span.button.jigou_ico_close {
+        background: url("/web/img/jigou.png");
+    }
+
+    .ztree li span.button.renyuan_ico_docu {
+        background: url("/web/img/renyuan.png");
+    }
+
+    .ztree li span.button.jigou_ico_open,
+    .ztree li span.button.jigou_ico_close,
+    .ztree li span.button.renyuan_ico_docu {
+        background-repeat: no-repeat;
+        background-size: 16px;
+        position: relative;
+        top: -2px;
+    }
+
+    /*模糊查询悬窗*/
+    .hc-searchli {
+        height: 30px;
+    }
+
+    .hc-searchli > span {
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .hc-searchli > span:nth-child(1) {
+        width: 20%;
+    }
+
+    .hc-searchli > span:nth-child(2) {
+        width: 24%;
+    }
+
+    .hc-searchli > span:nth-child(3) {
+        width: 13%;
+    }
+
+    .hc-searchli > span:nth-child(4) {
+        width: 13%;
+    }
+
+    .hc-searchli > span:nth-child(5) {
+        width: 13%;
+    }
+
+    .hc-searchli > span:nth-child(6) {
+        width: 12%;
+    }
+
+    .hc-searchli-title {
+        background-color: #bebebe;
+        cursor: default;
+    }
+
+    .swf-pr {
+        padding-right: 8px;
+    }
+
+    /*使hcicon高度与faicon高度一致*/
+    .hc-icon-mh {
+        max-height: 25px;
+        display: inline-block;
+    }
+
+    /*通讯录悬浮框*/
+    .hc-addrModal {
+        padding: 10px 0px;
+        position: fixed;
+        left: calc(50% - 160px);
+        top: 260px;
+        z-index: 9999;
+        border-radius: 3px;
+        border: 1px solid rgba(108, 124, 134, 0.39);
+        background-color: #fff;
+        box-shadow: 0 0 4px rgba(108, 124, 134, 0.39);
+    }
+
+    .addrModal-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*左*/
+    .addrModal-l {
+        float: left;
+        width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .addrModal-l > img {
+        width: 80px;
+        border-radius: 50%;
+    }
+
+    .addrModal-l > p {
+        margin: 0px;
+        font-weight: bold;
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+    }
+
+    /*右*/
+    .addrModal-r {
+        float: left;
+        width: 200px;
+    }
+
+    .addrModal-r > div:not(:nth-child(1)) {
+    }
+
+    .addrModal-r > div:nth-child(1) {
+        font-weight: bold;
+        margin-bottom: 1px;
+        margin-top: 2px;
+    }
+
+    .addrModal-r > div:not(:last-child) {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    /*通讯录高度*/
+    .AddrTabH {
+        height: calc(100% - 62px);
+        overflow-y: auto;
+    }
+
+    /*性别图标*/
+    .hc-nan {
+        color: #41b9ff;
+    }
+
+    .hc-nv {
+        color: #fd3b3b;
+    }
+
+    /*人员查询卡片样式*/
+    .peoplesearch-div {
+        border-bottom: 1px solid rgba(108, 124, 134, 0.39);
+        display: flex;
+        padding: 5px 2px;
+    }
+
+    /*左*/
+    .peoplesearch-l {
+        width: 90px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .peoplesearch-l > img {
+        border-radius: 50%;
+        width: 70px;
+    }
+
+    .peoplesearch-l > p {
+        margin: 0px;
+        font-weight: bold;
+    }
+
+    /*右*/
+    .peoplesearch-r {
+        width: calc(100% - 90px);
+    }
+
+    .peoplesearch-r > div:not(:nth-child(1)) {
+        font-size: 12px;
+    }
+
+    .peoplesearch-r > div:nth-child(1) {
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 1px;
+        margin-top: 2px;
+    }
+
+    .peoplesearch-r > div:not(:last-child) {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .hc-pointer {
+        cursor: pointer;
+    }
+
+    .table-mail .check-mail {
+        padding-left: 8px;
+    }
+
+    table.table-mail {
+        table-layout: fixed;
+    }
+
+    table.table-mail td {
+        overflow: hidden;
+        word-break: keep-all;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    #right_outmail, #right_final, #right_custom {
+        display: none;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+
+    #user_search {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        display: block;
+    }
+
+    .hc-menu, #user_search {
+        background-color: #fff;
+        border: 1px solid #dbe0e8;
+        box-shadow: 1px 3px 4px rgba(189, 201, 214, 0.3);
+        padding: 0px;
+        min-width: 100px;
+        font-size: 10pt;
+        z-index: 99;
+    }
+
+    .hc-menu li, #user_search li {
+        font-size: 11px;
+        margin: 0px;
+        padding: 2px;
+        cursor: pointer;
+        list-style: none outside none;
+        padding-left: 3px;
+        color: #222;
+        line-height: 30px;
+    }
+
+    .hc-menu li:hover, .hc-searchli-hover {
+        background: #eee;
+    }
+
+    .hc-menu li i, #user_search li i {
+        padding-left: 10px;
+    }
+
+    .mr-10 {
+        margin-right: 10px;
+    }
+
+    /*返回后加|*/
+    .btn-after-interval {
+        position: relative;
+    }
+
+    .btn-after-interval:after {
+        content: "";
+        height: 20px;
+        width: 0px;
+        border-right: 1px solid #E2EBF1;
+        position: absolute;
+        left: 66px;
+        top: 4px;
+    }
+
+    /*上下一封按钮禁用样式*/
+    .disUDBtn {
+        color: #a0a0a0;
+        cursor: default;
+    }
+
+    .disUDBtn:hover {
+        color: #a0a0a0;
+    }
+
+    .ud-box {
+        line-height: 27px;
+    }
+
+    .send-button {
+        background-color: #1AB394 !important;
+        color: #fff !important;
+        border: 1px solid #1AB394 !important;
+        transition: all .2s;
+    }
+
+    .send-button:hover {
+        background-color: #18A689 !important;
+        border: 1px solid #18A689 !important;
+    }
+
+    /*textarea插件提示?*/
+    .ui-tooltip.ui-widget.ui-corner-all.ui-widget-content {
+        /*display: none;*/
+    }
+
+    .look-body {
+        overflow-y: auto;
+    }
+
+    .look-tool {
+        padding-top: 9px;
+    }
+
+    .lm_sbar a.lm_sopen {
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .width-search-bar #lm15034559988030725050352368402searchtext {
+        width: 100%;
+    }
+
+    .table-box {
+        display: inline-block;
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    .mail-box {
+        margin-bottom: 0px;
+    }
+
+    .mail-foot {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .panel {
+        margin-bottom: 0px;
+    }
+
+    .mail-body:after {
+        content: '';
+        clear: both;
+        width: 0px;
+        display: block;
+    }
+
+    .write-input {
+        width: calc(100% - 75px);
+        float: left;
+    }
+
+    .write-label {
+        width: 60px !important;
+    }
+
+    .write-title-button {
+        padding-top: 2px;
+    }
+
+    .bill-form {
+        min-width: 992px;
+    }
+
+    .bold {
+        font-weight: bold
+    }
+
+    .star {
+        background: url(../web/img/star.png) no-repeat;
+        background-position: center;
+    }
+
+    .lightstar {
+        background: url(../web/img/lightstar.png) no-repeat;
+        background-position: center;
+    }
+
+    .Rr {
+        background: url(../web/img/open_mail.png) no-repeat;
+        background-position-y: 7px;
+    }
+
+    .unr {
+        background: url(../web/img/unopen_mail.png) no-repeat;
+        background-position-y: center;
+    }
+
+    table.i td.ci div.cir {
+        width: 18px;
+        height: 16px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .mail-box-header1 {
+        background: url(../web/img/header.jpg) no-repeat;
+    }
+
+    .fadeInRight {
+        z-index: 10;
+    }
+
+    .o_title2 {
+        background: #f2f4f6;
+        margin: 0;
+        padding: 0 0 0 12px;
+        height: 20px;
+    }
+
+    .black {
+        color: #000;
+    }
+
+    .normal {
+        font-weight: normal;
+    }
+
+    .f_size {
+        font-size: 12px;
+    }
+
+    .att_bt {
+        _zoom: 1;
+        padding: 5px 2px;
+        clear: both;
+        margin: 5px 0 10px;
+        min-height: 40px;
+    }
+
+    .ico_big {
+        float: left;
+        margin: 2px 8px 0 0;
+    }
+
+    .name_big {
+        float: left;
+    }
+
+    .graytext {
+        color: #a0a0a0;
+    }
+
+    .name_big .down_big {
+        margin-top: 2px;
+    }
+
+    .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0px;
+    }
+
+    .table.table-w {
+        width: calc(100% - 15px)
+    }
+
+    .high {
+        background: #f3f3f3;
+    }
+
+    .tcolor {
+        font: normal 12px "lucida Grande", Verdana, "Microsoft YaHei";
+        color: #7f7f7f;
+    }
+
+    .green,
+    .grn,
+    a.green:link,
+    a.green:visited {
+        color: #5fa207;
+    }
+
+    .qm_ico_flagoff {
+        padding: 0;
+        border: 0;
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+        vertical-align: middle;
+        margin-top: -2px;
+        _margin-top: -7px;
+    }
+
+    .tenxun-color {
+        background-color: #eff5fb
+    }
+
+    .m-t-md {
+        margin-top: 0px;
+    }
+
+    .btn_gray {
+        display: inline-block;
+        height: 22px;
+        min-width: 24px;
+        line-height: 24px;
+        line-height: 23px \9 \0;
+        _line-height: 26px;
+        _overflow-y: hidden;
+        padding: 0 12px;
+        margin: 0;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        cursor: default;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        border-radius: 3px;
+        color: rgb(104, 107, 109);
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(136, 136, 136);
+        border-image: initial;
+        background: -webkit-linear-gradient(top, rgb(255, 255, 255) 0%, rgb(235, 235, 235) 90%, rgb(243, 243, 243) 100%);
+    }
+
+    .time {
+        color: #364454;
+        font-size: 14px;
+    }
+
+    .lm_panel {
+        border-style: groove;
+        border: 1px solid rgba(108, 124, 134, 0.39);
+        background: #fff;
+        height: 500px;
+        /**overflow: auto;*/
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    .settingtable {
+        background-color: #eff5fb;
+    }
+
+    .lm_sbar .lm_sopen {
+        /* background: url(/zh_CN/htmledition/images/webp/newicon/compose207c92.png) 0 -312px no-repeat; */
+        width: 19px;
+        height: 20.5px;
+        padding: 0;
+        border: 1px solid rgb(169, 169, 169);
+        float: right;
+        border-bottom-left-radius: none;
+        border-left: white;
+    }
+
+    .lm_sbar {
+        border-bottom: 1px solid #ccc;
+        padding: 7px 6px 4px;
+        _padding-left: 3px;
+        line-height: 11px;
+    }
+
+    .cptab {
+        float: left;
+        display: inline-block;
+        height: 25px;
+        /* border: 1px solid #7f9db9; */
+        border-bottom: none;
+        line-height: 24px;
+        border-bottom: none;
+        width: 50%;
+        text-align: center;
+        background: #eff5fb;
+    }
+
+    .cpslt {
+        background: #fff;
+        height: 25px;
+        font-weight: bold;
+    }
+
+    .lm_sbar div {
+        overflow: hidden;
+    }
+
+    .ds_dialog {
+        z-index: 3002;
+    }
+
+    .groupclose {
+        padding-left: 8px;
+    }
+
+    .note-editor .col-xs-1,
+    .col-sm-1,
+    .col-md-1,
+    .col-lg-1,
+    .col-xs-2,
+    .col-sm-2,
+    .col-md-2,
+    .col-lg-2,
+    .col-xs-3,
+    .col-sm-3,
+    .col-md-3,
+    .col-lg-3,
+    .col-xs-4,
+    .col-sm-4,
+    .col-md-4,
+    .col-lg-4,
+    .col-xs-5,
+    .col-sm-5,
+    .col-md-5,
+    .col-lg-5,
+    .col-xs-6,
+    .col-sm-6,
+    .col-md-6,
+    .col-lg-6,
+    .col-xs-7,
+    .col-sm-7,
+    .col-md-7,
+    .col-lg-7,
+    .col-xs-8,
+    .col-sm-8,
+    .col-md-8,
+    .col-lg-8,
+    .col-xs-9,
+    .col-sm-9,
+    .col-md-9,
+    .col-lg-9,
+    .col-xs-10,
+    .col-sm-10,
+    .col-md-10,
+    .col-lg-10,
+    .col-xs-11,
+    .col-sm-11,
+    .col-md-11,
+    .col-lg-11,
+    .col-xs-12,
+    .col-sm-12,
+    .col-md-12,
+    .col-lg-12 {
+        position: relative;
+        min-height: 1px;
+        padding-left: 1px !important;
+        padding-right: 1px !important;
+    }
+
+    .note-editor .btn-group > .btn-group {
+        float: left;
+        max-width: 80px !important;
+    }
+
+    .note-editor.note-frame .note-statusbar {
+        background-color: #f1f1f1;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+        visibility: hidden;
+    }
+
+    .note-editor .form-group {
+        margin-bottom: 15px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .form-inline {
+        padding: 5px !important
+    }
+
+    button.btn.btn-toolbar,
+    a.btn.btn-toolbar,
+    div.btn.btn-toolbar {
+        background-color: #fff;
+        height: 25px;
+        margin: 0px;
+        padding: 2px 0px 0px 0px;
+        font-size: 1px;
+    }
+
+    /*邮件下拉*/
+
+    .div_txt {
+        border: 1px solid #c3c3c3;
+        border-top: 1px solid #7c7c7c;
+        border-left: 1px solid #9a9a9a;
+        background: 0 -162px #fff repeat-x;
+        padding: 1px;
+        width: auto;
+        height: auto;
+        _height: 16px;
+        min-height: 18px;
+        font-family: Tahoma;
+    }
+
+    .attbg:hover {
+        background-color: #e3e3ec;
+    }
+
+    .attbg_focus {
+        background-color: #FFB951;
+    }
+
+    .addr_text {
+        margin: 1px -13px 1px 0;
+        height: 16px;
+        background: transparent;
+    }
+
+    .addr_base {
+        height: 16px;
+        margin: 1px 3px 1px 3px;
+        cursor: default;
+        color: #2b2828;
+        font-family: "lucida Grande", Verdana, "Microsoft YaHei";
+    }
+
+    ul.autoul {
+        /* 下拉菜单 */
+        width: 216px;
+        margin: 0px;
+        margin-top: -5px;
+        padding: 0px;
+        color: #666;
+        border: 1px solid #e5e6e7;
+        border-top: 0;
+        overflow: hidden;
+    }
+
+    ul.autoul li.autoli {
+        /* 下拉菜单li */
+        height: 30px;
+        display: block;
+        list-style-type: none;
+        text-align: left;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 30px;
+        padding-left: 15px;
+        padding-right: 15px;
+        overflow: hidden;
+        /*当对象内文本溢出时显示省略标记*/
+        text-overflow: ellipsis;
+    }
+
+    .lihover {
+        /* 下拉菜单li高亮样式 */
+        background-color: #eee;
+    }
+
+    .showli {
+        display: block;
+    }
+
+    /* 经过过滤的li的样式 */
+
+    #attach-area table thead {
+        visibility: hidden;
+    }
+
+    .limit {
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    /*.mail-body {
+    border-top: 1px solid #e7eaec;
+    padding: 5px;
+}*/
+
+    .b {
+        margin: 0px;
+        padding: 0px;
+        overflow: auto;
+    }
+
+    .line0 {
+        line-height: 20px;
+        background-color: lightyellow;
+        padding: 0px 15px;
+    }
+
+    .line1 {
+        line-height: 18px;
+        background-color: lightblue;
+        padding: 0px 10px;
+    }
+
+    .w {
+        position: absolute;
+        lift: 10px;
+        top: 10px;
+        width: 1px;
+        height: 300px;
+        overflow: hidden;
+        border: 2px groove #281;
+        cursor: default;
+        -moz-user-select: none;
+        z-index: 10
+    }
+
+    .t {
+        line-height: 20px;
+        height: 20px;
+        width: 160px;
+        overflow: hidden;
+        background-color: #27C;
+        color: white;
+        font-weight: bold;
+        border-bottom: 1px outset blue;
+        text-align: center;
+    }
+
+    .winBody {
+        height: 270px;
+        width: 160px;
+        overflow-x: auto;
+        overflow-y: auto;
+        border-top: 1px inset blue;
+        padding: 10px;
+        background-color: white;
+    }
+
+    .profileTip {
+        padding: 2px;
+        background: #D5D5D5;
+        -moz-border-radius: 3px;
+        -khtml-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        position: absolute;
+        z-index: 21;
+    }
+
+    .infoArrowUp {
+        width: 17px;
+        height: 9px;
+        background: url(/zh_CN/htmledition/images/webp/newicon/infocard1e9c5d.gif) no-repeat 0 0;
+        position: absolute;
+        z-index: 10;
+        margin: -9px 0 0 55px;
+    }
+
+    .profileTip .tipInner {
+        width: 320px;
+        border: 0;
+        background: #FFF;
+        -moz-border-radius: 3px;
+        -khtml-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .profile_inner {
+        padding: 16px;
+        overflow: hidden;
+        _zoom: 1;
+    }
+
+    .profile_inner img {
+        float: left;
+        margin-right: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .profile_inner div {
+        line-height: 20px;
+    }
+
+    .profile_inner div {
+        line-height: 20px;
+        max-width: 238px;
+        _width: 238px;
+        margin-left: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .nowrap {
+        white-space: nowrap;
+    }
+
+    .profile_inner div {
+        line-height: 20px;
+    }
+
+    .profile_ope .pro_ope {
+        width: 100%;
+        border-collapse: collapse;
+        border-top: 1px solid #ddd;
+        background: #f5f5f5;
+    }
+
+    .profile_ope td {
+        height: 25px;
+        text-align: center;
+        border-right: 1px solid #ddd;
+        width: 30%;
+    }
+
+    .ztree {
+        margin: 0;
+        padding: 10px !important;
+        color: #333;
+    }
+</style>
+<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+<!--<link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">-->
+<!--<script src="js/plugins/summernote/summernote.min.js"></script>-->
+<script src="js/plugins/summernote/summernote-zh-CN.js"></script>
+<!--<script src="js/plugins/bootstrap/bootstrap.min.js"></script>-->
+<link rel="stylesheet" href="js/plugins/z-tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="js/plugins/z-tree/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="js/plugins/z-tree/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="js/plugins/z-tree/jquery.ztree.exedit.js"></script>
+<!-- <script type="text/javascript" src="js/plugins/iCheck/iCheck.min.js"></script> -->
+<script>
+    $(document).ready(function () {
+        $('.note-editing-area').keydown(function (event) {
+            event.stopPropagation();
+            console.warn(event);
+        })
+
+        //checkbox选择效果
+        // $('.i-checks').iCheck({
+        //     checkboxClass: 'icheckbox_square-green',
+        //     radioClass: 'iradio_square-green',
+        // });
+
+        // console.warn($(window).height());
+        // $('.limit').height($(window).height() - 130);
+    });
+
+</script>

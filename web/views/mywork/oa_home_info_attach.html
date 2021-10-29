@@ -1,0 +1,251 @@
+<!--
+	编辑界面
+-->
+<div class="bill-form" ng-controller="oa_home_info_attach" style="width: 100%; height: 93%;">
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-12">
+			<div class="ab-form-title">
+				信息发布详情
+			</div>
+			<div class="ab-form-toolbar">
+				<div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">
+				</div>
+				<button class="btn btn-white btn-xs" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+				<button class="btn btn-white btn-xs" type="button" ng-hide="searchlist" ng-click="new()"><i class="fa fa-file-o"></i>新增
+                </button>
+				<button class="btn btn-white btn-xs" type="button" ng-hide="searchlist" ng-click="save($event)"><i class="fa fa-floppy-o"></i>保存
+                </button>
+				<button class="btn btn-white btn-xs" type="button" ng-click="refresh()"><i class="fa fa-history"></i>刷新
+                </button>
+				<button class="btn btn-white btn-xs" type="button" ng-hide="searchlist" ng-if="data.currItem.stat==1||searchlist" ng-click="delete()"><i class="fa fa-trash"></i>删除
+                </button>
+				<button ng-click="closefrm()" class="btn btn-white btn-xs" type="button"><i class="fa fa-times"></i>
+                </button>
+			</div>
+		</div>
+	</div>
+
+	<div class="wrapper wrapper-content animated fadeInRight resource-root" style="width: 100%; margin-top: 3.5%;">
+		<div class="row row_div" style="width: 100%;">
+			<div class="col-lg-12">
+				<ul id="maintabs" class="tri-nav-tabs">
+					<li class="active">
+						<a data-target="#tab1" data-toggle="tab" class="tab-nav"><i class="fa fa-desktop"> 常规</i></a>
+					</li>
+					<li ng-click="authority()">
+						<a data-target="#tab4" data-toggle="tab" class="tab-nav"><i class="fa fa-paperclip"> 附件</i></a>
+					</li>
+					<li ng-click="authority()">
+						<a data-target="#tab2" data-toggle="tab" class="tab-nav"><i class="fa fa-paperclip"> 其它</i></a>
+					</li>
+				</ul>
+				<!--问题：class="tab-content"-->
+				<div id="main-tab-content" class="tab-content">
+
+					<div id="tab1" class="main-tab-pane tab-pane active resource">
+						<div class="ibox-content">
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">标题：</label>
+								</div>
+								<div class="col-md-10">
+									<text-input ng-readonly="false" ng-model="data.currItem.title">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">模块名：</label>
+								</div>
+								<div class="col-md-3">
+									<select chosen-select ng-model="data.currItem.info_mod" ng-readonly="false" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in info_mod">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null " ng-if="data.currItem.info_mod==1">分类：</label>
+								</div>
+								<div class="col-md-3" ng-if="data.currItem.info_mod==1">
+									<select chosen-select ng-model="data.currItem.info_type" ng-readonly="false" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in info_type">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null" >状态：</label>
+								</div>
+								<div class="col-md-2">
+									<select chosen-select ng-model="data.currItem.stat" ng-readonly="false" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in stat">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">备注：</label>
+								</div>
+								<div class="col-md-10">
+									<text-input ng-readonly="false" ng-model="data.currItem.note">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-1 form-group">
+									<label class="form-label-mini not-null">内容：</label>
+								</div>
+								<div class="col-md-10">
+									<textarea ng-readonly="false" ng-model="data.currItem.contant" type="text" name="text" class="summernote" id="contents" title="Contents" style="display: none;"></textarea>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-10"></div>
+								<div class="colmd-1">
+									<button type="button" class="btn btn-white btn-xs" ng-click="preview(contant)">
+                    					<i class="fa fa-search"></i>预览
+                					</button>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div id="tab2" class="main-tab-pane tab-pane">
+						<div class="ibox-content">
+							<h5>创建人: {{data.currItem.creator}}</h5>
+							<h5>创建时间: {{data.currItem.create_time}}</h5>
+							<h5>最后修改人: {{data.currItem.updator}}</h5>
+							<h5>最后修改时间: {{data.currItem.update_time}}</h5>
+						</div>
+					</div>
+
+					<div id="tab4" class="main-tab-pane tab-pane">
+						<div class="ibox-title">
+							<button swf-upload title="添加附件" class="btn btn-sm btn-info" upload-list="data.currItem.objattachs" ng-model="data.currItem.objattachs" filed='#attach-area'>
+                        		<i class="fa lightblue font-size-15  fa-paperclip"></i> 添加附件
+                    		</button>
+						</div>
+						<div class="ibox-content icons-box">
+							<ul id="attach-area">
+							</ul>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	.resource-tree {
+		width: 288px;
+		flex-shrink: 0;
+		flex-grow: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		margin-right: 10px;
+		border: 1px #ddd solid;
+		border-radius: 2px;
+	}
+	
+	.resource {
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+		flex-shrink: 1;
+		flex-grow: 1;
+		background-color: #fff;
+	}
+	
+	div.wrap-height {
+		display: flex;
+	}
+	
+	div.wrap-height>div.ng-scope {
+		display: flex;
+		flex-shrink: 1;
+		flex-grow: 1;
+	}
+	
+	.wrapper.animated.fadeInRight.ng-scope {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	.wrapper-content {
+		padding: 0px 0px 10px!important;
+	}
+	
+	.resource-root {
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+		flex-shrink: 1;
+		flex-grow: 1;
+		background-color: #fff;
+		padding: 3px 2px;
+	}
+	
+	.resource-scheduer {
+		flex-shrink: 1;
+		flex-grow: 1;
+	}
+	
+	div.left-nav-div {
+		width: 180px;
+		flex-grow: 0;
+		flex-shrink: 0;
+		display: flex;
+	}
+	
+	div.client-content {
+		flex-grow: 1;
+		flex-shrink: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	div.more_news {
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	div.ibox-content.modal-open {
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+	
+	.fadeInRight {
+		z-index: 10;
+	}
+	
+	.tab-content {
+		position: initial;
+	}
+	
+	.row_div {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	
+	.wrap-height {
+		height: 334px;
+		margin-right: 0px !important;
+		padding-right: 2.5px !important;
+		overflow: hidden;
+		outline: none;
+	}
+	
+	div.col-lg-12 {
+		padding-right: 0px !important;
+		padding-left: 0px!important;
+	}
+</style>
+<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+<link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+<script src="js/plugins/summernote/summernote.min.js"></script>

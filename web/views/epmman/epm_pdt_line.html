@@ -1,0 +1,54 @@
+<!--产品线维护-编辑列表页 -->
+<!--author:shenguocheng-->
+<!--since 2019-08-06-->
+<div hc-edit-list>
+    <div id="base" class="active">
+        <div class="hc-box  other-h">
+            <div class="row">
+                <div hc-input="data.currItem.bill_type"
+                     hc-label="订单类型"
+                     hc-dict-code="epm.bill_type"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.division_name"
+                     hc-label="事业部"
+                     hc-dict-code="epm.division"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.order_pdt_line"
+                     hc-label="订单产品线"
+                     hc-dict-code="epm.order_pdt_line"
+                     hc-required="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.is_major_data"
+                     hc-label="主数据专用"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     class="oneis">
+                </div>
+
+                <div hc-input="data.currItem.is_project_report"
+                     hc-label="工程报备专用"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     style="padding-left: 41px;padding-top: 3px">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<style>
+    .oneis {
+        padding-left: 33px;
+        padding-top: 3px;
+    }
+</style>

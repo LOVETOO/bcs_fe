@@ -1,0 +1,80 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.company_name"
+                 hc-label="名称"
+                 hc-required="true"
+                 hc-col-count="4">
+            </div>
+
+            <div hc-input="data.currItem.tax_no"
+                 hc-label="纳税人识别号"
+                 hc-required="true"
+                 hc-col-count="4">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.address"
+                 hc-label="单位地址"
+                 hc-required="true"
+                 hc-col-count="4">
+            </div>
+
+            <div hc-input="data.currItem.phone"
+                 hc-label="电话号码"
+                 hc-required="true"
+                 hc-col-count="4">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.bank"
+                 hc-label="开户银行"
+                 hc-required="true"
+                 hc-col-count="4">
+            </div>
+
+            <div hc-input="data.currItem.account_no"
+                 hc-label="银行账号"
+                 hc-required="true"
+                 hc-col-count="4">
+            </div>
+        </div>
+    </div>
+
+    <!--其他-->
+    <div id="other" hc-box="">
+        <div class="row">
+            <div hc-input="data.currItem.creator"
+                 hc-label="创建人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.create_time"
+                 hc-type="date"
+                 hc-label="创建时间"
+                 hc-readonly="true">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.updator"
+                 hc-label="最后修改人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.update_time"
+                 hc-type="date"
+                 hc-label="最后修改时间"
+                 hc-readonly="true">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

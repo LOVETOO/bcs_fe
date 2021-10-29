@@ -1,0 +1,122 @@
+<div hc-diy-page>
+
+
+    <ul class="nav nav-tabs other-h" id="maintab">
+        <li class="active">
+            <a data-toggle="tab" id="tab1" href="tabs.html#t1">1、计算前检查</a>
+        </li>
+        <li>
+            <a data-toggle="tab" id="tab2" href="tabs.html#t2">2、实际成本计算</a>
+        </li>
+        <li>
+            <a data-toggle="tab" id="tab3" href="tabs.html#t3">3、计算后检查</a>
+        </li>
+    </ul>
+
+    <div class="tabs-container">
+        <div class="tab-content">
+            <div id="t1" class="tab-pane active">
+                <div class="hc-box grid-other-h">
+                    <div class="row">
+                        <div hc-input="data.currItem.year_month"
+                             hc-label="月份"
+                             hc-readonly = "true">
+                        </div>
+                        <button type="button" style="height: 26px;" class="btn btn-white fa fa-search" ng-click="before()">计算前检查</button>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs other-h" id="detailtab1">
+                    <li class="active">
+                        <a data-toggle="tab" id="tab11" href="tabs.html#t11">检查项</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" id="tab12" href="tabs.html#t12">异常信息</a>
+                    </li>
+                </ul>
+                <div class="tabs-container">
+                    <div class="tab-content">
+                        <div id="t11" class="tab-pane active">
+                            <div hc-grid="gridOptions1"  hc-auto-height="grid"></div>
+
+                        </div>
+                        <div id="t12" class="tab-pane">
+                            <div hc-grid="detailOptions1"  hc-auto-height="grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="t2" class="tab-pane">
+                <div class="hc-box grid-other-h">
+                    <div class="row">
+                        <div hc-input="data.currItem.year_month"
+                             hc-label="月份"
+                             hc-readonly = "true">
+                        </div>
+
+                        <button type="button" style="height: 26px;" class="btn btn-white fa fa-search" ng-click="factcostclac()">成本运算</button>
+                        <button type="button" style="height: 26px;" class="btn btn-white fa fa-search" ng-click="transact()">收发存运算</button>
+                        <button type="button" style="height: 26px;" class="btn btn-white fa fa-search" ng-click="usp_reexccurqty()">库存运算</button>
+
+
+                    </div>
+                </div>
+                <ul class="nav nav-tabs other-h" id="detailtab2">
+                    <li class="active">
+                        <a data-toggle="tab" id="tab21" href="tabs.html#t21">计算项目</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" id="tab22" href="tabs.html#t22">查看结果</a>
+                    </li>
+                </ul>
+                <div class="tabs-container">
+                    <div class="tab-content">
+                        <div id="t21" class="tab-pane active">
+                            <div hc-grid="gridOptions2"  hc-auto-height="grid"></div>
+                        </div>
+                        <div id="t22" class="tab-pane">
+                            <div style="margin-top: 30px;">
+                                <button type="button" style="height: 26px;" class="btn btn-white fa fa-search" ng-click="">结存金额有问题的记录</button>
+                                <button type="button" style="height: 26px;" class="btn btn-white fa fa-search" ng-click="">本厂物料月度收发存</button>
+                                <button type="button" style="height: 26px;" class="btn btn-white fa fa-search" ng-click="">本厂物料结存价格表</button>
+                                <button type="button" style="height: 26px;" class="btn btn-white fa fa-search" ng-click="">成本明细账查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="t3" class="tab-pane">
+                <div class="hc-box grid-other-h">
+                    <div class="row">
+                        <div hc-input="data.currItem.year_month"
+                             hc-label="月份"
+                             hc-readonly = "true">
+                        </div>
+                        <button type="button" style="height: 26px;" class="btn btn-white fa fa-search" ng-click="after()">计算后检查</button>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs other-h" id="detailtab3">
+                    <li class="active">
+                        <a data-toggle="tab" id="tab31" href="tabs.html#t31">检查项</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" id="tab32" href="tabs.html#t32">异常信息</a>
+                    </li>
+                </ul>
+                <div class="tabs-container">
+                    <div class="tab-content">
+                        <div id="t31" class="tab-pane active">
+                            <div hc-grid="gridOptions3"  hc-auto-height="grid"></div>
+
+                        </div>
+                        <div id="t32" class="tab-pane">
+                            <div hc-grid="detailOptions3"  hc-auto-height="grid"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

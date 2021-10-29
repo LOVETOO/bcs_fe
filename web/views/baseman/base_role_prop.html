@@ -1,0 +1,80 @@
+<div hc-obj-prop>
+    <div id="base" hc-box='' class="active">
+        <div hc-box class="grid-other-h">
+            <div class="row">
+                <div hc-input="data.currItem.roleid" hc-label="角色代号" hc-required="true" hc-readonly="!data.isInsert"/>
+                <div hc-input="data.currItem.rolename" hc-label="角色名称" hc-required="true"/>
+                <!-- <div hc-input="data.currItem.role_type" hc-label="角色类型" hc-required="true"
+                     hc-dict-code="base.role_type"/> -->
+                <div hc-label="全运营单元共享" hc-input="data.currItem.allent" hc-type="checkbox"
+                     hc-change="onAllEntChange()"/>
+            </div>
+            <div class="row">
+                <div hc-label="备注" hc-input="data.currItem.note" hc-type="textarea" hc-col-count="8"/>
+            </div>
+            <div class="row">
+                <div hc-label="创建用户" hc-input="data.currItem.creator" hc-readonly="true"/>
+                <div hc-label="创建时间" hc-input="data.currItem.createtime" hc-type="time" hc-readonly="true"/>
+                <div hc-label="最后修改用户" hc-input="data.currItem.updator" hc-readonly="true"/>
+                <div hc-label="最后修改时间" hc-input="data.currItem.updatetime" hc-type="time" hc-readonly="true"/>
+            </div>
+        </div>
+        <div hc-box="所属运营单元" hc-auto-height="grid" ng-show="data.currItem.allent!=2">
+            <div hc-grid="entGridOptions" style="height:100%;"/>
+        </div>
+    </div>
+
+    <div id="users" hc-box='' class="h-box">
+        <!-- 用户表格 -->
+        <div hc-grid="gridOptions_users" class="hc-grid m h-grid" hc-auto-height="grid"/>
+    </div>
+
+    <div id="permission" hc-box='' class="h-box">
+        <!-- 权限 树表格 -->
+        <div class="TreeGridBox" style="height: 100%;width:100%;margin: 0px;">
+            <div class="ibox-title h-grid" style="width: 30%;">
+                <h5>模块</h5>
+                <ul id="zTree1" class="ztree"></ul>
+            </div>
+            <div class="ibox-title h-grid" style="width: 80%;" ng-show="!ws.showGrid">
+                <h5>菜单</h5>
+                <ul id="zTree2" class="ztree"></ul>
+            </div>
+            <div class="ibox-title h-grid" style="width: 80%;" ng-show="ws.showGrid">
+                <div hc-grid="wsGridOptions" style="height:100%;"/>
+            </div>
+        </div>
+    </div>
+
+    <div id="appmenu" hc-box='' class="h-box">
+        <!-- app 树表格 -->
+        <div class="TreeGridBox" style="height: 100%;width:100%;margin: 0px;">
+            <div class="ibox-title h-grid" style="width: 100%;">
+                <h5>模块</h5>
+                <ul id="app1" class="ztree"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="organizations" hc-box='' class="h-box">
+        <!-- 组织表格 -->
+        <div hc-grid="gridOptions_organizations" class="hc-grid m h-grid" hc-auto-height="grid"/>
+    </div>
+</div>
+<style>
+    /*网格高度调整*/
+    .h-box {
+        height: 100%;
+        margin: 0px;
+        padding: 10px 15px;
+    }
+
+    .h-grid {
+        height: 100% !important;
+        margin: 0px;
+    }
+
+    .TreeGridBox {
+        display: flex !important;
+    }
+</style>

@@ -1,0 +1,180 @@
+<div class="bill-form" ng-controller="base_notice_headerEdit">
+    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h3>公告维护</h3>
+                <button class="btn btn-toolbar" type="button" ng-click="search()"><i class="fa fa-search"></i>查询
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="new()"><i class="fa fa-file-o"></i>新增</button>
+                <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i class="fa fa-history"></i>刷新
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="save($event)"><i class="fa fa-floppy-o"></i>保存
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="delete()"><i class="fa fa-trash"></i>删除
+                </button>
+                <button ng-hide="true" class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>导出
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="closefrm()"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>基本信息</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null font-noraml ">公告标题</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input ng-model="data.currItem.notice_title" type="text"
+                                               data-rule-required="true" data-msg-required="公告标题不能空"
+                                               placeholder="" class="input-sm form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null font-noraml ">公告内容</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <textarea ng-model="data.currItem.notice_content" type="text" placeholder=""
+                                                  data-rule-required="true" data-msg-required="公告内容不能空"
+                                                  class="input-sm form-control" style="height:200px;">
+										</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null font-noraml ">创建人</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-model="data.currItem.creator" type="text" ng-disabled="true"
+                                               placeholder="" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml ">创建时间</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input  ng-model="data.currItem.create_time"
+                                               type="text" placeholder="" class="input-sm form-control"
+                                               readonly="readonly">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml ">发布时间</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input bs-datepacker ng-model="data.currItem.fb_date"
+                                               type="text" placeholder="" class="input-sm form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null font-noraml ">修改人</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input ng-model="data.currItem.updator" type="text" ng-disabled="true"
+                                           placeholder="" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini font-noraml ">修改时间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input  ng-model="data.currItem.update_time"
+                                           type="text" placeholder="" class="input-sm form-control"
+                                           readonly="readonly">
+                                </div>
+
+                                <div class="col-md-1">
+                                    <label class="form-label-mini font-noraml ">失效时间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input bs-datepacker ng-model="data.currItem.sx_date"
+                                           type="text" placeholder="" class="input-sm form-control" >
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">查看部门</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input type="text" class="input-sm form-control"
+                                                   ng-disabled="true" ng-change="changeorg(data.currItem.org_names)"
+                                                   ng-model="data.currItem.org_name">
+                                            <a class="input-group-addon"
+                                               ng-click="selectorg()"><i class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" ng-hide="true">
+                                        <input ng-model="data.currItem.orgid" type="text" ng-disabled="true"
+                                               placeholder="" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">查看人</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input type="text" readonly="true" class="input-sm form-control"
+                                                   ng-model="data.currItem.username">
+                                            <a class="input-group-addon" ng-click="selectuser()"><i
+                                                    class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" ng-hide="true">
+                                        <input ng-model="data.currItem.sysuserid" type="text" ng-disabled="true"
+                                               placeholder="" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="col-md-12">
+                                            <label class="form-label-mini">是否有附件</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select chosen-select ng-model="data.currItem.is_fj"
+                                                ng-disabled="data.currItem.stat!=1"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="item_type.id as item_type.name  for item_type in is_fjs">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>附件</h5>
+                                <div ibox-tools></div>
+                            </div>
+                            <div class="ibox-content icons-box">
+                                <button swf-upload title="添加附件" class="btn btn-toolbar"
+                                        upload-list="data.currItem.objattachs" ng-model="data.currItem.objattachs"
+                                        filed='#attach-area'>
+                                    <i class="fa lightblue font-size-15  fa-paperclip"></i> 添加附件
+                                </button>
+                                <ul id="attach-area">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+

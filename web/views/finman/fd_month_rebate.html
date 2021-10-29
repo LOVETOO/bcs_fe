@@ -1,0 +1,62 @@
+<!--
+/**
+ * 客户返利结果
+ * @since 2018-05-24
+ */
+-->
+<div local-storage class="bill-form" ng-controller="fd_month_rebate" ng-cloak>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <!--<h5>{{title()}}</h5>-->
+                    <div class="ibox-tools">
+                        <form class="pull-left">
+                            <!--<button class="btn btn-white btn-sm"
+                                    ng-click="searchData()">查询
+                            </button>-->
+                            <button class="btn btn-white btn-sm"
+                                    ng-click="addCustomer(1)"
+                                    ng-hide="data.isSearch"
+                                    ng-disabled="head.locked">添加客户</button>
+                            <button class="btn btn-white btn-sm"
+                                    ng-click="addCustomer(2)"
+                                    ng-hide="data.isSearch"
+                                    ng-disabled="head.locked">添加运营中心</button>
+                            <button class="btn btn-white btn-sm"
+                                    ng-click="saveData()"
+                                    ng-hide="data.isSearch"
+                                    ng-disabled="head.locked">保存
+                            </button>
+                            <button class="btn btn-white btn-sm"
+                                    ng-click="searchBySql()"
+                                    ng-hide="data.isSearch">查询
+                            </button>
+                            <button class="btn btn-white btn-sm"
+                                    ng-click="reflashData()">刷新
+                            </button>
+                            <button class="btn btn-white btn-sm"
+                                    ng-click="lastYear()">上一年</button>
+                            <label>年份：{{head.year}}</label>
+                            <button class="btn btn-white btn-sm"
+                                    ng-click="nextYear()">下一年</button>
+                            <label>单位：元</label>
+                        </form>
+                        <form class="pull-right" ng-hide="data.isSearch">
+                            <label>年度状态：{{head.locked?'已关闭':'已开启'}}</label>
+                            <button class="btn btn-white btn-sm"
+                                    ng-click="closeYear()"
+                                    ng-disabled="head.locked">关闭年度</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="headerGrid"></div>
+                    <!--<div class="page_modal modal-open" page-pagination></div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div></div>
+</div>

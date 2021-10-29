@@ -1,0 +1,210 @@
+<div class="bill-form" ng-controller="sale_prod_allo_headerEdit">
+    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h3>到款转入生产单</h3>
+                <button ng-click="search()" class="btn btn-toolbar" ng-hide="mainbtn.search" type="button">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button ng-click="new()" class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button">
+                    <i class="fa fa-file-o"></i>新增
+                </button>
+                <button ng-click="save()" class="btn btn-toolbar" type="button">
+                    <i class="fa fa-floppy-o"></i>保存
+                </button>
+                <button ng-click="refresh()" class="btn btn-toolbar" type="button" >
+                    <i class="fa fa-history"></i>刷新
+                </button>
+                <button ng-click="delete()" class="btn btn-toolbar" type="button"
+                        ng-hide="data.currItem.stat!=1">
+                    <i class="fa fa-trash"></i>删除
+                </button>
+                <button ng-click="wfstart()" class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1">
+                    <i class="fa fa-check-square-o">提交</i></button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button">
+                    <i class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>基本信息</h5>
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content icons-box">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">单据号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder="" ng-readonly="true"
+                                       class="input-sm form-control"
+                                       ng-model="data.currItem.prod_allo_no">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">单据类型</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select ng-disabled="true" readonly ng-model="data.currItem.bill_type"
+                                        class="input-sm chosen-select form-control"
+                                        ng-options="type.id as type.name for type in bill_types">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">状态</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select ng-disabled="true" readonly ng-model="data.currItem.stat"
+                                        class="input-sm chosen-select form-control"
+                                        ng-options="s.dictvalue as s.dictname for s in stats">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">创建时间</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input bs-datepacker ng-readonly="true"
+                                       ng-disabled="true"
+                                       ng-model="data.currItem.create_time" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">部门</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text" placeholder=""
+                                           ng-disabled="true"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.org_name">
+                                    <a class="input-group-addon" ng-click="openCPCOrgFrm()">
+                                        <i class="fa fa-ellipsis-h">
+                                        </i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">客户</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text" placeholder=""
+                                           ng-disabled="true"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.cust_name">
+                                    <a class="input-group-addon" ng-click="openCustFrm()">
+                                        <i class="fa fa-ellipsis-h">
+                                        </i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">到款PI分配单</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text" placeholder=""
+                                           ng-disabled="true"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.allo_no">
+                                    <a class="input-group-addon" ng-click="openLcNoSearchFrm()">
+                                        <i class="fa fa-ellipsis-h">
+                                        </i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">创建人</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-readonly="true"
+                                       ng-disabled="data.currItem.stat!=1"
+                                       ng-model="data.currItem.creator" type="text"
+                                       class="form-control input-sm"><!--上浮后金额amt-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">备注</label>
+                            </div>
+                            <div class="col-md-11">
+                                <textarea ng-readonly="(data.currItem.stat!=1&amp;&amp;data.currItem.currprocname!='业务员')||flag==3"
+                                        ng-model="data.currItem.note" rows="3"
+                                        class="form-control noresize ng-pristine ng-untouched ng-valid"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <a ng-click="show11()" class="pull-right"
+                                       style="padding-right: 10px;line-height: 25px;"><i class="fa fa-list"></i></a>
+                                </div>
+                                <div class="col-md-8" style=" padding-right: 0px; ">
+                                    分配明细
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="show_11">
+                            <div class="col-md-12">
+                                <div class="ibox-content" style="margin-left: 15px;">
+                                    <div ag-gridview sg-options="options_11"
+                                         sg-columns="columns_11" style="width:100%;height:180px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <a ng-click="show12()" class="pull-right"
+                                       style="padding-right: 10px;line-height: 25px;"><i class="fa fa-list"></i></a>
+                                </div>
+                                <div class="col-md-8" style=" padding-right: 0px; ">
+                                    生产单明细
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="show_12">
+                            <div class="col-md-12">
+                                <button class="btn btn-toolbar" type="button" ng-disabled="data.currItem.stat!=1"
+                                        style=" margin-left: 35px;"
+                                        ng-click="additem2()"><i class="fa fa-plus-square-o"></i>增加行
+                                </button>
+                                <button class="btn btn-toolbar" type="button" ng-disabled="data.currItem.stat!=1"
+                                        ng-click="delitem2()"><i class="fa fa-minus-square-o"></i>删除行
+                                </button>
+                                <div class="ibox-content" style="margin-left: 15px;">
+                                    <div ag-gridview sg-options="options_12" sg-columns="columns_12"
+                                         style="width:100%;height:180px;" class="slick-grid"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-hide="data.currItem.stat == 1">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>审批流程</h5>
+                                        <div ibox-tools></div>
+                                    </div>
+                                    <div class="ibox-content icons-box">
+                                        <div wf-ystep size="large" class="p-xs clear" wf-apply-id="data.currItem.wfid"
+                                             ng-model="data.currItem.wfid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+

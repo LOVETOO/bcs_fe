@@ -1,0 +1,48 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h" style="margin-bottom: 30px">
+            <div class="row">
+                <div hc-input="data.currItem.bom_flag"
+                     hc-label="显示无BOM产品"
+                     hc-type="checkbox"
+                     hc-true-value="1"
+                     hc-false-value="2"></div>
+                <div hc-input="data.currItem.searchkey"
+                     hc-placeholder="输入 产品编码、名称、规格型号查询"
+                     hc-col-count="4"></div>
+                  <button  type="button" ng-click="searchDrp_Item()" style="border:1px solid #dbe0e8;font-size:13px;background: white">查询</button>
+                  <div   hc-button="improtfile()"  hc-icon="iconfont hc-back"  hc-title="导入文件"   style="margin-left: 30px" ></div>
+
+            </div>
+        </div>
+        <div id="salaryitem" class="TreeGridBox tablecsll active" style="margin: 0px;">
+            <div class="ibox-title" style="width: 45%;">
+
+                <div hc-box="产品信息" hc-grid="gridOptions_Drp_Item" hc-auto-height="grid"></div>
+            </div>
+            <div class="ibox-title" style="width: 55%;">
+                <div hc-box="配件信息" hc-grid="gridOptions_Item" hc-auto-height="grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .ibox-title {
+        display: inline-block;
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+
+    .modal-footer {
+        padding-top: 0px;
+    }
+
+    .TreeGridBox {
+        width: calc(100%);
+    }
+
+    .TreeGridBox .ibox-title {
+        border: none;
+    }
+</style>

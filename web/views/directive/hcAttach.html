@@ -1,0 +1,70 @@
+<div hc-box hc-if="error">
+	<h3>附件功能初始化失败</h3>
+</div>
+
+<div class="hc-file-list" hc-box hc-if="!error">
+
+	<!-- 文件图标 -->
+	<!-----------------css选中class=“checked”------>
+	<div
+		class="hc-file-div"
+		ng-repeat="doc in docs track by doc.docid"
+		ng-dblclick="open(doc)"
+		ng-click="select(this)"
+		ng-class="{ checked: checked }"
+		hc-tooltip="名称：{{ doc.docname }}<br>大小：{{ displaySize(doc.oldsize) }}<br>时间：{{ doc.createtime }}"
+		hc-tooltip-as-html="true"
+		hc-tooltip-placement="bottom"
+	>
+		<div class="hc-file-btn no-draggable cha-x">
+			<i class="iconfont hc-icondownload" ng-click="$event.stopPropagation();download(doc)" title="下载附件" />
+			<i class="iconfont hc-delete" ng-click="delete(doc)" ng-hide="readonly" title="删除附件" />
+		</div>
+
+		<div class="hc-file-img">
+			<!-- 若是图片，显示缩略图 -->
+			<img hc-img="doc" hc-img-thumb="true" hc-if="isImage(doc)"><!-- ng-src="/imageViewerCache/{{doc.docid}}_{{doc.rev}}.jpg" -->
+			<!-- 否则，显示图标 -->
+			<i class="iconfont {{getIcon(doc)}}" hc-if="!isImage(doc)" />
+		</div>
+
+		<span class="hc-file-text" ng-bind="doc.docname" />
+		<i class="iconfont hc-checked"/>
+	</div>
+
+	<!-- 新增图标 -->
+	<div
+		class="hc-file-div"
+		ng-hide="readonly"
+		hc-tooltip="新增附件"
+		hc-tooltip-placement="bottom"
+	>
+		<div class="hc-file-img" ng-click="upload()">
+			<i class="iconfont hc-add" />
+		</div>
+	</div>
+
+	<!-- 批量下载图标 -->
+	<div
+		class="hc-file-div"
+		ng-show="multiSelected"
+		hc-tooltip="批量下载"
+		hc-tooltip-placement="bottom"
+	>
+		<div class="hc-file-img" ng-click="batchDownload()">
+			<i class="iconfont hc-icondownload" />
+		</div>
+	</div>
+
+	<!-- 批量删除图标 -->
+	<div
+		class="hc-file-div"
+		ng-show="multiSelected && !readonly"
+		hc-tooltip="批量删除"
+		hc-tooltip-placement="bottom"
+	>
+		<div class="hc-file-img" ng-click="batchDelete()">
+			<i class="iconfont hc-delete" />
+		</div>
+	</div>
+</div>

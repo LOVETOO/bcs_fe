@@ -1,0 +1,77 @@
+<!--工作日历
+CreateDate: 2019-07-25
+CreateBy: tsl-->
+<div hc-diy-page>
+    <div hc-box>
+        <!--tab标签栏-->
+        <ul class="nav nav-tabs other-h ng-scope" id="gridtab">
+            <li class="active">
+                <a data-toggle="tab" id="tab1" href="tabs.html#tab-conventional"
+                    ng-click="onGridTabChange($event)">常规</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" id="tab2" href="tabs.html#tab-special" ng-click="onGridTabChange($event)">特殊</a>
+            </li>
+        </ul>
+
+        <!--tab标签对应网格-->
+        <div class="tabs-container">
+            <div class="tab-content">
+                <!--常规-->
+                <div id="tab-conventional" class="tab-pane active">
+                    <div hc-grid="ordinaryOptions" style="height:450px;"></div>
+                </div>
+                <!--特殊-->
+                <div id="tab-special" class="tab-pane">
+                    <div hc-grid="specialOptions" style="height:450px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer other-h">
+            <div hc-button="setvalue()" class="pull-left" hc-title="添加" ng-show="tab == 2"></div>
+            <div hc-button="delLineRow()" class="pull-left" hc-title="删除" ng-show="tab == 2"></div>
+            <label class="btn btn-info pull-right">
+                <input type="checkbox" ng-model="data.currItem.nextyear" ng-true-value="2" ng-false-value="1"
+                    ng-click="nextYearFun($event)"> 明年工作时间
+            </label>
+            <div hc-button="save()" class="pull-right" hc-title="保存"></div>
+        </div>
+
+        <div hc-modal="settingModal" class="settingModal" id="detailModal" hc-auto-height>
+            <div hc-box style="width: 680px;height:450px;">
+                    <div class="row">
+                        <div hc-input="cfgdata.theday" hc-label="特殊日期" hc-required="true" hc-type="date"
+                            hc-col-count="4">
+                        </div>
+                        <div hc-input="cfgdata.afterday" hc-label="到" hc-required="true" hc-type="date"
+                            hc-col-count="4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="cfgdata.iswork" hc-type="checkbox" hc-label="工作" hc-col-count="2"
+                            ng-click="workModal($event)"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="cfgdata.statime1" hc-label="上午上班时间" hc-col-count="4">
+                        </div>
+                        <div hc-input="cfgdata.endtime1" hc-label="到" hc-col-count="4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="cfgdata.statime2" hc-label="下午上班时间" hc-col-count="4">
+                        </div>
+                        <div hc-input="cfgdata.endtime2" hc-label="到" hc-col-count="4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.cfgdata.note" hc-label="备注" hc-col-count="8"></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* .modal-content {
+        height: 430px;
+    } */
+</style>

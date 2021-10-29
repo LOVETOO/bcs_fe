@@ -1,0 +1,144 @@
+<div hc-obj-prop>
+    <div id="base"  class="active">
+        <div hc-box="" class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.cost_bud_head_no"
+                    hc-label="成本预算单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.bud_year"
+                     hc-label="预算编制年度"
+                     hc-change="onBudYearChange()"
+                     hc-type="year"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.cost_kind"
+                     hc-label="行业类型"
+                     hc-required="true"
+                     hc-change="onCostKindChange()"
+                     hc-dict-code="cost_kind">
+                </div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!--<div hc-input="data.currItem.org_name"-->
+                     <!--hc-label="部门"-->
+                     <!--hc-required="true"-->
+                     <!--hc-btn-click="chooseOrg()">-->
+                <!--</div>-->
+                <div hc-input="data.currItem.cost_type"
+                     hc-label="成本计算方式"
+                     hc-required="data.currItem.cost_kind==1"
+                     ng-show="data.currItem.cost_kind==1"
+                     hc-change="onCostTypeChange()"
+                     hc-dict-code="cost_type">
+                </div>
+                <div hc-input="data.currItem.comp_target_salesamt"
+                     hc-label="总预算销售收入"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+
+                <!--<div hc-input="data.currItem.total_sales_qty"-->
+                     <!--hc-label="预算销售总量"-->
+                     <!--hc-type="number"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+
+
+                <div hc-input="data.currItem.total_cost_amt"
+                     hc-label="销售成本总额"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-if="data.currItem.cost_kind==2"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row" ng-show="data.currItem.cost_kind==1">
+                <div hc-input="data.currItem.cost_diff_rate"
+                     hc-required="data.currItem.cost_kind==1"
+                     hc-change="onDiffRateChange()"
+                     hc-label="预算材料成本差异率"
+                     hc-type="percent">
+                </div>
+
+                <div hc-input="data.currItem.fee_zz_rate"
+                     hc-label="预算制造费用率"
+                     hc-change="onZzRateChange()"
+                     hc-required="data.currItem.cost_kind==1"
+                     hc-type="percent">
+                </div>
+
+                <div hc-input="data.currItem.cost_rg_rate"
+                     hc-label="预算人工成本率"
+                     hc-change="onRgRateChange()"
+                     hc-required="data.currItem.cost_kind==1"
+                     hc-type="percent">
+                </div>
+
+
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row" ng-show="data.currItem.cost_kind==1">
+                <div hc-input="data.currItem.cost_diff_amt"
+                     hc-label="材料成本差异总额"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.fee_zz_amt"
+                     hc-label="制造费用总额"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.cost_rg_amt"
+                     hc-label="人工成本总额"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.cost_cl_amt"
+                     hc-label="材料成本总额"
+                     hc-readonly="true"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div hc-input="data.currItem.note"
+                     hc-label="说明"
+                     hc-type="textarea"
+                     hc-col-count="8">
+                </div>
+
+            </div>
+        </div>
+        <div hc-grid="gridOptions" hc-box hc-auto-height="grid"></div>
+            
+    </div>
+    
+</div>

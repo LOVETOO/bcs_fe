@@ -1,0 +1,26 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>{{FrmInfo.title}}</h3>
+    </div>
+    <div class="modal-body" style="overflow: hidden;">
+        <div class="col-md-12">
+        	<ul class="unstyled inline">
+        		
+        	</ul>
+        	<ul class="unstyled inline" id="slickgrid_columns_def">
+        		<li class="inline p-xs" ng-repeat="column in columns">
+        			<label><input field="{{column.field}}" name="item" type="checkbox"><span ng-bind="column.headerName"></span></label>
+        		</li>
+        	</ul>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok($event)">
+          	确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+         	 取消
+        </a>
+     </div>
+</div>

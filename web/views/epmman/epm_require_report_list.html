@@ -1,0 +1,150 @@
+<div hc-obj-list>
+    <!-- 查询条件面板-->
+    <hc-obj-list-search-panel>
+        <div class="row require_report_view">
+            <div hc-input="searchObj.sa_salebillno"
+                 hc-label="要货单号"
+            ></div>
+
+            <div
+                    hc-label="订单日期"
+                    hc-input="searchObj.date_invbill_date_start"
+                    hc-change="checkDate('date_invbill_date_start')"
+                    hc-can-delete="true"
+                    hc-type="date"
+                    hc-col-count="1"
+            ></div>
+            <div
+                    hc-label="至"
+                    hc-input="searchObj.date_invbill_date_end"
+                    hc-change="checkDate('date_invbill_date_end')"
+                    hc-can-delete="true"
+                    hc-type="date"
+                    hc-col-count="1"
+            ></div>
+
+            <div hc-input="searchObj.created_by"
+                 hc-label="申请人"
+            ></div>
+
+            <div hc-input="searchObj.order_stat"
+                 hc-label="订单状态"
+                 hc-dict-code="epm.require_bill.order_stat"
+                 hc-can-delete="true"
+            ></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="searchObj.customer_code"
+                 hc-label="客户编码"
+                 hc-class-id="customer_org"
+                 hc-common-search="commonSearch.customer_org"
+                 hc-can-delete="true"
+            ></div>
+
+            <div hc-input="searchObj.customer_name"
+                 hc-label="客户名称"
+            ></div>
+
+            <div hc-input="searchObj.dhl_no"
+                 hc-label="客户自编号"
+            ></div>
+
+            <div hc-input="searchObj.bill_type"
+                 hc-label="订单类型"
+                 hc-dict-code="epm.bill_type"
+                 hc-can-delete="true"
+            ></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="searchObj.contract_code"
+                 hc-label="合同编码"
+                 hc-class-id="epm_project_contract"
+                 hc-common-search="commonSearch.contract_code"
+                 hc-can-delete="true"
+            ></div>
+
+            <div hc-input="searchObj.contract_name"
+                 hc-label="合同名称"
+            ></div>
+
+            <div hc-label="折扣单号"
+                 hc-input="searchObj.discount_apply_code"
+            ></div>
+
+            <div
+                    hc-label="签约方式"
+                    hc-input="searchObj.contract_type"
+                    hc-can-delete="true"
+                    hc-dict-code="epm.contract_type"
+            ></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="searchObj.project_code"
+                 hc-label="项目编码"
+                 hc-class-id="epm_project"
+                 hc-common-search="commonSearch.project_code"
+                 hc-can-delete="true"
+            ></div>
+
+            <div hc-input="searchObj.project_name"
+                 hc-label="项目名称"
+            ></div>
+
+            <div hc-label="订单产品线"
+                 hc-input="searchObj.order_pdt_line"
+                 hc-can-delete="true"
+                 hc-dict-code="epm.order_pdt_line"
+            ></div>
+
+            <div hc-label="业务类型"
+                 hc-input="searchObj.business_type"
+                 hc-can-delete="true"
+                 hc-dict-code="epm.business_type"
+            ></div>
+
+        </div>
+
+        <div class="row">
+            <div hc-input="searchObj.trading_company_name"
+                 hc-label="交易公司"
+                 hc-class-id="epm_discount_apply"
+                 hc-common-search="commonSearch.trading_company_name"
+                 hc-can-delete="true"
+            ></div>
+
+            <div hc-input="searchObj.billing_unit_name"
+                 hc-label="开票单位"
+                 hc-class-id="epm_discount_apply"
+                 hc-common-search="commonSearch.billing_unit_name"
+                 hc-can-delete="true"
+            ></div>
+
+            <div hc-input="searchObj.item_code"
+                 hc-label="产品编码"
+                 hc-col-count="4"
+            ></div>
+
+        </div>
+
+    </hc-obj-list-search-panel>
+</div>
+
+
+<style>
+    .require_report_view [hc-input="searchObj.date_invbill_date_start"] {
+          width: calc(13% + 15px);
+		margin-right: 0px;
+    }
+
+    .require_report_view [hc-input="searchObj.date_invbill_date_end"] {
+          width: calc(12% - 35px);
+    }
+
+    .require_report_view [hc-input="searchObj.date_invbill_date_end"] label {
+          width: 13px;
+		min-width: 0px;
+    }
+</style>

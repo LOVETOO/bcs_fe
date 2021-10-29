@@ -1,0 +1,100 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.urgent_order_billno"
+                    hc-label="紧急要货单号"
+                    hc-readonly="true"></div>
+                <div hc-input="data.currItem.sa_salebillno"
+                     hc-label="要货单号"
+                     hc-class-id="sa_out_bill_head"
+                     hc-common-search="searchObjectSerach"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.date_approval"
+                     hc-label="审批日期"
+                     hc-readonly="true"
+                     hc-type="time"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户信息"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.trading_company_name"
+                     hc-label="交易公司"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.date_invbill"
+                     hc-label="订单日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.billing_unit_name"
+                     hc-label="开票单位"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.bill_type"
+                     hc-label="订单类型"
+                     hc-dict-code="epm.bill_type"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.order_stat"
+                     hc-label="订单状态"
+                     hc-dict-code="epm.require_bill.order_stat"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.in_date"
+                     hc-label="期望到达日期"
+                     hc-readonly="true"
+                     hc-type="date"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.contract_code"
+                     hc-label="合同编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_name"
+                     hc-label="合同名称"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-col-count="8"
+                     hc-type="textarea"></div>
+            </div>
+        </div>
+        <div hc-box class="flex1 flex-column" style="min-height: 200px;">
+            <div hc-grid="gridOptions" style="width:100%;" class="flex1"></div>
+        </div>
+        <div hc-box="该要货单里的下述产品不可发起紧急要货" class="flex1 flex-column" hc-if="data.currItem.stat == 1" style="min-height: 200px;">
+          <div hc-grid="gridOptionsLineNo" style="width:100%;" class="flex1"></div>
+        </div>
+        <div hc-box="库存保留或预占信息" class="flex1 flex-column" hc-if="isNotDealerLog" style="min-height: 200px;">
+            <div hc-grid="gridOptionsLine" style="width:100%;" class="flex1"></div>
+        </div>
+    </div>
+     <div id="pickTime" class="flex1 flex-column">
+          <div hc-box hc-grid="gridOptionspickTime" class="flex1"></div>
+     </div>
+     <div id="singleRecord" class="flex1 flex-column">
+          <div hc-box hc-grid="gridOptionssingleRecord" class="flex1"></div>
+     </div>
+     <div hc-modal="inventory">
+          <div hc-box style="display: flex; flex: 1; flex-direction: column;">
+              <div hc-grid="gridOptionInventory" style="flex: 1"></div>
+          </div>
+     </div>
+</div>
+
+
+
+

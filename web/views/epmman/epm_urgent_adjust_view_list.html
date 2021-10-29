@@ -1,0 +1,29 @@
+<!-- 
+ 紧急要货插单记录报表
+ zengjinhua
+ 2019/12/31
+ -->
+ <div hc-obj-list>
+    <!-- 查询条件面板-->
+    <hc-obj-list-search-panel>
+        <div class="row">
+            <div hc-label="要货单号" hc-input="searchObj.sa_salebillno"></div>
+
+            <div hc-label="紧急要货单号" hc-input="searchObj.urgent_order_billno"></div>
+
+            <div hc-label="客户编码" hc-input="searchObj.customer_code" hc-class-id="customer_org" hc-common-search="commonSearch.customer_org" hc-can-delete="true" hc-can-input="true"></div>
+
+            <div hc-label="客户简称" hc-input="searchObj.short_name"></div>
+        </div>
+
+        <div class="row">
+            <div hc-label="产品编码" hc-input="searchObj.item_code" hc-class-id="item_org" hc-common-search="commonSearch.item_code" hc-can-delete="true" hc-can-input="true"></div>
+
+            <div hc-label="产品名称" hc-input="searchObj.item_name"></div>
+
+            <div hc-label="发货基地" hc-input="searchObj.delivery_base_name" hc-class-id="epm_trading_company" hc-common-search="commonSearch.trading_company_name" hc-can-delete="true" hc-can-input="true"></div>
+            
+            <div hc-label="操作人" hc-input="searchObj.creator_name"></div>
+        </div>
+    </hc-obj-list-search-panel>
+</div>

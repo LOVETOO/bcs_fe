@@ -1,0 +1,72 @@
+<div hc-diy-page>
+
+    <div class="topDiv grid-other-h" style="margin-top: 100px;margin-left:15px">
+        <div id="gridDept" hc-grid="gridOptionsOrg" style="height: 150px;width: 350px;float:left"></div>
+
+
+        <div class="" style="margin-left: 380px;margin-top: -80px"><!--grid-other-h-->
+            <div class="row" >
+                <!--
+                            <div hc-input="data.currItem.unknown"
+                                 hc-label="查询组织"
+                                 hc-btn-click="chooseunknown()">
+                            </div>
+                -->
+
+                <div hc-input="data.currItem.accmonstart"
+                     hc-label="会话期间"
+                     hc-type="year-month">
+                </div>
+
+                <div hc-input="data.currItem.accmonend"
+                     hc-label="到"
+                     hc-type="year-month"
+                     style="margin-left: -80px"><!-- style="margin-left: -80px"-->
+                </div>
+            </div>
+
+            <div class="row" style="margin-left: 30px;margin-top: -90px">
+<!--
+                <div hc-input="data.currItem.maxsearchrltcmt"
+                     hc-label="最大查询数">
+                </div>
+-->
+
+                <div hc-input="data.currItem.tally_flag"
+                     hc-type="checkbox"
+                     hc-label="含未过账凭证">
+                </div>
+
+                <div hc-input="data.currItem.istmodel"
+                     hc-type="checkbox"
+                     hc-label="T型账户分配模式">
+                </div>
+
+                <button type="button"
+                        class="btn btn-white"
+                        ng-click="search()">查询
+                </button>
+
+                <button type="button"
+                        class="btn btn-white"
+                        ng-click="export()">导出
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="p-w-sm" >
+        <div hc-grid="gridOptions" class="m-t-xs" hc-auto-height="grid"></div>
+    </div>
+    <!--
+        <div class="tabs-container">
+            <div class="tab-content">
+                <div id="tab1" class="tab-pane active">
+                    <div hc-box hc-grid="gridOptions"  hc-auto-height="grid"></div>
+                </div>
+            </div>
+        </div>
+    -->
+
+</div>

@@ -1,0 +1,763 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fin_bud_adjust_header">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>预算调整</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 m-t-xs m-b-xs">
+                            <div class="text-right">
+                                <!--<button type="button" class="btn btn-default btn-sm" ng-click=""> 常规-->
+                                <!--</button>-->
+                                <button type="button" class="btn btn-default btn-sm" ng-click="addHeader()"><i
+                                        class="fa fa-plus"></i> 增加
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
+                                        data-target="#SearchModal"><i class="fa fa-search"></i> 查询
+                                </button>
+                                <!--<button type="button" class="btn btn-default btn-sm"-->
+                                <!--ng-click="searchBudType('budtype')"><i class="fa fa-star-o"></i> 个性化-->
+                                <!--</button>-->
+                                <!--<button type="button" class="btn btn-default btn-sm" ng-click="saveData()"><i-->
+                                <!--class="fa fa-folder-o"></i> 保存-->
+                                <!--</button>-->
+                                <!--<button type="button" class="btn btn-default btn-sm"><i class="fa fa-ban"></i> 取消-->
+                                <!--</button>-->
+                                <button type="button" class="btn btn-default btn-sm" ng-click="viewAttachment()"><i
+                                        class="fa fa-ban"></i> 附件
+                                </button>
+                                <!--<button type="button" class="btn btn-default btn-sm" data-toggle="modal"-->
+                                <!--data-target="#ImportModal"><i class="fa fa-external-link"></i> 导出-->
+                                <!--</button>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="viewGrid"
+                         slick-grid="grid"
+                         sg-options="viewOptions"
+                         sg-data="data"
+                         sg-columns="viewColumns"
+                         style="width:100%;min-height:500px;"
+                         class="slick-grid">
+                    </div>
+                    <div id="pager_list_1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--查询-->
+    <div class="modal inmodal fade" id="SearchModal" tabindex="-1" role="dialog"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">选择过滤条件</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>条件1</label>
+                                    <select class="form-control"
+                                            ng-model="condition_name1"
+                                            ng-options = "s.id as s.name for s in conditions">
+                                        <!--<option value="adjust_no">调整单编码</option>-->
+                                        <!--<option value="bill_date">调整日期</option>-->
+                                        <!--<option value="org_name ">制单部门</option>-->
+                                        <!--<option value="bud_year">预算年度</option>-->
+                                        <!--<option value="stat">单据状态</option>-->
+                                        <!--<option value="style">调整类型</option>-->
+                                        <!--<option value="bill_type">单据类型</option>-->
+                                        <!--<option value="note">备注</option>-->
+                                        <!--<option value="org_code">制单部门编码</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>运算符1</label>
+                                    <select class="form-control"
+                                            ng-model="condition_type1">
+                                        <option value="like">包含</option>
+                                        <option value="=">等于</option>
+                                        <option value="left">左包含</option>
+                                        <option value="right">右包含</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>关键字1</label>
+                                    <input type="text" class="form-control" ng-model="condition_value1"
+                                           name="conditions">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>条件2</label>
+                                    <select class="form-control"
+                                            ng-model="condition_name1">
+                                        <option value="adjust_no">调整单编码</option>
+                                        <option value="bill_date">调整日期</option>
+                                        <option value="org_name ">制单部门</option>
+                                        <option value="bud_year">预算年度</option>
+                                        <option value="stat">单据状态</option>
+                                        <option value="style">调整类型</option>
+                                        <option value="bill_type">单据类型</option>
+                                        <option value="note">备注</option>
+                                        <option value="org_code">制单部门编码</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>运算符2</label>
+                                    <select class="form-control" ng-model="condition_type2">
+                                        <option value="like">包含</option>
+                                        <option value="=">等于</option>
+                                        <option value="3">左包含</option>
+                                        <option value="4">右包含</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>关键字2</label>
+                                    <input type="text" class="form-control" ng-model="condition_value2"
+                                           name="conditions">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label>
+                                    <div class="icheckbox_square-green">
+                                        <input type="checkbox" class="i-checks">
+                                        <ins class="iCheck-helper"></ins>
+                                    </div>
+                                    保留过滤条件
+                                </label>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>
+                                    <div class="icheckbox_square-green">
+                                        <input type="checkbox" class="i-checks">
+                                        <ins class="iCheck-helper"></ins>
+                                    </div>
+                                    忽略大小写
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="searchFee()">确定
+                    </button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--modal-导出-->
+    <div class="modal inmodal fade" id="ImportModal" tabindex="-1" role="dialog"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">请选择要导出的列</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-condensed table-hover">
+                        <tr>
+                            <th></th>
+                            <th>导出</th>
+                            <th>列名</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <input type="checkbox" value="1" id="FeeId">
+                            </td>
+                            <td>
+                                <label for="FeeId">费用项目编码</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <input type="checkbox" value="1" id="FeeName">
+                            </td>
+                            <td>
+                                <label for="FeeName">费用项目名称</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <input type="checkbox" value="1" id="SubjectId">
+                            </td>
+                            <td>
+                                <label for="SubjectId">会计科目编码</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <input type="checkbox" value="1" id="SubjectName">
+                            </td>
+                            <td>
+                                <label for="SubjectName">会计科目名称</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <input type="checkbox" value="1" id="SubjectDescription">
+                            </td>
+                            <td>
+                                <label for="SubjectDescription">会计科目描述</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>
+                                <input type="checkbox" value="1" id="Reimbursement">
+                            </td>
+                            <td>
+                                <label for="Reimbursement">报销方式</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>
+                                <input type="checkbox" value="1" id="State">
+                            </td>
+                            <td>
+                                <label for="State">状态</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>
+                                <input type="checkbox" value="1" id="Comment">
+                            </td>
+                            <td>
+                                <label for="Comment">备注</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--查看-->
+    <div class="modal inmodal fade" id="DetailModal" tabindex="-1" role="dialog" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 802px;height: 620px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">预算调整</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="get" class="form-horizontal ng-pristine ng-valid">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label not-null">调整单编码</label>
+                                        <div class="col-sm-8">
+                                            <input type="text"
+                                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.currItem.adjust_no" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label not-null">单据状态</label>
+                                        <div class="col-sm-8">
+                                            <select ng-model="data.currItem.stat"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                    ng-options="s.id as s.name for s in stat"
+                                                    disabled="disabled" ng-disabled="true">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">预算年度</label>
+                                        <div class="col-sm-8">
+                                            <input type="number" value="2018" class="form-control"
+                                                   ng-model="data.currItem.bud_year"   ng-disabled="viewDisabled">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label not-null">制单部门</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid"
+                                                       ng-model="data.currItem.org_code" ng-disabled="viewDisabled">
+                                                <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-click="searchDept('checkDetail')" ng-disabled="viewDisabled">•••</button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input type="text"
+                                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.currItem.org_name" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">制单人</label>
+                                        <div class="col-sm-8">
+                                            <input type="text"
+                                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.currItem.creator" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">制单时间</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" ng-disabled="true"
+                                                   ng-model="data.currItem.create_time">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">调整日期</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" ng-disabled="true"
+                                                   ng-model="data.currItem.bill_date">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">调整类型</label>
+                                        <div class="col-sm-8">
+                                            <select ng-model="data.currItem.style"
+                                                    class="input-sm chosen-select"
+                                                    ng-options="s.id as s.name for s in styles"
+                                                    ng-selected="s.id== data.currItem.style"
+                                                    ng-disabled="viewDisabled">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">调增金额</label>
+                                        <div class="col-sm-8">
+                                            <input type="text"
+                                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.AddItem.adjust_amt" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">调减金额</label>
+                                        <div class="col-sm-8">
+                                            <input type="text"
+                                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.DecreaseItem.adjust_amt" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label ">备注</label>
+                                        <div class="col-sm-8">
+                                            <input type="text"
+                                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.currItem.note" ng-disabled="viewDisabled">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="" class="tab-content">
+                        <div class="tab-pane fade in active">
+                            <div id="lineGrid" slick-grid="grid" sg-options="lineOptions" sg-data=""
+                                 sg-columns="lineColumns" style="width:100%;height:320px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            <div class="col-sm-3">
+                                <div class="col-sm-1"></div>
+                                <button type="button" class="btn btn-default btn-sm" ng-click="newDetail()" ng-disabled="viewDisabled"> 增加明细
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="saveAll()">确定</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 增加明细 -->
+    <div class="modal inmodal fade" id="AddDetailModal" tabindex="-1" role="dialog"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="width: 802px;height: 620px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">资源调整属性</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="m-t-sm m-b-sm border-bottom">
+                        <h4>调增</h4>
+                    </div>
+                    <form method="get" class="form-horizontal ng-pristine ng-valid">
+                        <div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label not-null">预算类别</label>
+                                        <div class="col-sm-7">
+                                            <div class="input-group">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid"
+                                                       ng-model="data.AddItem.bud_type_code" ng-disabled="AddDisabled">
+                                                <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-click="searchBudType('AddDetail')"
+                                                                ng-disabled="AddDisabled">•••</button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                               ng-model="data.AddItem.bud_type_name" ng-disabled="true"
+                                               disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label not-null">费用对象</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid"
+                                                       ng-model="data.AddItem.object_name" ng-disabled="true">
+                                                <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-disabled="AddDisabled">•••</button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label not-null">产品线</label>
+                                        <div class="col-sm-8">
+                                            <select ng-model="data.AddItem.item_type_id"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                    ng-options="s.id as s.name for s in item_type_id"
+                                                    ng-selected="s.id == data.AddItem.item_type_id"
+                                                    ng-disabled="AddDisabled">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label not-null">预算机构</label>
+                                        <div class="col-sm-7">
+                                            <div class="input-group">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid"
+                                                       ng-model="data.AddItem.org_code" ng-disabled="AddDisabled">
+                                                <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-click="searchDept('AddDetail')"
+                                                                ng-disabled="AddDisabled">•••</button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                               ng-model="data.AddItem.org_name" ng-disabled="true"
+                                               disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label not-null">预算期间</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <select
+                                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                        ng-model="data.AddItem.dname"
+                                                        ng-options="s for s in dnames"
+                                                        ng-selected="data.AddItem.dname == s"
+                                                        ng-disabled="AddDisabled">
+                                                </select>
+                                                <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-disabled="AddDisabled">•••</button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label "> 品类</label>
+                                        <div class="col-sm-8">
+                                            <select ng-model="data.AddItem.crm_entid"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                    ng-options="s.id as s.name for s in crm_entid"
+                                                    ng-selected="s.id == data.DecreaseItem.crm_entid"
+                                                    ng-disabled="AddDisabled">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label not-null">调整类型</label>
+                                        <div class="col-sm-7">
+                                            <select ng-model="data.AddItem.style"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                    ng-options="s.id as s.name for s in styles"
+                                                    ng-selected="s.id == data.AddItem.style" ng-disabled="true">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label not-null">调整金额</label>
+                                        <div class="col-sm-6">
+                                            <input type="text"
+                                                   class="input-group col-sm-12 ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.AddItem.adjust_amt" ng-disabled="AddDisabled">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="m-t-sm m-b-sm border-bottom">
+                        <h4>调减</h4>
+                    </div>
+                    <form method="get" class="form-horizontal ng-pristine ng-valid">
+                        <div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label not-null">预算类别</label>
+                                        <div class="col-sm-7">
+                                            <div class="input-group">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid"
+                                                       ng-model="data.DecreaseItem.bud_type_code">
+                                                <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-click="searchBudType('DecreaseDetail')"
+                                                                ng-disabled="DecreaseDisabled">•••</button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                               ng-model="data.DecreaseItem.bud_type_name" ng-disabled="true">
+                                    </div><!--预算类别输入框,不可用-->
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label not-null">费用对象</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid"
+                                                       ng-model="data.DecreaseItem.bud_type_name" ng-disabled="true">
+                                                <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-disabled="DecreaseDisabled">•••</button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label not-null">产品线</label>
+                                        <div class="col-sm-8">
+                                            <select ng-model="data.DecreaseItem.item_type_id"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                    ng-options="s.id as s.name for s in item_type_id"
+                                                    ng-selected="s.id == data.DecreaseItem.item_type_id"
+                                                    ng-disabled="DecreaseDisabled">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label not-null">预算机构</label>
+                                        <div class="col-sm-7">
+                                            <div class="input-group">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid"
+                                                       ng-model="data.DecreaseItem.org_code">
+                                                <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-click="searchDept('DecreaseDetail')"
+                                                                ng-disabled="DecreaseDisabled">•••</button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                               ng-model="data.DecreaseItem.org_name" ng-disabled="true"
+                                               disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label not-null">预算期间</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group">
+                                                <select
+                                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                        ng-model="data.DecreaseItem.dname"
+                                                        ng-options="s for s in dnames"
+                                                        ng-selected="data.DecreaseItem.dname == s"
+                                                        ng-disabled="DecreaseDisabled">
+                                                </select>
+                                                <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-primary"
+                                                                ng-disabled="DecreaseDisabled">•••</button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label "> 品类</label>
+                                        <div class="col-sm-8">
+                                            <select ng-model="data.DecreaseItem.crm_entid"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                    ng-options="s.id as s.name for s in crm_entid"
+                                                    ng-selected="s.id == data.DecreaseItem.crm_entid"
+                                                    ng-disabled="DecreaseDisabled">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label not-null">调整类型</label>
+                                        <div class="col-sm-7">
+                                            <select ng-model="data.DecreaseItem.style"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                    ng-options="s.id as s.name for s in styles"
+                                                    ng-selected="s.id== data.DecreaseItem.style"
+                                                    ng-disabled="true">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label not-null">调整金额</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="input-group col-sm-12"
+                                                   ng-model="data.DecreaseItem.adjust_amt" ng-disabled="DecreaseDisabled">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveDetail()">确定
+                    </button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!--时间插件引入中文-->
+<script type="text/javascript" src="../../lib/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"
+        charset="UTF-8"></script>
+
+
+

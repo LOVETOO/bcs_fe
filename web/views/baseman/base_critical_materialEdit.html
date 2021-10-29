@@ -1,0 +1,137 @@
+<div class="bill-form" ng-controller="base_critical_materialEdit">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float:left">
+                <div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">
+
+                </div>
+
+
+                <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button" ng-click="new()"><i
+                        class="fa fa-file-o"></i>新增
+                </button>
+                <button class="btn btn-toolbar" type="button"  ng-click="save($event)"><i
+                        class="fa fa-floppy-o"></i>保存
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i
+                        class="fa fa-history"></i>刷新
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                        ng-click="delete()"><i class="fa fa-trash"></i>删除
+                </button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-title">
+                    <h5>基本信息</h5>
+                    <div ibox-tools></div>
+                </div>
+                <div id="content" class="first tab-content">
+                    <div id="tab1" class="tab-pane active">
+                        <div class="ibox-content">	
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">机型类别</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select data-rule-required="true" data-msg-required="机型类别不能空"
+									        data-placeholder="" chosen-select								        
+                                            ng-model="data.currItem.pro_type"
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="s.dictvalue as s.dictname for s in trade_types">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">编码前缀</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input data-rule-required="true" data-msg-required="编码前缀不能空" type="text"      
+									       ng-model="data.currItem.item_code"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-1">
+                                    <label><input ng-model="data.currItem.usable" ng-false-value="1"
+                                                  ng-true-value="2" ng-checked="data.currItem.usable"
+                                                  type="checkbox">是否可用</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">物料描述包含</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input data-rule-required="true" data-msg-required="物料描述包含不能空" type="text" 
+									       ng-model="data.currItem.item_name"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">物料描述不包含</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input data-rule-required="true" data-msg-required="物料描述不包含不能空" type="text" 
+									       ng-model="data.currItem.item_name2"
+                                           class="input-sm form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">创建人</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" readonly="true" ng-model="data.currItem.creator"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">创建时间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.create_time"
+                                           class="input-sm form-control">
+                                </div>
+
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">更新人</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.updator"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">更新时间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.update_time"
+                                           class="input-sm form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">备注</label>
+                                </div>
+                                <div class="col-md-11   ">
+                                            <textarea ng-model="data.currItem.note" rows="3"
+                                                      class="form-control noresize">
+                                            </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

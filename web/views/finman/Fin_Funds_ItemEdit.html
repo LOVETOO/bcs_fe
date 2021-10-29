@@ -1,0 +1,61 @@
+﻿<div class="bill-form" ng-controller="FinFundsItemEditController">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h3>业务员与汇款人对应关系维护</h3>
+            <button ng-click="search()" class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                <i class="fa fa-search"></i>查询
+            </button>
+            <button ng-click="new()" class="btn btn-toolbar" type="button"><i class="fa fa-file-o"></i>新增</button>
+            <button ng-click="refresh()" class="btn btn-toolbar" type="button"><i class="fa fa-history"></i>刷新</button>
+            <button ng-click="save()" class="btn btn-toolbar" type="button"><i class="fa fa-floppy-o"></i>保存</button>
+            <button ng-click="delete()" class="btn btn-toolbar" type="button"><i class="fa fa-trash"></i>删除</button>
+            <button class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>导出</button>
+            <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i class="fa fa-times"></i>关闭
+            </button>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <form name="editform" class="form-horizontal">
+                                <div class="ibox-content">
+                                    <div class="row">                                 
+                                        <div class="col-md-1">
+	                                        <label class="form-label-mini" >业务员:</label>
+	                                    </div>
+	                                    <div class="col-md-2">
+	                                        <input class="form-control input-sm" type="text" ng-model="data.currItem.sales_user_id">
+	                                    </div>
+	                                    <div class="col-md-1">
+	                                        <label class="form-label-mini" >汇款人:</label>
+	                                    </div>
+	                                    <div class="col-md-2">
+	                                        <input class="form-control input-sm" type="text" ng-model="data.currItem.hk_man">
+	                                    </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-1">
+	                                        <label class="form-label-mini">备注:</label>
+	                                    </div>
+	                                    <div class="col-md-11">
+	                                        <textarea ng-model="data.currItem.note" rows="3"
+	                                                  class="form-control noresize"></textarea>
+	                                    </div>
+                                    </div>
+    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

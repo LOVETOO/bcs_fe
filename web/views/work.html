@@ -1,0 +1,142 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ctrl_mydesktop">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>工作流</h5>
+                    <span class="hide label label-success pull-right">刷新</span>
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-xs btn-white" ng-class="{active: data.wftype == 1}" ng-click="getwflist(1)">待审批</button>
+                            <button type="button" class="btn btn-xs btn-white" ng-class="{active: data.wftype == 2}" ng-click="getwflist(2)">我启动的</button>
+                            <button type="button" class="btn btn-xs btn-white" ng-class="{active: data.wftype == 4}" ng-click="getwflist(4)">已完成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content no-padding">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="item in data.wfcurrents">
+                            <p> 
+                                <a ng-click="wftempcheck($index)">
+                                    <span><i class="fa fa-angle-right" ng-class="{'fa-angle-down': !item.hide, 'fa-angle-right': item.hide}"></i>
+{{item.wfname}}
+                                </span>
+                                </a>
+
+								<pie-chart ng-hide="data.wftype!=1" class="pull-right" data="[item.normalqty,item.delayqty+item.overqty]" options="xoption"></pie-chart>
+								
+                                <!--<span class="text pull-right text-info" ng-class="{'hide': item.normalqty==0}">{{item.normalqty}} </span>
+								<span class="text pull-right text-warning" ng-class="{'hide': item.delayqty==0}">{{item.delayqty}} </span>
+								<span class="text pull-right text-danger" ng-class="{'hide': item.overqty==0}">{{item.overqty}} </span>-->
+                            </p>
+							
+                            <!--table ng-hide="item.hide" class="item-info table table-hover margin bottom"-->
+					
+							<table foo-table ng-hide="item.hide" class="table default footable-loaded footable" data-page-size="5"> <!--table-stripped toggle-arrow-tiny-->
+							<thead>
+                                <tr>
+                                    
+                                    <th>主题</th>
+                                    <th ng-hide="data.wftype!=1 && data.wftype!=4">启动者</th>
+									<th ng-hide="data.wftype!=2">当前过程</th>
+									<th ng-hide="data.wftype!=2">当前审批人</th>
+                                    <th>到达时间</th>
+                                    
+                                </tr>
+							</thead>
+							<tbody>
+                                <tr ng-repeat="wf in item.wf">
+										<!--href="#{{wf.formclass}}"-->
+                                    <td><a href="#{{wf.formclass}}?param={{wf.url_param}}" aang-click="edit(wf, $event)" class="text-info">{{wf.subject}}</a>
+                                        <span class="label pull-right label-danger" ng-class="{'hide': wf.delay_stat!=3}">延迟</span>
+										<span class="label pull-right label-warning" ng-class="{'hide': wf.delay_stat!=2}">延迟</span>
+                                    </td>
+                                    <td ng-hide="data.wftype!=1 && data.wftype!=4">{{wf.startor}}</td>
+									<td ng-hide="data.wftype!=2">{{wf.currprocname}}</td>
+									<td ng-hide="data.wftype!=2">{{wf.userid}}</td>
+
+                                    <td>{{wf.lasttime}}</td>
+                                    <!--td><a class="text-infoa">审批</a></td-->
+                                </tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="5">
+										<ul class="pagination pull-right"></ul>
+									</td>
+								</tr>
+                            </tfoot>
+                            </table>
+                        </li>
+                        <li class="list-group-item" ng-class="{'hide':data.wfcurrents.length != 0}">
+                            <p>没有数据</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+					<span  ng-show="remindset" ng-click="work_settings($event)" class="label label-success pull-right dd-handle">完成设置</span>
+                    <span  ng-show="!remindset" ng-click="work_settings($event)" class="label label-success pull-right dd-handle">设置</span>
+                    <h5>工作提醒</h5>					
+                </div>				
+				
+                <div class="ibox-content  no-padding">
+
+					<ul class="list-group" ng-show="!remindset">
+                        <li class="list-group-item" ng-repeat="item in data.reminds">
+                            <p><a href="#{{item.default_menu_name}}?param={{item.url_param}}" class="text-info">{{item.title.replace("%d", item.qty)}}</a><!--small><a class="text-muted pull-right"><i class="fa fa-trasha"></i> 详情</a></small--></p>
+                            
+                        </li>
+					</ul>
+                    <ul class="list-group" ng-show="remindset">
+                        <li class="list-group-item" ng-repeat="item in data.base_remind_headers">
+                            <p><a href="#{{item.default_menu_name}}" class="text-info">{{item.remind_type}}</a><small>
+                            <a ng-show="!item.is_focus" ng-click="setRemind($index)" class="text-muted pull-right"><i class="fa fa-trasha"></i> 关注</a>
+                            <a ng-show="item.is_focus" ng-click="setNoRemind($index)" class="text-muted pull-right"><i class="fa fa-trasha"></i> 取消关注</a>
+                            </small></p>
+                            
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">发布</span>
+                    <h5>通知公告</h5>
+                </div>
+                <div class="ibox-content">
+                    <div ng-repeat="item in data.pubnotice" class="border-bottom">
+                        <h5>{{item.notice_title}}</h5>
+                        <p></p>
+                        <h6>发布人:{{item.creator}} 发布时间:{{item.fb_date}}</h6>
+                        <p class="list-group-item-text"><span>{{item.notice_content}}</span></p>
+                        <p class="list-group-item-text" ng-repeat="attach in item.attachs">
+							<a class="text-info" href='{{attach.url}}'><i class="fa fa-paperclip"></i> {{attach.docname}}</a>
+						</p>
+                    </div>
+                    <button ng-hide="(data.pubnotice.length==0)" class="btn btn-primary btn-block m-t" ng-click="test()"><i class="fa fa-arrow-down"></i> Show More</button>
+
+					<p ng-hide="(data.pubnotice.length!=0)">暂无公告</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+span.wfcheckstat-c {
+    display: none
+}
+span.wfcheckstat-b {
+    background-color: rgb(237, 85, 101);
+    color: rgb(255, 255, 255);
+}
+span.wfcheckstat-a {
+    background-color: rgb(248, 172, 89);
+    color: rgb(255, 255, 255);
+}
+</style>

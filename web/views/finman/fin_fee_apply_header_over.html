@@ -1,0 +1,172 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="ctrl_fin_fee_apply_header_over">
+    <div class="wrapper wrapper-content animated fadeInRight"><!-- ng-init="doSearch()"-->
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title page-title">
+                    <h5>{{headername}}</h5>
+                    <div class="ibox-tools">
+                        <form role="form" class="form-inline">
+                            <div class="text-right">
+                            <!--<button type="button" class="btn btn-default btn-sm" data-toggle="modal"-->
+                                    <!--data-target="#SearchModal"><i class="fa fa-search"></i> 查询-->
+                            <!--</button>-->
+                                <button type="button" class="btn btn-default btn-sm"
+                                        ng-click="searchData()"><i class="fa fa-refresh"></i> 刷新
+                                </button>
+                            <!--<button type="button" class="btn btn-default btn-sm" ng-click="over()"><i
+                                    class="fa fa-ban"></i> 费用结案
+                            </button>-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="viewGrid"></div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--详情模态页面-->
+    <div class="modal inmodal fade" id="detailModal" tabindex="-1" role="dialog" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog modal-lg" style="width:1024px;">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">费用申请结案</h4>
+                </div>
+                <div class="modal-body" >
+                    <div class="ibox-content">
+                        <form method="get" class="form-inline mline ng-pristine ng-valid">
+                            <div class="row">
+                                <label class="control-label">申请单号</label>
+                                <input type="text" class="form-control"
+                                       ng-model="data.currItem.fee_apply_no" ng-readonly="true">
+                                <!--<label class="control-label">单据状态</label>
+                                <input type="text" class="form-control"
+                                       ng-model="data.billStats" ng-readonly="true">-->
+                                <label class="control-label">制单人</label>
+                                <input type="text" class="form-control"
+                                       ng-model="data.currItem.creator" ng-readonly="true">
+                                <label class="control-label">制单时间</label>
+                                <input type="text" class="form-control padding-time"
+                                       ng-model="data.currItem.create_time" ng-readonly="1">
+                                <label class="control-label">单据状态</label>
+                                <select ng-model="data.currItem.stat"
+                                        class="input-sm chosen-select form-control"
+                                        ng-options="s.id as s.name for s in billStats"
+                                        ng-selected="s.id==data.currItem.stat"
+                                        ng-disabled="true">
+                                </select>
+
+                            </div>
+                            <div class="row">
+                                <label class="control-label">申请人</label>
+                                <input type="text" class="form-control"
+                                       ng-model="data.currItem.chap_name" ng-readonly="1">
+                                <label class="control-label">申请部门</label>
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="data.currItem.org_code" ng-readonly="1">
+                                <input type="text" class="form-control width_xm" ng-model="data.currItem.org_name"
+                                       ng-readonly="1">
+                                <label class="control-label">报销截止</label>
+                                <input type="text" class="form-control padding-time"
+                                       ng-model="data.currItem.bx_end_date" ng-readonly="1">
+                            </div>
+                            <div class="row">
+                                <label class="control-label">工程项目</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control " ng-model="data.currItem.project_code"
+                                           name="customer_code"
+                                           ng-readonly="data.currItem.fee_apply_id>0 && data.currItem.stat !=1"
+                                           ng-required="true">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary"  type="button"
+                                                ng-click="searchItem()"
+                                                ng-disabled="data.currItem.fee_apply_id>0 && data.currItem.stat !=1">•••</button>
+                                    </div>
+                                </div>
+                                <input type="text" class=" form-control width_xm"  name="project_name"
+                                       ng-model="data.currItem.project_name"  ng-readonly="true">
+
+                                <label class="control-label">销售渠道</label>
+                                <select ng-model="data.currItem.sale_center"
+                                        class="input-sm chosen-select form-control non-empty ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                        ng-options="s.id as s.name for s in sale_center"
+                                        ng-disabled="true">
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label class="control-label">预算类别</label>
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="data.currItem.bud_type_code" ng-readonly="1">
+                                <input type="text" class="form-control width_xm"
+                                       ng-model="data.currItem.bud_type_name" ng-readonly="1">
+                                <label class="control-label">年度</label>
+                                <input type="number" class="form-control"
+                                       ng-model="data.currItem.cyear" ng-readonly="1">
+                                <label class="control-label">月度</label>
+                                <input type="text" class="form-control"
+                                       ng-model="data.currItem.cmonth" ng-readonly="1">
+                            </div>
+
+                            <!--<div class="row">
+                                <label class="control-label">使用对象类型</label>
+                                <input type="text" class="form-control"
+                                       ng-model="data.currItem.useobject_types" ng-readonly="1">
+                                <label class="control-label">使用对象</label>
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.useobject_code" ng-readonly="1">
+                                <input type="text" class="form-control width_xm"
+                                       ng-model="data.currItem.useobject_name" ng-readonly="1">
+                            </div>-->
+                            <div class="row">
+                                <label class="control-label ">申请总额</label>
+                                <input type="text" class="form-control" money-format
+                                       ng-model="data.currItem.total_apply_amt" ng-readonly="1">
+                                <label class="control-label ">批准总额</label>
+                                <input type="text" class="form-control" money-format
+                                       ng-model="data.currItem.total_allow_amt" ng-readonly="1">
+                                <label class="control-label">用途</label>
+                                <input type="text" class="form-control width_ml"
+                                       ng-model="data.currItem.purpose" ng-readonly="1">
+                            </div>
+
+
+                            <div class="row">
+                                <label class="control-label">结案原因</label>
+                                <input type="text" class="form-control non-empty" style="width:890px;"
+                                       ng-model="data.currItem.settle_reason">
+                            </div>
+                            <table></table>
+                        </form>
+                        <div id="lineGrid" style="height: 150px;"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="over()">费用结案</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    #viewGrid .l7.r7, #viewGrid .l8.r8 {
+        text-align: right !important;
+    }
+
+    #lineGrid .l2.r2, #lineGrid .l3.r3, #lineGrid .l4.r4, #lineGrid .l5.r5, #lineGrid .l6.r6 {
+        text-align: right !important;
+    }
+</style>
+
+
+

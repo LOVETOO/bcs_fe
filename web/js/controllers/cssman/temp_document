@@ -1,0 +1,387 @@
+
+	FormName=CssFixFeeSettleTotalForm
+	ClassName=TCssFixFeeSettleTotalForm
+	UnitName=CssFixFeeSettleTotalFrm
+	窗体标题:总部维修费结算标准[制单]
+	内建索引 self.MenuTag=0
+	窗体关联值 self.ExpandValue=0
+
+	tbFirst:TToolButton,Caption=首条,Hint=移到第一条,Visible=True
+
+	tbPrior:TToolButton,Caption=上一条,Hint=移到上一条,Visible=True
+
+	tbnext:TToolButton,Caption=下一条,Hint=移到下一条,Visible=True
+
+	tbLast:TToolButton,Caption=末条,Hint=移到最末一条,Visible=True
+
+	ToolButton5:TToolButton,Caption=ToolButton5,Hint=,Visible=True
+
+	tbAdd:TToolButton,Caption=增加,Hint=增加(F2),Visible=True
+
+	tbDel:TToolButton,Caption=删除,Hint=删除(F4),Visible=True
+
+	tbEdit:TToolButton,Caption=编辑,Hint=编辑(F5),Visible=False
+
+	tbCopy:TToolButton,Caption=复制,Hint=复制,Visible=False
+
+	tbCompare:TToolButton,Caption=查找,Hint=查找,Visible=False
+
+	ToolButton18:TToolButton,Caption=ToolButton18,Hint=,Visible=False
+
+	tbFind:TToolButton,Caption=查询,Hint=查询(F3),Visible=True
+
+	tbRefresh:TToolButton,Caption=刷新,Hint=刷新当前记录,Visible=False
+
+	tbSort:TToolButton,Caption=排序,Hint=排序(Ctrl+R),Visible=False
+
+	tbSetdgOptions:TToolButton,Caption=设置列,Hint=设置列(Ctrl+S),Visible=False
+
+	tbSetStat:TToolButton,Caption=个性化,Hint=个性化设置,Visible=False
+
+	ToolButton11:TToolButton,Caption=ToolButton11,Hint=,Visible=True
+
+	tbSave:TToolButton,Caption=保存,Hint=保存(F9),Visible=True
+
+	tbUndo:TToolButton,Caption=取消,Hint=取消保存,Visible=True
+
+	tbEditSht:TToolButton,Caption=编辑报表,Hint=编辑导出格式,Visible=False
+
+	tbExport:TToolButton,Caption=导出,Hint=数据导出到Excel,Visible=True
+
+	tbImport:TToolButton,Caption=导入,Hint=从Excel导入数据,Visible=True
+
+	ToolButton2:TToolButton,Caption=ToolButton2,Hint=,Visible=True
+
+	tbAudit:TToolButton,Caption=审核,Hint=提交,Visible=True
+
+	tbUndoAudit:TToolButton,Caption=作废,Hint=取消审核,Visible=False
+
+	tbECBillWF:TToolButton,Caption=变更,Hint=变更流程,Visible=False
+
+	tbBillCancel:TToolButton,Caption=作废单据,Hint=作废单据,Visible=False
+
+	tbBatchCheck:TToolButton,Caption=批量审核,Hint=批量审核,Visible=False
+
+	ToolButton15:TToolButton,Caption=ToolButton15,Hint=,Visible=False
+
+	tbPriview:TToolButton,Caption=预览,Hint=预览,Visible=False
+
+	tbPrint:TToolButton,Caption=打印,Hint=打印(F7),Visible=False
+
+	ToolButton12:TToolButton,Caption=,Hint=,Visible=True
+
+	tbClose:TToolButton,Caption=关闭,Hint=关闭,Visible=True
+
+	dgDetail:TccDataStringGrid,Visible=False
+	FieldName=,Title.Caption=,Format=cfString,DisplayValues=
+
+
+	dgView:TccDataStringGrid,Visible=True
+	FieldName=Stat,Title.Caption=单据状态,Format=cfInteger,DisplayValues=
+	  PickList[0]=制单
+	  PickList[1]=提交
+	  PickList[2]=已启动
+	  PickList[3]=审核中
+	  PickList[4]=已审核
+	  PickList[5]=已驳回
+	  PickList[6]=已取消
+	  PickList[7]=暂停
+	  PickList[8]=已结案
+	  PickList[9]=关闭
+	  RelationValues[0]=1
+	  RelationValues[1]=2
+	  RelationValues[2]=3
+	  RelationValues[3]=4
+	  RelationValues[4]=5
+	  RelationValues[5]=6
+	  RelationValues[6]=96
+	  RelationValues[7]=97
+	  RelationValues[8]=98
+	  RelationValues[9]=99
+
+	FieldName=Norm_Id,Title.Caption=标准Id,Format=cfInteger,DisplayValues=
+
+	FieldName=Norm_Name,Title.Caption=标准名称,Format=cfString,DisplayValues=
+
+	FieldName=Repair_Way,Title.Caption=服务方式,Format=cfInteger,DisplayValues=
+	  PickList[0]=送修
+	  PickList[1]=一般上门
+	  PickList[2]=远程上门
+	  PickList[3]=超远程上门
+	  PickList[4]=一次上门多台
+	  PickList[5]=托运
+	  PickList[6]=邮寄
+	  PickList[7]=仅供配件
+	  PickList[8]=保内其他
+	  PickList[9]=保外维修
+	  PickList[10]=售前维修
+	  RelationValues[0]=1
+	  RelationValues[1]=2
+	  RelationValues[2]=3
+	  RelationValues[3]=4
+	  RelationValues[4]=5
+	  RelationValues[5]=6
+	  RelationValues[6]=7
+	  RelationValues[7]=8
+	  RelationValues[8]=9
+	  RelationValues[9]=10
+	  RelationValues[10]=11
+
+	FieldName=Fix_Step_Code,Title.Caption=维修类型编码,Format=cfString,DisplayValues=
+
+	FieldName=Fix_Step_Name,Title.Caption=维修类型名称,Format=cfString,DisplayValues=
+
+	FieldName=Fix_Org_Level,Title.Caption=资质等级,Format=cfInteger,DisplayValues=
+
+	FieldName=Is_project,Title.Caption=工程机,Format=cfBoolean,DisplayValues=2;1
+
+	FieldName=Start_Date,Title.Caption=开始日期,Format=cfDateTime,DisplayValues=
+
+	FieldName=End_Date,Title.Caption=结束日期,Format=cfDateTime,DisplayValues=
+
+	FieldName=Distance_Start,Title.Caption=公里数开始,Format=cfNumber,DisplayValues=
+
+	FieldName=Distance_End,Title.Caption=公里数结束,Format=cfNumber,DisplayValues=
+
+	FieldName=Way_Fee,Title.Caption=上门费,Format=cfNumber,DisplayValues=
+
+	FieldName=Is_PerDistance,Title.Caption=按每公里计算,Format=cfBoolean,DisplayValues=2;1
+
+	FieldName=PerDistance_Fee,Title.Caption=每公里上门费,Format=cfNumber,DisplayValues=
+
+	FieldName=PerDistance_BaseFee,Title.Caption=按公里计算的基础上门费,Format=cfNumber,DisplayValues=
+
+	FieldName=Info_Fee,Title.Caption=信息费,Format=cfNumber,DisplayValues=
+
+	FieldName=Fix_Fee,Title.Caption=维修费,Format=cfNumber,DisplayValues=
+
+	FieldName=Norm_Amt,Title.Caption=总金额,Format=cfNumber,DisplayValues=
+
+	FieldName=Item_Type_No,Title.Caption=产品大类编码,Format=cfString,DisplayValues=
+
+	FieldName=Item_Type_Name,Title.Caption=产品大类名称,Format=cfString,DisplayValues=
+
+	FieldName=SmallC_Code,Title.Caption=小类编码,Format=cfString,DisplayValues=
+
+	FieldName=SmallC_Name,Title.Caption=小类名称,Format=cfString,DisplayValues=
+
+	FieldName=Series_Code,Title.Caption=系列编码,Format=cfString,DisplayValues=
+
+	FieldName=Series_Name,Title.Caption=系列名称,Format=cfString,DisplayValues=
+
+	FieldName=Item_Code,Title.Caption=产品编码,Format=cfString,DisplayValues=
+
+	FieldName=Item_Name,Title.Caption=产品名称,Format=cfString,DisplayValues=
+
+	FieldName=Spec,Title.Caption=产品型号,Format=cfString,DisplayValues=
+
+	FieldName=Creator,Title.Caption=制单人,Format=cfString,DisplayValues=
+
+	FieldName=Create_Time,Title.Caption=制单时间,Format=cfDate,DisplayValues=
+
+	FieldName=Checkor,Title.Caption=审核人,Format=cfString,DisplayValues=
+
+	FieldName=Check_Time,Title.Caption=审核时间,Format=cfDate,DisplayValues=
+
+	FieldName=Note,Title.Caption=备注,Format=cfString,DisplayValues=
+
+	FieldName=Norm_Type,Title.Caption=标准类型,Format=cfInteger,DisplayValues=
+	  PickList[0]=固定类
+	  PickList[1]=申请类
+	  RelationValues[0]=1
+	  RelationValues[1]=2
+
+	FieldName=Fix_Step_Id,Title.Caption=Fix_Step_Id,Format=cfString,DisplayValues=
+
+	FieldName=EntId,Title.Caption=EntId,Format=cfString,DisplayValues=
+	  PickList[0]=佛山市顺德区美的生活电器销售有限公司
+	  RelationValues[0]=16
+
+	FieldName=Item_Type_Id,Title.Caption=Item_Type_Id,Format=cfInteger,DisplayValues=
+
+	FieldName=SmallC_Id,Title.Caption=SmallC_Id,Format=cfInteger,DisplayValues=
+
+	FieldName=Series_Id,Title.Caption=Series_Id,Format=cfInteger,DisplayValues=
+
+	FieldName=Item_Id,Title.Caption=Item_Id,Format=cfInteger,DisplayValues=
+
+	FieldName=Old_Entid,Title.Caption=历史组织,Format=cfInteger,DisplayValues=
+	  PickList[0]=微波电器
+	  PickList[1]=整体厨卫
+	  PickList[2]=生活电器
+	  PickList[3]=环境电器
+	  PickList[4]=精品电器
+	  PickList[5]=照明电气
+	  PickList[6]=环境公司
+	  PickList[7]=美的日电集团
+	  RelationValues[0]=1
+	  RelationValues[1]=2
+	  RelationValues[2]=3
+	  RelationValues[3]=4
+	  RelationValues[4]=6
+	  RelationValues[5]=7
+	  RelationValues[6]=8
+	  RelationValues[7]=99
+
+
+	bedtCreator:TccButtonEdit,Text=scbuser,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=False
+
+	bedtCreate_Time:TccButtonEdit,Text=2019-07-08,AddOnId=0,AddOnIdFieldName=,Dataformat=dfDate,Visible=False
+
+	cbNorm_Type:TsComboBox,Text=固定类,Visible=False
+	  Items[0]=固定类
+	  Items[1]=申请类
+
+	bedtNorm_Name:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=Norm_Id,Dataformat=dfString,Visible=True
+
+	bedtNorm_Amt:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfNumber,Visible=True
+
+	bedtFix_Step_Code:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=False
+
+	bedtFix_Org_Level:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=False
+
+	bedtFix_Step_Id:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=False
+
+	bedtInfo_Fee:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfNumber,Visible=True
+
+	bedtWay_Fee:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfNumber,Visible=True
+
+	bedtStart_Date:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfDate,Visible=True
+
+	bedtEnd_Date:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfDate,Visible=True
+
+	bedtStat:TccButtonEdit,Text=制单,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=True
+	  Items[0]=制单
+	  Items[1]=提交
+	  Items[2]=已启动
+	  Items[3]=审核中
+	  Items[4]=已审核
+	  Items[5]=已驳回
+	  Items[6]=已取消
+	  Items[7]=暂停
+	  Items[8]=已结案
+	  Items[9]=关闭
+	  Values[0]=1
+	  Values[1]=2
+	  Values[2]=3
+	  Values[3]=4
+	  Values[4]=5
+	  Values[5]=6
+	  Values[6]=96
+	  Values[7]=97
+	  Values[8]=98
+	  Values[9]=99
+
+	bedtFix_Fee:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfNumber,Visible=True
+
+	bedtFix_Step_Name:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=True
+
+	dgImportFormat:TccDataStringGrid,Visible=False
+	FieldName=Norm_Name,Title.Caption=标准名称,Format=cfString,DisplayValues=
+
+	FieldName=Repair_Way,Title.Caption=服务方式,Format=cfInteger,DisplayValues=
+	  PickList[0]=送修
+	  PickList[1]=一般上门
+	  PickList[2]=远程上门
+	  PickList[3]=超远程上门
+	  PickList[4]=一次上门多台
+	  PickList[5]=托运
+	  PickList[6]=邮寄
+	  PickList[7]=仅供配件
+	  PickList[8]=保内其他
+	  PickList[9]=保外维修
+	  PickList[10]=售前维修
+	  RelationValues[0]=1
+	  RelationValues[1]=2
+	  RelationValues[2]=3
+	  RelationValues[3]=4
+	  RelationValues[4]=5
+	  RelationValues[5]=6
+	  RelationValues[6]=7
+	  RelationValues[7]=8
+	  RelationValues[8]=9
+	  RelationValues[9]=10
+	  RelationValues[10]=11
+
+	FieldName=Fix_Step_Code,Title.Caption=维修类型编码,Format=cfString,DisplayValues=
+
+	FieldName=Fix_Step_Name,Title.Caption=维修类型名称,Format=cfString,DisplayValues=
+
+	FieldName=Fix_Org_Level,Title.Caption=资质等级,Format=cfInteger,DisplayValues=
+
+	FieldName=Start_Date,Title.Caption=开始日期,Format=cfDateTime,DisplayValues=
+
+	FieldName=End_Date,Title.Caption=结束日期,Format=cfDateTime,DisplayValues=
+
+	FieldName=Info_Fee,Title.Caption=信息费,Format=cfNumber,DisplayValues=
+
+	FieldName=Way_Fee,Title.Caption=上门费,Format=cfNumber,DisplayValues=
+
+	FieldName=Fix_Fee,Title.Caption=维修费,Format=cfNumber,DisplayValues=
+
+	FieldName=item_kind,Title.Caption=产品类别,Format=cfString,DisplayValues=
+
+	FieldName=Norm_Amt,Title.Caption=总金额,Format=cfNumber,DisplayValues=
+
+	FieldName=Note,Title.Caption=备注,Format=cfString,DisplayValues=
+
+	FieldName=Norm_Id,Title.Caption=标准ID,Format=cfInteger,DisplayValues=
+
+	FieldName=Fix_Step_Id,Title.Caption=Fix_Step_Id,Format=cfString,DisplayValues=
+
+
+	bedtEntId:TccButtonEdit,Text=佛山市顺德区美的生活电器销售有限公司,AddOnId=0,AddOnIdFieldName=EntId,Dataformat=dfString,Visible=True
+	  Items[0]=佛山市顺德区美的生活电器销售有限公司
+	  Values[0]=16
+
+	bedtSpec:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=False
+
+	bedtSeries_Code:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=Series_Id,Dataformat=dfString,Visible=True
+
+	bedtSeries_Name:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=True
+
+	bedtItem_Code:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=Item_Id,Dataformat=dfString,Visible=True
+
+	bedtItem_Name:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=True
+
+	bedtDistance_Start:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfNumber,Visible=True
+
+	bedtDistance_End:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfNumber,Visible=True
+
+	bedtPerDistance_Fee:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfNumber,Visible=True
+
+	bedtPerDistance_BaseFee:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfNumber,Visible=True
+
+	bedtREPAIR_WAY:TccButtonEdit,Text=送修,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=True
+	  Items[0]=送修
+	  Items[1]=一般上门
+	  Items[2]=远程上门
+	  Items[3]=超远程上门
+	  Items[4]=一次上门多台
+	  Items[5]=托运
+	  Items[6]=邮寄
+	  Items[7]=仅供配件
+	  Items[8]=保内其他
+	  Items[9]=保外维修
+	  Items[10]=售前维修
+	  Values[0]=1
+	  Values[1]=2
+	  Values[2]=3
+	  Values[3]=4
+	  Values[4]=5
+	  Values[5]=6
+	  Values[6]=7
+	  Values[7]=8
+	  Values[8]=9
+	  Values[9]=10
+	  Values[10]=11
+
+	bedtNorm_Id:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=True
+
+	bedtSmallC_Code:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=SmallC_Id,Dataformat=dfString,Visible=True
+
+	bedtSmallC_Name:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=True
+
+	bedtItem_Type_No:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=Item_Type_Id,Dataformat=dfString,Visible=True
+
+	bedtItem_Type_Name:TccButtonEdit,Text=,AddOnId=0,AddOnIdFieldName=,Dataformat=dfString,Visible=True

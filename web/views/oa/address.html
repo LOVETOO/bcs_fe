@@ -1,0 +1,150 @@
+
+<div hc-diy-page>
+    <div class="content">
+        <h2>通讯录</h2>
+        <div hc-box class="other-h">
+            <div class="top-search">
+                <div
+                hc-input="data.keyword"
+                hc-can-input="true"
+                hc-col-count="8"
+                hc-placeholder="输入用户名/手机/邮箱查询"
+                hc-change="getData(true)"
+                ng-keyup="enter($event)"
+                ></div>
+                <button class="btn btn-sm btn-info" ng-click="search()">搜索</button>
+            </div>
+            
+            <ul class="list-group" style="min-height: 542px">
+                <li class="useritem list-group-item" style="margin-top:10px;background-color: #E2EBF1">
+                        <div style="width: 40px;margin-left:0;">头像</div>
+                        <div class="large">用户名</div>
+                        <div class="large">所属部门</div>
+                        <div class="large">联系电话</div>
+                        <div class="large">邮箱</div>
+                </li>
+                <li class="middle" ng-show="data.userlist.length==0">
+                    <div class="nofile div-empty" >
+                        <img src="img/nofile.png">
+                        <p class="infor">暂无数据显示，请输入查询条件搜索</p>
+                    </div>
+                </li>
+                <li ng-repeat="item in data.userlist" class="useritem list-group-item itemColor" ng-if="data.userlist.length>0">
+                    <div class="headimg">
+                        <img hc-img="item.headimgdocid" class="img" ng-if="item.headimgdocid !='0'">
+                        <img src="img/head.png" class="img" ng-if="item.headimgdocid =='0'">
+                    </div>
+                    <div class="large">{{item.username}}</div>
+                    <div class="large">{{item.dept}} 
+                        <span ng-if="item.dept==''">暂未维护部门信息</span>
+                    </div>
+                    <div class="large">{{item.mobil}} 
+                        <span ng-if="item.mobil==''">暂未维护电话号码</span>
+                    </div>
+                    <div class="large">{{item.email}}
+                            <span ng-if="item.email==''">暂未维护邮箱</span>
+                    </div>
+                </li>
+            </ul>
+            
+            <div id="pageBox" style="width:100%;" ng-show="data.userlist.length>0"></div>
+        </div>
+    </div>
+</div>
+<style>
+    h2{
+        text-align: center;
+    }
+    .content{
+        padding: 10px;
+        width: 1200px;
+        margin: 0 auto;
+    }
+    .useritem{
+        display: flex;
+        align-items: center;
+        color: #717171;
+        font-size: 14px;
+        text-align: center;
+        justify-content: space-between;
+    }
+    .useritem>div.normal{
+        width: 100px;
+    }
+    .useritem>div.large{
+        width: 200px;
+    }
+    ul{
+        padding: 0 !important;
+    }
+    .useritem>div.headimg{
+        width: 40px !important;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid black;
+        margin: 0;
+    }
+    .img{
+        width: 100%;
+        border-radius: 50%;
+    }
+    li:first-child>div{
+        font-weight: bold;
+        color: black
+    }
+    .list-group-item{
+        padding: 5px 15px;
+    }
+    .itemColor{
+        /* background-color: azure; */
+    }
+    .hc-editable input {
+     border: 1px solid #adadad
+    }
+    .form-control {
+    background-color: #FFFFFF;
+    background-image: none;
+    border: 1px solid #dbe0e8 !important; 
+    border-right: 0 !important;
+    border-radius: 0px;
+    color: inherit;
+    display: block;
+    padding: 6px 6px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+    font-size: 13px;
+    color: #333;
+    }
+    input.form-control {
+        height: 35px !important;
+    }
+    .top-search{
+        display: flex;
+        margin-top: 10px;
+    }
+    .input-inline {
+        margin-right: 0 !important; 
+        font-size: 0;
+    }
+    .btn {
+        padding: 3px 30px;
+    }
+    .div-empty img {
+        display: block;
+        width: 100px;
+        height: 100px;
+        margin: 0px auto;
+    }
+    .div-empty p.infor {
+        margin-top: 10px;
+        font-size: 13px;
+        color: #808080;
+        text-align: center;
+    }
+    .middle{
+        height: 450px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

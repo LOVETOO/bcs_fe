@@ -1,0 +1,32 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+        <div class="row">
+            <div hc-input="data.currItem.year_month"
+                 hc-type="year-month"
+                 hc-required="true"
+                 hc-label="起始月份">
+            </div>
+            <div hc-input="data.currItem.year_month_last"
+                 hc-type="year-month"
+                 hc-required="true"
+                 hc-label="结束月份">
+            </div>
+            <div hc-input="data.currItem.warehouse_name"
+                 hc-label="仓库"
+                 hc-common-search="warehouse">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.item_code"
+                 hc-label="产品"
+                 hc-common-search="item_org">
+            </div>
+            <div hc-input="data.currItem.item_name"
+                 hc-readonly="true">
+            </div>
+        </div>
+    </div>
+
+    <div hc-grid="gridOptions" hc-box hc-auto-height="grid"></div>
+
+</div>

@@ -1,0 +1,80 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.surveyitem_name"
+                     hc-label="调研项目名称"
+                     hc-col-count="4"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.sortno"
+                     hc-label="排序号"
+                     hc-type="number"></div>
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true"></div>
+            </div>
+          <!--  hc-required="true" -->
+            <div class="row">
+                <div hc-input="data.currItem.subject"
+                     hc-label="调研主题"
+                     hc-col-count="4"
+                     hc-class-id="kpi_questionnaire_header"
+                     hc-common-search="commonSearchSettingOfSubject"></div>
+                <div hc-input="data.currItem.itemkind"
+                     hc-label="调研项目类别"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.commentnote"
+                     hc-label="答题说明"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.itemtype"
+                     hc-label="答题类型"
+                     hc-change="changeItems()"
+                     hc-dict-code="itemtype"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.usable"
+                     hc-label="可用"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+
+        </div>
+        <div hc-tab="kpi_tab" hc-tab-change="onTabChange(params)" class="other-h"></div>
+        <div hc-tab-page  >
+            <!--适用评分标准-->
+            <div id="score" class="active">
+                <div hc-box hc-grid="gridOptions_surveyitem_norm" hc-auto-height="grid"></div>
+            </div>
+            <!--适用重点工作完成率-->
+            <div id="completion" >
+                <div hc-box hc-grid="gridOptions_surveyitem_appraiser" hc-auto-height="grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /*.ibox-title {
+        display: inline-block;
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    .modal-footer{
+        padding-top: 0px;
+    }
+    .TreeGridBox .ibox-title{
+        border: none;
+    }*/
+</style>

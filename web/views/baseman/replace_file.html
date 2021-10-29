@@ -1,0 +1,99 @@
+<div class="modal-content" local-storage ng-model="data.currItem">
+    <div draggable-model class="modal-header" style="width: 100%">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                ng-click="cancel(e)"><span aria-hidden="true">&times;</span></button>
+        <h3>文件替换</h3>
+    </div>
+    <div class="modal-body" style="width: 100%">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="ibox-contant">
+                <div class="row">
+                    <div hc-input="data.docname"
+                         hc-label="原文件"
+                         hc-readonly="true">
+                    </div>
+                    <div hc-input="data.isvirtual"
+                         hc-label="版本号"
+                         hc-readonly="true">
+                    </div>
+                    <!--<div class="col-md-1">
+                        <label class="form-label-mini not-null ">原文件</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input ng-readonly="true" type="text" ng-model="data.docname" class="input-sm form-control">
+                    </div>
+                    <div class="col-md-1">
+                        <label class="form-label-mini not-null ">版本号</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input ng-readonly="true" type="text" ng-model="data.isvirtual" class="input-sm form-control">
+                    </div>-->
+                </div>
+                <div class="row">
+                    <!--<div class="col-md-1">
+                        <label class="form-label-mini not-null ">新文件</label>
+                    </div>
+                    <div class="col-md-11">
+                        <button-edit be-delete="clearspec()" be-search="add_file()" be-edit="true"
+                                     ng-model="data.currItem.docname"/>
+                    </div>-->
+                    <div hc-input="data.currItem.docname"
+                         hc-label="新文件"
+                         hc-btn-click="add_file()"
+                         hc-col-count="4">
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="control-label"></label>
+                    <div class="hc-w1 di">
+                        <label class="ilabel">
+                            <input ng-model="data.currItem.is_th" value="1" name="okstat" type="radio"
+                                   style="vertical-align: text-top;">升级版本
+                        </label>
+                    </div>
+                    <label class="control-label"></label>
+                    <div class="hc-w1 di">
+                        <label class="ilabel">
+                            <input ng-model="data.currItem.is_th" value="2" name="okstat" type="radio"
+                                   style="vertical-align: text-top;">替换版本
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="width: 100%">
+        <a class="btn btn-sm btn-primary" ng-click="ok(e)">
+            确定
+        </a>
+        <a class="btn btn-sm btn-default" ng-click="cancel(e)">
+            取消
+        </a>
+    </div>
+    <button ng-hide="true" id='dropzone_add'> 弹出自带</button>
+</div>
+<style>
+    .di {
+        display: inline-block;
+    }
+
+    .modal-body {
+        padding: 15px;
+    }
+
+    .cpcwf-contant {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .subtitle {
+        margin-right: 0px;
+        border-bottom: 1px #e7eaec solid;
+        padding-bottom: 10px;
+    }
+
+    .row {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+</style>

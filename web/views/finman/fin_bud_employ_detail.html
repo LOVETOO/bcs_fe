@@ -1,0 +1,153 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fin_bud_employ_detail">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{headername}}</h5>
+                    <div class="ibox-tools form-inline">
+                        <button type="button" class="btn btn-default btn-sm" id="collectBtn"><i class="fa fa-save"></i> 汇总</button>
+                        <button type="button" class="btn btn-default btn-sm" id="searchBtn"><i class="fa fa-search"></i> 查询</button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <!--编辑栏-->
+                    <form method="get" class="form-inline mline title-form">
+                        <div class="row">
+                            <label class="control-label">申请部门</label>
+                            <div class="input-group width_m">
+                                <input type="text" class="form-control" ng-model="data.dept_code" ng-readonly="true">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary" ng-click="deptSearch()">•••</button></span>
+                            </div>
+                            <input type="text" class="form-control" ng-readonly="true" ng-model="data.dept_name" style="width: 235px;">
+                            <label class="control-label">预算类别</label>
+                            <div class="input-group width_m">
+                                <input type="text" class="form-control" ng-model="data.bud_type_code" ng-readonly="true">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary" ng-click="typeSearch()">•••</button></span>
+                            </div>
+                            <input type="text" class="form-control" ng-readonly="true" ng-model="data.bud_type_name" style="width: 235px;">
+                        </div>
+                        <div class="row">
+                            <label class="control-label">费用部门</label>
+                            <div class="input-group width_m">
+                                <input type="text" class="form-control" ng-model="data.fee_org_code" ng-readonly="true">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary" ng-click="feeorgSearch()">•••</button></span>
+                            </div>
+                            <input type="text" class="form-control" ng-readonly="true" ng-model="data.fee_org_name" style="width: 235px;">
+                            <!--<label class="control-label">品类</label>
+                            <input type="text" class="form-control" ng-model="data.crm_entid" ng-readonly="true">
+                            <label class="control-label">产品线</label>
+                            <input type="text" class="form-control" ng-model="data.item_type_name" ng-readonly="true">
+-->
+                            <label class="control-label">品牌</label>
+                            <select chosen-select ng-model="data.crm_entid"
+                                    class="input-sm chosen-select form-control"
+                                    ng-options="s.id as s.name for s in crm_entids"
+                                    ng-selected="s.id==data.crm_entid">
+                            </select>
+                            <label class="control-label">产品线</label>
+                            <select chosen-select ng-model="data.item_type_name"
+                                    class="input-sm chosen-select form-control"
+                                    ng-options="s.id as s.name for s in item_type_names"
+                                    ng-selected="s.id==data.item_type_name">
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label class="control-label">预算年月</label>
+                            <input type="text" class="form-control" ng-model="data.year_month_start" id="year_month_start">
+                            <label class="control-label">到</label>
+                            <input type="text" class="form-control" ng-model="data.year_month_end" id="year_month_end">
+                            <label class="control-label">制单时间</label>
+                            <input type="text" class="form-control" ng-model="data.bill_start_date" id="bill_start_date">
+                            <label class="control-label">到</label>
+                            <input type="text" class="form-control" ng-model="data.bill_end_date" id="bill_end_date">
+                        </div>
+                        <div class="row">
+                            <label class="control-label">费用项目</label>
+                            <div class="input-group width_m">
+                                <input type="text" class="form-control" ng-model="data.fee_code" ng-readonly="true">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary" ng-click="feeSearch()">•••</button></span>
+                            </div>
+                            <input type="text" class="form-control" ng-readonly="true" ng-model="data.fee_name" style="width: 235px;">
+                            <label class="control-label">费用对象</label>
+                            <select chosen-select ng-model="data.object_id"
+                                    class="input-sm chosen-select form-control"
+                                    ng-options="s.id as s.name for s in object_ids"
+                                    ng-selected="s.id==data.object_id">
+                            </select>
+                        </div>
+                    </form>
+                    <!--列表-->
+                    <div id="viewGrid" style="height: 650px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="collectModal" tabindex="-1" role="dialog" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">汇总</h4>
+                </div>
+                <div class="modal-body ibox-content">
+                    <form method="get" class="form-inline mline ng-pristine ng-valid">
+                        <div class="row">
+                            <label class="form-label width_m">
+                                <input type="checkbox" ng-model="modal.bill_type">
+                                单据类型
+                            </label>
+                            <label class="form-label width_m">
+                                <input type="checkbox" ng-model="modal.bud_year">
+                                年度
+                            </label>
+                            <label class="form-label width_m">
+                                <input type="checkbox" ng-model="modal.month">
+                                月度
+                            </label>
+                            <label class="form-label">
+                                <input type="checkbox" ng-model="modal.dept_name">
+                                申请部门
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="form-label width_m">
+                                <input type="checkbox" ng-model="modal.fee_org_name">
+                                费用承担部门
+                            </label>
+                            <label class="form-label width_m">
+                                <input type="checkbox" ng-model="modal.bud_type_name">
+                                预算类别
+                            </label>
+                            <label class="form-label width_m">
+                                <input type="checkbox" ng-model="modal.crm_entld">
+                                品类
+                            </label>
+                            <label class="form-label">
+                                <input type="checkbox" ng-model="modal.item_type_id">
+                                产品组织
+                            </label>
+                        </div>
+                        <div class="row">
+                            <label class="form-label width_m">
+                                <input type="checkbox" ng-model="modal.object_name">
+                                费用对象
+                            </label>
+                            <label class="form-label width_m">
+                                <input type="checkbox" ng-model="modal.fee_name">
+                                费用项目
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white pull-left" ng-click="recover()">恢复</button>
+                    <button type="button" class="btn btn-primary" ng-click="collect()">确定</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

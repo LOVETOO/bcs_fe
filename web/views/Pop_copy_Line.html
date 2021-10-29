@@ -1,0 +1,31 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>行数</h3>
+    </div>
+    <div class="modal-body">
+    	<form name="planHeaderEdit" class="form-horizontal form-inline">
+    		
+    		<div class="ibox-content">
+    			<div class="row">
+    				<div class="col-md-2"></div>
+    				<div class="col-md-2"><label class="form-label-mini ">行数:</label></div>
+    				<div class="col-md-4">
+    					<input ng-model="item.lines" type="number" class="form-control input-sm">
+    				</div>
+					<div class="col-md-1"><label class="form-label-mini " type="float:left">行</label></div>
+					<div class="col-md-3"></div>
+    			</div>
+    		</div>
+    		
+        </form> 
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+        	  确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+         	 取消
+        </a>
+     </div>
+</div>

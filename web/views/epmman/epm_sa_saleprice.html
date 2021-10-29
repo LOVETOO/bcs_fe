@@ -1,0 +1,58 @@
+<div hc-diy-page>
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.item_code"
+                 hc-label="产品编码"
+                 hc-can-input="true"
+                 hc-class-id="item_org"
+                 hc-common-search="commonSearchItem">
+            </div>
+            <div hc-input="data.currItem.item_name"
+                 hc-label="产品名称">
+            </div>
+            <div hc-input="data.currItem.division_id"
+                 hc-select-options="division_arr"
+                 hc-readonly="isOnly"
+                 hc-label="事业部">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.start_date"
+                 hc-label="有效时间 从"
+                 hc-change="changeDate()"
+                 hc-type="date">
+            </div>
+            <div hc-input="data.currItem.end_date"
+                 hc-label="至"
+                 hc-change="changeDate()"
+                 hc-type="date">
+            </div>
+            <div hc-input="data.currItem.valid"
+                 hc-label="有效"
+                 hc-change="invalidMethod()"
+                 hc-type="checkbox"
+                 hc-col-count="1"
+                 hc-true-value="2"
+                 hc-false-value="1"
+                 class="oneis">
+            </div>
+            <div hc-input="data.currItem.invalid"
+                 hc-label="失效"
+                 hc-change="invalidMethod()"
+                 hc-type="checkbox"
+                 hc-col-count="1"
+                 hc-true-value="2"
+                 hc-false-value="1"
+                 class="oneis">
+            </div>
+        </div>
+    </div>
+    <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+</div>
+<style>
+    .oneis{
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+</style>
+

@@ -1,0 +1,26 @@
+<div hc-diy-page>
+    <div class="hc-box other-h" ng-show="showDetails">
+        <div class="row">
+            <div hc-input="data.currItem.month_year"
+                 hc-label="预计入库年月"
+                 hc-change="showListData()"
+                 hc-readonly="isEdit"
+                 hc-type="year-month">
+            </div>
+            <div hc-input="data.currItem.creator"
+                 hc-label="创建人"
+                 hc-readonly="true">
+            </div>
+            <div hc-input="data.currItem.is_lock"
+                 hc-label="单据状态"
+                 hc-select-options="yesLock"
+                 hc-readonly="true">
+            </div>
+        </div>
+    </div>
+    <div hc-box hc-grid="gridOptions" hc-auto-height="grid" ng-show="showDetails"></div>
+    <div hc-box hc-grid="gridOptionsHead" hc-auto-height="grid" ng-show="!showDetails"></div>
+</div>
+
+
+

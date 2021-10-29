@@ -1,0 +1,83 @@
+<div jq-widget hc-init="doInit()">
+
+    <div class="ibox-title other-h">
+        <div class="ibox-tools pull-right">
+            <div hc-buttons="toolButtons" hc-buttons-pull-right></div>
+        </div>
+    </div>
+
+    <div class="tree-grid-box" hc-auto-height hc-splitter-box>
+        <div class="tree-box">
+            <div class="tree-content" ng-hide="isSearchMod">
+                <div class="tree-title" ng-bind="data.title"></div>
+                <div hc-tree="treeSetting"></div>
+            </div>
+        </div>
+        <div class="grid-box">
+            <div hc-grid="gridOptions" hc-auto-height></div>
+
+            <div hc-tab="tabs" hc-tab-change="onTabChange(params)" class="other-h"></div>
+
+            <div hc-tab-page class="other-h" style="height: 180px">
+                <!--适用部门-->
+                <div id="dept" class="active">
+                    <div  hc-grid="gridOptions_dept" style="height: 180px" class="other-h"></div>
+                </div>
+                <!--适用岗位-->
+                <div id="position" >
+                    <div  hc-grid="gridOptions_position" style="height: 180px" class="other-h"></div>
+                </div>
+                <!--评分标准-->
+                <div id="grade" >
+                    <div  hc-grid="gridOptions_grade" style="height: 180px" class="other-h"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div hc-modal="type" >
+        <div hc-box>
+            <div class="row" >
+                <div hc-input="data.currItem.itemtype_name"
+                     hc-label="指标类别名称"
+                     hc-required="true"
+                     hc-blur="checkItemTypeName()"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.no"
+                     hc-label="备注"
+                     hc-col-count="4"></div>
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.usable"
+                     hc-type="checkbox"
+                     hc-label="可用"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="4"
+                style="margin-left: 15px"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<style>
+    .tree-box .ibox-title {
+        padding: 8px 15px 5px;
+    }
+
+    .tree-box .ibox-title .hc-input .form-control {
+        padding: 0px;
+    }
+
+    .grid-box .ibox {
+        margin-left: -15px;
+    }
+
+    .grid-box .pull-right .btn-group button {
+        margin-left: 4px;
+    }
+</style>

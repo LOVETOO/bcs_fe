@@ -1,0 +1,279 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="item_org_pro">
+    <div class="wrapper wrapper-content" ng-init="init();">
+        <div class="modal-footflex">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="tabs.html#tab-common"> 基本信息</a></li>
+                    <li><a data-toggle="tab" href="tabs.html#tab-item_orgc"> 销售组织</a></li>
+                    <li><a data-toggle="tab" href="tabs.html#tab-item_orgf"> 工厂信息</a></li>
+                    <li ng-show="data.currItem.is_special_supply==2"><a data-toggle="tab" href="tabs.html#tab-supply"> 专供客户</a></li>
+                    <li ng-show="data.currItem.is_close==2"><a data-toggle="tab" href="tabs.html#tab-item_org"> 销售渠道</a></li>
+                    <li><a data-toggle="tab" href="tabs.html#tab-areas"> 其他</a></li>
+                </ul>
+                <form method="get" class="form-inline mline" name="entityForm" novalidate>
+                    <div class="tab-content">
+                        <div id="tab-common" class="tab-pane active">
+                            <div class="form-group">
+                                <div class="panel-body form-inline">
+                                    <div class="row">
+                                        <label class="control-label">产品编码</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" name="item_code"
+                                                   class="form-control"
+                                                   ng-model="data.currItem.item_code"
+                                                   ng-readonly="false"
+                                                   required>
+                                            <span style="color:red"
+                                                  ng-show="entityForm.item_code.$dirty && entityForm.item_code.$invalid">
+												<span ng-show="entityForm.item_code.$error.required">请输入</span>
+											</span>
+                                            <span class="input-group-btn">
+												<button type="button" class="btn btn-primary" ng-click="searchItem('item')">•••</button>
+											</span>
+                                        </div>
+                                        <input type="text" class="form-control width_xm"
+                                               ng-model="data.currItem.item_name" ng-readonly="false">
+                                        <!--<label class="control-label">产品组编码</label>-->
+                                        <!--<input type="text" class="form-control ng-pristine ng-untouched ng-valid"-->
+                                               <!--ng-model="data.currItem.entorgcode"-->
+                                               <!--ng-readonly="true">-->
+                                        <!--<label class="control-label">产品组名称</label>-->
+                                        <!--<input type="text" class="form-control ng-pristine ng-untouched ng-valid"-->
+                                               <!--ng-model="data.currItem.entorgname"-->
+                                               <!--ng-readonly="true">-->
+                                        <label class="control-label">产品线</label>
+                                        <select ng-model="data.currItem.entorgid"
+                                                class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                ng-options="s.id as s.name for s in entorgids">
+                                        </select>
+                                        <label class="control-label">型号</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.specs">
+                                    </div>
+                                    <div class="row">
+                                        <label class=" control-label">产品描述</label>
+                                        <textarea class="form-control" style="width: 400px;height:26px;"
+                                                  ng-model="data.currItem.item_desc"></textarea>
+                                        <label class="control-label">上市日期</label>
+                                        <input type="text" bs-date-picker class="form-control ng-pristine ng-untouched ng-valid"
+                                               id="createDate" ng-model="data.currItem.newproducts_date"
+                                               ng-disabled="false">
+                                        <label class="control-label">退市日期</label>
+                                        <input type="text" bs-date-picker class="form-control ng-pristine ng-untouched ng-valid"
+                                               id="endDate" ng-model="data.currItem.oldproducts_date"
+                                               ng-disabled="false">
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label">零售底价</label>
+                                        <input type="number" class="form-control width_m"
+                                               ng-model="data.currItem.reta_price">
+                                        <label class="control-label">外箱尺寸㎜</label>
+                                        <input type="text" class="form-control width_m"
+                                               ng-model="data.currItem.outbox_size">
+
+                                        <label class="control-label">计量单位</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" name="uom_name"
+                                                   class="form-control"
+                                                   ng-model="data.currItem.uom_name"
+                                                   ng-readonly="true">
+                                            <span class="input-group-btn">
+												<button type="button" class="btn btn-primary" ng-click="searchItem('uom')">•••</button>
+											</span>
+                                        </div>
+                                        <label class="control-label">包装体积m³</label>
+                                        <input type="number" class="form-control width_m"
+                                               ng-model="data.currItem.cubage">
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label">产品大类</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" name="item_class1_code"
+                                                   class="form-control"
+                                                   ng-model="data.currItem.item_class1_code"
+                                                   ng-readonly="true">
+                                            <span class="input-group-btn">
+												<button type="button" class="btn btn-primary" ng-click="searchItem('item_class1')">•••</button>
+											</span>
+                                        </div>
+                                        <input type="text" class="form-control width_xm"
+                                               ng-model="data.currItem.item_class1_name" ng-readonly="true">
+                                        <label class="control-label">包装单位</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" name="pack_uom"
+                                                   class="form-control"
+                                                   ng-model="data.currItem.pack_uom"
+                                                   ng-readonly="true">
+                                            <span class="input-group-btn">
+												<button type="button" class="btn btn-primary" ng-click="searchItem('pack_uom')">•••</button>
+											</span>
+                                        </div>
+                                        <label class="control-label">包装数量</label>
+                                        <input type="number" class="form-control width_m"
+                                               ng-model="data.currItem.spec_qty">
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label">产品中类</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" name="item_class2_code"
+                                                   class="form-control"
+                                                   ng-model="data.currItem.item_class2_code"
+                                                   ng-readonly="true">
+                                            <span class="input-group-btn">
+												<button type="button" class="btn btn-primary" ng-click="searchItem('item_class2')">•••</button>
+											</span>
+                                        </div>
+                                        <input type="text" class="form-control width_xm"
+                                               ng-model="data.currItem.item_class2_name" ng-readonly="true">
+
+                                        <label class="control-label">毛重㎏</label>
+                                        <input type="number" class="form-control width_m"
+                                               ng-model="data.currItem.gross_weigth">
+                                        <label class="control-label">净重㎏</label>
+                                        <input type="number" class="form-control width_m"
+                                               ng-model="data.currItem.net_weigth">
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label">产品小类</label>
+                                        <div class="input-group width_m">
+                                            <input type="text" name="item_class3_code"
+                                                   class="form-control"
+                                                   ng-model="data.currItem.item_class3_code"
+                                                   ng-readonly="true">
+                                            <span class="input-group-btn">
+												<button type="button" class="btn btn-primary" ng-click="searchItem('item_class3')">•••</button>
+											</span>
+                                        </div>
+                                        <input type="text" class="form-control width_xm"
+                                               ng-model="data.currItem.item_class3_name" ng-readonly="true">
+                                        <label class="control-label">产品属性</label>
+                                        <select ng-model="data.currItem.attribute5"
+                                                class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                ng-options="s.id as s.name for s in item_pro">
+                                        </select>
+                                        <!--<label class="control-label">销售区域</label>-->
+                                        <!--<div class="input-group width_m">-->
+                                            <!--<input type="text" name="sales_area_name"-->
+                                                   <!--class="form-control"-->
+                                                   <!--ng-model="data.currItem.sales_area_name"-->
+                                                   <!--ng-readonly="true">-->
+                                            <!--<span class="input-group-btn">-->
+												<!--<button type="button" class="btn btn-primary" ng-click="searchItem('sales_area')">•••</button>-->
+											<!--</span>-->
+                                        <!--</div>-->
+
+                                    </div>
+                                    <!--<div class="row">-->
+                                        <!--<label class=" control-label">执行标准</label>-->
+                                        <!--<textarea class="form-control" style="width: 400px;height:26px;"-->
+                                                  <!--ng-model="data.currItem.stanard_execution"></textarea>-->
+                                        <!--<label class="control-label">产品手册</label>-->
+                                        <!--<input type="text" class="form-control width_m"-->
+                                               <!--ng-model="data.currItem.product_manual">-->
+                                        <!---->
+                                    <!--</div>-->
+                                    <div class="row">
+                                        <label class="control-label">
+                                            <input type="checkbox" class="i-checks" ng-checked="data.currItem.item_usable==2"
+                                                   ng-modal="data.currItem.item_usable" ng-click="item_usable($event)">有效</label>
+                                        <label class="control-label">
+                                            <input type="checkbox" class="i-checks" ng-checked="data.currItem.can_sale==2"
+                                                   ng-modal="data.currItem.can_sale"  ng-click="can_sale($event)">可销售</label>
+                                        <label class="control-label">
+                                            <input type="checkbox" class="i-checks" ng-checked="data.currItem.is_retail==2"
+                                                   ng-modal="data.currItem.is_retail" ng-click="is_retail($event)">零售</label>
+                                        <label class="control-label">
+                                            <input type="checkbox" class="i-checks" ng-checked="data.currItem.is_wl==2"
+                                                   ng-modal="data.currItem.is_wl" ng-click="is_wl($event)">推广物料</label>
+                                        <label class="control-label">
+                                            <input type="checkbox" class="i-checks" ng-checked="data.currItem.is_old==2"
+                                                   ng-modal="data.currItem.is_old" ng-click="is_old($event)">老品</label>
+                                        <label class="control-label">
+                                            <input type="checkbox" class="i-checks" ng-checked="data.currItem.is_special_supply==2"
+                                                   ng-modal="data.currItem.is_special_supply" ng-click="is_special_supply($event)">专供</label>
+                                        <label class="control-label">
+                                            <input type="checkbox" class="i-checks" ng-checked="data.currItem.is_close==2"
+                                                   ng-modal="data.currItem.is_old" ng-click="is_close($event)">封闭品</label>
+                                        <label class="control-label">
+                                            <input type="checkbox" class="i-checks" ng-checked="data.currItem.is_eliminate==2"
+                                                   ng-modal="data.currItem.is_eliminate" ng-click="is_eliminate($event)">淘汰品</label>
+                                        <label class="control-label">
+                                            <input type="checkbox" class="i-checks" ng-checked="data.currItem.is_round==2"
+                                                   ng-modal="data.currItem.is_round" ng-click="is_round($event)">凑整开单</label>
+                                        <!--<label class="control-label">
+                                            <input type="checkbox" class="i-checks" ng-checked="data.currItem.is_forproject==2"
+                                                   ng-modal="data.currItem.is_forproject" ng-click="is_forproject($event)">工程品</label>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-item_orgc" class="tab-pane">
+                            <div class="panel-body">
+                                <div id="linegridview2" slick-grid sg-options="lineOptions" sg-data=""
+                                     sg-columns="lineColumns2" style="width:100%;height:320px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-item_orgf" class="tab-pane">
+                            <div class="panfel-body">
+                                <div id="linegridview3" slick-grid sg-options="lineOptions" sg-data=""
+                                     sg-columns="lineColumns3" style="width:100%;height:320px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-supply" class="tab-pane">
+                            <div class="panel-body">
+                                <button type="button" class="btn btn-primary footer-btn"
+                                        ng-click="searchCustomer()">添加客户
+                                </button>
+                                <div id="linegridview" slick-grid sg-options="lineOptions" sg-data=""
+                                     sg-columns="lineColumns" style="width:100%;height:320px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-item_org" class="tab-pane">
+                            <div class="panel-body">
+                                <button type="button" class="btn btn-primary footer-btn"
+                                        ng-click="chooseSaleCenter()">添加渠道
+                                </button>
+                                <div id="linegridview1" slick-grid sg-options="lineOptions" sg-data=""
+                                     sg-columns="lineColumns1" style="width:100%;height:320px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-areas" class="tab-pane">
+                            <div class="panel-body form-inline">
+                                <div class="row">
+                                    <label class="control-label">创建用户</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.created_by" ng-readonly="true">
+                                    <label class="control-label">创建时间</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.creation_date" ng-readonly="true">
+                                    <label class="control-label">最后修改用户</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.last_updated_by" ng-readonly="true">
+                                    <label class="control-label">最后修改时间</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.last_update_date" ng-readonly="true">
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">备注</label>
+                                    <textarea class="form-control" style="width: 400px;"
+                                              ng-model="data.currItem.note"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save()"
+                        ng-disabled="entityForm.$invalid">
+                    保存
+                </button>
+                <button type="button" class="btn btn-white" ng-click="closeWindow()">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

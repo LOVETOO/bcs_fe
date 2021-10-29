@@ -1,0 +1,24 @@
+<label>
+	<input
+		type="checkbox"
+		ng-model="isPaging"
+		ng-change="search()"
+	>启用分页
+</label>
+<div ng-bind="currPage" ng-show-start="isPaging"></div>
+<div>/</div>
+<div ng-bind="pageCount"></div>
+<a ng-click="firstPage()">首页</a>
+<a ng-click="prevPage()">上页</a>
+<a ng-click="nextPage()">下页</a>
+<a ng-click="lastPage()">末页</a>
+<div>每页</div>
+<select
+	ng-model="pageSize"
+	ng-options="x for x in [10, 20, 50, 100, 200, 500, 1000]"
+	ng-change="search()"
+></select>
+<div ng-show-end>行</div>
+<div>共有</div>
+<div ng-bind="count"></div>
+<div>行</div>

@@ -1,0 +1,35 @@
+<div hc-diy-page>
+    <div class="row">
+        <!-- <div hc-label="地址" hc-input="address" hc-col-count="4" hc-placeholder="请输入地址"></div> -->
+        <div style="float: left; display: flex;margin: 0 25px;">
+            <label style="white-space: nowrap;line-height: 27px;margin-bottom: 0;">地址</label>
+            <input class="form-control" id="suggestId" type="text" placeholder="请输入地址" style="width: 400px;" ng-model="address"></input>
+            <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+        </div>
+        <div hc-button="changeAdd()" hc-title="定位"></div>
+    </div>
+ 
+    <div id='allmap'></div>
+</div>
+<style>
+    #allmap {
+        width: 95%;
+        height: 400px;
+        margin: 0 auto;
+        flex: 1;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 10px;
+    }
+
+    .mapContain {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+</style>

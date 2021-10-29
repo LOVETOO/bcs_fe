@@ -1,0 +1,19 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <!-- {{data.currItem}} -->
+            <div hc-input="data.currItem.period_year" hc-label="年度" hc-required="true" hc-type="year"></div>
+            <div hc-input="data.currItem.period_type" hc-label="预算期间类别"  hc-dict-code="Period_Type" hc-required="true"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.description" hc-label="描述" hc-col-count="4"></div>
+        </div>
+        <!-- 表格视图 -->
+        <div hc-grid="gridOptions" class="hc-grid m" hc-auto-height="grid"></div>
+        <!-- 按钮 -->
+        <div class="foot-left-btn">
+            <button ng-click="addLineRow()" class="btn btn-white btn-sm">增加行</button>
+            <button ng-click="deleteLineRow()" class="btn btn-white btn-sm">删除行</button>
+        </div>
+    </div>
+</div>

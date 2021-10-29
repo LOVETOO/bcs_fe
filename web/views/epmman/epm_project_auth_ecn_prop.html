@@ -1,0 +1,147 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+
+        <div class="row">
+            <div hc-input="data.currItem.project_auth_ecn_code"
+                 hc-label="变更单号"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.creator_name"
+                 hc-label="申请人"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.createtime"
+                 hc-label="申请日期"
+                 hc-type="date"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.stat"
+                 hc-label="单据状态"
+                 hc-dict-code="stat"
+                 hc-readonly="true"
+            ></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.project_code"
+                 hc-label="项目编码"
+                 hc-required="true"
+                 hc-class-id="epm_report"
+                 hc-common-search="commonSearch.strategy_project"
+            ></div><!-- hc-delete-together="project_name"-->
+
+            <div hc-input="data.currItem.project_name"
+                 hc-label="项目名称"
+                 hc-col-count="4"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.strategic_stage"
+                 hc-label="战略对接进度"
+                 hc-readonly="true"
+            ></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.party_a_name"
+                 hc-label="甲方名称"
+                 hc-col-count="4"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.party_b_name"
+                 hc-label="乙方名称"
+                 hc-col-count="4"
+                 hc-readonly="true"
+            ></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.trading_company_name"
+                 hc-label="交易公司"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.operating_mode"
+                 hc-label="管理类型"
+                 hc-dict-code="epm.operating_mode"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.project_type"
+                 hc-label="项目类型"
+                 hc-dict-code="epm.project_type"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.background"
+                 hc-label="背景关系"
+                 hc-dict-code="epm.background"
+                 hc-readonly="true"
+            ></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.predict_proj_qty"
+                 hc-label="预计项目数量"
+                 hc-type="number"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.predict_pdt_qty"
+                 hc-label="工程用量"
+                 hc-type="number"
+                 hc-unit="套"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.predict_sign_date"
+                 hc-label="预计签订日期"
+                 hc-type="date"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.predict_sales_amount"
+                 hc-label="预计销售收入"
+                 hc-type="money"
+                 hc-unit="万元"
+                 hc-readonly="true"
+            ></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.intent_product"
+                 hc-label="工程意向产品"
+                 hc-col-count="4"
+                 hc-readonly="true"
+            ></div>
+
+            <div hc-input="data.currItem.competitor"
+                 hc-label="竞争对手"
+                 hc-col-count="4"
+                 hc-readonly="true"
+            ></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.reason"
+                 hc-label="变更原因"
+                 hc-col-count="8"
+                 hc-required="true"
+            ></div>
+        </div>
+
+        <!--   明细信息      -->
+        <div style="display: flex;height: 350px">
+            <!-- 调整(新增、失效、恢复生效)中的经销商 -->
+            <div hc-grid="gridOptions" hc-box="经销商调整" hc-auto-height="grid" id="modifyAuth" style="flex: 3"></div>
+
+            <!--  项目中有效的经销商 -->
+            <div hc-grid="gridOptionsOfProjectauth" hc-box="当前经销商" hc-auto-height="grid" id="curAuth" style="flex: 2"></div>
+        </div>
+    </div>
+</div>

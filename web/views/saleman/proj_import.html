@@ -1,0 +1,74 @@
+<!--
+/**
+ * 工程项目导入
+ * @since 2018-08-06
+ */
+-->
+<div class="bill-form" ng-controller="proj_import">
+    <div class="wrapper wrapper-content">
+        <div class="modal-footflex">
+            <div class="tabs-container">
+                <div class="panel-body">
+                    <!-- 这里增加组件 -->
+                    <div class="form-inline mline">
+                        <div class="row">
+                            <lable class="control-label">文件名</lable>
+                            <input type="text" class="form-control width_xxxl" ng-model="data.file" ng-readonly="true">
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    ng-click="importStart()"
+                                    ng-hide="status.running">{{count.all===count.remain?'开始':'继续'}}导入
+                            </button>
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    ng-click="importPause()"
+                                    ng-show="status.running"
+                                    ng-disabled="status.pause">暂停导入
+                            </button>
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    ng-click="chooseFile()"
+                                    ng-hide="status.running">选择导入文件
+                            </button>
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    ng-click="test()">测试
+                            </button>
+                        </div>
+                        <!--<div class="row">-->
+                            <div id="progress"
+                                 class="progress progress-striped"
+                                 ng-class="{active:status.running}"
+                                 style="margin-bottom:10px;">
+                                <div id="progress-bar"
+                                     class="progress-bar progress-bar-striped"
+                                     role="progressbar"
+                                     aria-valuenow="0"
+                                     aria-valuemin="0"
+                                     aria-valuemax="0"
+                                     style="width:0%;min-width:10em;">
+                                    <span>{{progress.value}} / {{progress.max}} = {{progress.percent}}%</span>
+                                </div>
+                            </div>
+                        <!--</div>-->
+                    </div>
+                    <div id="grid" style="height:410px;"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span class="pull-left"><b>
+                    <span>【导入统计】</span>
+                    <span style="color:blue;margin-left:16px;">总数：{{count.all}}</span>
+                    <span style="color:green;margin-left:16px;">成功：{{count.success}}</span>
+                    <span style="color:red;margin-left:16px;">失败：{{count.fail}}</span>
+                    <span style="color:orange;margin-left:16px;">剩余：{{count.remain}}</span>
+                    <!--<span style="margin-left:32px;">正在导入第{{status.currIndex+1}}行数据...</span>-->
+                </b></span>
+                <button type="button"
+                        class="btn btn-white"
+                        ng-click="btnCloseClick()">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

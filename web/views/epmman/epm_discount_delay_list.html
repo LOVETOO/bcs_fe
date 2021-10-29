@@ -1,0 +1,67 @@
+<div hc-obj-list>
+	<!-- 查询条件面板-->
+	<hc-obj-list-search-panel>
+		<div class="row epm_discount_delay_list">
+			<div
+				hc-label="延期申请单号"
+				hc-input="searchObj.discount_ecn_code"
+			></div>
+
+			<div hc-label="延期申请时间"
+				 hc-input="searchObj.createtime"
+                 hc-can-delete="true"
+				 hc-type="date"></div>
+				 
+			<div hc-label="至"
+				 hc-input="searchObj.createtime_end"
+                 hc-can-delete="true"
+                 hc-type="date"></div>
+			<div
+				 hc-label="产品编码"
+				 hc-input="searchObj.item_code"
+			 ></div>
+			 
+			<div hc-label="签约方式"
+				 hc-dict-code="epm.contract_type"
+				 hc-can-delete="true"
+				 hc-input="searchObj.contract_type"></div>
+		</div>
+		<div class="row">
+			<div hc-label="客户编码"
+				 hc-input="searchObj.customer_code"></div>
+
+			<div hc-label="客户名称"
+				 hc-input="searchObj.customer_name"></div>
+
+			<div hc-label="交易公司"
+				 hc-input="searchObj.trading_company_name"></div>
+
+			<div hc-label="开票单位"
+				 hc-input="searchObj.billing_unit_name"></div>
+		</div>
+		<div class="row">
+			<div hc-label="合同编码"
+				 hc-input="searchObj.contract_code"></div>
+			<div hc-label="合同名称"
+				 hc-input="searchObj.contract_name"></div>
+			<div hc-label="工程编码"
+				 hc-input="searchObj.project_code"></div>
+			<div hc-label="工程名称"
+				 hc-input="searchObj.project_name"></div>
+		</div>
+	</hc-obj-list-search-panel>
+</div>
+
+<style>
+	.epm_discount_delay_list [hc-label="延期申请时间"]{
+        width: calc(13% + 15px);
+		margin-right: 0px;
+    }
+	.epm_discount_delay_list [hc-label="至"] {
+        width: calc(12% - 35px);
+    }
+	.epm_discount_delay_list [hc-label="至"] label {
+        width: 13px;
+		min-width: 0px;
+    }
+</style>

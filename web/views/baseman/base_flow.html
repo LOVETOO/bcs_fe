@@ -1,0 +1,304 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="base_flow">
+	<div class="wrapper wrapper-content animated fadeInRight" ng-init="init_Tree();">
+		<div class="row">
+			<div class="ibox">
+				<div class="ibox-title">
+					<h5>{{headername}}</h5>
+					<div class="ibox-tools">
+						<!--<button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="刷新"><i class="fa fa-refresh"></i> 刷新</button>-->
+						<!--<button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o"></i> 删除流程</button>-->
+						<button class="btn btn-white btn-sm" title="新建" ng-click="newwftemp()"><i class="fa fa-plus"></i> 新建流程 </button>
+					</div>
+				</div>
+				<div class="ibox-content TreeGridBox">
+					<div class="ibox-title">
+						<h5>{{headername}}</h5>
+						<ul id="tree" class="ztree" style="width:230px; overflow:auto;"></ul>
+					</div>
+					<div class="grid_modal">
+						<div id="headerGrid" class="headerGrid"></div>
+						<div class="page_modal modal-open" page-pagination></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--新建流程-->
+<div class="modal inmodal fade GooFlow_modal_lg" id="myModal5" role="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header" draggable-model>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">新建流程</h4>
+			</div>
+			<div class="modal-body" id="wfprocmodal">
+				<iframe id="iframepage" src="" style="width:100%;height: 445px;">
+				</iframe>
+			</div>
+		</div>
+	</div>
+</div>
+<!--新建流程end-->
+
+<!--新建流程----查看/编辑-->
+<div class="modal inmodal fade" id="myModal6" role="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+
+			<div class="modal-header" draggable-model>
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">过程信息</h4>
+			</div>
+
+			<div class="modal-body">
+				<form method="get" class="form-horizontal">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">过程名称</label>
+									<div class="col-sm-4"><input type="text" class="form-control"></div>
+									<label class="col-sm-2 control-label">状态</label>
+									<div class="col-sm-4">
+										<button data-toggle="dropdown" class="btn btn-default dropdown-toggle w_l" aria-expanded="false">计划 <span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:;">进行中</a></li>
+											<li><a href="javascript:;">结束</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">类型</label>
+									<div class="col-sm-4">
+										<button data-toggle="dropdown" class="btn btn-default dropdown-toggle w_l" aria-expanded="false">审核 <span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:;">只读</a></li>
+										</ul>
+									</div>
+									<label class="col-sm-2 control-label">权限</label>
+									<div class="col-sm-4">
+										<button data-toggle="dropdown" class="btn btn-default dropdown-toggle w_l" aria-expanded="false">只读 <span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:;">可编辑</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">优先级</label>
+									<div class="col-sm-4">
+										<button data-toggle="dropdown" class="btn btn-default dropdown-toggle w_l" aria-expanded="false">B <span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:;">A</a></li>
+										</ul>
+									</div>
+									<label class="col-sm-2 control-label">可控过程</label>
+									<div class="col-sm-4">
+										<div class="input-group">
+											<input type="text" class="form-control">
+											<div class="input-group-btn">
+												<button class="btn btn-white" type="button"><i class="fa fa-ellipsis-h"></i></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">后续节点类型</label>
+									<div class="col-sm-4">
+										<button data-toggle="dropdown" class="btn btn-default dropdown-toggle w_l" aria-expanded="false">无条件执行 <span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:;">选项二</a></li>
+										</ul>
+									</div>
+									<label class="col-sm-2 control-label">过程设置</label>
+									<div class="col-sm-4">
+										<button data-toggle="dropdown" class="btn btn-default dropdown-toggle w_l" aria-expanded="false">必须执行<span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:;">选项B</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">周期(小时)</label>
+									<div class="col-sm-4"><input type="text" class="form-control" value="8" ></div>
+									<label class="col-sm-2 control-label">延迟周期</label>
+									<div class="col-sm-4"><input type="text" class="form-control" value="0" ></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">实际周期</label>
+									<div class="col-sm-4"><input type="text" class="form-control"></div>
+									<label class="col-sm-2 control-label">评分</label>
+									<div class="col-sm-4"><input type="text" class="form-control"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">计划开始时间</label>
+									<div class="col-sm-4">
+										<button data-toggle="dropdown" class="btn btn-default dropdown-toggle w_l" aria-expanded="false"><span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:;">选项A</a></li>
+										</ul>
+									</div>
+									<label class="col-sm-2 control-label">计划结束时间</label>
+									<div class="col-sm-4">
+										<button data-toggle="dropdown" class="btn btn-default dropdown-toggle w_l" aria-expanded="false"><span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:;">选项A</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">实际开始时间</label>
+									<div class="col-sm-4"><input type="text" class="form-control"></div>
+									<label class="col-sm-2 control-label">实际结束时间</label>
+									<div class="col-sm-4"><input type="text" class="form-control"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">自动路径设置</label>
+									<div class="col-sm-10">
+										<div class="input-group">
+											<input type="text" class="form-control">
+											<div class="input-group-btn">
+												<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button"><i class="fa fa-ellipsis-h"></i></button>
+												<ul class="dropdown-menu pull-right">
+													<li><a href="form_basic.html#">选项一</a></li>
+												</ul>
+												<button tabindex="-1" class="btn btn-white" type="button"><i class="fa fa-times"></i></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">驳回类型</label>
+									<div class="col-sm-4">
+										<button data-toggle="dropdown" class="btn btn-default dropdown-toggle w_l" aria-expanded="false">允许驳回 <span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:;">选项一</a></li>
+										</ul>
+									</div>
+									<div class="col-sm-6 form-inline">
+										<div class="checkbox m-r-xs">
+											<input type="checkbox">
+											<label for="checkbox1">
+												不能被驳回
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">可驳回过程</label>
+									<div class="col-sm-4">
+										<div class="input-group">
+											<input type="text" class="form-control">
+											<div class="input-group-btn">
+												<button class="btn btn-white" type="button"><i class="fa fa-ellipsis-h"></i></button>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 form-inline">
+										<div class="checkbox m-r-xs">
+											<input type="checkbox">
+											<label for="checkbox1">
+												禁止修改
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">归档设置</label>
+									<div class="col-sm-4">
+										<button data-toggle="dropdown" class="btn btn-default dropdown-toggle w_l" aria-expanded="false"> <span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:;">选项一</a></li>
+										</ul>
+									</div>
+									<div class="col-sm-6 form-inline">
+										<div class="checkbox m-r-xs">
+											<input type="checkbox">
+											<label for="checkbox1">
+												归档后保留快捷方式
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">备注</label>
+									<div class="col-sm-10">
+										<textarea rows="3" cols ="" class="form-control"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">缺省提交意见</label>
+									<div class="col-sm-10">
+										<textarea rows="2" cols ="" class="form-control"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary">确定</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!--新建流程----查看/编辑end-->
+

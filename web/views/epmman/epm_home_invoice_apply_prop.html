@@ -1,0 +1,198 @@
+<!--家装开票申请 属性页-->
+<!--2020/3/30-->
+<!--wujiyou-->
+<div hc-obj-prop>
+    <div hc-box id="base" class="active flex-column">
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.invoice_apply_code"
+                     hc-label="申请单号"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.creator"
+                     hc-label="申请人"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.createtime"
+                     hc-label="申请日期"
+                     hc-type="date"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.audit_stat"
+                     hc-label="审核状态"
+                     hc-readonly="true">
+                </div>
+
+            </div>
+
+            <div class="row">
+               <div hc-input="data.currItem.customer_code"
+                    hc-label="客户编码"
+                    hc-required="!onlyCustomer"
+                    hc-readonly="onlyCustomer"
+                    hc-can-delete="true"
+                    hc-btn-click="chooseCustomerCode()"
+                    hc-before-delete="afterDeleteCustomerCode()">
+               </div>
+               <div hc-input="data.currItem.customer_name"
+                    hc-label="客户名称"
+                    hc-col-count="4"
+                    hc-readonly="true">
+               </div>
+               <!-- <div hc-input="data.currItem.invoice_make_out_type"
+                    hc-label="开票类型"
+                    hc-readonly="true"
+                    hc-required="true"
+                    >
+               </div> -->
+               <div hc-input="data.currItem.gl_date"
+                   hc-label="GL日期"
+                   hc-required="true"
+                   hc-type="date">
+              </div>
+           </div>
+
+           <div class="row">
+               <div hc-input="data.currItem.trading_company_name"
+                    hc-label="交易公司"
+                    hc-can-delete="true"
+                    hc-required="true"
+                    hc-btn-click="searchObjectTran()"
+                    hc-before-delete="afterDeleteCustomerCode()">
+               </div>
+               <div hc-input="data.currItem.invoice_number"
+                    hc-label="发票号"
+                    hc-col-count="4"
+                    hc-readonly="true">
+              </div>
+              <div hc-input="data.currItem.invoice_time"
+                    hc-label="审核日期"
+                    hc-readonly="true"
+                    hc-type="date">
+               </div> 
+           </div>
+
+           <div class="row">
+               <div hc-input="data.currItem.legal_entity_code"
+                    hc-label="法人客户编码"
+                    hc-required="true"
+                    hc-btn-click="chooseLegalEntityCode()">
+               </div>
+               <div hc-input="data.currItem.legal_entity_name"
+                    hc-label="法人客户名称"
+                    hc-col-count="4"
+                    hc-readonly="true">
+               </div>
+               <div hc-input="data.currItem.invoice_amount"
+               hc-label="开票金额"
+               hc-type="money"
+               hc-readonly="true">
+         </div>
+            </div>
+            
+           <!-- 开票类型：预开票 -->
+            <div class="row" hc-if="data.currItem.invoice_make_out_type == 2">
+               <div hc-input="data.currItem.promise_payment_time"
+                    hc-label="预计回款时间"
+                    hc-required="true"
+                    hc-date-options="{ startDate: 'today' }"
+                    hc-type="date">
+               </div>
+               <div hc-input="data.currItem.ext_account_name"
+                    hc-label="账户信息"
+                    hc-col-count="4"
+                    hc-btn-click="chooseEntityAccount()"
+                    hc-required="true">
+               </div>
+               <div hc-input="data.currItem.tax_amount"
+                     hc-label="开票税额"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row" hc-if="data.currItem.invoice_make_out_type == 2">
+               <div hc-input="data.currItem.payment_term"
+                    hc-readonly="true"
+                    hc-label="付款条件">
+               </div>
+               <div hc-input="data.currItem.source"
+                    hc-readonly="true"
+                    hc-label="来源">
+               </div>
+               <div hc-input="data.currItem.sort"
+                    hc-readonly="true"
+                    hc-label="分类">
+               </div>
+               <div hc-input="data.currItem.remittances_received"
+                    hc-label="已汇款"
+                    hc-type="checkbox"
+                    style="padding-left: 60px;">
+               </div>
+            </div>
+            <!-- END -->
+            <div class="row">
+               <div hc-input="data.currItem.apply_note"
+                    hc-label="申请说明"
+                    hc-col-count="8"
+                    hc-required="true">
+               </div>
+            </div>
+
+            <div class="row">
+               <div hc-input="data.currItem.translate_out_stat"
+                    hc-label="请求发送状态"
+                    hc-readonly="true">
+               </div>
+               <div hc-input="data.currItem.make_out_info"
+                    hc-label="错误信息"
+                    hc-col-count="4"
+                    hc-readonly="true">
+               </div>
+               <div hc-input="data.currItem.trx_number"
+                    hc-label="事务处理编号"
+                    hc-readonly="true">
+               </div>
+            </div>
+
+        </div>
+
+        <div hc-box class="other-h" hc-tab="inv_tab" hc-tab-as="invTabController"
+             hc-tab-change="onInvTabChange(params)"></div>
+        <div hc-tab-page class="flex1">
+            <!--适用合同信息-->
+            <div id="contract" hc-box class="active" style="padding: 0px;">
+                <div hc-grid="gridOptions_contract" class="flex1"></div>
+            </div>
+            <!--适用出库信息-->
+            <div id="out" hc-box class="" style="padding: 0px;">
+                <div hc-grid="gridOptions_out" class="flex1"></div>
+            </div>
+            <!--适用产品信息-->
+            <div id="item" hc-box class="" style="padding: 0px;">
+                <div hc-grid="gridOptions_item" class="flex1"></div>
+            </div>
+        </div>
+    </div>
+
+    <div hc-modal="attachmentModalBox">
+        <div ng-form="form" hc-form-readonly="true">
+            <hc-proj-attach hc-proj-attach-as="outboundAttach"></hc-proj-attach>
+        </div>
+    </div>
+</div>
+<style>
+    .hc-box {
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-top: 0px;
+        padding: 1px 0px;
+    }
+
+     [hc-input="data.currItem.translate_out_stat"] label,
+     [hc-input="data.currItem.translate_out_stat"] input ,
+     [hc-input="data.currItem.make_out_info"] label,
+     [hc-input="data.currItem.make_out_info"] input  {
+        color: #F35A05;
+    }
+</style>
+

@@ -1,0 +1,52 @@
+<div  hc-div-page hc-init="doInit()">
+    <div class="ibox-title grid-other-h">
+        <div class="ibox-tools">
+            <div hc-buttons="toolButtons" hc-buttons-pull-right></div>
+        </div>
+    </div>
+    <div hc-box>
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.probation_stat"
+                     hc-label="到期状态"
+                     hc-change="changePosition()"
+                     hc-select-options="[{name:'已到期',value:'1',actived:'true'},{name:'将到期',value:'2'}]">
+                </div>
+                <div hc-input="data.currItem.end_days"
+                     hc-label="到期天数"
+                     hc-type="number"
+                     hc-readonly="data.currItem.probation_stat==1">
+                </div>
+                <div hc-input="data.currItem.try_day_search"
+                     hc-label="试用期天数"
+                     hc-type="number">
+                </div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.org_name_search"
+                     hc-label="部门"
+                     hc-class-id="dept"
+                     hc-common-search="commonSearchSettingOfDept">
+                </div>
+                <div hc-input="data.currItem.position_name_search"
+                     hc-label="职位"
+                     hc-class-id="hr_position"
+                     hc-common-search="commonSearchSettingOfPosition">
+                </div>
+                <div hc-input="data.currItem.formal_date"
+                     hc-label="转正日期"
+                     hc-type="date">
+                </div>
+                <div hc-input="data.currItem.start_date"
+                     hc-label="入职日期"
+                     hc-type="date">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div hc-box>
+      <div  hc-grid="gridOptions"  hc-auto-height="grid"></div>
+    </div>
+</div>

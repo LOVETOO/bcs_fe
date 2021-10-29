@@ -1,0 +1,56 @@
+<div hc-obj-prop>
+
+    <div id="base" class="active">
+        <div hc-box class="ohter-h">
+            <div class="row">
+                <div hc-label="名称" hc-input="data.currItem.orgname" hc-required="true"/>
+                <div hc-label="类型" hc-input="data.currItem.orgtype" hc-dict-code="org_type" hc-required="true"/>
+                <div hc-label="负责人" hc-input="data.currItem.manager" hc-class-id="scpuser"
+                     hc-common-search="commonSearch.manager"/>
+                <div hc-label="编码" hc-input="data.currItem.code"/>
+            </div>
+
+            <div class="row">
+                <div hc-label="所属组织" hc-input="data.currItem.entname" hc-readonly="true" hc-class-id="scpent"
+                     hc-common-search="commonSearch.ent"/>
+                <div hc-label="所属组织ID" hc-input="data.currItem.entid" hc-readonly="true"/>
+                <div hc-label="机构ID" hc-input="data.currItem.orgid" hc-readonly="true"/>
+                <div hc-label="序号" hc-input="data.currItem.seq" hc-required="true"/>
+            </div>
+            <div class="row">
+                <div hc-label="部门属性" hc-input="data.currItem.orgattribute" hc-dict-code="org_attribute" hc-required="true"/>
+                <div hc-label="可用" hc-input="data.currItem.stat" hc-type="checkbox" class="locationAdjust"/>
+                <div hc-label="成本费用中心" hc-input="data.currItem.isfeecenter" hc-type="checkbox" class="locationAdjust"/>
+                <div
+                    hc-label="签约工程主体"
+                    hc-input="data.currItem.is_contract_unit"
+                    hc-type="checkbox"
+                    hc-true-value="2"
+                    hc-false-value="1"
+                    class="locationAdjust"
+                ></div>
+            </div>
+            <div class="row">
+                <div hc-label="创建人" hc-input="data.currItem.creator" hc-readonly="true"/>
+                <div hc-label="创建时间" hc-input="data.currItem.createtime" hc-type="time" hc-readonly="true"/>
+                <div hc-label="修改人" hc-input="data.currItem.updator" hc-readonly="true"/>
+                <div hc-label="修改时间" hc-input="data.currItem.updatetime" hc-type="time" hc-readonly="true"/>
+            </div>
+            <div class="row">
+                <div hc-label="备注" hc-input="data.currItem.note" hc-type="textarea" hc-col-count="8"/>
+            </div>
+        </div>
+    </div>
+
+    <!-- 包含用户 -->
+    <div id="user">
+        <div hc-box hc-grid="userGridOptions" hc-auto-height/>
+    </div>
+
+</div>
+<style>
+    .locationAdjust{
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+</style>

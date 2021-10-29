@@ -1,0 +1,117 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.apply_bill_no"
+                 hc-label="申请单号"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.bank_acct_name"
+                 hc-label="账户名"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.bank_acct_no"
+                 hc-label="银行账号"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.stat"
+                 hc-label="单据状态"
+                 hc-readonly="true"
+                 hc-dict-code="stat">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.bank_type"
+                 hc-label="银行类别"
+                 hc-required="true"
+                 hc-dict-code="bank_type">
+            </div>
+
+            <div hc-input="data.currItem.bank_name"
+                 hc-label="开户行"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.city_name"
+                 hc-label="所在省市"
+                 hc-btn-click="chooseArea('arrival_area')"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.creator"
+                 hc-label="创建人"
+                 hc-readonly="true">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.acct_type"
+                 hc-label="账户类别"
+                 hc-required="true"
+                 hc-dict-code="acct_type">
+            </div>
+
+            <div hc-input="data.currItem.lianhang_no"
+                 hc-label="联行号"
+                 hc-required="true" >
+            </div>
+
+            <div hc-input="data.currItem.acct_nature"
+                 hc-label="账户性质"
+                 hc-required="true"
+                 hc-dict-code="acct_nature" >
+            </div>
+
+            <div hc-input="data.currItem.create_time"
+                 hc-label="创建时间"
+                 hc-readonly="true">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.curr_type"
+                 hc-label="币别"
+                 hc-required="true"
+                 hc-dict-code="currency_name" >
+            </div>
+
+            <div hc-input="data.currItem.open_acct_company"
+                 hc-label="开户单位"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.acct_property"
+                 hc-label="账户属性"
+                 hc-required="true"
+                 hc-dict-code="acct_property">
+            </div>
+
+            <div hc-input="data.currItem.is_initial_acct"
+                 hc-type="checkbox"
+                 hc-label="期初账户">
+            </div>
+
+            <div hc-input="data.currItem.is_ec_acct"
+                 hc-type="checkbox"
+                 hc-label="电票账户">
+            </div>
+
+            <div hc-input="data.currItem.is_sweep_acct"
+                 hc-type="checkbox"
+                 hc-label="扫户（资金归集户）">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.note"
+                 hc-label="开户原因"
+                 hc-required="true"
+                 hc-col-count="8">
+            </div>
+        </div>
+
+    </div>
+</div>

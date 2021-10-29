@@ -1,0 +1,31 @@
+<div hc-edit-list>
+
+        <div hc-box class="other-h">
+            <!-- 模态框 -->
+            <div class="row">
+                <div hc-input="data.currItem.year_month"
+                     hc-label="记账月份"
+                     hc-required="true"
+                     hc-type="year-month"></div>
+
+                <div hc-input="data.currItem.item_code"
+                     hc-label="产品"
+                     hc-required="true"
+                     hc-common-search="chooseItem()">
+                </div>
+                <div hc-input="data.currItem.item_name"></div>
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.price"
+                     hc-label="标准成本"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.remark"
+                     hc-col-count="4"
+                     hc-label="备注"></div>
+            </div>
+        </div>
+</div>

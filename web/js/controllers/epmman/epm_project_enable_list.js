@@ -1,0 +1,95 @@
+/**
+ * 报备恢复生效
+ * 2019/12/25
+ * zengjinhua
+ */
+define(
+    ['module', 'controllerApi', 'base_obj_list'],
+    function (module, controllerApi, base_obj_list) {
+        'use strict';
+        /**
+         * 控制器
+         */
+        var controller = [
+            '$scope',
+            function ($scope) {
+                $scope.gridOptions = {
+                    columnDefs: [{
+                        type: '序号'
+                    },{
+                        field: 'stat',
+                        headerName: '单据状态',
+                        hcDictCode : 'stat'
+                    },{
+                        field: 'proj_enable_code',
+                        headerName: '申请单号'
+                    },{
+                        field: 'createtime',
+                        headerName: '申请日期',
+                        type : '日期'
+                    }, {
+                        field: 'creator_name',
+                        headerName: '申请人'
+                    },  {
+                        field: 'project_code',
+                        headerName: '项目编码'
+                    }, {
+                        field: 'project_name',
+                        headerName: '项目名称'
+                    }, {
+                        field: 'division_id',
+                        headerName: '所属事业部',
+                        hcDictCode : 'epm.division'
+                    }, {
+                        field: 'area_full_name',
+                        headerName: '工程所在地'
+                    },{
+                        field: 'address',
+                        headerName: '详细地址'
+                    },{
+                        field: 'is_local',
+                        headerName: '本地/异地',
+                        hcDictCode: 'epm.is_local'
+                    },{
+                        field: 'party_a_name',
+                        headerName: '甲方名称'
+                    }, {
+                        field: 'party_b_name',
+                        headerName: '乙方名称'
+                    }, {
+                        field: 'disable_reason',
+                        headerName: '前期失效原因'
+                    }, {
+                        field: 'enable_reason',
+                        headerName: '恢复生效说明'
+                    }   , {
+                        field: 'creator_name',
+                        headerName: '创建人'
+                    }, {
+                        field: 'createtime',
+                        headerName: '创建时间',
+                        type:'时间'
+                    }, {
+                        field: 'updator_name',
+                        headerName: '修改人'
+                    }, {
+                        field: 'updatetime',
+                        headerName: '修改时间',
+                        type:'时间'
+                    }]
+                };
+                //继承列表页基础控制器
+                controllerApi.extend({
+                    controller: base_obj_list.controller,
+                    scope: $scope
+                });
+            }
+        ];
+        //使用控制器Api注册控制器
+        //需传入require模块和控制器定义
+        return controllerApi.controller({
+            module: module,
+            controller: controller
+        });
+    });
+

@@ -1,0 +1,120 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-required="true"
+                     hc-class-id="epm_project"
+                     hc-common-search="commonSearchOfEpmProject"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true" ></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.guarantee_amount_type"
+                     hc-label="保证金类型"
+                     hc-required="true"
+                     hc-dict-code="epm.guarantee_amount_type"></div>
+                <div hc-input="data.currItem.guarantee_amount"
+                     hc-label="保证金额"
+                     hc-required="true"
+                     hc-unit="元"
+                     hc-blur="changeCtrlGuarante()"></div>
+                <div hc-input="data.currItem.ctrl_price"
+                     hc-label="控制价"
+                     hc-unit="元"
+                     hc-blur="changeCtrlPrice()"></div>
+            </div>
+        </div>
+        <div hc-box="投标注意事项">
+        </div>
+        <div hc-box>
+            <div hc-grid="gridOptions_call" style="height:142px"></div>
+        </div>
+        <div hc-box="项目商务评审">
+            <div class="row">
+                <div hc-input="data.currItem.business_meth"
+                     hc-label="评标方式"
+                     hc-required="busRequired == 2"
+                     hc-change="changePosition()"
+                     hc-dict-code="epm.bid_meth"></div>
+                <div hc-input="data.currItem.business_result"
+                     hc-label="评审结果"
+                     hc-required="busRequired == 2"
+                     hc-dict-code="epm.bid_review_result"></div>
+                <div hc-input="data.currItem.sumBusSroce"
+                     hc-label="评审总分"
+                     hc-readonly="true"
+                     hc-if="data.businessScore == 0"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.business_analysis"
+                     hc-label="结论分析"
+                     hc-type="textarea"
+                     hc-required="busRequired == 2"
+                     hc-col-count="6"
+                     hc-if="data.businessScore == 0"></div>
+                <div hc-input="data.currItem.business_analysis"
+                     hc-label="结论分析"
+                     hc-type="textarea"
+                     hc-required="busRequired == 2"
+                     hc-if="data.businessScore == 1"
+                     hc-col-count="4"></div>
+            </div>
+        </div>
+        <div hc-box>
+            <div hc-grid="gridOptions_business" style="height:142px"></div>
+        </div>
+        <div hc-box="项目技术评审">
+            <div class="row">
+                <div hc-input="data.currItem.tech_meth"
+                     hc-label="评标方式"
+                     hc-required="required == 2"
+                     hc-change="changeTech()"
+                     hc-dict-code="epm.bid_meth"></div>
+                <div hc-input="data.currItem.tech_result"
+                     hc-label="评审结果"
+                     hc-required="required == 2"
+                     hc-dict-code="epm.bid_review_result"></div>
+                <div hc-input="data.currItem.sumRevSroce"
+                     hc-label="评审总分"
+                     hc-readonly="true"
+                     hc-if="data.technologyScore == 0"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.tech_analysis"
+                     hc-label="结论分析"
+                     hc-type="textarea"
+                     hc-required="required == 2"
+                     hc-if="data.technologyScore == 0"
+                     hc-col-count="6"></div>
+                <div hc-input="data.currItem.tech_analysis"
+                     hc-label="结论分析"
+                     hc-type="textarea"
+                     hc-required="required == 2"
+                     hc-if="data.technologyScore == 1"
+                     hc-col-count="4"></div>
+            </div>
+        </div>
+        <div hc-box>
+            <div hc-grid="gridOptions_technology" style="height:142px"></div>
+        </div>
+        <div hc-box="封标注意事项">
+        </div>
+        <div hc-box>
+            <div hc-grid="gridOptions_sealed" style="height:142px"></div>
+        </div>
+    </div>
+
+</div>
+<style>
+    [hc-input="data.currItem.sumRevSroce"] input, [hc-input="data.currItem.sumBusSroce"] input{
+        text-align: right;
+    }
+</style>
+
+

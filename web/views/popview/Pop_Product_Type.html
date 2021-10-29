@@ -1,0 +1,133 @@
+<style>
+	.radio-btn input[type="radio"],
+	.check-box input[type="checkbox"] {
+		visibility: hidden;
+	}
+	/*Custom radio button*/
+	
+	.radio-btn {
+		width: 25px;
+		height: 25px;
+		display: inline-block;
+		float: left;
+		margin: 3px 7px 0 0;
+		cursor: pointer;
+		position: relative;
+		-webkit-border-radius: 100%;
+		-moz-border-radius: 100%;
+		border-radius: 100%;
+		border: 1px solid #ccc;
+		box-shadow: 0 0 1px #ccc;
+		background: rgb(255, 255, 255);
+		background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(47%, rgba(246, 246, 246, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
+		background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+		background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+		background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+		filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);
+	}
+	
+	.checkedRadio {
+		-moz-box-shadow: inset 0 0 5px 1px #ccc;
+		-webkit-box-shadow: inset 0 0 5px 1px #ccc;
+		box-shadow: inset 0 0 5px 1px #ccc;
+	}
+	
+	.radio-btn i {
+		border: none;
+		width: 25px;
+		height: 25px;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		-webkit-border-radius: 100%;
+		-moz-border-radius: 100%;
+		border-radius: 100%;
+	}
+	
+	.checkedRadio i {
+		background-color: none;
+		background-image: url('/app/images/checking_flag.png');
+		width: 27px;
+		height: 27px;
+		background-size: cover;
+		margin-left: -2px;
+		margin-top: -2px;
+	}
+	
+	.item {
+		width: 300px;
+		height: 30px;
+	}
+</style>
+<div class="row">
+
+	<div class="col-lg-12">
+
+		<div style="width: 100%; height: 300px; background: white; overflow: auto;">
+
+			<div style="width: 100%; height: 300px; background: white;" id="customers">
+
+				<div style="width: 100%; height: 40px;background:#EEEEEE;overflow: auto;">
+					<div style="border-radius: 5px; background: white; width: 90%; height: 30px; margin-left: 5%; margin-top: 5px;overflow: auto;">
+
+						<div style="width: 100%; height: 30px; margin: 0 auto; ">
+
+							<i class="top_icon search_icon" style=" width: 20px; height: 20px; margin: 5px;" ng-click="filter()"></i>
+
+							<input style=" width: 90%;height: 30px; border: hidden; text-align: center;" ng-model="searchtext" type="text" placeholder="产品种类" />
+
+						</div>
+
+					</div>
+				</div>
+
+				<ul class="">
+
+					<li ng-repeat="currItem in data.product_types" class="item" style="border-top: thin gainsboro;" >
+						<div class="radio-btn" >
+							
+							<i style="float: left;" ng-click="setCheck($index)">
+							<input type="radio" name="radio-btn"   />
+							</i>
+							
+							<div style="width:200px;float: left;" ng-click="setCheck($index)" >
+								<span style="padding-left: 35px;">{{currItem.item_type_name}}</span>
+							</div>
+							
+							<div style="margin-left: 300px; ">
+								 <img style="height: 25px; width: 25px;" src="/app/images/icon/icon_to.png" ng-click="setNext($index)" />
+							</div>
+							
+						</div>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+
+		<div style="width: 100%; height: 40px;background:#F0F3F7;overflow: auto;">
+			<a class="btn btn-sm btn-primary" ng-click="ok()" style="float: right;margin: 5px;">
+          确定
+        </a>
+			<a class="btn btn-sm btn-info" ng-click="cancel()" style="float: right;margin: 5px;">
+          取消
+        </a>
+		</div>
+
+	</div>
+
+</div>
+</div>
+
+<script>
+	$(document).on('click', '.radio-btn', function() {
+		var _this = $(this),
+			block = _this.parent().parent();
+		block.find('input:radio').attr('checked', false);
+		block.find(".radio-btn").removeClass('checkedRadio');
+		_this.addClass('checkedRadio');
+		_this.find('input:radio').attr('checked', true);
+	});
+</script>

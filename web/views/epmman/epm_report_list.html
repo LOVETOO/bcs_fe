@@ -1,0 +1,144 @@
+<div hc-obj-list>
+	<!-- 查询条件面板-->
+	<hc-obj-list-search-panel>
+		<!--单体-->
+		<div class="row" hc-if="single">
+			<div
+				hc-label="项目编码"
+				hc-input="searchObj.project_code"
+			></div>
+		
+			<div
+				hc-label="项目名称"
+				hc-input="searchObj.project_name"
+			></div>
+
+			<div hc-label="客户编码"
+				 hc-input="searchObj.customer_code"></div>
+
+			<div hc-label="客户名称"
+				 hc-input="searchObj.customer_name"></div>
+
+            
+		</div>
+		<div class="row report_project" hc-if="single">
+			<div hc-label="修改时间从"
+				 hc-type="date"
+				 hc-can-delete="true"
+				 hc-input="searchObj.updatetime_start"></div>
+			<div hc-label="至"
+				 hc-type="date"
+				 hc-can-delete="true"
+				 hc-input="searchObj.updatetime_end"></div>
+
+			<div hc-label="申报日期从"
+				 hc-type="date"
+				 hc-can-delete="true"
+				 hc-input="searchObj.report_time_start"></div>
+
+			<div hc-label="至"
+				 hc-type="date"
+				 hc-can-delete="true"
+				 hc-input="searchObj.report_time_end"></div>
+
+			<div hc-label="甲方名称"
+				 hc-input="searchObj.party_a_name"></div>
+
+			<div hc-label="乙方名称"
+				 hc-input="searchObj.party_b_name"></div>
+		</div>
+		<div class="row" hc-if="single">
+			<div hc-label="本地/异地"
+				 hc-can-delete="true"
+				 hc-dict-code="epm.is_local"
+				 hc-input="searchObj.is_local"></div>
+			<div hc-label="省"
+				 hc-input="searchObj.province_name"></div>
+			<div hc-label="市"
+				 hc-input="searchObj.city_name"></div>
+			<div hc-label="区"
+				 hc-input="searchObj.area_name"></div>
+		</div>
+		<div class="row" hc-if="single">
+			<div
+                hc-label="审核状态"
+                hc-select-options="[
+                    { name: '新建', value: '新建' },
+                    { name: '已提交', value: '已提交' },
+                    { name: '审核通过', value: '审核通过' },
+                    { name: '审核拒绝', value: '审核拒绝' },
+                    { name: '已送签OA', value: '已送签OA' }
+                ]"
+				hc-can-delete="true"
+                hc-input="searchObj.audit_stat"
+			></div>
+			
+			<div hc-label="工程类型"
+				 hc-dict-code="epm.project_source"
+				 hc-can-delete="true"
+				 hc-input="searchObj.project_source"></div>
+
+			<div hc-label="有效状态"
+               hc-dict-code="valid"
+               hc-can-delete="true"
+               hc-input="searchObj.project_valid"></div>
+
+			<div hc-label="详细地址"
+				 hc-input="searchObj.address"></div>
+		</div>
+
+		<!--战略-->
+		<div class="row" hc-if="!single">
+			<div
+					hc-label="项目编码"
+					hc-input="searchObj.project_code"
+			></div>
+
+			<div
+					hc-label="项目名称"
+					hc-input="searchObj.project_name"
+			></div>
+
+			<div hc-label="甲方名称"
+				 hc-input="searchObj.party_a_name"></div>
+
+			<div hc-label="乙方名称"
+				 hc-input="searchObj.party_b_name"></div>
+		</div>
+		<div class="row" hc-if="!single">
+			<div hc-label="申报日期从"
+				 hc-type="date"
+				 hc-can-delete="true"
+				 hc-input="searchObj.report_time_start"></div>
+
+			<div hc-label="申报日期至"
+				 hc-type="date"
+				 hc-can-delete="true"
+				 hc-input="searchObj.report_time_end"></div>
+
+			<div hc-label="项目当前进度"
+				 hc-input="searchObj.stage_name"></div>
+
+			<div hc-label="审核状态"
+				 hc-dict-code="stat"
+				 hc-can-delete="true"
+				 hc-input="searchObj.stat"></div>
+		</div>
+	</hc-obj-list-search-panel>
+</div>
+<style>
+	.report_project [hc-input="searchObj.report_time_start"],
+	.report_project [hc-input="searchObj.updatetime_start"] {
+        width: calc(13% + 15px);
+		margin-right: 0px;
+    }
+	.report_project [hc-input="searchObj.report_time_end"],
+	.report_project [hc-input="searchObj.updatetime_end"] {
+        width: calc(12% - 35px);
+    }
+	.report_project [hc-input="searchObj.report_time_end"] label,
+	.report_project [hc-input="searchObj.updatetime_end"] label {
+        width: 13px;
+		min-width: 0px;
+    }
+</style>

@@ -1,0 +1,13 @@
+<div hc-box="请选择流程模板">
+	<ul class="list-group clear-list m-t">
+		<li
+			class="list-group-item fist-item"
+			style="cursor: pointer;"
+			ng-repeat="wfTemp in wfTemps"
+			ng-click="$close(wfTemp)"
+		>
+			<span class="label label-info" ng-bind="$index + 1"></span>
+			<span ng-bind="wfTemp.wftempname"></span>
+		</li>
+	</ul>
+</div>

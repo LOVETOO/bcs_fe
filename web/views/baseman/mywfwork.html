@@ -1,0 +1,60 @@
+<!-- <div class="tree-grid-box" hc-auto-height hc-splitter-box hc-init="doInit()">
+    <div class="tree-box">
+        <div class="tree-content" hc-auto-height="grid">
+            <div class="tree-title">所有流程</div>
+            <div hc-tree="treeSetting"></div>
+        </div>
+    </div>
+    <div class="grid-box">
+        <div hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div> -->
+
+<div class="flex1 flex-column" hc-init="doInit()">
+    <div class="tree-grid-box flex1 splitter_panel" hc-splitter-box>
+        <div class="tree-box left_panel" style="width : 20%;">
+            <div class="tree-content" hc-auto-height="grid">
+                <div class="tree-title">所有流程</div>
+                <div hc-tree="treeSetting"></div>
+            </div>
+        </div>
+        <div class="vsplitter" style="left:20px;"></div>
+        <div class="grid-box right_panel">
+            <div hc-grid="gridOptions" hc-auto-height="grid"></div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    /*网格延期/未读样式*/
+    .sick-days-isread {
+        font-weight: bold !important;
+    }
+
+    .sick-days-flag {
+        color: red !important;
+    }
+
+    .grid-box .ibox {
+        margin-left: -15px;
+    }
+
+    .tree-box {
+        width: 20% !important;
+        min-width: 200px !important;
+    }
+
+    .grid-box {
+        width: 80% !important;
+        max-width: calc(100% - 200px) !important;
+    }
+
+    .tree-grid-box .tree-title {
+        width: 100%;
+    }
+
+    .ztree li span.button.ico_close, .ztree li span.button.ico_open, .ztree li span.button.ico_docu {
+        background-size: 16px 16px !important;
+    }
+</style>

@@ -1,0 +1,86 @@
+﻿<div class="bill-form" ng-controller="aux_oms_sapEdit">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                SAP接口名维护
+            </div>
+            <div style="float:left">
+                <div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">
+
+                </div>
+                <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button" ng-click="new()"><i
+                        class="fa fa-file-o"></i>新增
+                </button>
+                <button class="btn btn-toolbar" type="button"
+                        ng-click="save($event)"><i class="fa fa-floppy-o"></i>保存
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i
+                        class="fa fa-history"></i>刷新
+                </button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-title">
+                    <h5>基本信息</h5>
+                    <div ibox-tools></div>
+                </div>
+                <div id="content" class="first tab-content">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null ">接口名称</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" ng-model="data.currItem.oms_sap_name" ng-readonly="false"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">是否可用</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select
+                                        ng-model="data.currItem.usable"
+                                        class="input-sm chosen-select form-control"
+                                        ng-options="s.id as s.name for s in trueorfalses">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">接口编码</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="data.currItem.oms_sap_no" ng-readonly="false"
+                                       class="input-sm form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label rows="1" class="form-label-mini ">备注</label>
+                            </div>
+                            <div class="col-md-8">
+								<textarea ng-readonly="false"
+                                          ng-model="data.currItem.note"
+                                          rows="3"
+                                          class="form-control noresize ng-pristine ng-valid ng-touched">
+								</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

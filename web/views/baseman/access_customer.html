@@ -1,0 +1,116 @@
+<div class="full-of-window padding">
+	<div class="h100" hc-splitter-box="{ position: '320px' }">
+		<div class="h100">
+			<div class="top-bar">
+				<input type="radio" ng-model="flag" value="1">按用户
+				<input type="radio" ng-model="flag" value="2">按客户
+			</div>
+			<div id="left-grid" hc-grid="leftGridOptions"></div>
+			<div class="shade" ng-show="editing"></div>
+		</div>
+		<div class="h100">
+			<div id="middle-grid-box" class="h100">
+				<div class="top-bar">
+					可访问
+				</div>
+				<div id="middle-grid" hc-grid="middleGridOptions"></div>
+			</div>
+			<div id="button-panel" class="h100">
+				<div class="top-bar">
+					操作
+				</div>
+				<div class="row">
+					<div
+						hc-button="addPart()"
+						hc-icon="iconfont hc-back"
+						hc-title="添加选中"
+					></div>
+				</div>
+				<div class="row">
+					<div
+						hc-button="addAll()"
+						hc-icon="iconfont hc-back"
+						hc-title="添加全部"
+					></div>
+				</div>
+				<div class="row">
+					<div
+						hc-button="deletePart()"
+						hc-icon="iconfont hc-more"
+						hc-title="移除选中"
+					></div>
+				</div>
+				<div class="row">
+					<div
+						hc-button="deleteAll()"
+						hc-icon="iconfont hc-more"
+						hc-title="移除全部"
+					></div>
+				</div>
+				<div class="row">
+					<div
+						hc-button="ok()"
+						hc-icon="iconfont hc-selected"
+						hc-title="确定"
+						ng-show="editing"
+					></div>
+				</div>
+				<div class="row">
+					<div
+						hc-button="cancel()"
+						hc-icon="iconfont hc-close"
+						hc-title="取消"
+						ng-show="editing"
+					></div>
+				</div>
+			</div>
+			<div id="right-grid-box" class="h100">
+				<div class="top-bar">
+					不可访问
+				</div>
+				<div id="right-grid" hc-grid="rightGridOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<style>
+	.full-of-window {
+		position: fixed;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+	}
+	.h100 {
+		height: 100%;
+	}
+	.padding {
+		padding: 8px;
+	}
+	.shade {
+		position: absolute;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+		background: rgba(255,255,255,0.5);
+		z-index: 10000;
+	}
+	.top-bar {
+		height: 24px;
+	}
+	#left-grid,#middle-grid,#right-grid {
+		height: calc(100% - 24px);
+	}
+	#middle-grid-box,#right-grid-box {
+		float: left;
+		width: calc((100% - 116px) / 2);
+	}
+	#button-panel {
+		float: left;
+		width: 116px;
+		text-align: center;
+	}
+</style>

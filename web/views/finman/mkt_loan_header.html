@@ -1,0 +1,331 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="ctrl_mkt_loan_header">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>借款申请</h5>
+                    <div class="ibox-tools">
+                        <form class="form-inline ng-pristine ng-valid">
+                            <button type="button" class="btn btn-default btn-sm"
+                                    ng-click="addNew()" ng-model="add_click"><i class="fa fa-plus"></i> 增加
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="searchBySql()"><i class="fa fa-search"></i> 查询
+                            </button>
+                            <button type="button" class="btn btn-default " data-toggle="modal"
+                                    ng-click="searchData()"><i class="fa fa-refresh"></i> 刷新
+                            </button>
+                            <!--<button type="button" class="btn btn-default btn-sm" data-toggle="modal"
+                                    data-target="#ImportModal"><i class="fa fa-external-link"></i> 导出
+                            </button>-->
+
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="headerViewGrid" slick-grid sg-options="headerOptions"
+                         sg-columns="headerColumns"
+                         class="slick-grid">
+                    </div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--详情模态页面-->
+    <div class="modal inmodal fade" id="detailModal" tabindex="-1" role="dialog" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">借款申请</h4>
+                    <ul class="nav nav-tabs" id="detailtab">
+                        <li class="active">
+                            <a data-toggle="tab" href="tabs.html#tab_common">常规</a>
+                            <ul class="tips category-list">
+                                <li><i class="fa fa-square text-havetext"></i> 必填</li>
+                                <li><i class="fa fa-square text-relondly"></i> 只读</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="tabs.html#tab_wfins">流程</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-body " style="height: 602px;">
+                    <div class="tabs-container">
+                        <form method="get" class="form-horizontal ng-pristine ng-valid" id="mkt_loan_Form"
+                              name="mkt_loan_Form">
+                            <div class="tab-content">
+                                <div id="tab_common" class="tab-pane active form-inline mline">
+                                    <div class="ibox-content">
+                                        <div class="row">
+                                            <label class="control-label not-null">申请单号</label>
+                                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.currItem.loan_no" ng-disabled="true">
+                                            <label class="control-label">借款类别</label>
+                                            <select
+                                                    class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid non-empty localytics-chosen loading"
+                                                    ng-options="s.id as s.name for s in loan_types"
+                                                    ng-model="data.currItem.loan_type"
+                                                    id="loan_type" ng-disabled="data.currItem.stat>1"
+                                                    data-rule-required="true"
+                                                    data-msg-required="借款类别不能为空">
+                                            </select>
+                                            <label class="control-label">申请时间</label>
+                                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.currItem.create_time" ng-disabled="true">
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">申请部门</label>
+                                            <div class="input-group width_m">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                                       ng-model="data.currItem.org_code"
+                                                       ng-disabled="true" data-rule-required="true"
+                                                       data-msg-required="申请部门不能为空"
+                                                >
+                                                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary "
+                                                ng-click="searchApplyOrg('申请部门')"
+                                                ng-disabled="data.currItem.stat>1">•••</button>
+                                </span>
+                                            </div>
+                                            <input type="text"
+                                                   class="form-control width_xm ng-pristine ng-untouched ng-valid non-empty"
+                                                   ng-model="data.currItem.org_name" ng-disabled="true">
+                                            <label class="control-label">申请人</label>
+                                            <div class="input-group width_m">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                                       ng-model="data.currItem.chap_name" ng-disabled="true"
+                                                       data-rule-required="true"
+                                                       data-msg-required="申请人不能为空">
+                                                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"
+                                                ng-click="searchUser()"
+                                                ng-disabled="data.currItem.stat>1">•••</button>
+                                    </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">费用承担部门</label>
+                                            <div class="input-group width_m">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                                       ng-model="data.currItem.fee_org_code"
+                                                       ng-disabled="true" data-rule-required="true"
+                                                       data-msg-required="费用承担部门不能为空">
+                                                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-click="searchApplyOrg()"
+                                                ng-disabled="data.currItem.fee_apply_id>0"
+                                                ng-disabled="data.currItem.stat>1">•••</button>
+                                </span>
+                                            </div>
+                                            <input type="text"
+                                                   class="form-control width_xm ng-pristine ng-untouched ng-valid non-empty"
+                                                   ng-model="data.currItem.fee_org_name" ng-disabled="true">
+                                            <label class="control-label">借款类型</label>
+                                            <div class="input-group width_m">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                                       ng-model="data.currItem.business_type_name"
+                                                       ng-disabled="true" data-rule-required="true"
+                                                       data-msg-required="预借款类型不能为空">
+                                                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-click="searchBusiness_Type()"
+                                                ng-disabled="data.currItem.stat>1">•••</button>
+                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">借款主体</label>
+                                            <div class="input-group width_m">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                                       ng-model="data.currItem.receiver_code"
+                                                       ng-disabled="true" data-rule-required="true"
+                                                       data-msg-required="借款主体不能为空">
+                                                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-click="searchReceiver()"
+                                                ng-disabled="data.currItem.bx_id>0">•••</button>
+                                    </span>
+                                            </div>
+                                            <input type="text"
+                                                   class="form-control width_xm ng-pristine ng-untouched ng-valid non-empty"
+                                                   ng-model="data.currItem.receiver_name"
+                                                   ng-disabled="true">
+                                            <label class="control-label">单据状态</label>
+                                            <div class="input-group width_m">
+                                                <select
+                                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                        ng-options="s.id as s.name for s in stats"
+                                                        ng-model="data.currItem.stat"
+                                                        ng-disabled="true">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label not-null">申请总额</label>
+                                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.currItem.total_apply_amt" ng-disabled="true"
+                                                   money-format>
+                                            <label class="control-label not-null">批准总额</label>
+                                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.currItem.total_allow_amt" ng-disabled="true"
+                                                   money-format>
+                                            <label class="control-label">预计还款日期</label>
+                                            <input type="text" ng-model="data.currItem.repayment_date"
+                                                   id="repayment_date"
+                                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-disabled="data.currItem.stat>1" date-format>
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label not-null">已付款金额</label>
+                                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.currItem.payed_amt" ng-disabled="true" money-format>
+                                            <label class="control-label not-null">未还款金额</label>
+                                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                                   ng-model="data.currItem.not_hk_amt" ng-disabled="true" money-format>
+                                            <label class="control-label">结算方式</label>
+                                            <div class="input-group width_m">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                                       ng-model="data.currItem.balance_type_name"
+                                                       ng-disabled="true" data-rule-required="true"
+                                                       data-msg-required="结算方式不能为空"
+                                                >
+                                                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"
+                                                ng-click="searchBase_balance_type()">•••</button>
+                                    </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label not-null">收款人</label>
+                                            <input type="text"
+                                                   class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                                   ng-model="data.currItem.payee_person_name"
+                                                   ng-disabled="data.currItem.stat>1" data-rule-required="true"
+                                                   data-msg-required="收款人不能为空">
+                                            <label class="control-label not-null">开户行名称</label>
+                                            <input type="text"
+                                                   class="form-control ng-pristine ng-untouched ng-valid "
+                                                   ng-model="data.currItem.bank_name"
+                                                   ng-disabled="data.currItem.stat>1">
+                                            <label class="control-label">开户名</label>
+                                            <input type="text"
+                                                   class="form-control ng-pristine ng-untouched ng-valid "
+                                                   ng-model="data.currItem.bank_code"
+                                                   ng-disabled="data.currItem.stat>1">
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label not-null">开户行账号</label>
+                                            <input type="text"
+                                                   class="form-control ng-pristine ng-untouched ng-valid width_xxl"
+                                                   ng-model="data.currItem.bank_accno"
+                                                   ng-disabled="data.currItem.stat>1">
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label not-null">借款用途</label>
+                                            <input type="text"
+                                                   class="form-control ng-pristine ng-untouched ng-valid width_xxl"
+                                                   ng-model="data.currItem.loan_purpose"
+                                                   ng-disabled="data.currItem.stat>1">
+                                        </div>
+                                        <div id="lineGridView" slick-grid sg-options="lineOptions"
+                                             sg-columns="lineColumns" style="width:100%;height:320px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab_wfins" class="tab-pane">
+                                    <div class="modal-body" style="width: 900px;height: 600px;" id="wfinsform">
+                                        <!--<iframe id="wfinspage" src=""-->
+                                        <!--style="width: 100%;height: 100%;background-color: #e2e5ec;">-->
+                                        <!--</iframe>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left"
+                            ng-click="addLineRow()"
+                            ng-disabled="data.currItem.stat>1"> 增加明细
+                    </button>
+                    <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#attModal">
+                        附件({{data.currItem.objattachs?data.currItem.objattachs.length:0}})
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="saveData()"
+                            ng-disabled="data.currItem.stat>1">保存
+                    </button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--附件模态框-->
+    <div class="modal inmodal fade" id="attModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">附件</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <table class="table table-bordered ui-widget m-n">
+                            <thead>
+                            <tr>
+                                <td style="width: 50px;">序号</td>
+                                <td>文件名称</td>
+                                <td>操作</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="doc in data.currItem.objattachs">
+                                <td>{{$index+1}}</td>
+                                <td><a href="/downloadfile.do?docid={{doc.docid}}" target="_blank">{{doc.docname}}</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-info viewbtn" ng-click="deleteFile(doc)"
+                                            ng-show="data.currItem.stat == 1">删除
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="addFile()"
+                            ng-show="data.currItem.stat == 1">添加附件
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ul id="contextMenu" style="display:none;position:absolute">
+    <b>Set priority:</b>
+    <li data="Low">Low</li>
+    <li data="Medium">Medium</li>
+    <li data="High">High</li>
+</ul>
+
+<!--时间插件引入中文-->
+<script type="text/javascript" src="../../lib/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"
+        charset="UTF-8"></script>
+
+
+

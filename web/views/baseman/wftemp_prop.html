@@ -1,0 +1,233 @@
+<div hc-obj-prop>
+
+    <div id="base" class="active" hc-box>
+        <div class="row">
+            <div hc-label="名称" hc-input="data.currItem.wftempname" hc-col-count="4" hc-required="true"/>
+
+            <div hc-label="中断设置" hc-input="data.currItem.breakprocid" hc-select-options="breakProcIds" hc-col-count="4"/>
+
+            <!--<div hc-label="周期" hc-input="data.currItem.period" hc-type="number" hc-unit="小时"/>-->
+        </div>
+
+        <div class="row">
+            <div hc-label="中断时执行" hc-input="data.currItem.breakfunc" hc-type="textarea" hc-col-count="8"/>
+        </div>
+
+        <div class="row">
+            <div hc-label="备注" hc-input="data.currItem.note" hc-type="textarea" hc-col-count="8"/>
+        </div>
+
+        <div class="row">
+            <div hc-label="创建人" hc-input="data.currItem.creator" hc-readonly="true"/>
+            <div hc-label="创建时间" hc-input="data.currItem.createtime" hc-type="time" hc-readonly="true"/>
+            <div hc-label="最后修改人" hc-input="data.currItem.updator" hc-readonly="true"/>
+            <div hc-label="最后修改时间" hc-input="data.currItem.updatetime" hc-type="time" hc-readonly="true"/>
+        </div>
+
+        <div class="row">
+            <div hc-label="可用" hc-input="data.currItem.actived" hc-type="checkbox" style="width: 100px"/>
+            <div hc-label="可选择" hc-input="data.currItem.canselect" hc-type="checkbox" style="width: 100px"/>
+            <div hc-label="驳回后允许保留提交历史" hc-input="data.currItem.keephistory" hc-type="checkbox" style="width: 220px"/>
+            <!--  <div hc-label="可修改过程周期" hc-input="data.currItem.modifyperiod" hc-type="checkbox"/>
+            <div hc-label="可修改过程时间" hc-input="data.currItem.canmodifytime" hc-type="checkbox"/>
+             <div hc-label="步骤运行后不允许中断" hc-input="data.currItem.canmodifytime" hc-type="checkbox" style="width: 200px"/>-->
+        </div>
+
+    </div>
+
+    <!-- 流程图 -->
+    <div id="flow" hc-box>
+        <div class="row">
+            <div hc-buttons="flowButtons"/>
+        </div>
+
+        <div hc-flow="flowSetting" style="height:450px;"/>
+    </div>
+
+    <!-- 流程实例 -->
+    <div id="instance" hc-box ng-form="instanceForm">
+        <div class="row grid-other-h">
+            <div hc-input="data.keyword"
+                 hc-btn-click="instanceGridOptions.hcApi.searchByKeyword(data.keyword, ['subject', 'startor', 'note'])"
+                 hc-btn-icon="fa fa-search"
+                 hc-can-input="true"
+                 hc-placeholder="请输入 主题/启动用户/备注 进行搜索"
+                 hc-col-count="6"/>
+        </div>
+        <div hc-grid="instanceGridOptions" hc-auto-height="grid"/>
+    </div>
+</div>
+
+<!-- 节点 -->
+<div hc-modal="nodeModal">
+    <div hc-tab="tabs_node"/>
+
+    <div hc-tab-page  hc-box ng-form="form"  hc-form-readonly="isReadonly()" hc-form-editing="true">
+        <div id="node_base" class="active" style="height:500px">
+            <div class="row">
+                <div hc-label="ID" hc-input="data.currNode.proctempid" hc-readonly="true"/>
+                <div hc-label="名称" hc-input="data.currNode.proctempname"/>
+                <div hc-label="类型" hc-input="data.currNode.proctype" hc-select-options="procTypes"/>
+                <div hc-label="权限" hc-input="data.currNode.operright" hc-select-options="operRights"/>
+            </div>
+
+            <div class="row">
+                <div hc-label="后续节点类型" hc-input="data.currNode.sufproctype" hc-select-options="sufproctypes"/>
+                <div hc-label="执行设置" hc-input="data.currNode.isskip" hc-select-options="isskips"/>
+                <div hc-label="执行人可控过程" hc-input="data.currNode.ctrlprocname" hc-btn-click="selectCtrlProc()"
+                    hc-col-count="4"/>
+                <!--<div hc-label="状态" hc-input="data.currNode.stat" hc-select-options="stats" hc-readonly="true"/>
+                <div hc-label="优先级" hc-input="data.currNode.priority" hc-select-options="priorities"/>-->
+            </div>
+
+            <div class="row">
+                <div hc-label="驳回设置" hc-input="data.currNode.canreject" hc-select-options="canrejects"/>1
+                <div hc-label="可驳回过程" hc-input="data.currNode.rejectprocname" hc-btn-click="selectRejectProc()"
+                     hc-col-count="6"/>
+
+               <!-- <div hc-label="周期（小时)" hc-input="data.currNode.period"/>-->
+            </div>
+
+            <div class="row">
+                <div hc-label="归档路径设置" hc-input="data.currNode.archiveto" hc-readonly="true" hc-col-count="8"/>
+
+               <!-- <div hc-label="延迟周期" hc-input="data.currNode.delayperiod"/>
+                <div hc-label="实际周期" hc-input="data.currNode.aperiod"/>
+                <div hc-label="评分" hc-input="data.currNode.score"/>-->
+            </div>
+
+            <div class="row">
+                <div hc-label="不能被驳回" hc-input="data.currNode.unreject" hc-type="checkbox"/>
+
+                <div hc-label="禁止从指定候选外挑选执行人" hc-input="data.currNode.canmodify" hc-type="checkbox"/>
+            </div>
+
+            <!--<div class="row">
+                <div hc-label="实际开始时间" hc-input="data.currNode.astatime" hc-readonly="true"/>
+                <div hc-label="计划开始时间" hc-input="data.currNode.pstatime" hc-readonly="true"/>
+                <div hc-label="计划结束时间" hc-input="data.currNode.pendtime" hc-readonly="true"/>
+                <div hc-label="实际结束时间" hc-input="data.currNode.aendtime" hc-readonly="true"/>
+            </div>
+
+            <div class="row">
+                <div hc-label="禁止修改" hc-input="data.currNode.canmodify" hc-type="checkbox"/>
+            </div>-->
+
+        </div>
+
+
+        <div id="user" hc-box>
+            <div class="ibox-content text-right m-b-n">
+                <span class="ng-binding pull-left">执行人</span>
+                <button class="btn btn-white" ng-click="addProcUser('proc1')" ng-disabled="isReadonly()">添加
+                </button>
+                <button class="btn btn-white" ng-click="deleteProcUser('proc1')" ng-disabled="isReadonly()">删除
+                </button>
+                <button class="btn btn-white" ng-click="" ng-disabled="isReadonly()">地址薄</button>
+                <button class="btn btn-white"
+                        ng-click="addOrgPosition('{{data.currProc.id}}')" ng-disabled="isReadonly()">机构岗位
+                </button>
+                <button class="btn btn-white"
+                        ng-click="addGroupPosition('{{data.currProc.id}}')" ng-disabled="isReadonly()">企业岗位
+                </button>
+                <button class="btn btn-white" ng-click="" ng-disabled="isReadonly()">设为决策人</button>
+            </div>
+            <div hc-grid="procUserGridOptions" style="height:192px;width:1000px"/>
+
+            <div class="ibox-content text-right m-b-n">
+
+                <span class="ng-binding pull-left">候选执行人</span>
+
+                <button class="btn btn-white" ng-click="addProcUser('ranger')" ng-disabled="isReadonly()">添加
+                </button>
+                <button class="btn btn-white" ng-click="deleteProcUser('ranger')" ng-disabled="isReadonly()">删除
+                </button>
+            </div>
+
+            <div hc-grid="procUserRangerGridOptions" style="height:192px;width:1000px"/>
+            <div class="row " style="flex-direction:row-reverse"><!--pull-right-->
+                <div hc-label="至少执行人数" hc-input="data.currNode.minperson" hc-type="number" hc-col-count="2"></div>
+                <div hc-label="所有人签字" hc-input="data.currNode.allperson" hc-type="checkbox" style="margin-right: -100px;"></div>
+            </div>
+        </div>
+
+        <div id="fun" hc-box>
+            <div class="row">
+                <div hc-label="提交成功执行" hc-input="data.currNode.submitfunc" hc-type="textarea" hc-col-count="8"/>
+            </div>
+            <div class="row">
+                <div hc-label="驳回成功执行" hc-input="data.currNode.rejectfunc" hc-label="驳回成功执行" hc-type="textarea"
+                     hc-col-count="8"/>
+            </div>
+            <div class="row">
+                <div hc-label="已到达时执行" hc-input="data.currNode.arrivefunc" hc-type="textarea" hc-col-count="8"/>
+            </div>
+            <div class="row">
+                <div hc-label="监控提交执行" hc-input="data.currNode.ctrlsubmitfunc" hc-type="textarea" hc-col-count="8"/>
+            </div>
+        </div>
+
+        <!--控制参数-->
+        <div id="ctrlfun" ng-hide="true" hc-box>
+            <div class="row">
+                <div hc-label="结束标志过程" hc-input="data.currNode.endprocid"/>
+                <div hc-label="监控/负责人" hc-input="data.currNode.ctrluser"/>
+                <div hc-label="监控转交" hc-input="data.currNode.ctrltrans" hc-select-options="ctrltranss"/>
+            </div>
+
+            <div class="row">
+                <div hc-label="延迟许可次数" hc-input="data.currNode.delaytimes"/>
+                <div hc-label="检查设置" hc-input="data.currNode.checkset" hc-select-options="checksets"/>
+                <div hc-label="自动设置后续过程用户" hc-input="data.currNode.sufprocuserset" hc-type="checkbox"/>
+            </div>
+            <div class="row">
+                <div hc-label="检查定义" hc-input="checkfunc" hc-col-count="8"/>
+            </div>
+            <div class="row">
+                <div hc-label="可转交过程" hc-input="data.currNode.varsufproc" hc-type="checkbox"></div>
+                <div hc-label="动态(转交)过程" hc-input="data.currNode.isdynamic" hc-type="checkbox"></div>
+            </div>
+        </div>
+
+        <!--通知设置-->
+        <div id="noticeset" ng-hide="true" style="padding: 8px 16px;">
+            <div hc-grid="noticeSetgridOptions" style="height:384px;"/>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!--  可控过程选择-->
+<div hc-modal="ctrlprocModal">
+    <div hc-box>
+        <div hc-grid="ctrlProcOptions" style="height: 300px"/>
+    </div>
+</div>
+
+<!-- 连线 -->
+<div hc-modal="lineModal">
+    <div style="flex: 1; padding: 0 16px;" ng-form="line"  hc-form-readonly="isReadonly()" hc-form-editing="true">
+        <div class="row">
+            <div hc-label="连线名称" hc-input="data.currLine.lefttext" hc-col-count="6"/>
+            <div hc-label="缺省" hc-input="data.currLine.isdefault" hc-type="checkbox"/>
+        </div>
+        <div class="row">
+            <div hc-label="执行分支条件" hc-input="data.currLine.conditions" hc-type="textarea" hc-col-count="8" hc-row="4"/>
+        </div>
+<!--
+        <div class="row">
+            <div hc-label="缺省" hc-input="data.currLine.isdefault" hc-type="checkbox"/>
+            <div hc-label="有效" hc-input="data.currLine.actived" hc-type="checkbox"/>
+        </div>
+-->
+    </div>
+</div>
+
+<!--  可驳回过程选择-->
+<div hc-modal="rejectProcModal">
+    <div hc-box>
+        <div hc-grid="rejectProcOptions" style="height: 300px"/>
+    </div>
+</div>

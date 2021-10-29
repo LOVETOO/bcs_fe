@@ -1,0 +1,333 @@
+<!--
+/**
+ * 工程折扣申请 - 详情页
+ * @since 2019-07-16
+ */
+-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div class="hc-box  ther-h">
+            <div class="row">
+				<div
+					hc-label="折扣单号"
+					hc-input="data.currItem.discount_apply_code"
+					hc-readonly="true"
+				></div>
+				
+				<div
+					hc-label="申请人"
+					hc-input="data.currItem.creator_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="申请时间"
+					hc-input="data.currItem.createtime"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="审核状态"
+					hc-input="data.currItem.stat"
+                    hc-dict-code="stat"
+					hc-readonly="true"
+				></div>
+            </div>
+
+            <div class="row">
+				<div
+					hc-label="所属事业部"
+					hc-input="data.currItem.division_id"
+					hc-dict-code="epm.division"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="订单产品线"
+					hc-input="data.currItem.order_pdt_line"
+					hc-dict-code="epm.order_pdt_line"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="签约方式"
+					hc-input="data.currItem.contract_type" 
+					hc-dict-code="epm.contract_type"
+					hc-change="onChange.contract_type()"
+				></div>
+
+				<div
+					hc-label="折扣有效期至"
+					hc-input="data.currItem.discount_valid_date" 
+					hc-type="date"
+					hc-date-options="{ startDate: 'today' }"
+				></div>
+            </div>
+
+            <div class="row">
+				<div
+					hc-label="客户信息"
+					hc-input="data.currItem.customer_code"
+                    hc-required="true"
+                    hc-class-id="customer_org"
+					hc-common-search="commonSearch.customer_code"
+				>
+				</div>
+
+				<div
+					hc-input="data.currItem.customer_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="交易公司"
+					hc-input="data.currItem.trading_company_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="开票单位"
+					hc-input="data.currItem.billing_unit_name"
+					hc-readonly="true"
+				></div>
+            </div>
+
+            <div class="row" ng-show="data.currItem.source_from_delay == 2">
+                <div hc-label="延期生成" hc-input="data.currItem.source_from_delay" hc-type="checkbox"></div>
+                <div hc-label="源折扣单号" hc-input="data.currItem.source_discount_apply_code"></div>
+            </div>
+        </div>
+
+        <div id="req" hc-box="合同信息">
+            <div class="row">
+                <div
+                    hc-label="合同编码"
+                    hc-input="data.currItem.contract_code"
+                    hc-class-id="epm_project_contract"
+                    hc-common-search="commonSearch.contract_code"
+                    hc-after-delete="onDelete.contract_code()"
+                    hc-required="true"
+                ></div>
+
+                <div
+                    hc-label="合同名称"
+                    hc-input="data.currItem.contract_name"
+                    hc-col-count="4"
+                    hc-readonly="true"
+                ></div>
+
+                <div hc-input="data.currItem.contract_amt"
+                    hc-label="合同总额"
+                    hc-required="true"
+                    hc-type="money"></div>
+            </div>
+
+            <div class="row">
+                <div
+                    hc-label="工程编码"
+                    hc-input="data.currItem.project_code"
+                    hc-readonly="true"
+                ></div>
+
+                <div
+                    hc-label="工程名称"
+                    hc-input="data.currItem.project_name"
+                    hc-col-count="4"
+                    hc-readonly="true"
+                ></div>
+
+                <div hc-input="data.currItem.strategic_related"
+                    hc-label="战略工程相关"
+                    hc-true-value="2"
+                    hc-false-value="1"
+                    hc-type="checkbox"
+                    hc-readonly="true"
+                    class="oneis"></div>
+            </div>
+
+        </div>
+
+        <div hc-box="折扣信息">
+
+            <div class="row">
+                <div
+                    hc-label="折扣类型"
+                    hc-input="data.currItem.discount_type"
+                    hc-dict-code="epm.discount_type"
+                ></div>
+
+                <div
+                    hc-label="总体积"
+                    hc-input="data.currItem.total_volume"
+                    hc-type="volume"
+                    hc-readonly="true"
+                ></div>
+
+                <div
+                    hc-label="有效总数量"
+                    hc-input="data.currItem.total_qty"
+                    hc-type="number"
+                    hc-readonly="true"
+                ></div>
+
+                <div
+                    hc-label="有效折后总额"
+                    hc-input="data.currItem.discounted_amount"
+                    hc-type="money"
+                    hc-readonly="true"
+                ></div>
+            </div>
+
+            <div class="row">
+                <div
+                    hc-label="审批折扣率"
+                    hc-input="data.currItem.discount_rate"
+                    hc-type="number"
+                    hc-readonly="true"
+                ></div>
+                <div
+                        hc-label="申请说明"
+                        hc-input="data.currItem.apply_reason"
+                        hc-col-count="4"
+                ></div>
+                <div hc-input="data.currItem.is_cal_second_year_discount"
+                    hc-label="计次年折扣"
+                    hc-readonly="true"
+                    hc-type="checkbox"
+                    hc-col-count="1"></div>
+                <div hc-input="data.currItem.is_cal_ad"
+                    hc-label="计广告费"
+                    hc-type="checkbox"
+                    hc-readonly="true"
+                    hc-col-count="1"></div>
+                </div>
+            <div class="row" style="align-items: center;" ng-show="userbean.hasRole('item_cost')">
+                <div style="font-size: 13px; display: flex; justify-content: flex-end;color: #F35A05;" class="hc-w1">
+                    毛 利 率 信 息 参 考 ：
+                </div>
+                <div
+                        hc-label="工程服务商毛利率"
+                        hc-input="data.currItem.dealer_gm"
+                        hc-type="number"
+                        hc-readonly="true"
+                ></div>
+
+                <div
+                        hc-label="事业部内结毛利率"
+                        hc-input="data.currItem.division_gm"
+                        hc-type="number"
+                        hc-readonly="true"
+                ></div>
+
+                <div
+                        hc-label="价值链毛利率"
+                        hc-input="data.currItem.value_chain_gm"
+                        hc-type="number"
+                        hc-readonly="true"
+                ></div>
+            </div>
+
+        </div>
+        
+        <div hc-box class="flex1 flex-column" style="min-height: 300px;"> 
+            <div hc-tab="item_date" hc-tab-change="onObjTabChange(params)"></div>
+            <div hc-tab-page class="flex1">
+                <!--产品清单-->
+                <div id="detailed" class="active">
+                    <div hc-grid="gridOptions" class="flex1"></div>
+                </div>
+                <!--提货计划-->
+                <div id="deliveryPlan" >
+                    <div hc-grid="gridOptionDseliveryPlan" class="flex1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框 -->
+    <div hc-modal="dateOfDelivery">
+        <div class="row" hc-box ng-show="!entranceEdit">
+            <div hc-label="产品编码"
+                 hc-input="before_line.item_code"
+                 hc-col-count="4"
+                 hc-readonly="true"></div>
+            <div hc-label="合同数量"
+                 hc-input="before_line.contract_qty"
+                 hc-type="number"
+                 hc-readonly="true"></div>
+        </div>
+        <div class="row" hc-box ng-show="!entranceEdit">
+            <div hc-label="产品名称"
+                 hc-input="before_line.item_name"
+                 hc-col-count="6"
+                 hc-readonly="true"></div>
+        </div>
+        <div hc-box style="display: flex; flex: 1; flex-direction: column;" ng-show="!entranceEdit">
+            <div hc-grid="gridOptionDseliveryPlanLine" style="flex: 1"></div>
+        </div>
+        <!-- 提货时间变更 -->
+        <div class="row" hc-box ng-show="entranceEdit">
+            <div hc-label="产品编码"
+                 hc-input="before_line.item_code"
+                 hc-readonly="true"></div>
+            <div hc-label="产品名称"
+                 hc-input="before_line.item_name"
+                 hc-col-count="6"
+                 hc-readonly="true"></div>
+        </div>
+        <div class="row" hc-box  ng-show="entranceEdit">
+            <div hc-label="合同数量"
+                 hc-input="before_line.contract_qty"
+                 hc-type="number"
+                 hc-readonly="true"></div>
+            <div hc-label="已下单数量"
+                 hc-input="before_line.ordered_qty"
+                 hc-type="number"
+                 hc-readonly="true"></div>
+            <div hc-label="可重新计划数量"
+                 hc-input="before_line.line_active_qty"
+                 hc-type="number"
+                 hc-readonly="true"></div>
+        </div>
+        <div hc-box class="flex1 flex-row flex-between" ng-show="entranceEdit">
+            <div hc-box="已下单" class="ibox-title flex-column" style="width: 49%;">
+                <div hc-grid="gridOptionDseliveryPlanLinePlace" style="flex: 1"></div>
+            </div>
+            <div hc-box="未下单" class="ibox-title flex-column" style="width: 49%;">
+                <div hc-grid="gridOptionDseliveryPlanLineCelPlace" style="flex: 1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+	.oneis{
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+	[hc-input="data.currItem.dealer_gm"] ,
+	[hc-input="data.currItem.division_gm"] ,
+	[hc-input="data.currItem.value_chain_gm"] {
+		color: #F35A05;
+		margin-right: 0px;
+		width: calc(25% + 8px);
+	}
+	[hc-input="data.currItem.discount_valid_date"],
+	[hc-input="data.currItem.discount_valid_date"] input,
+    [hc-input="data.currItem.dealer_gm"] input,
+	[hc-input="data.currItem.division_gm"] input,
+	[hc-input="data.currItem.value_chain_gm"] input,
+    [hc-input="data.currItem.dealer_gm"] label,
+	[hc-input="data.currItem.division_gm"] label,
+	[hc-input="data.currItem.value_chain_gm"] label {
+        color: #F35A05;
+    }
+	[hc-input="data.currItem.dealer_gm"] label,
+	[hc-input="data.currItem.division_gm"] label,
+	[hc-input="data.currItem.value_chain_gm"] label {
+		width: 110px;
+	}
+	.oneis{
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+</style>

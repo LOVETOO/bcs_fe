@@ -1,0 +1,458 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.item_code"
+                     hc-label="产品编码"
+                     hc-required="true"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.item_name"
+                     hc-label="产品名称"
+                     hc-col-count="4"
+                     hc-required="true" hc-readonly="data.currItem.is_init == 2"></div>
+
+                <div hc-input="data.currItem.sales_status"
+                     hc-label="上/下架状态"
+                     hc-dict-code="item.sales_status"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div> <!--<div hc-input="data.currItem.bas_brand_name"
+                    hc-label="产品品牌"
+                    hc-dict-code="bas_brand_name"></div>-->
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.old_item_code"
+                     hc-label="旧产品编码"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.item_desc"
+                     hc-label="产品描述"
+                     hc-col-count="6"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.division_id"
+                     hc-label="品牌事业部"
+                     hc-dict-code="epm.division"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.entorgid"
+                     hc-label="产品线"
+                     hc-dict-code="entorgid"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.channel_id"
+                     hc-label="销售渠道"
+                     hc-dict-code="item.channel"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.uom_name"
+                     hc-label="计量单位"
+                     hc-class-id="uom"
+                     hc-common-search="commonSearchSetting.uom"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <!--<div hc-input="data.currItem.max_inv"
+                    hc-type="number"
+                    hc-label="库存上限">
+                </div>
+
+                <div hc-input="data.currItem.min_inv"
+                    hc-type="number"
+                    hc-label="库存下限">
+                </div>-->
+                <div hc-input="data.currItem.item_type"
+                     hc-label="物料类型"
+                     hc-dict-code="item_type"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.specs"
+                     hc-label="规格"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.item_model"
+                     hc-label="型号"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.item_color"
+                     hc-label="颜色"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.item_class1_name"
+                     hc-label="产品大类"
+                     hc-delete-together="item_class1 item_class2_name item_class2 item_class3 item_class3_name"
+                     hc-before-delete="clearProps(data.currItem.item_class1,data.currItem.item_class2,data.currItem.item_class3)"
+                     hc-class-id="item_class"
+                     hc-common-search="commonSearchSetting.item_class1"
+                     hc-readonly="data.currItem.is_init == 2"
+                ></div>
+
+                <div hc-input="data.currItem.item_class2_name"
+                     hc-label="产品中类"
+                     hc-delete-together="item_class2 item_class3 item_class3_name"
+                     hc-before-delete="clearProps(data.currItem.item_class2,data.currItem.item_class3)"
+                     hc-class-id="item_class"
+                     hc-common-search="commonSearchSettingOfItem_class2()"
+                     hc-readonly="data.currItem.is_init == 2"
+                ></div>
+
+                <div hc-input="data.currItem.item_class3_name"
+                     hc-label="产品小类"
+                     hc-delete-together="item_class3"
+                     hc-before-delete="clearProps(data.currItem.item_class3)"
+                     hc-class-id="item_class"
+                     hc-common-search="commonSearchSettingOfItem_class3()"
+                     hc-readonly="data.currItem.is_init == 2"
+                ></div>
+
+                <div hc-input="data.currItem.item_loc"
+                     hc-label="产品定位"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <!--<div hc-input="data.currItem.crm_entid"
+                    hc-label="品类"
+                    hc-dict-code="crm_entid"
+                    hc-select-filter="option.value>0&&option.value!=99">
+                    &lt;!&ndash; 排除【所有品类】，目前是99，推荐改为-1（后面应该会这么做，所以加上  option.value > 0）
+                    对于产品来说，要维护品类的话，应该是要有具体的品类值的，【所有品类】应该只适应于于单据，指明物料品类不用进行过滤，
+                    可以理解为不会有一个物料的品类定义为【所有品类】
+                    &ndash;&gt;
+                </div>-->
+
+                <!-- <div hc-input="data.currItem.item_class1_name"
+                    hc-readonly="true">
+                </div>-->
+
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.length"
+                     hc-type="number"
+                     hc-label="长"
+                     hc-unit="mm"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.width"
+                     hc-type="number"
+                     hc-label="宽"
+                     hc-unit="mm"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.height"
+                     hc-type="number"
+                     hc-label="高"
+                     hc-unit="mm"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.cubage"
+                     hc-type="volume"
+                     hc-label="单位体积"
+                     hc-unit="m³"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+
+
+            </div>
+            <!-- <div class="row">
+                &lt;!&ndash; <div hc-input="data.currItem.item_class2_name"
+                    hc-readonly="true">
+                </div>&ndash;&gt;
+
+            </div>-->
+
+            <div class="row">
+
+                <!--  <div hc-input="data.currItem.item_class3_name"
+                    hc-readonly="true">
+                </div>-->
+
+                <!--  <div hc-input="data.currItem.item_type"
+                    hc-label="产品类别"
+                    hc-dict-code="item_type">
+                </div>-->
+
+                <div hc-input="data.currItem.pack_uom"
+                     hc-label="包装单位"
+                     hc-class-id="uom"
+                     hc-common-search="commonSearchSetting.pack_uom"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+
+                <div hc-input="data.currItem.spec_qty"
+                     hc-type="number"
+                     hc-label="包装数量"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.pack_code"
+                     hc-label="包装码"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.outbox_cubage"
+                     hc-type="volume"
+                     hc-label="包装体积"
+                     hc-unit="m³"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.gross_weigth"
+                     hc-type="number"
+                     hc-label="毛重"
+                     hc-unit="kg"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.net_weigth"
+                     hc-type="number"
+                     hc-label="净重"
+                     hc-unit="kg"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.bar_code"
+                     hc-label="国际条形码"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <div hc-input="data.currItem.acreage"
+                     hc-label="面积"
+                     hc-type="number"
+                     hc-unit="m²"
+                     hc-readonly="data.currItem.is_init == 2">
+                </div>
+                <!-- <div hc-input="data.currItem.cubage"
+                    hc-type="volume"
+                    hc-label="单位体积"
+                    hc-unit="m³">
+                </div>
+
+                <div hc-input="data.currItem.outbox_cubage"
+                    hc-type="volume"
+                    hc-label="包装体积"
+                    hc-unit="m³">
+                </div>-->
+
+            </div>
+            <div class="row">
+                <!--<div hc-input="data.currItem.asset_subject_code"
+                    hc-label="资产科目"
+                    hc-class-id="gl_account_subject"
+                    hc-common-search="commonSearchSetting.gl_account_subject">
+
+                </div>
+                <div hc-input="data.currItem.asset_subject_name"
+                    hc-readonly="true">
+                </div>-->
+
+                <div hc-input="data.currItem.can_sale"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-label="可销售"></div>
+                <div hc-input="data.currItem.is_eliminate"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-label="淘汰品"
+                     hc-readonly="data.currItem.is_init == 2"></div>
+                <div hc-input="data.currItem.is_special_supply"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-change="changeExclusively()"
+                     hc-label="专供"></div>
+                <div hc-input="data.currItem.is_csspj"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-label="配件"></div>
+                <div hc-input="data.currItem.is_old"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-label="老品"></div>
+
+                <div hc-input="data.currItem.is_wl"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-label="推广物料"></div>
+
+                <div hc-input="data.currItem.is_install"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-label="需要安装"></div>
+                <div hc-input="data.currItem.is_round"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-label="凑整开单"></div>
+            </div>
+            <div class="row">
+                <!-- <div hc-input="data.currItem.pack_code"
+                    hc-label="包装码">
+                </div>-->
+                <!--<div hc-input="data.currItem.outbox_size"-->
+                <!--hc-type="number"-->
+                <!--hc-label="外箱尺寸"-->
+                <!--hc-unit="mm">-->
+                <!--</div>-->
+
+                <!--<div hc-input="data.currItem.colorbox_size"-->
+                <!--hc-type="number"-->
+                <!--hc-label="彩箱尺寸"-->
+                <!--hc-unit="mm">-->
+                <!--</div>-->
+
+                <!--  <div hc-input="data.currItem.gross_weigth"
+                    hc-type="number"
+                    hc-label="毛重"
+                    hc-unit="kg">
+                </div>
+    -->
+
+            </div>
+
+            <!--<div class="row">-->
+            <!--<div hc-input="data.currItem.inbox_size"-->
+            <!--hc-type="number"-->
+            <!--hc-label="中箱尺寸"-->
+            <!--hc-unit="mm">-->
+            <!--</div>-->
+
+
+            <!--</div>-->
+
+            <!-- <div class="row">
+                &lt;!&ndash;<div hc-input="data.currItem.is_stock"&ndash;&gt;
+                    &lt;!&ndash;hc-type="checkbox"&ndash;&gt;
+                    &lt;!&ndash;hc-label="可采购"></div>&ndash;&gt;
+
+            &lt;!&ndash;   <div hc-input="data.currItem.item_usable"
+                    hc-type="checkbox"
+                    hc-label="有效"></div>
+    &ndash;&gt;
+                &lt;!&ndash; <div hc-input="data.currItem.is_retail"
+                    hc-type="checkbox"
+                    hc-label="零售"></div>&ndash;&gt;
+
+            &lt;!&ndash;   <div hc-input="data.currItem.can_sale"
+                    hc-type="checkbox"
+                    hc-label="可销售"></div>&ndash;&gt;
+
+                <div hc-input="data.currItem.is_csspj"
+                    hc-type="checkbox"
+                    hc-label="配件"></div>
+
+                <div hc-input="data.currItem.is_eliminate"
+                    hc-type="checkbox"
+                    hc-label="淘汰品"></div>
+
+                <div hc-input="data.currItem.is_old"
+                    hc-type="checkbox"
+                    hc-label="老品"></div>
+
+                <div hc-input="data.currItem.is_wl"
+                    hc-type="checkbox"
+                    hc-label="推广物料"></div>
+
+                &lt;!&ndash;<div hc-input="data.currItem.is_import_ec"&ndash;&gt;
+                    &lt;!&ndash;hc-type="checkbox"&ndash;&gt;
+                    &lt;!&ndash;hc-label="引入电商"></div>&ndash;&gt;
+
+                &lt;!&ndash;<div hc-input="data.currItem.is_consign"
+                    hc-type="checkbox"
+                    hc-label="可委外"></div>&ndash;&gt;
+
+                <div hc-input="data.currItem.is_special_supply"
+                    hc-type="checkbox"
+                    hc-label="专供"></div>
+
+                <div hc-input="data.currItem.is_install"
+                    hc-type="checkbox"
+                    hc-label="需要安装"></div>
+
+                <div hc-input="data.currItem.is_round"
+                    hc-type="checkbox"
+                    hc-label="凑整开单"></div>
+                &lt;!&ndash;<div hc-input="data.currItem.is_syscreate"&ndash;&gt;
+                    &lt;!&ndash;hc-type="checkbox"&ndash;&gt;
+                    &lt;!&ndash;hc-label="系统预设"></div>&ndash;&gt;
+            </div>-->
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="8">
+                </div>
+            </div>
+        </div>
+        <div hc-box="产品图片">
+            <div class="hc-box-upload">
+                <div class="hc-list" ng-dblclick="open(img)"
+                     ng-repeat="img in data.currItem.item_org_imgofitem_orgs">
+                    <div class="hc-list-img">
+                        <img title="双击查看大图" class="img" ng-show="img.docid&&img.docid!='0'> 0"
+                             src="/downloadfile?docid={{img.docid}}&viewtype=1"/>
+                        <span class="btn-upload" id="uploadFileFirst" ng-click="uploadFile($index)"
+                              ng-show="!form.isReadonly() && hasRightOfPic && !+img.docid">上传照片</span>
+                        <button class="btn btn_del" ng-click="del_image($index)"
+                                ng-show="!form.isReadonly() && hasRightOfPic && +img.docid">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="hc-list-infor">
+                        <input type="text" readonly="readonly" class="hc-list-infor-name" name="img_name"
+                               ng-model="img.img_name"/>
+                        <input type="hidden" name="locationid" ng-model='img.locationid'/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--开票单位-->
+    <!-- <div id="exclusively" ng-show="data.currItem.is_special_supply == 2">
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div> -->
+
+    <!--其他参数-->
+    <div id="otherProp" hc-box="">
+        <div hc-grid="gridOptionsOfProp" hc-auto-height="grid"></div>
+    </div>
+
+    <!--其他-->
+    <div id="other" hc-box="">
+        <div class="row">
+            <div hc-input="data.currItem.created_by_name"
+                 hc-label="创建人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.creation_date"
+                 hc-label="创建时间"
+                 hc-readonly="true"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by_name"
+                 hc-label="最后修改人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.last_update_date"
+                 hc-label="最后修改时间"
+                 hc-readonly="true"></div>
+        </div>
+    </div>
+</div>
+<style>
+    .hc-box-upload {
+        margin: 0px -15px;
+    }
+
+    .row .i-checks label {
+        min-width: 100px;
+    }
+</style>

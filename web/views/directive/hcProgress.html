@@ -1,0 +1,41 @@
+<div class="hc-progress__bar" ng-style="{ width: data.width }">
+    <div
+        class="hc-progress__text"
+        ng-bind-template="{{ data.value }} / {{ data.max }} = {{ data.percentAsStr }}%"
+    ></div>
+</div>
+
+<style>
+hc-progress,
+[hc-progress],
+.hc-progress {
+    display: block;
+    height: 1.5em;
+    line-height: 1.5em;
+    background-color: #c8c8c8;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.hc-progress__bar {
+    height: 100%;
+    width: 0%;
+    background-color: #409eff;
+    text-align: right;
+    transition: width 0.6s;
+}
+
+/* .hc-progress__bar::after {
+content: '';
+display: inline-block;
+height: 100%;
+vertical-align: middle;
+} */
+
+.hc-progress__text {
+    display: inline-block;
+    margin: 0 1em;
+    color: white;
+    white-space: nowrap;
+}
+</style>

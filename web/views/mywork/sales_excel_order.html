@@ -1,0 +1,110 @@
+<div class="modal-content" local-storage>
+	<div class="row" style="width: 100%;margin-left: 0px;">
+		<div class="col-lg-12">
+			<div draggable-model class="modal-header" style="width: 100%">
+				<h3>{{title}}</h3>
+			</div>
+			<div class="modal-body" style="width: 100%">
+
+				<div class="tab-content-button">
+					<div id="tab_1_11" class="tab-pane active">
+						<div class="row">
+							<div class="col-md-1">
+								<label class="form-label-mini not-null">统计主体</label>
+							</div>
+							<div class="col-md-2">
+								<select chosen-select ng-readonly="false" ng-model="data.currItem.group_name" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in group_names">
+									<option value=""></option>
+								</select>
+							</div>
+							<div class="col-md-1">
+								<label class="form-label-mini not-null">开始日期</label>
+							</div>
+							<div class="col-md-2">
+								<input style="text-align: center;" bs-datepacker="" ng-model="data.currItem.s_date" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+							</div>
+							<div class="col-md-1">
+								<label class="form-label-mini not-null">结束日期</label>
+							</div>
+							<div class="col-md-2">
+								<input style="text-align: center;" bs-datepacker="" ng-model="data.currItem.e_date" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+							</div>
+							<div class="col-md-1"></div>
+							<div class="col-md-2">
+								<div class="ab-option-toolbar">
+									<button style="height: 25px;" title="" ng-if="data.currItem.stat!=2" class="btn btn-white btn-xs swfobjContainer">
+											<i class="fa fa-file-excel-o"></i> excel导入
+							 				<span class="swfobj">
+												 <!--swfupload插件占位符 - 被object替换--> 
+												<a swf-upload id="swfupload-control" import-grid='opt_itemline' import-columns='reseau' ng-model="templist" flag="1" ng-init="templist = []">导入报关价格</a>
+									 		</span>
+                            			</button>
+									<button style="height: 25px;" class="btn btn-white btn-xs" type="button" ng-if="data.currItem.stat!=2" ng-click="delItem()"><i class="fa fa-minus-square-o"></i>删除
+                                    </button>
+								</div>
+							</div>
+						</div>
+						<div class="resource" style="margin: 20px 20px 0px 20px;">
+							<div class="slick-grid" ag-gridview sg-options="opt_itemline" sg-columns="reseau" style="width:100%; height:400px;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer" style="width: 100%">
+				<a class="btn btn-sm btn-primary" ng-if="userid == data.currItem.ownerid" ng-click="ok(e)">
+					确认
+				</a>
+				<a class="btn btn-sm btn-info" ng-click="cancel(e)">
+					取消
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	div.timecontainer {
+		display: flex;
+		align-items: center;
+		height: 25px;
+		border: 1px #e5e6e7 solid;
+		border-radius: 2px;
+		padding-left: 3px;
+		padding-right: 3px;
+	}
+	
+	div.timecontainer:hover {
+		border-color: #1ab394;
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(26, 179, 148, .6);
+	}
+	
+	div.timecontainer>i {
+		margin-right: 3px;
+	}
+	
+	div.timecontainer>i,
+	div.timecontainer>span {
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+	
+	div.timecontainer>select {
+		flex-grow: 0;
+		flex-shrink: 0;
+		outline: none;
+		border: none;
+		width: 16px;
+		appearance: none;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+	}
+	
+	.modal-dialog {
+		width: 1000px;
+		margin: 30px auto;
+	}
+	
+	.modal-body {
+		padding: 20px 30px 0px 30px;
+	}
+</style>

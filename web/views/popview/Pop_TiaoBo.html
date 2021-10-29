@@ -1,0 +1,136 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>新增调拨单</h3>
+    </div>
+    <div class="modal-body">
+        <div class="ibox-content m-b-sm" style="border-top: none;">
+        	<div class="row">
+        		<fieldset>
+                    <div class="form-group ibox-content" style="border-top:none;">
+                    	<div class="row">
+                    		<div class="col-md-1">
+                                <label class="form-label-mini">发货单号:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="item.outbill_no" class="input-sm form-control">
+                            </div>
+							<div class="col-md-1">
+                                <label class="form-label-mini">排车号:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="item.bus_index" class="input-sm form-control">
+                            </div>
+							<div class="col-md-1">
+								<label class="form-label-mini font-noraml">发货仓库:</label>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group">
+									<input type="text" class="input-sm form-control" ng-model="item.in_warehouse_name" ng-readonly="true">
+									<a class="input-group-addon" ng-click="selectWarehouse(1)">
+										<i class="fa fa-ellipsis-h"></i>
+									</a>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<label class="form-label-mini font-noraml">收货仓库:</label>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group">
+									<input type="text" class="input-sm form-control" ng-readonly="true" ng-model="item.out_warehouse_name">
+									<a class="input-group-addon" ng-click="selectWarehouse(2)">
+									<i class="fa fa-ellipsis-h"></i> </a>
+								</div>
+							</div>
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-1">
+								<label class="form-label-mini font-noraml">到货城市:</label>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group">
+                                    <input type="text" class="input-sm form-control" ng-readonly="true" ng-model="item.in_area_name">
+                                    <a class="input-group-addon" ng-disabled="item.stat!=1" ng-click="selectCity(2)">
+                                    <i class="fa fa-ellipsis-h"></i> </a>
+                                </div>
+							</div>
+							<div class="col-md-1">
+								<label class="form-label-mini font-noraml">承运商:</label>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group">
+                                    <input type="text" class="input-sm form-control" ng-readonly="true" ng-model="item.trans_org_name">
+                                    <a class="input-group-addon" ng-disabled="item.stat!=1" ng-click="selectBusiness(2)"><i class="fa fa-ellipsis-h"></i> </a>
+                                </div>
+							</div>
+							<div class="col-md-1">
+								<label class="form-label-mini font-noraml">发运方式:</label>
+							</div>
+							<div class="col-md-2">
+								<select  data-placeholder=" " chosen-select ng-model="item.shipmode_id" class="input-sm chosen-select form-control" ng-options="s.id as s.name for s in fh_types">
+                                    <option value=""></option>
+                                </select>
+							</div>
+							<div class="col-md-1">
+								<label class="form-label-mini font-noraml">装车方式:</label>
+							</div>
+							<div class="col-md-2">
+								<select  data-placeholder=" " chosen-select ng-model="item.shipment_type" class="input-sm chosen-select form-control" ng-options="s.id as s.name for s in shipment_types">
+                                    <option value=""></option>
+                                </select>
+							</div>
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-1">
+								<label class="form-label-mini font-noraml">发运日期:</label>
+							</div>
+							<div class="col-md-2">
+                                <input bs-datepacker ng-model="item.confirm_time" type="text" class="form-control input-sm">
+                            </div>
+                    		<div class="col-md-1">
+								<label class="form-label-mini font-noraml">发货体积:</label>
+							</div>
+							<div class="col-md-2">
+                                <input type="text" ng-model="item.total_one_more_volume" class="input-sm form-control">
+                            </div>
+							<div class="col-md-1">
+								<label class="form-label-mini font-noraml">协商运费:</label>
+							</div>
+							<div class="col-md-2">
+                                <input type="money"  ng-change="selectRate()" ng-model="item.calc_trans_fee" class="input-sm form-control">
+                            </div>
+							<div class="col-md-1">
+								<label class="form-label-mini font-noraml">其他费用:</label>
+							</div>
+							<div class="col-md-2">
+                                <input type="money" ng-change="selectRate()" ng-model="item.other_trans_fee" class="input-sm form-control">
+                            </div>
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-1">
+								<label class="form-label-mini font-noraml">扣费:</label>
+							</div>
+							<div class="col-md-2">
+                                <input type="money" ng-change="selectRate()" ng-model="item.kou_trans_fee" class="input-sm form-control">
+                            </div>
+                    		<div class="col-md-1">
+								<label class="form-label-mini font-noraml">总运费:</label>
+							</div>
+							<div class="col-md-2">
+                                <input type="money" readonly="true" ng-model="item.tot_trans_fee" class="input-sm form-control">
+                            </div>
+                    	</div>
+                    </div>     
+                </fieldset>         
+        	</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+         	 确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+          	取消
+        </a>
+     </div>
+</div>

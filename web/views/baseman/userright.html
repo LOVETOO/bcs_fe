@@ -1,0 +1,142 @@
+﻿<div local-storage ng-model="userright" class="bill-form">
+    <div class="col-lg-12" style=" height: 500px;width:1100px">
+        <div class="ibox-title">
+            <!--<a style="font-size: small;font-weight: bold;color:black"><i ng-click="show_profit()"class="fa fa-minus"></i>查询条件</a>-->
+            <div ng-show="profit_stat" class="ibox-content" id="sqlWhereBlock">
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="btn btn-sm btn-info" type="button" ng-click="save()"
+                                style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;margin-left: 20px;">
+                            保存
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="ibox-content">
+                            <div class="col-lg-7">
+                                <ul id="tabs" class="nav nav-tabs">
+                                    <li class="active">
+                                        <a data-target="#tab1" data-toggle="tab"
+                                           style="padding-top: 5px;padding-left: 5px;padding-bottom: 5px;border-right-width: 5px;">
+                                            <i class="fa fa-shopping-cart">部门</i>
+                                        </a></li>
+                                    <li><a data-target="#tab2" data-toggle="tab"
+                                           style="padding-top: 5px;padding-left: 5px;padding-bottom: 5px;border-right-width: 5px;">
+                                        <i class="fa fa-shopping-cart">客户</i>
+                                    </a></li>
+                                    <li><a data-target="#tab3" data-toggle="tab"
+                                           style="padding-top: 5px;padding-left: 5px;padding-bottom: 5px;border-right-width: 5px;">
+                                        <i class="fa fa-shopping-cart">用户</i>
+                                    </a></li>
+                                    <li><a data-target="#tab4" data-toggle="tab"
+                                           style="padding-top: 5px;padding-left: 5px;padding-bottom: 5px;border-right-width: 5px;">
+                                        <i class="fa fa-shopping-cart">仓库</i>
+                                    </a></li>
+                                </ul>
+                                <div id="content" class="tab-content">
+                                    <div id="tab1" class="tab-pane fade in active">
+                                        <div ag-gridview sg-options="options_13"
+                                             sg-columns="columns_13" style="width:181%;height:300px;"
+                                             class="slick-grid"></div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-toolbar" class="btn btn-toolbar"
+                                                    type="button" ng-click="addline13()"><i
+                                                    class="fa fa-plus-square-o"></i>增加行
+                                            </button>
+                                            <button class="btn btn-toolbar" class="btn btn-toolbar"
+                                                    type="button" ng-click="gridDelItem('options_13')"><i
+                                                    class="fa fa-minus-square-o"></i>删除行
+                                            </button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="checkbox" ng-click="s_flag1()" ng-true-value="2" ng-false-value="1"
+                                                   ng-model="data.currItem.usable_orgid"
+                                                   class="ng-pristine ng-untouched ng-valid">
+                                        </div>
+                                    </div>
+                                    <div id="tab2" class="tab-pane fade">
+                                        <div ag-gridview sg-options="options_14"
+                                             sg-columns="columns_14" style="width:181%;height:300px;"
+                                             class="slick-grid"></div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-toolbar" class="btn btn-toolbar"
+                                                    type="button" ng-click="addline14()"><i
+                                                    class="fa fa-plus-square-o"></i>增加行
+                                            </button>
+                                            <button class="btn btn-toolbar" class="btn btn-toolbar"
+                                                    type="button" ng-click="gridDelItem('options_14')"><i
+                                                    class="fa fa-minus-square-o"></i>删除行
+                                            </button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label style="margin-left: 0px;font-size: 12px">
+                                                <input type="checkbox" ng-false-value="1" ng-true-value="2"
+                                                       ng-click="s_flag2()"
+                                                       ng-checked="data.currItem.usable_custid"
+                                                       ng-model="data.currItem.usable_custid"
+                                                       class="ng-pristine ng-untouched ng-valid">可访问所有客户
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div id="tab3" class="tab-pane fade">
+                                        <div ag-gridview sg-options="options_15"
+                                             sg-columns="columns_15" style="width:181%;height:300px;"
+                                             class="slick-grid"></div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-toolbar" class="btn btn-toolbar"
+                                                    type="button" ng-click="addline15()"><i
+                                                    class="fa fa-plus-square-o"></i>增加行
+                                            </button>
+                                            <button class="btn btn-toolbar" class="btn btn-toolbar"
+                                                    type="button" ng-click="gridDelItem('options_15')"><i
+                                                    class="fa fa-minus-square-o"></i>删除行
+                                            </button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label style="margin-left: 0px;font-size: 12px">
+                                                <input type="checkbox" ng-false-value="1" ng-true-value="2"
+                                                       ng-click="s_flag3()"
+                                                       ng-checked="data.currItem.usable_userid"
+                                                       ng-model="data.currItem.usable_userid"
+                                                       class="ng-pristine ng-untouched ng-valid">可访问所有用户
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div id="tab4" class="tab-pane fade">
+
+                                        <div ag-gridview sg-options="options_16"
+                                             sg-columns="columns_16" style="width:181%;height:300px;"
+                                             class="slick-grid"></div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-toolbar" class="btn btn-toolbar"
+                                                    type="button" ng-click="addline16()"><i
+                                                    class="fa fa-plus-square-o"></i>增加行
+                                            </button>
+                                            <button class="btn btn-toolbar" class="btn btn-toolbar"
+                                                    type="button" ng-click="gridDelItem('options_16')"><i
+                                                    class="fa fa-minus-square-o"></i>删除行
+                                            </button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label style="margin-left: 0px;font-size: 12px">
+                                                <input type="checkbox" ng-false-value="1" ng-true-value="2"
+                                                       ng-click="s_flag4()"
+                                                       ng-checked="data.currItem.usable_lev"
+                                                       ng-model="data.currItem.usable_lev"
+                                                       class="ng-pristine ng-untouched ng-valid">可访问所有仓库
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--div class="modal-footer">
+                                <a class="btn btn-sm btn-primary" ng-click="ok()"> 确定</a>
+                                <a class="btn btn-sm btn-info" ng-click="cancel()">取消</a></div-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,422 @@
+<div hc-diy-page>
+    <div class="hc-management flex1 flex-row">
+        <div class="hc-management-user flex-column">
+            <h3>授权方式<em>Authorization mode</em></h3>
+            <div hc-tab="tabs" hc-tab-class-ul="btn-tabs" class="m-n" 
+                 hc-tab-change="onObjTabChange(params)"></div>
+            <div hc-tab-page class="flex1">
+                <!--用户-->
+                <div id="user" class="active flex-column">
+                    <div hc-grid="gridOptions_user" class="flex1 flex-column"></div>
+                </div>
+
+                <!-- 角色 -->
+                <div id="role" class="flex-column">
+                    <div hc-grid="gridOptions_role" class="flex1 flex-column"></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="Authorized_project flex1 flex-column">
+            <h3>授权项目<em>Authorized project</em></h3>
+            <div class="m-n " hc-tab="tabs_access" hc-tab-class-ul="btn-tabs" hc-tab-change="onAccessTabChange(params)"></div>
+
+            <div hc-tab-page class="flex1 flex-column">
+                <!--仓库-->
+                <div id="warehouse" class="grid-group" style="margin: 0px;">
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div hc-grid="gridOptions_warehouse" class="flex-column"></div>
+                    </div>
+                    <div class="grid-group-box btn-list">
+                        <h5>操作</h5>
+                        <div id="button-panel" class="h100">
+                            <div class="row">
+                                <div
+                                        hc-button="addPart()"
+                                        hc-icon="fa fa-chevron-left"
+                                        hc-title="添加选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="addAll()"
+                                        hc-icon="fa fa-chevron-left"
+                                        hc-title="添加全部"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deletePart()"
+                                        hc-icon="fa fa-chevron-right"
+                                        hc-title="移除选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deleteAll()"
+                                        hc-icon="fa fa-chevron-right"
+                                        hc-title="移除全部"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div id="right-grid" hc-grid="gridOptions_warehouse_no" class="flex-column" style="height: 100%"></div>
+                    </div>
+                </div>
+
+                <!-- 部门 -->
+                <div id="dept" class="grid-group" style="margin: 0px;">
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div hc-grid="gridOptions_dept" class="flex-column"></div>
+                    </div>
+                    <div class="grid-group-box btn-list">
+                        <h5>操作</h5>
+                        <div id="button-panel_1" class="h100">
+                            <div class="row">
+                                <div
+                                        hc-button="addPart()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="addAll()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加全部"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deletePart()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deleteAll()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除全部"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div hc-grid="gridOptions_dept_no" class="flex-column"></div>
+                    </div>
+                </div>
+
+                <!--  资金账户权限 -->
+                <div id="fd_fund_account" class="grid-group" style="margin: 0px;">
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div hc-grid="gridOptions_account" class="flex-column"></div>
+                    </div>
+                    <div class="grid-group-box btn-list">
+                        <h5>操作</h5>
+                        <div class="h100">
+                            <div class="row">
+                                <div
+                                        hc-button="addPart()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="addAll()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加全部"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deletePart()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deleteAll()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除全部"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div hc-grid="gridOptions_account_no" class="flex-column"></div>
+                    </div>
+                </div>
+
+
+                <!--  销售区域 权限 -->
+                <div id="salearea" class="grid-group" style="margin: 0px;">
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div  hc-grid="gridOptions_salearea" class="flex-column"></div>
+                    </div>
+                    <div class="grid-group-box btn-list">
+                        <h5>操作</h5>
+                        <div class="h100">
+                            <div class="row">
+                                <div
+                                        hc-button="addPart()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="addAll()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加全部"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deletePart()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deleteAll()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除全部"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div  hc-grid="gridOptions_salearea_no" class="flex-column"></div>
+                    </div>
+                </div>
+
+                <!--  客户 权限 -->
+                <div id="customer" class="grid-group active" style="margin: 0px;">
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div  hc-grid="gridOptions_customer" class="flex-column"></div>
+                    </div>
+                    <div class="grid-group-box btn-list">
+                        <h5>操作</h5>
+                        <div class="h100">
+                            <div class="row">
+                                <div
+                                        hc-button="addPart()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="addAll()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加全部"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deletePart()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deleteAll()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除全部"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div  hc-grid="gridOptions_customer_no" class="flex-column"></div>
+                    </div>
+                </div>
+
+                <!--  品类 权限 -->
+                <div id="crm_ent" class="grid-group" style="margin: 0px;">
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div  hc-grid="gridOptions_crment" class="flex-column"></div>
+                    </div>
+                    <div class="grid-group-box btn-list">
+                        <h5>操作</h5>
+                        <div class="h100">
+                            <div class="row">
+                                <div
+                                        hc-button="addPart()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="addAll()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加全部"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deletePart()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deleteAll()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除全部"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div  hc-grid="gridOptions_crment_no" class="flex-column"></div>
+                    </div>
+                </div>
+                <!--  网点访问 权限 -->
+                <div id="fixOrg" class="grid-group" style="margin: 0px;">
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div  hc-grid="gridOptions_fixOrg" class="flex-column"></div>
+                    </div>
+                    <div class="grid-group-box btn-list">
+                        <h5>操作</h5>
+                        <div class="h100">
+                            <div class="row">
+                                <div
+                                        hc-button="addPart()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="addAll()"
+                                        hc-icon="iconfont hc-back"
+                                        hc-title="添加全部"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deletePart()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除选中"
+                                ></div>
+                            </div>
+                            <div class="row">
+                                <div
+                                        hc-button="deleteAll()"
+                                        hc-icon="iconfont hc-more"
+                                        hc-title="移除全部"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-group-box" style="width: 50%;">
+                        <div  hc-grid="gridOptions_fixOrg_no" class="flex-column"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hc-management {
+        padding: 0px 15px;
+    }
+    .hc-management h3{
+        margin-top: 15px;
+        margin-bottom: 10px;
+        font-weight: 400;
+    }
+    .hc-management h3 em{
+        font-size: 12px;
+        color: #ececec;
+        margin-left: 10px;
+        font-style: normal;
+        font-weight: 300;
+    }
+    .hc-management
+    .hc-management .nav-tabs {
+        background-color: transparent;
+    }
+
+    .hc-management-user {
+        width: 315px;
+        padding-right: 30px;
+    }
+
+    .hc-management .ibox-title {
+        border: none;
+    }
+
+    .displayflex {
+        display: -webkit-flex; /* Safari */
+        display: flex;
+    }
+
+    .displayflex > div {
+        flex-driection: row;
+    }
+
+    .tablecsll {
+        display: table;
+        width: 100%;
+    }
+
+    .tablecsll > div {
+        display: table-cell;
+    }
+
+    .rightgrid {
+        float: left;
+        width: calc((100% - 116px) / 2);
+    }
+
+    .Authorized_project .btn{
+        border-left: none;
+        border-right: none;
+        border-radius: 0px;
+        padding: 10px;
+    }
+    .Authorized_project .btn i{
+        color: #3c97ff;
+    }
+    .modal-footer{border: none;}
+    .hc-management .tab-content>.tab-pane.active{height: 100%;
+    flex-direction: row;}
+    .grid-group{height: 100%;}
+    .grid-group .grid-group-box h5{
+        background-color: #f9f9f9;
+        border: 1px solid #dbe0e8;
+        border-left: none;
+        border-right: none;
+        height: 26px;
+        line-height: 26px;
+        font-weight: normal;
+    }
+    .grid-group .btn-list{
+        vertical-align: middle;text-align: center;width: 130px;border-bottom: 1px solid #dbe0e7;}
+    .grid-group-box{height: 100%;}
+    .grid-group-box>.hc-grid{height: 100%;}
+    .grid-group.active{display: flex;}
+    .nav.nav-tabs.btn-tabs>li.active {
+        background-color: #8095a2;
+        border-color: #8095a2;
+    }
+</style>
+
+

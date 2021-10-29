@@ -1,0 +1,518 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="base_org">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>机构</h5>
+                    <div class="ibox-tools">
+                        <form>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="刷新"
+                                    ng-click="org_refresh()"><i class="fa fa-refresh"></i>刷新
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal" data-placement="left"
+                                    data-target="#myModal5" ng-click="cpcorg_edit()"><i
+                                    class="fa fa-search"></i>查看机构
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top"
+                                    ng-click="cpcorg_delete()" ng-show="isOrgAdmin"><i class="fa fa-trash-o"></i> 删除机构
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal" data-target="#myModal5"
+                                    ng-click="cpcorg_add() " ng-show="isOrgAdmin"><i class="fa fa-plus"></i> 新建机构
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal" data-target="#addUserModal"
+                                    ng-click="cpcuser_add()" ng-show="isOrgAdmin"><i class="fa fa-plus"></i> 新建用户
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content TreeGridBox">
+                    <div class="ibox-title">
+                        <h5>机构</h5>
+                        <ul id="tree" class="ztree"></ul>
+                    </div>
+                    <div class="grid_modal">
+                        <div id="headerGrid" class="headerGrid"></div>
+                        <div class="page_modal modal-open" page-pagination></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--添加窗口-->
+    <div class="modal inmodal fade" id="myModal5" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">机构属性</h4>
+                </div>
+                <div class="modal-body" style="height: 355px;">
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="tabs.html#tab-common"> 基本信息</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab-addUser-user"> 包含用户</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab-other"> 其他</a></li>
+                        </ul>
+                        <form method="get" class="form-inline mline" name="orgForm" novalidate >
+                            <div class="tab-content">
+                                <div id="tab-common" class="tab-pane active">
+                                    <div class="panel-body form-inline">
+                                        <div class="row">
+                                                <label class="control-label">名称</label>
+                                                <input type="text" class="form-control" ng-readonly="!isOrgAdmin"
+                                                       name="model_data_orgname"
+                                                       ng-model="data.currTreeItem.orgname"
+                                                       ng-minlength=2
+                                                       ng-maxlength=20 required>
+                                                <span  ng-show="orgForm.model_data_orgname.$dirty && orgForm.model_data_orgname.$invalid">
+																	<span ng-show="orgForm.model_data_orgname.$error.required">请输入名称</span>
+																	<span ng-show="orgForm.model_data_orgname.$error.minlength">名称最少2个字符</span>
+																	<span ng-show="orgForm.model_data_orgname.$error.maxlength">名称最多20个字符</span>
+																</span>
+
+                                                <label class="control-label">编码</label>
+                                                <input type="text" class="form-control" ng-readonly="!isOrgAdmin" name="model_data_code"
+                                                       ng-model="data.currTreeItem.code"
+                                                       ng-minlength=2
+                                                       ng-maxlength=20 required>
+                                                <span ng-show="orgForm.model_data_code.$dirty && orgForm.model_data_code.$invalid">
+																<span ng-show="orgForm.model_data_code.$error.required">请输入编码</span>
+																<span ng-show="orgForm.model_data_code.$error.minlength">编码最少2个字符</span>
+																<span ng-show="orgForm.model_data_code.$error.maxlength">编码最多20个字符</span>
+															</span>
+                                                <label class="control-label">机构类型</label>
+                                                <select ng-model="data.currTreeItem.orgtype"
+                                                        class="input-sm chosen-select form-control"
+                                                        ng-options="s.id as s.name for s in OrgType"
+                                                        data-placeholder="类型">
+                                                    <option value=""></option>
+                                                </select>
+                                        </div>
+                                        <div class="row">
+                                                <label class="control-label">负责人</label>
+                                                <div class="input-group width_m">
+                                                    <input type="text"  class="form-control" ng-readonly="!isOrgAdmin"
+                                                           ng-model="data.currTreeItem.manager"
+                                                           name="model_data_manager">
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary" ng-disabled="!isOrgAdmin"
+                                                                ng-click="searchUser('manager')" type="button">
+                                                            <i class="fa fa-ellipsis-h"></i></button>
+                                                    </div>
+                                                </div>
+                                                <label class="control-label">副负责人</label>
+                                                <div class="input-group width_m">
+                                                    <input type="text"  class="form-control" ng-readonly="!isOrgAdmin"
+                                                           ng-model="data.currTreeItem.vicemanager"
+                                                           name="model_data_vicemanager">
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary" ng-disabled="!isOrgAdmin"
+                                                                ng-click="searchUser('vicemanager')"
+                                                                type="button"><i class="fa fa-ellipsis-h"></i></button>
+                                                    </div>
+                                                </div>
+                                                <label class="control-label">机构简称</label>
+                                                <input type="text"  class="form-control" ng-readonly="!isOrgAdmin"
+                                                       ng-model="data.currTreeItem.shortname">
+                                        </div>
+                                        <div class="row" ng-if="data.currTreeItem.orgtype==6">
+                                            <label class="control-label">所在城市</label>
+                                            <div class="input-group width_m">
+                                                <input type="text"
+                                                       class="form-control"
+                                                       ng-readonly="true"
+                                                       ng-model="data.currTreeItem.areaname"
+                                                       name="model_data_areaname">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary"
+                                                            ng-click="searchArea()"
+                                                            ng-disabled="!isOrgAdmin"
+                                                            type="button">
+                                                        <i class="fa fa-ellipsis-h"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">备注</label>
+                                                <textarea  class="form-control" ng-readonly="!isOrgAdmin" name="note" style="width: 645px"
+                                                          ng-model="data.currTreeItem.note"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label"></label>
+                                            <label class="control-label">
+                                                <input type="checkbox" class="i-checks" ng-disabled="!isOrgAdmin"
+                                                       ng-modal="data.currTreeItem.stat"
+                                                       ng-checked="data.currTreeItem.stat == 1"
+                                                       ng-click="checkStat($event)">禁止使用</label>
+                                            <label class="control-label">
+                                                <input type="checkbox" class="i-checks" ng-disabled="!isOrgAdmin"
+                                                       ng-modal="data.currTreeItem.isfeecenter"
+                                                       ng-checked="data.currTreeItem.isfeecenter == 2"
+                                                       ng-click="checkIsfeecenter($event)">
+                                                成本中心</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab-addUser-user" class="tab-pane">
+                                    <div class="panel-body">
+                                        <div id="lineUserGridView" slick-grid sg-options="lineUserOptions"
+                                             sg-data=""
+                                             sg-columns="lineUserColumns" style="width:100%;height:280px;">
+                                        </div>
+                                    </div>
+                                    <div class="footer-btn">
+                                        <button type="button" class="btn btn-white" ng-disabled="!isOrgAdmin"
+                                                ng-click="searchUser('addUserLineRow')">增加
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="tab-other" class="tab-pane">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <label class=" control-label">创建用户</label>
+                                            <input type="text" class="form-control width_m" name="creator"
+                                                   ng-model="data.currTreeItem.creator" ng-readonly="true">
+                                            </span>
+                                            <label class=" control-label">创建时间</label>
+                                            <input type="text" class="form-control width_m" name="createTime"
+                                                   ng-model="data.currTreeItem.createtime"
+                                                   ng-readonly="true">
+                                        </div>
+                                        <div class="row">
+                                            <label class=" control-label">修改用户</label>
+                                            <input type="text" class="form-control width_m" name="creator"
+                                                   ng-model="data.currTreeItem.creator" ng-readonly="true">
+                                            </span>
+                                            <label class=" control-label">修改时间</label>
+                                            <input type="text" class="form-control width_m" name="createtime"
+                                                   ng-model="data.currTreeItem.createtime"
+                                                   ng-readonly="true">
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">机构代号</label>
+                                            <input type="text" class="form-control width_m" name="orgid"
+                                                   ng-model="data.currTreeItem.orgid" ng-readonly="true">
+                                            </span>
+                                            <label class="control-label">营运单位</label>
+                                            <select  ng-model="data.currTreeItem.entid" ng-disabled="!isOrgAdmin"
+                                                    class="input-sm chosen-select form-control width_m"
+                                                    ng-options="item.id as item.name for item in ents"
+                                                    data-placeholder="所属营运单位">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">所属渠道</label>
+                                            <select ng-model="data.currTreeItem.sale_center"
+                                                    class="input-sm form-control"
+                                                    ng-options="s.id as s.name for s in sale_center">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <!--<div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">来源</label>
+                                                <input type="text" class="form-control width_l" name="" ng-model=""
+                                                       ng-readonly="true">
+                                                </span>
+                                                <label class="control-label">访问用户</label>
+                                                <input type="text" class="form-control width_l" name="" ng-model="">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="form-group">
+                                                    <label class="control-label">LDAP唯一标识</label>
+                                                        <input type="text"  class="form-control" ng-readonly="!isOrgAdmin" name="" ng-model=""
+                                                               ng-readonly="true">
+                                                        </span>
+                                                    <label class="control-label">序号</label>
+                                                        <input type="text"  class="form-control" ng-readonly="!isOrgAdmin" name="" ng-model="">
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <!--<div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class=" control-label"></label>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox" class="i-checks"
+                                                               ng-modal="data.currTreeItem.emailcheck"
+                                                               ng-checked="data.currTreeItem.emailcheck == '2'"><label
+                                                            class="form-label-mini">邮件审核控制</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="cpcorg_save()"
+                            ng-disabled="orgForm.model_data_orgname.$invalid || orgForm.model_data_code.$invalid
+							||orgForm.model_data_manager.$invalid ||orgForm.model_data_vicemanager.$invalid || !isOrgAdmin ">保存
+                    </button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--添加用户窗口-->
+    <div class="modal inmodal fade" id="addUserModal" role="dialog" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">用户属性</h4>
+                </div>
+                <div class="modal-body" style="height: 355px;">
+                    <!--tab-->
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="tabs.html#tab_common"> 常规</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab_org"> 隶属机构</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab_role"> 所属角色</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab_position"> 所属岗位</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab_ent"> 用户职责</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab_mrp"> MRP控制者</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab_other"> 其他</a></li>
+                        </ul>
+                        <form method="get" class="form-horizontal" name="userForm" novalidate>
+                            <div class="tab-content form-inline mline">
+                                <div id="tab_common" class="tab-pane active">
+                                    <div class="panel-body ">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">用户账号</label>
+                                                <input type="text" class="form-control width_l" name="model_data_userid"  ng-readonly="!isOrgAdmin"
+                                                       ng-model="data.currItem.userid"
+                                                       ng-minlength=2
+                                                       ng-maxlength=20 required
+                                                       ng-readonly="data.currItem.sysuserid>0">
+                                                <span style="color:red"
+                                                      ng-show="userForm.model_data_userid.$dirty && userForm.model_data_userid.$invalid">
+                                                    <span ng-show="userForm.model_data_userid.$error.required">请输入用户账号</span>
+                                                    <span ng-show="userForm.model_data_userid.$error.minlength">最少2个字符</span>
+                                                    <span ng-show="userForm.model_data_userid.$error.maxlength">最多20个字符</span>
+                                                </span>
+                                                <label class="control-label">用户名称</label>
+                                                <input type="text" class="form-control width_l"  ng-readonly="!isOrgAdmin"
+                                                       name="model_data_username"
+                                                       ng-model="data.currItem.username"
+                                                       ng-minlength=2
+                                                       ng-maxlength=20 required>
+                                                <span style="color:red"
+                                                      ng-show="userForm.model_data_username.$dirty && userForm.model_data_username.$invalid">
+                                                    <span ng-show="userForm.model_data_username.$error.required">请输入用户名称</span>
+                                                    <span ng-show="userForm.model_data_username.$error.minlength">最少2个字符</span>
+                                                    <span ng-show="userForm.model_data_username.$error.maxlength">最多20个字符</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">密码</label>
+                                                <input type="password" class="form-control width_l" name="userpass" id="password"  ng-readonly="!isOrgAdmin"
+                                                       ng-minlength=2
+                                                       ng-maxlength=20
+                                                       ng-model="data.currItem.userpass" ng-readonly="1==data.currItem.enablepwd">
+                                                <span style="color:red"
+                                                      ng-show="userForm.password.$dirty && userForm.password.$invalid">
+                                                    <span ng-show="userForm.password.$error.required">请输入密码</span>
+                                                    <span ng-show="userForm.password.$error.minlength">最少2个字符</span>
+                                                    <span ng-show="userForm.password.$error.maxlength">最多20个字符</span>
+                                                </span>
+                                                <label class=" control-label">确认密码</label>
+                                                <input type="password" class="form-control width_l" name="userpass2" pw-check="password"
+                                                       ng-minlength=2
+                                                       ng-maxlength=20
+                                                       ng-model="data.currItem.userpass2" ng-readonly="1==data.currItem.enablepwd || !isOrgAdmin " >
+                                                <span style="color:red"
+                                                      ng-show="userForm.userpass2.$dirty && userForm.userpass2.$invalid">
+                                                    <span ng-show="userForm.userpass2.$error.required">请输入确认密码</span>
+                                                    <span ng-show="userForm.userpass2.$error.minlength">最少2个字符</span>
+                                                    <span ng-show="userForm.userpass2.$error.maxlength">最多20个字符</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                       <!-- <div class="row">
+                                            <div class="form-group">
+                                                 <label class="control-label">员工代号</label>
+                                                <input type="text" class="form-control width_l" name="">
+                                                <label class=" control-label">短号</label>
+                                                <input type="text"  class="form-control" ng-readonly="!isOrgAdmin" name="shortmobil"
+                                                       ng-model="data.currItem.shortmobil">
+                                            </div>
+                                        </div>-->
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">办公电话</label>
+                                                <input type="text" class="form-control width_l" name="telo"  ng-readonly="!isOrgAdmin"
+                                                       ng-model="data.currItem.telo">
+                                                </span>
+                                                <label class=" control-label">手机</label>
+                                                <input type="text" class="form-control width_l" name="mobil"  ng-readonly="!isOrgAdmin"
+                                                       ng-model="data.currItem.mobil">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">家庭电话</label>
+                                                <input type="text" class="form-control width_l" name="telh"  ng-readonly="!isOrgAdmin"
+                                                       ng-model="data.currItem.telh">
+                                                </span>
+                                                <label class=" control-label">邮箱</label>
+                                                <input type="text" class="form-control width_l" name="email"  ng-readonly="!isOrgAdmin"
+                                                       ng-model="data.currItem.email">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">用户类型</label>
+                                                <select ng-model="data.currItem.usertype" name="usertype"
+                                                        class="input-sm chosen-select form-control width_m"
+                                                        ng-options="s.id as s.name for s in usertype"
+                                                        data-placeholder="用户类型">
+                                                    <option value=""></option>
+                                                </select>
+                                                <label class=" control-label"></label>
+                                                <label class=" control-label"></label>
+                                                <input type="checkbox" class="i-checks" id="actived"  ng-disabled="!isOrgAdmin"
+                                                       ng-checked="data.currItem.actived==1"
+                                                       ng-modal="data.currItem.actived"
+                                                       ng-click="checkActived($event)">
+                                                <label for="actived" class="form-label-mini">禁止该用户</label>
+                                                <label class=" control-label"></label>
+                                                <input type="checkbox" class="i-checks" id="enablepwd" ng-disabled="!isOrgAdmin"
+                                                       ng-checked="data.currItem.enablepwd==1"
+                                                       ng-modal="data.currItem.enablepwd"
+                                                       ng-click="checkEnablepwd($event)">
+                                                <label for="enablepwd" class="form-label-mini">禁止更改密码</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">备注</label>
+                                                <textarea  class="form-control" ng-readonly="!isOrgAdmin" name="note" style="width: 603px" ng-model="data.currItem.note"></textarea>
+                                            </div>
+                                    </div>
+                                     </div>
+                                </div>
+                                <div id="tab_org" class="tab-pane ">
+                                    <div class="panel-body">
+                                        <div id="lineOrgGridView" slick-grid style="width:100%;height:215px;"></div>
+                                    </div>
+                                    <div class="footer-btn">
+                                        <button type="button" class="btn btn-white" ng-click="searchOrg()"
+                                                ng-disabled="!isOrgAdmin">增加
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="tab_role" class="tab-pane ">
+                                    <div class="panel-body">
+                                        <div id="lineRoleGridView" slick-grid style="width:100%;height:215px;"></div>
+                                    </div>
+                                    <div class="footer-btn">
+                                        <button type="button" class="btn btn-white" ng-click="searchRole()"
+                                                ng-disabled="!isOrgAdmin">增加
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="tab_position" class="tab-pane ">
+                                    <div class="panel-body">
+                                        <div id="linePositionGridView" slick-grid style="width:100%;height:415px;"></div>
+                                    </div>
+                                    <div class="footer-btn">
+                                        <button type="button" class="btn btn-white" ng-click="searchPosition()"
+                                                ng-disabled="!isOrgAdmin">
+                                            增加
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="tab_ent" class="tab-pane ">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <ul id="entTree" class="ztree"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab_mrp" class="tab-pane ">
+                                    <div class="panel-body">
+                                        <div id="lineMrpGridView" slick-grid style="width:100%;height:215px;"></div>
+                                    </div>
+                                    <div class="footer-btn">
+                                        <button type="button" class="btn btn-white" ng-click="searchMrp()"
+                                                ng-disabled="!isOrgAdmin" >增加
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="tab_other" class="tab-pane">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">创建用户</label>
+                                                <input type="text" class="form-control width_l" name="creator"
+                                                       ng-model="data.currItem.creator" ng-readonly="true">
+                                                </span>
+                                                <label class="control-label">创建时间</label>
+                                                <input type="text" class="form-control width_l" name="createTime"
+                                                       ng-model="data.currItem.createtime" ng-readonly="true">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">最后修改用户</label>
+                                                <input type="text" class="form-control width_l" name="creator"
+                                                       ng-model="data.currItem.creator" ng-readonly="true">
+                                                </span>
+                                                <label class="control-label">最后修改时间</label>
+                                                <input type="text" class="form-control width_l" name="createtime"
+                                                       ng-model="data.currItem.createtime" ng-readonly="true">
+                                            </div>
+                                        </div>
+                                        <!--<div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">来源</label>
+                                                <input type="text" class="form-control width_l" name="" ng-model=""
+                                                       ng-readonly="true">
+                                                <label class=" control-label">LDAP标识</label>
+                                                <input type="text" class="form-control width_l" name="" ng-model=""
+                                                       ng-readonly="true">
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="cpcuser_save()"
+                            ng-disabled="userForm.model_data_username.$invalid || userForm.model_data_userid.$invalid
+                             || userForm.userpass.$invalid|| userForm.userpass2.$invalid || !isOrgAdmin ">
+                        保存
+                    </button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .tabs-container .panel-body{
+        border:0px;
+    }
+</style>

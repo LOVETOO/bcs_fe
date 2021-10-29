@@ -1,0 +1,159 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="homePage">
+<div class="row">
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right">本月</span>
+                <h5>销售额</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">{{month_saleamount| currency:''}}</h1>
+
+                <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                <small>月累计发货金额</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right">本年</span>
+                <h5>销售额</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">{{year_saleamount| currency:''}}</h1>
+
+                <div class="stat-percent font-bold text-info">80% <i class="fa fa-level-up"></i></div>
+                <small>本年度累计发货金额</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-primary pull-right">本月</span>
+                <h5>订单</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">{{month_orderqty| number}}</h1>
+
+                <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
+                <small>新增订单数量</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-danger pull-right">本年</span>
+                <h5>订单</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">{{year_orderqty| number}}</h1>
+
+                <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
+                <small>新增订单数量</small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>任务及预算</h5>
+				<span class="pull-left p-l-sm"><span>部门:</span><a ng-click="selectorg()">{{data.org_name || '全部'}}</a><span class="p-l-sm">销售组织:</span><a ng-click="selectorg(1)">{{data.mrporgname || '全部'}}</a></span>
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button ng-click="maskbuget(1,$event)" type="button" class="btn btn-xs btn-white active">销售</button>
+                        <button ng-click="maskbuget(2,$event)" type="button" class="btn btn-xs btn-white">回款</button>
+                        <button ng-click="maskbuget(3,$event)" type="button" class="btn btn-xs btn-white">预算</button>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="flot-chart">
+                            <div flot class="flot-chart-content" dataset="flotData" options="flotOptions"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <ul class="stat-list">
+                            <li>
+                                <h2 class="no-margins">{{this_a | currency:''}}</h2>
+                                <small>{{this_a_str || '本月订单发货数'}}</small>
+                                <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
+                                <div class="progress progress-mini">
+                                    <div style="width: 48%;" class="progress-bar"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <h2 class="no-margins ">{{this_b | currency:''}}</h2>
+                                <small>{{this_b_str || '本月订单已发货数'}}</small>
+                                <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
+                                <div class="progress progress-mini">
+                                    <div style="width: 60%;" class="progress-bar"></div>
+                                </div>
+                            </li>
+                            <!-- <li>
+                                <h2 class="no-margins ">{{this_c | currency:''}}</h2>
+                                <small>{{this_c_str ||'本月订单累计发货数' }}</small>
+                                <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>
+                                <div class="progress progress-mini">
+                                    <div style="width: 22%;" class="progress-bar"></div>
+                                </div>
+                            </li> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>业绩风云榜</h5>
+                <div ibox-tools></div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <table class="table table-hover margin bottom">
+                            <thead>
+                            <tr>
+                                <th style="width:1%" class="text-center">No:</th>
+                                <th>国家或地区</th>
+                                <th class="text-center">销售量</th>
+                                <th class="text-center">销售额</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+	                            <tr ng-repeat="item in ranklist">
+	                            	<td class="text-center"><span class="label label-success" ng-bind="$index+1"></span></td>
+	                                <td><small ng-bind="item.org_name"></small></td>
+	                                <td class="text-center small" ng-bind="item.fact"></td>
+	                                <td class="text-center"><span class="label label-primary" ng-bind="item.task | currency:'$'"></span></td>
+	                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-7">
+                        <div china-map style="height: 500px;"></div>
+                    </div>
+					
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+</div>
+</div>

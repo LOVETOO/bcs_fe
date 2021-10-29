@@ -1,0 +1,54 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.invbillno"
+                     hc-readonly="true"
+                     hc-label="单据号">
+                </div>
+                <div hc-input="data.currItem.invbilldate"
+                     hc-label="记账日期"
+                     hc-type="date"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.year_month"
+                     hc-label="记账月份"
+                     hc-readonly="true"
+                     hc-type="month">
+                </div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.warehouse_code"
+                     hc-label="仓库"
+                     hc-common-search="chooseWareHouse">
+                </div>
+                <div hc-input="data.currItem.warehouse_name"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.dept_code"
+                     hc-label="部门"
+                     hc-common-search="chooseOrg"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.dept_name"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-col-count="8">
+                </div>
+            </div>
+        </div>
+        <!-- 表格视图  -->
+        <div hc-grid="gridOptions" class="hc-grid m" hc-auto-height="grid"></div>
+
+    </div>
+</div>

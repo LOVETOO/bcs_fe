@@ -1,0 +1,111 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fin_fee_apply_bx_search">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{headername}}</h5>
+                    <div class="ibox-tools form-inline">
+                        <button type="button" class="btn btn-default btn-sm" id="searchBtn"><i class="fa fa-search"></i> 查询</button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <!--编辑栏-->
+                    <form method="get" class="form-inline mline title-form">
+                        <div class="row">
+                            <label>申请日期</label>
+                            <input type="text" class="form-control width_no" ng-model="data.create_time" id="create_time_stat_apply">
+                            <label class="control-label width_ms">到</label>
+                            <input type="text" class="form-control width_no" ng-model="data.end_create_time" id="create_time_end_apply">
+                            <label class="control-label width_ms">报销日期</label>
+                            <input type="text" class="form-control width_no" ng-model="data.bx_time" id="create_time_stat_bx">
+                            <label class="control-label width_ms">到</label>
+                            <input type="text" class="form-control width_no" ng-model="data.end_bx_time" id="create_time_end_bx">
+                        </div>
+                        <div class="row">
+                            <label>申请单号</label>
+                            <div class="input-group width_no">
+                                <input type="text" class="form-control" ng-model="data.fee_apply_no">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary" ng-click="applynoSearch()">•••</button></span>
+                            </div>
+                            <label class="control-label width_ms">报销单号</label>
+                            <div class="input-group width_no">
+                                <input type="text" class="form-control" ng-model="data.bx_no">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary" ng-click="bxnoSearch()">•••</button></span>
+                            </div>
+                            <label class="control-label width_ms">申请部门</label>
+                            <div class="input-group width_no">
+                                <input type="text" class="form-control" ng-model="data.org_name">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary" ng-click="deptSearch()">•••</button></span>
+                            </div>
+                            <label class="control-label width_ms">申请人</label>
+                            <div class="input-group width_no">
+                                <input type="text" class="form-control" ng-model="data.chap_name">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary" ng-click="chapSearch()">•••</button></span>
+                            </div>
+                        </div>
+                    </form>
+                    <!--列表-->
+                    <div id="viewGrid"></div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    #viewGrid .del .apply_no,#viewGrid .del .uid{
+        border-bottom: 0;
+    }
+
+
+    #viewGrid div[colid="uid"]{
+        text-align: center;
+    }
+    #viewGrid div[colid="allow_amt"],#viewGrid div[colid="finish_bx_amt"],#viewGrid div[colid="pay_amt"]{
+        text-align: right;
+    }
+
+
+    .ag-header-cell{
+        border-right: 1px solid #E2EBF1;
+    }
+    .ag-blue .ag-header,.ag-header-viewport{
+        background: #f9f9f9;
+        border-top: 1px solid #E2EBF1;
+        border-bottom: 1px solid #E2EBF1;
+        font-weight: bold;
+        color: #676A6C;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    }
+    .ag-blue .ag-ltr .ag-header-cell{
+        border-right: 1px solid #E2EBF1;
+    }
+    .ag-cell-no-focus.ag-cell.ag-cell-not-inline-editing.ag-cell-value{
+        border: 1px solid transparent;
+        border-right: 1px dotted #e7eaec;
+        border-bottom-color: #E7EAEC;
+    }
+    .ag-bl-center.ag-bl-normal-center {
+        font-size: 13px;
+        background-color: #fff;
+        border: 1px solid #E7EAEC;
+        border-top: none;
+    }
+    ag-header{height:30px;line-height: 22px;border-right: 1px solid #E2EBF1;}
+    .ag-blue .ag-header{
+        border: 1px solid gray;
+        border-bottom: 0;
+        border-top: 0;
+        color: black;
+        height: 24px;
+        line-height: 24px;
+    }
+</style>
+
+
+<!--时间插件引入中文-->
+<script src="../../lib/bootstrap-datetimepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="../../lib/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"
+        charset="UTF-8"></script>

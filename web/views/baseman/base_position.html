@@ -1,0 +1,173 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="base_position">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="searchws();">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>岗位</h5>
+                    <div class="ibox-tools">
+                        <form class="pull-right">
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="刷新"
+                                    ng-click="refresh()"><i class="fa fa-refresh"></i>刷新
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal" data-target="#attributeModal"
+                                    ng-click="add()" title="新建岗位"><i class="fa fa-plus"></i> 新建岗位
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content TreeGridBox">
+                    <div class="ibox-title">
+                        <h5>岗位列表</h5>
+                        <ul id="tree" class="ztree"></ul>
+                    </div>
+                    <div class="grid_modal">
+                        <div id="headerGrid" class="headerGrid"></div>
+                        <div class="page_modal modal-open" page-pagination></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--属性窗口-->
+    <div class="modal inmodal fade" id="attributeModal" role="dialog" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">岗位属性</h4>
+                </div>
+                <div class="modal-body">
+                    <!--tab-->
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="tabs.html#tab-common"> 常规</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab-org_user"> 包含机构用户</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab-ohter"> 其他</a></li>
+                        </ul>
+                        <form method="get" class="form-inline mline" name="entityForm" novalidate>
+                            <div class="tab-content">
+                                <div id="tab-common" class="tab-pane active">
+                                    <div class="panel-body form-inline">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">岗位名称</label>
+                                                <input type="text" class="form-control width_l" name="positionid"
+                                                       ng-model="data.currItem.positionid"
+                                                       ng-minlength=2
+                                                       ng-maxlength=20 required>
+                                                    <span style="color:red"
+                                                          ng-show="entityForm.positionid.$dirty && entityForm.positionid.$invalid">
+                                                        <span ng-show="entityForm.positionid.$error.required">请输入</span>
+                                                        <span ng-show="entityForm.positionid.$error.minlength">最少2个字符</span>
+                                                        <span ng-show="entityForm.positionid.$error.maxlength">最多20个字符</span>
+                                                    </span>
+                                                <label class="control-label">岗位编码</label>
+                                                <input type="text" class="form-control width_l" name="code"
+                                                       ng-model="data.currItem.code"
+                                                       ng-minlength=2
+                                                       ng-maxlength=20 required>
+                                                <span style="color:red"
+                                                      ng-show="entityForm.code.$dirty && entityForm.code.$invalid">
+                                                    <span ng-show="entityForm.code.$error.required">请输入</span>
+                                                    <span ng-show="entityForm.code.$error.minlength">最少2个字符</span>
+                                                    <span ng-show="entityForm.code.$error.maxlength">最多20个字符</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">直接上级</label>
+                                            <div class="input-group width_l">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched "
+                                                       ng-model="data.currItem.superposition">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-primary"
+                                                            ng-click="searchPosition('superposition')">•••</button>
+                                                </span>
+                                            </div>
+                                            <label class="control-label">直接下级</label>
+                                            <div class="input-group width_l">
+                                                <input type="text"
+                                                       class="form-control ng-pristine ng-untouched "
+                                                       ng-model="data.currItem.lowerposition">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-primary"
+                                                            ng-click="searchPosition('lowerposition')">•••</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">职责概述</label>
+                                                <textarea class="form-control" name="note" style="width: 594px" name="positiondesc"
+                                                          ng-model="data.currTreeItem.positiondesc"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab-org_user" class="tab-pane">
+                                    <div class="panel-body">
+                                        <button type="button" class="btn btn-white footer-btn"
+                                                ng-click="searchUser('addUserLineRow')">增加
+                                        </button>
+                                        <div id="linegridview" slick-grid sg-options="lineOptions" sg-data=""
+                                             sg-columns="lineColumns" style="width:100%;height:320px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab-ohter" class="tab-pane">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">创建用户</label>
+                                                    <input type="text" class="form-control width_l" name="creator"
+                                                           ng-model="data.currItem.creator" ng-readonly="true">
+                                                    </span>
+                                                <label class=" control-label">创建时间</label>
+                                                    <input type="text" class="form-control width_l" name="createTime"
+                                                           ng-model="data.currItem.createtime" ng-readonly="true">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">最后修改用户</label>
+                                                <input type="text" class="form-control width_l" name="creator"
+                                                       ng-model="data.currItem.creator" ng-readonly="true">
+                                                </span>
+                                                <label class=" control-label">最后修改时间</label>
+                                                <input type="text" class="form-control width_l" name="createtime"
+                                                       ng-model="data.currItem.createtime" ng-readonly="true">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">来源</label>
+                                                <input type="text" class="form-control width_l" name="" ng-model=""
+                                                       ng-readonly="true">
+                                                </span>
+                                                <label class=" control-label">LDAP唯一标识</label>
+                                                <input type="text" class="form-control width_l" name="" ng-model=""
+                                                       ng-readonly="true">
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save()"
+                            ng-disabled="entityForm.positionid.$invalid || entityForm.code.$invalid ">
+                        保存
+                    </button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

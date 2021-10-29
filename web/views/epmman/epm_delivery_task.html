@@ -1,0 +1,121 @@
+<!-- 
+author：zengjinhua
+since：2020/1/9
+Description：销售任务录入
+-->
+<div hc-diy-page>
+    <!--========================== 按钮 ==========================-->
+    <div class="row other-h m-t-xs delivery_task_top_body">
+        <!--========================== 头部右边按钮 ==========================-->
+        <!-- 保存按钮 --><!-- 新增模式and编辑模式 可见 -->
+        <div hc-button="topRightSave()" class="delivery_task_save_btn delivery_task_top_right_btn" hc-if="displayMode == 'newModel' || displayMode == 'editModel'" hc-icon="iconfont hc-save">保存</div>
+        <!-- 取消编辑 --><!-- 新增模式and编辑模式 可见 -->
+        <div hc-button="topRightBohui1()" class="delivery_task_bohui1_btn delivery_task_top_right_btn" hc-if="displayMode == 'newModel' || displayMode == 'editModel'" hc-icon="iconfont hc-bohui1">取消编辑</div>
+        <!-- 删除按钮 --><!-- 列表清单and查看模式 可见 -->
+        <div hc-button="topRightDel()" class="delivery_task_del_btn delivery_task_top_right_btn" hc-if="(displayMode == 'listing' || displayMode == 'viewModel') && showEditDel"><i class="iconfont hc-delete"></i>删除</div>
+        <!-- 新增按钮 --><!-- 列表清单 可见 -->
+        <div hc-button="topRightAdd()" class="delivery_task_add_btn delivery_task_top_right_btn" hc-if="displayMode == 'listing'"><i class="iconfont hc-add"></i>新增</div>
+        <!-- 编辑按钮 --><!-- 查看模式 可见 -->
+        <div hc-button="topRightEdit()" class="delivery_task_edit_btn delivery_task_top_right_btn" hc-if="(displayMode == 'viewModel') && showEditDel" hc-icon="iconfont hc-edit">编辑</div>
+        <!-- 列表清单 --><!-- 查看模式 可见 -->
+        <div hc-button="topRightForm()" class="delivery_task_form_btn delivery_task_top_right_btn" hc-if="displayMode == 'viewModel'"><i class="iconfont hc-form"></i>列表清单</div>
+    </div>
+    <!-- 分割线 -->
+    <div class="delivery_task_top_page"></div>
+    <!--========================== 头部内容部分 ==========================-->
+    <div class="row other-h m-t-xs delivery_task_body delivery_task_top_body" hc-if="displayMode != 'listing'">
+        <!-- 头部右边内容 -->
+        <div  style="display: inline-block;padding-left: 90px;">
+            <!-- 年份选择 -->
+            <div hc-input="data.currItem.year" hc-type="year" hc-readonly="displayMode == 'viewModel'" hc-change="checkYear()" style="display: inline-block;width: 75px;margin-right: 0px;;"></div>
+            <!-- 固定文本 -->
+            <div class="delivery_task_text">年度</div>
+            <!-- 主题展示 -->
+            <div class="delivery_task_text">{{ data.currItem.table_name }}</div>
+        </div>
+        <!-- 固定文本 -->
+        <div class="delivery_task_text delivery_task_body_right">单位：万元</div>
+    </div>
+    <!--========================== 网格部分 ==========================-->
+    <div hc-box class="flex-column">
+        <!-- 列表清单列表 -->
+        <div hc-box hc-grid="gridOptionsList" class="flex1" ng-show="displayMode == 'listing'"></div>
+        <!-- 新增模式列表and查看模式列表and编辑模式列表 -->
+        <div hc-box class="flex1 flex-column" style="min-height: 200px;" ng-show="displayMode != 'listing'">
+            <div hc-tab="task_grid" hc-tab-change="ondeliveryTaskTabChange(params)" hc-tab-as="taskController"></div>
+            <div hc-tab-page class="flex1">
+                <div id="deliver" class="active"><!-- 发货任务 -->
+                    <div hc-grid="gridOptionsDeliver" class="flex1"></div>
+                </div>
+                <div id="written" ><!-- 签单任务 -->
+                    <div hc-grid="gridOptionsWritten" class="flex1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* 头部容器样式 */
+    .delivery_task_top_body{/* 头部样式 */
+        padding-left: 15px;
+        padding-right: 15px;
+        margin: 5px 0 5px 0;
+    }
+
+    /* 头部按钮样式 */
+    .delivery_task_top_right_btn{/* 头部右边按钮统一样式 */
+        float: right;
+        margin-left: 4px;
+    }
+    .delivery_task_save_btn{/* 保存按钮 */
+        background-color: #1b89ff;
+        color: #fff;
+        border-color: #1e7bde;
+    }
+    .delivery_task_bohui1_btn{/* 取消编辑按钮 */
+        background-color: #ec5c2b;
+        border-color: #c7461a;
+        color: white;
+    }
+    .delivery_task_del_btn i{/* 删除按钮图标 */
+        color: #ff4100;
+    }
+    .delivery_task_add_btn i{/* 新增按钮图标 */
+        color: #36a010;
+    }
+    .delivery_task_edit_btn{/* 编辑按钮 */
+        background-color: #1b89ff;
+        color: #fff;
+        border-color: #1e7bde;
+    }
+    .delivery_task_form_btn i{/* 列表清单 */
+        color: #51a5ff;
+    }
+
+    /* 头部内容样式 */
+    .delivery_task_body [hc-input="data.currItem.year"] input {/* 内容部分：年份靠右展示 */
+        text-align: right;
+        margin-left: 10px;
+        width: 65px;
+        padding-bottom: 15px;
+        font-size: 18px; 
+    }
+    .delivery_task_body_right {/* 内容部分右浮动 */
+        float: right;
+        padding-right: 65px;
+    }
+    .delivery_task_text{/* 文本样式 */
+        font-size: 18px; 
+        display: inline-block;
+        line-height: 30px;
+    }
+
+    /* 头部分割线 */
+    .delivery_task_top_page{
+        border: 1px solid #f5f5f5;
+        margin: 0 15px 0 15px;
+    }
+</style>
+<script>
+    $('#sta_table_left_btn').text('<');/* 赋值列左移文本内容 */
+</script>

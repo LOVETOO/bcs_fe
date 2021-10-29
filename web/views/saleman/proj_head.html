@@ -1,0 +1,67 @@
+<!--
+/**
+ * 工程项目(浏览页)
+ * @since 2018-07-14
+ */
+-->
+<div local-storage class="bill-form" ng-controller="proj_head" ng-model="data.currItem">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <div class="ibox-tools">
+                        <form class="form-inline">
+                            <button class="btn btn-white btn-sm" ng-click="btnEcnClick()">
+                                发起变更审核
+                            </button>
+                            <button class="btn btn-white btn-sm" ng-click="btnEcnHClick()">
+                                变更审核记录
+                            </button>
+                            <button class="btn btn-white btn-sm" ng-click="searchBySql()">
+                                <i class="fa fa-search"></i> 查询
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm"
+                                    ng-click="searchData()" ><i class="fa fa-refresh"></i> 刷新
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm"
+                                    ng-click="editData()"><i class="fa fa-edit"></i> 查看详情
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm"
+                                    ng-click="addData()"><i class="fa fa-plus"></i> 报备
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm"
+                                    ng-click="deleteData()"><i class="fa fa-trash"></i> 删除
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="headerGrid" style="height:500px"></div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 变更 -->
+    <div class="modal inmodal fade" id="modal_ecn" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width:800px;height:400px;">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">变更</h4>
+                </div>
+                <div class="modal-body" style="height:290px;">
+                    <div id="grid_ecn" style="width:100%;height:100%;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

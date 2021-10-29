@@ -1,0 +1,138 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ctrl_mydesktop">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>待审批流程</h5>
+                    <span class="hide label label-success pull-right">刷新</span>
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-xs btn-white active">待审批</button>
+                            <button type="button" class="btn btn-xs btn-white">我启动的</button>
+                            <button type="button" class="btn btn-xs btn-white">已完成</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content no-padding">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="item in data.wfcurrents">
+                            <p>
+                                <a ng-click="wftempcheck($index)">
+                                    <span><i class="fa fa-angle-right" ng-class="{'fa-angle-down': !item.hide, 'fa-angle-right': item.hide}"></i>
+                                     {{item.wfname}}
+                                </span>
+                                </a>
+
+								<pie-chart class="pull-right" data="[item.normalqty,item.delayqty+item.overqty]" options="xoption"></pie-chart>
+								
+                                <!--span class="text pull-right text-info" ng-class="{'hide': item.normalqty==0}">{{item.normalqty}} </span>
+								<span class="text pull-right text-warning" ng-class="{'hide': item.delayqty==0}">{{item.delayqty}} </span>
+								<span class="text pull-right text-danger" ng-class="{'hide': item.overqty==0}">{{item.overqty}} </span-->
+                            </p>
+							
+                            <table ng-hide="item.hide" class="item-info table table-hover margin bottom">
+                                <tr>
+                                    <th></th>
+                                    <th>主题</th>
+                                    <th>启动者</th>
+                                    <th>到达时间</th>
+                                    <th></th>
+                                </tr>
+                                <tr ng-repeat="wf in item.wf">
+                                    <td></td>
+                                    <td><a href="#{{wf.web_gallery}}"class="text-info">{{wf.subject}}</a>
+                                        <span class="label pull-right label-danger" ng-class="{'hide': wf.delay_stat!=3}">严重延迟</span>
+										<span class="label pull-right label-warning" ng-class="{'hide': wf.delay_stat!=2}">延迟</span>
+                                    </td>
+                                    <td>{{wf.startor}}</td>
+                                    <td>{{wf.lasttime}}</td>
+                                    <!--td><a class="text-infoa">审批</a></td-->
+                                </tr>
+                            </table>
+                        </li>
+                        <li class="list-group-item" ng-class="{'hide':data.wfcurrents.length != 0}">
+                            <p>没有数据</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>留言</h5>
+                    <span class="label label-success pull-right">New</span>
+                </div>
+                <div class="ibox-content no-padding">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <p><a class="text-info" href="">@Alan Marry</a> I belive that. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 minuts ago</small>
+                        </li>
+                        <li class="list-group-item">
+                            <p><a class="text-info" href="">@Stock Man</a> Check this stock chart. This price is crazy! </p>
+                            <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 hours ago</small>
+                        </li>
+                        <li class="list-group-item">
+                            <p><a class="text-info" href="">@Kevin Smith</a> Lorem ipsum unknown printer took a galley </p>
+                            <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
+                        </li>
+                        <li class="list-group-item ">
+                            <p><a class="text-info" href="">@Jonathan Febrick</a> The standard chunk of Lorem Ipsum</p>
+                            <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 hour ago</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">设置</span>
+                    <h5>工作提醒</h5>
+                </div>
+                <div class="ibox-content  no-padding">
+
+				<ul class="list-group">
+                        <li class="list-group-item" ng-repeat="item in data.reminds">
+                            <p><a href="#/crmman/{{item.default_menu_code}}" class="text-info">{{item.qty}}</a><small><a class="text-muted pull-right"><i class="fa fa-trasha"></i> 不再关注</a></small></p>
+                            
+                        </li>
+						</ul>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">发布</span>
+                    <h5>通知公告</h5>
+                </div>
+                <div class="ibox-content">
+                    <div ng-repeat="item in data.pubnotice" class="border-bottom">
+                        <h5>{{item.notice_title}}</h5>
+                        <p/>
+                        <h6>发布人:{{item.creator}} 发布时间:{{item.fb_date}}</h6>
+                        <p class="list-group-item-text">{{item.notice_content}}</span>
+                            <p class="list-group-item-text" ng-repeat="attach in item.attachs">
+							<a class="text-info" href='{{attach.url}}'><i class="fa fa-paperclip"></i> {{attach.docname}}</a></p>
+                    </div>
+                    <button ng-hide="(data.pubnotice.length==0)" class="btn btn-primary btn-block m-t" ng-click="test()"><i class="fa fa-arrow-down"></i> Show More</button>
+
+					<p ng-hide="(data.pubnotice.length!=0)">暂无公告</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+span.wfcheckstat-c {
+    display: none
+}
+span.wfcheckstat-b {
+    background-color: rgb(237, 85, 101);
+    color: rgb(255, 255, 255);
+}
+span.wfcheckstat-a {
+    background-color: rgb(248, 172, 89);
+    color: rgb(255, 255, 255);
+}
+</style>

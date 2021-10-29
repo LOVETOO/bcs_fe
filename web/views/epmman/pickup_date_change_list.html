@@ -1,0 +1,25 @@
+<div hc-diy-page>
+    <div hc-box>
+        <div class="row pickup_date_change_list">
+            <div hc-input="data.currItem.sa_salebillno"
+                hc-label="请选择需要调整紧急要货时间的要货单号"
+                hc-required="true"
+                hc-class-id="pickup_date_change_list"
+                hc-common-search="searchObjectPickupDate">
+            </div>
+            <div hc-button="updatePickTime()"
+                hc-if="selectedRowCount > 0">【更新提货时间】</div>
+        </div>
+    </div>
+    <div hc-box class="flex1 flex-column">
+        <div hc-grid="gridOptions" class="flex1"></div>
+    </div>
+    <div hc-box="下述产品目前延期申请失败，但尚未主动将申请置为失效，故不可进行提货时间变更:" class="flex1 flex-column">
+        <div hc-grid="gridOptions_list" class="flex1"></div>
+    </div>
+</div>
+<style>
+    .pickup_date_change_list [hc-input="data.currItem.sa_salebillno"] label {
+        width: 128px;
+    }
+</style>

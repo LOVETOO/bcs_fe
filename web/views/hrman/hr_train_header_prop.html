@@ -1,0 +1,79 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+    <div class="hc-box grid-other-h">
+        <div class="row">
+            <div hc-input="data.currItem.train_no"
+                 hc-label="登记单号"
+                 hc-readonly="true">
+            </div>
+            <div hc-input="data.currItem.course_name"
+                 hc-label="培训课程"
+                 hc-required="true"
+                 hc-class-id="hr_course"
+                 hc-common-search="commonSearchSettingOfHr_Course">
+            </div>
+            <div hc-input="data.currItem.train_date"
+                 hc-label="培训时间"
+                 hc-required="true"
+                 hc-type="date">
+            </div>
+            <div hc-input="data.currItem.creator"
+                 hc-label="创建人"
+                 hc-readonly="true">
+            </div>
+    </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.teacher"
+                 hc-label="培训老师">
+            </div>
+            <div hc-input="data.currItem.address"
+                 hc-label="培训地点"
+                 hc-col-count="4">
+            </div>
+            <div hc-input="data.currItem.create_time"
+                 hc-label="创建时间"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.course_hour"
+                 hc-label="培训课时"
+                 hc-type="number"
+                 hc-change="hourIsNumber()"
+                 hc-unit="小时">
+            </div>
+            <div hc-input="data.currItem.evaluation"
+                 hc-label="效果评价"
+                 hc-col-count="4">
+            </div>
+            <div hc-input="data.currItem.course_fee"
+                 hc-label="培训费用"
+                 hc-change="feeIsNumber()"
+                 hc-unit="元">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.content"
+                 hc-label="培训内容"
+                 hc-type="textarea"
+                 hc-col-count="8">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.note"
+                 hc-label="备注"
+                 hc-col-count="8">
+            </div>
+        </div>
+
+    </div>
+    <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+    </div>
+</div>
+
+

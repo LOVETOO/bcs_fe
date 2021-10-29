@@ -1,0 +1,125 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fin_bud_type_header" data-ng-init="init()">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="row">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>预算类别</h5>
+                    <div class="ibox-tools">
+                        <form class="form-inline">
+                            <button type="button" class="btn btn-default"  ng-click="searchBySql()"><i class="fa fa-search"></i> 查询
+                            </button>
+                            <button type="button" class="btn btn-default" ng-click="addBudType()"><i
+                                    class="fa fa-plus"></i> 增加
+                            </button>
+                            <button type="button" class="btn btn-default " data-toggle="modal"
+                                    ng-click="searchData()"><i class="fa fa-refresh"></i> 刷新
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="headergrid" slick-grid sg-options="periodOptions" sg-data=""
+                         sg-columns="periodColumns"></div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--新增 -->
+    <div class="modal inmodal fade" id="detailModal"  role="dialog" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">预算类别</h4>
+                </div>
+                <div class="modal-body" style="height:350px;">
+                    <div class="ibox-content">
+                        <form method="get" class="form-inline mline" id="addForm">
+                            <div class="row">
+                                <label class="control-label width_xs">类别编码</label>
+                                <input type="text" class="form-control non-empty" ng-model="data.currItem.bud_type_code"data-rule-required="true"
+                                       data-msg-required="类别编码不能为空">
+                                <label class=" control-label width_xs">类别名称</label>
+                                <input type="text" class="form-control non-empty" ng-model="data.currItem.bud_type_name"data-rule-required="true"
+                                       data-msg-required="类别名称不能为空">
+
+                                <label class="control-label width_xs">预算期间类别</label>
+                                <!--<select chosen-select ng-model="data.currItem.period_type"
+                                        class="input-sm chosen-select"
+                                        ng-options="s.id as s.name for s in period_types"
+                                        ng-selected="s.id==data.currIterm.period_type">
+                                </select>-->
+                                <select  ng-model="data.currItem.period_type"
+                                        class="input-sm chosen-select form-control non-empty"
+                                        ng-options="s.id as s.name for s in period_types"
+                                        ng-selected="s.id==data.currItem.period_type">
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label class="control-label not-null width_xs">费用大类编码</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control non-empty"
+                                           ng-model="data.currItem.fee_type_code"
+                                    ng-disabled="true" data-rule-required="true"
+                                           data-msg-required="费用大类不能为空">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"
+                                                ng-click="feeTypeSearch()">•••</button>
+                                    </span>
+                                </div>
+                                <input type="text" disabled class="form-control  non-empty"
+                                       ng-model="data.currItem.fee_type_name"
+                                        style="width:257px;">
+
+                                <label class="control-label not-null width_xs">费用项目层级</label>
+                                <select ng-model="data.currItem.fee_type_level" ng-change="changelevel()"
+                                        class="input-sm chosen-select form-control non-empty"
+                                        ng-options="s.id as s.name for s in fee_type_levels" data-rule-required="true"
+                                        data-msg-required="费用大类不能为空">
+                                </select>
+
+
+                            </div>
+                            <div class="row">
+                                <label class="control-label width_xs">包含费用项目</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.feenames"
+                                       ng-disabled="true">
+
+                                <label class="form-label-mini width_xs" >
+                                    <input type="checkbox" class="i-checks" ng-model="data.currItem.is_control_bud"
+                                           ng-true-value="2" ng-false-value="1" ng-disabled="">
+                                    受预算控制
+                                </label>
+                                <label class="form-label-mini width_xs">
+                                    <input type="checkbox" class="i-checks" ng-model="data.currItem.is_resource"
+                                           ng-true-value="2" ng-false-value="1" ng-disabled="">
+                                    市场资源
+                                </label>
+                            </div>
+                            <div class="row">
+                                <label class="control-label width_xs">描述</label>
+                                <input type="text" class="form-control" style="width: 402px;"
+                                       ng-model="data.currItem.description">
+
+                            </div>
+                        </form>
+                        <div id="linegrid" slick-grid sg-options="lineGridOptions" sg-data=""
+                             sg-columns="lineGridColumns" style="width:100%;height:280px">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left" ng-click="addLineRow()">增加行</button>
+                    <button type="button" class="btn btn-primary"  ng-click="saveData()">保存
+                    </button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

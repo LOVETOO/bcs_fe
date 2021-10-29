@@ -1,0 +1,46 @@
+<!-- 
+ 订单紧急要货报表
+ zengjinhua
+ 2019/12/23
+ -->
+<div hc-obj-list>
+    <!-- 查询条件面板-->
+    <hc-obj-list-search-panel>
+        <div class="row">
+            <div hc-label="紧急要货单号" hc-input="searchObj.urgent_order_billno"></div>
+
+            <div hc-label="客户编码" hc-input="searchObj.customer_code" hc-class-id="customer_org" hc-common-search="commonSearch.customer_org" hc-can-delete="true" hc-can-input="true"></div>
+
+            <div hc-label="客户名称" hc-input="searchObj.customer_name" hc-col-count="4"></div>
+        </div>
+
+        <div class="row">
+            <div hc-label="要货单号" hc-input="searchObj.sa_salebillno"></div>
+
+            <div hc-label="合同编码" hc-input="searchObj.contract_code" hc-class-id="epm_project_contract" hc-common-search="commonSearch.contract_code" hc-can-delete="true" hc-can-input="true"></div>
+
+            <div hc-label="合同名称" hc-input="searchObj.contract_name" hc-col-count="4"></div>
+        </div>
+
+        <div class="row">
+            <div hc-label="开票单位" hc-input="searchObj.billing_unit_name" hc-class-id="epm_discount_apply" hc-common-search="commonSearch.billing_unit_name" hc-can-delete="true" hc-can-input="true"></div>
+
+            <div hc-label="项目编码"hc-input="searchObj.project_code" hc-class-id="epm_project" hc-common-search="commonSearch.project_code" hc-can-delete="true" hc-can-input="true"></div>
+
+            <div hc-label="项目名称" hc-input="searchObj.project_name" hc-col-count="4"></div>
+        </div>
+
+        <div class="row">
+            <div hc-label="接口状态" hc-input="searchObj.intf_result" hc-can-delete="true" 
+            hc-select-options="[
+                { name: '失败', value: 'E' },
+                { name: '成功', value: 'S' }
+            ]"></div>
+
+            <div hc-label="产品编码" hc-input="searchObj.item_code" hc-class-id="item_org" hc-common-search="commonSearch.item_code" hc-can-delete="true" hc-can-input="true"></div>
+
+            <div hc-label="产品名称" hc-input="searchObj.item_name" hc-col-count="4"></div>
+        </div>
+    </hc-obj-list-search-panel>
+</div>
+

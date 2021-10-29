@@ -1,0 +1,459 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="ctrl_decorate_fee_apply_bill">
+    <div class="wrapper wrapper-content" ng-init="selectCurrenItem()">
+        <ul class="nav nav-tabs p-w-m other-h" id="detailtab">
+            <li class="active">
+                <a data-toggle="tab" href="tabs.html#tab_common">单据详情</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="tabs.html#tab_wfins">审批流程</a>
+            </li>
+        </ul>
+        <div class="modal-footflex">
+            <div class="tabs-container">
+                <form method="get" class="form-horizontal" name="entityForm" novalidate>
+                    <div class="tab-content">
+                        <div id="tab_common" class="tab-pane active form-inline mline">
+                            <div class="panel-body" list-toggle>
+                                <div class="row">
+                                    <label class="control-label ">申请单号</label>
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.fee_apply_no" ng-readonly="true">
+
+                                    <label class="control-label">制单人</label>
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.creator" ng-readonly="true">
+
+                                    <label class="control-label ">制单时间</label>
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           id="creatDate" ng-model="data.currItem.create_time"
+                                           ng-disabled="true">
+
+                                    <label class="control-label not-null">单据状态</label>
+                                    <select ng-model="data.currItem.stat"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in billStats"
+                                            ng-disabled="true">
+                                    </select>
+
+                                </div>
+
+                                <div class="row">
+                                    <label class="control-label">网点</label>
+                                    <div class="input-group width_m">
+                                        <input type="text" class="form-control non-empty"
+                                               ng-model="data.currItem.terminal_code"
+                                               ng-readonly="!data.canmodify"
+                                               ng-change="codeChangeEvent('terminal')">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary"  type="button"
+                                                    ng-click="searchTerminal()"
+                                                    ng-disabled="!data.canmodify">•••</button>
+                                        </div>
+                                    </div>
+
+                                    <label class="control-label">店面性质</label>
+                                    <select ng-model="data.currItem.branch_property"
+                                            class="input-sm chosen-select form-control ng-pristine non-empty ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in branch_property"
+                                            ng-disabled="!data.canmodify">
+                                    </select>
+
+                                    <label class="control-label">市场级别</label>
+                                    <select ng-model="data.currItem.grade_market"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in grade_market"
+                                            ng-disabled="true">
+                                    </select>
+                                    <label class="control-label">网点类别</label>
+                                    <select ng-model="data.currItem.terminal_kind"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in terminal_kind"
+                                            ng-disabled="true">
+                                    </select>
+                                </div>
+
+                                <!--网点信息（由网点带出，不可编辑）-->
+                                <div class="row">
+                                    <label class="control-label">运营中心</label>
+                                    <div class="input-group width_m">
+                                        <input type="text" ng-change="codeChangeEvent('op')"
+                                               class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                               ng-model="data.currItem.op_center_name"
+                                               ng-readonly="!data.canmodify ">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" ng-click="searchOp()"
+                                                    ng-disabled="!data.canmodify">•••</button>
+                                        </span>
+                                    </div>
+                                    <label class="control-label">店面名称</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.terminal_name"
+                                           ng-readonly="true">
+                                    <label class="control-label">店面联系电话</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.branch_tel"
+                                           ng-readonly="true">
+                                    <label class="control-label">店面人员数量</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.staff_qty"
+                                           ng-readonly="true">
+                                </div>
+
+                                <div class="row">
+                                    <label class="control-label">店面位置分类</label>
+                                    <select ng-model="data.currItem.position_class"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in position_class"
+                                            ng-disabled="true">
+                                    </select>
+                                    <label class="control-label">店面形式</label>
+                                    <select ng-model="data.currItem.branch_form"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in branch_form"
+                                            ng-disabled="true">
+                                    </select>
+                                    <label class="control-label">最近装修时间</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.tearest_decoration_time"
+                                           ng-disabled="true" bs-date-picker>
+                                    <label class="control-label">店面负责人</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.shopmanager_name"
+                                           ng-readonly="true">
+                                </div>
+
+                                <!--经销商信息（由网点带出，不可编辑）-->
+                                <div class="row">
+                                    <label class="control-label">经销商编号</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.cust_code"
+                                           ng-readonly="true">
+
+                                    <label class="control-label">经销商性质</label>
+                                    <select ng-model="data.currItem.dealer_property"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in dealer_property"
+                                            ng-disabled="true">
+                                    </select>
+                                    <label class="control-label">经销商分类</label>
+                                    <select ng-model="data.currItem.is_400"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in customer_org_class"
+                                            ng-disabled="true">
+                                    </select>
+                                    <label class="control-label">店面负责人手机</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.shopmanager_mob"
+                                           ng-readonly="true">
+                                </div>
+
+                                <div class="row">
+                                    <label class="control-label">公司名称</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.cust_name"
+                                           ng-readonly="true">
+                                    <label class="control-label">授权经营区域</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.authorize_area"
+                                           ng-readonly="true">
+                                    <label class="control-label">经销商姓名</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.manager"
+                                           ng-readonly="true">
+                                    <label class="control-label">经销商手机</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.tel_mb_law_man"
+                                           ng-readonly="true">
+
+                                </div>
+
+                                <div class="row">
+                                    <label class="control-label">终端代码</label>
+                                    <input type="text" class=" form-control"
+                                           ng-model="data.currItem.crm_terminal_code"  ng-readonly="true">
+                                    <label class="control-label">经销商地址</label>
+                                    <input type="text" class="form-control" style="width: 124px;"
+                                           ng-model="data.currItem.province_areaname"
+                                           ng-readonly="true">
+
+                                    <input type="text" class="form-control" style="width: 124px;"
+                                           ng-model="data.currItem.city_areaname"
+                                           ng-readonly="true">
+
+                                    <input type="text" class="form-control" style="width: 124px;"
+                                           ng-model="data.currItem.county_areaname"
+                                           ng-readonly="true">
+
+                                    <input type="text" class="form-control width_xm"
+                                           ng-model="data.currItem.addr"
+                                           ng-readonly="true">
+                                </div>
+
+                                <div class="row">
+                                    <label class="control-label">此经销商签约年销量</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.year_signed_amount"
+                                           ng-readonly="true">
+                                    <label class="control-label">截止当前销量</label>
+                                    <input type="text" class="form-control"
+
+                                           ng-readonly="true"><!--ng-model="data.currItem.year_signed_amount"-->
+                                    <label class="control-label">经营店面数量</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.shop_count"
+                                           ng-readonly="true">
+                                    <label class="control-label">经营雷士时间</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.sale_time"
+                                           ng-readonly="true">
+                                </div>
+
+                                <div class="row">
+                                    <label class="control-label">需要总部设计</label>
+                                    <select ng-model="data.currItem.need_design"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in yesorno"
+                                            ng-disabled="!data.canmodify">
+                                    </select>
+                                    <label class="control-label">工程展厅类别</label>
+                                    <select ng-model="data.currItem.project_hall_type"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in project_hall_type"
+                                            ng-disabled="true">
+                                    </select>
+                                    <label class="control-label">年度</label>
+                                    <input type="number"
+                                           class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                           ng-model="data.currItem.cyear"
+                                           ng-readonly="!data.canmodify">
+                                    <label class="control-label">月度</label>
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                           ng-model="data.currItem.cmonth"
+                                           ng-readonly="!data.canmodify">
+                                </div>
+
+                                <div class="row">
+                                    <label class="control-label">装修类别</label>
+                                    <select ng-model="data.currItem.decoration_type"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in decoration_type"
+                                            ng-disabled="!data.canmodify">
+                                    </select>
+
+                                    <label class="control-label">申请综合店类别</label>
+                                    <select ng-model="data.currItem.apply_mixed_type"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in apply_mixed_type"
+                                            ng-disabled="!data.canmodify">
+                                    </select>
+
+                                    <label class="control-label ">预算类别</label>
+                                    <div class="input-group width_m">
+                                        <input type="text" ng-change="codeChangeEvent('bud_type')"
+                                               class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                               ng-model="data.currItem.bud_type_code"
+                                               ng-readonly="!data.canmodify">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary"
+                                                    ng-click="searchBudType()"
+                                                    ng-disabled="!data.canmodify">•••</button>
+                                        </span>
+                                    </div>
+                                    <input type="text"
+                                           class="form-control width_xm ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.bud_type_name"
+                                           ng-readonly="true">
+                                </div>
+
+                                <div class="row">
+                                    <label class="control-label ">装修天花总面积</label>
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.total_ceiling_area"
+                                           ng-readonly="true">
+                                    <label class="control-label ">装修墙面总面积</label>
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.total_wall_area"
+                                           ng-readonly="true">
+                                    <label class="control-label ">申请总金额</label>
+                                    <input type="text" money-format
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.total_apply_amt"
+                                           ng-readonly="true">
+                                    <label class="control-label ">批准总金额</label>
+                                    <input type="text" money-format
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.total_allow_amt"
+                                           ng-readonly="true">
+                                </div>
+
+                                <div class="row">
+                                    <label class="control-label ">店招材质</label>
+                                    <select ng-model="data.currItem.signage_material"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in signage_material"
+                                            ng-disabled="!data.canmodify">
+                                    </select>
+                                    <label class="control-label ">店招长</label>
+                                    <input type="text" number-format
+                                           ng-change="codeChangeEvent('signage')"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.signage_length"
+                                           ng-readonly="!data.canmodify">
+                                    <label class="control-label ">店招高</label>
+                                    <input type="text" number-format
+                                           ng-change="codeChangeEvent('signage')"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.signage_height"
+                                           ng-readonly="!data.canmodify">
+                                    <label class="control-label ">店招面积</label>
+                                    <input type="text" number-format
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.signage_area"
+                                           ng-readonly="true">
+                                </div>
+
+                                <div class="row">
+                                    <label class="control-label">截止核销日期</label>
+                                    <input type="text" class="form-control" bs-date-picker
+                                           ng-model="data.currItem.bx_end_date"  ng-disabled="true">
+                                    <label class="control-label">备注</label>
+                                    <input type="text"
+                                           class="form-control width_xxxl ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.currItem.purpose"
+                                           ng-readonly="!data.canmodify">
+                                </div>
+
+                                <ul class="nav nav-tabs p-w-m" id="linetab">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="tabs.html#tab_items">品项分布</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="tabs.html#tab_finlines">装修费用明细</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="tabs.html#tab_photos">装修前照片</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="tabs.html#tab_files">附件</a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <div class="tabs-container">
+                                        <form method="get" class="form-horizontal" name="entityForm" novalidate>
+                                            <div class="tab-content">
+                                                <div id="tab_items" class="tab-pane active form-inline mline">
+                                                    <div id="lineGridView" slick-auto-height>
+                                                    </div>
+                                                </div>
+                                                <div id="tab_photos" class="tab-pane form-inline mline">
+                                                    <div class="panel-body">
+                                                        <div class="photo_view">
+                                                            <div class="photo_div"
+                                                                 ng-repeat="img in image_type">
+                                                                <div id="imgatt" ng-dblclick="viewFullImg(img.id)" title="双击查看大图">
+                                                                    <!--重新上传-->
+                                                                    <div class="cha-no" ng-show="map_imgatts[img.id].docid && data.canmodify">
+                                                                        <span class="no-draggable cha-x" ng-click="addImg(img.id)">重新上传</span>
+                                                                    </div>
+
+                                                                    <!--上传照片-->
+                                                                    <div class="cha-no" ng-hide="map_imgatts[img.id].docid || !data.canmodify">
+                                                                        <span class="no-draggable cha-x" ng-click="addImg(img.id)">上传照片</span>
+                                                                    </div>
+
+                                                                    <img class="cha-img"
+                                                                         ng-hide="!map_imgatts[img.id].docid"
+                                                                         ng-src="/viewimage/{{map_imgatts[img.id].docid}}_1{{map_imgatts[img.id].strType}}">
+                                                                </div>
+
+                                                                <div class="cha-p">
+                                                                    <span>{{img.name}}</span>
+                                                                    <div>
+                                                                        <select ng-model="map_imgatts[img.id].area_type"
+                                                                                ng-options="s.id as s.name for s in area_type"
+                                                                                ng-disabled="!data.canmodify">
+                                                                            <option value='' disabled selected style='display:none;'>请选择区域分布</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="tab_files" class="tab-pane form-inline mline">
+                                                    <div id="filesGridView" slick-auto-height>
+                                                    </div>
+                                                </div>
+                                                <div id="tab_finlines" class="tab-pane form-inline mline">
+                                                    <div id="finlineGridView" slick-auto-height>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="tab_wfins" class="tab-pane">
+                            <div id="wfinsform" auto-height>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer other-h">
+                <!--品项分布tab页显示-->
+                <button type="button" class="btn btn-primary pull-left" ng-click="addLine('items')"
+                        ng-show="tab == 1 && data.canmodify">增加行
+                </button>
+                <button type="button" class="btn btn-primary pull-left" ng-click="deleteLine('items')"
+                        ng-show="tab == 1 && data.canmodify">删除行
+                </button>
+
+                <!--电子附件tab页显示-->
+                <button type="button" class="btn btn-primary pull-left" ng-click="addFile()"
+                        ng-show="tab == 3 && data.canmodify">添加附件
+                </button>
+                <button type="button" class="btn btn-primary pull-left" ng-click="downloadAttFileClick()"
+                        ng-show="tab == 3">下载
+                </button>
+                <button type="button" class="btn btn-primary pull-left" ng-click="deleteFileClick()"
+                        ng-disabled="!data.canmodify"
+                        ng-show="tab == 3 && data.canmodify">删除
+                </button>
+
+                <!--装修费用明细tab页显示-->
+                <button type="button" class="btn btn-primary pull-left" ng-click="addLine('finline')"
+                        ng-show="tab == 4 && data.canmodify">增加行
+                </button>
+                <button type="button" class="btn btn-primary pull-left" ng-click="deleteLine('finline')"
+                        ng-show="tab == 4 && data.canmodify">删除行
+                </button>
+
+                <button type="button" class="btn btn-primary" ng-click="saveData(false)"
+                        ng-show="data.canmodify || canaudit">保存
+                </button>
+                <button type="button" class="btn btn-primary"
+                        ng-show="data.canmodify || canaudit"
+                        ng-click="saveData(true)">保存并提交
+                </button>
+                <button type="button" class="btn btn-white" ng-click="closeWindow()">关闭</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+

@@ -1,0 +1,315 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box="" class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.adjust_no"
+                     hc-label="调整单编码" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.creator"
+                     hc-label="制单人" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.create_time"
+                     hc-label="制单时间"
+                     hc-type="date" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.bud_year"
+                     hc-label="预算年度"
+                     hc-required="true"
+                     hc-type="year">
+                </div>
+                <div hc-input="data.currItem.org_code"
+                     hc-label="制单部门"
+                     hc-required="true"
+                     hc-common-search="searchDept('checkDetail')">
+                </div>
+                <div hc-input="data.currItem.org_name"
+                     hc-label=""
+                     hc-col-count="2">
+                </div>
+            </div>
+            <div class="row">
+
+                <div hc-input="data.currItem.style"
+                     hc-label="调整类型"
+                     hc-required="true"
+                     hc-dict-code="style"
+                     hc-change="onChangeClear()">
+                </div>
+                <div hc-input="addTotal"
+                     hc-label="调增金额"
+                     hc-type="money" hc-readonly="true">
+                </div>
+                <div hc-input="decTotal"
+                     hc-label="调减金额"
+                     hc-type="money" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.bill_date"
+                     hc-label="调整日期"
+                     hc-required="true"
+                     hc-type="date">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-col-count="8">
+                </div>
+            </div>
+        </div>
+        <!-- 表格视图 -->
+        <div hc-grid="gridOptions" hc-box hc-auto-height="grid"></div>
+    </div>
+
+    <!-- 增加明细 -->
+    <div class="modal inmodal fade" id="AddDetailModal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" style="font-size: 16px;">预算调整明细</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="get" class="form-inline mline" id="AddItemForm" name="AddItemForm">
+                        <div>
+                            <div class="m-t-sm m-b-sm border-bottom">
+                                <h4 style="margin-left: 30px;font-size: small;font-style: italic">调增</h4>
+                            </div>
+                            <div class="row">
+                                <div hc-input="data.currItem.AddItem.org_code"
+                                     hc-label="预算部门"
+                                     hc-readonly="AddDisabled"
+                                     hc-common-search="searchDept('AddDetail')">
+                                </div>
+                                <div hc-input="data.currItem.AddItem.org_name"
+                                     hc-label=""
+                                     hc-readonly="true"
+                                     hc-col-count="1">
+                                </div>
+
+                                <div hc-input="data.currItem.AddItem.bud_type_code"
+                                     hc-label="预算类别"
+                                     hc-readonly="AddDisabled"
+                                     hc-common-search="searchBudType('AddDetail')">
+                                </div>
+                                <div hc-input="data.currItem.AddItem.bud_type_name"
+                                     hc-label=""
+                                     hc-readonly="true"
+                                     hc-col-count="2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div hc-input="data.currItem.AddItem.object_code"
+                                     hc-label="费用项目"
+                                     hc-readonly="AddDisabled"
+                                     hc-common-search="searchFeeObject('AddItem')">
+                                </div>
+                                <div hc-input="data.currItem.AddItem.object_name"
+                                     hc-label=""
+                                     hc-readonly="true"
+                                     hc-col-count="1">
+                                </div>
+                                <div hc-input="data.currItem.AddItem.crm_entid"
+                                     hc-label="品类"
+                                     hc-dict-code="crm_entid">
+                                </div>
+                                <div hc-input="data.currItem.AddItem.dname"
+                                     hc-label="预算期间"
+                                     hc-readonly="AddDisabled"
+                                     hc-common-search="searchBudPeriod('AddItem')">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div hc-input="data.currItem.AddItem.style"
+                                     hc-label="调整类型"
+                                     hc-readonly="true"
+                                     hc-dict-code="style">
+                                </div>
+                                <div hc-input="data.currItem.AddItem.adjust_amt"
+                                     hc-label="调整金额"
+                                     hc-readonly="AddDisabled"
+                                     hc-change="same('addItem')"
+                                     hc-type="money">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="m-t-sm m-b-sm border-bottom">
+                        <h4 style="margin-left: 30px;font-size: small;font-style: italic">调减</h4>
+                    </div>
+                    <form method="get" class="form-inline mline" name="DecItemForm" id="DecItemForm">
+                        <div>
+                            <div class="row">
+                                <div hc-input="data.currItem.DecreaseItem.org_code"
+                                     hc-label="预算部门"
+                                     hc-readonly="DecreaseDisabled"
+                                     hc-common-search="searchDept('DecreaseDetail')">
+                                </div>
+                                <div hc-input="data.currItem.DecreaseItem.org_name"
+                                     hc-label=""
+                                     hc-readonly="true"
+                                     hc-col-count="1">
+                                </div>
+                                <div hc-input="data.currItem.DecreaseItem.bud_type_code"
+                                     hc-label="预算类别"
+                                     hc-readonly="DecreaseDisabled"
+                                     hc-common-search="searchBudType('DecreaseDetail')">
+                                </div>
+                                <div hc-input="data.currItem.DecreaseItem.bud_type_name"
+                                     hc-label=""
+                                     hc-readonly="true"
+                                     hc-col-count="2">
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div hc-input="data.currItem.DecreaseItem.object_code"
+                                     hc-label="费用项目"
+                                     hc-readonly="DecreaseDisabled"
+                                     hc-common-search="searchFeeObject('DecreaseItem')">
+                                </div>
+                                <div hc-input="data.currItem.DecreaseItem.object_name"
+                                     hc-label=""
+                                     hc-readonly="true"
+                                     hc-col-count="1">
+                                </div>
+                                <div hc-input="data.currItem.DecreaseItem.crm_entid"
+                                     hc-label="品类"
+                                     hc-dict-code="crm_entid">
+                                </div>
+                                <div hc-input="data.currItem.DecreaseItem.dname"
+                                     hc-label="预算期间"
+                                     hc-readonly="DecreaseDisabled"
+                                     hc-common-search="searchBudPeriod('DecreaseItem')">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div hc-input="data.currItem.DecreaseItem.style"
+                                     hc-label="调整类型"
+                                     hc-readonly="true"
+                                     hc-dict-code="style">
+                                </div>
+                                <div hc-input="data.currItem.DecreaseItem.adjust_amt"
+                                     hc-label="调整金额"
+                                     hc-readonly="DecreaseDisabled"
+                                     hc-change="same('decItem')"
+                                     hc-type="money">
+                                </div>
+                                <div hc-input="canuseamt"
+                                     hc-label="可调减金额"
+                                     hc-readonly="true"
+                                     hc-type="money">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" ng-click="saveDetail()">保存</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                    <!-- data-dismiss="modal"-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 打印模板 -->
+    <div class="modal inmodal fade" role="dialog" aria-hidden="true">
+        <div id="div_print" ng-hide="true">
+            <div id='div1' style='font-size:12px;font-weight: normal;'>
+                <DIV style='LINE-HEIGHT: 30px' class=size16 align=center>
+                    <STRONG><H2>预算调整单</H2></STRONG></DIV>
+
+                <TABLE border=0 cellSpacing=1 cellPadding=3 width='100%' style='border-collapse:collapse'
+                       bordercolor='#333333'>
+                    <TBODY>
+                    <TR>
+                        <TD><b>调整单编码：</b><SPAN>{{data.currItem.adjust_no}}</SPAN></TD>
+                        <TD><b>预算年度：</b><span>{{data.currItem.bud_year}}</span></TD>
+                    </TR>
+                    <TR>
+                        <TD><b>制单部门：</b><SPAN>{{data.currItem.org_name}}</SPAN></TD>
+                        <TD><b>制单人：</b><SPAN>{{data.currItem.creator}}</SPAN></TD>
+                        <TD><b>制单时间：</b><SPAN>{{data.currItem.create_time}}</SPAN></TD>
+                    </TR>
+                    <TR>
+                        <TD><b>调整日期：</b><SPAN>{{data.currItem.bill_date}}</SPAN></TD>
+                        <TD>
+                            <b>调整类型：</b><SPAN>{{data.currItem.style}}</SPAN>
+                        </TD>
+                    </TR>
+                    <TR>
+                        <TD><b>调增金额：</b><SPAN>{{data.currItem.addTotal}}</SPAN></TD>
+                        <TD><b>调减金额：</b><SPAN>{{data.currItem.decTotal}}</SPAN></TD>
+                    </TR>
+                    <tr>
+                        <td colspan="3"><b>备注：</b><SPAN>{{data.currItem.note}}</SPAN></td>
+                    </tr>
+                    </TBODY>
+                </TABLE>
+            </div>
+            <div>
+                <div id="div2">
+                    <TABLE border=1 cellSpacing=0 cellPadding=3 width='100%' style='border-collapse:collapse'
+                           bordercolor='#333333'>
+                        <thead>
+                        <TR style="">
+                            <td colspan="7" stype="font-weight: bold;"><b>借款明细：</b></td>
+                        </TR>
+                        <TR style="">
+                            <td><b>序号</b></td>
+                            <td><b>调整类型</b></td>
+                            <td><b>调整金额</b></td>
+                            <td><b>预算期间</b></td>
+                            <td><b>预算类别</b></td>
+                            <td><b>费用对象</b></td>
+                            <td><b>机构名称</b></td>
+                        </TR>
+                        </thead>
+                        <TBODY>
+                        <TR ng-repeat="item in data.currItem.mkt_loan_lineofmkt_loan_headers">
+                            <td>{{$index}}</td>
+                            <TD>{{item.style}}</TD>
+                            <TD>{{item.adjust_amt}}</TD>
+                            <TD>{{item.dname}}</TD>
+                            <TD>{{item.bud_type_name}}</TD>
+                            <TD>{{item.object_name}}</TD>
+                            <TD>{{item.org_name}}</TD>
+                        </TR>
+                    </TABLE>
+                </div>
+            </div>
+            <div id="div3">
+                <TABLE border=1 rules="rows" cellSpacing=0 cellPadding=0 width="100%"
+                       style="font-size: small;height:90px">
+                    <thead>
+                    <TR style="">
+                        <td colspan="5" stype="font-weight: bold;"><b>审核记录：</b></td>
+                    </TR>
+                    <TR style="">
+                        <td><b>时间</b></td>
+                        <td><b>节点名称</b></td>
+                        <td><b>操作者</b></td>
+                        <td><b>操作</b></td>
+                        <td><b>处理意见</b></td>
+                    </TR>
+                    </thead>
+                    <TBODY>
+                    <TR ng-repeat="item in opinions">
+                        <TD>{{item.signtime}}</TD>
+                        <TD>{{item.procname}}</TD>
+                        <TD>{{item.username}}</TD>
+                        <TD>{{item.stat}}</TD>
+                        <TD>{{item.opinion}}</TD>
+                    </TR>
+                </TABLE>
+            </div>
+        </div>
+    </div>
+</div>

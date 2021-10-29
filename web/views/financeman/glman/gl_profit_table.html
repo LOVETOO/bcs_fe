@@ -1,0 +1,35 @@
+<div hc-diy-page>
+
+    <div class="hc-box other-h">
+
+        <div class="row">
+            <div hc-input="data.currItem.entnames"
+                 hc-label="查询组织"
+                 hc-class-id="base_search"
+                 delete-together="orgids"
+                 hc-common-search="commonSearchSetting.ent"
+                 hc-readonly="data.currItem.is_multi_ent == 1"
+                 hc-col-count="3">
+            </div>
+
+            <div hc-input="data.currItem.year_month"
+                 hc-label="年月"
+                 hc-type="year-month">
+            </div>
+
+            <div hc-input="data.currItem.forced_flag"
+                 hc-label="强制模拟过账"
+                 hc-type="checkbox">
+            </div>
+
+            <button type="button" class="btn btn-primary"
+                    ng-click="searchByCon()">
+                <i class="fa fa-search"></i> 查询
+            </button>
+        </div>
+    </div>
+
+    <!--网格-->
+    <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+</div>

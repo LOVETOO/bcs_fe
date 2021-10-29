@@ -1,0 +1,207 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="ctrl_inv_out_bill_head">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>销售出库单</h5>
+                    <div class="ibox-tools">
+                        <form class="pull-right">
+                            <button class="btn btn-white btn-sm" data-toggle="modal"
+                                    ng-click="searchBySql()"><i class="fa fa-search"></i> 查询
+                            </button>
+                            <!--<button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="刷新"-->
+                                    <!--ng-click="add()"><i class="fa fa-plus"></i>新增-->
+                            <!--</button>-->
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="刷新"
+                                    ng-click="searchData()"><i class="fa fa-refresh"></i>刷新
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div id="headerGridView" slick-grid sg-options="headerOptions"
+                         sg-columns="headerColumns"
+                         class="slick-grid">
+                    </div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--详情框-->
+    <div class="modal inmodal fade" id="detailModal" role="dialog" tabindex="-1"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal_lgmax" >
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">销售出库单</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content" style="height:300px;">
+                        <form method="get" class="form-inline mline">
+                            <div class="row">
+                                <label class="control-label width_s">出库单号</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.invbillno"
+                                       ng-readonly="true">
+                                <label class="control-label width_s">ERP出库单号</label>
+                                <input type="text" class="form-control "  ng-readonly="true"
+                                       ng-model="data.currItem.invbill_sap_no">
+                                <label class="control-label width_s">单据日期</label>
+                                <input type="text" class="form-control" ng-disabled="data.currItem.invbillno"
+                                       ng-model="data.currItem.date_invbill" bs-date-picker/>
+                                <!--<label class="control-label width_s">业务员</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control" ng-readonly="data.currItem.invbillno"
+                                           ng-model="data.currItem.employee_name" >
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-disabled="data.currItem.invbillno"
+                                                ng-click="employeeSearch()">•••</button>
+                                    </span>
+                                </div>-->
+
+                                <label class="control-label width_s">单据状态</label>
+                                <select ng-model="data.currItem.stat"  ng-disabled="true"
+                                        class="input-sm   form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                        ng-options="s.id as s.name for s in billStat">
+                                </select>
+
+                            </div>
+                            <div class="row">
+
+                                <!--<label class="control-label width_s">发运方式</label>-->
+                                <!--<select ng-model="data.currItem.shipmode_id"  ng-disabled="data.currItem.invbillno"-->
+                                        <!--class="input-sm   form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"-->
+                                        <!--ng-options="s.id as s.name for s in ShipmodeiId">-->
+                                <!--</select>-->
+                                <label class="control-label width_s">客户</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control  " ng-readonly="data.currItem.invbillno"
+                                           ng-model="data.currItem.customer_code" >
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-disabled="data.currItem.invbillno"
+                                                ng-click="customerSearch()">•••</button>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control width_xm " ng-readonly="true"
+                                       ng-model="data.currItem.customer_name" >
+
+
+                                <label class="control-label width_s">折前总额</label>
+                                <input type="text" class="form-control " ng-readonly="true" money-format
+                                       ng-model="data.currItem.wtamount_billing" >
+                                <label class="control-label width_s">折后总额</label>
+                                <input type="text" class="form-control " ng-readonly="true" money-format
+                                       ng-model="data.currItem.wtamount_discount" >
+                                <!--<label class="control-label width_s">部门</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control  " ng-readonly="true"
+                                           ng-model="data.currItem.dept_code" >
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-disabled="true"
+                                                ng-click="balanceTypeSearch()">•••</button>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control width_xm " ng-readonly="true"
+                                       ng-model="data.currItem.dept_name" >-->
+
+                            </div>
+                            <!--<div class="row">-->
+                                <!--&lt;!&ndash;<label class="control-label width_s">销售订单号</label>-->
+                                <!--<div class="input-group width_m">-->
+                                    <!--<input type="text" class="form-control  " ng-readonly="data.currItem.invbillno"-->
+                                           <!--ng-model="data.currItem.sa_salebillno" >-->
+                                    <!--<span class="input-group-btn">-->
+                                        <!--<button type="button" class="btn btn-primary" ng-disabled="data.currItem.invbillno"-->
+                                                <!--ng-click="salebillnoSearch()">•••</button>-->
+                                    <!--</span>-->
+                                <!--</div>&ndash;&gt;-->
+                                <!--<label class="control-label width_s">收货人</label>-->
+                                <!--<input type="text" class="form-control "  ng-readonly="data.currItem.invbillno"-->
+                                       <!--ng-model="data.currItem.take_man">-->
+                                <!--<label class="control-label width_s">收货人电话</label>-->
+                                <!--<input type="text" class="form-control" ng-model="data.currItem.phone_code"-->
+                                  <!--ng-readonly="data.currItem.invbillno">-->
+                                <!--<label class="control-label width_s">收货地址</label>-->
+                                <!--<div class="input-group width_ml">-->
+                                    <!--<input type="text" class="form-control  " ng-readonly="data.currItem.invbillno"-->
+                                           <!--ng-model="data.currItem.address1" >-->
+                                    <!--<span class="input-group-btn">-->
+                                        <!--<button type="button" class="btn btn-primary" ng-disabled="data.currItem.invbillno"-->
+                                                <!--ng-click="customerOrgSearch()">•••</button>-->
+                                    <!--</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <div class="row">
+                                <label class="control-label width_s">总数量</label>
+                                <input type="text" class="form-control " ng-readonly="true"
+                                       ng-model="data.currItem.qty_sum" >
+                                <label class="control-label width_s">备注</label>
+                                <textarea rows="1" style=""  ng-readonly="data.currItem.invbillno"
+                                          class="form-control width_ml ng-pristine ng-untouched ng-valid"
+                                          ng-model="data.currItem.mo_remark">
+                                </textarea>
+                                <!--<label class="control-label width_s">出库仓</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control  " ng-readonly="data.currItem.invbillno"
+                                           ng-model="data.currItem.warehouse_code" >
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-disabled="data.currItem.invbillno"
+                                                ng-click="warehouseSearch()">•••</button>
+                                    </span>
+                                    <input type="text" class="form-control width_xm " ng-readonly="true"
+                                       ng-model="data.currItem.warehouse_name" >
+                                </div>-->
+                                <!--<label class="control-label width_s">发货城市</label>-->
+                                <!--<div class="input-group width_m">-->
+                                    <!--<input type="text" class="form-control  " ng-readonly="data.currItem.invbillno"-->
+                                           <!--ng-model="data.currItem.out_area_code" >-->
+                                    <!--<span class="input-group-btn">-->
+                                        <!--<button type="button" class="btn btn-primary" ng-disabled="data.currItem.invbillno"-->
+                                                <!--ng-click="customerSearch()">•••</button>-->
+                                    <!--</span>-->
+                                <!--</div>-->
+                                <!--<input type="text" class="form-control width_xm " ng-readonly="true"-->
+                                       <!--ng-model="data.currItem.out_area_name" >-->
+
+
+                            </div>
+                            <!--<div class="row">-->
+
+                                <!--&lt;!&ndash;<label class="control-label width_s">运输说明</label>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<textarea rows="1" style="width: 396px;"  ng-readonly="data.currItem.invbillno"&ndash;&gt;-->
+                                          <!--&lt;!&ndash;class="form-control ng-pristine ng-untouched ng-valid"&ndash;&gt;-->
+                                          <!--&lt;!&ndash;ng-model="data.currItem.note">&ndash;&gt;-->
+                                <!--&lt;!&ndash;</textarea>&ndash;&gt;-->
+                                <!---->
+                            <!--</div>-->
+                            <!--<div class="row">
+                                <label class="control-label width_s">备注</label>
+                                <textarea rows="1" style="width: 895px;"  ng-readonly="data.currItem.invbillno"
+                                          class="form-control ng-pristine ng-untouched ng-valid"
+                                          ng-model="data.currItem.mo_remark">
+                                </textarea>
+                            </div>-->
+
+                        </form>
+                        <div id="lineGridView" slick-grid sg-options="lineOptions"
+                             sg-columns="lineColumns" style="width: 100%; "
+                             class="slick-grid">
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-primary" ng-hide="data.currItem.syscreate_type==1" ng-click="saveData()">保存</button>-->
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,139 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fd_rebate_pro" ng-init="selectCurrenItem()">
+    <div class="wrapper wrapper-content">
+        <ul class="nav nav-tabs p-w-m" id="detailtab">
+            <li class="active">
+                <a data-toggle="tab" href="tabs.html#tab_common">单据详情</a>
+            </li>
+            <li>
+                <a data-toggle="tab" id="tab_head_wf" href="tabs.html#tab_wfins">审批流程</a>
+            </li>
+        </ul>
+        <div class="modal-footflex">
+            <div class="tabs-container">
+                <form method="get" class="form-horizontal" name="entityForm" novalidate>
+                    <div class="tab-content">
+                        <div id="tab_common" class="tab-pane active form-inline mline">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <label class="control-label width_s">返利单号</label>
+                                    <input type="text" class="form-control" ng-model="data.currItem.rebate_code"
+                                           ng-disabled="true">
+                                    <label class="control-label width_s">制单日期</label>
+                                    <input type="text" class="form-control" ng-model="data.currItem.creation_date" ng-disabled="true"/>
+                                    <label class="control-label">制单人</label>
+                                    <input type="text"
+                                           class="form-control width_m"
+                                           ng-model="data.currItem.created_by"
+                                           ng-disabled="true">
+                                    <label class="control-label not-null">单据状态</label>
+                                    <select ng-model="data.currItem.stat"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in billStats"
+                                            ng-disabled="true">
+                                    </select>
+
+                                </div>
+                                <div class="row">
+                                    <label class="control-label width_s">工程项目</label>
+                                    <div class="input-group width_m">
+                                        <input type="text" class="form-control non-empty" ng-model="data.currItem.project_code" ng-required="true" ng-disabled="data.currItem.stat!=1">
+                                        <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-disabled="data.currItem.stat!=1" ng-click="searchItem('project')">•••</button>
+                                    </span>
+                                    </div>
+                                    <input type="text" class="form-control width_xm"
+                                           ng-model="data.currItem.project_name" ng-disabled="true"/>
+                                    <!--<label class="control-label width_s">客户</label>-->
+                                    <!--<div class="input-group width_m">-->
+                                        <!--<input type="text" class="form-control" ng-model="data.currItem.customer_code" ng-readonly="true">-->
+                                        <!--<span class="input-group-btn">-->
+                                        <!--<button type="button" class="btn btn-primary" ng-disabled="true" ng-click="searchItem('customer')">•••</button>-->
+                                    <!--</span>-->
+                                    <!--</div>-->
+                                    <!--<input type="text" class="form-control width_xm"-->
+                                           <!--ng-model="data.currItem.customer_name" ng-disabled="true"/>-->
+                                    <label class="control-label width_s">运营中心</label>
+                                    <input type="text" class="form-control" ng-model="data.currItem.dept_name" ng-disabled="true">
+
+                                    <label class="control-label">返利方式</label>
+                                    <select ng-model="data.currItem.rebate_type" ng-change="setLines()"
+                                            class="input-sm chosen-select form-control non-empty ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in RebateTypes"
+                                            ng-required="true" ng-disabled="data.currItem.stat!=1">
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label width_s">申请人</label>
+                                    <input type="text" class="form-control" ng-model="data.currItem.applier">
+                                    <label class="control-label width_s">联系方式</label>
+                                    <input type="text" class="form-control" ng-model="data.currItem.phone">
+                                    <label class="control-label width_s">备注</label>
+                                    <textarea rows="1" ng-disabled="data.currItem.stat!=1" style="height: 30px;" class="form-control ng-pristine ng-untouched ng-valid width_ml" ng-model="data.currItem.note">
+                                    </textarea>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label width_s">订货总金额</label>
+                                    <input type="text" class="form-control" ng-model="data.currItem.order_amt" ng-disabled="true">
+                                    <label class="control-label width_s">应冲总金额</label>
+                                    <input type="text" class="form-control" ng-model="data.currItem.write_off_amt" ng-disabled="true">
+                                    <!--<label class="control-label width_s">返利总金额</label>-->
+                                    <!--<input type="text" class="form-control" ng-model="data.currItem.rebate_amt" ng-disabled="true">-->
+                                    <label class="control-label width_s">批准返利额</label>
+                                    <input type="text" class="form-control" ng-model="data.currItem.allow_rebate_amt" ng-disabled="true">
+
+                                </div>
+                                <!--<div id="lineViewGrid"-->
+                                     <!--slick-grid-->
+                                     <!--sg-options="lineOptions"-->
+                                     <!--sg-columns="lineColumns"-->
+                                     <!--style="width:100%;height:250px;">-->
+                                <!--</div>-->
+                                <div id="lineViewGrid" style="width:100%;height:250px"></div>
+                            </div>
+                        </div>
+                        <div id="tab_wfins" class="tab-pane">
+                            <div class="scroll550" id="wfinsform"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="saveData(false)"
+                        ng-disabled="entityForm.$invalid || data.currItem.stat>1
+                        || data.currItem.sa_out_bill_lineofsa_out_bill_heads.length==0"
+                        ng-show="data.currItem.stat==1">保存
+                </button>
+                <button type="button" class="btn btn-white" ng-click="closeWindow()">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!--附件模态框-->
+    <div class="modal inmodal fade" id="selectWfTempModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">请选择流程模版</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <ul class="list-group clear-list m-t">
+                            <li class="list-group-item fist-item" ng-repeat="wftmp in data.wftemps"
+                                ng-click="selectWfTemp(wftmp.wftempid)">
+                                <span class="label label-info">{{$index+1}}</span>{{wftmp.wftempname}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确定
+                    </button>
+                    <button type="button" class="btn btn-default" >关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

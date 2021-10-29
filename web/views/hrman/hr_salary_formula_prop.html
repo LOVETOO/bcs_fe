@@ -1,0 +1,109 @@
+<div hc-obj-prop>
+
+	<div id="base" class="active">
+		<div class="other-h" hc-box="基本信息">
+			<div class="row">
+				<div
+					hc-label="薪资组编码"
+					hc-input="data.currItem.salary_group_code"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="薪资组名称"
+					hc-input="data.currItem.salary_group_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="薪资项目名称"
+					hc-input="data.currItem.salary_item_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="计算类型"
+					hc-input="data.currItem.calc_type"
+					hc-dict-code="hr_salary_item_set.calc_type"
+				></div>
+			</div>
+		</div>
+
+		<div
+			class="other-h"
+			hc-box="公式"
+			ng-style="{
+				visibility: data.currItem.calc_type == 3 ? null : 'hidden'
+			}"
+		>
+			<div class="row">
+				<div
+					hc-input="data.currItem.salary_formula_desc"
+					hc-type="textarea"
+					hc-change="onFormulaChange()"
+					hc-col-count="8"
+					hr-salary-formula
+				></div>
+			</div>
+
+			<div class="row" ng-show="formulaError">
+				<div
+					hc-input="formulaError"
+					hc-type="textarea"
+					hc-readonly="true"
+					hc-col-count="8"
+				></div>
+			</div>
+
+			<div class="row">
+				<div hc-buttons="buttons"></div>
+			</div>
+		</div>
+
+		<div
+			id="grids"
+			hc-auto-height
+			ng-style="{
+				visibility: data.currItem.calc_type == 3 ? null : 'hidden'
+			}"
+		>
+			<div hc-box="薪资项目">
+				<div hc-grid="itemGridOptions"></div>
+			</div>
+
+			<div hc-box="函数" hc-auto-height>
+				<div hc-grid="functionGridOptions"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	#grids {
+		position: relative;
+	}
+
+	#grids [hc-box="薪资项目"] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 50%;
+	}
+
+	#grids [hc-box="函数"] {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 100%;
+		width: 50%;
+	}
+
+	#grids [hc-grid="itemGridOptions"] {
+		height: calc(100% - 20px);
+	}
+
+	#grids [hc-grid="functionGridOptions"] {
+		height: calc(100% - 20px);
+	}
+</style>

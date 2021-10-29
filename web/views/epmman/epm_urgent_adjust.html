@@ -1,0 +1,85 @@
+<div hc-diy-page>
+    <div hc-box>
+        <div class="row epm_urgent_adjust">
+            <div hc-input="data.currItem.sa_salebillno"
+                hc-label="请选择需要进行插单申请的要货单号"
+                hc-required="true"
+                hc-class-id="sa_out_bill_head"
+                hc-common-search="searchObjectPickupDate">
+            </div>
+            <div hc-button="updateAdjust()"
+                hc-if="selectedRowCount > 0">【发送插单请求】</div>
+        </div>
+    </div>
+    <div hc-box class="flex1 flex-column">
+        <div hc-grid="gridOptions" class="flex1"></div>
+    </div>
+    <div hc-box="该要货单中的下述产品目前不可进行提货时间变更：" class="flex1 flex-column" ng-show="data.currItem.epm_urgent_adjust_lines.length > 0">
+        <div hc-grid="gridOptions_list" class="flex1"></div>
+    </div>
+</div>
+<div hc-modal="urgentAdjust">
+    <div hc-box="申请信息">
+        <div class="row" >
+            <div hc-label="要货单号"
+                hc-input="before_line.sa_salebillno"
+                hc-readonly="true"></div>
+            <div hc-label="紧急要货单号"
+                hc-input="before_line.urgent_order_billno"
+                hc-readonly="true"></div>
+            <div hc-label="客户编码"
+                hc-input="before_line.customer_code"
+                hc-readonly="true"></div>
+            <div hc-label="客户名称"
+                hc-input="before_line.customer_name"
+                hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="产品编码"
+                hc-input="before_line.item_code"
+                hc-readonly="true"></div>
+            <div hc-label="产品名称"
+                hc-input="before_line.item_name"
+                hc-col-count="6"
+                hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="基地编码"
+                hc-input="before_line.delivery_base_code"
+                hc-readonly="true"></div>
+            <div hc-label="基地名称"
+                hc-input="before_line.delivery_base_name"
+                hc-readonly="true"></div>
+            <div hc-label="提货时间"
+                hc-input="before_line.pick_up_date"
+                hc-type="date"
+                hc-readonly="true"></div>
+            <div hc-label="有效期至"
+                hc-input="before_line.valid_date"
+                hc-type="date"
+                hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="当前保留数量"
+                hc-input="before_line.reserved_qty"
+                hc-type="number"
+                hc-readonly="true"></div>
+            <div hc-label="当前预占数量"
+                hc-input="before_line.pre_reserved_qty"
+                hc-type="number"
+                hc-readonly="true"></div>
+            <div hc-label="增加保留数量"
+                hc-input="before_line.adjust_qty"
+                hc-type="number"
+                hc-readonly="true"></div>
+        </div>
+    </div>
+    <div hc-box="调整信息" style="display: flex; flex: 1; flex-direction: column;">
+        <div hc-grid="gridOptionUrgentAdjust" style="flex: 1;"></div>
+    </div>
+</div>
+<style>
+    .epm_urgent_adjust [hc-input="data.currItem.sa_salebillno"] label {
+        width: 115px;
+    }
+</style>

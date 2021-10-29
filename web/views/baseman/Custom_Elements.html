@@ -1,0 +1,88 @@
+﻿<div class="wrapper wrapper-content animated fadeInRight" ng-controller="baseBoxRuleController">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title" style="padding-top:8px;">
+                    <h5 style="margin:0;"><strong>柜型最大值</strong></h5>
+
+                    <div ibox-tools class="pull-right"></div>
+                </div>
+                <div class="ibox-content">
+                    <!-- 搜索框 -->
+                    <div>
+                        <form name="seaport_search">
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td width="70%"><input ng-model="searchtext" type="text" name="keyword"
+                                                           placeholder="输入文本..." class="form-control"></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-info dropdown-toggle" ng-click="search()">查询 </button>
+                                            <!-- <button data-toggle="dropdown" class="btn btn-sm btn-info dropdown-toggle">
+                                                <span class="caret"></span>
+                                            </button> -->
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a onClick="init_table()"
+                                                       data-target="#currency_highlevelsearch"
+                                                       data-toggle="modal">高级查询</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <button class="btn btn-sm btn-info dropdown-toggle" ng-click="new()">新增柜型最大值</button>
+                    </div>
+
+                    <!-- 列表内容 -->
+                    <div class="bill-search-panel">
+                        <table foo-table
+                               class="footable table table-striped table-bordered table-hover toggle-arrow-tiny"
+                               data-filter="#filter" data-page-size="5" data-page-previous-text="prev"
+                               data-page-next-text="next">
+                            <thead>
+                            <tr class="currency_list">
+                                <th class="footable-visible footable-first-column">柜型</th>
+                                <th>最大体积</th>
+                                <th>最大毛重</th>
+                                <th>最大净重</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="currency_list" ng-repeat="base_box_rule in data.currItem.base_box_rules">
+                                <td>
+						            	<span ng-switch on="base_box_rule.box_type">
+                                            <span ng-switch-when="1">20GP</span>
+                                            <span ng-switch-when="2">40GP</span>
+                                            <span ng-switch-when="3">40HQ</span>
+                                            <span ng-switch-when="4">45HQ</span>
+                                            <span ng-switch-when="5">40RH</span>
+                                            <span ng-switch-when="6">拼箱</span>
+                                            <span ng-switch-when="7">空运</span>
+                                            <span ng-switch-when="8">一卡一车</span>
+                                            <span ng-switch-when="9">二卡一车</span>
+                                            <span ng-switch-when="10">三卡一车</span>
+                                        </span>
+                                </td>
+                                <td>{{ base_box_rule.max_rule}}</td>
+                                <td>{{ base_box_rule.max_gw}}</td>
+                                <td>{{ base_box_rule.max_nw}}</td>                              
+                                <td>
+                                    <button ui-sref="gallery.BaseBoxRuleEdit" class="btn btn-white btn-xs"
+                                            ng-click="edit($index,$event)"> 编辑
+                                    </button>
+                                    <button class="btn btn-white btn-xs" ng-click="so_delete($index)"> 删除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="ibox-content modal-open" page-pagination></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

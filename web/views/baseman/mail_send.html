@@ -1,0 +1,82 @@
+<div class="bill-form"  ng-controller="mail_send">
+    <!---->
+    <div class="wrapper wrapper-content ">
+        <div class="row">
+            <div class="col-lg-2">
+                <div  ng-include="'views/baseman/mail_left.html'"></div>
+            </div>
+			<div class="col-lg-10">
+            <div class="mail-box-header">
+                <div class="pull-right tooltip-demo">
+                    <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> 草稿</a>
+                    <a onclick="javascript:history.go(-1);" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> 取消</a>
+                </div>
+                <h3>
+                    发送邮件
+                </h3>
+            </div>
+			<div class="mail-box">
+				<div class="mail-body">
+					<form class="form-horizontal">
+						<div class="form-group"><label class="col-sm-1 control-label">收件人:</label>
+							<div class="col-sm-11"><button-edit be-delete="clearspec()" be-search="openAreaNameFrm()" be-edit="true" ng-model="data.currItem.snedto" /></div>
+						</div>
+						<div class="form-group"><label class="col-sm-1 control-label">抄送人:</label>
+							<div class="col-sm-11"><button-edit be-delete="clearspec()" be-search="search_spec()" be-edit="true" ng-model="data.currItem.snedto" /></div>
+						</div>
+						<div class="form-group"><label class="col-sm-1 control-label">主题:</label>
+							<div class="col-sm-11"><input type="text" class="form-control" ng-model="data.currItem.subject"></div>
+						</div>
+						<div class="form-group"><label class="col-sm-1 control-label">内容:</label>
+							<div class="col-sm-11"><textarea type="text" name="text" class="summernote" id="contents" title="Contents"></textarea></div>
+						</div>						
+					 </form>					 
+				</div>
+				<div class="mail-body text-right tooltip-demo">
+					<a  ng-click="send_email()" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send"><i class="fa fa-reply"></i> 发送</a>
+					<a class="btn btn-white btn-sm" onclick="javascript:history.go(-1);" data-toggle="tooltip" data-placement="top" title="" data-original-title="Discard email"><i class="fa fa-times"></i> 取消</a>
+					<a class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Move to draft folder"><i class="fa fa-pencil"></i>草稿 </a>
+				</div>
+			</div>
+            </div>
+        </div>
+    </div>
+    <!---->
+</div>
+<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+<link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+<script src="js/plugins/summernote/summernote.min.js"></script>
+<style>
+
+.Rr {
+    background: url(../web/images/open_mail.png)no-repeat;
+    background-position: center;
+}
+.unr {
+    background: url(../web/images/unopen_mail.jpg)no-repeat;
+    background-position: center;
+}
+table.i td.ci div.cir {
+    width: 18px;
+    height: 16px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.mail-box-header{
+ background: url(../web/images/header.jpg)no-repeat;
+}
+
+</style>
+
+<script>
+$(document).ready(function(){
+	$('.summernote').summernote({
+        height: 150
+      });
+	  
+	$('.note-editing-area').keydown(function(event){
+       event.stopPropagation();
+	   console.warn(event);
+     })
+});
+</script>

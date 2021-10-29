@@ -1,0 +1,65 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div  hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.apply_bill_no"
+                     hc-label="借出单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.estimated_loan_date"
+                     hc-label="预计借出日期"
+                     hc-change="dateLock()"
+                     hc-required="true"
+                     hc-type="date"></div>
+                <div hc-input="data.currItem.estimated_return_date"
+                     hc-label="预计归还日期"
+                     hc-required="true"
+                     hc-change="dateLock()"
+                     hc-type="date"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.apply_person_name"
+                     hc-label="申请人"
+                     hc-required="true"
+                     hc-class-id="scpuser"
+                     hc-common-search="scpuserSerachObj"></div>
+                <div hc-input="data.currItem.apply_dept_name"
+                     hc-label="申请部门"
+                     hc-required="true"
+                     hc-class-id="dept"
+                     hc-common-search="deptSerachObj"></div>
+                <div hc-input="data.currItem.loan_project_name"
+                     hc-label="使用项目"
+                     hc-col-count="4"
+                     hc-class-id="epm_project"
+                     hc-common-search="epmProjectSerachObj"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.loan_person_name"
+                     hc-label="使用人"
+                     hc-required="true"
+                     hc-class-id="scpuser"
+                     hc-common-search="scpuserSerachShiYong"></div>
+                <!--<div hc-input="data.currItem.manager"
+                     hc-label="使用业主"
+                     hc-readonly="true"></div>-->
+                <div hc-input="data.currItem.loan_description"
+                     hc-col-count="6"
+                     hc-required="true"
+                     hc-label="用途"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.remark"
+                     hc-col-count="8"
+                     hc-type="textarea"
+                     hc-label="备注"></div>
+            </div>
+        </div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="modal-header other-h">
+    <div class="modal-header-btns">
+		<button
+			class="btn"
+			style="cursor: help;"
+			ng-click="showHelp()"
+			hc-if="objConf.tooltip"
+			hc-tooltip="帮助"
+			hc-tooltip-placement="bottom"
+		>
+			<i class="iconfont hc-help"></i>
+		</button>
+
+        <button class="btn modmax" hc-tooltip="{{ fullScreen ? '退出全屏' : '全屏' }}" hc-tooltip-placement="bottom">
+            <i class="iconfont hc-quanping"></i>
+		</button>
+
+        <button class="btn" ng-click="$dismiss('头部关闭')" ng-show="closeable" hc-tooltip="关闭" hc-tooltip-placement="bottom">
+            <i class="iconfont hc-close"></i>
+        </button>
+	</div>
+
+    <h4 class="modal-title" id="commonModalTitle" ng-bind="title"></h4>
+</div>
+
+<!-- <iframe id="iframe_{{ $id }}:{{ state.name }}" ng-src="{{ src }}" hc-if="type === 'state' && !height" hc-auto-height></iframe>
+
+<iframe id="iframe_{{ $id }}:{{ state.name }}" ng-src="{{ src }}" hc-if="type === 'state' && height"></iframe> -->
+
+<hc-view hc-state="state" hc-params="params"></hc-view>
+
+<image ng-src="{{src}}" hc-if="type==='image'" hc-auto-height></image>
+
+<div hc-import-console="importSetting" hc-if="type==='import'"></div>
+
+<div class="other-h" style="height: 60px;position: fixed;z-index: -100;">
+	<!--占位符--占据模态框外边高度距离--->
+</div>

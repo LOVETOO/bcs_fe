@@ -1,0 +1,331 @@
+﻿<div local-storage ng-model="proitem" class="bill-form">
+        <div class="col-lg-12"style=" height: 500px;width:1100px">
+            <div class="ibox-title" >
+			    <a style="font-size: small;font-weight: bold;color:black"><i ng-click="show11()" class="fa fa-minus"></i>手工新加数据</a>
+                <div ng-show="show_11" class="ibox-content" id="sqlWhereBlock">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini">客户型号</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.cust_item_name"
+                                   name="like"
+                                   id="pro_item.cust_item_name"
+                                   type="text" class="form-control input-sm">
+                        </div>
+
+                        <div class="col-md-1">
+                            <label class="form-label-mini">数量</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.qty"
+							       ng-readonly="proitem.pro_type==4"
+                                   name="like"
+                                   id="pro_item.qty"
+                                   type="text" class="form-control input-sm">
+                        </div>
+						
+						<div class="col-md-1">
+                            <label class="form-label-mini">FOB销售价</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.price"
+                                   name="like"
+                                   id="pro_item.price"
+                                   type="text" class="form-control input-sm">
+                        </div>
+						
+						<div class="col-md-1">
+                            <label class="form-label-mini">品牌名</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.brand_name"
+                                   name="like"
+                                   id="pro_item.brand_name"
+                                   type="text" class="form-control input-sm">
+                        </div>
+                    </div>
+                </div>
+                <a style="font-size: small;font-weight: bold;color:black"><i ng-click="show_profit()" class="fa fa-minus"></i>配件查询条件</a>
+                <div ng-show="profit_stat" class="ibox-content" id="sqlWhereBlock">
+				
+				    <div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini">制冷剂</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.refrigerant"
+                                   name="like"
+                                   id="pro_item.refrigerant"
+                                   type="text" class="form-control input-sm">
+                        </div>
+
+                        <div class="col-md-1">
+                            <label class="form-label-mini">定速/变频</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.power_frequency"
+                                   name="like"
+                                   id="pro_item.power_frequency"
+                                   type="text" class="form-control input-sm">
+                        </div>
+						
+						<div class="col-md-1">
+                            <label class="form-label-mini">电源</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.power"
+                                   name="like"
+                                   id="pro_item.power"
+                                   type="text" class="form-control input-sm">
+                        </div>		
+
+                        <div class="col-md-1">
+                            <label class="form-label-mini">冷量等级</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input ng-model="proitem.cool_stand"
+                                   name="like"
+                                   id="pro_item.cool_stand"
+                                   type="text" class="form-control input-sm">
+                        </div>		
+                        <div class="col-md-1">
+								<label>
+								<input type="checkbox" ng-disabled="proitem.pro_type==2||proitem.pro_type==3||proitem.pro_type==4||proitem.pro_type==8"  ng-true-value="1" ng-checked="proitem.checkbox2" ng-model="proitem.checkbox2" class="ng-valid ng-dirty ng-valid-parse ng-touched">内机
+                                        </label>
+						  </div>						
+                      </div>
+					
+					
+					<div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini">EER</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.eer"
+                                   name="like"
+                                   id="pro_item.eer"
+                                   type="text" class="form-control input-sm">
+                        </div>
+
+                        <div class="col-md-1">
+                            <label class="form-label-mini">制热量</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.item_hot"
+                                   name="like"
+                                   id="pro_item.item_hot"
+                                   type="text" class="form-control input-sm">
+                        </div>
+						
+						<div class="col-md-1">
+                            <label class="form-label-mini">COP</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.cop"
+                                   name="like"
+                                   id="pro_item.cop"
+                                   type="text" class="form-control input-sm">
+                        </div>		
+
+                        <div class="col-md-1">
+                            <label class="form-label-mini">内外机噪音</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input ng-model="proitem.voice"
+                                   name="like"
+                                   id="pro_item.voice"
+                                   type="text" class="form-control input-sm">
+                        </div>		
+                         <div class="col-md-1">
+								<label>
+								<input type="checkbox" ng-disabled="proitem.pro_type==2||proitem.pro_type==3||proitem.pro_type==4||proitem.pro_type==8" ng-true-value="2" ng-checked="proitem.checkbox2" ng-model="proitem.checkbox2" class="ng-valid ng-dirty ng-valid-parse ng-touched">外机
+                                        </label>
+						  </div>						
+                    </div>
+					
+					<div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini">塑壳</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.molded_case"
+                                   name="like"
+                                   id="pro_item.molded_case"
+                                   type="text" class="form-control input-sm">
+                        </div>
+
+                        <div class="col-md-1">
+                            <label class="form-label-mini">认证</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.authen"
+                                   name="like"
+                                   id="pro_item.authen"
+                                   type="text" class="form-control input-sm">
+                        </div>
+						
+						<div class="col-md-1">
+                            <label class="form-label-mini">内机风量</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.in_air"
+                                   name="like"
+                                   id="pro_item.in_air"
+                                   type="text" class="form-control input-sm">
+                        </div>		
+
+                        <div class="col-md-1">
+                            <label class="form-label-mini">内机大小</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input ng-model="proitem.item_platform"
+                                   name="like"
+                                   id="pro_item.item_platform"
+                                   type="text" class="form-control input-sm">
+                        </div>	
+
+                         <div class="col-md-1">
+								<label>
+								<input type="checkbox" ng-disabled="proitem.pro_type==2||proitem.pro_type==3||proitem.pro_type==4||proitem.pro_type==8"  ng-true-value="3" ng-checked="proitem.checkbox2" ng-model="proitem.checkbox2" class="ng-valid ng-dirty ng-valid-parse ng-touched">整机
+                                        </label>
+						  </div>							
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini">整机编码</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.item_h_code"
+                                   name="like"
+                                   id="pro_item.item_h_code"
+                                   type="text" class="form-control input-sm">
+                        </div>
+
+                        <div class="col-md-1">
+                            <label class="form-label-mini">整机名称</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.item_h_name"
+                                   name="like"
+                                   id="pro_item.item_h_name"
+                                   type="text" class="form-control input-sm">
+                        </div>
+						<div class="col-md-1">
+                            <label class="form-label-mini">分体机编码</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.item_code"
+                                   name="like"
+                                   id="pro_item.item_code"
+                                   type="text" class="form-control input-sm">
+                        </div>
+
+                        <div class="col-md-1">
+                            <label class="form-label-mini">分体机描述</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input ng-model="proitem.item_name"
+                                   name="like"
+                                   id="pro_item.item_name"
+                                   type="text" class="form-control input-sm">
+                        </div>
+						<div class="col-md-1">
+								<label>
+								<input type="checkbox" ng-disabled="proitem.pro_type==2||proitem.pro_type==3||proitem.pro_type==4||proitem.pro_type==8"  ng-true-value="4" ng-checked="proitem.checkbox2" ng-model="proitem.checkbox2" class="ng-valid ng-dirty ng-valid-parse ng-touched">配件
+                                        </label>
+						  </div>	
+
+                </div>
+				
+				<div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini">冷凝器规格</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.condenser"
+                                   name="like"
+                                   id="pro_item.condenser"
+                                   type="text" class="form-control input-sm">
+                        </div>
+
+                        <div class="col-md-1">
+                            <label class="form-label-mini">制冷量</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.item_cool"
+                                   name="like"
+                                   id="pro_item.item_cool"
+                                   type="text" class="form-control input-sm">
+                        </div>
+						
+						<div class="col-md-1">
+                            <label class="form-label-mini">适用面板</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.stand_conf"
+                                   name="like"
+                                   id="pro_item.stand_conf"
+                                   type="text" class="form-control input-sm">
+                        </div>		
+
+                        <div class="col-md-1">
+						     <label class="form-label-mini font-noraml">类型</label>
+						</div>
+        	             <div ng-show="data.currItem.sale_order_type==4" class="col-md-2">
+						 <div class="col-md-8">
+        		            <select chosen-select ng-disabled="data.currItem.sale_order_type==4"  
+        		         ng-model="proitem.pro_type"
+						 ng-change="changetype()"
+        		         ng-options="type.dictvalue as type.dictname for type in typelist"
+        		         class="input-sm chosen-select form-control">
+        			       <option value=""></option>
+        		             </select>
+						</div>
+                            <div class="col-md-4">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="search()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    查询
+                                </button>
+                        </div>							 
+			             </div>
+						 
+                         <div ng-show="data.currItem.sale_order_type!=4" class="col-md-2">
+						 <div class="col-md-8">
+        		            <select chosen-select  
+        		         ng-model="proitem.pro_type"
+						 ng-change="changetype()"
+        		         ng-options="type.dictvalue as type.dictname for type in typelist"
+        		         class="input-sm chosen-select form-control">
+        			       <option value=""></option>
+        		             </select>
+						</div>
+                            <div class="col-md-4">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="search()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    查询
+                                </button>
+                        </div>							 
+			             </div>	
+                          						 
+                    </div>
+		    <div class="row">
+              <div class="col-md-12">
+                <div class="ibox-content">
+                    <a style="font-size: small;font-weight: bold;color:black"><i class="fa fa-floppy-o"></i>查询结果</a>
+                    <div class="ibox-content">
+                    <div ag-gridview sg-options="options"
+                         sg-columns="columns" style="width:100%;height:300px;"
+                         class="slick-grid"></div>
+                    </div>
+
+                    <div class="ibox-content modal-open" style="float:left" page-pagination></div><div style="float:right" >
+                        <a class="btn btn-sm btn-primary" ng-click="ok()"> 确定</a>
+                        <a class="btn btn-sm btn-info" ng-click="cancel()">取消</a></div>
+                    
+                  </div>
+			   </div>
+                </div>
+            </div>
+        </div>
+</div>

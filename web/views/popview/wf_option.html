@@ -1,0 +1,297 @@
+<link rel="stylesheet" href="js/plugins/z-tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="js/plugins/z-tree/jquery.ztree.core.js"></script>
+<!-- 审批流程意见 -->
+<div class="modal-header">
+	<h4 class="modal-title">{{title || "审批意见"}}</h4>
+</div>
+<div class="modal-body">
+	<div class="opnion row">
+		<textarea class="form-control noresize opinion-text" ng-model="item.opinion" rows="3"></textarea>
+	</div>
+	<div class="opnion row" ng-if="proc.proctype==4">
+		<!--
+     	    <div class="col-md-2">
+     	        <label class="form-label-mini not-null">归档路径</label>
+     	    </div>
+     	    <div class="col-md-10">
+     	        <button-edit be-delete="clearUser()" be-search="selectUser()" be-edit="false" ng-model="data.currItem.contact" />
+     	    </div>
+     	    -->
+		<fieldset class="archive">
+			<legend>选择归档路径</legend>
+			<div class="archiveContent">
+				<ul id="treeFdr" class="ztree"></ul>
+			</div>
+			<span class="archiveTitle">归档路径：{{archivetoname}}</span>
+		</fieldset>
+	</div>
+	<div class="opnion row" ng-if="proc.proctype==5">
+		<div class="" style="width: 100%;margin-right: 0px !important;margin-left: 0px !important;">
+			<div class="row row_div">
+				<div class="col-md-12">
+					<div class="row row_div">
+						<div class="col-md-6">
+							<div class="lm_panel1">
+								<div id="AddrTab" style='display:block'>
+									<div id="lm150338581407203951792705359891tree">
+										<div class="groupopen" style="display:" key="t2" sub="0">
+											<div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">
+												<a class="lm_rt" fun="g2"></a>公司同事</div>
+											<ul id="treeDemo4" class="ztree ztrees"></ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-2">
+								<div style="padding-top:80px">
+									<button style="width:100%" class="btn btn-white btn-xs" type="button" ng-click="add_sj()">
+											<i class="fa fa-arrow-right fa-1x"></i>
+										 </button>
+									<div style='height:5px'></div>
+									<button style="width:100%;padding-top:5px" class="btn btn-white btn-xs" type="button" ng-click="del_sj()">
+											<i class="fa fa-arrow-left fa-1x"></i>
+										 </button>
+								</div>
+								<div style="padding-top:180px">
+									<button style="width:100%" class="btn btn-white btn-xs" type="button" ng-click="add_cs()">
+											<i class="fa fa-arrow-right fa-1x"></i>
+										 </button>
+									<div style='height:5px'></div>
+									<button style="width:100%;padding-top:5px" class="btn btn-white btn-xs" type="button" ng-click="del_cs()">
+											<i class="fa fa-arrow-left fa-1x"></i>
+										 </button>
+								</div>
+							</div>
+							<div class="col-md-10">
+								<div class="lm_panel1">
+									<div id="AddrTab" style='display:block'>
+										<div class="groupopen" key="t3" sub="0">
+											<div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">用户</div>
+										</div>
+										<div style="height:180px;overflow: auto;" id="lm150338581407203951792705359891tree">
+											<div class="groupsub" key="t3" sub="1">
+												<div ng-dblclick="del_user($event,$index)" ng-click='click_sj($event,$index)' ng-repeat='item in data.currItem.sj_people' class="groupclose" style="display:" key="8" sub="0">
+													<a unselectable="on" class="lm_addr">{{item.username}}</a>
+												</div>
+											</div>
+										</div>
+										<div style="height:180px;overflow: auto;">
+											<div class="groupopen" style="display:" key="t2" sub="0">
+												<div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">
+													<a class="lm_rt" fun="g2"></a>机构</div>
+												<div ng-dblclick="del_org($event,$index)" ng-click='click_cs($event,$index)' ng-repeat='item in data.currItem.cs_people' class="groupclose" style="display:" key="8" sub="0">
+													<a unselectable="on" class="lm_addr">{{item.orgname}}</a>
+												</div>
+												<!--显示已选择的机构-->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style='max-height: 100px;overflow-y: auto;padding-top:10px;' class="opnion row" ng-show="procusers.length != 0">
+		<div class="ibox-content icons-bprocusersox">
+			<table class="table table-border table-striped">
+				<thead style="border: 1px solid #e7e7e7;background-color: #F5F5F6;line-height: 25px;height:25px;">
+					<tr>
+						<td>过程名称</td>
+						<td>用户</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="iitem in procusers" ng-click="addLine($index,$event)">
+						<td ng-bind="iitem.title"></td>
+						<td ng-bind="iitem.userid"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-white" ng-click="cancel()">取消</button>
+	<button type="button" class="btn btn-primary" ng-click="ok()">确定</button>
+</div>
+
+<style type="text/css">
+	div.modal-dialog {
+		width: 40%;
+	}
+	
+	div.opnion.row {
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	
+	div.modal-body {
+		padding-top: 10px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	
+	div.modal-header {
+		padding: 15px 10px;
+	}
+	
+	textarea.opinion-text {
+		font-size: 14px;
+	}
+	
+	fieldset.archive {
+		margin: 10px 0;
+		border-color: #e5e5e5;
+		border-radius: 2px;
+	}
+	
+	.archiveContent {
+		min-height: 155px;
+		max-height: 355px;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+	
+	.archiveTitle {
+		margin-top: 10px;
+		color: #138DFA;
+	}
+	
+	.modal-body {
+		padding: 15px;
+	}
+	
+	fieldset {
+		padding: .35em .425em .25em;
+		margin: 1px 0px 5px;
+		position: relative;
+		border: 1px solid silver;
+	}
+	
+	.lm_panel1 {
+		border-style: groove;
+		border: 1px solid rgba(108, 124, 134, 0.39);
+		background: #fff;
+	}
+	
+	.groupclose {
+		/**border-bottom: 1px solid #ccc;*/
+	}
+	
+	.modal-dialog {
+		width: 650px;
+	}
+	
+	.row_div {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	
+	.note-editor .col-xs-1,
+	.col-sm-1,
+	.col-md-1,
+	.col-lg-1,
+	.col-xs-2,
+	.col-sm-2,
+	.col-md-2,
+	.col-lg-2,
+	.col-xs-3,
+	.col-sm-3,
+	.col-md-3,
+	.col-lg-3,
+	.col-xs-4,
+	.col-sm-4,
+	.col-md-4,
+	.col-lg-4,
+	.col-xs-5,
+	.col-sm-5,
+	.col-md-5,
+	.col-lg-5,
+	.col-xs-6,
+	.col-sm-6,
+	.col-md-6,
+	.col-lg-6,
+	.col-xs-7,
+	.col-sm-7,
+	.col-md-7,
+	.col-lg-7,
+	.col-xs-8,
+	.col-sm-8,
+	.col-md-8,
+	.col-lg-8,
+	.col-xs-9,
+	.col-sm-9,
+	.col-md-9,
+	.col-lg-9,
+	.col-xs-10,
+	.col-sm-10,
+	.col-md-10,
+	.col-lg-10,
+	.col-xs-11,
+	.col-sm-11,
+	.col-md-11,
+	.col-lg-11,
+	.col-xs-12,
+	.col-sm-12,
+	.col-md-12,
+	.col-lg-12 {
+		position: relative;
+		min-height: 1px;
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+	
+	.modal {
+		z-index: 2001 !important;
+	}
+	
+	.modal-backdrop {
+		z-index: 2001 !important;
+	}
+	
+	.settingtable {
+		background-color: #eff5fb;
+	}
+	
+	.ztree li {
+		padding: 2px;
+		margin: 0;
+		list-style: none;
+		line-height: 14px;
+		text-align: left;
+		white-space: nowrap;
+		outline: 0;
+	}
+	
+	.ztree li {
+		line-height: 20px;
+	}
+	
+	.ztree li a {
+		color: #5d5d5d;
+	}
+	
+	.ztree li a.curSelectedNode {
+		height: 20px;
+		border-radius: 2px;
+	}
+	
+	ul.ztrees {
+		border: 1px solid #ffffff;
+		overflow-y: hidden;
+		overflow-x: hidden;
+		height: 360px;
+		overflow: auto;
+	}
+	
+	.high {
+		background: #e3e1e4;
+	}
+</style>

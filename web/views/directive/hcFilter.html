@@ -1,0 +1,3 @@
+<div ng-repeat="(id,filter) in setting.filters">
+	<a ng-class="{active:option.active}" ng-bind="option.name" ng-click="filterClick({id:$parent.id,filter:$parent.filter,option:option})" ng-repeat="option in filter.options"></a>
+</div>

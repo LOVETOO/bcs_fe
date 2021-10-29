@@ -1,0 +1,118 @@
+<div class="bill-form" ng-controller="customer_user_relation">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                业务员客户关系维护
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="btn-group">
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="content" class="first tab-content">
+                    <div id="tab1" class="tab-pane active">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="ibox-content">
+                                        <div ag-gridview sg-options="options_7"
+                                             sg-columns="columns_7" style="width:100%;height:360px;"
+                                             class="slick-grid"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="ibox-content">
+                                        <div ag-gridview sg-options="options_3"
+                                             sg-columns="columns_3" style="width:100%;height:360px;"
+                                             class="slick-grid"></div>
+                                    </div>
+                                    <button class="btn btn-toolbar" type="button"
+                                            ng-click="addpo()"><i class="fa fa-plus-square-o"></i>增加明细
+                                    </button>
+                                    <button class="btn btn-toolbar" type="button"
+                                            ng-click="saveline()"><i
+                                            class="fa fa-minus-square-o"></i>保存明细
+                                    </button>
+                                    <button class="btn btn-toolbar" type="button"
+                                            ng-click="delpo()"><i
+                                            class="fa fa-minus-square-o"></i>删除明细
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="form-label-mini ">输入客户SAP编码/名称</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           ng-model="data.currItem.cust_name"
+                                           class="input-sm form-control">
+                                </div>
+
+                                <div class="col-md-1">
+                                    <button class="btn btn-sm btn-info" type="button" ng-click="selectcust()"
+                                            style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;
+                                        border-right-width: 0px;">
+                                        查询客户
+                                    </button>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-sm btn-info" type="button" ng-click="custtouser()"
+                                            style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;
+                                        border-right-width: 0px;">
+                                        把客户分配给业务员
+                                    </button>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-sm btn-info" type="button" ng-click="usertocust()"
+                                            style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;
+                                        border-right-width: 0px;">
+                                        复制业务员到客户
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="form-label-mini ">输入业务员</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           ng-model="data.currItem.applicant"
+                                           class="input-sm form-control">
+                                </div>
+
+                                <div class="col-md-1">
+                                    <button class="btn btn-sm btn-info" type="button" ng-click="selectuser()"
+                                            style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;
+                                        border-right-width: 0px;">
+                                        查询业务员负责的客户
+                                    </button>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-sm btn-info" type="button" ng-click="refresh()"
+                                            style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;
+                                        border-right-width: 0px;">
+                                        刷新
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

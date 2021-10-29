@@ -1,0 +1,64 @@
+<!-- 
+ 提货时间要货报表
+ zengjinhua
+ 2019/12/30
+ -->
+ <div hc-obj-list>
+    <!-- 查询条件面板-->
+    <hc-obj-list-search-panel>
+        <div class="row">
+            <div hc-label="要货单号" hc-input="searchObj.sa_salebillno"></div>
+
+            <div hc-label="紧急要货单号" hc-input="searchObj.urgent_order_billno"></div>
+
+            <div hc-label="客户编码" hc-input="searchObj.customer_code" hc-class-id="customer_org" hc-common-search="commonSearch.customer_org" hc-can-delete="true" hc-can-input="true"></div>
+
+            <div hc-label="客户简称" hc-input="searchObj.short_name"></div>
+        </div>
+
+        <div class="row">
+            <div hc-label="产品编码" hc-input="searchObj.item_code" hc-class-id="item_org" hc-common-search="commonSearch.item_code" hc-can-delete="true" hc-can-input="true"></div>
+
+            <div hc-label="产品名称" hc-input="searchObj.item_name" hc-col-count="4"></div>
+
+            <div hc-label="发货基地" hc-input="searchObj.delivery_base_name" hc-class-id="epm_trading_company" hc-common-search="commonSearch.trading_company_name" hc-can-delete="true" hc-can-input="true"></div>
+        </div>
+
+        <div class="row pickup_date_change_view_date">
+            <div hc-label="原提货日期从" hc-input="searchObj.old_pick_up_date_start" hc-can-delete="true" hc-type="date"></div>
+				 
+            <div hc-label="至" hc-input="searchObj.old_pick_up_date_end" hc-can-delete="true" hc-type="date"></div>
+            
+            <div hc-label="新提货日期从" hc-input="searchObj.new_pick_up_date_start" hc-can-delete="true" hc-type="date"></div>
+				 
+            <div hc-label="至" hc-input="searchObj.new_pick_up_date_end" hc-can-delete="true" hc-type="date"></div>
+            
+            <div hc-label="有效期至从" hc-input="searchObj.valid_date_start" hc-can-delete="true" hc-type="date"></div>
+				 
+			<div hc-label="至" hc-input="searchObj.valid_date_end" hc-can-delete="true" hc-type="date"></div>
+                 
+            <div hc-label="操作人" hc-input="searchObj.creator_name"></div>
+        </div>
+    </hc-obj-list-search-panel>
+</div>
+<style>
+	.pickup_date_change_view_date [hc-input="searchObj.old_pick_up_date_start"]{
+        width: calc(13% + 15px);
+		margin-right: 0px;
+    }
+    .pickup_date_change_view_date [hc-input="searchObj.new_pick_up_date_start"]{
+        width: calc(13% + 15px);
+		margin-right: 0px;
+    }
+    .pickup_date_change_view_date [hc-input="searchObj.valid_date_start"]{
+        width: calc(13% + 15px);
+		margin-right: 0px;
+    }
+	.pickup_date_change_view_date [hc-label="至"] {
+        width: calc(12% - 35px);
+    }
+	.pickup_date_change_view_date [hc-label="至"] label {
+        width: 13px;
+		min-width: 0px;
+    }
+</style>

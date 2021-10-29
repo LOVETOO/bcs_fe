@@ -1,0 +1,117 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="finfundsheaderController">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title" style="padding-top:8px;">
+                    <h5 style="margin:0;"><strong>财务管理 - 到款查询</strong></h5>
+
+                    <div ibox-tools class="pull-right"></div>
+                    <div class="pull-right">
+
+                        <!--   <a ui-sref="gallery.fin_funds_header_edit" type="button" title="新增"
+                              class="btn btn-sm btn-white"> <i class="fa fa-file-o"></i> </a>
+                           <button ng-click="refresh()" type="button" title="刷新" class="btn btn-sm btn-white"><i
+                                   class="fa fa-refresh"></i></button>
+                           &lt;!&ndash; <button type="button" title="取消修改" class="btn btn-sm btn-white"> <i class="fa fa-undo"></i> </button> &ndash;&gt;
+                           <button type="button" title="删除" class="btn btn-sm btn-white"><i class="fa fa-times"></i>
+                           </button>
+                           <button type="button" title="作废" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i>
+                           </button>
+                           <button type="button" title="审核" class="btn btn-sm btn-white"><i
+                                   class="fa fa-check-square-o"></i></button>
+                           <button type="button" title="取消审核" class="btn btn-sm btn-white"><i
+                                   class="fa fa-minus-square"></i></button>
+                           <button type="button" title="导出Excel" class="btn btn-sm btn-white"><i
+                                   class="fa fa-file-excel-o"></i></button>-->
+                    </div>
+                </div>
+                <div class="ibox-content" style="padding:10px;min-height:420px;">
+                    <!-- 新增内容 class="bill-search-panel" -->
+
+                    <!-- 搜索框 -->
+                    <div>
+                        <form name="customer_search">
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td width="70%"><input ng-model="searchtext" type="text" name="keyword"
+                                                           placeholder="输入文本..." class="form-control"></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-info dropdown-toggle" ng-click="searchdk()">查询
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <button class="btn btn-sm btn-info dropdown-toggle" ng-click="new()">新增到款录入</button>
+                    </div>
+
+                    <!-- 列表内容 -->
+                    <div foo-table class="table-responsive bill-search-panel">
+                        <table class="footable table table-striped table-bordered table-hover toggle-arrow-tiny"
+                               data-filter="#filter" data-page-size="5" data-page-previous-text="prev"
+                               data-page-next-text="next">
+                            <thead>
+                            <tr class="currency_list">
+                                <th class="footable-visible footable-first-column">单据号</th>
+                                <th>日期</th>
+                                <th>客户名称</th>
+                                <th>业务部门</th>
+                                <th>信用证号</th>
+                                <th>国家</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr class="currency_list" ng-repeat="fin_funds_header in data.currItem.fin_funds_headers">
+                                <td>{{ fin_funds_header.funds_no }}</td>
+                                <td>{{ fin_funds_header.create_time }}</td>
+                                <td>{{ fin_funds_header.cust_name}}</td>
+                                <td>{{ fin_funds_header.org_name }}</td>
+                                <td>{{ fin_funds_header.lc_bill_no }}</td>
+                                <td>{{ fin_funds_header.area_name }}
+                                </td>
+                                <td>
+                                  <span ng-switch on="fin_funds_header.stat">
+                                    <span ng-switch-when="0">制单</span>
+                                    <span ng-switch-when="1">制单</span>
+                                    <span ng-switch-when="2">已提交</span>
+                                    <span ng-switch-when="3">已启动</span>
+                                    <span ng-switch-when="5">已审核</span>
+                                    <span ng-switch-when="99">已作废</span>
+                                 </span>
+
+                                    <!--
+                                      <select style="height: 23px;" class="form-control chosen-select input-mini input-s-sm-im"
+                                                           ng-model="fin_lc_bill.stat"
+                                                             ng-options="bill_stat.id as bill_stat.name for bill_stat in bill_stats"
+                                                             chosen chosen-width="60%" data-placeholder='未选择'   >
+                                                          <option value="1" selected></option>
+                                                   </select>
+                                                   -->
+
+                                </td>
+
+
+                                <td>
+                                    <button class="btn btn-white btn-xs" ng-click="edit($index,$event)"> 编辑</button>
+                                    <button class="btn btn-white btn-xs" ng-hide="fin_funds_header.stat!=1"
+                                            ng-click="so_delete($index)"> 删除
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                        <div class="ibox-content modal-open" page-pagination></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

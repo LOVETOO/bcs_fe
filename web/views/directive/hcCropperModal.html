@@ -1,0 +1,106 @@
+<div hc-init="doInit()" class="c-content">
+    <div class="row" style="height: 500px;">
+        <img id="hcCropperModal"
+             ng-show="data.src==''"
+             ng-src={{data.src}}
+             style="max-width: 100%;max-height: 500px;" hc-cropper="data.option"><!---->
+    </div>
+    <div class="row">
+        <!--设置拖拽模式-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-click="setDragMode('move')" data-toggle="tooltip"
+                    title="移动模式"><span
+                    class="fa fa fa-arrows"></span></button>
+            <button type="button" class="btn btn-default" ng-click="setDragMode('crop')"
+                    title="裁剪模式"><span class="fa fa-crop"></span></button>
+        </div>
+
+        <!--缩放-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-click="zoom(0.1)" title="放大">
+                <span class="fa fa-search-plus"></span>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="zoom(-0.1)" title="缩小">
+                <span class="fa fa-search-minus"></span>
+            </button>
+        </div>
+
+        <!--移动画布-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-click="move(-10, 0)" title="向左旋转">
+                <span class="fa fa-arrow-left"></span>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="move(10, 0)" title="向右旋转">
+                <span class="fa fa-arrow-right"></span>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="move(0, -10)" title="向上旋转">
+                <span class="fa fa-arrow-up"></span>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="move(0, 10)" title="向下旋转">
+                <span class="fa fa-arrow-down"></span>
+            </button>
+        </div>
+
+        <!--旋转-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-click="rotate(-45)" title="向左旋转">
+                <span class="fa fa-rotate-left"></span>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="rotate(45)" title="向右旋转">
+                <span class="fa fa-rotate-right"></span>
+            </button>
+        </div>
+
+        <!--翻转-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-click="scale(-1,1)" title="水平翻转">
+                <span class="fa fa-arrows-h"></span>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="scale(1,-1)" title="垂直翻转">
+                <span class="fa fa-arrows-v"></span>
+            </button>
+        </div>
+
+        <!--裁剪 清除-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-click="crop()" title="裁剪">
+                <span class="fa fa-check"></span>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="clear()" title="清除">
+                <span class="fa fa-remove"></span>
+            </button>
+        </div>
+
+        <!--禁用 启用-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-click="disable()" title="禁用">
+                <span class="fa fa-lock"></span>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="enable()" title="启用">
+                <span class="fa fa-unlock"></span>
+            </button>
+        </div>
+
+        <!--重启 上传图片文件 破坏-->
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-click="reset()" title="重启">
+                <span class="fa fa-refresh"></span>
+            </button>
+            <label style="position: relative;top: 10px;left: 5px;" class="btn btn-default btn-upload" for="inputImage" title="上传图片文件">
+                <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                <span class="fa fa-upload"></span>
+            </label>
+            <!--破坏后无法恢复-->
+            <!--<button type="button" class="btn btn-default" ng-click="destroy()"><span class="fa fa-power-off"></span>
+            </button>-->
+        </div>
+
+
+    </div>
+</div>
+<link href="js/plugins/cropperjs/cropper.css" rel="stylesheet">
+<style>
+    .c-content {
+        padding: 0px 10px;
+    }
+</style>

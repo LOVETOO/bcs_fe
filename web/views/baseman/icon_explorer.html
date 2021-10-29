@@ -1,0 +1,169 @@
+<div class="icon-explorer flex-row flex1">
+	<div class="flex1 icon-explorer__left">
+        <div
+            ng-class="{ 'flex1 flex-column': iconBoxes.length === 1 }"
+            ng-repeat="iconBox in iconBoxes"
+			hc-box="{{ ::iconBox.name }}"
+        >
+            <div
+                class="icon-box"
+                ng-class="{ 'flex1': iconBoxes.length === 1 }"
+                ng-style="{ 'overflow-y': iconBoxes.length === 1 ? 'auto' : null }"
+            >
+                <div
+                    class="icon-item"
+                    ng-repeat="icon in iconBox.icons"
+                    ng-class="{ active: icon === activeIcon }"
+                    ng-click="$parent.$parent.activeIcon = icon"
+                    ng-dblclick="$close(icon)"
+                >
+                    <div class="icon-class">
+                        <i class="{{ ::icon.class }}"></i>
+                    </div>
+                    <!-- <div class="icon-name" ng-bind="::icon.name"></div> -->
+                </div>
+            </div>
+		</div>
+	</div>
+	<div class="color-select">
+		<i class="{{ activeIcon.class }} {{ activeColorClass }}"></i>
+		<div class="color-check">
+			<ul>
+				<li
+					ng-repeat="colorClass in [
+						'icon-orange',
+						'icon-yellow',
+						'icon-green',
+						'icon-blue',
+						'icon-blue2',
+						'icon-blue3'
+					]"
+					class="{{ colorClass }}"
+					ng-class="{ active: colorClass === activeColorClass }"
+					ng-click="$parent.activeColorClass = colorClass"
+				></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<style>
+.icon-explorer {
+    height: 100%;
+    overflow-y: auto;
+}
+.icon-explorer__left {
+    padding: 10px 15px;
+    overflow-y: auto;
+}
+.icon-explorer .hc-box{
+    margin: 0;
+    border: 1px solid #ececec;
+    padding: 0px;
+}
+.icon-explorer .hc-box hc-box-title{
+    background: transparent;
+}
+.color-select{
+    margin: 10px;
+}
+.color-select>i{
+    display: block;
+    border: 1px solid #e4eaf1;
+    width: 100px;
+    height: 100px;
+    font-size: 64px;
+    text-align: center;
+}
+.color-select .color-check{margin-top: 10px;
+    width: 100px;}
+.color-select .color-check>ul{    display: flex;
+    flex-wrap: wrap;}
+.color-select .color-check>ul>li{
+    width: 100px;
+    height: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.color-select .color-check>ul>li.active{
+    box-shadow: 4px 4px 6px rgba(18, 65, 105, 0.3);
+    border: 2px solid #fff;
+}
+.color-select .color-check>ul>li:hover{
+    box-shadow: 4px 4px 6px rgba(18, 65, 105, 0.15);
+}
+.color-select .color-check>ul>li.icon-blue{
+    background-color: #0095ff;}
+.color-select .color-check>ul>li.icon-green{
+    background-color: #9ed63d;}
+.color-select .color-check>ul>li.icon-yellow{
+    background-color: #ffde17;}
+.color-select .color-check>ul>li.icon-blue2{
+    background-color: #6182ec;}
+.color-select .color-check>ul>li.icon-blue3{
+    background-color: #4ac1ff;}
+.color-select .color-check>ul>li.icon-orange{
+    background-color: #f98438;}
+
+.color-select i.bg-orange {
+    color: #f98438;
+}
+.color-select i.bg-yellow {
+    color: #ffde17;
+}
+.color-select i.bg-green {
+    color: #9ed63d;
+}
+.color-select i.bg-blue {
+    color: #0095ff;
+}
+.color-select i.bg-blue2 {
+    color: #6182ec;
+}
+.color-select i.bg-blue3 {
+    color: #4ac1ff;
+}
+
+.icon-explorer .icon-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    /* max-height: 380px; */
+    /* overflow-y: auto; */
+}
+
+.icon-explorer .icon-item {
+    height: 72px;
+    width: 75px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-right: 1px solid #e4eaf1;
+    border-bottom: 1px solid #e4eaf1;
+}
+
+.icon-explorer .icon-item.active {
+    color: white;
+    background-color: #52abff;
+}
+
+.icon-explorer .icon-class {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon-explorer .icon-class .iconfont{
+    font-size: 32px;
+}
+.icon-explorer .icon-name {
+    height: 20px;
+    width: 100%;
+    text-align: center;
+}
+</style>
+
+

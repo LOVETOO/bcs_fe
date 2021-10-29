@@ -1,0 +1,63 @@
+<div hc-diy-page ng-init = "init();">
+    <div class="TreeGridBox" hc-auto-height>
+        <div class="ibox-title">
+            <h5>产品分类</h5>
+            <ul id="ztree" class="ztree"></ul>
+        </div>
+        <div class="grid_modal">
+            <div hc-grid="gridOptions" hc-auto-height="grid"></div>
+        </div>
+    </div>
+    <!-- 模态框 -->
+    <div class="modal inmodal fade" id="newModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" style="width:600px">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span></button>
+                    <p class="modal-title" style="font: size 13px;">产品分类详情</p>
+                </div>
+                <div class="modal-body" >
+                    <div class="tabs-container">
+                        <div hc-tab="tabs" style="width:598px"></div>
+                        <div hc-tab-page class="tab-content">
+                            <!--基本信息-->
+                            <div id="base" hc-box="" class="active">
+                                <div class="row">
+                                    <div hc-input="data.currItem.item_class_code" hc-label="分类编码" hc-required="true"></div>
+                                    <div hc-input="data.currItem.item_usable" hc-type="checkbox" hc-label="有效"></div>
+                                </div>
+                                <div class="row">
+                                        <div hc-input="data.currItem.item_class_name" hc-label="分类名称" hc-required="true"></div>
+                                </div>
+                                <div class="row">
+                                    <div hc-input="data.currItem.item_class_level" hc-label="分类级别" hc-required="true"
+                                        hc-dict-code="item_class_level"></div>
+                                </div>
+                            </div>
+                            <!--其他-->
+                            <div id="other" hc-box="">
+                                <div class="row">
+                                    <div hc-input="data.currItem.created_by" hc-readonly="true" hc-label="创建人"></div>
+                                </div>
+                                <div class="row">
+                                    <div hc-input="data.currItem.creation_date" hc-readonly="true" hc-label="创建时间"></div>
+                                </div>
+                                <div class="row">
+                                    <div hc-input="data.currItem.last_updated_by" hc-readonly="true" hc-label="最后修改人"></div>
+                                </div>
+                                <div class="row">
+                                    <div hc-input="data.currItem.last_update_date" hc-readonly="true" hc-label="最后修改时间"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

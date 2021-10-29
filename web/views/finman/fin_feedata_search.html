@@ -1,0 +1,54 @@
+<div hc-diy-page>
+    <div hc-box="" class="other-h">
+        <div class="row">
+            <div hc-input="data.currItem.fee_year"
+                 hc-label="预算年度"
+                 hc-type="year">
+            </div>
+            <div hc-label="部门"
+                 hc-input="data.currItem.org_name"
+                 hc-class-id="dept"
+                 hc-common-search="deptObj">
+            </div>
+            <div hc-label="费用类别/项目"
+                 hc-input="data.currItem.object_name"
+                 hc-col-count="3"
+                 hc-common-search="feeObj">
+            </div>
+
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.crm_entid"
+                 hc-label="品类"
+                 hc-dict-code="crm_entid">
+            </div>
+            <div hc-label="预算类别"
+                 hc-input="data.currItem.bud_type_name"
+                 hc-class-id="fin_bud_type_header"
+                 hc-common-search="budTypeObj">
+            </div>
+            <div hc-label="会计科目"
+                 hc-input="data.currItem.subject_name"
+                 hc-col-count="3"
+                 hc-class-id="gl_account_subject"
+                 hc-common-search="subjectObj">
+            </div>
+
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs other-h" id="detailtab">
+        <li class="active">
+            <a data-toggle="tab" id="tab11" href="tabs.html#tab1">费用明细</a>
+        </li>
+    </ul>
+
+    <div class="tabs-container">
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active">
+                <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+            </div>
+        </div>
+    </div>
+
+</div>

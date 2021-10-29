@@ -1,0 +1,83 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.completed_code"
+                     hc-label="结案单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="申请人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.createtime"
+                     hc-label="申请时间"
+                     hc-readonly="true"
+                     hc-type="time"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-readonly="true"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.stage_name"
+                     hc-label="项目当前进度"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.contract_code"
+                     hc-label="合同编码"
+                     hc-required="true"
+                     hc-change="changeNull()"
+                     hc-class-id="epm_project_contract"
+                     hc-common-search="commonSearchOfEpmProjectContract"></div>
+                <div hc-input="data.currItem.contract_name"
+                     hc-label="合同名称"
+                     hc-readonly="true"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.signed_date"
+                     hc-label="合同签订日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.contract_effect_date"
+                     hc-label="合作开始时间"
+                     hc-readonly="true"
+                     hc-type="date"></div>
+                <div hc-input="data.currItem.contract_expire_date"
+                     hc-label="合作结束时间"
+                     hc-readonly="true"
+                     hc-type="date"></div>
+                <div hc-input="data.currItem.contract_amt"
+                     hc-label="合同总额"
+                     hc-readonly="true"
+                     hc-type="money"></div>
+                <div hc-input="data.currItem.contract_amt_received"
+                     hc-label="已回金额"
+                     hc-readonly="true"
+                     hc-type="money"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.completed_type"
+                     hc-label="结案类型"
+                     hc-dict-code="epm.contract_completed_type"></div>
+                <div hc-input="data.currItem.completed_desc"
+                     hc-label="结案说明"
+                     hc-required="true"
+                     hc-type="textarea"
+                     hc-col-count="6"></div>
+            </div>
+        </div>
+        <div hc-box="增补合同清单" class="other-h"></div>
+        <div hc-box hc-grid="gridOptions_project" hc-auto-height="grid" ng-show="showLine == 2"></div>
+    </div>
+</div>
+

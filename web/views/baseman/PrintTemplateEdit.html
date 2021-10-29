@@ -1,0 +1,106 @@
+<div class="bill-form" ng-controller="PrintTemplateEditController">
+    <div class="row wrapper border-bottom white-bg page-heading"
+         style="position: fixed;z-index: 999;width:88%;top: 51px;">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                <h3>��ӡģ��</h3>
+            </div>
+            <div style="float:right">
+                <button ng-click="search()" class="btn btn-toolbar" ng-hide="mainbtn.search" type="button">
+                    <i class="fa fa-search"></i>��ѯ
+                </button>
+                <button ng-click="new()" class="btn btn-toolbar" type="button"><i class="fa fa-file-o"></i>����</button>
+                <button ng-click="refresh()" class="btn btn-toolbar" type="button"><i class="fa fa-history"></i>ˢ��
+                </button>
+                <button ng-click="save()" class="btn btn-toolbar" type="button"><i class="fa fa-floppy-o"></i>����
+                </button>
+                <button ng-click="delete()" class="btn btn-toolbar" type="button"><i class="fa fa-trash"></i>ɾ��</button>
+                <button class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>����</button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>�ر�
+                </button>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 90px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="content" class="first tab-content">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-2"><label
+                                            class="form-label-mini font-noraml ">ģ�����:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input ng-model="data.currItem.templet_code" type="text" placeholder=""
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-2"><label
+                                            class="form-label-mini font-noraml ">ģ������:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input ng-model="data.currItem.templet_name" type="text" placeholder=""
+                                               class="input-sm form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-2"><label
+                                            class="form-label-mini font-noraml ">�Ƶ���:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input ng-model="data.currItem.creator" type="text" placeholder=""
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-2"><label
+                                            class="form-label-mini font-noraml ">�Ƶ�ʱ��:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input bs-datepacker ng-model="data.currItem.create_time" type="text"
+                                               placeholder="" class="input-sm form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-2"><label
+                                            class="form-label-mini font-noraml ">��ע:</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input ng-model="data.currItem.note" type="text" placeholder=""
+                                               class="input-sm form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>����</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <button swf-upload title="swfupload-control" class="btn btn-toolbar"
+                                    upload-list="data.currItem.objattachs" ng-model="data.currItem.objattachs"
+                                    filed='#attach-area'>
+                                <i class="fa lightblue font-size-15  fa-paperclip"></i> ��Ӹ���
+                            </button>
+                            <ul id="attach-area">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

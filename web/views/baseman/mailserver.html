@@ -1,0 +1,54 @@
+<div hc-edit-list>
+	<div class="row">
+		<div hc-input="data.currItem.servertype"
+			 hc-label="类型"
+			 hc-select-options="data.servertype_options">
+		</div>
+		<div hc-input="data.currItem.domain"
+			 hc-label="域名"
+			 hc-required="true">
+		</div>
+	</div>
+	<div class="row">
+		<div hc-input="data.currItem.pop3server"
+			 hc-label="POP3服务器"
+			 hc-required="true"
+			 hc-col-count="4">
+		</div>
+		<div hc-input="data.currItem.pop3port"
+			 hc-label="POP3端口"
+			 hc-type="number">
+		</div>
+		<div hc-input="data.currItem.pop3ssl"
+			 hc-label="POP3加密连接(SSL)"
+			 hc-type="checkbox">
+		</div>
+	</div>
+	<div class="row">
+		<div hc-input="data.currItem.smtpserver"
+			 hc-label="SMTP服务器"
+			 hc-col-count="4">
+		</div>
+		<div hc-input="data.currItem.smtpport"
+			 hc-label="SMTP端口"
+			 hc-type="number">
+		</div>
+		<div hc-input="data.currItem.smtpssl"
+			 hc-label="SMTP加密连接"
+			 hc-type="checkbox">
+		</div>
+	</div>
+	<div class="row">
+		<div hc-input="data.currItem.smtpauthtype"
+			 hc-label="SMTP服务器需要身份验证"
+			 hc-type="checkbox"
+			 hc-col-count="2">
+		</div>
+	</div>
+	<div class="row">
+		<div hc-input="data.currItem.note"
+			 hc-label="备注"
+			 hc-col-count="8">
+		</div>
+	</div>
+</div>

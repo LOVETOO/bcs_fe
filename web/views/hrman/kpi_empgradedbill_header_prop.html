@@ -1,0 +1,72 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div class="hc-box other-h">
+            <div class="row">
+                <div hc-input="data.currItem.empkpibill_no"
+                     hc-label="绩效评分编码"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.kpicase_name"
+                     hc-label="考核方案名称"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.userid"
+                     hc-label="被考核员工"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.appraiseman_userid"
+                     hc-label="参评人"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.empid"
+                     hc-label="被考核员工工号"
+                     hc-type="year"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.positionid"
+                     hc-label="被考核员工岗位"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.appraiseman_empid"
+                     hc-label="参评人工号"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-col-count="4">
+                </div>
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+        </div>
+
+        <div hc-grid="gridOptions" hc-box style="height: 170px"></div>
+        <div class="hc-box m-t" style="display: flex">
+            <!--适用参评人-->
+            <div hc-grid="gridOptions_appraiser" style="width: calc(50% - 10px);height: 160px"></div>
+            <!--适用评分标准-->
+            <div hc-grid="gridOptions_score" style="width: calc(50% - 10px);margin-left: 20px;height: 160px"></div>
+        </div>
+
+    </div>
+</div>
+
+
+

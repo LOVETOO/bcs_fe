@@ -1,0 +1,182 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box="" class="grid-other-h">
+            <div class="row">
+                <div hc-input="data.currItem.invoice_bill_no"
+                     hc-label="流水号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.date_bill"
+                     hc-label="记账日期"
+                     hc-type="date"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.year_month"
+                     hc-label="记账月份"
+                     hc-type="date"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.refer_no"
+                     hc-label="来源单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.date_invoice"
+                     hc-label="发票日期"
+                     hc-type="date"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.date_plan_pay"
+                     hc-label="预计付款日期"
+                     hc-type="date"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.created_by"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户"
+                     hc-readonly="true"
+                     hc-btn-click="customerSearch()"
+                >
+                </div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.crm_entid"
+                     hc-label="品类"
+                     hc-dict-code="crm_entid">
+                </div>
+
+                <div hc-input="data.currItem.creation_date"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.dept_code"
+                     hc-label="部门"
+                     hc-readonly="!data.canEdit"
+                     hc-btn-click="chooseOrg()">
+                </div>
+                <div hc-input="data.currItem.dept_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.invoice_no"
+                     hc-label="发票号"
+                     hc-readonly="true">
+                </div>
+
+
+                <div hc-input="data.currItem.bill_stat"
+                     hc-label="发票状态"
+                     hc-readonly="true"
+                     hc-dict-code="ar_invoice_bill_stat">
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div hc-input="data.currItem.tax_no"
+                     hc-label="客户税号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.bank"
+                     hc-label="开户银行"></div>
+
+                <div hc-input="data.currItem.bank_no"
+                     hc-label="开户行账号"></div>
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.currency_name"
+                     hc-label="结算货币"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.amount_goods_f"
+                     hc-label="货款"
+                     hc-type="money"
+                     hc-readonly="true"
+                >
+                </div>
+
+                <div hc-input="data.currItem.amount_zk_f"
+                     hc-label="折扣金额"
+                     hc-type="money"
+                     hc-readonly="true"
+                >
+                </div>
+
+                <div hc-input="data.currItem.sourcebilltype"
+                     hc-label="来源单据类型"
+                     hc-readonly="true"
+                     hc-dict-code="ar_invoice_sourcebilltype"><!-- 来源单据类型:1-销售出库,2-应收转移,3-应付转应收,4-应收转应付,5-低开发票 -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.amount_bill_f"
+                     hc-label="发票总额"
+                     hc-type="money"
+                     hc-readonly="true"
+                >
+                </div>
+
+                <div hc-input="data.currItem.tax_rate"
+                     hc-label="税率"
+                     hc-readonly="true"
+                     hc-type="percent">
+                </div>
+
+                <div hc-input="data.currItem.amount_tax_f"
+                     hc-label="税款"
+                     hc-type="money"
+                     hc-readonly="true"
+                >
+                </div>
+
+                <div hc-input="data.currItem.bluered"
+                     hc-label="红冲单"
+                     hc-readonly="true"
+                     hc-select-options="[{name:'是',value:'R'},{name:'否',value:'B'}]">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="8">
+                </div>
+            </div>
+        </div>
+        <div hc-grid="gridOptions" hc-box="" hc-auto-height="grid"></div>
+
+    </div>
+
+</div>

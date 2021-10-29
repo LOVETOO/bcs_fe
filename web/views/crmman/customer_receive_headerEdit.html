@@ -1,0 +1,348 @@
+﻿<div class="bill-form" ng-controller="customer_receive_headerEdit">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                客户来访接待
+            </div>
+            <div style="float:left">
+                <div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">
+
+                </div>
+                <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button" ng-click="new()"><i
+                        class="fa fa-file-o"></i>新增
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                        ng-click="save($event)"><i class="fa fa-floppy-o"></i>保存
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i
+                        class="fa fa-history"></i>刷新
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                        ng-click="delete()"><i class="fa fa-trash"></i>删除
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                        ng-click="wfstart()"><i class="fa fa-check-square-o">提交</i></button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+
+                <div class="btn-group">
+                    <button class="btn btn-toolbar dropdown-toggle" type="button">
+                        <i class="fa fa-file-excel-o"></i>导出
+                    </button>
+                    <button data-toggle="dropdown" class="btn btn-toolbar dropdown-toggle">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a ng-click="export1()">来访客户接待</a></li>
+                        <li><a ng-click="export2()">来访客户接待用品明细</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul id="tabs" class="tri-nav-tabs">
+                    <li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav"><i
+                            class="fa fa-pencil-square">基本信息</i></a></li>
+
+                </ul>
+                <div id="content" class="first tab-content">
+                    <div id="tab1" class="tab-pane active">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">单据号</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-model="data.currItem.receive_no"
+                                           placeholder=""
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">状态</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select chosen-select readonly="false" ng-disabled="true"
+                                            ng-model="data.currItem.stat"
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="type.dictvalue as type.dictname for type in stats">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">制单时间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" readonly="true" ng-model="data.currItem.create_time"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <label><input ng-model="data.currItem.is_repast" ng-false-value="1"
+                                                  ng-true-value="2" ng-checked="data.currItem.is_repast"
+                                                  type="checkbox">是否小食堂就餐</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">使用部门</label>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="input-group">
+                                        <input data-rule-required="true" data-msg-required="部门编码不能空" type="text"
+                                               ng-readonly="true" class="input-sm form-control"
+                                               ng-model="data.currItem.org_code">
+                                        <a class="input-group-addon" ng-click="selectorg()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="data.currItem.org_name" ng-readonly="true"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">预计费用</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="data.currItem.total_money"
+                                           ng-readonly="data.currItem.stat!=1"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">制单人</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.creator"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <label><input ng-model="data.currItem.is_screen" ng-false-value="1"
+                                                  ng-true-value="2" ng-checked="data.currItem.is_screen"
+                                                  type="checkbox">是否需要一楼大屏幕</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">客户</label>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               data-rule-required="true" data-msg-required="客户不能空"
+                                               readonly="true" class="input-sm form-control"
+                                               ng-model="data.currItem.cust_code">
+                                        <a class="input-group-addon" ng-click="selectcust()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="data.currItem.cust_name" readonly="true"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">来访日期</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" bs-datepacker ng-model="data.currItem.receive_time"
+                                           data-rule-required="true" data-msg-required="来访日期不能空"
+                                           ng-readonly="data.currItem.stat!=1"
+                                           ng-disabled="data.currItem.stat!=1"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">国家经理</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input data-rule-required="true" data-msg-required="国家经理不能空" type="text"
+                                               ng-readonly="data.currItem.stat!=1" class="input-sm form-control"
+                                               ng-model="data.currItem.country_manager">
+                                        <a class="input-group-addon" ng-click="selectqy_user()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <label><input ng-model="data.currItem.is_tour" ng-false-value="1"
+                                                  ng-true-value="2" ng-checked="data.currItem.is_tour"
+                                                  type="checkbox">是否旅游推荐</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label rows="1" class="form-label-mini not-null">我方人员</label>
+                                </div>
+                                <div class="col-md-4">
+									<textarea ng-readonly="data.currItem.stat!=1"
+                                              ng-model="data.currItem.receive_name"
+                                              data-rule-required="true" data-msg-required="我方人员不能空"
+                                              rows="2"
+                                              class="form-control noresize ng-pristine ng-valid ng-touched">
+									</textarea>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">茶饮</label>
+                                </div>
+                                <div class="col-md-4">
+									<textarea ng-readonly="data.currItem.stat>4"
+                                              data-rule-required="true" data-msg-required="茶饮不能空"
+                                              ng-model="data.currItem.receive_tea"
+                                              rows="2"
+                                              class="form-control noresize ng-pristine ng-valid ng-touched">
+									</textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">糕点</label>
+                                </div>
+                                <div class="col-md-4">
+									<textarea ng-readonly="data.currItem.stat!=1"
+                                              data-rule-required="true" data-msg-required="糕点不能空"
+                                              ng-model="data.currItem.receive_cake"
+                                              rows="2"
+                                              class="form-control noresize ng-pristine ng-valid ng-touched">
+									</textarea>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">水果</label>
+                                </div>
+                                <div class="col-md-4">
+									<textarea ng-readonly="data.currItem.stat!=1"
+                                              data-rule-required="true" data-msg-required="水果不能空"
+                                              ng-model="data.currItem.receive_fruit"
+                                              rows="2"
+                                              class="form-control noresize ng-pristine ng-valid ng-touched">
+									</textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">花篮</label>
+                                </div>
+                                <div class="col-md-4">
+									<textarea ng-readonly="data.currItem.stat!=1"
+                                              data-rule-required="true" data-msg-required="花篮不能空"
+                                              ng-model="data.currItem.receive_flower"
+                                              rows="3"
+                                              class="form-control noresize ng-pristine ng-valid ng-touched">
+									</textarea>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">备注</label>
+                                </div>
+                                <div class="col-md-4">
+									<textarea ng-readonly="data.currItem.stat!=1"
+                                              ng-model="data.currItem.note"
+                                              rows="3"
+                                              class="form-control noresize ng-pristine ng-valid ng-touched">
+									</textarea>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <fieldset>
+                                            <legend>客户信息</legend>
+                                            <div class="col-md-10">
+                                                <div class="ibox-content clearborder">
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            <label class="form-label-mini not-null">单位名称</label></div>
+                                                        <div class="col-md-5">
+                                                            <input ng-readonly="data.currItem.stat!=1" type="text"
+                                                                   data-rule-required="true" data-msg-required="单位名称不能空"
+                                                                   class="input-sm form-control ng-pristine ng-untouched ng-valid"
+                                                                   ng-model="data.currItem.uom">
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <label class="form-label-mini not-null">采购规模</label>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <input ng-readonly="data.currItem.stat!=1" type="text"
+                                                                   data-rule-required="true"
+                                                                   data-msg-required="采购规规模不能空"
+                                                                   class="input-sm form-control ng-pristine ng-untouched ng-valid"
+                                                                   ng-model="data.currItem.scal">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            <label rows="1"
+                                                                   class="form-label-mini ">客户级别/人数</label>
+                                                        </div>
+                                                        <div class="col-md-5">
+												            <textarea ng-readonly="data.currItem.stat!=1"
+                                                                ng-model="data.currItem.leve"
+                                                                rows="3"
+                                                                class="form-control noresize ng-pristine ng-valid ng-touched">
+												            </textarea>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <label class="form-label-mini">名字/职务</label>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <textarea ng-readonly="data.currItem.stat!=1"
+                                                                ng-model="data.currItem.jop"
+                                                                rows="3"
+                                                                class="form-control noresize ng-pristine ng-valid ng-touched">
+												            </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <h5>附件</h5>
+
+                                            <div ibox-tools></div>
+                                        </div>
+                                        <div class="ibox-content icons-box">
+                                            <button swf-upload title="添加附件" class="btn btn-toolbar"
+                                                    ng-disabled="data.currItem.stat!=1"
+                                                    upload-list="data.currItem.objattachs"
+                                                    ng-model="data.currItem.objattachs"
+                                                    ng-disabled="(data.currItem.currprocname!='业务员')&&(data.currItem.stat!=1)"
+                                                    filed='#attach-area'>
+                                                <i class="fa lightblue font-size-15  fa-paperclip"></i> 添加附件
+                                            </button>
+                                            <ul id="attach-area">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-hide="data.currItem.stat == 1">
+                                <div class="col-lg-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <h5>审批流程</h5>
+
+                                            <div ibox-tools></div>
+                                        </div>
+                                        <div class="ibox-content icons-box">
+                                            <div wf-ystep size="large" class="p-xs clear"
+                                                 ng-model="data.currItem.wfid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

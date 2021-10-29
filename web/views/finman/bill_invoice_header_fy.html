@@ -1,0 +1,450 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="billInvoiceHeaderFY">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;margin-top: 5px;font-size: 18px;">��֤����>���÷�Ʊ�Ƶ�/�༭/����</div>
+            <div style="float:right;">
+                <button ng-click="search()" class="btn btn-toolbar" ng-hide="mainbtn.search" type="button"
+                        ng-click="search()">
+                    <i class="fa fa-search"></i>��ѯ
+                </button>
+                <button ng-click="new()" class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button"
+                        ng-click="new()">
+                    <i class="fa fa-file-o"></i>����
+                </button>
+                <button ng-click="save()" class="btn btn-toolbar" type="button" ng-click="save()">
+                    <i class="fa fa-floppy-o"></i>����
+                </button>
+                <button ng-click="refresh()" class="btn btn-toolbar" type="button" ng-click="refresh()">
+                    <i class="fa fa-history"></i>ˢ��
+                </button>
+                <button ng-click="delete()" class="btn btn-toolbar" type="button" ng-click="delete()"
+                        ng-hide="data.currItem.stat!=1">
+                    <i class="fa fa-trash"></i>ɾ��
+                </button>
+                <button ng-click="wfstart()" class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                        ng-click="wfstart()">
+                    <i class="fa fa-check-square-o">�ύ</i></button>
+                <button class="btn btn-toolbar" type="button" ng-click="export()">
+                    <i class="fa fa-file-excel-o"></i>����
+                </button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button">
+                    <i class="fa fa-times"></i>�ر�
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+
+                    <div class="ibox-content">
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">��Ʊ��ˮ��</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder="" ng-readonly="true"
+                                       class="input-sm form-control"
+                                       ng-model="data.currItem.invoice_no">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">�Ƶ�ʱ��</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input bs-datepacker ng-readonly="true"
+                                       ng-disabled="true"
+                                       ng-model="data.currItem.create_time" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">�Ƶ���</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder="" ng-readonly="true"
+                                       class="input-sm form-control"
+                                       ng-model="data.currItem.creator">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">����״̬</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select ng-disabled="true" ng-model="data.currItem.stat"
+                                        class="input-sm chosen-select form-control"
+                                ng-options="s.id as s.name for s in stats">
+                                <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">��ҵ��Ʊ��</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder=""
+                                       ng-disabled="data.currItem.stat!=1"
+                                       class="input-sm form-control"
+                                       ng-model="data.currItem.fact_invoice_no">
+
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">PI��</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-disabled="data.currItem.stat!=1"
+                                           data-rule-required="true"
+                                           data-msg-required="PI�Ų���Ϊ��"
+                                       ng-model="data.currItem.pi_no" type="Text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">����֤��</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input ng-disabled="data.currItem.stat!=1"
+										ng-readonly="true"
+                                       ng-model="data.currItem.lc_no" type="number"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">ҵ����</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input ng-disabled="data.currItem.stat!=1"									
+                                           data-rule-required="true"
+                                           data-msg-required="ҵ���Ų���Ϊ��"
+                                           ng-model="data.currItem.org_code" type="text"
+                                           class="form-control input-sm">
+                                    <a class="input-group-addon" ng-click="cpcorg()">
+                                        <li class="fa fa-ellipsis-h"></li>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input ng-disabled="data.currItem.stat!=1"
+                                       ng-model="data.currItem.org_name"
+                                       type="text"
+                                       ng-readonly="true"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">����ڼ�</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input ng-disabled="data.currItem.stat!=1"
+                                           data-rule-required="true"
+                                           data-msg-required="����ڼ䲻��Ϊ��"
+                                           ng-model="data.currItem.dname" type="text"
+                                           class="form-control input-sm">
+                                    <a class="input-group-addon" ng-click="fin_bud_period_header()">
+                                        <li class="fa fa-ellipsis-h"></li>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">ó������</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select
+                                        ng-disabled="data.currItem.stat!=1"
+                                        ng-model="data.currItem.sale_ent_type"
+                                        type="text"
+										data-rule-required="true"
+										data-msg-required="ó�����Ͳ���Ϊ��"
+                                        ng-options="type.dictvalue as type.dictname for type in trade_types"
+                                        class="form-control chosen-select input-sm">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">�ͻ�</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input ng-disabled="data.currItem.stat!=1"
+                                           data-rule-required="true"
+                                           data-msg-required="�ͻ�����Ϊ��"
+                                           ng-model="data.currItem.cust_code" type="text"
+                                           class="form-control input-sm">
+                                    <a class="input-group-addon" ng-click="customer()">
+                                        <li class="fa fa-ellipsis-h"></li>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input ng-disabled="data.currItem.stat!=1"
+                                       ng-readonly="true"
+                                       ng-model="data.currItem.cust_name" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">ҵ��Ա</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-disabled="data.currItem.stat!=1"
+                                       ng-readonly="true"
+                                       ng-model="data.currItem.sales_user_id" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">�����ܽ��</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-readonly="true"
+                                       ng-disabled="data.currItem.stat!=1"
+
+                                       ng-model="data.currItem.return_amt" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">���ʽ</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input ng-disabled="data.currItem.stat!=1"	
+                                           data-rule-required="true"
+                                           data-msg-required="���ʽ����Ϊ��"
+                                           ng-model="data.currItem.payment_type_name" type="text"
+                                           class="form-control input-sm">
+                                    <a class="input-group-addon" ng-click="payment_type()">
+                                        <li class="fa fa-ellipsis-h"></li>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">��������</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select
+                                        ng-disabled="data.currItem.stat!=1"
+                                        ng-model="data.currItem.currency_code"
+                                        type="text"
+                                        ng-options="type.currency_code as type.currency_name for type in base_currencys"
+                                        class="form-control chosen-select input-sm">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">ʵ���տ�����</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-disabled="data.currItem.stat!=1"
+										bs-datepacker
+                                       ng-model="data.currItem.actual_return_date"
+                                       ng-change="lc_interestChange()"
+                                       type="number"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">�Ƿ���</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select ng-disabled="data.currItem.stat!=1"
+                                        ng-readonly="true"
+                                        ng-model="data.currItem.is_red" type="text"
+                                        ng-options="type.id as type.name for type in trueorfalsetests"
+                                        class="form-control chosen-select input-sm">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">���������</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-disabled="data.currItem.stat!=1"
+											ng-readonly="true"
+                                           ng-model="data.currItem.tt_amt" type="text"
+                                           class="form-control input-sm">
+                                
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">�Ѻ������</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-disabled="data.currItem.stat!=1"
+										ng-readonly="true"
+                                       ng-model="data.currItem.tt_check_amt" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">�Ѻ������</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select ng-disabled="data.currItem.stat!=1"
+										ng-readonly="true"
+                                        ng-model="data.currItem.is_check_over" type="text"
+                                        ng-options="type.id as type.name for type in trueorfalsetests"
+                                        class="form-control chosen-select input-sm">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">���ο�Ʊ���</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-disabled="data.currItem.stat!=1"
+										ng-readonly="true"
+                                       ng-model="data.currItem.invoice_amt" type="Text"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+						<div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">��ע</label>
+                            </div>
+                            <div class="col-md-11">	
+										<textarea ng-model="data.currItem.note" rows="1"
+                                                  class="form-control noresize"> </textarea>
+                            </div>
+                        </div>
+						<div slick-grid
+                                 sg-options="bill_invoice_lineOptions"
+                                 sg-data="data.currItem.bill_invoice_lineoffin_funds_headers"
+                                 sg-columns="bill_invoice_lineColums"
+                                 style="width:100%;height:240px;"
+                                 class="slick-grid">
+                        </div>
+                        <button ng-click="addbill_invoice_line()" 
+                                class="btn btn-toolbar" type="button">
+                                <i class="fa fa-plus-square-o"></i>������
+                        </button>
+                        <button ng-click="deletebill_invoice_line()" 
+                                class="btn btn-toolbar" type="button" 
+                                ng-click="test('test!!')">
+                             <i class="fa fa-minus-square-o"></i>ɾ����
+                        </button>
+
+                    </div>
+                    <!--ul id="tabs" class="tri-nav-tabs">
+                        <li class="active">
+                            <a data-target="#tab1" data-toggle="tab" class="tab-nav">
+                                <i class="fa fa-shopping-cart">
+                                    SAPƾ֤��ϸ
+                                </i>
+                            </a>
+                        </li>
+                        <!--li>
+                            <a data-target="#tab2" data-toggle="tab" class="tab-nav">
+                                <i class="fa fa-shopping-cart">
+                                ����֤�۷���ϸ
+                                </i>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-target="#tab3" data-toggle="tab" class="tab-nav">
+                                <i class="fa fa-shopping-cart">
+                                SAPƾ֤��ϸ
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div id="content" class="first tab-content">
+                        <!--div id="tab1" class="tab-pane active">
+                            <button ng-click="openbill_invoice_headerFrm()" 
+                                class="btn btn-toolbar" type="button">
+                                <i class="fa fa-plus-square-o"></i>������
+                            </button>
+                            <button ng-click="deletefin_funds_lineLine()" 
+                                class="btn btn-toolbar" type="button" >
+                                <i class="fa fa-minus-square-o"></i>ɾ����
+                            </button>
+                            <div slick-grid 
+                                sg-options="fin_funds_lineOptions" 
+                                sg-data="data.currItem.fin_funds_lineoffin_funds_headers" 
+                                sg-columns="fin_funds_lineColums"
+                                style="width:100%;height:240px;" 
+                                class="slick-grid">
+                            </div>                	
+                        </div>
+                        <div id="tab2" class="tab-pane">
+                            <button ng-click="addfin_funds_xypm()" 
+                                class="btn btn-toolbar" type="button">
+                                <i class="fa fa-plus-square-o"></i>������
+                            </button>
+                            <button ng-click="deletefin_funds_xypm()" 
+                                class="btn btn-toolbar" type="button" >
+                                <i class="fa fa-minus-square-o"></i>ɾ����
+                            </button>
+                            <div slick-grid 
+                                sg-options="fin_funds_xypmProdOptions" 
+                                sg-data="data.currItem.fin_funds_xypmoffin_funds_headers" 
+                                sg-columns="fin_funds_xypmProdColums" 
+                                style="width:100%;height:240px;" 
+                                class="slick-grid">
+                            </div>                    	
+                        </div>
+                        <div id="tab1" class="tab-pane active">
+                            <div slick-grid
+                                 sg-options="bill_invoice_lineOptions"
+                                 sg-data="data.currItem.bill_invoice_lineoffin_funds_headers"
+                                 sg-columns="bill_invoice_lineColums"
+                                 style="width:100%;height:240px;"
+                                 class="slick-grid">
+                            </div>
+                            <button ng-click="addbill_invoice_line()" 
+                                class="btn btn-toolbar" type="button">
+                                <i class="fa fa-plus-square-o"></i>������
+                            </button>
+                            <button ng-click="deletebill_invoice_line()" 
+                                class="btn btn-toolbar" type="button" 
+                                ng-click="test('test!!')">
+                                <i class="fa fa-minus-square-o"></i>ɾ����
+                            </button>
+                        <!--/div-->
+                    <!--/div-->
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>����</h5>
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content icons-box">
+                        <button swf-upload title="swfupload-control" class="btn btn-toolbar"
+                                upload-list="data.currItem.objattachs" ng-model="data.currItem.objattachs"
+                                filed='#attach-area'>
+                            <i class="fa lightblue font-size-15  fa-paperclip"></i> ��Ӹ���
+                        </button>
+                        <ul id="attach-area">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-hide="data.currItem.stat == 1">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>��������</h5>
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content icons-box">
+                        <div wf-ystep size="large" wf-own-method="refresh()" class="p-xs clear"
+                             ng-model="data.currItem.wfid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

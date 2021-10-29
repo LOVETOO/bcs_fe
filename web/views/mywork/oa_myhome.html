@@ -1,0 +1,688 @@
+<div local-storage class="bill-form flex-column">
+    <div class="home_nav ibox-content mynav"
+     ng-init="initHomeData()">
+        <div id="menus" hc-sortable="sortableOption" ng-model="data.currItem.menus">
+            <div ng-repeat="item in data.currItem.menus " class="home_nav_mod" \>
+                <div>
+                    <a ui-sref="{{item.webrefaddr||'noop'}}" target="_self" ng-click="showTips(item.webrefaddr)">
+                        <button class="btn label-info btn-circle btn-lg" type="button">
+                            <i ng-class="item.imgsrc" ng-if="item.imgsrc != ''"></i>
+                            <img hc-img="item.docid" ng-if="+item.docid && item.imgsrc ==''">
+                            <i class="iconfont hc-kucun" ng-if="!+item.docid && item.imgsrc ==''"></i>
+                        </button>
+                    </a>
+                    <div class="home_nav_name home_nav_mod m-t-5" title="{{item.menuname}}">{{item.menuname}}</div>
+                </div>    
+                <i class="iconfont hc-wrong" ng-click="delMenu(item,$event)"></i>
+            </div>
+            <div id="addBtn" style="padding-bottom:10px">
+                <div>
+                    <a>
+                        <button class="btn btn-default btn-circle btn-lg" type="button" ng-click="searchMenufavorites()">
+                            <i class="iconfont hc-add" style="font-size: 17px;"></i>
+                        </button>
+                    </a>
+                    <div class="m-t-5 home_nav_mod home_nav_name">快捷设置</div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-white moveBtn" ng-click="down()" ng-if="downBool && menurows>1">
+            <img class="btnImg" src="img/down.png">
+        </button>
+        <button class="btn btn-white moveBtn" id="up" ng-click="up()" ng-if="!downBool && menurows>1">
+            <img class="btnImg" src="img/up.png">
+        </button>
+    </div>
+    <div class="flex1-scroll flex-column" style=" padding: 0px 15px 10px; overflow: auto; ">
+        <div class="flex1 flex-row flex-between" ng-if="!expertJurisdiction" style="margin-top: 10px;">
+            <div class="hc-card box-shadow list" style="width:calc(50% - 10px)">
+                <div class="ibox badge-white border-bottom flex-column">
+                    <div class="hc-card-title flex-row">
+                        <div class="flex1">
+                            <i class="iconfont hc-fenlei"></i>
+                            待办流程
+                            <i class="noread" ng-if="data.currItem.works.length>0"
+                            >{{data.currItem.works.length}}</i>
+                            <div class="wf-refesh-button" hc-button="refreshWF()" hc-icon="iconfont hc-refresh" hc-title="刷新"></div>
+                        </div>
+                        <div class="more">
+                            <a ui-sref="baseman.mywfwork({title:'我的工作'})"><span class="text-typeface-unify">更多</span> 
+                                <i class="iconfont hc-more"></i></a>
+                        </div>
+                    </div>
+                    <div class="hc-card-content js-telescoping-box flex1">
+                        <ul>
+                            <li ng-repeat="work in data.currItem.works"
+                                ng-click="openBill(work)"  class="flex-row">
+                                <a class="flex1" href="javascript:;"> 
+                                    <span class="m-r-xs">{{$index+1}}</span>
+                                    {{ work.wfname +" " + work.subject}}
+                                </a>
+                                <span class="amount">
+                                    {{work.lasttime}}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div> 
+        </div>
+        <div class="flex1 flex-row flex-between" ng-if="expertJurisdiction" style="margin-top: 10px;">
+            <div class="flex-column" style="width:calc(50% - 10px)">
+                <div class="flex1 flex-column hc-card box-shadow list">
+                    <div class="hc-card-title flex-row">
+                        <div class="flex1">
+                            <i class="iconfont hc-fenlei"></i>待办流程
+                            <i class="noread" ng-if="data.currItem.works.length>0"
+                            >{{data.currItem.works.length}}</i>
+                            <div class="wf-refesh-button" hc-button="refreshWF()" hc-icon="iconfont hc-refresh" hc-title="刷新"></div>
+                        </div>
+                        <div class="more">
+                            <a ui-sref="baseman.mywfwork({title:'我的工作'})"><span class="text-typeface-unify">更多</span> 
+                            <i class="iconfont hc-more"></i></a>
+                        </div>
+                    </div>
+                    <div class="flex1 flex-column hc-card-content js-telescoping-box">
+                        <ul class="flex1-scroll">
+                            <li class="flex-row flex-between" ng-repeat="work in data.currItem.works"
+                                ng-click="openBill(work)">
+                                <a class="flex1"> <span class="m-r-xs">{{$index+1}}</span>{{ work.wfname
+                                    +" " + work.subject}}</a>
+                                <span class="amount">
+                                    {{work.lasttime}}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="hc-card box-shadow flex-column" style="width: calc(50% - 10px)">
+                <div class="flex1 flex-column hc-card box-shadow list" style="margin-top: 10px;">
+                    <!-- <div class="hc-card-title flex-row" ng-click=showMsg()>
+                        <div class="flex1">
+                            <i class="iconfont hc-fenlei"></i>共享资料
+                        </div>
+                    </div> -->
+                    <div class="hc-card-title flex-row">
+                        <ul class="hc-nav-tabs flex1 scpnotive">
+                            <li class="active">
+                                <a data-toggle='tab' href='#notice'>通知公告</a>
+                                <span class="badge mybadge badge-danger"
+                                    ng-show="data.unreadCounter.notice > 0">{{data.unreadCounter.notice < 99 ? data.unreadCounter.notice : '99+'}}</span>
+                            </li>
+                            <li>
+                                <a data-toggle='tab' href='#objattachs'>共享资料</a> 
+                                <span class="badge mybadge badge-danger"
+                                    ng-show="data.unreadCounter.objattachs > 0">{{data.unreadCounter.objattachs < 99 ? data.unreadCounter.objattachs : '99+'}}</span>
+                            </li>
+                        </ul>
+                        <div class="more" style="justify-content: flex-end;"> 
+                            <div class="pointerCursor" ng-click="redrawNewss()"><span class="text-typeface-unify">刷新</span><i style="width:16px;height:20px" class="iconfont hc-refresh"></i></div>
+                            <!-- <div class="pointerCursor" ng-click="moreNews()">更多<i class="iconfont hc-more"></i></div> -->
+                        </div>   
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- <div class="row p-w-xs p-t-md">
+            <div class="col-lg-6 col-md-6 col-sm-6 p-w-xs" style="width: 100%;">
+                <div class="ibox boxshadow badge-white">
+                    <div class="ibox-title">
+                        <h4 class="pull-left">事务预警
+                            <i class="noread" ng-if="data.currItem.warningTotalQuantity > 0"
+                                >{{data.currItem.warningTotalQuantity}}</i>
+                        </h4>
+                    </div>
+
+                    <div class="scroll220" id="warning-id">
+                        <div ng-repeat="work in data.currItem.affairsWarning" ng-click="openWarning(work)"
+                            class="warning-class">
+                            <span class="warning-span-class">
+                                <div>{{ work.warningName}}</div>
+                                <div class="warning-value-class">&nbsp;{{work.warningValue}}&nbsp;</div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!--旧-带标题预警--->
+        <!-- <div class="row p-w-xs">
+            <div class="ibox oa-alert">
+                <div class="ibox-title">
+                    <h4 class="pull-left">事务预警<i class="noread" ng-bind="warningCount" ng-show="warningCount > 0"></i></h4>
+                </div>
+                <div class="flex">
+                    <div class="oa-alert-box" ng-class="warning.color" ng-repeat="warning in warnings track by warning.name" ng-click="openWarning(warning)">
+                        <div class="oa-alert-title" ng-bind="warning.name"></div>
+                        <i class="iconfont oa-alert-icon" ng-class="warning.icon"></i>
+                        <div class="oa-alert-num" ng-bind="warning.value"></div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+        <!-- <div class="flex-row hc-oa-tip" style="margin-top: 10px">
+            <div class="oa-tip-box blue" ng-class="warning.color" ng-repeat="warning in warnings track by warning.name" ng-click="openWarning(warning)">
+                <div class="oa-tip-title" ng-bind="warning.name"></div>
+                <i class="iconfont oa-tip-icon oa-alert-icon" ng-class="warning.icon"></i>
+                <div class="oa-tip-num" ng-bind="warning.value"></div>
+            </div>
+        </div> -->
+    </div>
+    <!-- <div class="notices">
+        <div class="notice">
+            <div>
+                <i class="iconfont hc-notices"></i>
+            </div>
+            <div class="itemmsg">
+            </div>
+        </div>
+    </div> -->
+    <div hc-modal="seeThePush">
+        <div hc-box style="display: flex; flex: 1; flex-direction: column;">
+            <div hc-grid="gridOptionWarning" style="flex: 1"></div>
+        </div>
+    </div> 
+    <div hc-modal="seeThePushCargo">
+        <div hc-box class="flex1 flex-column" style="min-height: 200px;">
+            <div hc-tab="warningEmergencyCargo" hc-tab-change="ondeliveryTaskTabChange(params)" hc-tab-as="taskController"></div>
+            <div hc-tab-page class="flex1">
+                <div id="delivery" class="active"><!-- 已保留 -->
+                    <div hc-grid="gridOptionsDelivery" class="flex1"></div>
+                </div>
+                <div id="await" ><!-- 待保留 -->
+                    <div hc-grid="gridOptionsAwait" class="flex1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div hc-modal="statementModalBox">
+        <div hc-box style="display: flex; flex: 1; flex-direction: column;">
+            <div hc-grid="gridOptionStatement" style="flex: 1"></div> 
+        </div>   
+    </div>  
+    <div hc-modal="messages" style="height:100px;" class="updatemodal" > 
+        <div hc-grid="custlines" hc-auto-height="grid" class="other-h modalsize"></div>
+         <!--通知公告-->
+         <!-- <ul id="notice" class="flex1-scroll tab-pane active ">
+            <li class="flex-row flex-between " ng-repeat="item in data.currItem.notice" style="min-height: 30px;">
+                <a class="flex1" ng-class="{ unreadNews:item.vh_viewnum == 0}" ng-click="gonews(item.newsid)">
+                    <span class="num" ng-if="item.is_top==1">{{$index+1}}</span>
+                    <img src="/web/img/hot.jpg" ng-if="item.is_top==2" style="width: 18px;"/>
+                    {{item.subject}} 
+                </a> 
+                <span class="amount ng-binding">{{item.pub_time}}</span>
+            </li>
+        </ul> -->
+
+    </div>
+</div>
+<style type="text/css">
+hc-view[hc-state-name="crmman.myhome"]{
+    background: #eaebf1;
+}
+[hc-state-name="crmman.myhome"] .ibox-title h4 {
+    margin: 0px;
+    line-height: 28px;
+    color: #333;
+    position: relative;
+}
+
+[hc-state-name="crmman.myhome"] .ibox-tools {
+    line-height: 28px;
+}
+
+[hc-state-name="crmman.myhome"] .ibox-tools a>.iconfont {
+    font-size: 14px;
+}
+
+[hc-state-name="crmman.myhome"] .home_nav_mod img {
+    width: 28px;
+    height: 28px;
+    position: relative;
+    left: -5px;
+}
+
+[hc-state-name="crmman.myhome"] .home_nav_name {
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+[hc-state-name="crmman.myhome"] #menus {
+    position: relative;
+    height: 82px;
+    overflow: hidden;
+    transition: all 1s;
+    -moz-transition: all 1s;
+    -webkit-transition: all 1s;
+    -o-transition: all 1s;
+}
+
+[hc-state-name="crmman.myhome"] #menus::after {
+    clear: both;
+    content: "";
+    display: block;
+}
+
+[hc-state-name="crmman.myhome"] #menus>div {
+    height: 82px !important;
+    float: left;
+}
+
+/*
+.menuscontent{
+    width:5000px;
+    display: flex;
+    transition:all 0.5s;
+    -moz-transition:all 0.5s;
+    -webkit-transition:all 0.5s;
+    -o-transition:all 0.5s;
+}*/
+[hc-state-name="crmman.myhome"] .btn-white {
+    color: inherit;
+    background: white;
+    border: 1px solid #fff;
+}
+
+[hc-state-name="crmman.myhome"] .btn-white:hover {
+    border: 1px solid #dbe0e8;
+}
+
+[hc-state-name="crmman.myhome"] #menus>.home_nav_mod a .iconfont {
+    font-size: 26px;
+    color: #fff;
+    position: relative;
+}
+
+[hc-state-name="crmman.myhome"] #addBtn {
+    width: 90px;
+}
+
+[hc-state-name="crmman.myhome"] .moveBtn {
+    /* height: 68px; */
+    padding: 3px 5px;
+    position: absolute;
+    right: 18px;
+    top: 33px;
+    background: rgb(255, 255, 255);
+    border: 1px solid #f1f1f1;
+    border: none;
+}
+
+[hc-state-name="crmman.myhome"] .btnImg {
+    width: 15px;
+}
+
+[hc-state-name="crmman.myhome"] .home_nav_mod {
+    padding-bottom: 10px;
+}
+
+[hc-state-name="crmman.myhome"] .mynav {
+    display: block;
+    position: relative;
+    padding-bottom: 0px;
+    background-color: #fff;
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+}
+
+[hc-state-name="crmman.myhome"] .btn-circle.btn-lg {
+    width: 44px;
+    height: 44px;
+    padding: 0px;
+}
+
+[hc-state-name="crmman.myhome"] .noread {
+    padding: 0px 5px;
+    line-height: 16px;
+    font-size: 10px;
+    -webkit-transform: scale(0.7);
+    text-align: center;
+    font-style: normal;
+    border-radius: 10px;
+    display:inline-block;
+    background-color: #ff5f00;
+    color: #fff;
+}
+
+[hc-state-name="crmman.myhome"] .notices {
+    max-height: 300px;
+    overflow: auto;
+    width: 250px;
+    position: fixed;
+    bottom: 16px;
+    right: 20px;
+    transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    /* Firefox 4 */
+    -webkit-transition: all 0.5s;
+    /* Safari and Chrome */
+    -o-transition: all 0.5s;
+    /* Opera */
+}
+
+[hc-state-name="crmman.myhome"] .notice {
+    position: relative;
+    opacity: 0;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    background: rgba(26, 179, 148, 0.7);
+    display: flex;
+    align-items: center;
+    transition: all 1s;
+    -moz-transition: all 1s;
+    /* Firefox 4 */
+    -webkit-transition: all 1s;
+    /* Safari and Chrome */
+    -o-transition: all 1s;
+    /* Opera */
+}
+
+[hc-state-name="crmman.myhome"] .notice>i.iconfont {
+    position: absolute;
+    color: #fff;
+    right: 5px;
+    top: 2px;
+}
+
+[hc-state-name="crmman.myhome"] .notice>div {
+    padding: 5px;
+}
+
+[hc-state-name="crmman.myhome"] .notice-left {
+    width: 35px;
+}
+
+[hc-state-name="crmman.myhome"] .notice-right {
+    width: calc(100% - 35px);
+    font-size: 13px;
+    text-align: left;
+    padding: 0 5px 5px 0 !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #fff;
+}
+
+[hc-state-name="crmman.myhome"] .hc-card {
+    margin-top: 0px;
+}
+
+[hc-state-name="crmman.myhome"] .btn.wf-refesh-button {
+    margin-left: 8px;
+    padding: 0;
+    border: none;
+}
+
+[hc-state-name="crmman.myhome"] .btn.wf-refesh-button i.iconfont {
+    font-size: 12px;
+}
+
+.hc-card .hc-card-title .more {
+    color: #969696;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+.hc-card .hc-card-title .more .iconfont{
+    font-size: 12px;
+    margin-left: 5px;
+}
+.hc-card .hc-card-title .more .hc-more {
+    color: #969696;
+    margin-right: 0px;
+    font-size: 13px;
+    margin-left: 1px;
+}
+.hc-card.list .hc-card-content li>a{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.hc-card .loudou_data{
+    position: relative;
+    padding: 15px;
+}
+.hc-card .loudou_data>ul{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    padding: 20px 15px 38px 0px;
+}
+.hc-card .loudou_data>ul li{
+    color: #525bbc;
+    align-items: center;
+}
+.hc-card .loudou_data>ul li{color: #525bbc;}
+.hc-card .loudou_data>ul div{
+    text-align: right;
+    width: 85px;
+    cursor: pointer;
+}
+.hc-card .loudou_data>ul div p:first-child{
+    margin-bottom: 3px;
+    opacity: 0.6;
+}
+/******[预警]********/
+.hc-oa-tip {
+    display: flex;
+}
+
+.hc-oa-tip .oa-tip-title {
+    height: 30px;
+    font-size: 14px;
+    position: relative;
+}
+
+.hc-oa-tip .ibox-title {
+    background-color: transparent;
+    border: none;
+    padding-left: 0px;
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+.hc-oa-tip .flex {
+    background-color: transparent;
+    border: 0px;
+    padding: 0px;
+    display: flex;
+    margin: 0px -10px;
+}
+
+.hc-oa-tip .oa-tip-box {
+    height: 80px;
+    position: relative;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 3px;
+    color: #fff;
+    margin-left: 10px;
+    overflow: hidden;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    cursor: pointer;
+}
+
+.hc-oa-tip .oa-tip-box:first-child {
+    margin-left: 0px;
+}
+
+.hc-oa-tip .oa-tip-box:before {
+    display: block;
+    content: "";
+    position: absolute;
+    left: -18px;
+    top: -28px;
+    border-radius: 100px;
+    width: 110px;
+    height: 110px;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.hc-oa-tip .oa-tip-box:after {
+    display: block;
+    content: "";
+    position: absolute;
+    left: -10px;
+    bottom: -70px;
+    border-radius: 100px;
+    width: 126px;
+    height: 126px;
+    opacity: 0.5;
+}
+
+.hc-oa-tip .oa-tip-box.blue {
+    background-image: linear-gradient(90deg, #65aeff, #72bdff);
+}
+
+.hc-oa-tip .oa-tip-box.green {
+    background-image: linear-gradient(90deg, #81c45e, #bdde55);
+}
+
+.hc-oa-tip .oa-tip-box.orange {
+    background-image: linear-gradient(90deg, #ffa27a, #ffb45a);
+}
+
+.hc-oa-tip .oa-tip-box.purple {
+    background-image: linear-gradient(90deg, #8779f9, #b190ff);
+}
+
+.hc-oa-tip .oa-tip-box.yellow {
+    background-image: linear-gradient(90deg, #fdc21a, #ffd96c);
+}
+
+.hc-oa-tip .oa-tip-box.green2 {
+    background-image: linear-gradient(90deg, #17b6b7, #07e1e2);
+}
+
+.hc-oa-tip .oa-tip-box.blue2 {
+    background-image: linear-gradient(90deg, #239cec, #007bcc)
+}
+
+.hc-oa-tip .oa-tip-box.blue:before {
+    background-color: #72bdff;
+}
+
+.hc-oa-tip .oa-tip-box.green:before {
+    background-color: #bdde55;
+}
+
+.hc-oa-tip .oa-tip-box.orange:before {
+    background-color: #ffb45a;
+}
+
+.hc-oa-tip .oa-tip-box.purple:before {
+    background-color: #b190ff;
+}
+
+.hc-oa-tip .oa-tip-box.yellow:before {
+    background-color: #ffd96c;
+}
+
+.hc-oa-tip .oa-tip-box.blue2:before {
+    background-color: #239cec;
+}
+
+.hc-oa-tip .oa-tip-box.green2:before {
+    background-color: #07e1e2;
+}
+
+.hc-oa-tip .oa-tip-box.blue:after {
+    background-color: #65aeff;
+}
+
+.hc-oa-tip .oa-tip-box.green:after {
+    background-color: #81c45e;
+}
+
+.hc-oa-tip .oa-tip-box.orange:after {
+    background-color: #ffa27a;
+}
+
+.hc-oa-tip .oa-tip-box.purple:after {
+    background-color: #8779f9;
+}
+
+.hc-oa-tip .oa-tip-box.yellow:after {
+    background-color: #fdc21a;
+}
+
+.hc-oa-tip .oa-tip-box.green2:after {
+    background-color: #17b6b7;
+}
+
+.hc-oa-tip .oa-tip-box.blue2:after {
+    background-color: #007bcc;
+}
+
+.hc-oa-tip .oa-tip-box .oa-tip-title {
+    position: absolute;
+    left: 15px;
+    top: 12px;
+    z-index: 3;
+    text-shadow: 2px 2px 2px #b2b0bb;
+}
+
+.hc-oa-tip .oa-tip-box .oa-tip-icon {
+    position: absolute;
+    right: 12px;
+    top: 6px;
+    font-size: 24px;
+}
+
+.hc-oa-tip .oa-tip-box .oa-tip-num {
+    font-size: 24px;
+    position: absolute;
+    left: 15px;
+    top: 38px;
+    z-index: 3;
+}
+.redpoint {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: 0px;
+    right: 4px;
+    border-radius: 50%;
+    background: #ed5565;
+}
+
+.mybadge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    font-weight: normal;
+    font-size: xx-small;
+}
+
+    /*可点击文本样式*/
+    .pointerCursor:hover {
+    cursor: pointer;
+    color: #2796ff;
+}
+.other-h.modalsize.flex1.hc-box.ng-scope.hc-grid.ag-blue{
+height: 120px;
+}
+.modal-content .ui-draggable .ui-resizable{
+    width: 300px;
+}
+.emergencyCargoDelivery{/* 紧急要货预警列表名称样式 */
+    color: red;
+}
+.text-typeface-unify {
+    font-family: "Microsoft YaHei","open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    color: #000;
+}
+</style>

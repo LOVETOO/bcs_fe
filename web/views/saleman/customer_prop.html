@@ -1,0 +1,285 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" hc-box="" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户编码"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.short_name"
+                     hc-label="客户简称">
+                </div>
+
+                <div hc-input="data.currItem.saleprice_type_name"
+                     hc-label="销售价格类型"
+                     hc-required="true"
+                     hc-btn-click="chooseSalePrice()">
+                </div>
+
+                <div hc-input="data.currItem.sale_type"
+                     hc-label="发货类型"
+                     hc-required="true"
+                     hc-dict-code="sale_types">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.customer_name"
+                     hc-label="客户名称"
+                     hc-required="true"
+                     hc-col-count="4">
+                </div>
+
+                <div hc-input="data.currItem.employee_name"
+                     hc-label="业务员"
+                     hc-required="true"
+                     hc-btn-click="chooseEmployee()">
+                </div>
+
+                <div hc-input="data.currItem.customer_type"
+                     hc-label="客户类型"
+                     hc-dict-code="customer_types">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.areaname"
+                     hc-label="行政区域"
+                     hc-required="true"
+                     hc-btn-click="chooseCpcarea()">
+                </div>
+
+                <div hc-input="data.currItem.dept_name"
+                     hc-label="销售归属部门"
+                     hc-required="true"
+                     hc-btn-click="searchDept('checkDetail')">
+                </div>
+
+                <div hc-input="data.currItem.sale_area_name"
+                     hc-label="销售区域"
+                     hc-required="true"
+                     hc-btn-click="chooseSalearea()">
+                </div>
+
+                <div hc-input="data.currItem.email"
+                     hc-label="电子邮件">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="客户简介"
+                     hc-col-count="6">
+                </div>
+
+                <div hc-input="data.currItem.usable"
+                     hc-type="checkbox"
+                     hc-label="有效">
+                </div>
+            </div>
+        </div>
+
+        <div hc-box hc-grid="gridOptions"
+             hc-auto-height="grid">
+        </div>
+
+    </div>
+
+    <!--财务属性-->
+    <div id="fa" hc-box>
+        <div class="row"></div>
+        【财务信息】
+        <div class="row">
+            <div hc-input="data.currItem.ar_type"
+                 hc-label="收入确认方式"
+                 hc-required="true"
+                 hc-dict-code="ar_type">
+            </div>
+
+            <div hc-input="data.currItem.tax_type"
+                 hc-label="纳税人类型"
+                 hc-required="true"
+                 hc-dict-code="tax_type">
+            </div>
+
+            <div hc-input="data.currItem.tax_rate"
+                 hc-label="缺省税率"
+                 hc-required="true"
+                 hc-type="percent">
+            </div>
+
+            <div hc-input="data.currItem.base_currency_id"
+                 hc-label="货币"
+                 hc-dict-code="currency_name">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.code_zyysl"
+                 hc-label="主营业务收入科目"
+                 hc-btn-click="chooseSubject('zyywsrkm')">
+            </div>
+            <div hc-input="data.currItem.name_zyysl">
+            </div>
+
+            <div hc-input="data.currItem.code_yszk"
+                 hc-label="应收账科目"
+                 hc-btn-click="chooseSubject('yszkm')">
+            </div>
+            <div hc-input="data.currItem.name_yszk">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.code_ar"
+                 hc-label="应收票据科目"
+                 hc-btn-click="chooseSubject('yspjkm')">
+            </div>
+            <div hc-input="data.currItem.name_ar">
+            </div>
+
+            <div hc-input="data.currItem.code_qtywsl"
+                 hc-label="其他业务收入科目"
+                 hc-btn-click="chooseSubject('qtywsrkm')">
+            </div>
+            <div hc-input="data.currItem.name_qtywsl">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.code_zyywcb"
+                 hc-label="主营业务成本"
+                 hc-btn-click="chooseSubject('zyywcb')">
+            </div>
+            <div hc-input="data.currItem.name_zyywcb">
+            </div>
+
+            <div hc-input="data.currItem.code_qtywzc"
+                 hc-label="其他业务支出"
+                 hc-btn-click="chooseSubject('qtywzc')">
+            </div>
+            <div hc-input="data.currItem.name_qtywzc">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.days_gathering"
+                 hc-label="预计收款天数"
+                 hc-type="number">
+            </div>
+
+            <div hc-input="data.currItem.crebit_ctrl"
+                 hc-type="checkbox"
+                 hc-label="发货信用控制"></div>
+        </div>
+
+        【开票信息】
+        <div class="row">
+            <div hc-input="data.currItem.contact"
+                 hc-label="联系人">
+            </div>
+
+            <div hc-input="data.currItem.tel_mb_contact"
+                 hc-label="住宅手机">
+            </div>
+
+            <div hc-input="data.currItem.tel_home_contact"
+                 hc-label="住宅电话">
+            </div>
+
+            <div hc-input="data.currItem.tele"
+                 hc-label="联系电话">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.bank"
+                 hc-label="开户行">
+            </div>
+
+            <div hc-input="data.currItem.fax"
+                 hc-label="联系传真">
+            </div>
+
+            <div hc-input="data.currItem.address"
+                 hc-label="地址"
+                 hc-col-count="4">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.bank_accno"
+                 hc-label="银行账号"
+                 hc-col-count="4">
+            </div>
+
+            <div hc-input="data.currItem.tax_no"
+                 hc-label="税务登记号"
+                 hc-col-count="4">
+            </div>
+        </div>
+
+    </div>
+
+    <div id="cs" hc-box><!--cs:customer_saleprice; hc-auto-height="grid"-->
+        <div hc-box hc-grid="gridOptions_cs"></div>
+    </div>
+
+    <!--其他-->
+    <div id="other" hc-box>
+        <div class="row">
+            <div hc-input="data.currItem.is_groupcustomer"
+                 hc-type="checkbox"
+                 hc-label="总公司"
+                 hc-col-count="4"
+                 hc-change="onBoxChange('groupcustomer')">
+            </div><!-- ="changeBox()"-->
+
+            <div hc-input="data.currItem.is_relation"
+                 hc-type="checkbox"
+                 hc-label="子公司"
+                 hc-col-count="4"
+                 hc-change="onBoxChange('relation')"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.group_customer_code"
+                 hc-label="总公司"
+                 hc-required="data.currItem.is_relation==2"
+                 hc-readonly="data.currItem.is_relation==1"
+                 hc-btn-click="chooseGroupcustomer(data.currItem.is_relation==2)">
+            </div>
+            <div hc-input="data.currItem.group_customer_name"
+                 hc-readonly="data.currItem.is_relation==1">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.created_by"
+                 hc-label="创建人">
+            </div>
+
+            <div hc-input="data.currItem.creation_date"
+                 hc-type="date"
+                 hc-label="创建时间">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by"
+                 hc-label="最后修改人">
+            </div>
+
+            <div hc-input="data.currItem.last_update_date"
+                 hc-type="date"
+                 hc-label="最后修改时间"></div>
+        </div>
+    </div>
+
+</div>
+
+
+

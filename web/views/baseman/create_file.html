@@ -1,0 +1,70 @@
+<div class="modal-content" local-storage ng-model="data.currItem">
+    <div draggable-model class="modal-header" style="width: 100%">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                ng-click="cancel(e)"><span aria-hidden="true">&times;</span></button>
+        <h3>新建文件夹</h3>
+    </div>
+    <div class="modal-body" style="width: 100%;text-align: right;padding: 10px 20px;">
+        <div class="row">
+            <div class="col-xs-2">
+                <label class="form-label-mini not-null ">名称</label>
+            </div>
+            <div class="col-xs-10">
+                <input type="text" ng-model="data.currItem.filename" class="input-sm form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label rows="1" class="form-label-mini ">备注</label>
+            </div>
+            <div class="col-xs-10">
+                <textarea ng-readonly="false" ng-model="data.currItem.note" rows="2"
+                          class="form-control noresize ng-pristine ng-valid ng-touched">
+                </textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label class="form-label-mini">创建用户</label>
+            </div>
+            <div class="col-xs-4 hc-readonly">
+                <input ng-readonly="true" text-input ng-model="data.currItem.creator"
+                       class="input-sm form-control">
+            </div>
+            <div class="col-xs-2">
+                <label class="form-label-mini">创建时间</label>
+            </div>
+            <div class="col-xs-4 hc-readonly">
+                <input ng-readonly="true" text-input ng-model="data.currItem.createtime"
+                       class="input-sm form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label class="form-label-mini">更新用户</label>
+            </div>
+            <div class="col-xs-4 hc-readonly">
+                <input ng-readonly="true" text-input ng-model="data.currItem.updator"
+                       class="input-sm form-control">
+            </div>
+            <div class="col-xs-2">
+                <label class="form-label-mini">更新时间</label>
+            </div>
+            <div class="col-xs-4 hc-readonly">
+                <input ng-readonly="true" text-input ng-model="data.currItem.updatetime"
+                       class="input-sm form-control">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="width: 100%">
+        <a class="btn btn-primary" ng-click="ok(e)">
+            确定
+        </a>
+        <a class="btn btn-default" ng-click="cancel(e)">
+            取消
+        </a>
+        <!--<a class="btn btn-default" ng-click="applyto(e)">
+            应用
+        </a>-->
+    </div>
+</div>

@@ -1,0 +1,146 @@
+	   <div class="bill-form" ng-controller="basebankEditController">
+	   <div class="row wrapper border-bottom white-bg page-heading"
+         style="position: fixed;z-index: 999;width:88%;top: 51px;">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                ��������
+            </div>
+
+<div style="float:right">
+			<button ng-click="search()" class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                <i class="fa fa-search"></i>��ѯ
+            </button>
+            <button ng-click="newone()" class="btn btn-toolbar" type="button"><i class="fa fa-file-o"></i>����</button>
+            <button ng-click="refresh()" class="btn btn-toolbar" type="button"><i class="fa fa-history"></i>ˢ��</button>
+            <button ng-click="save()" class="btn btn-toolbar" type="button"><i class="fa fa-floppy-o"></i>����</button>
+            <button ng-click="delete()" class="btn btn-toolbar" type="button"><i class="fa fa-trash"></i>ɾ��</button>
+            <button class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>����</button>
+            <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i class="fa fa-times"></i>�ر�
+            </button>
+                        </div>
+        </div>
+
+    </div>
+	<form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+		<div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 90px;"> 
+		   
+				<div class="row">
+					<div class="col-lg-12">	                
+						<div id="content" class="tab-content">
+							<div id="tab1" class="tab-pane active">
+								<div class="ibox-content">
+									
+									<div class="row" ng-class="{false:'hide'}[isEdit]">
+											<div class="col-md-1">
+												<label class="form-label-mini">������:</label>
+											</div>
+											<div class="col-md-2">
+												<input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="data.currItem.creator">
+											</div>
+											<div class="col-md-1">
+												<label class="form-label-mini">����ʱ��:</label>
+											</div>
+											<div class="col-md-2">
+												<input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="data.currItem.create_time">
+											</div>
+											<div class="col-md-1">
+												<label class="form-label-mini">�޸���:</label>
+											</div>
+											<div class="col-md-2">
+												<input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="data.currItem.updator">
+											</div>
+											<div class="col-md-1">
+												<label class="form-label-mini">�޸�ʱ��:</label>
+											</div>
+											<div class="col-md-2">
+												<input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="data.currItem.update_time">
+											</div>
+									</div>
+									
+									<div class="row">
+										<div class="col-md-1">
+											<label class="form-label-mini">���б���:</label>
+										</div>
+										<div class="col-md-2">
+											<input ng-model="data.currItem.bank_code" type="text" class="form-control input-sm">
+										</div>
+										<div class="col-md-1">
+											<label class="form-label-mini">���м��:</label>
+										</div>
+										<div class="col-md-2">
+											<input ng-model="data.currItem.bank_jc" type="text" class="form-control input-sm">
+										</div>
+										<div class="col-md-1">
+											<label class="form-label-mini">��������:</label>
+										</div>
+										<div class="col-md-2">
+											<input ng-model="data.currItem.bank_name" type="text" class="form-control input-sm">
+										</div>
+										<div class="col-md-1">
+											<label class="form-label-mini">��������:</label>
+										</div>
+										<div class="col-md-2">
+											<select chosen-select ng-model="data.currItem.currency_id"
+												class="input-sm chosen-select form-control"
+												ng-options="type.currency_id as type.currency_code for type in base_currencys" >
+											 <option value=""></option>
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">
+											<label class="form-label-mini">�˺�1:</label>
+										</div>
+										<div class="col-md-2">
+											<input ng-model="data.currItem.account_no" type="text" class="form-control input-sm">
+										</div>
+										<div class="col-md-1">
+											<label class="form-label-mini">�˺�2:</label>
+										</div>
+										<div class="col-md-2">
+											<input ng-model="data.currItem.account_no2" type="text" class="form-control input-sm">
+										</div>
+											<div class="col-md-1">
+											<label class="form-label-mini">SAP��Ŀ:</label>
+										</div>
+										<div class="col-md-2">
+											<input ng-model="data.currItem.sap_account" type="text" class="form-control input-sm">
+										</div>
+										<div class="col-md-3">
+											<label  style="margin-left: 30px;"><input  
+													type="checkbox"
+													ng-false-value="1" 
+													ng-true-value="2"
+													ng-checked="data.currItem.usable"
+													ng-model="data.currItem.usable">�Ƿ����
+											</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">
+											<label class="form-label-mini">���е�ַ:</label>
+										</div>
+										<div class="col-md-11">
+											<input ng-model="data.currItem.adress" type="text" class="form-control input-sm">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-1">
+											<label class="form-label-mini">��ע:</label>
+										</div>
+										<div class="col-md-11">
+											<textarea ng-model="data.currItem.note" rows="3"
+													  class="form-control noresize"></textarea>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+				   </div>
+			  </div>
+			 
+		</div>
+	</form>	
+	</div>
+</div>	                        

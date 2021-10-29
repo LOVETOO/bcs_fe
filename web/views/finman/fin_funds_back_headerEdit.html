@@ -1,0 +1,278 @@
+<div class="bill-form" ng-controller="fin_funds_back_headerEdit">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                退款
+            </div>
+            <div style="float:left">
+                <div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">
+
+                </div>
+                <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button" ng-click="new()"><i
+                        class="fa fa-file-o"></i>新增
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1" ng-click="save($event)"><i
+                        class="fa fa-floppy-o"></i>保存
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i
+                        class="fa fa-history"></i>刷新
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                        ng-click="delete()"><i class="fa fa-trash"></i>删除
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                        ng-click="wfstart()"><i class="fa fa-check-square-o">提交</i></button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-title">
+                    <h5>基本信息</h5>
+                    <div ibox-tools></div>
+                </div>
+                <div id="content" class="first tab-content">
+                    <div id="tab1" class="tab-pane active">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">退款单号</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="data.currItem.back_no"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">状态</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select chosen-select readonly="true" ng-disabled="true"
+                                            ng-model="data.currItem.stat"
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="s.id as s.name for s in stats">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">创建人</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="data.currItem.creator"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">创建时间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="data.currItem.create_time"
+                                           class="input-sm form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">原到款单号</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input type="text" data-rule-required="true" data-msg-required="原到款单号不能空"
+                                               ng-readonly="data.currItem.stat!=1" class="input-sm form-control"
+                                               ng-model="data.currItem.funds_no">
+                                        <a class="input-group-addon" ng-click="selectfunds_no()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">到款类型</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select chosen-select
+                                            ng-model="data.currItem.funds_type"
+                                            ng-readonly="true"
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="s.dictvalue as s.dictname for s in funds_types">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">回款组织</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select chosen-select
+                                            ng-disabled="true" readonly="true"
+                                            ng-options="type.dictvalue as type.dictname for type in return_ent_types"
+                                            ng-model="data.currItem.return_ent_type" type="text"
+                                            class="form-control chosen-select input-sm">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">资金系统单号</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="data.currItem.other_no"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">到款总额</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="data.currItem.fact_amt"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">已分配金额</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="data.currItem.allocated_amt"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">可退款金额</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="data.currItem.can_back_amt"
+                                           class="input-sm form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">销售部门</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               ng-readonly="true" class="input-sm form-control"
+                                               ng-model="data.currItem.org_code">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-model="data.currItem.org_name" ng-readonly="true"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">客户</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="data.currItem.cust_code" ng-readonly="true"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-model="data.currItem.cust_name" ng-readonly="true"
+                                           class="input-sm form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">供应商</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input data-rule-required="true" data-msg-required="供应商不能空" type="text"
+                                               ng-readonly="data.currItem.stat!=1" class="input-sm form-control"
+                                               ng-model="data.currItem.vender_code">
+                                        <a class="input-group-addon" ng-click="selectvender()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-model="data.currItem.vender_name" ng-readonly="true"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">退款金额</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="false" ng-model="data.currItem.back_amt"
+                                           data-rule-required="true" data-msg-required="退款金额不能空"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">会计期间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input type="text" data-rule-required="true" data-msg-required="会计期间不能空"
+                                               ng-readonly="false" class="input-sm form-control"
+                                               ng-model="data.currItem.dname">
+                                        <a class="input-group-addon" ng-click="selectdname()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">币种</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="data.currItem.currency_name"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-2">
+                                    <label><input ng-model="data.currItem.is_into_amt" ng-false-value="1"
+                                                  class="form-label-mini "
+                                                  ng-true-value="2" ng-checked="data.currItem.is_into_amt"
+                                                  type="checkbox">是否引资金系统到款到款单</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-sm btn-info" type="button" ng-click="tofin_funds()"
+                                            style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;
+                                            border-right-width: 0px;">
+                                        导入资金系统到款单
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">备注</label>
+                                </div>
+                                <div class="col-md-11">
+									<textarea ng-readonly="data.currItem.stat!=1"
+                                              ng-model="data.currItem.note"
+                                              rows="3"
+                                              class="form-control noresize ng-pristine ng-valid ng-touched">
+									</textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="ibox-content">
+                                        <div ag-gridview sg-options="options_3"
+                                             sg-columns="columns_3" style="width:100%;height:160px;"
+                                             class="slick-grid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-hide="data.currItem.stat == 1">
+                                <div class="col-lg-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <h5>审批流程</h5>
+
+                                            <div ibox-tools></div>
+                                        </div>
+                                        <div class="ibox-content icons-box">
+                                            <div wf-ystep size="large" class="p-xs clear"
+                                                 ng-model="data.currItem.wfid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,180 @@
+
+<div  hc-init="doInit()" class="ibox"><!--hc-diy-page-->
+
+    <div class="ibox-title grid-other-h">
+        <div class="ibox-tools">
+            <h4 class="pull-left" ng-show="form.$dirty">
+                <span>正在</span><span ng-show="data.isInsert">新增</span><span ng-hide="data.isInsert">修改第{{data.currRowNode.rowIndex+1}}行</span><span>，请选择：</span>
+            </h4>
+            <div hc-buttons="editButtons" hc-buttons-pull-left style="margin-left:8px"></div>
+            <div hc-buttons="toolButtons" hc-buttons-pull-right></div>
+        </div>
+    </div>
+
+    <div class="hc-box grid-other-h" ng-form="form" >
+
+        <ul class="nav nav-tabs other-h ng-scope" id="detailtab" >
+            <li class="">
+                <a data-toggle="tab" href="tabs.html#tab1" aria-expanded="false"
+                   ng-click="tabClicked('fin_fee_param')">预算模块</a>
+            </li>
+            <li class="active">
+                <a data-toggle="tab" href="tabs.html#tab1" aria-expanded="false"
+                   ng-click="tabClicked('inv_param')">存货模块</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="tabs.html#tab1" aria-expanded="false "
+                   ng-click="tabClicked('ar_param')">应收模块</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="tabs.html#tab1" aria-expanded="false"
+                   ng-click="tabClicked('ap_param')">应付模块</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="tabs.html#tab1" aria-expanded="false"
+                   ng-click="tabClicked('fd_param')">出纳模块</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="tabs.html#tab1" aria-expanded="false"
+                   ng-click="tabClicked('ad_param')">固定资产模块</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="tabs.html#tab2" aria-expanded="true"
+                   ng-click="tabClicked('gl_account_param')">财务总账模块</a>
+            </li>
+        </ul>
+
+        <div class="tabs-container">
+            <div class="tab-content">
+                <div id="tab1" class="tab-pane active">
+                    <div class="hc-box">
+                        <div class="row">
+                            <div hc-input="data.currItem.param_code"
+                                 hc-label="参数编码"
+                                 hc-readonly="true">
+                            </div>
+
+                            <div hc-input="data.currItem.param_name"
+                                 hc-label="参数名称"
+                                 hc-col-count="4"
+                                 hc-readonly="true">
+                            </div>
+
+                            <div hc-input="data.currItem.param_value"
+                                 hc-label="参数值"><!--hc-readonly="data.currItem.is_system == 2"-->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div hc-input="data.currItem.note"
+                                 hc-label="备注"
+                                 hc-col-count="6"><!--hc-readonly="data.currItem.is_system == 2"-->
+                            </div>
+
+                            <div hc-input="data.currItem.is_system"
+                                 hc-label="是否系统值"
+                                 hc-type="checkbox"
+                                 hc-readonly="true"
+                                 style="margin-left: 64px">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div hc-input="data.currItem.created_by"
+                                 hc-label="创建人"
+                                 hc-readonly="true">
+                            </div>
+
+                            <div hc-input="data.currItem.creation_date"
+                                 hc-label="创建日期"
+                                 hc-type="date"
+                                 hc-readonly="true">
+                            </div>
+
+                            <div hc-input="data.currItem.last_updated_by"
+                                 hc-label="修改人"
+                                 hc-readonly="true">
+                            </div>
+
+                            <div hc-input="data.currItem.last_update_date"
+                                 hc-label="修改日期"
+                                 hc-type="date"
+                                 hc-readonly="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div hc-grid="gridOptions" hc-auto-height="grid"></div>
+                    
+                </div>
+
+                <div id="tab2" class="tab-pane">
+                    <div class="row">
+                        <div hc-input="data.currItem.credence_type"
+                             hc-label="记账凭证类型"
+                             hc-col-count="4">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div hc-input="data.currItem.km_length_1"
+                             hc-label="一级会计科目长度">
+                        </div>
+
+                        <div hc-input="data.currItem.km_length_2"
+                             hc-label="二级会计科目长度">
+                        </div>
+
+                        <div hc-input="data.currItem.km_length_3"
+                             hc-label="三级会计科目长度">
+                        </div>
+
+                        <div hc-input="data.currItem.km_length_4"
+                             hc-label="四级会计科目长度">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div hc-input="data.currItem.km_length_5"
+                             hc-label="五级会计科目长度">
+                        </div>
+
+                        <div hc-input="data.currItem.km_length_6"
+                             hc-label="六级会计科目长度">
+                        </div>
+
+                        <div hc-input="data.currItem.qty_account_period"
+                             hc-label="会计期间数">
+                        </div>
+
+                        <div hc-input="data.currItem.crendent_no_way"
+                             hc-label="凭证号编法">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div hc-input="data.currItem.gl_created_by"
+                             hc-label="创建人">
+                        </div>
+
+                        <div hc-input="data.currItem.gl_creation_date"
+                             hc-label="创建日期"
+                             hc-type="date">
+                        </div>
+
+                        <div hc-input="data.currItem.gl_last_updated_by"
+                             hc-label="修改人">
+                        </div>
+
+                        <div hc-input="data.currItem.gl_last_update_date"
+                             hc-label="修改日期"
+                             hc-type="date">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--结束标签-->
+
+    </div>
+
+</div>

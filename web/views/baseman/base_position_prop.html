@@ -1,0 +1,50 @@
+<div hc-obj-prop>
+
+    <div id="base" class="active">
+        <div class="row">
+            <div hc-label="岗位名称" hc-input="data.currItem.positionid" hc-col-count="4" hc-required="true"/>
+
+            <div hc-label="岗位编码" hc-input="data.currItem.code" hc-col-count="4" hc-required="true"/>
+        </div>
+        <div class="row">
+            <div hc-label="直接上级"
+                 hc-input="data.currItem.superposition"
+                 hc-col-count="2"
+                 hc-class-id="scpposition"
+                 hc-common-search="commonSearchSetting.superposition"/>
+
+            <div hc-input="data.currItem.lowerposition"
+                 hc-label="直接下级"
+                 hc-col-count="6"
+                 hc-readonly="true"
+            ></div>
+        </div>
+        <div class="row">
+            <div hc-label="职责概述" hc-input="data.currItem.positiondesc"
+                 hc-type="textarea"
+                 hc-col-count="6"/>
+            <div hc-input="data.currItem.isvisible"
+                 hc-label="可见"
+                 hc-type="checkbox"
+                 hc-true-value="2"
+                 hc-false-value="1">
+            </div>
+        </div>
+
+    </div>
+
+    <div id="users" hc-box=''>
+        <!-- 用户表格 -->
+        <div hc-grid="gridOptions_users" class="hc-grid m" hc-auto-height="grid"/>
+    </div>
+
+    <div id="other" hc-box=''>
+        <div class="row">
+            <div hc-label="创建人" hc-input="data.currItem.creator" hc-readonly="true"/>
+            <div hc-label="创建时间" hc-input="data.currItem.createtime" hc-type="time" hc-readonly="true"/>
+            <div hc-label="最后修改人" hc-input="data.currItem.updator" hc-readonly="true"/>
+            <div hc-label="最后修改时间" hc-input="data.currItem.updatetime" hc-type="time" hc-readonly="true"/>
+        </div>
+    </div>
+
+</div>

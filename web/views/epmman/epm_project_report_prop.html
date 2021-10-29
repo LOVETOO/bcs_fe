@@ -1,0 +1,555 @@
+<!--
+/**
+ * 项目报备 - 详情页
+ * @since 2019-06-20
+ */
+-->
+<div hc-obj-prop>
+
+	<div id="base" class="active" hc-if="$stateParams.report_type == 1">
+		<div hc-box>
+			<div class="row">
+				<div
+					hc-label="报备号"
+					hc-input="data.currItem.project_code"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="申报日期"
+					hc-input="data.currItem.report_time"
+					hc-type="date"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="单据状态"
+					hc-input="data.currItem.stat"
+					hc-dict-code="stat"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="项目当前进度"
+					hc-input="data.currItem.stage_name"
+					hc-readonly="true"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="有效期至"
+					hc-input="data.currItem.indate"
+					hc-type="date"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="客户编号"
+					hc-input="data.currItem.customer_code"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="客户名称"
+					hc-input="data.currItem.customer_name"
+					hc-readonly="true"
+					hc-col-count="4"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="交易公司"
+					hc-input="data.currItem.trading_company_name"
+					hc-required="true"
+					hc-col-count="4"
+				></div>
+
+				<div
+					hc-label="产品线"
+					hc-input="data.currItem.pdt_line"
+					hc-dict-code="epm.pdt_line"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="工程类型"
+					hc-input="data.currItem.project_source"
+					hc-dict-code="epm.project_source"
+					hc-required="true"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="甲方名称"
+					hc-input="data.currItem.party_a_name"
+					hc-required="true"
+					hc-col-count="4"
+				></div>
+
+				<div
+					hc-label="甲方联系人"
+					hc-input="data.currItem.party_a_link_person"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="甲方联系电话"
+					hc-input="data.currItem.party_a_phone"
+					hc-required="true"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="乙方名称"
+					hc-input="data.currItem.party_b_name"
+					hc-required="true"
+					hc-col-count="4"
+				></div>
+
+				<div
+					hc-label="乙方联系人"
+					hc-input="data.currItem.party_b_link_person"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="乙方联系电话"
+					hc-input="data.currItem.party_b_phone"
+					hc-required="true"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="战略报备号"
+					hc-input="data.currItem.rel_project_code"
+					hc-col-count="4"
+					hc-class-id="epm_project_report"
+					hc-common-search="commonSearch.rel_project_code"
+				></div>
+
+				<div
+					hc-label="战略项目名称"
+					hc-input="data.currItem.rel_project_name"
+					hc-col-count="4"
+					hc-readonly="true"
+				></div>
+			</div>
+		</div>
+
+		<div hc-box="工程信息">
+			<div class="row">
+				<div
+					hc-label="工程名称"
+					hc-input="data.currItem.project_name"
+					hc-required="true"
+					hc-col-count="6"
+				></div>
+
+				<div
+					hc-label="本地/异地"
+					hc-input="data.currItem.is_local"
+					hc-dict-code="epm.is_local"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="业主类型"
+					hc-input="data.currItem.project_type"
+					hc-dict-code="epm.project_type"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="背景关系"
+					hc-input="data.currItem.background"
+					hc-dict-code="epm.background"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="工程建筑面积"
+					hc-input="data.currItem.site_area"
+					hc-type="square"
+				></div>
+
+				<div
+					hc-label="工程用量"
+					hc-input="data.currItem.predict_proj_qty"
+					hc-unit="套"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="省"
+					hc-input="data.currItem.province_name"
+				></div>
+				
+				<div
+					hc-label="市"
+					hc-input="data.currItem.city_name"
+				></div>
+
+				<div
+					hc-label="区"
+					hc-input="data.currItem.area_name"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="详细地址"
+					hc-input="data.currItem.address"
+					hc-col-count="8"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="工程施工阶段"
+					hc-input="data.currItem.construction_stage"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="竣工日期"
+					hc-input="data.currItem.completion_date"
+					hc-type="date"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="工程意向产品"
+					hc-input="data.currItem.intent_product"
+					hc-col-count="4"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="竞争对手"
+					hc-input="data.currItem.competitor"
+					hc-col-count="8"
+				></div>
+			</div>
+		</div>
+
+		<div hc-box="跟进信息">
+			<div class="row">
+				<div
+					hc-label="项目跟进进度"
+					hc-input="data.currItem.stage_name"
+					hc-class-id="epm_stage_def"
+					hc-common-search="commonSearch.stage_name"
+				></div>
+
+				<div
+					hc-input="data.currItem.stage_note"
+					hc-readonly="true"
+					hc-col-count="6"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="跟进进度描述"
+					hc-input="data.currItem.stage_desc"
+					hc-type="textarea"
+					hc-col-count="8"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="经销商现场跟进人"
+					hc-input="data.currItem.dealer_follower"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="经销商跟进人电话"
+					hc-input="data.currItem.dealer_follower_phone"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="公司现场跟进人"
+					hc-input="data.currItem.own_follower"
+				></div>
+
+				<div
+					hc-label="公司跟进人电话"
+					hc-input="data.currItem.own_follower_phone"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="产品送样"
+					hc-input="data.currItem.need_sample"
+					hc-select-options="[{ name: '是', value: 2 }, { name: '否', value: 1 }]"
+					hc-required="true"
+					hc-col-count="4"
+				></div>
+
+				<div
+					hc-label="产品报价"
+					hc-input="data.currItem.need_quote"
+					hc-select-options="[{ name: '是', value: 2 }, { name: '否', value: 1 }]"
+					hc-required="true"
+					hc-col-count="4"
+				></div>
+			</div>
+		</div>
+
+		<div hc-box="经办人信息">
+			<div class="row">
+				<div
+					hc-label="经办人"
+					hc-input="data.currItem.agent"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="经办人电话"
+					hc-input="data.currItem.agent_phone"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="经办人意见"
+					hc-input="data.currItem.agent_opinion"
+					hc-readonly="true"
+					hc-col-count="4"
+				></div>
+			</div>
+		</div>
+
+		<div hc-box="跟进进度历程">
+			<div hc-grid="stageGridOptions" style="height: 300px;"></div>
+		</div>
+	</div>
+
+	<div id="base" class="active" hc-if="$stateParams.report_type == 2">
+		<div hc-box>
+			<div class="row">
+				<div
+					hc-label="战略报备号"
+					hc-input="data.currItem.project_code"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="申报日期"
+					hc-input="data.currItem.report_time"
+					hc-type="date"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="单据状态"
+					hc-input="data.currItem.stat"
+					hc-dict-code="stat"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="项目当前进度"
+					hc-input="data.currItem.stage_name"
+					hc-readonly="true"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="交易公司"
+					hc-input="data.currItem.trading_company_name"
+					hc-required="true"
+					hc-col-count="4"
+				></div>
+
+				<div
+					hc-label="产品线"
+					hc-input="data.currItem.pdt_line"
+					hc-dict-code="epm.pdt_line"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="管理类型"
+					hc-input="data.currItem.operating_mode"
+					hc-dict-code="epm.operating_mode"
+					hc-required="true"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="甲方名称"
+					hc-input="data.currItem.party_a_name"
+					hc-required="true"
+					hc-col-count="4"
+				></div>
+
+				<div
+					hc-label="甲方联系人"
+					hc-input="data.currItem.party_a_link_person"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="甲方联系电话"
+					hc-input="data.currItem.party_a_phone"
+					hc-required="true"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="乙方名称"
+					hc-input="data.currItem.party_b_name"
+					hc-required="true"
+					hc-col-count="4"
+				></div>
+
+				<div
+					hc-label="乙方联系人"
+					hc-input="data.currItem.party_b_link_person"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="乙方联系电话"
+					hc-input="data.currItem.party_b_phone"
+					hc-required="true"
+				></div>
+			</div>
+		</div>
+
+		<div hc-box="工程信息">
+			<div class="row">
+				<div
+					hc-label="战略项目名称"
+					hc-input="data.currItem.project_name"
+					hc-required="true"
+					hc-col-count="8"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="项目类型"
+					hc-input="data.currItem.project_type"
+					hc-dict-code="epm.project_type"
+				></div>
+
+				<div
+					hc-label="背景关系"
+					hc-input="data.currItem.background"
+					hc-dict-code="epm.background"
+				></div>
+
+				<div
+					hc-label="战略项目数量"
+					hc-input="data.currItem.predict_proj_qty"
+				></div>
+
+				<div
+					hc-label="工程用量"
+					hc-input="data.currItem.predict_pdt_qty"
+					hc-unit="套"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="预计签订日期"
+					hc-input="data.currItem.predict_sign_date"
+					hc-type="date"
+				></div>
+
+				<div
+					hc-label="预计销售收入"
+					hc-input="data.currItem.predict_sales_amount"
+					hc-type="money"
+					hc-unit="万元"
+				></div>
+
+				<div
+					hc-label="工程意向产品"
+					hc-input="data.currItem.intent_product"
+					hc-col-count="4"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="竞争对手"
+					hc-input="data.currItem.competitor"
+					hc-col-count="8"
+				></div>
+			</div>
+		</div>
+
+		<div hc-box="跟进信息">
+			<div class="row">
+				<div
+					hc-label="项目跟进进度"
+					hc-input="data.currItem.stage_name"
+					hc-class-id="epm_stage_def"
+					hc-common-search="commonSearch.stage_name"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-input="data.currItem.stage_note"
+					hc-readonly="true"
+					hc-col-count="6"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="跟进进度描述"
+					hc-input="data.currItem.stage_desc"
+					hc-type="textarea"
+					hc-required="true"
+					hc-col-count="8"
+				></div>
+			</div>
+		</div>
+
+		<div hc-box="经办人信息">
+			<div class="row">
+				<div
+					hc-label="经办人"
+					hc-input="data.currItem.agent"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="经办人电话"
+					hc-input="data.currItem.agent_phone"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="经办人意见"
+					hc-input="data.currItem.agent_opinion"
+					hc-col-count="4"
+				></div>
+			</div>
+		</div>
+
+		<div hc-box="分配经销商">
+			<div hc-grid="dealerGridOptions" style="height: 300px;"></div>
+		</div>
+	</div>
+
+</div>

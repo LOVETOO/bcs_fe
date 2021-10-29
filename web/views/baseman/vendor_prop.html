@@ -1,0 +1,158 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.vendor_code"
+                 hc-label="供应商编码"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.vendor_name"
+                 hc-label="供应商名称"
+                 hc-required="true">
+            </div>
+
+<!--
+            <div hc-input="data.currItem.crm_entid"
+                 hc-label="品类"
+                 hc-dict-code="crm_entid">
+            </div>
+-->
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.contact"
+                 hc-label="联系人">
+            </div>
+
+            <div hc-input="data.currItem.tele"
+                 hc-label="联系电话">
+            </div>
+
+            <div hc-input="data.currItem.usable"
+                 hc-label="有效"
+                 hc-type="checkbox">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.address"
+                 hc-label="供应商地址"
+                 hc-col-count="8">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.note"
+                 hc-label="备注"
+                 hc-col-count="8">
+            </div>
+        </div>
+
+        <!-- <div id="finance" hc-box="">-->
+        【财务属性】
+        <div class="row">
+            <div hc-input="data.currItem.currency_name"
+                 hc-label="结算货币"
+                 hc-class-id="base_currency"
+                 hc-common-search="commonSearchSettingOfCurrency"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.vendortaxrate_percent"
+                 hc-label="默认税率" hc-type="percent" hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.bank"
+                 hc-label="开户银行">
+            </div>
+
+            <div hc-input="data.currItem.bank_accno"
+                 hc-label="开户行账号">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.vendortaxno"
+                 hc-label="税务登记号">
+            </div>
+
+            <div hc-input="data.currItem.account_days"
+                 hc-label="账期天数"
+                 hc-dict-code="ap_period">
+            </div>
+
+            <div hc-input="data.currItem.code_noinv"
+                 hc-label="无票应付科目"
+                 hc-class-id="gl_account_subject"
+                 hc-common-search="commonSearchSettingOfAccountSubject.noinv"
+                 hc-after-delete="clearSubjectAfterDelete('noinv')">
+            </div>
+
+            <div hc-input="data.currItem.name_noinv"
+                 hc-label="">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.code_ap"
+                 hc-label="应付票据科目"
+                 hc-class-id="gl_account_subject"
+                 hc-common-search="commonSearchSettingOfAccountSubject.ap"
+                 hc-after-delete="clearSubjectAfterDelete('ap')">
+            </div>
+
+            <div hc-input="data.currItem.name_ap"
+                 hc-label="">
+            </div>
+
+            <div hc-input="data.currItem.code_inv"
+                 hc-label="有票应付科目"
+                 hc-class-id="gl_account_subject"
+                 hc-common-search="commonSearchSettingOfAccountSubject.inv"
+                 hc-after-delete="clearSubjectAfterDelete('inv')">
+            </div>
+
+            <div hc-input="data.currItem.name_inv"
+                 hc-label="">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.ap_invoice_type"
+                 hc-label="发票产生方式"
+                 hc-dict-code="ap_invoice_type" hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.price_from"
+                 hc-label="价格来源"
+                 hc-dict-code="price_from">
+            </div>
+
+            <div hc-input="data.currItem.pay_type"
+                 hc-label="付款说明"
+                 hc-col-count="4">
+            </div>
+        </div>
+        <!--</div>-->
+    </div>
+
+    <div id="other" hc-box="">
+        <div class="row">
+            <div hc-input="data.currItem.created_by"
+                 hc-label="创建人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.creation_date"
+                 hc-label="创建时间"
+                 hc-readonly="true">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by"
+                 hc-label="修改人" hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.last_update_date"
+                 hc-label="修改时间" hc-readonly="true">
+            </div>
+        </div>
+    </div>
+</div>

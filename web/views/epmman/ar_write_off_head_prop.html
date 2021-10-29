@@ -1,0 +1,66 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.write_off_head_code"
+                     hc-label="核销单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.createtime"
+                     hc-label="核销日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.currency_name"
+                     hc-label="币别"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.payment_record_code"
+                     hc-label="到款单号"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="经销商编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-label="经销商名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.received_amt"
+                     hc-label="到款金额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.received_written_off_amt"
+                     hc-label="可核销金额"
+                     hc-type="money"
+                     hc-if="data.currItem.write_off_head_id <= 0"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.write_off_amt_before"
+                     hc-label="核销前可核销金额"
+                     hc-type="money"
+                     hc-if="data.currItem.write_off_head_id > 0"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-col-count="6"
+                     hc-readonly="data.currItem.write_off_head_id > 0"
+                     hc-type="textarea"></div>
+                <div hc-input="data.currItem.write_off_amt"
+                     hc-label="本次核销金额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+            </div>
+        </div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>

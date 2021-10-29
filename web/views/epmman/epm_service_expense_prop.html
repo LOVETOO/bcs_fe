@@ -1,0 +1,67 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base"  class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.service_expense_no" 
+                     hc-label="服务费编号"
+                     hc-readonly="true"></div>
+               <div hc-input="data.currItem.customer_code"
+                     hc-label="客户信息"
+                     hc-class-id="customer_org"
+                     hc-required="!isCustomerCode"
+                     hc-readonly="isCustomerCode"
+                     hc-common-search="commonSearchSetting.CustomerOrg"></div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="审核状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.total_auditt_amt"
+                     hc-label="合同发货总额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+               <div hc-input="data.currItem.billing_unit_code"
+                     hc-label="法人客户信息"
+                     hc-required="true"
+                     hc-class-id="epm_project_contract"
+                     hc-common-search="commonSearchSetting.legalEntityName"></div>
+                <div hc-input="data.currItem.billing_unit_name"
+                     hc-readonly="true"></div>
+               <div hc-input="data.currItem.creator_name"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+               <div hc-input="data.currItem.total_check_amt"
+                    hc-label="发货结算总额"
+                    hc-type="money"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.service_amt"
+                    hc-label="服务费金额"
+                    hc-type="money"
+                    hc-readonly="true"></div>
+                <div hc-input="data.currItem.total_cash_amt"
+                     hc-label="已兑现总额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.total_uncash_amt"
+                     hc-label="未兑现总额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+            </div>
+            <div>
+               <div hc-input="data.currItem.remark"
+                    hc-label="备注"
+                    hc-col-count="8"
+                    hc-type="textarea"></div>
+            </div>
+        </div>
+        <div hc-box="服务费明细" class="other-h"></div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>

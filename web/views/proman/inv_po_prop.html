@@ -1,0 +1,90 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.pono"
+                     hc-label="采购订单号"
+                     hc-readonly="true"><!--hc-required="true"-->
+                </div>
+                <div hc-input="data.currItem.podate"
+                     hc-label="单据日期"
+                     hc-type="date"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.price_type"
+                     hc-label="采购价格类型"
+                     hc-required="data.currItem.price_from==2"
+                     hc-readonly="data.currItem.price_from==1"
+                     hc-change = "onPriceTypeChange()"
+                     hc-dict-code="price_type"></div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+<!--
+                <div hc-input="data.currItem.employee_name"
+                     hc-label="采购员"
+                     hc-btn-click="chooseBuyer()"
+                >
+                </div>
+-->
+                <div hc-input="data.currItem.vendor_name"
+                     hc-label="供应商"
+                     hc-class-id="vendor_org"
+                     hc-common-search="chooseVendor"
+                     hc-required="true"
+                     hc-col-count="4"
+                >
+                </div>
+
+
+                <div hc-input="data.currItem.warehouse_name"
+                     hc-label="仓库"
+                     hc-btn-click="chooseWarehouse()">
+                </div>
+
+                <div hc-input="data.currItem.created_by"
+                     hc-label="创建人"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.poremark"
+                     hc-label="备注"
+                     hc-col-count="4">
+                </div>
+                <!--<div hc-input="data.currItem.contact"
+                     hc-label="联系人">
+                </div>
+                <div hc-input="data.currItem.tele"
+                     hc-label="联系电话">
+                </div>-->
+                <div hc-input="data.currItem.dept_name"
+                     hc-label="部门"
+                     hc-class-id="dept"
+                     hc-common-search="chooseDept">
+                </div>
+
+                <div hc-input="data.currItem.creation_date"
+                     hc-label="创建时间"
+                     hc-type="time"
+                     hc-readonly="true">
+                </div>
+            </div>
+        </div>
+
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+    </div>
+
+</div>
+
+
+

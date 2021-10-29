@@ -1,0 +1,119 @@
+<div class="wrapper wrapper-content animated fadeInRight view-root" ng-controller="oa_resource">
+
+	<div class="resource-root">
+		<div id="rMenu">
+			<ul>
+				<li ng-show='bottom!=2' id="m_delete" ng-click="add_classify()">增加分类</li>
+				<li ng-show='bottom!=2' id="m_editFile" ng-click="add_resource()">增加资源</li>
+				<li id="m_delete" ng-click="property()">属性</li>
+				<li id="m_delete" ng-click="del_file(1)">删除</li>
+			</ul>
+		</div>
+		<div class="resource-tree">
+			<div id="treeRes" class="ztree" />
+		</div>
+		<div class="resource-scheduer">
+			<div id="calendar" />
+		</div>
+	</div>
+</div>
+
+<script src='js/jquery/zh-cn.js'></script>
+
+<style type="text/css">
+	div#rMenu {
+		width: 110px;
+		z-index: 4;
+		position: absolute; //使用绝对定位  
+		visibility: hidden;
+		top: 0;
+		background-color: #f6f6f6;
+		padding: 1px;
+		visibility: hidden;
+		text-align: center;
+	}
+	
+	div#rMenu ul {
+		margin: 0px;
+		padding: 0px;
+		/* border-collapse: separate; */
+		border: 1px solid #808080;
+	}
+	
+	.ztree li {
+		padding: 2px;
+		margin: 0;
+		list-style: none;
+		line-height: 14px;
+		text-align: left;
+		white-space: nowrap;
+		outline: 0;
+	}
+	
+	div#rMenu ul li {
+		font-size: 11px;
+		line-height: 20px;
+		margin: 0px;
+		padding: 2px;
+		cursor: pointer;
+		list-style: none outside none; //取消样式
+		background-color: #DFDFDF;
+		border-bottom: 1px solid #d3d3d3;
+		padding-left: 3px;
+		color: #222;
+	}
+	
+	div#rMenu ul li:hover {
+		background: #eee;
+	}
+	
+	div.wrap-height>div.ng-scope {
+		height: 100%;
+	}
+	
+	div.wrapper.wrapper-content.animated.fadeInRight.view-root.ng-scope {
+		display: flex;
+		flex-shrink: 1;
+		flex-grow: 1;
+		padding: 10px 0px;
+	}
+	
+	.resource-root {
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+		flex-shrink: 1;
+		flex-grow: 1;
+		background-color: #fff;
+		padding: 3px 2px;
+	}
+	
+	.resource-tree {
+		width: 288px;
+		flex-shrink: 0;
+		flex-grow: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		margin-right: 10px;
+		border: 1px #ddd solid;
+		border-radius: 2px;
+	}
+	
+	.resource-scheduer {
+		flex-shrink: 1;
+		flex-grow: 1;
+	}
+	
+	.ztree li {
+		line-height: 20px;
+	}
+	
+	.ztree li a {
+		color: #5d5d5d;
+	}
+	
+	.ztree li a.curSelectedNode {
+		height: 20px;
+		border-radius: 2px;
+	}
+</style>

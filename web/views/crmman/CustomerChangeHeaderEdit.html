@@ -1,0 +1,758 @@
+<div id="container_error" class="container">
+    <h4>��ܰ��ʾ���������ݲ�����Ҫ���������ٱ���</h4>
+    <ol></ol>
+</div>
+
+<div local-storage ng-model="data.currItem" class="bill_form" ng-controller="ctrl_customer_change_headerEdit">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h3>�ͻ����ϱ��</h3>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul id="tabs" class="tri-nav-tabs">
+                    <li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav"><i
+                            class="fa fa-pencil-square">������Ϣ</i></a></li>
+                    <li><a data-target="#tab2" data-toggle="tab" class="tab-nav"><i class="fa fa-shopping-cart">��ϵ��</i></a>
+                    </li>
+                    <li><a data-target="#tab3" data-toggle="tab" class="tab-nav"><i class="fa fa-truck">���ʽ</i></a>
+                    </li>
+                    <li><a data-target="#tab4" data-toggle="tab" class="tab-nav"><i class="fa fa-cogs">�ͻ�Ʒ��</i></a></li>
+                    <li><a data-target="#tab5" data-toggle="tab" class="tab-nav"><i class="fa fa-cogs">�����˺�</i></a></li>
+
+                    <div style="float: right;color:gray;">
+                        <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()"><i
+                                class="fa fa-search"></i>��ѯ
+                        </button>
+                        <button class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button" ng-click="new()"><i
+                                class="fa fa-file-o"></i>����
+                        </button>
+                        <button class="btn btn-toolbar" type="button" ng-click="save()"><i class="fa fa-floppy-o"></i>����</button>
+                        <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i class="fa fa-history"></i>ˢ��</button>
+                        <button class="btn btn-toolbar" type="button" ng-click="delete()" ng-hide="data.currItem.stat!=1"><i
+                                class="fa fa-trash"></i>ɾ��
+                        </button>
+                        <button class="btn btn-toolbar" type="button" ng-click="wfstart()" ng-hide="data.currItem.stat!=1">
+                            <i class="fa fa-check-square-o"></i>�ύ
+                        </button>
+                        <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i class="fa fa-times"></i>�ر�</button>
+                        </button>
+                    </div>
+                </ul>
+                <div id="error" class="error"></div>
+                <form class="form-horizontal" id="saveform">
+                    <div id="content" class="first tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">�������</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input  type="text"
+                                                ng-disabled="true"
+                                                ng-model="data.currItem.cust_change_no"
+                                                class="input-sm form-control readonly">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">������</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control input-sm" readonly="readonly"
+                                               ng-model="data.currItem.creator">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">����ʱ��</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input bs-datepacker type="text" class="form-control input-sm"
+                                               readonly="readonly" ng-model="data.currItem.create_time">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">����״̬</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select chosen-select id="astat" ng-disabled="true"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="type.dictvalue as type.dictname  for type in stats"
+                                                ng-model="data.currItem.stat">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">�ͻ�</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input ng-readonly="data.currItem.stat!=1" type="text"
+                                               ng-model="data.currItem.cust_code" class="input-sm form-control"
+                                               name="cust_name" id="cust_code"
+                                               data-rule-required="true"
+                                               data-msg-required="�ͻ����ܿ�">
+                                            <a class="input-group-addon" ng-click="openCustFrm()" id="#cust_code"><i
+                                                    class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" for="cust_code">�ͻ�����</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                            <input type="text" readonly="readonly"
+                                                   class="input-sm form-control ng-pristine ng-valid ng-touched"
+                                                   ng-model="data.currItem.sap_code">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">���˵��</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input ng-readonly="data.currItem.stat!=1" type="text"
+                                               ng-model="data.currItem.note"
+                                               class="input-sm form-control">
+                                    </div>
+                                </div>
+								 <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="col-md-2">
+                                            <a class="pull-right"
+                                               style="padding-right: 10px;line-height: 25px;"><i
+                                                    class="fa fa-list"></i></a>
+                                        </div>
+                                        <div class="col-md-8" style=" padding-right: 0px; ">
+                                            �������Ϣ
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<h4 class="ibox-content-title">�������Ϣ</h4>-->
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" for="cust_name">�ͻ�����</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.stat!=1" type="text"
+                                               ng-model="data.currItem.new_cust_name" class="input-sm form-control"
+                                               name="cust_name" id="cust_name1"
+                                               data-rule-required="true"
+                                               data-msg-required="�ͻ����Ʋ��ܿ�">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" >��ַ</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.stat!=1" type="text"
+                                               data-rule-required="true"
+                                               data-msg-required="��ַ����Ϊ��"
+                                               ng-model="data.currItem.new_address"
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">�绰</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.stat!=1" type="text"
+                                               data-rule-required="true"
+                                               data-msg-required="�绰����Ϊ��"
+                                               ng-model="data.currItem.new_tel"
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">ҵ����</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input type="text" ng-readonly="data.currItem.stat!=1"
+                                                   data-rule-required="true"
+                                                   data-msg-required="ҵ���Ų���Ϊ��"
+                                                   class="input-sm form-control"
+                                                   ng-model="data.currItem.new_org_code">
+                                            <a class="input-group-addon" ng-click="selectorg()" id="#code"><i
+                                                    class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-2">-->
+                                    <!--<input ng-readonly="data.currItem.read!=1" type="text"-->
+                                    <!--ng-model="data.currItem.new_org_name"-->
+                                    <!--class="input-sm form-control">-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">����</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.stat!=1" type="text"
+                                               data-rule-required="true"
+                                               data-msg-required="���治��Ϊ��"
+                                               ng-model="data.currItem.new_fax"
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">Email</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.stat!=1" type="text"
+                                               data-rule-required="true"
+                                               data-msg-required="Email����Ϊ��"
+                                               ng-model="data.currItem.new_email"
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">���ұ���</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input ng-readonly="data.currItem.stat!=1" type="text"
+                                                   data-rule-required="true"
+                                                   data-msg-required="���ұ��벻��Ϊ��"
+                                                   class="input-sm form-control"
+                                                   ng-model="data.currItem.new_currency_code">
+                                            <a class="input-group-addon" ng-click="currency()" id="#abc"><i
+                                                    class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-2">-->
+                                    <!--<input ng-readonly="data.currItem.read!=1" type="text"-->
+                                    <!--ng-model="data.currItem.new_currency_name"-->
+                                    <!--class="input-sm form-control">-->
+                                    <!--</div>-->
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">ó������</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select ng-disabled="data.currItem.stat!=1" chosen-select data-placeholder=" "
+                                                name="trade_type"
+                                                data-rule-required="true"
+                                                data-msg-required="ó�����Ͳ���Ϊ��"
+                                                ng-model="data.currItem.new_trade_type"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="type.dictvalue as type.dictname for type in trade_types" >
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" for="area_level">����ȼ�</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select ng-disabled="data.currItem.stat!=1" chosen-select data-placeholder=" "
+                                                name="area_level" ng-model="data.currItem.new_area_level"
+                                                data-rule-required="true"
+                                                data-msg-required="����ȼ�����Ϊ��"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="type.dictvalue as type.dictname for type in area_levels">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">���ұ���</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input ng-readonly="data.currItem.stat!=1" type="text"
+                                                   data-rule-required="true"
+                                                   data-msg-required="���ұ��벻��Ϊ��"
+                                                   class="input-sm form-control"
+                                                   ng-model="data.currItem.new_area_code">
+                                            <a class="input-group-addon" ng-click="openAreaNameFrm()" id="#new_area_code"><i
+                                                    class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-2">-->
+                                    <!--<input ng-readonly="data.currItem.read!=1" type="text"-->
+                                    <!--ng-model="data.currItem.new_area_name"-->
+                                    <!--class="input-sm form-control">-->
+                                    <!--</div>-->
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">���õȼ�</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select  ng-disabled="data.currItem.stat!=1" data-placeholder=" "
+                                                 class="input-sm chosen-select form-control"
+                                                 ng-model="data.currItem.new_credit_rating" chosen-select
+                                                 ng-options="type.dictvalue as type.dictname for type in credit_ratings">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">��������</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input type="text" ng-readonly="data.currItem.stat!=1"
+                                                   class="input-sm form-control"
+                                                   ng-model="data.currItem.new_core_name">
+                                            <a class="input-group-addon" ng-click="selectCoreItem()" id="core_name1"><i
+                                                    class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">���˴���</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.stat!=1" type="text"
+                                               data-rule-required="true"
+                                               data-msg-required="���˴�����Ϊ��"
+                                               ng-model="data.currItem.new_lawman" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">�����˺�</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" ng-readonly="data.currItem.stat!=1"
+                                               data-rule-required="true"
+                                               data-msg-required="�����˺Ų���Ϊ��"
+                                               ng-model="data.currItem.new_bank_accno" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" for="cust_stat">�ͻ�����</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select ng-disabled="data.currItem.stat!=1" chosen-select data-placeholder=" "
+                                                name="cust_type" ng-model="data.currItem.new_cust_type"
+                                                data-rule-required="true"
+                                                data-msg-required="�ͻ����ʲ���Ϊ��"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="type.dictvalue as type.dictname for type in cust_types">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" for="cust_level">�ͻ��ȼ�</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select ng-disabled="data.currItem.stat!=1" chosen-select data-placeholder=" "
+                                                name="cust_stat" ng-model="data.currItem.new_cust_level"
+                                                data-rule-required="true"
+                                                data-msg-required="�ͻ��ȼ�����Ϊ��"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="type.dictvalue as type.dictname for type in cust_levels">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" style="font-size: 12px">�ͻ��������</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="number" ng-readonly="data.currItem.stat!=1"
+                                               ng-model="data.currItem.new_part_rate" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" style="font-size: 12px">������(%)</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="number" ng-readonly="data.currItem.stat!=1"
+                                               ng-model="data.currItem.new_rebate_rate" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">ע���ַ</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.stat!=1" type="text"
+                                               data-rule-required="true"
+                                               data-msg-required="ע���ַ����Ϊ��"
+                                               ng-model="data.currItem.new_invoice_address"
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">OA��ȱ��</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.stat!=1" type="number"
+                                               ng-model="data.currItem.oa_change"
+                                               class="input-sm form-control">
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-11"></div>
+                                    <div class="col-md-1" style="left: 30px;">
+                                        <label><input type="checkbox" ng-false-value="1" ng-true-value="2"
+                                                      ng-checked="data.currItem.new_usable"
+                                                      ng-model="data.currItem.new_usable">�Ƿ����
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="col-md-2">
+                                            <a class="pull-right"
+                                               style="padding-right: 10px;line-height: 25px;"><i
+                                                    class="fa fa-list"></i></a>
+                                        </div>
+                                        <div class="col-md-8" style=" padding-right: 0px; ">
+                                            ���ǰ��Ϣ
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<h4 class="ibox-content-title">���ǰ��Ϣ</h4>-->
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">�ͻ�����</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.read!=1" type="text"
+                                               ng-model="data.currItem.cust_name" class="input-sm form-control"
+                                               name="cust_name" id="name"
+                                               data-rule-required="true"
+                                               data-msg-required="�ͻ����Ʋ��ܿ�">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" >��ַ</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.read!=1" type="text"
+                                               ng-model="data.currItem.address"
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">�绰</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.read!=1" type="text"
+                                               ng-model="data.currItem.tel"
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">ҵ����</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input type="text" ng-readonly="data.currItem.read!=1"
+                                                   class="input-sm form-control"
+                                                   ng-model="data.currItem.org_code">
+                                            <a class="input-group-addon" ng-click="selectorg()" id="#org"><i
+                                                    class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-2">-->
+                                    <!--<input ng-readonly="data.currItem.read!=1" type="text"-->
+                                    <!--ng-model="data.currItem.org_name"-->
+                                    <!--class="input-sm form-control">-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">����</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.read!=1" type="text"
+                                               ng-model="data.currItem.fax"
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">Email</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.read!=1" type="text"
+                                               ng-model="data.currItem.email"
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">����</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select  ng-disabled="data.currItem.read!=1" chosen-select data-placeholder=" "
+                                                 name="base_currency"  ng-model="data.currItem.currency_id"
+                                                 class="input-sm chosen-select form-control"
+                                                 ng-options="type.currency_id as type.currency_name  for type in base_currencys">
+                                        </select>
+                                    </div>
+                                    <!--<div class="col-md-2">-->
+                                    <!--<input ng-readonly="data.currItem.read!=1" type="text"-->
+                                    <!--ng-model="data.currItem.currency_name"-->
+                                    <!--class="input-sm form-control">-->
+                                    <!--</div>-->
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">ó������</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select ng-disabled="data.currItem.read!=1" chosen-select data-placeholder=" "
+                                                name="cust_type" ng-model="data.currItem.trade_type"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="type.dictvalue as type.dictname for type in trade_types">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" for="area_level">����ȼ�</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select ng-disabled="data.currItem.read!=1" chosen-select data-placeholder=" "
+                                                name="cust_type" ng-model="data.currItem.area_level"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="type.dictvalue as type.dictname for type in area_levels">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">���ұ���</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input ng-readonly="data.currItem.read!=1" type="text"
+                                                   class="input-sm form-control"
+                                                   ng-model="data.currItem.area_code">
+                                            <a class="input-group-addon" ng-click="openAreaNameFrm()" id="#abc"><i
+                                                    class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-2">-->
+                                    <!--<input ng-readonly="data.currItem.read!=1" type="text"-->
+                                    <!--ng-model="data.currItem.area_name"-->
+                                    <!--class="input-sm form-control">-->
+                                    <!--</div>-->
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">���õȼ�</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select  ng-disabled="data.currItem.read!=1" data-placeholder=" "
+                                                 class="input-sm chosen-select form-control"
+                                                 ng-model="data.currItem.credit_rating" chosen-select
+                                                 ng-options="type.dictvalue as type.dictname for type in credit_ratings">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">��������</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input type="text" ng-readonly="data.currItem.read!=1"
+                                                   class="input-sm form-control"
+                                                   ng-model="data.currItem.core_name">
+                                            <a class="input-group-addon" ng-click="selectCoreItem()" id="core_name"><i
+                                                    class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">���˴���</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.read!=1" type="text"
+                                               ng-model="data.currItem.lawman" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">�����˺�</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" ng-readonly="data.currItem.read!=1"
+                                               ng-model="data.currItem.bank_accno" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" for="cust_read">�ͻ�����</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select ng-disabled="data.currItem.read!=1" chosen-select data-placeholder=" "
+                                                name="cust_stat" ng-model="data.currItem.cust_type"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="type.dictvalue as type.dictname for type in cust_types">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null" for="cust_level">�ͻ��ȼ�</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select ng-disabled="data.currItem.read!=1" chosen-select data-placeholder=" "
+                                                name="cust_stat" ng-model="data.currItem.cust_level"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="type.dictvalue as type.dictname for type in cust_levels">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini" style="font-size: 12px">�ͻ��������</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="number" ng-readonly="data.currItem.read!=1"
+                                               ng-model="data.currItem.part_rate" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini" style="font-size: 12px">������(%)</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="number" ng-readonly="data.currItem.read!=1"
+                                               ng-model="data.currItem.rebate_rate" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">ע���ַ</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-readonly="data.currItem.read!=1" type="text"
+                                               ng-model="data.currItem.invoice_address"
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-1" style="left: 30px;">
+                                        <label><input type="checkbox" ng-false-value="1" ng-true-value="2"
+                                                      ng-checked="data.currItem.usable"
+                                                      ng-model="data.currItem.usable">�Ƿ����
+                                        </label>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <!--1.��ϵ��-->
+                        <div id="tab2" class="tab-pane">
+                        <div class="ibox-content">
+                        <button  class="btn btn-toolbar" type="button" ng-click="addRelaman()"><i
+                        class="fa fa-plus-square-o"></i>������
+                        </button>
+                        <button ng-hide="data.currItem.stat!=1" class="btn btn-toolbar" type="button" ng-click="delRelaman()"><i
+                        class="fa fa-minus-square-o"></i>ɾ����
+                        </button>
+                        <div slick-grid sg-options="relamanOptions"
+                        sg-data="data.currItem.customer_change_relamanofcustomer_change_headers"
+						 sg-model="data.currItem.customer_change_relamanofcustomer_change_headers"
+                        sg-columns="relaman_Columns" style="width:100%;height:240px;"
+                        class="slick-grid"></div>
+                        </div>
+                        </div>
+                        <!--2.��������-->
+                        <div id="tab3" class="tab-pane">
+                            <div class="ibox-content">
+                                <button ng-hide="data.currItem.stat!=1" class="btn btn-toolbar" type="button" ng-click="addPaymentType()"><i
+                                        class="fa fa-plus-square-o"></i>������
+                                </button>
+                                <button ng-hide="data.currItem.stat!=1" class="btn btn-toolbar" type="button" ng-click="delPaymentType()"><i
+                                        class="fa fa-minus-square-o"></i>ɾ����
+                                </button>
+                                <div slick-grid sg-options="PaymentTypeOptions"
+                                     sg-data="data.currItem.customer_change_payment_typeofcustomer_change_headers"
+                                     sg-model="data.currItem.customer_change_payment_typeofcustomer_change_headers"
+                                     sg-columns="paytype_Columns" style="width:100%;height:140px;"
+                                     class="slick-grid"></div>
+                            </div>
+                            <div class="ibox-content">
+                                <button ng-hide="data.currItem.stat!=1" class="btn btn-toolbar" type="button" ng-click="addType()"><i
+                                        class="fa fa-plus-square-o"></i>������
+                                </button>
+                                <button ng-hide="data.currItem.stat!=1" class="btn btn-toolbar" type="button" ng-click="delType()"><i
+                                        class="fa fa-minus-square-o"></i>ɾ����
+                                </button>
+                                <div slick-grid sg-options="PaytypeDetailOptions"
+                                     sg-data="data.currItem.customer_change_paytype_detailofcustomer_change_payment_types"
+                                     sg-model="data.currItem.customer_change_paytype_detailofcustomer_change_payment_types"
+                                     sg-columns="PaytypeDetai_Columns" style="width:100%;height:140px;"
+                                     class="slick-grid"></div>
+                            </div>
+                        </div>
+                        <!--3.�ͻ�Ʒ��-->
+                        <div id="tab4" class="tab-pane">
+                            <div class="ibox-content">
+                                <button ng-hide="data.currItem.stat!=1" class="btn btn-toolbar" type="button" ng-click="addBrand()"><i
+                                        class="fa fa-plus-square-o"></i>������
+                                </button>
+                                <button ng-hide="data.currItem.stat!=1" class="btn btn-toolbar" type="button" ng-click="delBrand()"><i
+                                        class="fa fa-minus-square-o"></i>ɾ����
+                                </button>
+                                <div slick-grid sg-options="BrandOptions"
+                                     sg-data="data.currItem.customer_change_brandofcustomer_change_headers"
+									 sg-model="data.currItem.customer_change_brandofcustomer_change_headers"
+                                     sg-columns="brand_Columns" style="width:100%;height:240px;"
+                                     class="slick-grid"></div>
+                            </div>
+                        </div>
+                        <!--4.�����ʺ�-->
+                        <div id="tab5" class="tab-pane">
+                            <div class="ibox-content">
+                                <button ng-hide="data.currItem.stat!=1" class="btn btn-toolbar" type="button" ng-click="addBank()"><i
+                                        class="fa fa-plus-square-o"></i>������
+                                </button>
+                                <button ng-hide="data.currItem.stat!=1" class="btn btn-toolbar" type="button" ng-click="delBank()"><i
+                                        class="fa fa-minus-square-o"></i>ɾ����
+                                </button>
+                                <div slick-grid sg-options="BankOptions"
+                                     sg-data="data.currItem.customer_change_bankofcustomer_change_headers"
+									 sg-data="data.currItem.customer_change_bankofcustomer_change_headers"
+                                     sg-columns="bank_Columns" style="width:100%;height:240px;"
+                                     class="slick-grid"></div>
+                            </div>
+                        </div>
+                        <!--5.������֯-->
+                        <!--<div id="tab6" class="tab-pane">-->
+                        <!--<div class="ibox-content">-->
+                        <!--<button class="btn btn-toolbar" type="button" ng-click="addSaleOrg()"><i-->
+                        <!--class="fa fa-plus-square-o"></i>������-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-toolbar" type="button" ng-click="deleteSaleOrg"><i-->
+                        <!--class="fa fa-minus-square-o"></i>ɾ����-->
+                        <!--</button>--><!--<div slick-grid sg-options="SaleOrgOptions"-->
+                        <!--sg-data="customer_apply_header.customer_apply_salorgofcustomer_apply_headers"-->
+                        <!--sg-columns="saleorg_Columns" style="width:100%;height:240px;"-->
+                        <!--class="slick-grid"></div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!-- 6.ҵ��Ա-->
+                        <!--<div id="tab7" class="tab-pane">-->
+                        <!--<div class="ibox-content">-->
+                        <!--<button ng-hide="data.currItem.stat!=1" class="btn btn-toolbar" type="button" ng-click="addCustomerSales()"><i-->
+                        <!--class="fa fa-plus-square-o"></i>������-->
+                        <!--</button>-->
+                        <!--<button ng-hide="data.currItem.stat!=1" class="btn btn-toolbar" type="button" ng-click="deletCustomerSales()"><i-->
+                        <!--class="fa fa-minus-square-o"></i>ɾ����-->
+                        <!--</button>-->
+                        <!--<div slick-grid sg-options="CustomerSalesOptions"-->
+                        <!--sg-data="data.currItem.customer_salesofcustomers"-->
+                        <!--sg-columns="customersales_Columns" style="width:100%;height:240px;"-->
+                        <!--class="slick-grid"></div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>����</h5>
+                                    </div>
+                                    <div class="ibox-content icons-box">
+                                        <button swf-upload title="��Ӹ���" class="btn btn-toolbar"
+										        ng-disabled="dada.currItem.stat!=1"
+                                                upload-list="data.currItem.objattachs"
+                                                ng-model="data.currItem.objattachs" filed='#attach-area'>
+                                            <i class="fa lightblue font-size-15  fa-paperclip"></i> ��Ӹ���
+                                        </button>
+                                        <ul id="attach-area">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-hide="data.currItem.stat == 1">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>��������</h5>
+                                        <div ibox-tools></div>
+                                    </div>
+                                    <div class="ibox-content icons-box">
+                                        <div wf-ystep size="large" class="p-xs clear"
+                                             ng-model="data.currItem.wfid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

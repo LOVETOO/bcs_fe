@@ -1,0 +1,85 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.invbillno"
+                     hc-readonly="true"
+                     hc-label="单据号">
+                </div>
+                <div hc-input="data.currItem.invbilldate"
+                     hc-label="记账日期"
+                     hc-type="date"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.year_month"
+                     hc-label="记账月份"
+                     hc-readonly="true"
+                     hc-type="month">
+                </div>
+                <!--<div hc-input="data.currItem.stat"-->
+                     <!--hc-label="单据状态"-->
+                     <!--hc-dict-code="stat"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+                <div hc-input="data.currItem.is_auditing_wh"
+                     hc-label="已审核"
+                     hc-type="checkbox"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.dept_code"
+                     hc-label="部门"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.dept_name"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.in_ware_type_name"
+                     hc-label="入库类型"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.iscredence"
+                     hc-label="生成凭证"
+                     hc-type="checkbox"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-readonly="true"
+                     hc-col-count="4">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.vendor_code"
+                     hc-label="供应商"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.vendor_name"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.tax_rate"
+                     hc-type="percent"
+                     hc-change="onTaxRateChange()"
+                     hc-required="true"
+                     hc-label="税率">
+                </div>
+            </div>
+        </div>
+        <!-- 表格视图  -->
+        <div hc-grid="gridOptions" class="hc-grid m" hc-auto-height="grid"></div>
+
+    </div>
+</div>

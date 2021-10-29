@@ -1,0 +1,88 @@
+.imgplayer-body{
+	margin:0px auto;
+	width:1024px;
+	text-align:left;
+	border-right:4px solid #324b6a;
+	background-color:#333333;
+}
+.imgplayer-download{
+	font-size:20px;
+	}
+.imgplayer-top{
+	 width:1024px;
+	 height:135px;	
+	 background-image:url(../images/toggleLoading_bg.jpg);
+	 background-repeat: no-repeat;
+}
+.imgplayer-content{
+	 width:1024px;
+	 padding:25px 50px 0px;	
+}
+.imgplayer-title{
+	
+	font-size:22px;
+	color:#577aa6;
+	font-weight:600;
+	padding:10px 0px;
+}
+.imgplayer-introduce{
+	color:#d0d0d0;
+	font-size:13px;
+	text-indent:2em;
+	line-height:16px;
+}
+
+.imgplayer-setting{
+	padding-left:2em;
+	color:#d0d0d0;
+	font-size:13px;
+	line-height:16px;
+}
+.imgplayer-setting-list{
+	width:900px;
+	color:#d0d0d0;
+	font-size:13px;
+	line-height:16px;
+}
+.imgPlayer1-stitle{
+	color:#d0d0d0;
+	font-size:13px;
+	line-height:16px;
+	padding:10px;
+}
+.imgplayer-example{
+	border:1px solid #666;
+	background-color:#3e3e3e;
+	padding:10px;
+	margin-top:10px;
+	font-size:13px;
+	line-height:16px;
+	color:#577aa6;
+	position:relative;
+}
+.imgplayer-example-js{
+	margin-top:10px;
+	width:800px;
+	padding:10px;
+	color:green;
+}
+.imgplayer-example-html{
+	width:800px;
+	padding:10px;
+}
+.imgplayer-example-say{
+	margin-top:10px;
+	width:900px;
+	padding:10px;
+	color:#3ea4fd;
+}
+.imgplayer-bottom{
+	 width:1024px;
+	 height:80px;
+	 color:#324b6a;
+	 line-height:80px;
+	 padding-left:80px;	
+	 font-family:Arial;
+	 background-image:url(../images/toggleLoading_b_bg.jpg);
+	 background-repeat: no-repeat;
+}

@@ -1,0 +1,44 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>拆分落货纸明细</h3>
+    </div>
+    <div class="modal-body">
+    	<form name="planHeaderEdit" class="form-horizontal form-inline">
+    		
+    		<div class="ibox-content">
+    			<div class="row">
+    				<div class="col-md-2"><label class="form-label-mini ">批次号:</label></div>
+    				<div class="col-md-4">
+    					<input readonly ng-model="item.batch_no" type="text" class="form-control input-sm" style="width: 100%;">
+    				</div>
+    				<div class="col-md-2"><label class="form-label-mini ">待发货数量:</label></div>
+    				<div class="col-md-4">
+    					<input readonly ng-model="item.qty" type="text" class="form-control input-sm" style="width: 100%;">
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="col-md-2"><label class="form-label-mini ">柜型:</label></div>
+    				<div class="col-md-4">
+    					<select chosen-select ng-model="item.box_type" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in box_line_types"> 
+	                        <option value=""></option> 
+	                    </select>
+    				</div>
+    				<div class="col-md-2"><label class="form-label-mini ">单柜装货数:</label></div>
+    				<div class="col-md-4">
+    					<input ng-model="item.split_num" type="text" bsDatepicker class="form-control input-sm date" style="width: 100%;">
+    				</div>
+    			</div>
+    		</div>
+    		
+        </form> 
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+          确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+          取消
+        </a>
+     </div>
+</div>

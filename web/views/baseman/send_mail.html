@@ -1,0 +1,676 @@
+<div class="modal-content" local-storage ng-model="data.currItem">
+	<div class="row row_div" style="width: 100%;margin-left: 0px;">
+		<div class="col-lg-12">
+			<div class="modal-header" style="width: 100%">
+				<div class="">
+					<a ng-click="send_email()" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send"><i class="fa fa-reply"></i> 发送</a>
+					<span style="color: #DDDDDD; float: right; font-size: 20px; cursor:pointer" class="glyphicon glyphicon-remove" ng-click="cancel(e)"></span>
+				</div>
+
+			</div>
+			<div class="modal-body" style="width: 100%">
+				<div class="col-lg-12 animated fadeInRight">
+					<div class="mail-box">
+						<div class="mail-body">
+							<div class="form-horizontal  col-lg-10" style="width: 81%;">
+								<div class="form-group"><label ng-click='addpeople($event)' style='float:left;width:45px' class="control-label">收件人</label>
+									<div class="col-md-11 ipt">
+										<div id="toAreaCtrl" ng-mousedown='mousedown(1)' ng-click class="noime div_txt" style="cursor: text;">
+											<div id='before' style="position:absolute;color:#A0A0A0;padding-top:1px;display:none;"></div>
+											<div id="final" class="addr_text" style="float:left;border:none;overflow:hidden;width:{{data.currItem.search_peop.length*13+13>840?840:data.currItem.search_peop.length*13+13}}px;">
+												<input type="input" class="js_input" ng-model="data.currItem.search_peop" style="border:none;outline:none;-webkit-appearance:none;width:100%;" accesskey="t" tabindex="1" autocomplete="off">
+												<div style="width: 1px; height: 1px; overflow: auto; white-space: nowrap; border: none; margin: 0px; padding: 0px; font-family: Tahoma; font-size: 12px; font-weight: normal; line-height: normal; word-spacing: 0px;">{{data.currItem.search_peop}}</div>
+											</div>
+											<div style="clear:both;border:none;margin:0;padding:0;" unselectable="on"><input type="text" style="position:absolute;border:none;padding:0;width:10px;left:-9999px;top:-9999px;" tabindex="-1"></div>
+
+										</div>
+										<textarea ng-hide='true' style='height:25px;resize:none;' class="col-md-12" be-delete="clearspec()" be-search="openuserFrm()" be-edit="true" ng-model="data.currItem.snedto" /></textarea>
+									</div>
+								</div>
+								<div class="form-group"><label style='float:left;width:45px' class="control-label">抄送人</label>
+									<div class="col-md-11">
+										<div id="toAreaCtrl1" ng-mousedown='mousedown(2)' class="noime div_txt" style="cursor: text;">
+											<div id='before1' style="position:absolute;color:#A0A0A0;padding-top:1px;display:none;"></div>
+											<div id="final1" class="addr_text" style="float:left;border:none;overflow:hidden;width:{{data.currItem.search_linep.length*13+13>840?840:data.currItem.search_linep.length*13+13}}px;">
+												<input type="input" class="js_input" ng-model="data.currItem.search_linep" style="border:none;outline:none;-webkit-appearance:none;width:100%;" accesskey="t" tabindex="1" autocomplete="off">
+												<div style="width: 1px; height: 1px; overflow: auto; white-space: nowrap; border: none; margin: 0px; padding: 0px; font-family: Tahoma; font-size: 12px; font-weight: normal; line-height: normal; word-spacing: 0px;">{{data.currItem.search_linep}}</div>
+											</div>
+											<div style="clear:both;border:none;margin:0;padding:0;" unselectable="on"><input type="text" style="position:absolute;border:none;padding:0;width:10px;left:-9999px;top:-9999px;" tabindex="-1"></div>
+
+										</div>
+										<textarea ng-hide='true' style='height:25px;resize:none;' ng-change='get_mail()' class="col-md-12" id="mail" be-delete="clearspec()" ng-mousedown='mousedown(2)' be-search="sendTo()" be-edit="true" ng-model="data.currItem.cc"></textarea>
+										<!--div  contenteditable="true" type='text' ng-disabled='false' ng-model="data.currItem.cc" class="div_txt note-editable" id="mail"  title="">
+										  <div class="chosen-drop">
+											  <!--ul class="chosen-results autoul">
+											  <li class="active-result" data-option-array-index="1" style="">冬季产品</li>
+											  </ul>
+										  </div>
+										</div-->
+									</div>
+									<!--ul class="autoul"></ul-->
+
+								</div>
+
+								<div class="form-group"><label style='float:left;width:45px' class="control-label">主题</label>
+									<div class="col-md-11"><input id='zuti' style='height:25px;resize:none;' class="col-md-12" ng-model="data.currItem.subject_send"></div>
+								</div>
+								<div class="form-group">
+									<div style='float:left;width:45px' class="">
+										
+										<!--button swf-upload title="添加附件" class="btn btn-toolbar" upload-list="data.currItem.attachofemails1" ng-model="data.currItem.attachofemails1" filed='#attach-area'>
+											<i class="fa lightblue font-size-15  fa-paperclip"></i> 添加
+										</button-->
+										<div class="btn-group">
+											<button   class="btn btn-toolbar dropdown-toggle" data-toggle="dropdown" type="button"><i class="fa lightblue font-size-15  fa-paperclip">附件</i><span class="caret"></span></button>
+											<ul class="dropdown-menu">
+												<li>
+													<a ng-disabled='false' upload-list="data.currItem.attachofemails1" ng-model="data.currItem.attachofemails1" swf-upload filed='#attach-area'>本地添加</a>
+												</li>
+												<li>
+													<a ng-click='fw_addfile()'>系统附件</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<ul class="col-sm-11" id="attach-area">
+									</ul>
+
+								</div>
+								<div class="form-group"><label style='float:left;width:45px' class="control-label">内容</label>
+									<div class="col-sm-11"><textarea type="text" name="text" class="summernote" id="contents" title="Contents"></textarea></div>
+								</div>
+							</div>
+
+							<div id='addwidth' class="lm_panel">
+								<div id="addr_cmd" ng-click='tooglass($event)' class="cptab cpslt" style="_width:74px;">
+									<a hidefocus="">通讯录</a>
+								</div>
+								<div id="stationery_cmd" ng-click='tooglass($event)' class="cptab" style="margin-left:7.9%;margin-left:90px\9;border-left-width:1px;border-left-width:0px\9;">
+									<a hidefocus="">分组</a>
+								</div>
+								<div id="AddrTab" style='display:block;'>
+									<div style="height:25px;" class="grptitle_tab_"></div>
+									<div class="lm_sbar">
+										<a ng-click='close_people()' type="button" id="lm15034559988030725050352368402cancel" ng-class="{true:'lm_sopen fa fa-times',false:'lm_sopen fa fa-search'}[data.is_search==2?true:false]" class="lm_sopen fa fa-search"></a>
+										<div>
+											<input ng-change='search_peopele()' id="lm15034559988030725050352368402searchtext" ng-model='data.username' type="text" class="txt" value="" autocomplete="off" style="color: rgb(160, 160, 160);">
+										</div>
+									</div>
+									<div ng-hide='data.is_search==2' class="groupopen" style="display:" key="t3" sub="0">
+										<div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">最近联系人</div>
+									</div>
+									<div ng-hide='data.is_search==2' id="lm150338581407203951792705359891tree" style="overflow-y: auto;height: 400px;">
+										<div class="groupsub" key="t3" sub="1">
+											<div ng-click='contact_man($event,$index)' ng-repeat='item in data.currItem.cpcemail_contact_lists' class="groupclose" style="display:" key="8" sub="0">
+												<a unselectable="on" class="lm_addr">{{item.contactname}}</a>
+											</div>
+
+										</div>
+										<div ng-show='data.cpcorgs.length>0' class="groupopen" style="display:" key="t2" sub="0">
+											<div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default; width: 250px;">
+												<a class="lm_rt" fun="g2"></a>公司同事</div>
+											<ul id="treeDemo2" class="ztree"></ul>
+										</div>
+									</div>
+								</div>
+								<div id="stationeryTab" id='addwidth' style='display:none'>
+									<div style="height:25px;" class="grptitle_tab_"></div>
+									<div class="lm_sbar">
+										<a ng-click='close_people()' type="button" id="lm15034559988030725050352368402cancel" ng-class="{true:'lm_sopen fa fa-times',false:'lm_sopen fa fa-search'}[data.is_search==2?true:false]" class="lm_sopen fa fa-search"></a>
+										<div>
+											<input ng-change='search_peopele()' ng-model='data.username' id="lm15034559988030725050352368402searchtext" type="text" class="txt" value="" autocomplete="off" style="color: rgb(160, 160, 160);">
+										</div>
+									</div>
+									<div ng-hide='data.is_search==2' class="groupopen" style="display:" key="t3" sub="0">
+										<div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">联系人分组</div>
+									</div>
+									<div ng-hide='data.is_search==2' id="lm150338581407203951792705359891tree">
+										<div class="groupsub" key="t3" sub="1">
+											<ul id="treeDemo1" class="ztree"></ul>
+										</div>
+									</div>
+								</div>
+								<div ng-show='data.is_search==2' class="groupopen" style="display:" key="t3" sub="0">
+									<div class="settingtable qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">查找到。。。</div>
+								</div>
+								<div ng-show='data.is_search==2' id="lm150338581407203951792705359891tree" style="overflow-y: auto;height:400px;overflow-x: hidden;">
+									<div class="groupsub" key="t3" sub="1">
+										<div ng-click='contact_people($event,$index)' ng-repeat='item in data.currItem.cpcorgs' class="groupclose" style="display:" key="8" sub="0">
+											<a unselectable="on" class="lm_addr">{{item.username}}</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+				</div>
+			</div>
+			<!--div class="modal-footer" style="width: 100%">
+				<a class="btn btn-sm btn-primary" ng-click="ok(e)">
+					确定
+				</a>
+				<a class="btn btn-sm btn-info" ng-click="cancel(e)">
+					取消
+				</a>
+			</div-->
+		</div>
+	</div>
+</div>
+<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+<link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+<script src="js/plugins/summernote/summernote.min.js"></script>
+
+<style>
+	.modal-body {
+		padding: 15px;
+	}
+	
+	fieldset {
+		padding: .35em .425em .25em;
+		margin: 1px 0px 5px;
+		position: relative;
+		border: 1px solid silver;
+	}
+	
+	.lm_panel1 {
+		border-style: groove;
+		border: 1px solid rgba(108, 124, 134, 0.39);
+		background: #fff;
+		height: 400px;
+		overflow: auto;
+	}
+	
+	.groupclose {
+		/**border-bottom: 1px solid #ccc;*/
+	}
+	
+	.modal-dialog {
+		width: 650px;
+	}
+	
+	.row_div {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	
+	.note-editor .col-xs-1,
+	.col-sm-1,
+	.col-md-1,
+	.col-lg-1,
+	.col-xs-2,
+	.col-sm-2,
+	.col-md-2,
+	.col-lg-2,
+	.col-xs-3,
+	.col-sm-3,
+	.col-md-3,
+	.col-lg-3,
+	.col-xs-4,
+	.col-sm-4,
+	.col-md-4,
+	.col-lg-4,
+	.col-xs-5,
+	.col-sm-5,
+	.col-md-5,
+	.col-lg-5,
+	.col-xs-6,
+	.col-sm-6,
+	.col-md-6,
+	.col-lg-6,
+	.col-xs-7,
+	.col-sm-7,
+	.col-md-7,
+	.col-lg-7,
+	.col-xs-8,
+	.col-sm-8,
+	.col-md-8,
+	.col-lg-8,
+	.col-xs-9,
+	.col-sm-9,
+	.col-md-9,
+	.col-lg-9,
+	.col-xs-10,
+	.col-sm-10,
+	.col-md-10,
+	.col-lg-10,
+	.col-xs-11,
+	.col-sm-11,
+	.col-md-11,
+	.col-lg-11,
+	.col-xs-12,
+	.col-sm-12,
+	.col-md-12,
+	.col-lg-12 {
+		position: relative;
+		min-height: 1px;
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+	
+	.modal {
+		z-index: 2001 !important;
+	}
+	
+	.modal-backdrop {
+		z-index: 2000 !important;
+	}
+	
+	/*ul.ztree {
+		height: 580px;
+		overflow-y: hidden;
+		overflow-x: hidden;
+	}
+	*/	
+	.high {
+		background: #e3e1e4;
+	}
+	
+	.bold {
+		font-weight: bold
+	}
+	
+	.star {
+		background: url(../web/images/star.png)no-repeat;
+		background-position: center;
+	}
+	
+	.lightstar {
+		background: url(../web/images/lightstar.png)no-repeat;
+		background-position: center;
+	}
+	
+	.Rr {
+		background: url(../web/images/open_mail.png)no-repeat;
+		background-position-y: center;
+	}
+	
+	.unr {
+		background: url(../web/images/unopen_mail.jpg)no-repeat;
+		background-position-y: center;
+	}
+	
+	table.i td.ci div.cir {
+		width: 18px;
+		height: 16px;
+		overflow: hidden;
+		cursor: pointer;
+	}
+	
+	.mail-box-header1 {
+		background: url(../web/images/header.jpg)no-repeat;
+	}
+	
+	.mail-box-header {
+		background-color: #ffffff;
+		border: 1px solid #e7eaec;
+		border-bottom: 0;
+		padding: 5px 5px 5px 5px;
+	}
+	
+	.fadeInRight {
+		z-index: 10;
+	}
+	
+	.o_title2 {
+		background: #f2f4f6;
+		margin: 0;
+		padding: 0 0 0 12px;
+		height: 20px;
+	}
+	
+	.black {
+		color: #000;
+	}
+	
+	.normal {
+		font-weight: normal;
+	}
+	
+	.f_size {
+		font-size: 12px;
+	}
+	
+	.att_bt {
+		_zoom: 1;
+		padding: 5px 2px;
+		clear: both;
+		margin: 5px 0 10px;
+		min-height: 40px;
+	}
+	
+	.ico_big {
+		float: left;
+		margin: 2px 8px 0 0;
+	}
+	
+	.name_big {
+		float: left;
+	}
+	
+	.graytext {
+		color: #a0a0a0;
+	}
+	
+	.name_big .down_big {
+		margin-top: 2px;
+	}
+	
+	.table {
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 0px;
+	}
+	
+	.high {
+		background: #e3e1e4;
+	}
+	
+	.tcolor {
+		font: normal 12px "lucida Grande", Verdana, "Microsoft YaHei";
+		color: #7f7f7f;
+	}
+	
+	.green,
+	.grn,
+	a.green:link,
+	a.green:visited {
+		color: #5fa207;
+	}
+	
+	.qm_ico_flagoff {
+		padding: 0;
+		border: 0;
+		width: 15px;
+		height: 15px;
+		cursor: pointer;
+		vertical-align: middle;
+		margin-top: -2px;
+		_margin-top: -7px;
+	}
+	
+	.tenxun-color {
+		background-color: #eff5fb
+	}
+	
+	.m-t-md {
+		margin-top: 0px;
+	}
+	
+	.btn_gray {
+		display: inline-block;
+		height: 22px;
+		min-width: 24px;
+		line-height: 24px;
+		line-height: 23px\9\0;
+		_line-height: 26px;
+		_overflow-y: hidden;
+		padding: 0 12px;
+		margin: 0;
+		text-align: center;
+		text-decoration: none;
+		vertical-align: middle;
+		cursor: default;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		border-radius: 3px;
+		color: rgb(104, 107, 109) border-width: 1px;
+		border-style: solid;
+		border-color: rgb(136, 136, 136);
+		border-image: initial;
+		background: -webkit-linear-gradient(top, rgb(255, 255, 255) 0%, rgb(235, 235, 235) 90%, rgb(243, 243, 243) 100%);
+	}
+	
+	.time {
+		color: #1e5494;
+		font-size: 14px;
+	}
+	
+	th {
+		border: 0.5px solid #ece1e1;
+		border-collapse: separate;
+		border-bottom-width: thin;
+	}
+	
+	.lm_panel {
+		border-style: groove;
+		border: 1px solid rgba(108, 124, 134, 0.39);
+		background: #fff;
+		height: 485px;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+	
+	.settingtable {
+		background-color: #eff5fb;
+	}
+	
+	.lm_sbar .lm_sopen {
+		/* background: url(/zh_CN/htmledition/images/webp/newicon/compose207c92.png) 0 -312px no-repeat; */
+		width: 19px;
+		height: 20.5px;
+		padding: 0;
+		border: 1px solid rgb(169, 169, 169);
+		float: right;
+		border-bottom-left-radius: none;
+		border-left: white;
+	}
+	
+	.lm_sbar {
+		border-bottom: 1px solid #ccc;
+		padding: 7px 6px 4px;
+		_padding-left: 3px;
+		line-height: 11px;
+	}
+	
+	.cptab {
+		position: absolute;
+		height: 25px;
+		/* border: 1px solid #7f9db9; */
+		border-bottom: none;
+		line-height: 24px;
+		border-bottom: none;
+		width: 7.9%!important;
+		text-align: center;
+		background: #eff5fb;
+	}
+	
+	.cpslt {
+		background: #fff;
+		height: 25px;
+		font-weight: bold;
+	}
+	
+	.lm_sbar div {
+		overflow: hidden;
+	}
+	
+	.ds_dialog {
+		z-index: 3002;
+	}
+	
+	.groupclose {
+		padding-left: 8px;
+	}
+	
+	.note-editor .col-xs-1,
+	.col-sm-1,
+	.col-md-1,
+	.col-lg-1,
+	.col-xs-2,
+	.col-sm-2,
+	.col-md-2,
+	.col-lg-2,
+	.col-xs-3,
+	.col-sm-3,
+	.col-md-3,
+	.col-lg-3,
+	.col-xs-4,
+	.col-sm-4,
+	.col-md-4,
+	.col-lg-4,
+	.col-xs-5,
+	.col-sm-5,
+	.col-md-5,
+	.col-lg-5,
+	.col-xs-6,
+	.col-sm-6,
+	.col-md-6,
+	.col-lg-6,
+	.col-xs-7,
+	.col-sm-7,
+	.col-md-7,
+	.col-lg-7,
+	.col-xs-8,
+	.col-sm-8,
+	.col-md-8,
+	.col-lg-8,
+	.col-xs-9,
+	.col-sm-9,
+	.col-md-9,
+	.col-lg-9,
+	.col-xs-10,
+	.col-sm-10,
+	.col-md-10,
+	.col-lg-10,
+	.col-xs-11,
+	.col-sm-11,
+	.col-md-11,
+	.col-lg-11,
+	.col-xs-12,
+	.col-sm-12,
+	.col-md-12,
+	.col-lg-12 {
+		position: relative;
+		min-height: 1px;
+		padding-left: 1px !important;
+		padding-right: 1px !important;
+	}
+	
+	.note-editor .btn-group>.btn-group {
+		float: left;
+		max-width: 80px !important;
+	}
+	
+	.note-editor.note-frame .note-statusbar {
+		background-color: #f1f1f1;
+		border-bottom-right-radius: 4px;
+		border-bottom-left-radius: 4px;
+		visibility: hidden;
+	}
+	
+	.note-editor .form-group {
+		margin-bottom: 15px;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+	
+	.form-inline {
+		padding: 5px !important
+	}
+	
+	button.btn.btn-toolbar,
+	a.btn.btn-toolbar,
+	div.btn.btn-toolbar {
+		background-color: #fff;
+		height: 25px;
+		margin: 0px;
+		padding: 2px 0px 0px 0px;
+		font-size: 1px;
+	}
+	/*邮件下拉*/
+	
+	.div_txt {
+		border: 1px solid #c3c3c3;
+		border-top: 1px solid #7c7c7c;
+		border-left: 1px solid #9a9a9a;
+		background: 0 -162px #fff repeat-x;
+		padding: 1px;
+		width: auto;
+		height: auto;
+		_height: 16px;
+		min-height: 18px;
+		font-family: Tahoma;
+	}
+	
+	.attbg:hover {
+		background-color: #e3e3ec;
+	}
+	
+	.attbg_focus {
+		background-color: #FFB951;
+	}
+	
+	.addr_text {
+		margin: 1px -13px 1px 0;
+		height: 16px;
+		background: transparent;
+	}
+	
+	.addr_base {
+		height: 16px;
+		margin: 1px 3px 1px 3px;
+		cursor: default;
+		color: #2b2828;
+		font-family: "lucida Grande", Verdana, "Microsoft YaHei";
+	}
+	
+	ul.autoul {
+		/* 下拉菜单 */
+		width: 216px;
+		margin: 0px;
+		margin-top: -5px;
+		padding: 0px;
+		color: #666;
+		border: 1px solid #e5e6e7;
+		border-top: 0;
+		overflow: hidden;
+	}
+	
+	ul.autoul li.autoli {
+		/* 下拉菜单li */
+		height: 30px;
+		display: block;
+		list-style-type: none;
+		text-align: left;
+		cursor: pointer;
+		font-size: 14px;
+		line-height: 30px;
+		padding-left: 15px;
+		padding-right: 15px;
+		overflow: hidden;
+		/*当对象内文本溢出时显示省略标记*/
+		text-overflow: ellipsis;
+	}
+	
+	.lihover {
+		/* 下拉菜单li高亮样式 */
+		background-color: #eee;
+	}
+	
+	.showli {
+		display: block;
+	}
+	/* 经过过滤的li的样式 */
+	
+	#attach-area table thead {
+		visibility: hidden;
+	}
+	
+	.limit {
+		overflow-y: auto;
+		height: 500px;
+		width: 100%;
+	}
+	
+	.modal-dialog {
+		width: 1000px;
+	}
+	
+	.mail-body {
+		border-top: 1px solid #e7eaec;
+		padding: 20px;
+		padding-right: 0px;
+	}
+</style>

@@ -1,0 +1,144 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div class="hc-box other-h">
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-class-id="epm_project"
+                     hc-common-search="commonSearchSettingOfEpmProject"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.project_source"
+                     hc-label="工程类型"
+                     hc-dict-code="epm.project_source"
+                     hc-readonly="true" ></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.report_time"
+                     hc-label="报备时间"
+                     hc-type="time"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.signup_time"
+                     hc-label="报名时间"
+                     hc-type="date"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.signup_plan_people"
+                     hc-label="报名经办人"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.signup_method"
+                     hc-label="报名方式"
+                     hc-dict-code="epm.signup_method"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div id="req" hc-box="开标信息">
+                <div class="row">
+                    <div hc-input="data.currItem.bid_open_time"
+                         hc-label="开标时间"
+                         hc-type="date"
+                         hc-readonly="true">
+                    </div>
+                    <div hc-input="data.currItem.bid_open_method"
+                         hc-label="开标方式"
+                         hc-dict-code="epm.bid_open_method"
+                         hc-readonly="true">
+                    </div>
+                    <div hc-input="data.currItem.bid_open_primary"
+                         hc-label="开标授权人"
+                         hc-readonly="true">
+                    </div>
+                    <div hc-input="data.currItem.bid_open_attendee"
+                         hc-label="开标出场人"
+                         hc-readonly="true">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.bid_open_address"
+                         hc-label="开标地点"
+                         hc-col-count="8"
+                         hc-readonly="true">
+                    </div>
+                </div>
+
+            </div>
+
+            <div hc-box="竞争对手信息">
+                <div class="hc-box" hc-grid="gridOptions" style="height: 130px"></div>
+            </div>
+
+            <div hc-box="开标结果">
+                <div class="row">
+                    <div hc-input="data.currItem.is_bid_win"
+                         hc-label="中标"
+                         hc-type="checkbox"
+                         hc-change="changeCheckBox()"
+                         hc-true-value="2"
+                         hc-false-value="1"
+                         hc-col-count="1"
+                         class="oneis">
+                    </div>
+                    <div hc-input="data.currItem.bid_winner"
+                         hc-label="中标单位"
+                         hc-col-count="8"
+                         hc-class-id="epm_project_bid_open"
+                         hc-common-search="commonSearchSettingOfBidWinner"
+                         hc-readonly="data.currItem.is_bid_win == 2"
+                         hc-required="data.currItem.is_bid_win != 2">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.bid_win_time"
+                         hc-label="中标时间"
+                         hc-type="date">
+                    </div>
+                    <div hc-input="data.currItem.bid_win_amount"
+                         hc-label="中标金额"
+                         hc-type="金额"
+                         hc-unit="元">
+                    </div>
+                    <div hc-input="data.currItem.pm_publicity_time"
+                         hc-label="项目经理公示时间"
+                         hc-type="date">
+                    </div>
+                    <div hc-input="data.currItem.publicity_pm_name"
+                         hc-label="公示项目经理"
+                         hc-can-input="true"
+                         hc-class-id="employee_header"
+                         hc-common-search="commonSearchSettingOfEmployee">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.bid_win_loss_reason"
+                         hc-label="得失分析"
+                         hc-col-count="8"
+                         hc-required="true">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<style>
+    .oneis {
+        padding-top: 3px;
+    }
+    [hc-input="data.currItem.is_bid_win"] {
+        margin-right: 0;
+    }
+</style>

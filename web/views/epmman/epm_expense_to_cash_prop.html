@@ -1,0 +1,133 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.cashing_no"
+                     hc-readonly="true"
+                     hc-label="兑现编码">
+                </div>
+                <div hc-input="data.currItem.service_expense_no"
+                     hc-label="服务费编码"
+                     hc-change="setServiceExpenseNo()"
+                     hc-required="true"
+                     hc-class-id="epm_service_expense_head"
+                     hc-common-search="commonSearchExpense">
+                </div>
+                <!-- <div hc-input="data.currItem.billing_unit_name"
+                     hc-readonly="true"
+                     hc-label="开票单位">
+                </div> -->
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+               <div hc-input="data.currItem.customer_code"
+                    hc-label="客户信息"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.customer_name"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.billing_unit_code"
+                     hc-label="法人客户信息"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.billing_unit_name"
+                     hc-readonly="true"></div>
+            </div>
+            <!-- <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="经销商编码"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-label="经销商名称"
+                     hc-readonly="true">
+                </div>
+                
+                <div hc-input="data.currItem.createtime"
+                     hc-label="创建时间"
+                     hc-readonly="true"
+                     hc-type="time">
+                </div>
+            </div> -->
+                <div class="row">
+                    <div hc-input="data.currItem.total_check_amt"
+                         hc-readonly="true"
+                         hc-type="money"
+                         hc-label="发货结算总额">
+                    </div>
+                    <div hc-input="data.currItem.service_amt"
+                         hc-label="服务费金额"
+                         hc-readonly="true"
+                         hc-type="money">
+                    </div>
+                    <div hc-input="data.currItem.total_cash_amt"
+                         hc-readonly="true"
+                         hc-type="money"
+                         hc-label="已兑现总额">
+                    </div>
+                    <div hc-input="data.currItem.total_uncash_amt"
+                         hc-label="未兑现金额"
+                         hc-readonly="true"
+                         hc-type="money">
+                    </div>
+                </div>
+                <div class="row">
+                    <div hc-input="data.currItem.total_auditt_amt"
+                         hc-label="合同发货总额"
+                         hc-readonly="true"
+                         hc-type="money">
+               </div>
+                </div>
+        <div hc-box="本次兑现信息">
+            <div class="row">
+                <div hc-input="data.currItem.cashing_way"
+                     hc-required="true"
+                     hc-label="兑现类型"
+                     hc-dict-code="epm.cashing_way"></div>
+                <div hc-input="data.currItem.deposit_deduct"
+                     hc-required="true"
+                     hc-type="money"
+                     hc-blur="setCashableAmt()"
+                     hc-label="应扣质保金"></div>
+                <div hc-input="data.currItem.taxes_deduct"
+                     hc-required="true"
+                     hc-type="money"
+                     hc-blur="setCashableAmt()"
+                     hc-label="应扣税金"></div>
+                <div hc-input="data.currItem.interest_on_credit"
+                     hc-required="true"
+                     hc-type="money"
+                     hc-blur="setCashableAmt()"
+                     hc-label="授信利息"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.other_deduct"
+                     hc-required="true"
+                     hc-type="money"
+                     hc-blur="setCashableAmt()"
+                     hc-label="应扣其他"></div>
+                <div hc-input="data.currItem.cashable_amt"
+                     hc-label="本次可兑现金额"
+                     hc-readonly="true"
+                     hc-type="money"></div>
+                <div hc-input="data.currItem.apply_amt"
+                     hc-label="本次实际兑现金额"
+                     hc-required="true"
+                     hc-type="money"></div>
+                <div hc-input="data.currItem.remark"
+                     hc-type="textarea"
+                     hc-label="备注"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

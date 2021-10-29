@@ -1,0 +1,292 @@
+<div class="bill-form" ng-controller="supplierEdit">
+    <div class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-12">
+                <div style="float: left;font-size: 18px">
+                    船公司及货代公司维护
+                </div>
+                <div style="float:left">
+                    <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                        <i class="fa fa-search"></i>查询
+                    </button>
+                    <button class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button" ng-click="new()"><i
+                            class="fa fa-file-o"></i>新增
+                    </button>
+                    <button class="btn btn-toolbar" type="button" ng-click="save($event)" ng-disabled="!(data.currItem.stat==1) && !(auth_right.cw)"><i
+                            class="fa fa-floppy-o"></i>保存
+                    </button>
+                    <button class="btn btn-toolbar" type="button" ng-click="refresh($event)"><i
+                            class="fa fa-history"></i>刷新
+                    </button>
+                    <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                            ng-click="delete($event)"><i class="fa fa-trash"></i>删除
+                    </button>
+                    <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                            ng-click="wfstart($event)"><i class="fa fa-check-square-o">提交</i></button>
+                    <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                            class="fa fa-times"></i>关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>基本信息</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null" style="font-size: 12px">公司编码</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           data-rule-required="true" data-msg-required="公司编码不能空"
+                                           ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                           ng-model="data.currItem.supplier_code">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null" style="font-size: 12px">船务公司名称</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                           data-rule-required="true" data-msg-required="船公司名称不能空"
+                                           ng-model="data.currItem.supplier_name">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">电子邮件</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm"
+                                           ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                           type="text" ng-model="data.currItem.email">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">状态</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select chosen-select ng-disabled="true" ng-readonly="true"
+                                            ng-model="data.currItem.stat"
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="s.dictvalue as s.dictname for s in stats">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">类型</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select chosen-select ng-model="data.currItem.supplier_type"
+                                            class="input-sm chosen-select form-control" data-placeholder=" "
+                                            ng-disabled="data.currItem.stat!=1 && !auth_right.cw"
+                                            ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                            ng-change="Change_Supplier()"
+                                            ng-options="type.dictvalue as type.dictname  for type in supplier_types">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">货代类型</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select chosen-select class="input-sm chosen-select form-control"
+                                            ng-model="data.currItem.hd_type" data-placeholder=" "
+                                            ng-disabled="data.currItem.stat!=1 && !auth_right.cw"
+                                            ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                            ng-change="Hd_Type()"
+                                            ng-options="type.dictvalue as type.dictname   for type in hd_types">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">资质证书号</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm"
+                                           ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                           type="text" ng-model="data.currItem.zzzsh">
+                                </div>
+                                <div class="col-md-3" style="left: 40px;">
+                                    <label><input type="checkbox" ng-true-value="2" ng-false-value="1"
+                                                  ng-disabled="data.currItem.stat!=1 && !auth_right.cw"
+                                                  ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                                  value="option1" ng-model="data.currItem.usable">是否可用</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">账户名</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                           ng-model="data.currItem.bank_acc">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">账户号</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                           ng-model="data.currItem.account1">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">证书到期</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input bs-datepacker class="form-control input-sm" type="text"
+                                           ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                           ng-model="data.currItem.zs_last_date">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label-mini" style="float: left;margin-left: 40px;">
+                                        <input type="checkbox" id="is_blacklist"
+                                               ng-true-value="2" ng-false-value="1"
+                                               ng-disabled="data.currItem.stat!=1 && !auth_right.cw"
+                                               ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                               ng-model="data.currItem.is_blacklist">列入黑名单</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">简称</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input class="form-control input-sm" type="text"
+                                           ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                           ng-model="data.currItem.short_name">
+                                </div>
+                                <!--div class="col-md-1">
+                                    <label class="form-label-mini">联系人</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           ng-model="data.currItem.noship_person">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">联系人电话</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           ng-model="data.currItem.noship_telephone">
+                                </div-->
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">地址</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input class="form-control input-sm" type="text"
+                                           ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                           ng-model="data.currItem.addr">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">备注</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input class="form-control input-sm" type="text"
+                                           ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                           ng-model="data.currItem.note">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul id="tabs" class="tri-nav-tabs">
+                        <li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav">
+                            <i class="fa fa-pencil-square">联系方式</i></a>
+                        </li>
+                        <li><a data-target="#tab2" data-toggle="tab" class="tab-nav">
+                            <i class="fa fa-pencil-square">固定加价</i></a>
+                        </li>
+                    </ul>
+                    <div id="content" class="first tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="ibox-content">
+                                <button class="btn btn-toolbar" type="button"  ng-click="gridAddItem('aoptions')"
+                                        ng-hide="data.currItem.stat!=1 && !auth_right.cw"><i
+                                        class="fa fa-plus-square-o"></i>增加行
+                                </button>
+                                <button class="btn btn-toolbar" type="button" ng-click="gridDelItem('aoptions')"
+                                        ng-hide="data.currItem.stat!=1 && !auth_right.cw"><i
+                                        class="fa fa-minus-square-o"></i>删除行
+                                </button>
+                                <div ag-gridview sg-options="aoptions"
+                                     sg-data="data.currItem.supplier_itemofsuppliers" sg-columns="acolumns"
+                                     style="width:100%;height:180px;" class="slick-grid"></div>
+                            </div>
+                        </div>
+                        <div id="tab2" class="tab-pane">
+                            <div class="ibox-content">
+                                <button class="btn btn-toolbar" type="button" ng-click="additem2()"
+                                        ng-hide="data.currItem.stat!=1 && !auth_right.cw"><i
+                                        class="fa fa-plus-square-o"></i>增加行
+                                </button>
+                                <button class="btn btn-toolbar" type="button"  ng-click="gridDelItem('lineOptions')"
+                                        ng-hide="data.currItem.stat!=1 && !auth_right.cw"><i
+                                        class="fa fa-minus-square-o"></i>删除行
+                                </button>
+                                <div ag-gridview sg-options="lineOptions"
+                                     sg-data="data.currItem.supplier_lineofsuppliers" sg-columns="lineColumns"
+                                     style="width:100%;height:180px;" class="slick-grid"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>附件</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <button swf-upload title="添加附件" class="btn btn-toolbar"
+                                    ng-readonly="data.currItem.stat!=1 && !auth_right.cw"
+                                    upload-list="data.currItem.objattachs" ng-model="data.currItem.objattachs"
+                                    filed='#attach-area'>
+                                <i class="fa lightblue font-size-15  fa-paperclip"></i> 添加附件
+                            </button>
+                            <ul id="attach-area">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-hide="data.currItem.stat == 1">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>审批流程</h5>
+
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <div wf-ystep size="large" class="p-xs clear" ng-model="data.currItem.wfid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+

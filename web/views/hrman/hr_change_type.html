@@ -1,0 +1,40 @@
+<div hc-edit-list>
+    <div  hc-box class="other-h">
+        <div class="row">
+            <div hc-input="data.currItem.change_type_code"
+                 hc-label="异动编码">
+            </div>
+            <div hc-input="data.currItem.change_type_name"
+                 hc-label="异动描述"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.for_billtype"
+                 hc-label="适用单据类型"
+                 hc-required="true"
+                 hc-dict-code="for_billtype">
+            </div>
+            <div hc-input="data.currItem.usable"
+                 hc-label="有效状态"
+                 hc-required="true"
+                 hc-dict-code="usable_code">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.is_sysvalue"
+                 hc-label="系统预设"
+                 hc-type="checkbox"
+                 hc-readonly="true">
+            </div>
+            <div hc-input="data.currItem.is_writeendsalarytime"
+                 hc-label="须填停薪日期"
+                 hc-type="checkbox"
+                 hc-readonly="data.currItem.for_billtype==1">
+            </div>
+            <div hc-input="data.currItem.is_inheimingdan"
+                 hc-label="须列入特殊名单"
+                 hc-type="checkbox"
+                 hc-readonly="data.currItem.for_billtype==1">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿﻿<div class="bill-form" ng-controller="seaportEdit">
+    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h3>港口资料</h3>
+                <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button" ng-click="new()"><i
+                        class="fa fa-file-o"></i>新增
+                </button>
+                <button class="btn btn-toolbar" type="button"
+                        ng-click="save($event)"><i class="fa fa-floppy-o"></i>保存
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i
+                        class="fa fa-history"></i>刷新
+                </button>
+                <button class="btn btn-toolbar" type="button"
+                        ng-click="delete()"><i class="fa fa-trash"></i>删除
+                </button>
+
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title" style="padding-top:8px;">
+                            <h5><strong>基本信息</strong></h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">港口编码</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control input-sm" type="text"
+                                           data-msg-required="港口编码不能为空"
+                                           data-rule-required="true"
+                                           ng-model="data.currItem.seaport_code">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">港口名称</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control input-sm" type="text"
+                                           data-msg-required="港口名称不能为空"
+                                           data-rule-required="true"
+                                           ng-model="data.currItem.seaport_name">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">英文名称</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control input-sm" type="text"
+                                           data-msg-required="英文名称不能为空"
+                                           data-rule-required="true"
+                                           ng-model="data.currItem.english_name">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">港口类型</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <select chosen-select data-msg-required="港口类型不能为空"
+                                            data-rule-required="true"
+                                            ng-model="data.currItem.seaport_type"
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="s.dictvalue as s.dictname for s in seaport_types">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">所在国家</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="text" class="input-sm form-control"
+                                               ng-model="data.currItem.area_name">
+                                        <a class="input-group-addon" ng-click="openAreaNameFrm()" id="#abc"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label style="margin-left: 30px;"><input
+                                            type="checkbox"
+                                            ng-false-value="1"
+                                            ng-true-value="2"
+                                            ng-checked="data.currItem.usable">是否可用
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">备注</label>
+                                </div>
+                                <div class="col-md-7">
+												<textarea ng-model="data.currItem.note" rows="3"
+                                                          class="form-control noresize"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

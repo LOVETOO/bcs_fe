@@ -1,0 +1,164 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>产品</h3>
+    </div>
+    <div class="modal-body">
+    	<form name="SaleProdHeaderEdit" class="form-horizontal">
+    		
+    		
+            <table class="table table-condensed table-sm table-no-border" cellpadding="0" cellspacing="0" >
+                <tr>
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="item_type">类型</label>
+	                    	<select class="form-control chosen-select input-mini input-s-sm-im" ng-model="proitem.item_type"
+                          			chosen chosen-width="65%">
+                          			<option value="1" selected>产品</option>
+                          			<option value="2">配件</option>
+						    </select>
+	                        <!-- <input class="form-control inline input-s-sm-im input-mini" id="item_type" type="text" ng-model="proitem.item_type"> -->
+                        </div>
+                     </td>
+
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="h_spec">基准机型</label>
+	                        <div class="input-append" style="width:46%;">
+					            <input type="text" readonly="readonly" class="span2 readonly input-mini form-control"  ng-model="proitem.item_name">
+					            <button title="基准机型" ng-click="openProItemFrm()" class="btn input-mini btn-info">
+					            	<i class="fa fa-bars"></i>
+								</button>
+					        </div>
+                    	</div>
+                    </td>
+					<td>
+						<div class="control-group">
+							<label class="control-label font-noraml form_label_text" for="cust_item_code">客户代码</label>
+							<input class="form-control inline input-s-sm-im input-mini" id="cust_item_code" type="text"  ng-model="proitem.cust_item_code">
+						</div>
+					</td>
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text needed" for="cust_item_name">客户机型</label>
+	                        <input class="form-control inline input-s-sm-im input-mini" id="cust_item_name" type="text"  ng-model="proitem.cust_item_name">
+                    	</div>
+                    </td>
+
+                </tr>
+                <tr>
+					<td>
+						<label class="control-label font-noraml form_label_text needed">PI号</label>
+						<input type="text" id="proitem.pi_no" class="input-s-sm-im input-mini inline form-control" type="text" ng-model="proitem.pi_no">
+					</td>
+					<td>
+						<label class="control-label font-noraml form_label_text needed">PO号</label>
+						<input type="text" id="proitem.po_no" class="input-s-sm-im input-mini inline form-control" type="text" ng-model="proitem.po_no">
+					</td>
+                    <td>
+                    	<label class="control-label font-noraml form_label_text needed" for="qty">排产数量</label>
+                        <input type="text" id="qty" class="input-s-sm-im input-mini inline form-control" type="text" ng-model="proitem.qty">
+                    </td>
+
+                    <!-- <td>
+                    	<label class="control-label font-noraml form_label_text" for="proitem.gw">审批价格</label>
+                        <input type="text" id="proitem.gw" class="input-s-sm-im input-mini inline form-control" type="text" ng-model="proitem.check_price"  >
+                    </td> -->
+                    <td>
+                    	<label class="control-label font-noraml form_label_text needed" for="proitem.nw">批次号</label>
+                        <input type="text" id="proitem.nw" class="input-s-sm-im input-mini inline form-control" type="text" ng-model="proitem.discount"  >
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                	<td>
+                		<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="proitem.bzcc">产品编码</label>
+	                        <input readonly="readonly" class="form-control inline input-s-sm-im input-mini" id="proitem.pdm_item_code" type="text"  ng-model="proitem.pdm_item_code">
+                    	</div>
+                    </td>
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="">工厂型号</label>
+	                        <input  class="form-control inline input-s-sm-im input-mini" id="pdm_item_spec" type="text" ng-model="proitem.pdm_item_spec">
+                    	</div>
+                    </td>
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="proitem.color">颜色</label>
+	                        <input  class="form-control inline input-s-sm-im input-mini" id="proitem.color" type="text"  ng-model="proitem.color">
+                    	</div>
+                    </td>
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="proitem.brand">品牌</label>
+	                        <input  class="form-control inline input-s-sm-im input-mini" id="proitem.brand" type="text"  ng-model="proitem.brand">
+                    	</div>
+                    </td>
+                </tr>
+                <tr>
+                	<td>
+
+						<div class="control-group">
+							<label class="control-label font-noraml form_label_text_l" for="delivery_date">本次交货日期:</label>
+							<input id="delivery_date" class="span2 input-mini form-control inline ng-valid ng-dirty ng-valid-parse ng-touched" type="text" ng-model="proitem.delivery_date" bs-datepacker="" style="width:50%">
+						</div>
+
+                    </td>
+                    <td>
+
+						<div class="control-group">
+							<label class="control-label font-noraml form_label_text_l" for="bom_confirm_date">本次交货日期:</label>
+							<input id="bom_confirm_date" class="span2 input-mini form-control inline ng-valid ng-dirty ng-valid-parse ng-touched" type="text" ng-model="proitem.bom_confirm_date" bs-datepacker="" style="width:50%">
+						</div>
+
+					</td>
+                    <td>
+						<div class="control-group">
+							<label class="control-label font-noraml form_label_text_l" for="material_arrive_date">本次交货日期:</label>
+							<input id="material_arrive_date" class="span2 input-mini form-control inline ng-valid ng-dirty ng-valid-parse ng-touched" type="text" ng-model="proitem.material_arrive_date" bs-datepacker="" style="width:50%">
+						</div>
+                    </td>
+                    <td>
+
+						<div class="control-group">
+							<label class="control-label font-noraml form_label_text_l" for="factory_reply_date">本次交货日期:</label>
+							<input id="factory_reply_date" class="span2 input-mini form-control inline ng-valid ng-dirty ng-valid-parse ng-touched" type="text" ng-model="proitem.factory_reply_date" bs-datepacker="" style="width:50%">
+						</div>
+                    </td>
+                </tr>
+                <tr>
+
+
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="proitem.pmd_batch">改制批次</label>
+	                        <input  class="form-control inline input-s-sm-im input-mini" id="proitem.pmd_batch" type="text"  ng-model="proitem.pmd_batch">
+                    	</div>
+                    </td>
+					<td>
+						<div class="control-group">
+							<label class="control-label font-noraml form_label_text" for="proitem.qty">当前库存</label>
+							<input  class="form-control inline input-s-sm-im input-mini" id="proitem.qty" type="text"  ng-model="proitem.qty">
+						</div>
+					</td>
+					<td colspan="2">
+						<div class="control-group">
+							<label class="control-label font-noraml form_label_text" for="">备注</label>
+							<input style="width:91.5%;" class="form-control inline input-s-sm-im input-mini"  id="note" type="text" ng-model="proitem.note">
+						</div>
+					</td>
+                </tr>
+             </table>
+				
+        </form> 
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+          确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+          取消
+        </a>
+     </div>
+</div>

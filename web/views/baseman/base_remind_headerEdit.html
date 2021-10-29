@@ -1,0 +1,144 @@
+<div class="bill-form" ng-controller="base_remind_headerEdit">
+    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h3>工作提醒维护</h3>
+                <button class="btn btn-toolbar" ng-hide="mainbtn.search"
+                        type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button ng-click="new()" class="btn btn-toolbar" type="button"><i class="fa fa-file-o"></i>新增</button>
+                <button ng-click="refresh()" class="btn btn-toolbar" type="button"><i class="fa fa-history"></i>刷新
+                    <button ng-click="save()" class="btn btn-toolbar" type="button">
+                        <i class="fa fa-floppy-o"></i>保存
+                    </button>
+                    <button ng-click="delete()" class="btn btn-toolbar" type="button"><i class="fa fa-trash"></i>删除
+                    </button>
+                </button>
+                <button ng-click="closefrm()" class="btn btn-toolbar"
+                        type="button">
+                    <i class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title" style="padding-top:8px;">
+                            <h5><strong>基本信息</strong></h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content  icons-box">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml">标题</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-model="data.currItem.title" type="text"
+                                               placeholder="" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml not-null">提醒名称</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input ng-model="data.currItem.remind_type" type="text"
+                                               placeholder="" class="input-sm form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml not-null">权限类型</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select chosen-select ng-model="data.currItem.power_type"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="s.id as s.name for s in powerlist">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml ">
+                                            默认菜单</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input ng-model="data.currItem.default_menu_name" type="text"
+                                               placeholder="" class="input-sm form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">创建人</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input readonly class="form-control readonly input-sm" type="text"
+                                               ng-model="data.currItem.creator">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">创建时间</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input readonly class="form-control readonly input-sm" type="text"
+                                               ng-model="data.currItem.create_time">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml ">备注</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input ng-model="data.currItem.note" type="text"
+                                               placeholder="" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="checkbox" ng-click="sub()" ng-true-value="2" ng-false-value="1"
+                                               ng-model="data.currItem.usable"
+                                               class="ng-pristine ng-untouched ng-valid">
+                                        <label ng-show="showType!=1" class="ng-hide">是否可用</label>
+                                        <label ng-show="showType==1">是否可用</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml">查询语句</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <textarea ng-model="data.currItem.sql" type="text" placeholder=""
+                                                  class="input-sm form-control" rows="10" cols="10">
+										</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml">查询条件</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <textarea ng-model="data.currItem.sqlwhere" type="text" placeholder=""
+                                                  class="input-sm form-control" rows="10" cols="10">
+										</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+

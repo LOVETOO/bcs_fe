@@ -1,0 +1,42 @@
+<div class="hc_wf_opinion flex-column">
+    <div hc-box="请输入{{ isReject ? '驳回原因' : '流程意见' }}(必填)" >
+        <div
+            hc-input-height="100%"
+            hc-input="data.opinion"
+            hc-type="textarea"
+            hc-required="true"
+            hc-autofocus="true"
+            hc-col-count="8"
+        ></div>
+    </div>
+    <!-- 意见管理器 -->
+    <hc-opinion-manager hc-opinion-content="data.opinion"></hc-opinion-manager>
+
+    <div class="flex1 flex-column" style="height: 150px;" hc-box="{{ procs.length > 1 ? '请选择驳回到哪个过程' : '驳回到以下过程' }}" hc-if="isReject">
+        <div class="flex1" hc-if-end hc-grid="rejectProcGridOptions"></div>
+    </div>
+</div>
+<style type="text/css">
+    .hc_wf_opinion .hc-box-title{
+        background: none;
+        margin: 0px -10px;
+        padding: 0px 25px;
+        font-weight: 400;
+        font-size: 13px;
+    }
+    .hc_wf_opinion .textarea-inline{
+        height: 80px;
+    }
+    .hc_wf_opinion textarea{
+        border: 1px solid #e3ebf2;
+        background-color: #fafbff;
+        padding: 2px 5px;
+        border-left: 2px solid #ff2b2b;
+    }
+    .hc_wf_opinion [hc-input] input.ng-invalid-required, [hc-input] textarea.ng-invalid-required {
+        background-color: #fafbff;
+    }
+    .hc_wf_opinion .hc-textarea i{
+        display: none;
+    }
+</style>

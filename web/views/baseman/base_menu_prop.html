@@ -1,0 +1,130 @@
+<div hc-obj-prop>
+
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-label="菜单代码" hc-input="data.currItem.menucode" />
+            <div hc-label="菜单名称" hc-input="data.currItem.menuname" />
+            <div hc-label="类型" hc-input="data.currItem.clas" hc-select-options="selectOptions.clas" />
+        </div>
+
+        <div class="row">
+            <div hc-label="路由名称" hc-input="data.currItem.webrefaddr" hc-col-count="4" />
+            <!--<div hc-label="引用地址" hc-input="data.currItem.refaddr" />-->
+            <div hc-label="菜单排序" hc-input="data.currItem.sortindex" />
+            <div class="picdiv">
+                <div class="picture">
+                    <div style="display: flex;flex-direction: column;" ng-hide="data.bool">
+                        <button ng-click="uploadFile()" style="background-color:#fff;border: none;">
+                            <i class="iconfont hc-add" ></i>
+                        </button>  
+                        <br>
+                        <p>菜单图标</p>  
+                    </div>
+                    <img id="invoice_div_img" class="invoice_div_img" hc-img="data.currItem.docid" >
+                    <button class="btn invoice_del"
+                            ng-click="del_invoice_image()"
+                            ng-show="data.currItem.docid > 0">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-label="客户端类型" hc-input="data.currItem.menutype" hc-select-options="selectOptions.menutype" />
+            <div hc-label="菜单ID" hc-input="data.currItem.menuid" hc-readonly="true" hc-col-count="2" />
+            <div hc-label="菜单图标" hc-input="data.currItem.imgsrc" hc-btn-click="chooseIcon()" />
+        </div>
+        <!--<div class="row">-->
+            <!--<div hc-label="需加载JS" hc-input="data.currItem.webloadfile" />-->
+            <!--<div hc-label="内建索引" hc-input="data.currItem.menutag" />-->
+            <!--<div hc-label="关联对象值" hc-input="data.currItem.objid" />-->
+
+        <!--</div>-->
+
+        <div class="row">
+            <div hc-label="所属模块"
+            hc-input="data.currItem.modpath"
+            hc-delete-together="modid menupid parentmenupath"
+            hc-class-id="scpmod"
+            hc-common-search="commonSearch.mod"
+            hc-required="!data.isInsert"
+            hc-readonly="data.isInsert"
+            hc-col-count="4" />
+            
+            <div hc-label="父菜单"
+                hc-input="data.currItem.parentmenupath"
+                hc-delete-together="menupid"
+                hc-class-id="scpmenu"
+                hc-common-search="commonSearch.parentMenu"
+                hc-readonly="data.isInsert"
+                hc-col-count="4" />
+            
+        </div>
+
+
+        <div class="row">
+            <div hc-label="描述" hc-input="data.currItem.note" hc-type="textarea" hc-col-count="4" />
+            <div style=" width: 140px;" hc-label="可用" hc-input="data.currItem.flag" hc-type="checkbox" />
+            <div style=" width: 140px;" hc-label="点击统计" hc-input="data.currItem.logonclick" hc-type="checkbox" />
+        </div>
+
+        <div class="row">
+            <div hc-label="创建用户" hc-input="data.currItem.creator" hc-readonly="true" />
+            <div hc-label="创建时间" hc-input="data.currItem.createtime" hc-readonly="true" />
+            <div hc-label="最后修改用户" hc-input="data.currItem.updator" hc-readonly="true" />
+            <div hc-label="最后修改时间" hc-input="data.currItem.updatetime" hc-readonly="true" />
+        </div>
+    </div>
+
+</div>
+<style>
+    .invoice_div_img {
+        width: 98px;
+        height: 0;
+        position: absolute;
+        z-index: 3;
+        top: 0.5px;
+    }
+    .invoice_del {
+        display: none;
+        position: absolute;
+        right: 1px;
+        top: 1px;
+        z-index: 5;
+        color: #828282;
+    }
+    div.picture:hover .invoice_del {
+        display: block;
+    }
+    .none{
+        display: none !important;
+    }
+    .picture{
+        border:1px #e4eaf1 solid;
+        width:100px;
+        height:100px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } 
+    .picture p{
+        text-align: center;
+        margin: 0;
+        font-size: 13px;
+        color: #717171;
+    }
+    .picdiv:after {
+        content: '';
+        clear: both;
+        width: 0px;
+        display: block;
+    }
+    .picdiv{
+        width: 100px;
+        position: absolute;
+        right: 5%; 
+        top: 42px;
+    }
+</style>

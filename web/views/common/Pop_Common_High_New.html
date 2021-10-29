@@ -1,0 +1,573 @@
+
+<div class="modal-body" style="overflow: hidden;padding-bottom: 0;">
+	<div class="high_filter" style="display: none;">
+		<div class="">
+			<div class="col-md-12" style="width:100%">
+				<div class="tabs-left">
+					<!-- 1.条件字段列表 -->
+					<!-- start-条件字段列表 -->
+					<ul class="nav inav-tabs"
+						style="height:240px;overflow:auto;min-height:240px;width: 150px;border-right: 1px solid #e7e7eb;font-size: 12px;margin-right: 10px;"
+						id="field_list">
+						<li class="text-left"
+							style="color: #8d8d8d;padding: 7px 0;font-size: 14px;font-weight: 700;"><span><i
+								class="fa fa-list-ul"></i>条件列表</span></li>
+						<li ng-repeat="item in FrmInfo.thead" class="myfilter">
+							<a href="#{{item.code}}" class="mytest" data-toggle="tab">
+								<span class="filed" name="{{item.code}}"
+										op_type="{{item.type}}">{{item.name}}</span>
+							</a>
+						</li>
+					</ul>
+					<!-- end-条件字段列表 -->
+
+					<!--  2.条件输入区 -->
+					<!-- start -tab-content -->
+					<div class="itab-content " id="tab-content" style="min-height:240px;background:#fff"
+							title="条件字段输入区" init-searchgrid>
+					</div>
+					<!-- end -tab-content -->
+				</div>
+			</div>
+			<!-- /col -->
+			<!-- /row -->
+			<div class="row">
+				<div class="col-md-12" style="width:100%">
+					<div class="hasBeenSelected ">
+						<span id="time-num"></span>
+						<div class="col-md-12 hide">
+							<div class="col-md-1">
+								<label class="form-label-mini">条件组成:</label>
+							</div>
+							<div class="col-md-10">
+								<div id="sql1"></div>
+							</div>
+						</div>
+						<div class="col-md-12 hide">
+							<div class="col-md-1">
+								<label class="form-label-mini">正式条件:</label>
+							</div>
+							<div class="col-md-10">
+								<input type="text" ng-hide="true" class="form-control noresize" readonly
+										name="textarea" id="mysql"
+										ng-model="sqlwhere_high">
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<table
+			class="table table-striped table-bordered no-paging footable-loaded normal_filter">
+		<tr style="display: table-row;" ng-hide="FrmInfo.type == 'sqlback'" ng-show="conditions">
+			<td width="100px">
+				<label>条件1</label>
+				<select ng-hide="FrmInfo.type == 'sqlback'" ng-show="conditions"
+						ng-model="con[0].condition_name" name="keyword" class="input-sm chosen-select form-control width_no"
+						ng-options=" s.code as s.name for s in FrmInfo.thead" ng-change="change('condition_name1')">
+				</select>
+			</td>
+			<td width="100px">
+				<label>运算符1</label>
+				<select ng-hide="FrmInfo.type == 'sqlback'" ng-show="conditions"
+						ng-model="con[0].condition_op" name="keyword" class="form-control"
+				>
+					<option value="center" selected>包含</option>
+					<option value="=">等于</option>
+					<option value="left">左包含</option>
+					<option value="right">右包含</option>
+				</select>
+			</td>
+			<td width="350px">
+				<label>关键字1</label>
+				<input ng-show="conditions" ng-if="con[0].type== 'string'"
+						ng-model="con[0].condition_value" type="text"  placeholder="输入文本..."
+						class="form-control" >
+				<input ng-show="conditions" ng-if="con[0].type== 'number'"
+						ng-model="con[0].condition_value" type="number"  placeholder="输入数字..."
+						class="form-control" >
+				<select ng-show="conditions" ng-if="con[0].type== 'list'"
+						ng-model="con[0].condition_value" name="keyword" class="form-control"
+						ng-options=" s.value as s.desc for s in con[0].dicts" selected hidden
+				/>
+				<input ng-show="conditions" ng-if="con[0].type== 'date'"
+						ng-model="con[0].condition_value" type="text"
+						class="form-control dateform" ng-readonly="true" bs-date-picker placeholder="选择日期...">
+			</td>
+		</tr>
+		<tr style="display: table-row;" ng-hide="FrmInfo.type == 'sqlback'" ng-show="conditions">
+			<td>
+				<label>条件2</label>
+				<select ng-show="conditions"
+						ng-model="con[1].condition_name" name="keyword" class="input-sm chosen-select form-control width_no"
+						ng-options=" s.code as s.name for s in FrmInfo.thead" ng-change="change('condition_name2')">
+				</select>
+			</td>
+			<td>
+				<label>运算符2</label>
+				<select ng-hide="FrmInfo.type == 'sqlback'" ng-show="conditions"
+						ng-model="con[1].condition_op" name="keyword" class="form-control">
+					<option value="center" selected>包含</option>
+					<option value="=">等于</option>
+					<option value="left">左包含</option>
+					<option value="right">右包含</option>
+				</select>
+			</td>
+			<td>
+				<label>关键字2</label>
+				<input ng-show="conditions" ng-if="con[1].type== 'string'"
+						ng-model="con[1].condition_value" type="text" name="keyword" placeholder="输入文本..."
+						class="form-control" id="condition_value2">
+				</input>
+				<input ng-show="conditions" ng-if="con[1].type== 'number'"
+						ng-model="con[1].condition_value" type="number" name="keyword" placeholder="输入数字..."
+						class="form-control" >
+				</input>
+				<select ng-show="conditions " ng-if="con[1].type== 'list'"
+						ng-model="con[1].condition_value" name="keyword" class="form-control"
+						ng-options=" s.value as s.desc for s in con[1].dicts" selected hidden
+				/>
+				<input ng-show="conditions" ng-if="con[1].type== 'date'"
+						ng-model="con[1].condition_value" type="text"
+						class="form-control dateform" ng-readonly="true" bs-date-picker placeholder="选择日期...">
+			</td>
+		</tr>
+		<tr class="ng-hide" style="display: table-row;">
+			<td colspan="2"  ng-if="conditions"></td>
+			<td width="72%" style="max-width:300px;" ng-if="!conditions || FrmInfo.type == 'sqlback'">
+				<div class="col-md-12" ng-show="!conditions || FrmInfo.type == 'sqlback'"
+						style="line-height: 25px;">
+					<div class="col-md-2">
+						<label class="form-label-mini">已选条件:</label>
+					</div>
+					<div class="col-md-10">
+						<div class="clearList"></div>
+					</div>
+				</div>
+				<!--<input ng-hide="FrmInfo.type == 'sqlback'" ng-show="conditions" autofocus id="autofocus" auto-focus-->
+				<!--ng-keyup="enter($event)"-->
+				<!--ng-model="searchtext" type="text" name="keyword" placeholder="输入文本..." class="form-control">-->
+			</td>
+			<td>
+				<a ng-show="!showonetime" ng-click="toggleFilter($event)" class="inline" style="margin-top:5px;"
+					id="high_search"><i class="fa fa-angle-double-down"></i>高级查询</a>
+				<button ng-if="!conditions || FrmInfo.type == 'sqlback'"
+						class="btn eliminateCriteria btn-sm btn-warning pull-right" style="margin-left:5px;">
+					<strong>清空条件</strong>
+				</button>
+				<button class="btn btn-sm btn-primary pull-right" id="searchbtn" ng-click="search()">
+					<strong>立即搜索</strong>
+				</button>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<script>
+    //alert(frmInfo);
+    var condtions = "";
+    var okSelect = []; //已经选择好的
+    var okSelect_condtion = []; //已经选择好的
+    function doInit() {
+        var frmInfo = sessionStorage.getItem("frmInfo");
+        if (frmInfo && frmInfo.length) {
+            var FrmInfo = JSON.parse(frmInfo);
+            if (FrmInfo.type == 'sqlback') {
+                setTimeout(function () {
+                    $('div.high_filter').show();
+                }, 50);
+            }
+
+            // 列出条件字段--条件输入区-右边
+            var str = "";
+            for (var i = 0; i < FrmInfo.thead.length; i++) {
+                if (FrmInfo.thead[i].type == "boolean") { // 单选型
+                    str = str + common_sql.createConditionBoolean(FrmInfo.thead[i]);
+                } else if (FrmInfo.thead[i].type == "list") { // 多选型
+                    str = str + common_sql.createConditionList(FrmInfo.thead[i]);
+                } else {// 字符、数字、日期
+                    str = str + common_sql.createConditionNumber(FrmInfo.thead[i]);
+                }
+            }
+        }
+
+        $("#tab-content").html(str);
+        var options = {
+            format: 'yyyy-mm-dd',
+            startView: 'day',
+            todayBtn: true,
+            forceParse: true,
+            language: "zh-CN",
+            multidate: false,
+            autoclose: true,
+            todayHighlight: true
+        };
+        $("#tab-content").find("div[data_type='date']").find("input").datepicker(options);
+
+    }
+
+    function addStr(obj_name, obj_text, option_filed, obj_val, option_flag, data_type) { //增加数组给定相同的字符串
+        //  alert(obj_name+" ==="+obj_val);
+        okSelect.push(obj_name + '|' + obj_text);
+        okSelect_condtion.push(option_filed + '|' + obj_val + "|" + option_flag
+            + "|" + data_type);
+
+    };
+
+    //删除数组给定相同的字符串
+    function removeStr(obj_name) {
+        var n = -1;
+        for (var i = 0, len = okSelect.length; i < len; i++) {
+            var str_name = okSelect[i].split("|");
+            if (obj_name == str_name[0]) {
+                n = i;
+                break;
+            }
+        }
+
+        n > -1 && okSelect.splice(n, 1);
+        n > -1 && okSelect_condtion.splice(n, 1);
+
+    };
+
+    //删除数组给定相同的字符串
+    function delStrNew(obj_name, arr) {
+        var n = -1;
+        for (var i = 0, len = arr.length; i < len; i++) {
+            var str_name = arr[i].split("|");
+            if (obj_name == str_name[0]) {
+                n = i;
+                break;
+            }
+        }
+        n > -1 && arr.splice(n, 1);
+
+    };
+
+    // 删除当前条件行
+    function deleteTr(nowTr) {
+        //  alert('11111');
+        $(nowTr).parent().parent().detach();
+    }
+
+    // 清除当行值
+    function claerTr(nowTr) {
+        $(nowTr).parent().parent().find(".s_value").val('');
+        $(nowTr).parent().parent().find(".e_value").val('');
+    }
+
+    $().ready(
+        function () {
+
+            // 实始化界面字段
+            doInit();
+
+            //左边字段列表点击 停止冒泡事件，否则立即查询、确定和取消事件失灵
+            $("body").on("click", ".myfilter", function (e) {
+                e.preventDefault();
+            });
+
+            $("body").on("click", "button[data-toggle='tab']", function () {
+                var _this = $(this);
+                setTimeout(function () {
+                    _this.addClass("active").siblings("button").removeClass("active");
+                }, 50);
+            });
+
+            //回车键执行搜索
+            $("body").keydown(function() {
+                if (event.keyCode == "13") {//keyCode=13是回车键
+                    $('#searchbtn').click();
+                }
+            });
+
+            // 添加动态条件
+            $("body").on(
+                "click",
+                ".add",
+                function () {
+                    //var namegroups = new Array();
+                    var vals = new Array();
+                    var texts = new Array();
+                    var obj_id = $(this).closest("div.tab-pane").attr("option_id");
+                    var obj_name = $(this).closest("div.tab-pane").attr("option_name");
+                    var option_filed = $(this).closest("div.tab-pane").attr("option_filed");
+
+                    // =1 包括范围 >= ;=2 不包括范围 ;=3 包括值范围  in ; =4 不包括值范围  ;
+                    var option_flag = $(this).closest("div.tab-pane").attr("option_flag");
+                    var data_type = $(this).closest("div.tab-pane").attr("data_type");
+
+                    //	 alert("数值不能为空");
+                    var namegroups = $(this).closest("div.tab-pane")
+                        .find("table.gridtable").find("tbody")
+                        .children("tr");
+
+                    // 先清空已选定的条件临时记录
+                    removeStr(obj_name);
+
+                    // 同组条件，每行值范围用#隔开
+                    var stat = false;
+                    for (g = 0; g < namegroups.length; g++) {
+                        s_value = $(namegroups[g]).find(".s_value").val();
+                        e_value = $(namegroups[g]).find(".e_value").val();
+
+                        if (s_value == "" || s_value == null) {
+                            alert("第" + (g + 1) + "行条件不能为空");
+                            stat = true;
+                            break;
+                        }
+
+                        var row_valuegroups = s_value;
+                        if (e_value != null) {
+                            // alert("e_value::no");
+                            row_valuegroups = s_value + "#" + e_value;
+                        }
+                        // var row_valuegroups=s_value+"#"+e_value;
+                        vals[g] = row_valuegroups;
+                        texts[g] = row_valuegroups;
+                    }
+                    if (stat) return;
+                    //alert('vals:'+vals);
+                    addStr(obj_name, texts, option_filed, vals, option_flag, data_type);
+                    // 显示选中的条件
+                    showcondtion();
+                });
+
+            // 删除条件
+            $("body")
+                .on(
+                    "click",
+                    ".del",
+                    function () {
+                        var obj = $(this).closest("div.tab-pane");
+                        var obj_id = obj.attr("option_id")
+                        var obj_name = obj.attr("option_name")
+                        var option_filed = obj.attr("option_filed");
+                        var option_flag = obj.attr("option_flag");
+                        var data_type = obj.attr("data_type");
+
+                        // 先清空已选定的条件临时记录
+
+                        // removeStr(option_filed);
+                        delStrNew(obj_name, okSelect);
+                        delStrNew(option_filed, okSelect_condtion);
+
+                        var namegroups = obj.find("." + option_filed);
+                        if (namegroups.length > 1) {
+                            $(this).parent().parent().detach();
+                            var add = obj.find(".add:last");
+                            add.click();
+                        } else {
+                            $(this).parent().parent().find(".s_value").val("");
+                            $(this).parent().parent().find(".e_value").val("");
+
+                        }
+                        showcondtion();
+
+                        return false;
+                    });
+
+            //  单选项
+            $("body")
+                .on(
+                    "click",
+                    ".j_checkbox_one",
+                    function () {
+                        //var namegroups = new Array();
+                        var vals = new Array();
+                        var texts = new Array();
+                        var obj = $(this).parent().parent()
+                            .parent().parent().parent();
+                        var obj_id = obj.attr("option_id")
+                        var obj_name = obj
+                            .attr("option_name")
+                        var option_filed = obj
+                            .attr("option_filed");
+                        // =1 包括范围 >= ;=2 不包括范围 ;=3 包括值范围  in ; =4 不包括值范围  ;
+                        var option_flag = obj
+                            .attr("option_flag");
+                        var data_type = obj
+                            .attr("data_type");
+                        var obj_val = $(this).val();
+                        var obj_text = $(this).parent()
+                            .find("span").html();
+
+                        // 查找同个字段下的选项
+                        var namegroups = obj
+                            .find(".j_checkbox_one");
+                        var j_checkbox_val = obj
+                            .find(".j_checkbox_val");
+                        //alert("j_checkbox_val:"+j_checkbox_val.html());
+
+                        // 删除条件
+                        removeStr(obj_name);
+                        j_checkbox_val.html('未选');
+
+                        // 增加条件
+                        for (var g = 0; g < namegroups.length; g++) {
+                            if (obj_val == namegroups[g].value) {
+                                if (namegroups[g].checked) {
+                                    addStr(obj_name,
+                                        obj_text,
+                                        option_filed,
+                                        obj_val,
+                                        option_flag,
+                                        data_type);
+                                    j_checkbox_val
+                                        .html(obj_text);
+                                }
+                            } else {
+                                namegroups[g].checked = false;
+                            }
+                        }
+                        // 显示条件
+                        showcondtion();
+
+                    });
+
+            // 多选项
+            $("body")
+                .on(
+                    "click",
+                    ".j_checkbox_more",
+                    function () {
+                        //var namegroups = new Array();
+                        var vals = new Array();
+                        var texts = new Array();
+                        var obj = $(this).parent().parent().parent().parent().parent();
+                        var obj_id = obj.attr("option_id")
+                        var obj_name = obj.attr("option_name")
+                        var option_filed = obj.attr("option_filed");
+                        // =1 包括范围 >= ;=2 不包括范围 ;=3 包括值范围  in ; =4 不包括值范围  ;
+                        var option_flag = obj.attr("option_flag");
+                        var data_type = obj.attr("data_type");
+                        // 查找同个字段下的选项
+                        var namegroups = obj.find(".j_checkbox_more");
+                        var j_checkbox_val = obj.find(".j_checkbox_val");
+                        //alert("j_checkbox_val:"+j_checkbox_val.html());
+
+                        // 删除条件
+                        removeStr(obj_name);
+                        j_checkbox_val.html('未选');
+
+                        // 增加条件
+                        var vals = new Array();
+                        var texts = new Array();
+                        var valindex = 0;
+                        for (var g = 0; g < namegroups.length; g++) {
+                            var obj_text = $(namegroups[g])
+                                .parent().find("span")
+                                .html();
+                            var obj_val = $(namegroups[g])
+                                .attr("value");
+                            if (namegroups[g].checked) {
+                                texts[valindex] = obj_text;
+                                vals[valindex] = obj_val;
+                                valindex++;
+                            }
+                        }
+
+                        if (vals.length > 0) {
+                            addStr(obj_name, texts,
+                                option_filed, vals,
+                                option_flag, data_type);
+                            j_checkbox_val.html(vals
+                                .join(","));
+                        }
+                        // 显示条件
+                        showcondtion();
+                    });
+
+            //  清空
+            $("body").on("click", "button.eliminateCriteria",
+                function () {
+                    $(".clearList").html('');
+                    $("#sql1").html('');
+                    $("#mysql").val('');
+                    okSelect = []; //已经选择好的
+                    okSelect_condtion = []; //已经选择好的
+                });
+
+        });
+
+    // 显示选中的条件
+    function showcondtion() {
+
+        var oClearList = $("div.clearList");
+        // alert(':'+okSelect.length);
+        var infor = "", sql = "";
+        var texts = [], vals = [];
+        for (var i = 0, size = okSelect.length; i < size; i++) {
+            texts = okSelect[i].split('|');
+            infor += '<div class=\"selectedInfor selectedShow text-ellipsis\">'
+                + texts[0] + '' + texts[1]
+                + '</div>';
+        }
+        // 显示中文条件
+        oClearList.html(infor);
+        $('#sql1').html(okSelect_condtion);
+        for (var i = 0, size = okSelect_condtion.length; i < size; i++) {
+            vals = okSelect_condtion[i].split('|');
+            var value = vals[1].split(',');
+            var filedname = vals[0];
+            var flag = vals[2]; // 动作
+            var data_type = vals[3];// 类型
+
+            var sql1 = "";
+            //  alert(flag+"==="+value);
+            switch (parseInt(flag)) {
+
+                case 1: // 包括范围
+                    sql1 = common_sql.getSqlInField(filedname, value, data_type);
+                    break;
+
+                case 2: // 不包括范围
+                    sql1 = common_sql.getSqlNotInField(filedname, value, data_type);
+                    break;
+
+                case 3: // 包括值范围
+                    sql1 = common_sql.getSqlInGroup(filedname, value, data_type);
+                    break;
+
+                case 4: //不包括值范围
+                    sql1 = common_sql.getSqlNotInGroup(filedname, value, data_type);
+                    break;
+            }
+            // 单个条件完成
+            if (sql1 != "") {
+                sql1 = "(" + sql1 + ")";
+                sql = i == 0 ? sql1 : sql + " and " + sql1;
+            }
+        }
+        console.log(sql)
+        // 显示sql执行条件
+        //$('#sql').html(sql);
+        $('#mysql').val(sql);
+        $('#mysql').change();
+    }
+
+    setTimeout(function () {
+        //alert($('#field_list').find("li.myfilter").eq(0).html());
+        $('#field_list').find("li.myfilter").eq(0).children("a").trigger("click");
+    }, 50);
+    var tabsFn = function () {
+        function init() {
+            setHeight();
+        }
+
+        function setHeight() {
+            var $tabPane = $('.tab-pane'), tabsHeight = $('.inav-tabs').height();
+        }
+
+        $(init);
+    }();
+
+    if (document.location.search.match(/type=embed/gi)) {
+        window.parent.postMessage("resize", "*");
+    }
+</script>
+
+

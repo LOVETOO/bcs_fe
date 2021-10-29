@@ -1,0 +1,58 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal"></a>
+        <h3>仓库资料编辑</h3>
+    </div>
+    <div class="modal-body">
+        <div class="ibox-content clearborder">
+            <div class="row">
+                <div class="col-md-2"><label class="form-label-mini">仓库编码:</label></div>
+                <div class="col-md-3">
+                    <input ng-readonly="item.is_edit" ng-model="item.areacode" type="text" class="form-control input-sm">
+                </div>
+                <div class="col-md-2"><label class="form-label-mini">仓库名称:</label></div>
+                <div class="col-md-3">
+                    <input ng-readonly="item.is_edit" ng-model="item.areaname" type="text" class="form-control input-sm">
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-2"><label class="form-label-mini">部门:</label></div>
+                <div class="col-md-3">
+                    <input ng-readonly="item.is_edit" ng-model="item.org_name" type="text" class="form-control input-sm">
+                </div>
+                <div class="col-md-2"><label class="form-label-mini">服务网点:</label></div>
+                <div class="col-md-3">
+                    <input ng-readonly="item.is_edit" ng-model="item.fix_org_name" type="text" class="form-control input-sm">
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-2"><label class="form-label-mini">城市:</label></div>
+                <div class="col-md-3">
+                    <input ng-readonly="item.is_edit" ng-model="item.org_name" type="text" class="form-control input-sm">
+                </div>
+                <div class="col-md-2"><label class="form-label-mini">是否可用:</label></div>
+                <div class="col-md-3">
+                    <input ng-readonly="item.is_edit" ng-model="item.fix_org_name" type="text" class="form-control input-sm">
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-2"><label class="form-label-mini">ERP仓库编码:</label></div>
+            	<div class="col-md-3">
+            		<input type="tel" class="input-sm form-control" ng-model="item.erp_warehouse_code">
+            	</div>
+                <div class="col-md-2"><label class="form-label-mini">备注:</label></div>
+                <div class="col-md-3">
+                    <input ng-readonly="item.is_edit" ng-model="item.note" type="text" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+            确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+            取消
+        </a>
+    </div>
+</div>

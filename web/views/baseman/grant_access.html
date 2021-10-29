@@ -1,0 +1,159 @@
+<div hc-splitter-box="{ position: '500px' }">
+
+	<div>
+
+		<div hc-tab="leftTabs"></div>
+
+		<div hc-tab-page>
+
+			<div
+				ng-repeat="(id, g) in leftGridOptions"
+				id="{{id}}"
+				class="tab-pane"
+				ng-class="{ active: leftTabs[id].active }"
+			>
+				<div hc-grid="g"></div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div>
+
+		<div hc-tab="rightTabs"></div>
+
+		<div hc-tab-page>
+
+			<div
+				ng-repeat="(id, g) in rightGridOptions"
+				id="{{id}}"
+				class="tab-pane"
+				ng-class="{ active: rightTabs[id].active }"
+			>
+				<div hc-grid="g"></div>
+			</div>
+
+		</div>
+
+		<div id="right-bar">
+			<div hc-buttons="buttons" hc-buttons-pull-left></div>
+		</div>
+
+	</div>
+
+</div>
+
+<style>
+	[hc-splitter-box] {
+		position: fixed;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+	}
+	[hc-splitter-box]>* {
+		height: 100%;
+	}
+	[hc-tab-page] {
+		position: absolute;
+		top: 31px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+	}
+	[hc-tab=rightTabs]+[hc-tab-page] {
+		bottom: 48px;
+	}
+	[hc-tab-page]>* {
+		height: 100%;
+		padding: 8px;
+	}
+	[hc-tab=rightTabs]+[hc-tab-page]>* {
+		padding-bottom: 0px;
+	}
+	[hc-grid] {
+		height: calc(100% - 27px);
+	}
+	[hc-tab=rightTabs]+[hc-tab-page] [hc-grid] {
+		height: 100%;
+	}
+	#right-bar {
+		position: absolute;
+		bottom: 0px;
+		height: 48px;
+		width: 100%;
+		padding: 8px
+	}
+</style>
+
+<!-- <div class="full-of-window" hc-splitter-box="{ position: '300px' }" hc-auto-height>
+	<div style="height: 100%;">
+		<div class="full-of-parent-with-margin" hc-grid="gridOptions.user"></div>
+	</div>
+	<div style="height: 100%;">
+		<div hc-tab="tabs"></div>
+
+		<div class="full-of-parent-tab-panel" hc-tab-page>
+
+			<div
+				id="{{tabId}}"
+				class="tab-pane"
+				style="position: relative; height: 100%;"
+				ng-class="{ active: tab.active }"
+				ng-repeat="(tabId, tab) in tabs"
+			>
+				<div style="position: absolute; top: 8px; left: 8px;">已授权</div>
+				<div class="half-left-of-parent-with-margin" hc-grid="gridOptions[tabId]"></div>
+				<div style="position: absolute; top: 8px; left: calc(50% + 8px);">未授权</div>
+				<div class="half-right-of-parent-with-margin" hc-grid="gridOptions[tabId + '_n']"></div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<style>
+	.full-of-window {
+		position: fixed;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+	}
+	.full-of-parent {
+		position: absolute;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+	}
+	.full-of-parent-with-margin {
+		position: absolute;
+		top: 8px;
+		bottom: 8px;
+		left: 8px;
+		right: 8px;
+	}
+	.half-left-of-parent-with-margin {
+		position: absolute;
+		top: 32px;
+		bottom: 8px;
+		left: 8px;
+		right: calc(50% + 4px);
+	}
+	.half-right-of-parent-with-margin {
+		position: absolute;
+		top: 32px;
+		bottom: 8px;
+		left: calc(50% + 4px);
+		right: 8px;
+	}
+	.full-of-parent-tab-panel {
+		position: absolute;
+		top: 30px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+	}
+</style> -->

@@ -1,0 +1,39 @@
+<div hc-obj-prop>
+    <div id="base" hc-box class="active">
+    <div  hc-box class="other-h">
+        <div class="row">
+            <div hc-input="data.currItem.bill_no"
+                 hc-label="单据号"
+                 hc-readonly="true">
+            </div>
+            <div hc-input="data.currItem.year_month"
+                 hc-label="生效年月"
+                 hc-type="year-month"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.salary_group_name"
+                 hc-label="薪资组"
+                 hc-class-id="hr_salary_group"
+                 hc-common-search="commonSearchSettingOfSalaryGroup"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.creator"
+                 hc-label="创建人"
+                 hc-readonly="true">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.remark"
+                 hc-label="备注"
+                 hc-col-count="6">
+            </div>
+            <div hc-input="data.currItem.creation_date"
+                 hc-label="创建时间"
+                 hc-readonly="true">
+            </div>
+        </div>
+
+    </div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>

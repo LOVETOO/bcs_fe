@@ -1,0 +1,60 @@
+<!--工程费用申请 视图-->
+<!--2019/7/1-->
+<!--shenguocheng-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box="" class="grid-other-h">
+            <div class="row">
+                <div hc-input="data.currItem.fee_apply_no"
+                     hc-label="申请单号"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.chap_name"
+                     hc-label="申请人"
+                     hc-btn-click="chooseUser()"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div hc-input="data.currItem.org_name"
+                     hc-label="申请部门"
+                     hc-btn-click="chooseOrg()"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.project_code"
+                     hc-label="工程项目"
+                     hc-class-id="epm_project"
+                     hc-common-search="commonSearchSettingOfProjectName"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.project_name"
+                     hc-col-count="4"
+                     hc-readonly="true">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.purpose"
+                     hc-label="费用用途"
+                     hc-col-count="8">
+                </div>
+            </div>
+
+        </div>
+        <div hc-grid="gridOptions" hc-box="" hc-auto-height="grid"></div>
+
+    </div>
+
+</div>

@@ -1,0 +1,22 @@
+<div>
+	<div class="modal-header" draggable-model>
+		<button type="button" class="close" ng-click="$dismiss('头部关闭')">
+			<i class="fa fa-close"></i>
+		</button>
+		<!-- <button type="button" class="modmax" id="ModalMax">
+			<i class="fa fa-expand no-draggable"></i>
+		</button> -->
+		<h4 class="modal-title" id="commonModalTitle">
+			<a target="_blank" ng-href="{{src}}" ng-bind="title"></a>
+		</h4>
+	</div>
+	<div class="modal-body">
+		<!-- 以下是模态框的实际内容 -->
+		<div modal-transclude />
+		<!-- 以上是模态框的实际内容 -->
+	</div>
+	<div class="modal-footer">
+		<div hc-buttons="footerLeftButtons" hc-buttons-pull-left></div>
+		<div hc-buttons="footerRightButtons" hc-buttons-pull-right></div>
+	</div>
+</div>

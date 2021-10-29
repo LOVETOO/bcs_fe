@@ -1,0 +1,88 @@
+﻿<div class="modal-content" local-storage ng-model="data.currItem">
+    <div class="row" style="width: 100%">
+        <div class="col-lg-12">
+            <div class="modal-header" draggable-model style="width: 100%">
+                <h3>产品类别属性</h3>
+            </div>
+            <div class="modal-body" style="width: 100%">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label-mini not-null ">词汇编码</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="data.currItem.dictcode"
+                               data-msg-required="词汇编码不能为空"
+                               data-rule-required="true"
+                               class="input-sm form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label-mini not-null">词汇名称</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="data.currItem.dictname"
+                               data-msg-required="词汇名称不能为空"
+                               data-rule-required="true"
+                               class="input-sm form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label-mini not-null ">词汇值</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="data.currItem.dictvalue" ng-readonly="false"
+                               data-msg-required="词汇值不能为空"
+                               data-rule-required="true"
+                               class="input-sm form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label-mini not-null">库存组织</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select chosen-select  id="pi_stat"
+                                ng-model="data.currItem.invorgid"
+                                class="input-sm chosen-select form-control"
+                                ng-options="s.id as s.name for s in invorgids">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <label><input ng-model="data.currItem.usable" ng-false-value="1" ng-true-value="2"
+                                      ng-checked="data.currItem.usable" type="checkbox"
+                                      class="ng-valid ng-dirty ng-valid-parse ng-touched">可用</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label rows="1" class="form-label-mini ">备注</label>
+                    </div>
+                    <div class="col-md-8">
+								<textarea ng-readonly="false"
+                                          ng-model="data.currItem.note"
+                                          rows="2"
+                                          class="form-control noresize ng-pristine ng-valid ng-touched">
+								</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="width: 100%">
+                <a class="btn btn-sm btn-primary" ng-click="ok(e)">
+                    确定
+                </a>
+                <a class="btn btn-sm btn-info" ng-click="cancel(e)">
+                    取消
+                </a>
+                <a class="btn btn-sm btn-info" ng-click="applyto(e)">
+                    应用
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

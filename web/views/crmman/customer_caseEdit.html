@@ -1,0 +1,135 @@
+<div class="bill-form" ng-controller="customer_caseEdit">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                客户特殊箱单发票案例库
+            </div>
+            <div style="float:left">
+                <div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">
+                </div>
+                <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button" ng-click="new()"><i
+                        class="fa fa-file-o"></i>新增
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="save($event)"><i
+                        class="fa fa-floppy-o"></i>保存
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i
+                        class="fa fa-history"></i>刷新
+                </button>
+                <button class="btn btn-toolbar" type="button"
+                        ng-click="delete()"><i class="fa fa-trash"></i>删除
+                </button>
+                <button ng-click="closefrm()" class="btn btn-toolbar dropdown-toggle" type="button"><i class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>基本信息</h5>
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content icons-box">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">模板编码</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" ng-readonly="true" ng-model="data.currItem.case_no"
+                                       placeholder=""
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">制单时间</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" ng-readonly="true" ng-model="data.currItem.create_time"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">制单人</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" ng-readonly="true" ng-model="data.currItem.creator"
+                                       class="input-sm form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">销售部门</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input data-rule-required="true" data-msg-required="销售部门不能空" type="text"
+                                           ng-readonly="true"
+                                           class="input-sm form-control" ng-model="data.currItem.org_code">
+                                    <a class="input-group-addon" ng-click="Org_Name()"><i
+                                            class="fa fa-ellipsis-h"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" ng-readonly="true" ng-model="data.currItem.org_name"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">客户</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input data-rule-required="true" data-msg-required="客户不能空" type="text"
+                                           ng-readonly="true"
+                                           class="input-sm form-control" ng-model="data.currItem.cust_code">
+                                    <a class="input-group-addon" ng-click="Cust_Code()"><i
+                                            class="fa fa-ellipsis-h"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" ng-readonly="true" ng-model="data.currItem.cust_name"
+                                       class="input-sm form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">备注</label>
+                            </div>
+                            <div class="col-md-11">
+									<textarea ng-model="data.currItem.note" rows="3"
+                                              class="form-control noresize ng-pristine ng-valid ng-touched">
+									</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>附件</h5>
+
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content icons-box">
+                        <button swf-upload title="添加附件" class="btn btn-toolbar"
+                                ng-disabled="data.currItem.stat!=1"
+                                upload-list="data.currItem.objattachs"
+                                ng-model="data.currItem.objattachs"
+                                ng-disabled="(data.currItem.currprocname!='业务员')&&(data.currItem.stat!=1)"
+                                filed='#attach-area'>
+                            <i class="fa lightblue font-size-15  fa-paperclip"></i> 添加附件
+                        </button>
+                        <ul id="attach-area">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

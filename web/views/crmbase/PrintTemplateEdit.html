@@ -1,0 +1,112 @@
+<div class="bill-form" ng-controller="PrintTemplateEditController">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h3>打印模板</h3>
+            <button class="btn btn-toolbar" ng-hide="mainbtn.search"
+                    type="button" ng-click="search()">
+                <i class="fa fa-search"></i>查询
+            </button>
+            <button ng-click="createNew()" class="btn btn-toolbar" type="button">
+                <i class="fa fa-file-o"></i>新增
+            </button>
+            <button ng-click="save()" class="btn btn-toolbar" type="button">
+                <i class="fa fa-floppy-o"></i>保存
+            </button>
+            <button class="btn btn-toolbar" type="button">
+                <i class="fa fa-history"></i>刷新
+            </button>
+            <button class="btn btn-toolbar" type="button">
+                <i class="fa fa-trash"></i>删除
+            </button>
+            <!-- <button class="btn btn-toolbar" type="button"><i class="fa fa-check-square-o">提交</i></button> -->
+            <button ng-click="exportExl()" class="btn btn-toolbar" type="button">
+                <i class="fa fa-file-excel-o"></i>导出
+            </button>
+            <button ng-click="closefrm()" class="btn btn-toolbar"
+                    type="button">
+                <i class="fa fa-times"></i>关闭
+            </button>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <form name="payment_bank_Edit" class="form-horizontal">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>常规</h5>
+
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-2">
+                                        <label class="form-label-mini font-noraml ">模板代号:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input ng-model="printtpl.templet_code" type="text"
+                                               placeholder="" class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-label-mini font-noraml ">模板名称:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input ng-model="printtpl.templet_name" type="text"
+                                               placeholder="" class="input-sm form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-2">
+                                        <label class="form-label-mini font-noraml ">制单人:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input ng-model="printtpl.creator" type="text" placeholder=""
+                                               class="input-sm form-control">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-label-mini font-noraml ">制单时间:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input bs-datepacker ng-model="printtpl.create_time"
+                                               type="text" placeholder="" class="input-sm form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="col-md-2">
+                                        <label class="form-label-mini font-noraml ">备注:</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input ng-model="printtpl.note" type="text" placeholder=""
+                                               class="input-sm form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                     <div class="ibox float-e-margins">
+                         <div class="ibox-title">
+                             <h5>附件</h5>
+                             <div ibox-tools></div>
+                         </div>
+                         <div class="ibox-content icons-box">
+                             <button swf-upload title="添加附件" class="btn btn-toolbar" upload-list="data.currItem.objattachs" ng-model="data.currItem.objattachs" filed='#attach-area'>
+                                 <i class="fa lightblue font-size-15  fa-paperclip"></i> 添加附件
+                             </button>
+                             
+                             <ul id="attach-area">
+                             </ul>
+                         </div>
+                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

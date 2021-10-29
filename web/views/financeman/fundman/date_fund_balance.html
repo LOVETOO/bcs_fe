@@ -1,0 +1,104 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+
+        <div class="row">
+            <div hc-input="data.currItem.startyear_month"
+                 hc-label="记账月份"
+                 hc-required="true"
+                 hc-type="year-month">
+            </div>
+            <div hc-input="data.currItem.endyear_month"
+                 hc-label="到"
+                 hc-required="true"
+                 hc-type="year-month">
+            </div>
+            <div hc-input="data.currItem.fund_account_type"
+                 hc-label="账户类型"
+                 hc-dict-code="fund_account_type">
+            </div>
+            <div hc-input="data.currItem.fund_account_property"
+                 hc-label="账户类别"
+                 hc-dict-code="fund_account_property">
+            </div>
+
+
+        </div>
+
+
+        <div class="row">
+            <div hc-input="data.currItem.fund_account_code" hc-delete-together="fd_fund_account_id"
+                 hc-label="资金账户"
+                 hc-col-count="3"
+                 hc-common-search="chooseAccount()">
+            </div>
+            <!--<div hc-input="data.currItem.fund_account_name"-->
+            <!--hc-readonly="true">-->
+            <!--</div>-->
+            <div hc-input="data.currItem.fd_fund_bank_code" hc-delete-together="fd_fund_bank_id"
+                 hc-label="开户银行"
+                 hc-col-count="3"
+                 hc-common-search="chooseBank()">
+            </div>
+            <!--<div hc-input="data.currItem.fd_fund_bank_name"-->
+            <!--hc-readonly="true">-->
+            <!--</div>-->
+            <div hc-input="data.currItem.is_zj"
+                 hc-type="checkbox"
+                 hc-change="onChange()"
+                 hc-label="按资金账户分组"></div>
+        </div>
+
+    </div>
+
+    <!--<ul class="nav nav-tabs other-h" id="detailtab">-->
+        <!--<li class="active">-->
+            <!--<a data-toggle="tab" id="tab11" href="tabs.html#tab1">流水明细</a>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<a data-toggle="tab" id="tab22" href="tabs.html#tab2">报表汇总</a>-->
+        <!--</li>-->
+    <!--</ul>-->
+
+    <!--<div class="tabs-container">-->
+        <!--<div class="tab-content">-->
+            <!--<div id="tab1" class="tab-pane active">-->
+                <div hc-grid="gridOptions" hc-box  hc-auto-height="grid"></div>
+            <!--</div>-->
+            <!--<div id="tab2" class="tab-pane">-->
+                <!--<div hc-grid="groupGridOptions"  hc-auto-height="grid"></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!-- 分类汇总 -->
+    <!--<div class="modal inmodal fade" id="groupModal" role="dialog" aria-hidden="true" style="display: none;">-->
+        <!--<div class="modal-dialog modal-lg" style="width: 500px;">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header" draggable-model>-->
+                    <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span-->
+                            <!--class="sr-only">Close</span></button>-->
+                    <!--<h4 class="modal-title" style="font-size: 16px;">汇总</h4>-->
+                <!--</div>-->
+                <!--<div class="modal-body" style="height: 60px;">-->
+                    <!--<form method="get" class="form-inline mline">-->
+                        <!--<div class="row">-->
+
+                            <!--<div hc-input="fund_account_type"-->
+                                 <!--hc-type="checkbox"-->
+                                 <!--hc-label="按账户类型"></div>-->
+                            <!--<div hc-input="fund_account_property"-->
+                                 <!--hc-type="checkbox"-->
+                                 <!--hc-label="按账户类别"></div>-->
+                        <!--</div>-->
+                    <!--</form>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-white" ng-click="initGroup()">汇总</button>-->
+                    <!--<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+
+</div>

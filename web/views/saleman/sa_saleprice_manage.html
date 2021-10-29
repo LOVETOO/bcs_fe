@@ -1,0 +1,42 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+        <div class="row">
+            <div hc-input="data.currItem.customer_code"
+                 hc-label="客户"
+                 hc-class-id="customer_org"
+                 hc-common-search="chooseCustomer">
+            </div>
+            <div hc-input="data.currItem.customer_name"
+                 hc-label="">
+            </div>
+            <div hc-input="data.currItem.saleprice_type_name"
+                 hc-label="价格类型"
+                 hc-class-id="sa_saleprice_type"
+                 hc-common-search="choosePriceType">
+            </div>
+            <div hc-input="data.currItem.saleorder_no"
+                 hc-label="价格单号">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.item_code"
+                 hc-label="产品编码">
+
+            </div>
+            <div hc-input="data.currItem.start_date"
+                 hc-type="date"
+                 hc-label="有效期间 从">
+            </div>
+            <div hc-input="data.currItem.end_date"
+                 hc-label="至"
+                 hc-type="date">
+            </div>
+            <div hc-input="data.currItem.is_cancellation"
+                 hc-label="状态"
+                 hc-select-options="is_cancellation">
+            </div>
+        </div>
+
+    </div>
+    <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+</div>

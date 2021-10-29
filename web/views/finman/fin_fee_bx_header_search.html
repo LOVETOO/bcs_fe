@@ -1,0 +1,207 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fin_fee_bx_header_search">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>费用报销查询</h5>
+                    <div class="ibox-tools">
+                        <form role="form" class="form-inline">
+                            <div class="text-right">
+                                <button type="button" class="btn btn-default btn-sm" ng-click="searchBX()"><i
+                                        class="fa fa-search"></i> 查询
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm" ng-click="clear()"><i
+                                        class="fa fa-search"></i> 清空条件
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" class="form-inline mline title-form">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="form-label-mini">报销单号</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control" ng-model="data.currItem.bx_no">
+                                </div>
+                                <label class="form-label-mini">制单人</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control" ng-model="data.currItem.creator">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"
+                                                ng-click="searchEmployee('creator')"><i
+                                                class="fa fa-user"></i></button>
+                                    </span>
+                                </div>
+                                <label class="form-label-mini">年度</label>
+                                <input type="number" class="form-control" ng-model="data.currItem.cyear">
+
+                                <label class="form-label-mini">预算类别</label>
+                                <div class="input-group width_m" style="margin-right: 2px;">
+                                    <input type="text" class="form-control" ng-model="data.currItem.bud_type_code">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"
+                                                ng-click="searchBudType()">•••</button>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control width_xm" ng-model="data.currItem.bud_type_name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="form-label-mini">申请单号</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control" ng-model="data.currItem.fee_apply_no">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-click="searchFee_apply_no()">•••</button>
+                                    </span>
+                                </div>
+                                <label class="form-label-mini">报销人</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control" ng-model="data.currItem.chap_name">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"><i
+                                                class="fa fa-user" ng-click="searchEmployee('chap_name')"></i></button>
+                                    </span>
+                                </div>
+
+                                <label class="form-label-mini">月度</label>
+                                <div class="input-group width_m">
+                                    <select class="input-sm chosen-select  form-control ng-pristine ng-valid localytics-chosen loading"
+                                            ng-model="data.currItem.cmonth"
+                                            ng-selected="s == data.currItem.cmonth"
+                                            ng-options="s for s in months">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+
+                                <label class="form-label-mini">单据状态</label>
+                                <div class="input-group width_m">
+                                    <select  class="input-sm  chosen-select form-control ng-pristine ng-valid localytics-chosen loading"
+                                             ng-model="data.currItem.stat"
+                                             ng-options="s.id as s.name for s in billStats"
+                                             ng-selected="s.id==data.currItem.stat">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="viewGrid" slick-grid sg-options="viewOptions"
+                         sg-columns="viewColumns" class="slick-grid"></div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--modal-导出-->
+    <div class="modal inmodal fade" id="ImportModal" tabindex="-1" role="dialog"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">请选择要导出的列</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-condensed table-hover">
+                        <tr>
+                            <th></th>
+                            <th>导出</th>
+                            <th>列名</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <input type="checkbox" value="1" id="FeeId">
+                            </td>
+                            <td>
+                                <label for="FeeId">费用项目编码</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <input type="checkbox" value="1" id="FeeName">
+                            </td>
+                            <td>
+                                <label for="FeeName">费用项目名称</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <input type="checkbox" value="1" id="SubjectId">
+                            </td>
+                            <td>
+                                <label for="SubjectId">会计科目编码</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <input type="checkbox" value="1" id="SubjectName">
+                            </td>
+                            <td>
+                                <label for="SubjectName">会计科目名称</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <input type="checkbox" value="1" id="SubjectDescription">
+                            </td>
+                            <td>
+                                <label for="SubjectDescription">会计科目描述</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>
+                                <input type="checkbox" value="1" id="Reimbursement">
+                            </td>
+                            <td>
+                                <label for="Reimbursement">报销方式</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>
+                                <input type="checkbox" value="1" id="State">
+                            </td>
+                            <td>
+                                <label for="State">状态</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>
+                                <input type="checkbox" value="1" id="Comment">
+                            </td>
+                            <td>
+                                <label for="Comment">备注</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!--时间插件引入中文-->
+<script type="text/javascript" src="../../lib/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"
+        charset="UTF-8"></script>
+
+
+

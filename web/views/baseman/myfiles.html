@@ -1,0 +1,268 @@
+<div class="wrapper wrapper-content animated fadeInRight ng-scope">
+    <div class="ibox-title other-h">
+        <div hc-input="keyword"
+             hc-btn-click="searchByKeyword()"
+             hc-btn-icon="iconfont hc-search"
+             hc-can-input="true"
+             hc-col-count="2"
+             hc-placeholder="请输入关键字进行搜索"
+             hc-autofocus="true"
+             hc-change="onKeywordChange()"
+             class="pull-left">
+        </div>
+        <div hc-button="isSearchMod = false" ng-hide="!isSearchMod">退出搜索模式</div>
+        <div hc-button="locate()" ng-hide="!isSearchMod">定位</div>
+    </div>
+    <div style="height: 7px;" class="other-h"></div>
+    <div class="TreeGridBox jq-widget" style="margin-top: 0px;margin-bottom: 0px;" hc-auto-height ng-hide="isSearchMod">
+        <div class="ibox-title">
+            <h5>个人文件</h5>
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+        <div class="grid_modal">
+            <div id="filedropzone" action="/web/cpc/filesuploadsave2.do" hc-grid="options"></div>
+            <button ng-hide="true" id='dropzone'> 弹出自带</button>
+        </div>
+    </div>
+    <div class="TreeGridBox jq-widget" style="margin-top: 0px;margin-bottom: 0px;" hc-auto-height ng-hide="!isSearchMod">
+        <div id="searchGrid" hc-grid="searchOptions" style="height: 100%;"></div>
+    </div>
+    <div style="height: 7px;" class="other-h"></div>
+</div>
+
+<!--树右键菜单-->
+<div id="rMenu">
+    <ul>
+        <!--li id="m_add" onclick="menuAddNode();">输出当前版本</li-->
+        <li id="m_edit" onclick="menuEditNode();">
+            <i class="fa fa-search"></i><span>搜索</span>
+        </li>
+        <!--<li ng-hide='true' id="m_editFile" onclick="menuEditContentNode();">
+            <i class="fa fa-refresh"></i>刷新(F5)
+        </li>-->
+        <li ng-show='data.rightObj.add == 1 || data.rightObj.all == 1'
+            ng-click="create_file()">
+            <i class="fa fa-folder-open-o"></i><span>新建文件夹</span>
+        </li>
+        <li ng-show='data.rightObj.modify == 1 || data.rightObj.all == 1'
+            ng-click="file_copy1('tree')">
+            <i class="fa fa-files-o"></i><span>复制</span>
+        </li>
+        <li ng-show='data.rightObj.modify==1  || data.rightObj.all == 1'
+            ng-click="file_cut1('tree')">
+            <i class="fa fa-scissors"></i><span>剪切</span>
+        </li>
+        <li ng-show='(data.rightObj.modify == 1 || data.rightObj.all == 1) && file_list && file_list.length>0'
+            ng-click="paste_file()">
+            <i class="fa fa-files-o"></i><span>粘贴</span>
+        </li>
+        <li ng-click="refreshTree()">
+            <i class="fa fa-refresh"></i><span>刷新</span>
+        </li>
+        <li ng-show='data.rightObj.rightObj.cantransfer == 2  || data.rightObj.all == 1'
+            ng-click="share()">
+            <i class="fa fa-share"></i><span>共享</span>
+        </li>
+        <li ng-show='data.rightObj.delete == 1 || data.rightObj.all == 1' id="m_delete"
+            ng-click="del_file(1,0)">
+            <i class="fa fa-trash-o"></i><span>删除</span>
+        </li>
+        <li ng-show='data.rightObj.modify == 1 || data.rightObj.all == 1'
+            ng-click="new_name(1)">
+            <i class="fa fa-pencil"></i><span>重命名</span>
+        </li>
+        <li ng-show='data.rightObj.cantransfer==2 || data.rightObj.all == 1 || data.rightObj.read == 1' ng-click="ftr_attr('tree')">
+            <i class="fa fa-info-circle"></i><span>属性</span>
+        </li>
+    </ul>
+</div>
+
+<!--上传进度条-->
+<div id='pro' class="progress">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{pro}}"
+         aria-valuemin="0" aria-valuemax="100" style="width: {{pro}}%">
+        {{pro}}%
+    </div>
+</div>
+
+<!--文件夹属性modal-->
+<div hc-modal="fdrModal">
+    <div hc-box=''>
+        <div class="row">
+            <div hc-label="名称" hc-input="data.fdrname" hc-readonly="true" hc-col-count="8"></div>
+        </div>
+        <div class="row">
+            <div hc-label="创建用户" hc-col-count="4" hc-input="data.creator" hc-readonly="true"></div>
+            <div hc-label="创建时间" hc-col-count="4" hc-input="data.createtime" hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="最后修改用户" hc-col-count="4" hc-input="data.updator" hc-readonly="true"></div>
+            <div hc-label="最后修改时间" hc-col-count="4" hc-input="data.updatetime" hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="文件夹代号" hc-col-count="4" hc-input="data.fdrid" hc-readonly="true"></div>
+            <div hc-label="可用" hc-type="checkbox" hc-col-count="4" hc-input="data.actived"></div>
+        </div>
+        <div class="row">
+            <div hc-label="备注" hc-type="textarea" hc-input="data.note" hc-col-count="8"></div>
+        </div>
+    </div>
+</div>
+
+<!--文件属性modal-->
+<div hc-modal="docModal">
+    <div hc-box=''>
+        <div class="row">
+            <div hc-label="文件名" hc-col-count="4" hc-input="data.docname" hc-readonly="true"></div>
+            <div hc-label="系统版本" hc-col-count="4" hc-input="data.rev" hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="编码" hc-col-count="4" hc-input="data.code"></div>
+            <div hc-label="版本" hc-col-count="4" hc-input="data.revlable"></div>
+        </div>
+        <div class="row">
+            <div hc-label="类型" hc-input="data.doctype"
+                    hc-select-options="doctypeList"
+                    hc-col-count="4"></div>
+            <div hc-label="状态" hc-input="data.stat"
+                    hc-select-options="statList"
+                    hc-col-count="4"></div>
+        </div>
+        <div class="row">
+            <div hc-label="文件代号" hc-col-count="4" hc-input="data.docid" hc-readonly="true"></div>
+            <div hc-label="电子仓位" hc-col-count="4" hc-input="data.locname " hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="原始大小(Bytes)" hc-col-count="4" hc-input="data.oldsize" hc-readonly="true"></div>
+            <div hc-label="压缩大小(Bytes)" hc-col-count="4" hc-input="data.zipsize " hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="生效日期" hc-col-count="4" hc-input="data.efftime" hc-type="date"></div>
+            <div hc-label="失效日期" hc-col-count="4" hc-input="data.exptime" hc-type="date"></div>
+        </div>
+        <div class="row">
+            <div hc-label="创建用户" hc-col-count="4" hc-input="data.creator" hc-readonly="true"></div>
+            <div hc-label="创建时间" hc-col-count="4" hc-input="data.createtime" hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="最后修改用户" hc-col-count="4" hc-input="data.updator" hc-readonly="true"></div>
+            <div hc-label="最后修改时间" hc-col-count="4" hc-input="data.updatetime" hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="检出用户" hc-col-count="4" hc-input="data.checkuser" hc-readonly="true"></div>
+            <div hc-label="检出时间" hc-col-count="4" hc-input="data.checktime" hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="备注" hc-type="textarea" hc-input="data.note" hc-col-count="8"></div>
+        </div>
+    </div>
+
+</div>
+<link rel="stylesheet" href="js/plugins/z-tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<style type="text/css">
+    /*进度条*/
+    #pro {
+        width: 400px;
+        z-index: 4;
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        margin-left: -200px;
+        background-color: #f5f5f5;
+        padding: 1px;
+        visibility: hidden;
+        text-align: center;
+    }
+
+    div#rMenu > ul > li {
+        text-align: left;
+    }
+
+    div#rMenu > ul > li > i {
+        display: inline-block;
+        padding: 0px 10px 0px 5px;
+    }
+
+    .grid_modal > div.hc-grid {
+        height: 100% !important;
+    }
+
+    .grid_modal .ag-blue {
+        height: auto;
+    }
+
+    .resource-tree {
+        width: 288px;
+        flex-shrink: 0;
+        flex-grow: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        margin-right: 10px;
+        border: 1px #ddd solid;
+        border-radius: 2px;
+    }
+
+    .resource {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        flex-shrink: 1;
+        flex-grow: 1;
+        background-color: #fff;
+    }
+
+    div#rMenu {
+        width: 110px;
+        z-index: 4;
+        position: absolute;
+        top: 0;
+        background-color: #fff;
+        padding: 1px;
+        visibility: hidden;
+        text-align: center;
+    }
+
+    div#rMenu ul {
+        margin: 0px;
+        padding: 0px;
+        border: 1px solid #dbe0e8;
+        box-shadow: 1px 3px 4px rgba(189, 201, 214, 0.3);
+    }
+
+    div#rMenu ul li {
+        font-size: 11px;
+        line-height: 20px;
+        margin: 0px;
+        padding: 2px;
+        cursor: pointer;
+        list-style: none outside none;
+        border-bottom: 1px solid #efefef;
+        padding-left: 3px;
+        color: #222;
+    }
+
+    div#rMenu ul li:hover {
+        background: #eee;
+    }
+</style>
+
+<link rel="stylesheet" href="js/plugins/splitter/jquery.splitter.css" type="text/css">
+<script type="text/javascript" src="/web/js/plugins/splitter/jquery.splitter-0.14.0.js"></script>
+<script>
+    setTimeout(function () {
+        $('#dropzone').height($('#dropzone').parent().height());
+    }, 500);
+
+    window.onresize = function () {
+        setTimeout(function () {
+            $('#grid').height($('#dropzone').parent().height());
+        }, 200);
+    }
+    jQuery(function ($) {
+        $('.jq-widget').width("calc(100% - 30px)").height("100%").split({
+            orientation: 'vertical',
+            limit: 100,
+            position: '25%'
+        });
+    });
+</script>

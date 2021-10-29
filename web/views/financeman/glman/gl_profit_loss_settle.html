@@ -1,0 +1,28 @@
+
+<div hc-diy-page>
+
+    <!--查询条件-->
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.year_month"
+                 hc-label="本次结转月份"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.character"
+                 hc-label="凭证字"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.credence_settle_type"
+                 hc-label="凭证结转类型"
+                 hc-dict-code="credence_settle_type">
+            </div>
+        </div>
+
+    </div>
+
+    <!--网格-->
+    <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+</div>

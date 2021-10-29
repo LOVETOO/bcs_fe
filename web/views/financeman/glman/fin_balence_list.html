@@ -1,0 +1,34 @@
+<div hc-diy-page>
+
+    <div class="hc-box other-h">
+
+        <div class="row">
+            <div hc-input="data.currItem.entnames"
+                 hc-label="查询组织"
+                 hc-class-id="ent_user_ctrl"
+                 delete-together="orgids"
+                 hc-common-search="commonSearchSetting.ent"
+                 hc-col-count="3">
+            </div>
+
+            <div hc-input="data.currItem.year_month"
+                 hc-label="会计期间"
+                 hc-type="year-month">
+            </div>
+
+            <div hc-input="data.currItem.flag"
+                 hc-label="含未过账凭证"
+                 hc-type="checkbox">
+            </div>
+
+            <button type="button" class="btn btn-primary"
+                    ng-click="search()">
+                <i class="fa fa-search"></i> 计算
+            </button>
+        </div>
+    </div>
+
+    <!--网格-->
+    <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+</div>

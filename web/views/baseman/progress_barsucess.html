@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<style type="text/css">
+
+</style>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" />
+<script type="text/javascript"> 
+ var progress_node_id = "progress"; 
+
+function SetProgress(){
+ $("#span").css("width", String(100) + "%"); 
+ $("#span").html(String(100) + "%"); 
+}
+
+ $(document).ready(function() { 
+ SetProgress(); 
+ }); 
+ 
+</script>
+</head>
+<body>
+
+<div  id="progresssucess"><span id="span">100%</span></div>
+</body>
+</html>

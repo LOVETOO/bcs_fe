@@ -1,0 +1,56 @@
+
+<div hc-diy-page>
+
+    <!--条件-->
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.organization_names"
+                 hc-label="查询组织"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.yearmonthap"
+                 hc-label="应付期间"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.tally_flag"
+                 hc-type="checkbox"
+                 hc-readonly="true"
+                 hc-label="含未过账">
+            </div>
+
+            <!--<div hc-input="data.currItem.is_object"-->
+                 <!--hc-label="对账类型"-->
+                 <!--hc-select-options="[{name: '往来', value: '0'}, {name: '暂估', value: '1'}, {name: '全部', value: '2'}]">-->
+            <!--</div>-->
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.year_month"
+                 hc-label="查询月份"
+                 hc-type="year-month">
+            </div>
+
+            <div hc-input="data.currItem.yearmonthgl"
+                 hc-label="总账期间"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.search_flag"
+                 hc-type="checkbox"
+                 hc-label="只显示匹配差异的数据">
+            </div>
+
+            <button type="button"
+                    class="btn btn-primary"
+                    ng-click="searchByCon()">查询
+            </button>
+        </div>
+
+    </div>
+
+    <!--网格-->
+    <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+
+</div>

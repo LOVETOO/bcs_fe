@@ -1,0 +1,260 @@
+<!--
+/**
+ * 工程订单透视
+ * @since 2019-11-11
+ */
+-->
+<!-- 报备类型切换器 -->
+<ul class="project-view__report-type-toggle hc-nav-tabs">
+    <li
+        ng-class="{ active: activeController === singleController }"
+        ng-click="activeController = singleController"
+    >
+        <a>单体项目</a>
+    </li>
+    <li
+        ng-class="{ active: activeController === strategicController }"
+        ng-click="activeController = strategicController"
+    >
+        <a>战略项目</a>
+    </li>
+</ul>
+
+<!-- 单体项目 -->
+<div
+    class="flex1 flex-column animated fadeInRight active"
+    ng-controller="EpmSingleProjectView"
+    ng-show="activeController === singleController"
+>
+    <!-- 工具栏 -->
+    <div class="project-view__tool-bar">
+        <div hc-buttons="toolButtons" hc-buttons-pull-right></div>
+    </div>
+    <!--  -->
+    <div class="project-view__body flex1-scroll flex-column">
+        <!-- 查询面板 -->
+        <div class="project-view__search-panel" hc-box ng-show="searchPanelVisible">
+            <div class="row">
+                <div hc-label="申报日期" hc-input="searchObj.report_time_start" hc-type="date"></div>
+                <div hc-label="至" hc-input="searchObj.report_time_end" hc-type="date"></div>
+                <div hc-label="客户编码" hc-input="searchObj.customer_code"></div>
+                <div hc-label="客户简称" hc-input="searchObj.customer_short_name"></div>
+            </div>
+            <div class="row">
+                <div hc-label="报备项目编码" hc-input="searchObj.project_code"></div>
+                <div hc-label="报备项目名称" hc-input="searchObj.project_name"></div>
+                <div hc-label="战略报备编码" hc-input="searchObj.rel_project_code"></div>
+                <div hc-label="战略报备名称" hc-input="searchObj.rel_project_name"></div>
+            </div>
+            <div class="row">
+                <div hc-label="本地/异地" hc-input="searchObj.is_local" hc-dict-code="epm.is_local"></div>
+                <div hc-label="工程类型" hc-input="searchObj.project_source" hc-dict-code="epm.project_source"></div>
+                <div hc-label="业主类型" hc-input="searchObj.project_type" hc-dict-code="epm.project_type"></div>
+            </div>
+            <div class="row">
+                <div hc-label="甲方名称" hc-input="searchObj.party_a_name"></div>
+                <div hc-label="乙方名称" hc-input="searchObj.party_b_name"></div>
+                <div hc-label="项目当前进度" hc-input="searchObj.stage_name"></div>
+            </div>
+        </div>
+        <!-- 查询结果 -->
+        <div class="flex1 flex-column" style="min-height: 200px;" hc-box="查询结果">
+            <div class="flex1" hc-grid="gridOptions"></div>
+        </div>
+        <!-- 底部 -->
+        <div class="flex-row" style="height: 370px; min-height: 370px;">
+            <!-- 项目看板 -->
+            <div class="project-view__project-panel-box flex1 flex-column" hc-box="项目看板">
+                <div class="project-view__project-panel flex1-scroll">
+                    <pp-item key="客户信息" value="{{ proj.customer_code }} - {{ proj.customer_name }}"></pp-item>
+                    <pp-item key="项目编码" :value="proj.project_code" col="6"></pp-item>
+                    <pp-item key="工程类型" :value="proj.project_source_as_name" col="6"></pp-item>
+                    <pp-item key="项目名称" :value="proj.project_name"></pp-item>
+                    <pp-item key="工程地址" :value="proj.address"></pp-item>
+                    <pp-item key="工程意向产品" :value="proj.intent_product"></pp-item>
+                    <pp-item key="合同数量/总额" value="{{ proj.contract_count }} 份 / {{ proj.contract_amt_as_wan }} 万元" col="6"></pp-item>
+                    <pp-item key="签约日期" :value="signed_date" col="6"></pp-item>
+                    <pp-item key="交付进度" percent="deliveryProgress"></pp-item>
+                    <pp-item key="签收进度" percent="receiveProgress"></pp-item>
+                    <pp-item key="下单进度(数量)" percent="orderQtyProgress"></pp-item>
+                    <pp-item key="下单进度(金额)" percent="orderAmtProgress"></pp-item>
+                    <pp-item key="回款进度" percent="returnProgress"></pp-item>
+                </div>
+            </div>
+            <!-- 统计图 -->
+            <div class="project-view__chart-box flex1 flex-column" hc-box>
+                <hc-box-title>
+                    统计图
+                    <div style="float: right;">
+                        统计维度：
+                        <select ng-model="staticSearchObj.group_by" ng-change="refreshChart()">
+                            <option value="project_source">工程类型</option>
+                            <option value="project_type">业务类型</option>
+                            <option value="stage_id">项目进度</option>
+                        </select>
+                    </div>
+                </hc-box-title>
+                <hc-chart class="project-view__chart flex1" hc-chart-option="chartOption" hc-chart-as="chart" hc-chart-ready="refreshChart()"></hc-chart>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 战略项目 -->
+<div
+    class="flex1 flex-column animated fadeInRight"
+    ng-controller="EpmStrategicProjectView"
+    ng-show="activeController === strategicController"
+>
+    <!-- 工具栏 -->
+    <div class="project-view__tool-bar">
+        <div hc-buttons="toolButtons" hc-buttons-pull-right></div>
+    </div>
+    <!--  -->
+    <div class="project-view__body flex1-scroll flex-column">
+        <!-- 查询面板 -->
+        <div class="project-view__search-panel" hc-box ng-show="searchPanelVisible">
+            <div class="row">
+                <div hc-label="申报日期" hc-input="searchObj.report_time_start" hc-type="date"></div>
+                <div hc-label="至" hc-input="searchObj.report_time_end" hc-type="date"></div>
+                <div hc-label="预计签订日期" hc-input="searchObj.predict_sign_date_start" hc-type="date"></div>
+                <div hc-label="至" hc-input="searchObj.predict_sign_date_end" hc-type="date"></div>
+            </div>
+            <div class="row">
+                <div hc-label="项目名称" hc-input="searchObj.project_name"></div>
+                <div hc-label="项目经理" hc-input="searchObj.manager"></div>
+                <div hc-label="甲方名称" hc-input="searchObj.party_a_name"></div>
+                <div hc-label="乙方名称" hc-input="searchObj.party_b_name"></div>
+            </div>
+            <div class="row">
+                <div hc-label="管理类型" hc-input="searchObj.operating_mode" hc-dict-code="epm.operating_mode"></div>
+                <div hc-label="项目类型" hc-input="searchObj.project_type" hc-dict-code="epm.project_type"></div>
+                <div hc-label="项目当前进度" hc-input="searchObj.stage_name"></div>
+            </div>
+        </div>
+        <!-- 查询结果 -->
+        <div class="flex1 flex-column" style="min-height: 200px;" hc-box="查询结果">
+            <div class="flex1" hc-grid="gridOptions"></div>
+        </div>
+        <!-- 底部 -->
+        <div class="flex-row" style="height: 260px; min-height: 260px;">
+            <!-- 项目看板 -->
+            <div class="project-view__project-panel-box flex1 flex-column" hc-box="项目看板">
+                <div class="project-view__project-panel flex1-scroll">
+                    <pp-item key="项目编码" :value="proj.project_code" col="6"></pp-item>
+                    <pp-item key="项目类型" :value="proj.project_type_as_name" col="6"></pp-item>
+                    <pp-item key="项目名称" :value="proj.project_name" col="6"></pp-item>
+                    <pp-item key="管理类型" :value="proj.operating_mode_as_name" col="6"></pp-item>
+                    <pp-item key="背景关系" :value="proj.background_as_name" col="6"></pp-item>
+                    <pp-item key="竞争对手" :value="proj.competitor" col="6"></pp-item>
+                    <pp-item key="工程意向产品" :value="proj.intent_product" col="6"></pp-item>
+                    <pp-item key="工程用量" value="{{ proj.predict_pdt_qty }} 套" col="6"></pp-item>
+                    <pp-item key="预计签订日期" :value="proj.predict_sign_date" col="6"></pp-item>
+                    <pp-item key="已签合同数量" :value="proj.contract_count" col="6"></pp-item>
+                    <pp-item key="预计销售收入" value="{{ proj.predict_sales_amount_as_wan }} 万元" col="6"></pp-item>
+                    <pp-item key="已签合同总额" value="{{ proj.contract_amt_as_wan }} 万元" col="6"></pp-item>
+                    <pp-item key="预计单体数量" :value="proj.predict_proj_qty" col="6"></pp-item>
+                    <pp-item key="已报备单体数量" :value="proj.proj_qty" col="6"></pp-item>
+                </div>
+            </div>
+            <!-- 统计图 -->
+            <div class="project-view__chart-box flex1 flex-column" hc-box>
+                <hc-box-title>
+                    统计图
+                    <div style="float: right;">
+                        统计维度：
+                        <select ng-model="staticSearchObj.group_by" ng-change="refreshChart()">
+                            <option value="operating_mode">管理类型</option>
+                            <option value="project_type">项目类型</option>
+                            <option value="stage_id">项目进度</option>
+                        </select>
+                    </div>
+                </hc-box-title>
+                <hc-chart class="project-view__chart flex1" hc-chart-option="chartOption" hc-chart-as="chart" hc-chart-ready="refreshChart()"></hc-chart>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height: 8px;"></div>
+
+<script>
+$('.project-view__search-panel [hc-input]').attr('hc-can-delete', true);
+</script>
+
+<style>
+[hc-state-name="epmman.epm_project_view"] {
+    overflow: hidden;
+}
+
+/* 报备类型切换器 */
+.project-view__report-type-toggle {
+    position: absolute;
+    top: 8px;
+    left: 15px;
+    z-index: 1000;
+}
+
+/* 工具栏 */
+.project-view__tool-bar {
+    padding: 8px 15px;
+}
+
+/* 项目看板区 */
+.project-view__project-panel-box {
+    height: auto;
+}
+
+/* 项目看板 */
+.project-view__project-panel {
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #eaeaea;
+    border-top: none;
+    line-height: 30px;
+}
+
+/* 项目看板项 */
+pp-item {
+    display: flex;
+    align-items: center;
+}
+
+/* 项目看板项的键 */
+.pp-item-key {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* 项目看板项的值 */
+.pp-item-value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 项目看板项的进度条 */
+pp-item hc-progress {
+    flex: 1;
+    min-width: 0;
+}
+
+pp-item hc-progress .progress {
+    margin: 0;
+}
+
+pp-item i.iconfont {
+    font-size: 13px;
+}
+
+/* 统计图区 */
+.project-view__chart-box {
+    height: auto;
+}
+
+/* 统计图 */
+.project-view__chart {
+    width: 100%;
+    border: 1px solid #eaeaea;
+    border-top: none;
+}
+</style>

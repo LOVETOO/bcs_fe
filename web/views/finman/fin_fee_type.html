@@ -1,0 +1,174 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fin_fee_type">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="ibox">
+				<div class="ibox-title">
+					<h5>{{headername}}</h5>
+					<div class="ibox-tools">
+						<form class="form-inline">
+							<button type="button" class="btn btn-default btn-sm" id="UpdateSortModalBtn">
+								<i class="fa fa-cog"></i> 属性
+							</button>
+							<button type="button" class="btn btn-default btn-sm" id="AddSortModalBtn">
+								<i class="fa fa-plus"></i> 增加类别
+							</button>
+							<button type="button" class="btn btn-default btn-sm" id="AddDetailModalBtn">
+								<i class="fa fa-plus-square-o"></i> 增加明细
+							</button>
+						</form>
+					</div>
+				</div>
+				<div class="ibox-content TreeGridBox">
+					<div class="ibox-title">
+						<h5>费用类别列表</h5>
+						<ul id="SortTree" class="ztree"></ul>
+					</div>
+					<div class="grid_modal">
+						<div id="SlickGrid" class="headerGrid"></div>
+						<!--<div class="page_modal modal-open" page-pagination></div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--modal-类别-->
+	<div class="modal inmodal fade" id="AddSortModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" draggable-model>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+							class="sr-only">Close</span></button>
+					<h4 class="modal-title">费用类别属性</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline mline ibox-content">
+						<div class="row">
+							<label class="control-label" for="AddSortCode">类别编码</label>
+							<input type="text" class="form-control" id="AddSortCode" ng-model="AddSortCode">
+							<label class="control-label" for="AddSortName">类别名称</label>
+							<input type="text" class="form-control" id="AddSortName" ng-model="AddSortName">
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<label class="control-label" for="AddBusinessUnits">经营单位</label>
+								<input type="text" class="form-control" id="AddBusinessUnits" ng-model="AddBusinessUnits" ng-readonly="true">
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="AddHierarchy">层级</label>
+								<input type="text" class="form-control" id="AddHierarchy" ng-model="AddHierarchy" ng-readonly="true">
+							</div>
+						</div>
+						<div class="row">
+							<label class="control-label" for="AddComment">备注</label>
+							<textarea class="form-control width_row" rows="1" id="AddComment" ng-model="AddComment"></textarea>
+						</div>
+						<div class="row">
+							<label class="control-label"></label>
+							<label>
+								<input type="checkbox" ng-model="AddUsable">
+								可用标志
+							</label>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="SortModal()">保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--modal-增加明细-->
+	<div class="modal inmodal fade" id="AddDetailModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" draggable-model>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+							class="sr-only">Close</span></button>
+					<h4 class="modal-title">费用项目属性</h4>
+				</div>
+				<div class="modal-body">
+					<form method="get" class="form-horizontal ibox-content">
+						<div id="nolook" style="background: #f9f9f9;position: absolute;width: 25px;height: 25px;left: 25px;top: 75px;z-index: 999;"></div>
+						<div class="row">
+							<div class="col-xs-6">
+								<h4>当前类别: {{DetailSort}}</h4>
+							</div>
+							<div class="col-xs-6">
+								<h4>所属大类: {{DetailType}}</h4>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<p class="text-warning">请在指定关系的费用项目前打钩</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<div id="DetailGrid" style="height: 200px"></div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="AddDetailModal()">保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--modal-双击查看-->
+	<div class="modal inmodal fade" id="LookModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" draggable-model>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+							class="sr-only">Close</span></button>
+					<h4 class="modal-title">费用项目明细</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline mline ibox-content">
+						<div class="row">
+							<label class="control-label" for="LookSortCode">{{fee_type_code}}</label>
+							<input type="text" class="form-control" id="LookSortCode" ng-model="LookSortCode" ng-readonly="true">
+							<label class="control-label" for="LookSortName">{{fee_type_name}}</label>
+							<input type="text" class="form-control" id="LookSortName" ng-model="LookSortName" ng-readonly="true">
+						</div>
+						<div class="row">
+							<label class="control-label" for="LookBusinessUnits">{{entname}}</label>
+							<input type="text" class="form-control" id="LookBusinessUnits" ng-model="LookBusinessUnits" ng-readonly="true">
+							<label class="control-label" for="LookHierarchy">{{lev}}</label>
+							<input type="text" class="form-control" id="LookHierarchy" ng-model="LookHierarchy" ng-readonly="true">
+						</div>
+						<div class="row">
+							<label class="control-label" for="LookComment">{{note}}</label>
+							<textarea class="form-control width_row" rows="1" id="LookComment" ng-model="LookComment" ng-readonly="true"></textarea>
+						</div>
+						<div class="row">
+							<label class="control-label"></label>
+							<label>
+								<input type="checkbox" ng-model="LookUsable" ng-readonly="true">
+								可用标志
+							</label>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<style>
+	.slick-cell-checkboxsel {
+		background: #f0f0f0;
+		border-right-color: silver;
+		border-right-style: solid;
+	}
+	.slick-row.disSelect{
+		background: #ccc!important;
+		pointer-events: none;
+	}
+</style>

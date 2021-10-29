@@ -1,0 +1,22 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>Excel导入</h3>
+    <button class="btn btn-toolbar" swf-upload id="swfupload-control"  import-cust="data.currItem.cust_id" import-grid='itemOptions' ng-model="templist" flag="3" ng-init="templist = []">
+    		<i class="fa lightblue font-size-15  fa-paperclip"></i> EXCEL表导入
+ 	</button>
+    </div>
+    <div class="modal-body">
+   		<div class="ibox-content">
+   			<div slick-multi-grid sg-options="itemOptions" sg-data="itemList" ng-model="itemList" sg-columns="ItemColumns" style="width:100%;height:240px;" class="slick-grid"></div>
+   		</div>	
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+          确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+          取消
+        </a>
+     </div>
+</div>

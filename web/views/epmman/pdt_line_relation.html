@@ -1,0 +1,24 @@
+<!--产品线关联设置--自定义页面-->
+<!--Created by shenguocheng-->
+<!--Date:2019-07-26-->
+<div hc-diy-page>
+    <div class="ibox-title other-h">
+        <div class="row">
+            <div hc-input="data.currItem.order_pdt_line"
+                 hc-label="订单产品线"
+                 hc-change="search()"
+                 hc-dict-code="epm.order_pdt_line"
+                 hc-after-delete="deleteOrderPDTLine()">
+            </div>
+
+            <div hc-input="data.currItem.pdt_line"
+                 hc-label="产品产品线"
+                 hc-change="search()"
+                 hc-dict-code="entorgid"
+                 hc-after-delete="deletePDTLine()">
+            </div>
+
+        </div>
+    </div>
+    <div hc-grid="gridOptions" class="hc-box" hc-auto-height="grid"></div>
+</div>

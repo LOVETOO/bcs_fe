@@ -1,0 +1,59 @@
+<div hc-obj-prop>
+    <div id="base" hc-box class="active">
+        <div class="row">
+            <div hc-input="data.currItem.warehouse_code" hc-label="仓库编码" hc-required="true"></div>
+            <div hc-input="data.currItem.warehouse_name" hc-label="仓库名称" hc-required="true"></div>
+            <div hc-input="data.currItem.warehouse_type" hc-label="仓库类型" hc-required="true" hc-dict-code="warehouse_type"></div>
+            <div hc-input="data.currItem.warehouse_property" hc-label="仓库属性"  hc-dict-code="warehouse_property" hc-required="true"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.is_service" hc-label="仓库使用者"  hc-dict-code="is_service"></div>
+            <div hc-input="data.currItem.is_zb" hc-label="仓库层级"  hc-dict-code="is_zb"></div>
+            <div hc-input="data.currItem.asset_property" hc-label="资产所有权" hc-required="true" hc-dict-code="asset_property"></div>
+            <div hc-input="data.currItem.management_people" hc-label="管理责任人"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.attribute11" hc-label="原仓库编码"></div>
+            <div hc-input="data.currItem.attribute21" hc-label="原仓库名称" ></div>
+            <div hc-input="data.currItem.warehouse_area" hc-label="仓库面积(㎡)" ></div>
+            <div hc-input="data.currItem.is_end" style="width: 80px" hc-label="明细仓库" hc-type="checkbox"></div>
+            <!--<div hc-input="data.currItem.id_wl" hc-label="物流仓库" hc-type="checkbox"></div>-->
+            <div hc-input="data.currItem.usable"  style="width: 80px" hc-label="有效" hc-type="checkbox"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.code" hc-label="所属部门"
+                 hc-class-id="dept"
+                 hc-common-search="orgclick"></div>
+            <div hc-input="data.currItem.orgname" hc-label="" ></div>
+            <div hc-input="data.currItem.customer_code" hc-label="客户" hc-class-id="base_view_customer_org"
+                 hc-common-search="customerclick"></div>
+            <div hc-input="data.currItem.customer_name" hc-label="" ></div>
+        </div>
+        <!-- <div class="row"> -->
+            <!-- <div hc-input="data.currItem.fix_org_code" hc-label="服务网点" hc-btn-click="fixclick()"></div>
+            <div hc-input="data.currItem.fix_org_name" hc-label="" ></div> -->
+            <!-- <div hc-input="data.currItem.terminal_code" hc-label="门店" hc-btn-click="terminalclick()"></div>
+            <div hc-input="data.currItem.terminal_name" hc-label="" ></div> -->
+        <!-- </div> -->
+        <div class="row">
+            <div hc-input="data.currItem.fix_org_code" hc-label="所属网点" hc-class-id="css_fix_org"
+                 hc-common-search="fixclick" hc-col-count="2"></div>
+            <div hc-input="data.currItem.fix_org_name" hc-label=""  hc-col-count="2"></div>
+            <div hc-input="data.currItem.warehouse_address" hc-label="仓库地址" hc-col-count="4"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.note" hc-label="说明" hc-col-count="8"></div>
+        </div>
+    </div>
+
+    <div id="other" hc-box >
+        <div class="row">
+            <div hc-input="data.currItem.created_by" hc-readonly="true" hc-label="创建人" ></div>
+            <div hc-input="data.currItem.creation_date" hc-readonly="true" hc-label="创建时间" ></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by" hc-readonly="true" hc-label="修改人" ></div>
+            <div hc-input="data.currItem.last_update_date" hc-readonly="true" hc-label="修改时间" ></div>
+        </div>
+    </div>
+</div>

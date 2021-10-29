@@ -20,7 +20,7 @@ define(
                         {
                             type: '序号'
                         },
-                        {
+                        { 
                             headerName: '条码',
                             field: "barcode",
                             editable: true

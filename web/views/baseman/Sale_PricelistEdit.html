@@ -1,0 +1,134 @@
+
+<div class="bill-form row wrapper wrapper-content animated fadeInRight" ng-controller="salepricelistEditController">
+	 <div class="col-lg-10">
+            <h3>指导价格</h3>
+			<button ng-click="newone()" class="btn btn-toolbar"><i class="fa fa-file-o"></i> 新建</button>
+			<button ng-click="refresh()" class="btn btn-toolbar"><i class="fa fa-refresh"></i> 刷新</button>
+			<button ng-click="delete()" class="btn btn-toolbar"><i class="fa fa-times"></i> 删除</button>
+			<button ng-click="save()" class="btn btn-toolbar"><i class="fa fa-floppy-o"></i> 保存</button>
+			<button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i class="fa fa-times"></i>关闭</button>
+      </div>
+       <div class="wrapper wrapper-content animated fadeInRight">
+	        <div class="">
+	            <div class="col-lg-12">
+	                <ul id="tabs" class="tri-nav-tabs">
+	                    <li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav"><i class="fa fa-pencil-square">常规</i></a></li>
+	                </ul>
+	                
+	                <div id="content" class="first tab-content">
+	                    <div id="tab1" class="tab-pane active">
+	                        <div class="ibox-content">
+	                            <div class="row" ng-class="{false:'hide'}[isEdit]">
+	                            	    <div class="col-md-1">
+			                                <label class="form-label-mini">创建者:</label>
+			                            </div>
+			                            <div class="col-md-2">
+			                                <input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="sale_pricelist.creator">
+			                            </div>
+			                            <div class="col-md-1">
+			                                <label class="form-label-mini">创建时间:</label>
+			                            </div>
+			                            <div class="col-md-2">
+			                                <input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="sale_pricelist.create_time">
+			                            </div>
+			                            <div class="col-md-1">
+			                                <label class="form-label-mini">修改者:</label>
+			                            </div>
+			                            <div class="col-md-2">
+			                                <input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="sale_pricelist.updator">
+			                            </div>
+			                            <div class="col-md-1">
+			                                <label class="form-label-mini">修改时间:</label>
+			                            </div>
+			                            <div class="col-md-2">
+			                                <input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="sale_pricelist.update_time">
+			                            </div>
+	                            </div>
+	                            
+	                            <div class="row" ng-class="{false:'hide'}[isEdit]">
+	                            	 <div class="col-md-1">
+			                                <label class="form-label-mini">审核人:</label>
+			                            </div>
+			                            <div class="col-md-2">
+			                                <input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="sale_pricelist.checkor">
+			                            </div>
+			                            <div class="col-md-1">
+			                                <label class="form-label-mini">审核时间:</label>
+			                            </div>
+			                            <div class="col-md-2">
+			                                <input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="sale_pricelist.check_time">
+			                            </div>
+			                            <div class="col-md-1">
+			                                <label class="form-label-mini">作废人:</label>
+			                            </div>
+			                            <div class="col-md-2">
+			                                <input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="sale_pricelist.revokor">
+			                            </div>
+			                            <div class="col-md-1">
+			                                <label class="form-label-mini">作废时间:</label>
+			                            </div>
+			                            <div class="col-md-2">
+			                                <input readonly="readonly" class="form-control readonly input-sm" type="text" ng-model="sale_pricelist.revoke_time">
+			                            </div>
+	                            </div>
+	                            
+	                            <div class="row">
+	                            	<div class="col-md-1">
+	                                    <label class="form-label-mini ">基准机型:</label>
+	                                </div>
+	                                <div class="col-md-2">
+	                                    <div class="input-group">
+	                                        <input type="text" class="input-sm form-control" ng-model="sale_pricelist.item_name">
+	                                        <a class="input-group-addon" ng-click="openItemFrm()"><i class="fa fa-ellipsis-h"></i></a>
+	                                    </div>
+	                                </div>
+	                                <div class="col-md-1">
+	                                    <label class="form-label-mini">指导价格:</label>
+	                                </div>
+	                                <div class="col-md-2">
+	                                    <input ng-model="sale_pricelist.standard_price" type="text" class="form-control input-sm">
+	                                </div>
+	                                <div class="col-md-1">
+	                                    <label class="form-label-mini">价格类型:</label>
+	                                </div>
+	                                <div class="col-md-2">
+	                                	<select chosen-select ng-model="sale_pricelist.price_type" class="input-sm chosen-select form-control">
+	                                        <option value=""></option>
+	                                        <option value="1">公司</option>
+											<option value="2">区域</option>
+											<option value="3">客户</option>
+	                                    </select>
+	                                </div>
+	                                <div class="col-md-1">
+	                                    <label class="form-label-mini">币种:</label>
+	                                </div>
+	                                <div class="col-md-2">
+	                                	<select chosen-select ng-model="sale_pricelist.currency_code" class="input-sm chosen-select form-control"
+	                                	ng-options="base_currency.currency_code as base_currency.currency_name  for base_currency in base_currencys" ng-change="currency_change()">
+	                                        <option value=""></option>
+	                                    </select>
+	                                </div>
+	                            </div>
+	                            
+	                            <div class="row">
+	                            	<div class="col-md-1">
+	                                    <label class="form-label-mini">有效日期起:</label>
+	                                </div>
+	                                <div class="col-md-2">
+	                                    <input bs-datepacker ng-model="sale_pricelist.start_date" type="text" class="form-control input-sm">
+	                                </div>
+	                            	<div class="col-md-1">
+	                                    <label class="form-label-mini">有效日期止:</label>
+	                                </div>
+	                                <div class="col-md-2">
+	                                    <input bs-datepacker ng-model="sale_pricelist.end_date" type="text" class="form-control input-sm">
+	                                </div>
+	                            </div>
+	                            
+	                        </div>
+	                     </div>       
+	                </div>
+	            </div>
+	        </div>
+       </div> 
+</div>

@@ -1,0 +1,124 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>资源调整</h3>
+    </div>
+    <div class="modal-body">
+        <div class="ibox-content m-b-sm" style="border-top: none;">
+        	<div class="row" ng-show="style == 1 || style == 3">
+        		<fieldset>
+                    <legend>调增</legend>
+                    <div class="form-group ibox-content" style="border-top:none;">
+                    	<div class="row">
+                    		<div class="col-md-1"><label class="form-label-mini font-noraml">预算类别:</label></div>
+							<div class="col-md-2">
+								<div class="input-group">
+			                        <input ng-model="item.z_bud_type_name" ng-disabled="true" class="input-sm form-control">
+			                         <a class="input-group-addon" ng-click="zopentype()" id="#abc">
+			                         	<i class="fa fa-ellipsis-h"></i>
+			                         </a>
+			                    </div>
+							</div>
+							<div class="col-md-1"><label class="form-label-mini font-noraml">区域:</label></div>
+							<div class="col-md-2">
+								<div class="input-group">
+			                        <input ng-model="item.z_org_name" ng-disabled="true" class="input-sm form-control">
+			                         <a class="input-group-addon" ng-click="selectOrgZ()" id="#abc">
+			                         	<i class="fa fa-ellipsis-h"></i>
+			                         </a>
+			                    </div>
+							</div>
+							<div class="col-md-1"><label class="form-label-mini font-noraml">期间:</label></div>
+							<div class="col-md-2">
+								<div class="input-group">
+			                         <input ng-model="item.z_dname" ng-disabled="true" class="input-sm form-control">
+			                         <a class="input-group-addon" ng-click="zopenperiod()" id="#abc">
+			                         	<i class="fa fa-ellipsis-h"></i>
+			                         </a>
+			                    </div>
+							</div>
+							<div class="col-md-1"><label class="form-label-mini font-noraml">调整金额:</label></div>
+							<div class="col-md-2">
+								<input ype="number" ng-model="item.z_adjust_amt" class="input-sm form-control">
+							</div>	
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-1"><label class="form-label-mini font-noraml">项目:</label></div>
+							<div class="col-md-2">
+								<div class="input-group">
+			                         <input ng-model="item.z_fee_name" ng-disabled="true" class="input-sm form-control">
+			                         <a class="input-group-addon" ng-click="zopenfee()" id="#abc">
+			                         	<i class="fa fa-ellipsis-h"></i>
+			                         </a>
+			                    </div>
+							</div>
+                    	</div>
+                    </div>     
+                </fieldset>         
+				        			
+        	</div>
+        	<div class="row" ng-show="style == 2 || style == 3">
+        		<fieldset>
+                    <legend>调减</legend>
+                    <div class="form-group ibox-content" style="border-top:none;">
+                    	<div class="row">
+                    		<div class="col-md-1"><label class="form-label-mini font-noraml">预算类别:</label></div>
+							<div class="col-md-2">
+								<div class="input-group">
+			                         <input ng-model="item.j_bud_type_name" ng-disabled="true" class="input-sm form-control">
+			                         <a class="input-group-addon" ng-click="jopentype()" id="#abc">
+			                         	<i class="fa fa-ellipsis-h"></i>
+			                         </a>
+			                    </div>
+							</div>
+							<div class="col-md-1"><label class="form-label-mini font-noraml">区域:</label></div>
+							<div class="col-md-2">
+								<div class="input-group">
+			                         <input ng-model="item.j_org_name" ng-disabled="true" class="input-sm form-control">
+			                         <a class="input-group-addon" ng-click="selectOrgJ()" id="#abc">
+			                         	<i class="fa fa-ellipsis-h"></i>
+			                         </a>
+			                    </div>
+							</div>
+							<div class="col-md-1"><label class="form-label-mini font-noraml">期间:</label></div>
+							<div class="col-md-2">
+								<div class="input-group">
+			                         <input ng-model="item.j_dname" ng-disabled="true" class="input-sm form-control">
+			                         <a class="input-group-addon" ng-click="jopenperiod()" id="#abc">
+			                         	<i class="fa fa-ellipsis-h"></i>
+			                         </a>
+			                    </div>
+							</div>
+							<div class="col-md-1"><label class="form-label-mini font-noraml">调整金额:</label></div>
+							<div class="col-md-2">
+								<input type="number" ng-model="item.j_adjust_amt" class="input-sm form-control">
+							</div>	
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-1"><label class="form-label-mini font-noraml">项目:</label></div>
+							<div class="col-md-2">
+								<div class="input-group">
+			                         <input ng-model="item.j_fee_name" ng-disabled="true" class="input-sm form-control">
+			                         <a class="input-group-addon" ng-click="jopenfee()" id="#abc">
+			                         	<i class="fa fa-ellipsis-h"></i>
+			                         </a>
+			                    </div>
+							</div>
+                    	</div>
+                    </div>
+                </fieldset>    
+        		       	
+        	</div>
+			
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+         	 确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+          	取消
+        </a>
+     </div>
+</div>

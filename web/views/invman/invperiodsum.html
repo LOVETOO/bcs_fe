@@ -1,0 +1,157 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+        <div class="row">
+            <div hc-input="data.currItem.date_invbill_begin"
+                 hc-label="起始日期"
+                 hc-type="date">
+            </div>
+            <div hc-input="data.currItem.date_invbill_end"
+                 hc-label="结束日期"
+                 hc-type="date">
+            </div>
+            <!--<div hc-input="data.currItem.asset_property"-->
+                 <!--hc-label="资产所有权"-->
+                 <!--hc-dict-code="asset_property">-->
+            <!--</div>-->
+            <div hc-input="data.currItem.year_month"
+                 hc-label="当前存货期间"
+                 hc-readonly = "true">
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div hc-input="data.currItem.crm_entid"
+                 hc-label="品类"
+                 hc-dict-code="crm_entid">
+            </div>
+            <div hc-input="data.currItem.entorgid"
+                 hc-label="产品线"
+                 hc-dict-code="entorgid">
+            </div>
+            <div hc-input="data.currItem.is_viewwh2wh"
+                 hc-type="checkbox"
+                 hc-label="显示调拨及委托代销数据">
+            </div>4
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.item_code"
+                 hc-label="产品"
+                 hc-class-id="item_org"
+                 hc-common-search="chooseItem">
+            </div>
+            <div hc-input="data.currItem.warehouse_name"
+                 hc-label="仓库"
+                 hc-class-id="warehouse"
+                 hc-common-search="chooseWarehouse">
+            </div>
+
+            <div hc-input="data.currItem.query_cb"
+                 hc-type="checkbox"
+                 hc-label="取即时成本">
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs other-h" id="detailtab">
+        <li class="active">
+            <a data-toggle="tab" id="tab11" href="tabs.html#tab1">收发存明细</a>
+        </li>
+        <li>
+            <a data-toggle="tab" id="tab22" href="tabs.html#tab2">收发存汇总</a>
+        </li>
+    </ul>
+
+    <div class="tabs-container">
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active">
+                <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+            </div>
+            <div id="tab2" class="tab-pane">
+                <div hc-grid="groupGridOptions"  hc-auto-height="grid"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 分类汇总 -->
+    <div class="modal inmodal fade" id="groupModal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg" style="width: 500px;">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" style="font-size: 16px;">汇总明细</h4>
+                </div>
+                <div class="modal-body" style="height: 60px;">
+                    <form method="get" class="form-inline mline">
+                        <div class="row">
+                            <div hc-input="warehouse" style="margin-left: 10px;"
+                                 hc-type="checkbox"
+                                 hc-label="按仓库"></div>
+                            <div hc-input="item"
+                                 hc-type="checkbox"
+                                 hc-label="按产品"></div>
+                            <div hc-input="crm_entid"
+                                 hc-type="checkbox"
+                                 hc-label="按品类"></div>
+                            <div hc-input="entorgid"
+                                 hc-type="checkbox"
+                                 hc-label="按产品线"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" ng-click="initGroup()">汇总</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="remainModal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg" style="width: 1000px;">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" style="font-size: 16px;">产品明细帐查询</h4>
+                </div>
+                <div class="modal-body" style="height: 483px;">
+                    <div class="row">
+                        <div hc-input="data.currItemLine.year_month"
+                             hc-type="year-month"
+                             hc-label="起始月份">
+                        </div>
+                        <div hc-input="data.currItemLine.year_month_last"
+                             hc-type="year-month"
+                             hc-label="结束月份">
+                        </div>
+                        <div hc-input="data.currItemLine.warehouse_name"
+                             hc-label="仓库"
+                             hc-class-id="warehouse"
+                             hc-common-search="chooseWarehouses">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItemLine.item_code"
+                             hc-label="产品"
+                             hc-class-id="item_org"
+                             hc-common-search="chooseItems">
+                        </div>
+                        <div hc-input="data.currItemLine.item_name"
+                             hc-readonly="true">
+                        </div>
+                        <button type="button" class="btn btn-white fa fa-search" ng-click="doSearchItemList()">查询</button>
+                    </div>
+                    <div hc-grid="gridOptions1"  style="height: 400px;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

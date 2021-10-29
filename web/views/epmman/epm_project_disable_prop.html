@@ -1,0 +1,72 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+        <div>
+            <div class="row">
+                <div hc-input="data.currItem.proj_disable_code"
+                     hc-label="申请单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.createtime"
+                     hc-label="申请日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="申请人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-btn-click="searchProject()"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.division_id"
+                     hc-label="所属事业部"
+                     hc-dict-code="epm.division"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.area_full_name"
+                     hc-label="工程所在地"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.address"
+                     hc-label="详细地址"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.is_local"
+                     hc-label="本地/异地"
+                     hc-dict-code="epm.is_local"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.party_a_name"
+                     hc-label="甲方名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.party_b_name"
+                     hc-label="乙方名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.reason"
+                     hc-label="申请说明"
+                     hc-required="true"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,288 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="my_settings"
+     style="background-color: #f5f6f9;">
+    <div class="myinfor">
+        <div class="profile-image">
+            <img class="headimg" src="img/userhead.png" class="img-circle circle-border m-b-md" alt="profile"
+                 width="60px">
+        </div>
+        <div class="myname">
+            <form method="get" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><i class="fa fa-user"></i> 姓名:</label>
+                    <div class="col-sm-9"><h2>{{data.currItem.username}}</h2></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><i class="fa fa-mobile-phone"></i> 联系电话:</label>
+                    <div class="col-sm-9">{{data.currItem.mobil}}</div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><i class="fa fa-map-marker"></i> 上班地址:</label>
+                    <div class="col-sm-9"></div>
+                </div>
+                <div class="form-group ">
+                    <p ng-show="goout!=2" class="col-sm-10" style="padding-left:50px;">&nbsp;&nbsp;当前没有设置出差</p>
+                    <p ng-show="goout==2" class="col-sm-10" style="padding-left:50px;">&nbsp;&nbsp;出差中</p>
+                </div>
+            </form>
+        </div>
+        <!--<div class="mywork">-->
+        <!--<ul>-->
+        <!--<li>-->
+        <!--<h4>部门</h4>-->
+        <!--<div>HR人力资源部</div>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<h4>职位</h4>-->
+        <!--<div>HR人力专员</div>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<h4>年资</h4>-->
+        <!--<div>5 年</div>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+    </div>
+    <div class="ibox myinfor-text">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <!--<li class="active"><a data-toggle="tab" href="tabs.html#tab-1" ><i class="fa fa-user"></i> 我的资料</a></li>-->
+                <!--<li><a data-toggle="tab" href="tabs.html#tab-2"><i class="fa fa-arrow-circle-o-up"></i> 上传头像</a></li>-->
+                <li ng-click="change_password()"><a data-toggle="tab" href="tabs.html#tab-3"><i class="fa fa-gear"></i>
+                    修改密码</a></li>
+                <li class="active" ng-click="gooutSetting()"><a data-toggle="tab" href="tabs.html#tab-4"><i
+                        class="fa fa-briefcase"></i> 出差设置</a></li>
+            </ul>
+            <div class="tab-content ibox-content">
+                <div id="tab-1" class="tab-pane ">
+                    <form method="get" class="form-inline">
+                        <div ag-gridview sg-options="userImfoOptions" sg-columns="userImfoColumns"
+                             autoHeight="auto"></div>
+                        <div class="row">
+                            <div class="col-sm-12" style="text-align: right;">
+                                <button class="btn btn-primary" type="submit" ng-click="saveUserImfo()">保存</button>
+                                <button class="btn btn-white" type="submit">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="tab-2" class="tab-pane headsize">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="img/userhead.png" class="circle-border m-b-md" alt="profile" width="120px">
+                            <img src="img/userhead.png" class="circle-border m-b-md" alt="profile" width="80px">
+                            <img src="img/userhead.png" class="circle-border m-b-md" alt="profile" width="40px">
+                        </div>
+                    </div>
+
+                </div>
+                <div id="tab-3" class="tab-pane ">
+                    <form role="form" class="form-inline">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <label class="col-sm-2 control-label">原密码</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" ng-model="oldpass">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 control-label">新密码</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" ng-model="newpass">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 control-label">确认新密码</label>
+                                    <div class="col-sm-10"><input type="text" class="form-control" ng-model="renewpass">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12" style="text-align: right;">
+                                        <button class="btn btn-primary" type="submit" ng-click="pwSave()">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                    </form>
+                </div>
+                <div id="tab-4" class="tab-pane  business active">
+                    <form role="form" class="form-inline">
+                        <div class="row" style="text-align: left;">
+                            <div class="form-group ">
+                                <label>
+                                    <input type="checkbox" ng-model="goout" ng-change="gooutChange()"
+                                           ng-true-value="2" ng-false-value="1">是否出差
+                                </label>
+                            </div>
+                            <div class="form-group ">
+                                <label>出差时间 </label>
+                            </div>
+                            <div class="form-group">
+                                <label> 从</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control"
+                                       ng-disabled="goout == 1" bs-date-picker
+                                       ng-model="data.currItem.gooutstarttime">
+                            </div>
+                            <div class="form-group">
+                                <label> 到</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control"
+                                       ng-disabled="goout == 1" bs-date-picker
+                                       ng-model="data.currItem.gooutendtime">
+                            </div>
+                        </div>
+                        <div ag-gridview sg-options="gooutOptions" sg-columns="gooutColumns" style="height:120px;"></div>
+                        <div class="row">
+                            <div class="col-sm-12" style="text-align: right;padding: 0px;">
+                                <button type="button" class="btn btn-primary pull-left"
+                                        ng-click="addItem()"> 增加代理用户
+                                </button>
+                                <!--<button class="btn btn-white" type="submit">取消</button>-->
+                                <button class="btn btn-primary" type="submit" ng-click="gooutsave()">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .myinfor {
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0px 2px 3px rgba(177, 189, 204, 0.3);
+    }
+
+    .myinfor:after {
+        content: " ";
+        display: block;
+        clear: both;
+    }
+
+    .myinfor h2 {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .myinfor .myname {
+        float: left;
+        width: 500px;
+        margin-left: 20px;
+        margin-top: 25px;
+    }
+
+    .myinfor .mywork {
+        float: right;
+        margin-top: 62px;
+    }
+
+    .headsize img {
+        border-radius: 50%;
+        margin-left: 30px;
+    }
+
+    .myinfor li {
+        margin: 0px;
+        padding: 0px 15px;
+        text-align: center;
+        float: left;
+        border-right: 1px solid #EBEDF1;
+    }
+
+    .myinfor li:last-child {
+        border: none;
+    }
+
+    .myinfor li div {
+        white-space: nowrap;
+    }
+
+    .myinfor h4 {
+    }
+
+    .myinfor .form-group:last-child {
+        margin-bottom: 0px;
+    }
+
+    /*.myinfor .control-label {*/
+    /*}*/
+
+    .myinfor .headimg {
+        border-radius: 50%;
+        width: 118px;
+        height: auto;
+    }
+
+    .myinfor input {
+        height: 34px !important;
+    }
+
+    .myinfor-text {
+        margin-top: 15px !important;
+        background-color: #fff;
+    }
+
+    .myinfor-text .nav-tabs {
+        padding: 10px 20px;
+    }
+
+    .myinfor-text li.active a {
+        border-bottom: 0px !important;
+        color: #53AFF1 !important;
+    }
+
+    .myinfor-text .tab-content {
+        font-size: 14px;
+        line-height: 32px;
+    }
+
+    /*.myinfor-text .tab-content .control-label {*/
+        /*padding: 0px;*/
+    /*}*/
+
+    .myinfor-text .tab-content .form-control {
+        height: 32px;
+        width: 100%;
+    }
+
+    .myinfor-text .tab-content .btn {
+        padding: 6px 20px;
+        margin-left: 10px;
+    }
+
+    .business {
+        font-size: 14px;
+        line-height: 32px;
+    }
+
+    .business label {
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
+</style>
+
+<!--时间插件引入中文-->
+<script type="text/javascript" src="../../lib/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"
+        charset="UTF-8">
+</script>
+
+<script>
+    //加载时间插件
+    $('.Datepicker').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language: 'cn',
+        pickDate: true, //选择日期
+        pickTime: false, //选择时间
+        todayBtn: true, //显示选择当前时间按钮
+        autoclose: true, //选择一个日期之后立即关闭日期时间选择器
+        todayHighlight: true, //高亮当前日期
+        startView: 'month', //选择首先显示的视图:month
+        minView: 'month' //最小的选择视图-选择最小单位:day
+    }).on('hide', function (event) {
+        event.stopPropagation();
+    })
+</script>

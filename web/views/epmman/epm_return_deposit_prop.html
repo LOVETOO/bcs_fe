@@ -1,0 +1,100 @@
+<!-- 
+  author：zengjinhua
+  since：2020/2/20
+  Description：保证金退还
+  -->
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-label="申请单号" hc-input="data.currItem.apply_code" hc-readonly="true"></div>
+                
+                <div hc-label="申请人" hc-input="data.currItem.creator_name" hc-readonly="true"></div>
+
+                <div hc-label="申请时间" hc-input="data.currItem.apply_time" hc-type="date" hc-readonly="true"></div>
+                    
+                <div hc-label="审核状态" hc-input="data.currItem.audit_stat" hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-label="报备项目编码" hc-input="data.currItem.project_code" hc-class-id="epm_project" hc-common-search="searchObject.epm_project" hc-required="true" hc-readonly="data.currItem.stat > 1"></div>
+
+                <div hc-label="报备项目名称" hc-input="data.currItem.project_name" hc-readonly="true"></div>
+                    
+                <div hc-label="报备项目地址" hc-input="data.currItem.area_full_name" hc-col-count="4" hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-label="签约方式" hc-input="data.currItem.contract_type" hc-readonly="true"></div>
+
+                <div hc-label="客户编码" hc-input="data.currItem.customer_code" hc-readonly="true"></div>
+
+                <div hc-label="客户名称" hc-input="data.currItem.customer_name" hc-col-count="4" hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-label="所属事业部" hc-input="data.currItem.division_id" hc-dict-code="epm.division" hc-readonly="true"></div>
+                    
+                <div hc-label="交易公司" hc-input="data.currItem.trading_company_name" hc-class-id="epm_trading_company" hc-common-search="searchObject.trading_company_name" hc-required="true" hc-readonly="data.currItem.stat > 1"></div>
+                     
+                <div hc-label="开票单位" hc-input="data.currItem.billing_unit_name" hc-class-id="epm_project_contract" hc-common-search="searchObject.billing_unit_name" hc-col-count="4" hc-required="true" hc-readonly="data.currItem.stat > 1"></div>
+            </div>
+        </div>
+        <div hc-box="保证金汇款信息">
+            <div class="row">
+                <div hc-label="汇款方式" hc-input="data.currItem.remittance_type" hc-dict-code="epm.remittance_type" hc-required="true" hc-readonly="data.currItem.stat > 1"></div>                    
+
+                <div hc-label="扣账单号" hc-input="data.currItem.remittance_bilino" hc-required="data.currItem.remittance_type == 1" hc-readonly="data.currItem.stat > 1"></div>
+                
+                <div hc-label="汇款金额" hc-input="data.currItem.remittance_bond" hc-type="money" hc-required="data.currItem.need_deposit != 2" hc-readonly="data.currItem.need_deposit == 2 || data.currItem.stat > 1"></div>
+            </div>
+            <div class="row">
+                <!-- 制单状态可编辑 -->
+                <div hc-label="保证金汇款说明" hc-input="data.currItem.remittance_remark" hc-col-count="6" hc-readonly="data.currItem.stat > 1"></div>
+            </div>
+        </div>
+        <div hc-box="保证金退还信息">
+            <div class="row">
+                <!-- 审核状态为3 and 制单状态可编辑 -->
+                <div hc-label="退还方式" hc-input="data.currItem.return_type" hc-change="changeReturn()" hc-dict-code="epm.return_type" hc-required="true"></div>
+                <!-- 审核状态为3可编辑 -->
+                <div hc-label="本地经销商" hc-input="data.currItem.local_customer_name" hc-class-id="customer_org" hc-common-search="searchObject.customer_code" hc-col-count="4" hc-readonly="data.currItem.stat != 3"></div>
+                <!-- 根据退还方式展示不同数据 -->
+                <div hc-label="项目售后负责方" hc-input="data.currItem.aa" hc-if="data.currItem.return_type != 1 && data.currItem.return_type != 2 && data.currItem.return_type != 3" hc-readonly="true"></div>
+                <div hc-label="项目售后负责方" hc-input="data.currItem.customer_name" hc-if="data.currItem.return_type == 1" hc-readonly="true"></div>
+                <div hc-label="项目售后负责方" hc-input="data.currItem.local_customer_name" hc-if="data.currItem.return_type == 2" hc-readonly="true"></div>
+                <div hc-label="项目售后负责方" hc-input="data.currItem.empty" hc-if="data.currItem.return_type == 3" hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <!-- 制单状态可编辑 -->
+                <div hc-label="发货数量完成率" hc-input="data.currItem.delivered_qty_rate" hc-required="true" hc-type="percent" hc-readonly="data.currItem.stat > 1"></div>
+                <!-- 制单状态可编辑 -->
+                <div hc-label="合同折后总额" hc-input="data.currItem.discounted_amount" hc-required="true" hc-type="money" hc-readonly="data.currItem.stat > 1"></div>
+                <!-- 制单状态 and 退还方式为本地售后 可编辑 -->
+                <div hc-label="申请任务划拨" hc-input="data.currItem.task_amount" hc-type="money" hc-readonly="data.currItem.return_type != 2 || data.currItem.stat > 1"></div>
+                <!-- 制单状态 and 退还方式为本地售后 可编辑 -->
+                <div hc-label="申请售后服务费" hc-input="data.currItem.after_sale_amount" hc-type="money" hc-readonly="data.currItem.return_type != 2 || data.currItem.stat > 1"></div>
+            </div>
+            <div class="row">
+                <!-- 审核状态为3可编辑 -->
+                <div hc-label="核实发货数量完成率" hc-input="data.currItem.cfm_delivered_qty_rate" hc-type="percent" hc-readonly="data.currItem.stat != 3"></div>
+                <!-- 审核状态为3可编辑 -->
+                <div hc-label="核实合同折后总额" hc-input="data.currItem.cfm_discounted_amount" hc-type="money" hc-readonly="data.currItem.stat != 3"></div>
+                <!-- 审核状态为3 and 退还方式为本地售后 可编辑 -->
+                <div hc-label="核实任务划拨" hc-input="data.currItem.cfm_task_amount" hc-type="money" hc-readonly="data.currItem.return_type != 2 || data.currItem.stat != 3"></div>
+                <!-- 审核状态为3 and 退还方式为本地售后 可编辑 -->
+                <div hc-label="核实售后服务费" hc-input="data.currItem.cfm_after_sale_amount" hc-type="money" hc-readonly="data.currItem.return_type != 2 || data.currItem.stat != 3"></div>
+            </div>
+            <div class="row">
+                <!-- 制单状态可编辑 -->
+                <div hc-label="备注" hc-input="data.currItem.remark" hc-col-count="8" hc-readonly="data.currItem.stat > 1"></div>
+            </div>
+            <div class="row">
+                <!-- 审核状态为3可编辑 -->
+                <div hc-label="经办人审批意见" hc-input="data.currItem.agent_opinion" hc-col-count="8"  hc-readonly="data.currItem.stat != 3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

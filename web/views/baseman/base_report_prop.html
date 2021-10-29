@@ -1,0 +1,210 @@
+<div hc-obj-prop>
+
+	<div id="base" class="active" style="flex-direction: row;">
+
+		<div class="flex1 h100 flex-column padding">
+			<div class="flex1" hc-grid="columnDefGridOptions"></div>
+		</div>
+		<div class="flex1 h100 flex-column">
+
+			<div class="flex1 flex-column" hc-box="查询相关">
+				<div class="row">
+					<div
+						hc-label="报表编码"
+						hc-input="data.currItem.code"
+						hc-required="true"
+						hc-readonly="!data.isInsert"
+						hc-autofocus="data.isInsert"
+						hc-col-count="4"
+
+					></div>
+					<div
+						hc-label="报表名称"
+						hc-input="data.currItem.name"
+						hc-required="true"
+						hc-col-count="4"
+					></div>
+				</div>
+
+				<div class="row text-right">
+					<div
+						style="margin-left: 86px;"
+						hc-title="添加到菜单"
+						hc-button="addToMenu()"
+						hc-disabled="!data.currItem.code"
+					></div>
+					<div
+						style="margin-left: 8px;"
+						hc-title="从语句读取字段"
+						hc-button="readFieldFromSql()"
+						hc-disabled="!data.currItem.sql"
+					></div>
+
+					<div
+						style="margin-left: 8px;"
+						hc-title="预览效果"
+						hc-button="openInNewTab()"
+						hc-disabled="!data.currItem.id"
+					></div>
+
+				</div>
+
+				<div class="row flex1">
+
+					<div
+						class="h100"
+						hc-label="查询语句"
+						hc-input="data.currItem.sql"
+						hc-type="textarea"
+						hc-required="true"
+						hc-autofocus="!data.isInsert"
+                        hc-col-count="8"
+                        hc-row="3"
+						hc-tooltip="此处的语句并非最终执行的语句，<br>而是会被另一个语句包裹后执行。<br>因此，排序语句不应写在此处，<br>而是写在下方的【排序】。"
+						hc-tooltip-as-html="true"
+					></div>
+
+				</div>
+
+				<div class="row">
+
+					<div
+						hc-label="排序语句"
+						hc-input="data.currItem.orderby"
+						hc-col-count="8"
+						hc-tooltip="排序字段必须出现在结果集中<br>不添加别名<br>以结果集出现的字段名称为准"
+						hc-tooltip-as-html="true"
+					></div>
+
+				</div>
+
+			</div>
+
+			<div hc-box="权限相关字段">
+
+				<div class="row">
+
+					<div
+						hc-label="EntId"
+						hc-input="data.currItem.key_ent"
+						hc-btn-click="data.currItem.key_ent = 'entid'"
+						hc-can-input="true"
+						hc-col-count="4"
+						hc-tooltip="对应【EntId】的实际字段名"
+					></div>
+
+					<div
+						hc-label="Organization_Id"
+						hc-input="data.currItem.key_organization"
+						hc-btn-click="data.currItem.key_organization = 'organization_id'"
+						hc-can-input="true"
+						hc-col-count="4"
+						hc-tooltip="对应【Organization_Id】的实际字段名"
+					></div>
+
+				</div>
+
+				<div class="row">
+
+					<div
+						hc-label="创建人"
+						hc-input="data.currItem.key_creator"
+						hc-btn-click="switchKeyOfCreator()"
+						hc-can-input="true"
+						hc-col-count="4"
+						hc-tooltip="对应【创建人】的实际字段名"
+					></div>
+
+				</div>
+
+				<div class="row">
+
+					<div
+						hc-label="客户ID"
+						hc-input="data.currItem.key_customer"
+						hc-btn-click="data.currItem.key_customer = 'customer_id'"
+						hc-can-input="true"
+						hc-col-count="4"
+						hc-tooltip="对应【客户ID】的实际字段名"
+					></div>
+
+					<div
+						hc-label="部门ID"
+						hc-input="data.currItem.key_dept"
+						hc-btn-click="data.currItem.key_dept = 'dept_id'"
+						hc-can-input="true"
+						hc-col-count="4"
+						hc-tooltip="对应【部门ID】的实际字段名"
+					></div>
+
+				</div>
+
+				<div class="row">
+
+					<div
+						hc-label="仓库ID"
+						hc-input="data.currItem.key_warehouse"
+						hc-btn-click="data.currItem.key_warehouse = 'warehouse_id'"
+						hc-can-input="true"
+						hc-col-count="4"
+						hc-tooltip="对应【仓库ID】的实际字段名"
+					></div>
+
+					<div
+						hc-label="销售区域ID"
+						hc-input="data.currItem.key_salearea"
+						hc-btn-click="data.currItem.key_salearea = 'sale_area_id'"
+						hc-can-input="true"
+						hc-col-count="4"
+						hc-tooltip="对应【销售区域ID】的实际字段名"
+					></div>
+
+				</div>
+
+				<div class="row">
+
+					<div
+						hc-label="资金账户ID"
+						hc-input="data.currItem.key_account"
+						hc-btn-click="data.currItem.key_account = 'fd_fund_account_id'"
+						hc-can-input="true"
+						hc-col-count="4"
+						hc-tooltip="对应【资金账户ID】的实际字段名"
+					></div>
+
+					<div
+						hc-label="品类ID"
+						hc-input="data.currItem.key_crment"
+						hc-btn-click="data.currItem.key_crment = 'crm_entid'"
+						hc-can-input="true"
+						hc-col-count="4"
+						hc-tooltip="对应【品类ID】的实际字段名"
+					></div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<style>
+	.h100 {
+		height: 100%;
+	}
+	.full-of-parent-with-margin {
+		position: absolute;
+		top: 8px;
+		bottom: 8px;
+		left: 8px;
+		right: 8px;
+	}
+	textarea.form-control {
+	    height: 100%;
+	    background-color: #fdfdff;
+	    border: 1px solid #e6e6e6;
+	}
+</style>

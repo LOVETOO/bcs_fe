@@ -1,0 +1,60 @@
+<div hc-diy-page>
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.year_month"
+                 hc-label="薪资年月"
+                 hc-change="setSearchFlag()"
+                 hc-type="year-month">
+            </div>
+
+            <div hc-input="data.currItem.salary_group_name"
+                 hc-label="薪资组"
+                 hc-change="setPersontaxAreaName()"
+                 hc-class-id="hr_salary_group"
+                 hc-common-search="commonSearchSettingOfSalaryGroup">
+            </div>
+            <div hc-input="data.currItem.hr_count_salary_head_id"
+                 hc-label="薪资单号"
+                 hc-class-id="hr_salary_group"
+                 hc-common-search="commonSearchSettingOfSalaryGroup">
+            </div>
+        </div>
+    </div>
+
+    <div hc-grid="gridOptions" class="hc-box" hc-auto-height="grid"></div>
+
+    <div class="hc-box other-h">
+        <div class="row m-n">
+            <div hc-input="data.currItem.pay_date"
+                 hc-label="发放日期"
+                 hc-type="date">
+            </div>
+
+            <div hc-input="data.currItem.total_pay_amt"
+                 hc-label="付款合计"
+                 hc-type="money"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.balance_type_name"
+                 hc-label="结算方式"
+                 hc-class-id="base_balance_type"
+                 hc-common-search="commonSearchSettingOfBalanceType">
+            </div>
+
+            <div hc-input="data.currItem.fund_account_code"
+                 hc-label="资金账户"
+                 hc-class-id="fd_fund_account"
+                 hc-common-search="getCommonSearchSetting_fd_account()">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.fund_account_code"
+                 hc-label="发放说明"
+                 hc-col-count="8">
+            </div>
+
+        </div>
+    </div>
+</div>

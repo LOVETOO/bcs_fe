@@ -1,0 +1,51 @@
+<div hc-diy-page>
+    <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    <div hc-modal="shareAdd" hc-auto-height>
+        <div hc-box>
+            <div class="row">
+                <div hc-col-count="4" hc-label="主题" hc-required="true" hc-input="data.currItem.subject">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.duedate" hc-type="date" hc-col-count="4" hc-label="过期时间"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.creator" hc-col-count="4" hc-label="创建人" hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.createtime" hc-col-count="4" hc-label="创建时间" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.updator" hc-col-count="4" hc-label="修改人" hc-readonly="true"></div>
+                <div hc-input="data.currItem.updatetime" hc-col-count="4" hc-label="修改时间" hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-label="内容" hc-input="data.currItem.content" hc-type="textarea" hc-col-count="8"></div>
+            </div>
+            <div class="row">
+                <div class="btn-group" style="margin-left: 25px;">
+                    <button class="btn btn-write" upload-list="data.currItem.objattachs"
+                        ng-model="data.currItem.objattachs" swf-upload filed='#attach-area' type="button"
+                        style="font-size: 14px;background-color: #fff;border:1px solid #dbe0e8">
+                        附件上传
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="" id="attach-area"
+                    style="width: 100%;font-size: 12px;margin-left: 25px;">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .modal-body {
+        height: 400px;
+    }
+
+    .swf-pr {
+        padding-right: 8px;
+    }
+</style>

@@ -1,0 +1,53 @@
+<div class="modal-content" local-storage ng-model="data.currItem" hc-init="doInit()">
+    <div draggable-model class="modal-header" style="width: 100%">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                ng-click="cancel(e)"><span aria-hidden="true">&times;</span></button>
+        <h3>选择流程</h3>
+    </div>
+    <div class="modal-body" style="width: 100%">
+        <div class="row">
+            <!--<ul id="treeDemo4" class="ztree ztree1" style="height:180px;"></ul>-->
+            <ul hc-tree="treeSetting" class="ztree ztree1" style="height:180px;"></ul>
+        </div>
+        <div class="row">
+            <div hc-grid="wfOptions"
+                 style="width: 100%;height:180px;"></div>
+        </div>
+    </div>
+
+    <div class="modal-footer" style="width: 100%">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+            确定
+        </a>
+        <a class="btn btn-default" ng-click="cancel()">
+            取消
+        </a>
+    </div>
+</div>
+<link rel="stylesheet" href="js/plugins/z-tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<style>
+    .modal-body {
+        padding: 15px;
+    }
+
+    div.modal-body {
+        padding-top: 10px !important;
+    }
+
+    .modal-body {
+        padding: 15px !important;
+    }
+
+    ul.ztree1 {
+        margin-top: 1px;
+        border: 1px solid #e4e4e4;
+        height: 250px;
+        overflow-y: scroll;
+        overflow-x: auto;
+    }
+
+    .row_div {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+</style>

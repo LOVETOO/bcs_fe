@@ -1,0 +1,141 @@
+<!--
+/**
+ * 流程意见管理器
+ * @since 2019-11-07
+ */
+-->
+
+<div class="opinion-manager__float-button-area">
+    <div
+        class="opinion-manager__float-button opinion-manager__float-button--add"
+        title="添加常用意见"
+        ng-click="addOpinion()"
+    >
+        <i class="iconfont hc-jia"></i>
+        添加常用意见
+    </div>
+</div>
+
+<div class="opinion-manager__body">
+    <div
+        class="opinion-manager__opinion"
+        ng-repeat="opinion in opinions track by opinion.opinion_id"
+        ng-click="$parent.opinionContent = opinion.opinion_content"
+    >
+        <div
+            class="opinion-manager__opinion-content"
+            title="{{ ::opinion.opinion_content }}"
+            ng-bind="::opinion.opinion_content"
+        ></div>
+        <div
+            class="opinion-manager__opinion-button opinion-manager__opinion-button--delete"
+            title="删除意见"
+            ng-click="deleteOpinion(opinion); $event.stopPropagation()"
+        >
+            <i class="iconfont hc-delete"></i>
+        </div>
+    </div>
+    
+    <!-- <div class="opinion-manager__float-button-area" hc-button="addOpinion()" hc-icon="iconfont hc-jia" title="添加意见"></div> -->
+</div>
+
+<style>
+hc-opinion-manager {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.opinion-manager__body {
+    position: relative;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px 15px;
+    max-height: 120px;
+}
+
+.opinion-manager__opinion {
+    position: relative;
+    height: 24px;
+    min-width: 150px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 3px 12px 3px;
+    margin-right: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    color: #574f4f;
+    border: 1px solid #c2d4f5;
+    background-color: #fafbff;
+}
+
+.opinion-manager__opinion:hover {
+    color: white;
+    background-image: linear-gradient(90deg, #65aeff, #72bdff);
+}
+
+.opinion-manager__opinion:hover .opinion-manager__opinion-button:not(:hover) .iconfont {
+    color: white;
+}
+
+.opinion-manager__opinion-content {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.opinion-manager__opinion-button {
+    position:relative;
+}
+.opinion-manager__opinion-button .iconfont{
+    font-size: 13px;
+    color: #f18208;
+}
+.opinion-manager__opinion-button .iconfont:hover{
+    color: #ff4100;
+}
+.opinion-manager__opinion:not(:hover) .opinion-manager__opinion-button--delete {
+    color: #ff4100;
+}
+
+.opinion-manager__float-button-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.opinion-manager__float-button {
+    min-width: 0;
+    padding: 0px 3px;
+    border-radius: 1px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    height: 20px;
+    margin-left: 5px;
+}
+.opinion-manager__float-button .iconfont{
+    font-size: 14px;
+}
+.opinion-manager__float-button:not(:first-child) {
+    margin-left: 8px;
+}
+
+.opinion-manager__float-button--collect {
+    background-image: linear-gradient(90deg, #ff8c00, #ef600c);
+}
+
+.opinion-manager__float-button--add {
+    background: #8ecc5d;
+}
+</style>

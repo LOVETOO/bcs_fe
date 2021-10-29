@@ -1,0 +1,165 @@
+<div class="bill-form" ng-controller="CustomerVisitRecordEditController">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h3>�ͻ��ݷü�¼</h3>
+            <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+            	<i class="fa fa-search"></i>��ѯ
+            </button>
+            <button ng-click="newOne()" class="btn btn-toolbar" type="button"><i class="fa fa-file-o"></i>����</button>
+            <button class="btn btn-toolbar" type="button"><i class="fa fa-history"></i>ˢ��</button>
+            <button ng-click="save()" class="btn btn-toolbar" type="button"><i class="fa fa-floppy-o"></i>����</button>
+			<button class="btn btn-toolbar" type="button" ng-click="wfstart()" ng-hide="data.currItem.stat!=1">
+                <i class="fa fa-check-square-o"></i>�ύ
+            </button>
+            <button class="btn btn-toolbar" type="button"><i class="fa fa-trash"></i>ɾ��</button>
+             <!-- <button class="btn btn-toolbar" type="button"><i class="fa fa-check-square-o">�ύ</i></button>-->
+            <button class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>����</button>
+            <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                    class="fa fa-times"></i>�ر�
+            </button>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="content">
+					 <form class="form-horizontal" id="saveform">
+						<div class="ibox-content">
+							
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini">���ݺ�:</label>
+								</div>
+								<div class="col-md-2">
+									<input readonly type="text" ng-model="data.currItem.record_no"
+										   class="input-sm form-control">
+								</div>
+									<div class="col-md-1">
+									<label class="form-label-mini">״̬:</label>
+								</div>
+								<div class="col-md-2">
+									<select ng-disabled="true" chosen-select id="stat"
+											ng-model="data.currItem.stat"
+											class="input-sm chosen-select form-control"
+											ng-options="s.id as s.name for s in stats">
+										<option value=""></option>
+									</select>
+								</div>
+								 <div class="col-md-1">
+									<label class="form-label-mini">������:</label>
+								</div>
+								<div class="col-md-2">
+									<input readonly class="form-control readonly input-sm" type="text"
+										   ng-model="data.currItem.creator">
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini">����ʱ��:</label>
+								</div>
+								<div class="col-md-2">
+									<input readonly class="form-control readonly input-sm" type="text"
+										   ng-model="data.currItem.create_time">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">���ű��:</label>
+								</div>
+								<div class="col-md-2">
+									<div class="input-group">
+										<input ng-readonly="data.currItem.stat!=1" type="text"
+											   class="input-sm form-control"
+											   ng-model="data.currItem.org_name">
+										<a class="input-group-addon" ng-click="openOrgNameFrm()" id="org_name">
+											<i class="fa fa-ellipsis-h"></i></a>
+									</div>
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">��̸����:</label>
+								</div>
+								<div class="col-md-2">
+									<select chosen-select  ng-model="data.currItem.cool_stand" data-placeholder=" "
+									class="input-sm chosen-select form-control" 
+										ng-options="type.id as type.name for type in recordTypes">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">��̸����:</label>
+								</div>
+								<div class="col-md-2">
+									<input bs-datepacker="" ng-model="data.currItem.record_date" class="form-control input-sm ng-valid ng-dirty ng-valid-parse ng-touched" ng-readonly="data.currItem.stat!=1">
+								</div>
+								
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">�ͻ����:</label>
+								</div>
+								<div class="col-md-2">
+									<div class="input-group">
+										<input ng-readonly="data.currItem.stat!=1" type="text"
+											   class="input-sm form-control"
+											   ng-model="data.currItem.cust_name">
+										<a class="input-group-addon" ng-click="openCustNameFrm()" id="cust_name"><i
+												class="fa fa-ellipsis-h"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+
+								<div class="col-md-1">
+									<label class="form-label-mini">�Ӵ�����:</label>
+								</div>
+								<div class="col-md-2">
+									<input class="form-control input-sm" type="text" ng-model="data.currItem.receive_no">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">�λ���Ա:</label>
+								</div>
+								<div class="col-md-11">
+									<textarea ng-model="data.currItem.record_user" rows="3"
+											  class="form-control noresize"></textarea>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">����:</label>
+								</div>
+								<div class="col-md-11">
+									<textarea ng-model="data.currItem.record_msg" rows="4"
+											  class="form-control noresize"></textarea>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">��������:</label>
+								</div>
+								<div class="col-md-11">
+									<textarea ng-model="data.currItem.record_note" rows="4"
+											  class="form-control noresize"></textarea>
+								</div>
+							</div>
+						</div>
+					</form>
+                  
+                </div>
+
+            </div>
+        </div>
+		<div class="row" ng-hide="data.currItem.stat == 1">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>��������</h5>
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content icons-box">
+                        <div wf-ystep size="large" class="p-xs clear" ng-model="data.currItem.wfid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

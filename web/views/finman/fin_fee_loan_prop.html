@@ -1,0 +1,122 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.fee_loan_no"
+                     hc-label="借款单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.org_code"
+                     hc-label="申请部门"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.org_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.chap_name"
+                     hc-label="申请人"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.balance_type_name"
+                     hc-label="结算方式"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.estimated_pay_time"
+                     hc-label="预计还款时间"
+                     hc-type="date"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.receiver"
+                     hc-label="收款人"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.receive_bank"
+                     hc-label="收款银行"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.receive_accno"
+                     hc-label="收款账号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.loan_purpose"
+                     hc-label="借款用途"
+                     hc-type="textarea"
+                     hc-col-count="6"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.credence_no"
+                     hc-label="凭证号"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.fee_apply_no"
+                     hc-label="费用申请单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.total_apply_amt"
+                     hc-label="借款申请总额"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.total_allow_amt"
+                     hc-label="借款批准总额"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div ng-show="isOverdue">
+                <div class="row">
+                    <span style="color:#FF5809">借款已逾期！请填写逾期原因！</span>
+                </div>
+                <div class="row">
+                    <div hc-input="data.currItem.overdue_reason"
+                         hc-label="逾期原因"
+                         hc-col-count="8"
+                         hc-readonly="true">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+            
+    </div>
+
+</div>

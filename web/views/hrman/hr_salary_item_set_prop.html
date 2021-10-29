@@ -1,0 +1,45 @@
+<div hc-obj-prop>
+    <div id="base" hc-box class="active">
+        <div  hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.salary_item_code"
+                     hc-label="薪资项目编码"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.salary_item_name"
+                     hc-label="薪资项目名称"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.is_visible"
+                     hc-label="有效状态"
+                     hc-dict-code="usable_code"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.created_by"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-col-count="4"
+                     hc-type="textarea">
+                </div>
+                <div hc-input="data.currItem.is_fixsalary"
+                     hc-required="true"
+                     hc-label="固薪项目"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1">
+                </div>
+                <div hc-input="data.currItem.creation_date"
+                     hc-label="创建时间"
+                     hc-readonly="true"
+                     hc-type="time">
+                </div>
+            </div>
+        </div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>

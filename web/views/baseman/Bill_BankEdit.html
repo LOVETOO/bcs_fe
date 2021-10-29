@@ -1,0 +1,120 @@
+
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="billbankEditController">
+
+<div class="row">
+<div class="col-lg-12">
+<div class="ibox float-e-margins">
+<div class="ibox-title" style="padding-top:8px;">
+    <h5>开证银行资料 - {{EditStr}}</h5>
+	<div ibox-tools class="pull-right" style="max-width:65%;max-height:35px;overflow:hidden;"></div>
+    <!-- <div class="pull-right">
+        <button type="button" title="首条" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-angle-double-left"></i> </button>
+        <a title="上一条" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-angle-left"></i> </a>
+        <a title="下一条" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-angle-right"></i> </a>
+        <button type="button" title="末条" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-angle-double-right"></i> </button>
+        <button type="button" title="新增" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-file-o"></i> </button>
+        <button ng-click="save()" type="button" title="保存" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-floppy-o"></i> </button>
+        <button type="button" title="刷新" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-refresh"></i> </button>
+        <button type="button" title="取消修改" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-undo"></i> </button>
+        <button type="button" title="删除" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-times"></i> </button>
+        <button type="button" title="作废" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-trash-o"></i> </button>
+        <button type="button" title="审核" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-check-square-o"></i> </button>
+        <button type="button" title="取消审核" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-minus-square"></i> </button>
+        <button type="button" title="导出Excel" class="btn btn-sm btn-white"> <i class="fa lightblue font-size-15 fa-file-excel-o"></i> </button>
+    </div> -->
+</div>
+<div class="ibox-content padding-top5" id="product_new" style="min-height: 420px;">
+	<div class="row icons-box border-bottom padding-bottom5">
+		<button class="infont btn btn-mini btn-white">	
+			<a class="no-padding"><i class="fa lightblue font-size-15 fa-angle-left"></i> 上一条</a>
+		</button>
+		<button class="infont btn btn-mini btn-white">	
+			<a class="no-padding"><i class="fa lightblue font-size-15 fa-angle-right"></i> 下一条</a>
+		</button>
+		<button class="infont btn btn-mini btn-white">	
+			<a class="no-padding"><i class="fa lightblue font-size-15 fa-file-o"></i> 新建</a>
+		</button>
+		<button class="infont btn btn-mini btn-white">	
+			<a class="no-padding"><i class="fa lightblue font-size-15 fa-refresh"></i> 刷新</a>
+		</button>
+		<button class="infont btn btn-mini btn-white">	
+			<a class="no-padding"><i class="fa lightblue font-size-15 fa-times"></i> 删除</a>
+		</button>
+		<button ng-click="save()" class="infont btn btn-mini btn-white">	
+			<a class="no-padding"><i class="fa lightblue font-size-15 fa-floppy-o"></i> 保存</a>
+		</button>
+    </div>
+	<!-- 新增内容 class="bill-search-panel" -->
+   <form name="payment_bank_Edit" class="form-horizontal">
+            <table class="table table-condensed table-sm table-no-border" cellpadding="0" cellspacing="0" >
+                <tr>
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="item_h_code">银行编码</label>
+	                        <input class="form-control inline input-s-sm-im input-mini" id="item_h_code" type="text" ng-model="payment_bank.bank_code">
+                        </div>
+                     </td>
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="item_h_name">银行名称</label>
+	                        <input class="form-control inline input-s-sm-im input-mini" id="item_h_name" type="text"  ng-model="payment_bank.bank_name">
+                    	</div>
+                    </td>
+                    <td>
+                    	<label class="control-label font-noraml form_label_text">币种</label> 
+                          <select chosen chosen-width="60%" class="form-control input-mini input-s-sm-im chosen-select" ng-model="payment_bank.currency_code"
+                          			ng-options="base_currency.currency_code as base_currency.currency_name  for base_currency in base_currencys" ng-change="currency_change()">
+								  <option value="">请选择币种</option>
+						  </select>
+                    </td>
+                    <td>
+                    	<label class="control-label font-noraml form_label_text">销售组织</label> 
+                          <select chosen chosen-width="60%" style="height: 23px;" class="form-control input-mini input-s-sm-im chosen-select" ng-model="payment_bank.item_type" 
+								  ng-options="item_type.dictvalue as item_type.dictname  for item_type in dict_item_types">
+								  <option value="">请选择组织</option>
+						  </select>
+                    </td>
+                </tr>
+                <tr ng-class="{false:'hide'}[isEdit]">
+                	<td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="payment_bank.creator">创建者</label>
+	                        <input readonly="readonly" class="form-control readonly inline input-s-sm-im input-mini" id="payment_bank.creator" type="text"  ng-model="payment_bank.creator">
+                    	</div>
+                    </td>
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="payment_bank.create_time">创建时间</label>
+	                        <input readonly="readonly" class="form-control readonly inline input-s-sm-im input-mini" date-filter id="payment_bank.create_time" type="text"  ng-model="payment_bank.create_time">
+                    	</div>
+                     </td>
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="payment_bank.creator">修改人</label>
+	                        <input readonly="readonly" class="form-control readonly inline input-s-sm-im input-mini" id="payment_bank.creator" type="text"  ng-model="payment_bank.updator">
+                    	</div>
+                    </td>
+                    <td>
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="payment_bank.create_time">修改时间</label>
+	                        <input readonly="readonly" date-filter class="form-control readonly inline input-s-sm-im input-mini" id="payment_bank.create_time" type="text"  ng-model="payment_bank.update_time">
+                    	</div>
+                     </td>
+                </tr>
+                <tr>
+                	<td colspan="4">
+                    	<div class="control-group">
+	                    	<label class="control-label font-noraml form_label_text" for="">备注</label>
+	                        <input style="width:91%;" class="form-control input-mini inline" id="" type="text" ng-model="payment_bank.note">
+                    	</div>
+                    </td>
+                   </tr>
+               </table>
+               
+        </form> 
+	
+</div>
+</div>
+</div>
+</div>
+</div>

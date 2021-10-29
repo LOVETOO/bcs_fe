@@ -1,0 +1,55 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+        <!-- 模态框 -->
+        <!-- <div class="modal inmodal fade" id="newModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="width:800px">
+                <div class="modal-content">
+                    <div class="modal-header" draggable-model>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                            <h4 class="modal-title">投资项目类型</h4>
+                        </div>
+                        <div class="modal-body">-->
+        <div class="row">
+            <div hc-input="data.currItem.invitem_code" hc-label="投资项目编码"></div>
+            <div hc-input="data.currItem.invitem_name" hc-label="投资项目名称" hc-required="true"></div>
+            <div hc-input="data.currItem.subject_no" hc-label="会计科目编码" hc-btn-click="getSubject()"></div>
+            <div hc-input="data.currItem.subject_name" hc-label="会计科目名称"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.invitem_type" hc-label="投资项目类型" hc-required="true" hc-dict-code="invitem_type"></div>
+            <div hc-input="data.currItem.creator" hc-label="制单人" ></div>
+            <div hc-input="data.currItem.create_time" hc-label="制单时间" ></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.note" hc-label="备注" hc-col-count="8"></div>
+        </div>
+
+        <!-- <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+    </div>
+    <div hc-grid="gridOptions" class="m-t-xs" hc-auto-height="grid"></div>
+</div>
+<!-- <div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.invitem_code" hc-label="投资项目编码"></div>
+            <div hc-input="data.currItem.invitem_name" hc-label="投资项目名称" hc-required="true"></div>
+            <div hc-input="data.currItem.invitem_type" hc-label="投资项目类型" hc-select-options="[{name:'固定资产',value:1},{name:'无形资产',value:2},{name:'长期待摊费用',value:3}]" ></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.subject_no" hc-label="会计科目编码" hc-btn-click="getSubject()"></div>
+            <div hc-input="data.currItem.subject_name" hc-label="会计科目名称" ></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.note" hc-label="备注" hc-type="textarea" hc-col-count="6"></div>
+            
+        </div>
+    </div>
+</div> -->

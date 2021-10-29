@@ -1,0 +1,79 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+        <div class="other-h">
+
+            <div class="row">
+                <div hc-input="data.currItem.engineer_code" hc-label="人员编号" hc-readonly="true"></div>
+                <div hc-input="data.currItem.engineer_name" hc-label="姓名" hc-required="true"> </div>
+                <div hc-input="data.currItem.identity_number" hc-label="身份证号" hc-change="birthdaySex()" hc-required="true"></div>
+                <div hc-input="data.currItem.detailed_address" hc-label="户口所在地">
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.sex" hc-label="性别" hc-dict-code="sex" hc-required="true"></div>
+                <div hc-input="data.currItem.phone" hc-label="手机号" hc-required="true"></div>
+                <div hc-input="data.currItem.age" hc-label="年龄"></div>
+                <div hc-input="data.currItem.email" hc-label="邮箱"></div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.education" hc-label="学历" hc-dict-code="educational_level"></div>
+                <div hc-input="data.currItem.mount_guard" hc-label="上岗编号" hc-readonly="true"></div>
+                <div hc-input="data.currItem.entry_date" hc-label="入职时间" hc-type="date"></div>
+                <div hc-input="data.currItem.note" hc-label="备注"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.a" hc-label="权限"></div>
+                <div hc-input="data.currItem.position" hc-label="职位" hc-dict-code="network_engineer"></div>
+
+                <div hc-input="data.currItem.job_attributes" hc-label="岗位属性" hc-dict-code="job_attributes"></div>
+                <div hc-input="data.currItem.qualification_level" hc-label="资格证级别" hc-dict-code="Qualification"></div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.information_number" hc-label="信息员上岗证编号" hc-readonly="true"></div>
+                <div hc-input="data.currItem.spare_number" hc-label="备件员上岗证编号" hc-readonly="true"></div>
+                <div hc-input="data.currItem.rejects_number" hc-label="不良品上岗证编号" hc-readonly="true"></div>
+                <div hc-input="data.currItem.settlement_number" hc-label="结算员上岗证编号" hc-readonly="true"></div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.is_part_spare" hc-label="兼职备件" hc-dict-code="whether"></div>
+                <div hc-input="data.currItem.is_part_reject" hc-label="兼职不良品" hc-dict-code="whether"></div>
+                <div hc-input="data.currItem.is_part_sale" hc-label="兼职销售" hc-dict-code="whether"></div>
+                <div hc-input="data.currItem.is_part_repair" hc-label="兼职维修" hc-dict-code="whether"></div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.is_part_settlement" hc-label="兼职结算" hc-dict-code="whether"></div>
+
+            </div>
+
+
+            <div hc-box="证件照片">
+                <div class="hc-box-upload">
+                    <div class="hc-list" ng-dblclick="open(img)" ng-repeat="img in data.currItem.item_org_imgofitem_orgs">
+                        <div class="hc-list-img">
+                            <img title="双击查看大图" class="img" ng-show="img.docid&&img.docid!='0'> 0" src="/downloadfile?docid={{img.docid}}&viewtype=1"
+                            />
+                            <span class="btn-upload" id="uploadFileFirst" ng-click="uploadFile($index)" ng-show="img.docid==0||img.docid=='0'||img.docid==undefined">上传照片</span>
+                            <button class="btn btn_del" ng-click="del_image($index)" ng-show="img.docid> 0&&img.docid!='0'">
+									<i class="fa fa-trash"></i>
+								</button>
+                        </div>
+                        <div class="hc-list-infor">
+                            <input type="text" readonly="readonly" class="hc-list-infor-name" name="img_name" ng-model="img.img_name" />
+                            <input type="hidden" name="locationid" ng-model='img.locationid' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

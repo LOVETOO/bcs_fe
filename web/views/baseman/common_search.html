@@ -1,0 +1,33 @@
+<div
+	style="
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	"
+>
+	<div hc-box class="other-h">
+		<div
+			hc-input="data.keyword"
+			hc-btn-click="search()"
+			hc-btn-icon="iconfont hc-search"
+			hc-can-input="true"
+			hc-col-count="8"
+			hc-placeholder="{{data.placeholder}}"
+			hc-autofocus="true"
+			hc-change="onKeywordChange()"
+		></div>
+	</div>
+	<div
+		style="
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+		"
+		hc-box
+	>
+		<div
+			style="flex: 1;"
+			hc-grid="gridOptions"
+		></div>
+	</div>
+</div>

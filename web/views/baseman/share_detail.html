@@ -1,0 +1,236 @@
+<div class="modal-content" ng-init="clearinformation()">
+    <div draggable-model class="modal-header" style="width: 100%">
+        <h3>文件权限设置</h3>
+    </div>
+    <div class="modal-body" style="width: 100%">
+        <div class="row">
+            <div hc-input="data.currItem.username"
+                 hc-label="用户"
+                 hc-readonly="true">
+            </div>
+            <div hc-input="data.currItem.orgname"
+                 hc-label="机构"
+                 hc-readonly="true">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-inline" style="width: 100%;">
+                <label class="control-label ng-binding ng-scope" style="width: 80px;vertical-align: top;">权限</label>
+                <fieldset style="width:406px;display: inline-block;">
+                    <div class="ibox-content clearborder">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <!--<label class="ilabel">-->
+                                    <!--<input ng-model="data.currItem.myright" ng-click='myright()' value="1"-->
+                                           <!--name="okstat" type="radio"-->
+                                           <!--ng-disabled="data.bReadOnly && !data.currItem.UserIsManager">部分</label>-->
+                                <div hc-input="data.currItem.myright"
+                                     hc-label="部分"
+                                     hc-type="checkbox"
+                                     hc-change="myright()"
+                                     hc-true-value="1"
+                                     hc-false-value="0"
+                                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <!--<label class="ilabel">-->
+                                    <!--<input ng-model="data.currItem.myright" ng-click='myright()' value="2"-->
+                                           <!--name="okstat" type="radio"-->
+                                           <!--ng-disabled="data.bReadOnly && !data.currItem.UserIsManager">完全</label>-->
+                                <div hc-input="data.currItem.myright"
+                                     hc-label="完全"
+                                     hc-type="checkbox"
+                                     hc-change="myright()"
+                                     hc-true-value="2"
+                                     hc-false-value="0"
+                                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <!--<label class="ilabel">-->
+                                    <!--<input ng-model="data.currItem.myright" ng-click='myright()' value="3"-->
+                                           <!--name="okstat" type="radio"-->
+                                           <!--ng-disabled="data.bReadOnly && !data.currItem.UserIsManager">拒绝</label>-->
+                                <div hc-input="data.currItem.myright"
+                                     hc-label="拒绝"
+                                     hc-type="checkbox"
+                                     hc-change="myright()"
+                                     hc-true-value="3"
+                                     hc-false-value="0"
+                                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row_div">
+                            <div class="col-xs-4">
+                                <div hc-input="data.currItem.dir"
+                                     hc-label="目录"
+                                     hc-type="checkbox"
+                                     hc-true-value="1"
+                                     hc-false-value="0"
+                                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                            </div>
+                            <div class="col-xs-4">
+                                <div hc-input="data.currItem.add"
+                                     hc-label="新增"
+                                     hc-type="checkbox"
+                                     hc-true-value="1"
+                                     hc-false-value="0"
+                                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row_div">
+                            <div class="col-xs-4">
+                                <div hc-input="data.currItem.view"
+                                     hc-label="浏览"
+                                     hc-type="checkbox"
+                                     hc-true-value="1"
+                                     hc-false-value="0"
+                                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                            </div>
+                            <div class="col-xs-4">
+                                <div hc-input="data.currItem.modify"
+                                     hc-label="修改"
+                                     hc-type="checkbox"
+                                     hc-true-value="1"
+                                     hc-false-value="0"
+                                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div hc-input="data.currItem.read"
+                                     hc-label="只读"
+                                     hc-type="checkbox"
+                                     hc-true-value="1"
+                                     hc-false-value="0"
+                                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                            </div>
+                            <div class="col-xs-4">
+                                <div hc-input="data.currItem.delete"
+                                     hc-label="删除"
+                                     hc-type="checkbox"
+                                     hc-true-value="1"
+                                     hc-false-value="0"
+                                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div hc-input="data.currItem.export"
+                                     hc-label="输出"
+                                     hc-type="checkbox"
+                                     hc-true-value="1"
+                                     hc-false-value="0"
+                                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                            </div>
+                            <div class="col-xs-4">
+                                <!--<div hc-input="data.currItem.transfer"-->
+                                <!--hc-label="可转授"-->
+                                <!--hc-type="checkbox"-->
+                                <!--hc-readonly="data.currItem.myright==3">-->
+                                <!--</div>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+            </div>
+            <div class="col-xs-3">
+                <div hc-input="data.currItem.ismanager"
+                     hc-label="设为管理员"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div hc-input="data.currItem.cantransfer"
+                     hc-label="可转授"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-readonly="data.bReadOnly && !data.currItem.UserIsManager">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.statime"
+                 hc-label="生效日期"
+                 hc-type="date">
+            </div>
+            <div hc-input="data.currItem.endtime"
+                 hc-label="失效日期"
+                 hc-type="date">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="width: 100%">
+        <a class="btn btn-sm btn-primary" ng-click="rightsdetailok(e)"
+           ng-show="!data.bReadOnly || data.currItem.UserIsManager">
+            确定
+        </a>
+        <a class="btn btn-sm btn-default" ng-click="rightsdetailcancel(e)">
+            取消
+        </a>
+    </div>
+</div>
+<style>
+    .form-label-mini {
+        display: inline-block;
+        max-width: 100%;
+        margin-top: 3px;
+        font-size: 0.90em;
+        margin-bottom: 2px;
+        font-weight: normal;
+        line-height: 22px;
+        float: right;
+        vertical-align: middle;
+    }
+
+    .row_div {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .modal-body {
+        padding: 15px;
+    }
+
+    fieldset {
+        padding: .35em .425em .25em;
+        margin: 1px 0px 5px;
+        position: relative;
+        border: 1px solid silver;
+    }
+
+    .row {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+</style>

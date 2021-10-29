@@ -1,0 +1,23 @@
+<div hc-diy-page>
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.search_flag"
+                 hc-label="分配状态"
+                 hc-change="setSearchFlag()"
+                 hc-dict-code="search_flag">
+            </div>
+
+            <div hc-input="data.currItem.persontax_area_name"
+                 hc-label="税收地域"
+                 hc-change="setPersontaxAreaName()"
+                 hc-btn-click="choose_persontax_area_name()">
+            </div>
+            <div hc-input="data.currItem.employee_name"
+                 hc-label="员工"
+                 hc-change="setEmployeeName()"
+                 hc-btn-click="choose_employee_name()">
+            </div>
+        </div>
+    </div>
+    <div hc-grid="gridOptions" class="hc-box" hc-auto-height="grid"></div>
+</div>

@@ -1,0 +1,96 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.contract_ecn_code"
+                     hc-label="变更单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="创建人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.createtime"
+                     hc-label="创建时间"
+                     hc-type="time"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="审批状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="战略项目编码"
+                     hc-required="true"
+                     hc-class-id="epm_contract_ecn"
+                     hc-common-search="commonSearchSetting.epmContractEcn"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="战略项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.manager"
+                     hc-label="战略项经理"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.contract_code"
+                     hc-label="合同协议编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_name"
+                     hc-label="合同协议名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.division_id"
+                     hc-label="所属事业部"
+                     hc-dict-code="epm.division"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.signed_date"
+                     hc-label="签订时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.signed_location"
+                     hc-label="签订地点"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_effect_date"
+                     hc-label="合作开始时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_expire_date"
+                     hc-label="合作结束时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.party_a_name"
+                    hc-label="甲方名称"
+                    hc-col-count="4"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.party_b_name"
+                    hc-label="乙方名称"
+                    hc-col-count="4"
+                    hc-readonly="true"></div>
+            </div>
+            <div class="row">
+               <div hc-input="data.currItem.reason"
+                    hc-label="变更说明"
+                    hc-col-count="8"
+                    hc-required="true"></div>
+            </div>
+        </div>
+        <div hc-box="原有效产品清单" class="flex-column flex1" style="min-height: 208px;">
+            <div hc-grid="gridOptions" class="flex1"></div>
+        </div>
+        <div hc-box="取消产品清单" class="flex-column flex1" style="min-height: 208px;">
+          <div hc-grid="gridOptionsCancel" class="flex1"></div>
+      </div>
+      <div hc-box="新增产品清单" class="flex-column flex1" style="min-height: 312px;">
+          <div hc-grid="gridOptionsNew" class="flex1"></div>
+      </div>
+    </div>
+</div>
+
+
+
+

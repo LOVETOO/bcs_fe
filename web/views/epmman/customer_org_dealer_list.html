@@ -1,0 +1,56 @@
+<div hc-obj-list>
+	<!-- 查询条件面板-->
+	<hc-obj-list-search-panel>
+		<!--单体-->
+		<div class="row">
+			<div
+				hc-label="客户编码"
+				hc-input="searchObj.customer_code"
+			></div>
+		
+			<div
+				hc-label="旧编码"
+				hc-input="searchObj.crm_cust_code"
+			></div>
+
+			<div hc-label="客户名称"
+				 hc-input="searchObj.customer_name"></div>
+
+			<div hc-label="客户简称"
+				 hc-input="searchObj.short_name"></div>
+		</div>
+		<div class="row">
+			<div hc-label="客户分类"
+                 hc-can-delete="true"
+                 hc-dict-code="epm.customer_class"
+				 hc-input="searchObj.customer_class"></div>
+
+			<div hc-label="客户子分类"
+                 hc-can-delete="true"
+                 hc-dict-code="epm.customer_subclass"
+				 hc-input="searchObj.customer_subclass"></div>
+
+            <div hc-label="客户等级"
+                 hc-can-delete="true"
+                 hc-dict-code="epm.customer_grade"
+				 hc-input="searchObj.customer_grade"></div>
+
+            <div hc-label="客户AB类"
+                 hc-can-delete="true"
+                 hc-dict-code="epm.customer_rank"
+				 hc-input="searchObj.rank"></div>
+		</div>
+		<div class="row">
+			<div hc-label="城市类型"
+				 hc-can-delete="true"
+				 hc-dict-code="epm.city_level"
+				 hc-input="searchObj.city_level"></div>
+			<div hc-label="所属事业部"
+				 hc-input="searchObj.division_name"></div>
+			<div hc-label="状态"
+                 hc-input="searchObj.valid"
+                 hc-select-options="optionValid"></div>
+		</div>
+	</hc-obj-list-search-panel>
+</div>
+

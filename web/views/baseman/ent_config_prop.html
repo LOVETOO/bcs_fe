@@ -1,0 +1,126 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+		<div hc-box="企业信息">
+			<div class="row">
+				<div hc-col-count="2"
+					hc-label="名称"
+					hc-readonly="true"
+					hc-input="data.currItem.entname">
+				</div>
+				<div hc-col-count="2"
+					hc-label="编码"
+					hc-readonly="true"
+					hc-input="data.currItem.entcode">
+				</div>
+				<div hc-col-count="2"
+					hc-label="代号"
+					hc-readonly="true"
+					hc-input="data.currItem.entid">
+				</div>
+				<div class="picdiv">
+				<label style='float:left;font-size: 13px;color: #717171;' class="control-label write-label">Logo</label>
+				<div class="picture">
+						<div style="display: flex;flex-direction: column;" ng-hide="data.currItem.logo_id > 0">
+							<button ng-click="uploadFile()" style="background-color:#fff;border: none;">
+								<i class="iconfont hc-add" ></i>
+							</button> 
+						</div>
+					<img id="invoice_div_img" class="invoice_div_img" hc-img="data.currItem.logo_id" style="{{ data.currItem.logo_style }}" >
+					<button class="btn invoice_del"
+							ng-click="del_invoice_image()"
+							ng-show="data.currItem.logo_id > 0">
+						<i class="fa fa-trash"></i>
+					</button>
+				</div>
+			</div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="应用标题"
+					hc-input="data.currItem.app_title"
+					hc-col-count="6"
+				></div>
+			</div>
+
+			<div class="row">
+				<div
+					hc-label="Logo 样式"
+					hc-input="data.currItem.logo_style"
+					hc-type="textarea"
+					hc-col-count="6"
+				></div>
+			</div>
+		</div>
+		<div hc-box="登录设置">
+			<div class="row">
+			<div 
+				hc-label="登录首页"
+				hc-required="true"
+				hc-input="data.currItem.home_page"
+				hc-select-options="page"
+				>
+			</div>
+			<div hc-input="data.currItem.enable_saas" hc-label="启用SAAS" hc-type="checkbox"></div>
+			<div hc-input="data.currItem.enable_oa" hc-label="启用OA" hc-type="checkbox"></div>
+			<div>
+				<button ng-click="setOAPage()" class="btn btn-sm btn-white" >
+						设置OA首页默认布局
+				</button>
+			</div>
+		</div>
+    </div>
+</div>
+<style>
+     .invoice_div_img {
+        width: 100%;
+        height: 0;
+        position: absolute;
+        z-index: 3;
+        top: 0.5px;
+    }
+    .invoice_del {
+        display: none;
+        position: absolute;
+        right: 1px;
+        top: 1px;
+        z-index: 5;
+        color: #828282;
+    }
+    div.picture:hover .invoice_del {
+        display: block;
+    }
+    .none{
+        display: none !important;
+    }
+    .picture{
+        border:1px #e4eaf1 solid;
+        width:100px;
+        height:60px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } 
+    .picture p{
+        text-align: center;
+        margin: 0;
+        font-size: 13px;
+        color: #717171;
+    }
+    .picdiv:after {
+        content: '';
+        clear: both;
+        width: 0px;
+        display: block;
+    }
+    .picdiv{
+        display: flex;
+    }
+    .hc-box{
+         margin-top: 17px;
+    }
+    .hc-box-title{
+          border-bottom: 1px solid #999;
+    }
+</style>

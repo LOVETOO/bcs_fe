@@ -1,0 +1,62 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.inv_whtowh_head_no"
+                     hc-label="调拨单号"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.bill_date"
+                     hc-label="单据日期"
+                     hc-required="true"
+                     hc-type="date">
+                </div>
+                <div hc-input="data.currItem.move_type"
+                     hc-label="调拨类型"
+                     hc-dict-code="inv_move_type"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.from_wh_name"
+                     hc-label="调出仓库"
+                     hc-btn-click="chooseWareHouse('from')">
+                </div>
+                <div hc-input="data.currItem.inv_out_bill_head_no"
+                     hc-label="出库单据号"
+                     hc-type="number"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.inv_in_bill_head_no"
+                     hc-label="入库单据号"
+                     hc-type="number"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.to_wh_name"
+                     hc-label="调入仓库"
+                     hc-btn-click="chooseWareHouse('to')">
+                </div>
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-col-count="4"></div>
+
+                <!--<div hc-buttons="toWareHouse" style=""></div>-->
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true"></div>
+            </div>
+        </div>
+        <!-- 表格视图  -->
+        <div hc-box hc-grid="gridOptions" class="hc-grid m" hc-auto-height="grid"></div>
+
+    </div>
+</div>

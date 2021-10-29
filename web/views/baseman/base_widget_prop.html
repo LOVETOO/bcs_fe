@@ -1,0 +1,92 @@
+<div hc-obj-prop>
+
+	<div id="base" class="active">
+		<div class="other-h" hc-box>
+			<div class="row">
+				<div
+					hc-label="组件编码"
+					hc-input="data.currItem.widgetcode"
+					hc-required="true"
+					hc-readonly="!data.isInsert"
+				></div>
+				<div
+					hc-label="组件名称"
+					hc-input="data.currItem.widgetname"
+					hc-required="true"
+				></div>
+				<div
+					hc-label="固定样式类"
+					hc-input="data.currItem.class"
+				></div>
+			</div>
+			<div class="row">
+				<div
+					hc-label="模板路径"
+					hc-input="data.currItem.templateurl"
+					hc-required="true"
+					hc-col-count="4"
+				></div>
+				<div
+					hc-label="脚本路径"
+					hc-input="data.currItem.scripturl"
+					hc-col-count="4"
+				></div>
+			</div>
+			<div class="row">
+				<div
+					hc-label="最小占用列宽"
+					hc-input="data.currItem.colwidthmin"
+					hc-type="number"
+				></div>
+				<div
+					hc-label="最大占用列宽"
+					hc-input="data.currItem.colwidthmax"
+					hc-type="number"
+				></div>
+				<div
+					hc-label="高度"
+					hc-input="data.currItem.height"
+				></div>
+			</div>
+			<div class="row">
+				<div
+					hc-label="禁用"
+					hc-input="data.currItem.disabled"
+					hc-type="checkbox"
+				></div>
+				<div
+					hc-label="启用组织授权"
+					hc-input="data.currItem.isaccessent"
+					hc-type="checkbox"
+				></div>
+				<div
+					hc-label="启用角色授权"
+					hc-input="data.currItem.isaccessrole"
+					hc-type="checkbox"
+				></div>
+				<div
+					hc-label="启用用户授权"
+					hc-input="data.currItem.isaccessuser"
+					hc-type="checkbox"
+				></div>
+			</div>
+		</div>
+
+		<div
+			style="margin: 8px; border-style: ridge; border-width: thin;"
+			hc-widget="widget"
+			hc-if="data.currItem.templateurl && form.$pristine"
+			hc-auto-height
+		></div>
+	</div>
+
+	<div
+		ng-repeat="(id, gridOptions) in accessGridOptions"
+		ng-init="$parent.gridCache[gridOptions.hcScope.$id] = gridOptions"
+		id="{{ id }}"
+		class="tab-pane"
+	>
+		<div hc-box hc-grid="gridOptions" hc-auto-height></div>
+	</div>
+
+</div>

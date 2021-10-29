@@ -1,0 +1,47 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.schedulername" hc-label="调度名称"></div>
+            <div hc-input="data.currItem.nexttime"
+                 hc-type = 'time'
+                 hc-label="开始/下一次运行时间"></div>
+            <div hc-input="data.currItem.lasttime" hc-label="上次运行时间"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.pausetime" hc-label="暂停时间范围 从"></div>
+            <div hc-input="data.currItem.resumetime" hc-label="到"></div>
+            <div hc-input="data.currItem.autorun" hc-label="自动运行" hc-type="checkbox" hc-col-count="1"></div>
+            <div hc-input="data.currItem.objtype" hc-label="系统接口" hc-type="checkbox" hc-col-count="1"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.runinterval" hc-label="间隔时间" hc-type="number"></div>
+            <div hc-input="data.currItem.intervalunit" hc-label="间隔单位"
+                 hc-select-options="[{'value':1,'name':'分钟'},{'value':2,'name':'小时'},{'value':3,'name':'天'},{'value':4,'name':'月'}]"></div>
+            <div hc-input="data.currItem.aheaddays" hc-label="月末提前执行天数" hc-type="number"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.entcode" hc-label="EntCode" hc-type="number"></div>
+            <div hc-input="data.currItem.maxcount" hc-label="最大运行次数" hc-type="number"></div>
+            <div hc-input="data.currItem.totalcount" hc-label="已经运行次数" hc-type="number"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.param1" hc-label="参数1"></div>
+            <div hc-input="data.currItem.param2" hc-label="参数2"></div>
+            <div hc-input="data.currItem.param3" hc-label="参数3"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.noticeuser" hc-label="运行失败通知用户"></div>
+            <div hc-input="data.currItem.servertype" hc-label="服务器类型"
+                 hc-select-options="[{'value':1,'name':'主服务器'},{'value':2,'name':'消息服务器'},{'value':3,'name':'所有'}]"></div>
+            <div hc-input="data.currItem.serverid" hc-label="服务器ID"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.objectname" hc-label="对象名称" hc-col-count="4"></div>
+            <div hc-input="data.currItem.rate" hc-label="级别"
+                 hc-select-options="[{'value':1,'name':'普通'},{'value':2,'name':'实时'}]" hc-col-count="2"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.note" hc-label="说明" hc-col-count="6"></div>
+        </div>
+    </div>
+</div>

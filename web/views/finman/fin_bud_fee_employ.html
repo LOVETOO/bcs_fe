@@ -1,0 +1,53 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fin_bud_fee_employ">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{headername}}</h5>
+                    <div class="ibox-tools form-inline">
+                        <button type="button" class="btn btn-default btn-sm" id="searchBtn"><i class="fa fa-search"></i>
+                            查询
+                        </button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <!--编辑栏-->
+                    <form method="get" class="form-inline mline title-form">
+                        <div class="row">
+                            <label class="">部门</label>
+                            <div class="input-group width_no">
+                                <input type="text" class="form-control" ng-model="data.dept_name">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary"
+                                                                      ng-click="deptSearch()">•••</button></span>
+                            </div>
+                            <label class="control-label">年度</label>
+                            <input type="number" class="form-control" ng-model="data.bud_year">
+                            <label class="control-label">预算类别</label>
+                            <div class="input-group width_mq">
+                                <input type="text" class="form-control" ng-model="data.bud_type_name">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" ng-click="typeSearch()">•••</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                    <!--列表-->
+                    <div id="viewGrid" style="height: 650px"></div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .slick-cell.l0.r0 {
+        text-align: center;
+    }
+</style>
+
+
+<!--时间插件引入中文-->
+<script src="../../lib/bootstrap-datetimepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="../../lib/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"
+        charset="UTF-8"></script>

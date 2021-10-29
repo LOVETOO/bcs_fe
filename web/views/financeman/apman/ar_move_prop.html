@@ -1,0 +1,132 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box="" class="grid-other-h">
+            <div class="row">
+                <div hc-input="data.currItem.invoice_move_head_no"
+                     hc-label="单据号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.bill_date"
+                     hc-label="记账日期"
+                     hc-type="date"
+                     hc-change="changeEvent()"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.year_month"
+                     hc-label="记账月份"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                        hc-label="单据状态"
+                        hc-dict-code="stat"
+                        hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.moveout_code"
+                     hc-label="转出客户"
+                     hc-btn-click="chooseVendor('out')"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.moveout_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.amount_sum_from"
+                     hc-label="应付账款余额"
+                     hc-readonly="true"
+                     hc-type="money">
+                </div>
+
+                <div hc-input="data.currItem.created_by"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.from_dept_code"
+                     hc-label="转出部门"
+                     hc-btn-click="chooseOrg('out')"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.from_dept_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.crm_entid"
+                     hc-label="品类"
+                     hc-dict-code="crm_entid"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.creation_date"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.movein_code"
+                     hc-label="转入客户"
+                     hc-btn-click="chooseVendor('in')"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.movein_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.amount_sum_to"
+                     hc-label="应付账款余额"
+                     hc-readonly="true"
+                     hc-type="money">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.to_dept_code"
+                     hc-label="转入部门"
+                     hc-btn-click="chooseOrg('out')"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.to_dept_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.to_crm_entid"
+                     hc-label="品类"
+                     hc-dict-code="crm_entid"
+                     hc-required="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.amount"
+                     hc-label="转移金额"
+                     hc-type="money"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.credence_no_s"
+                    hc-label="凭证号"
+                    hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="4">
+                </div>
+            </div>
+
+            <div class="row">
+
+            </div>
+        </div>
+    </div>
+
+</div>

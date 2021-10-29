@@ -1,0 +1,32 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div id="net_inspect" hc-box="网点巡检记录" class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.css_net_inspect_rec_no" hc-label="单号" hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.input_name" hc-label="录入人" hc-required="true" hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.input_time" hc-label="录入时间" hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.stat" hc-label="单据状态" hc-dict-code="stat" hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.dept_name" hc-label="部门" hc-required="true" hc-class-id="dept"
+                    hc-common-search="commonSearchSettingOfDept"></div>
+
+                <div hc-input="data.currItem.cyear" hc-label="年份"></div>
+
+                <div hc-input="data.currItem.cmonth" hc-label="月份"></div>
+
+                <div hc-input="data.currItem.remark" hc-label="备注"></div>
+            </div>
+            <!-- 明细 -->
+            <div hc-box hc-grid="gridOptions_inspect" hc-auto-height="grid"></div>
+
+        </div>
+
+    </div>
+
+</div>

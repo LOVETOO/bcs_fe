@@ -1,0 +1,62 @@
+<div hc-obj-list>
+    <!-- 查询条件面板-->
+    <hc-obj-list-search-panel>
+        <!--单体-->
+        <div class="row">
+            <div hc-input="searchObj.item_code"
+                 hc-label="产品编码"
+            ></div>
+
+            <div hc-input="searchObj.item_name"
+                 hc-label="产品名称"
+            ></div>
+
+            <div hc-input="searchObj.specs"
+                 hc-label="规格"
+            ></div>
+
+            <div hc-input="searchObj.item_model"
+                 hc-label="型号"
+            ></div>
+        </div>
+
+        <div class="row">
+            <!--手动输入类别名，后台转id-->
+            <div hc-input="searchObj.item_class1_name"
+                 hc-label="产品大类"
+            ></div>
+
+            <div hc-input="searchObj.item_class2_name"
+                 hc-label="产品中类"
+            ></div>
+
+            <div hc-input="searchObj.item_class3_name"
+                 hc-label="产品小类"
+            ></div>
+
+            <div hc-input="searchObj.sales_status"
+                 hc-label="上架/下架"
+                 hc-dict-code="item.sales_status"
+            ></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="searchObj.entorgid"
+                 hc-label="产品线"
+                 hc-dict-code="entorgid"
+            ></div>
+
+            <div hc-input="searchObj.channel_id"
+                 hc-label="渠道"
+                 hc-dict-code="item.channel"
+            ></div>
+
+            <!--手输名称，后台转换成值-->
+            <div hc-input="searchObj.division_name"
+                 hc-label="品牌事业部"
+            ></div>
+        </div>
+
+    </hc-obj-list-search-panel>
+</div>
+

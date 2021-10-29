@@ -1,0 +1,34 @@
+<div hc-edit-list>
+    <div  hc-box class="other-h">
+        <div class="row">
+            <div hc-input="data.currItem.insrnc_group_code"
+                 hc-label="社保组编码"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.insrnc_group_name"
+                 hc-label="社保组名称"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.usable"
+                 hc-label="有效状态"
+                 hc-required="true"
+                 hc-dict-code="usable_code">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.for_employee_type"
+                 hc-label="适用员工类型"
+                 hc-required="true"
+                 hc-dict-code="project.remote">
+            </div>
+            <div hc-input="data.currItem.for_domicile_type"
+                 hc-label="适用户籍类型"
+                 hc-required="true"
+                 hc-dict-code="for_domicile_type">
+            </div>
+            <div hc-input="data.currItem.remark"
+                 hc-label="备注">
+            </div>
+        </div>
+    </div>
+</div>

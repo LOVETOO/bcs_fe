@@ -1,0 +1,19 @@
+
+<div hc-diy-page>
+
+    <div class="row"> 
+        <div hc-input="data.currItem.search_word"
+             ng-keyup="enterEvent($event)"
+             hc-label hc-col-count="3" hc-placeholder="输入文本...">
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="searchBySqlWhere()">搜索</button>
+    </div>
+
+    <div id="grid" hc-grid="gridOptions" style="height: 200px;"></div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="selectBill()">确定</button>
+        <!-- <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button> -->
+    </div>
+
+</div>

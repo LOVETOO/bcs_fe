@@ -1,0 +1,44 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="item_class_pro">
+    <div class="wrapper wrapper-content" ng-init="init();">
+        <div class="modal-footflex">
+            <div class="tabs-container">
+                <form method="get" class="form-horizontal" name="entityForm" novalidate>
+                    <div class="tab-content">
+                        <div id="tab_common" class="tab-pane active form-inline mline">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <label>分类名称</label>
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                           ng-model="data.currItem.item_class_name">
+                                    <label class="control-label">分类编码</label>
+                                        <input type="text"
+                                               class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                               ng-model="data.currItem.item_class_code">
+                                </div>
+                                <div class="row">
+                                    <label>分类等级</label>
+                                    <select ng-model="data.currItem.item_class_level"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading non-empty"
+                                            ng-options="s.id as s.name for s in levs"
+                                            ng-disabled="true">
+                                    </select>
+                                    <label class="control-label">
+                                        <input type="checkbox" class="i-checks" ng-checked="data.currItem.item_usable==2"
+                                               ng-modal="data.currItem.item_usable" ng-click="checkEnable($event)">有效</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="saveData()">保存</button>
+                <button type="button" class="btn btn-white" ng-click="closeWindow()">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

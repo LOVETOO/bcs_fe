@@ -1,0 +1,352 @@
+<div class="wrapper wrapper-content animated fadeInRight ng-scope" ng-controller="manage_home">
+	<div class="containner">
+		<div class="client-content">
+			<div class="more_news">
+				<div class="row row_div">
+					<div class="col-md-12">
+						<div class="col-md-4">
+							<div class="col-md-2">
+								<label class="form-label-mini">时段:</label>
+							</div>
+							<div class="col-md-4">
+								<input bs-datepacker="" type="text" ng-model="data.currItem.start_date" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+							</div>
+							<div class="col-md-2">
+								<label class="form-label-mini">至</label>
+							</div>
+							<div class="col-md-4">
+								<input bs-datepacker="" type="text" ng-model="data.currItem.end_date" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="col-md-2">
+								<label class="form-label-mini">类型</label>
+							</div>
+							<div class="col-md-4">
+								<select chosen-select ng-model="data.currItem.type"  class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in types">
+									<option value=""></option>
+								</select>
+							</div>
+							<!--div class="col-md-2">
+								<label class="form-label-mini">部门</label>
+							</div>
+							<div class="col-md-4">
+								<select chosen-select ng-model="data.currItem.orgname" ng-readonly="true" class="input-sm chosen-select form-control" ng-options="s.value as s.desc for s in org_name">
+									<option value=""></option>
+								</select>
+							</div-->
+						</div>
+						<div class="col-md-4">
+							<div class="col-md-3">
+								<div class="text-center">
+									<div class="btn-group">
+										<button class="btn btn-sm btn-info dropdown-toggle" ng-disabled="disableflag>0" style="margin-bottom:0px;width: 95px;" ng-click="search()">查询</button>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="text-center">
+									<div class="btn-group">
+										<button class="btn btn-sm btn-info dropdown-toggle" ng-disabled="disableflag>0" style="margin-bottom:0px;float:left" ng-click="open_report(1)">新增报告</button>
+										<button data-toggle="dropdown" ng-disabled="disableflag>0" style="margin-bottom:0px;float:right" class="btn btn-sm btn-info dropdown-toggle">
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" style="min-width:80px;">
+											<li style="width:80px;">
+												<a style="padding-left:0px;padding-right:0px;text-align: center;" ng-click="open_report(1)">日报</a>
+											</li>
+											<li style="width:80px;">
+												<a style="padding-left:0px;padding-right:0px;text-align: center;" ng-click="open_report(2)">周报</a>
+											</li>
+											<li style="width:80px;">
+												<a style="padding-left:0px;padding-right:0px;text-align: center;" ng-click="open_report(3)">月报</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="commentAll" style='float:left;margin-top: 10px;height: 96%; overflow: auto;overflow-x: hidden;'>
+						<div ng-repeat="item in data.oa_work_report_headers track by $index" style="border: 1px solid #ededed;margin-bottom: 8px;">
+
+							<div class="settingtable_header qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">
+								<a ng-show="item.work_type==1" class="lm_rt" fun="g2">日报</a>
+								<a ng-show="item.work_type==2" class="lm_rt" fun="g2">周报</a>
+								<a ng-show="item.work_type==3" class="lm_rt" fun="g2">月报</a>{{item.report_time}}</div>
+							<!--回复区域 begin-->
+							<div style="height: 50px;">
+								<div class="comment-show-con-img pull-left">
+									<img style="width: 48px;height: 48px;" class="img-circle" src="{{item.avatar}}" alt="image">
+
+								</div>
+								<span class="span" style="font-size: 15px; padding-top:10px ;">汇报人：</span><span class="span" style="padding-left: 0px;">{{item.username}}</span><span class="span" style="font-size: 15px; padding-top:10px ;">抄送人：</span> <span class="span" style="padding-left: 0px;">{{item.cc_report_usernames}}</span>
+							</div>
+							<div ng-repeat="content in item.oa_work_report_line2ofoa_work_report_headers" class="comment-show">
+								<div class="comment-show-con clearfix">
+									<div class="comment-show-con-list pull-left clearfix">
+										<div class="pl-text clearfix">
+											<span class="my-pl-con">&nbsp;{{content.content}}</span>
+										</div>
+										<div class="date-dz">
+											{{content.create_time.substring(10,20)}}
+										</div>
+										<div class="hf-list-con"></div>
+									</div>
+								</div>
+								<table style="padding:4px 0 3px 8px;cursor:default;width: 100%;height: 30px;" class="settingtable qqshowbd" border="0" cellspacing="" cellpadding="">
+									<tr>
+										<td style="width: 45%;padding-left: 10px;">
+											<a title="查看附件" ng-click="attachment(item.objattachs,a)" class=" fa fa-paperclip fa-2x">({{item.objattachs.length||0}})</a>
+										</td>
+										<td style="width: 40%">
+											<a title="删除" ng-show="item.dj_type==1" ng-click="del(content,$parent.$index)" class=" fa fa-trash-o fa-2x"></a>
+										</td>
+										<td style="width: 8%;">
+											<a title="评论" ng-click="speak(content,$parent.$index)" class="fa fa-commenting fa-2x"></a>
+										</td>
+										<td>
+											<a title="查看评论" ng-click="look_over($event,$parent.$index)" class="fa fa-caret-square-o-left fa-2x">({{item.oa_work_report_lineofoa_work_report_headers.length||0}})</a>
+										</td>
+									</tr>
+								</table>
+
+								<table id="box" ng-show="objattachs==item.objattachs&&a==2" ng-repeat="data in item.objattachs" style="width: 100%;" border="0" cellspacing="" cellpadding="">
+									<tr style="height: 30px;">
+										<td style="width: 48%;padding-left: 10px;">{{data.docname}}</td>
+										<td style="width: 45%; padding-left: 10px;">{{data.oldsize/1024|number:0}}k</td>
+										<td style="padding-left: 10px;">
+											<a target="_blank" ng-click="viewDoc({docname:data.docname,downloadcode:data.downloadcode})">查看</a>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+					</div>
+					<!--回复区域 end-->
+
+					<div ng-show="data.oa_work_report_headers.length>0" class="commentAll1" style='float:right;margin-top: 10px;'>
+						<div style="border: 1px solid #ededed;">
+							<div class="settingtable_header qqshowbd" style="padding:4px 0 3px 8px;cursor:default;">
+								<a class="lm_rt" fun="g2" ng-click="speak(data.oa_work_report_headers[index],index)">我要评论</a>评论区</div>
+							<!--回复区域 begin-->
+							<div id="box" ng-repeat="item in data.oa_work_report_lineofoa_work_report_headers" class="comment-show">
+								<div class="comment-show-bom clearfix">
+									<div class="comment-show-con-img pull-left">
+										<img class="img-circle" style="width: 48px; height: 48px;" src="{{item.avatar}}" alt="image">
+									</div>
+									<div class="comment-show-con-list pull-left clearfix">
+										<div class="pl-text clearfix">
+											<a href="#" class="comment-size-name">{{item.username}} : </a>
+											<span class="my-pl-con">{{item.content}}</span>
+										</div>
+										<div class="date-dz-commet">
+											<span class="date-dz-left pull-left comment-time">{{item.create_time}}</span>
+										</div>
+										<div class="hf-list-con"></div>
+									</div>
+								</div>
+							</div>
+							<div id="box" ng-show='data.oa_work_report_lineofoa_work_report_headers.length==0' style='height:80px' class="comment-show">
+							     <div style="margin-left: 170px;margin-top: 20px;" class="my-pl-con">无评论</div>
+							</div>
+							<!--回复区域 end-->
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="js/jquery/jquery.flexText.js"></script>
+<link rel="stylesheet" href="css/comment.css">
+<style type="text/css">
+	div.wrap-height {
+		display: flex;
+	}
+	
+	div.wrap-height>div.ng-scope {
+		display: flex;
+		flex-shrink: 1;
+		flex-grow: 1;
+	}
+	
+	div.containner {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	div.client-content {
+		flex-grow: 1;
+		flex-shrink: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	div.more_news {
+		flex-grow: 1;
+		flex-shrink: 1;
+		height: 100%;
+	}
+	
+	div.ibox-content.modal-open {
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+	
+	.wrapper.wrapper-content.animated.fadeInRight.ng-scope {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+		flex-shrink: 1;
+		background-color: #fff;
+	}
+	
+	.commentAll {
+		width: 60%;
+		padding: 0px;
+		border: 0px solid #ededed !important;
+	}
+	
+	.commentAll1 {
+		width: 40%;
+		padding: 0px;
+		height: 96%;
+		overflow: auto;
+		overflow-x: hidden;
+	}
+	
+	.settingtable {
+		background-color: #efe3ec;
+	}
+	
+	.settingtable_header {
+		background-color: #f3f3f4;
+	}
+	
+	.comment-show {
+		margin-top: 0px;
+		padding: 5px;
+	}
+	
+	.comment-show-bom {
+		width: 100%;
+		border-bottom: 1px solid #EDEDED;
+		padding: 0px 0;
+	}
+	
+	.comment-show-con-list {
+		width: 90%;
+		margin-left: 13%;
+		float: initial !important;
+	}
+	
+	.pl-text {
+		width: 97%;
+		margin-top: 7px;
+		word-wrap: break-word;
+		overflow: hidden;
+		float: left;
+	}
+	
+	.date-dz {
+		width: 13%;
+		float: right;
+	}
+	
+	.date-dz-commet {
+		float: right;
+		margin-right: 18px;
+	}
+	
+	.lm_lt {
+		padding-left: 5px
+	}
+	
+	.lm_mt {
+		position: middle;
+		margin-left: 280px;
+	}
+	
+	.lm_rt {
+		float: right;
+		padding-right: 15px
+	}
+	
+	.row {
+		height: 100%;
+	}
+	
+	.row_div {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	
+	.btn-sm,
+	.btn-group-sm>.btn {
+		padding: 2px 10px;
+		font-size: 12px;
+		line-height: 1.5;
+		border-radius: 3px;
+	}
+	
+	.btn-group,
+	.btn-group-vertical {
+		position: fixed;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	
+	.fa-2x {
+		font-size: 1.5em;
+	}
+	
+	.wrapper-content {
+		margin-top: 10px;
+		margin-bottom: 0px;
+		padding-left: 5 px;
+		padding-right: 5 px;
+		z-index: 10;
+	}
+	
+	@-webkit-keyframes fadeIn {
+		0% {
+			opacity: 0;
+			/*初始状态 透明度为0*/
+		}
+		50% {
+			opacity: 0;
+			/*中间状态 透明度为0*/
+		}
+		100% {
+			opacity: 1;
+			/*结尾状态 透明度为1*/
+		}
+	}
+	
+	#box {
+		-webkit-animation-name: fadeIn;
+		/*动画名称*/
+		-webkit-animation-duration: 2s;
+		/*动画持续时间*/
+		-webkit-animation-iteration-count: 1;
+		/*动画次数*/
+		-webkit-animation-delay: 0s;
+		/*延迟时间*/
+	}
+	
+	.span {
+		vertical-align: middle;
+		display: table-cell;
+		height: 50px;
+		font-size: 15px;
+		padding-top: 10px;
+		padding-left: 20px;
+	}
+</style>

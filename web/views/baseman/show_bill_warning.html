@@ -1,0 +1,54 @@
+﻿<div class="form-horizontal" ng-controller="show_bill_warning">
+<div local-storage ng-model="showwarn" class="bill-form">
+		<div class="col-lg-12"style=" height: 500px;width:1100px">
+			<div class="row">
+			    <div class="col-md-12">
+					<fieldset>
+						<legend>应收逾期款</legend>
+						<div class="ibox-content">                         
+							<div ag-gridview sg-options="options_yq" sg-columns="columns_yq" style="width:100%;height:150px;"
+								 class="slick-grid">
+						    </div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<fieldset>
+						<legend>生产定金7天未到提醒</legend>
+						<div class="ibox-content">                         
+							<div ag-gridview sg-options="options_prod"  sg-columns="columns_prod" style="width:100%;height:150px;" class="slick-grid"></div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="col-md-6">
+					<fieldset>
+						<legend>印刷件补充提醒</legend>
+						<div class="ibox-content">                         
+							<div ag-gridview sg-options="options_printed"  sg-columns="columns_printed" style="width:100%;height:150px;" class="slick-grid"></div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<fieldset>
+						<legend>客户来访接待审核提醒</legend>
+						<div class="ibox-content">                         
+							<div ag-gridview sg-options="options_detail"  sg-columns="columns_detail" style="width:100%;height:150px;" class="slick-grid"></div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="col-md-6">
+					<fieldset>
+						<legend>限额预撤销提醒</legend>
+						<div class="ibox-content">                         
+							<div ag-gridview sg-options="options_list"  sg-columns="columns_list" style="width:100%;height:150px;" class="slick-grid"></div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+</div>
+</div>

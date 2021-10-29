@@ -1,0 +1,113 @@
+﻿<div class="bill-form" ng-controller="exchange_rateEdit">
+    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h3>汇率设置</h3>
+                <button ng-click="search()" class="btn btn-toolbar" ng-hide="mainbtn.search" type="button"
+                        ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button ng-click="new()" class="btn btn-toolbar" type="button"><i class="fa fa-file-o"></i>新增</button>
+                <button ng-click="refresh()" class="btn btn-toolbar" type="button"><i class="fa fa-history"></i>刷新
+                </button>
+                <button ng-click="save()" class="btn btn-toolbar" type="button"><i class="fa fa-floppy-o"></i>保存
+                </button>
+                <button ng-click="delete()" class="btn btn-toolbar" type="button"><i class="fa fa-trash"></i>删除</button>
+                <button class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>导出</button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>基本信息</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">货币</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group">
+                                        <input type="text" ng-readonly="data.currItem.stat!=1"
+                                               class="input-sm form-control"
+                                               ng-model="data.currItem.currency_name">
+                                        <a class="input-group-addon" ng-click="selectCurrency()" id="#abc">
+                                            <i class="fa fa-ellipsis-h"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">创建者</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input readonly="readonly"
+                                           class="form-control readonly input-sm" type="text"
+                                           ng-model="data.currItem.creator">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">创建时间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input readonly="readonly"
+                                           class="form-control readonly input-sm" type="text"
+                                           ng-model="data.currItem.create_time">
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">年份</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input bs-datepacker view='decade' format="yyyy"
+                                           ng-model="data.currItem.rate_year" type="number"
+                                           class="form-control input-sm">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">月份</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select chosen-select id="rate_month"
+                                            ng-model="data.currItem.rate_month"
+                                            class="input-sm chosen-select form-control"
+                                            ng-options=" month.id as month.name  for month in months">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">汇率</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control readonly input-sm" type="number"
+                                           ng-model="data.currItem.exch_rate">
+                                </div>
+                                <div class="col-md-2">
+                                    <label><input type="checkbox" ng-false-value="1"
+                                                  ng-true-value="2"
+                                                  ng-model="data.currItem.is_future">是否远期汇率 </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">备注</label>
+                                </div>
+                                <div class="col-md-11">
+											<textarea ng-model="data.currItem.note" rows="3"
+                                                      class="form-control noresize"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

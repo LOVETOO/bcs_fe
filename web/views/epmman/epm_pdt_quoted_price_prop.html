@@ -1,0 +1,87 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-class-id="epm_project"
+                     hc-common-search="commonSearchOfpmEProject"></div>
+                <div hc-input="data.currItem.quoted_person"
+                     hc-required="true"
+                     hc-can-input="true"
+                     hc-label="报价人"
+                     hc-class-id="scpuser"
+                     hc-common-search="commonSearchOfScpuser"></div>
+                <div hc-input="data.currItem.quoted_date"
+                     hc-label="报价日期"
+                     hc-required="true"
+                     hc-type="date"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.trading_company_name"
+                     hc-label="报价单位"
+                     hc-col-count="4"
+                     hc-required="true"
+                     hc-class-id="epm_trading_company"
+                     hc-common-search="commonSearchOfTrading"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.quoted_type"
+                     hc-label="报价类型"
+                     hc-change="whetherQuotedType()"
+                     hc-dict-code="epm.quoted_type"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.tax_included"
+                     hc-label="价格含税"
+                     hc-dict-code="yesno"
+                     hc-readonly="data.currItem.quoted_type == 2"
+                     hc-required="data.currItem.quoted_type != 2"></div>
+                <div hc-input="data.currItem.freight_included"
+                     hc-label="价格含运费"
+                     hc-dict-code="yesno"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.quoted_times"
+                     hc-label="项目报价次数"
+                     hc-readonly="true"
+                     hc-type="number"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.valid_time_limit"
+                     hc-label="报价有效期"
+                     hc-dict-code="epm.quoted.valid_time_limit"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.show_number"
+                     hc-label="不显示数量"
+                     hc-readonly-private="true"
+                     class="oneis"
+                     hc-type="checkbox"
+                     hc-change="displayUntil()"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-col-count="4"
+                     hc-type="textarea"></div>
+            </div>
+        </div>
+        <div hc-box="报价信息" class="other-h"></div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>
+<style>
+    .oneis{
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+</style>
+
+
+

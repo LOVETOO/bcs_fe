@@ -1,0 +1,117 @@
+<!--
+/**
+ * 工程折扣申请
+ * zengjinhua
+ * 2020-3-26
+ */
+-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div class="hc-box  ther-h">
+            <div class="row">
+				<div
+					hc-label="折扣单号"
+					hc-input="data.currItem.discount_apply_code"
+					hc-readonly="true"
+				></div>
+				
+				<div
+					hc-label="申请人"
+					hc-input="data.currItem.creator_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="申请时间"
+					hc-input="data.currItem.createtime"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="审核状态"
+					hc-input="data.currItem.stat"
+                    hc-dict-code="stat"
+					hc-readonly="true"
+				></div>
+            </div>
+
+            <div class="row">
+                <div
+                    hc-label="家装报备单号"
+                    hc-input="data.currItem.project_code"
+                    hc-readonly="true"
+                ></div>
+
+                <div
+                    hc-label="家装公司"
+                    hc-input="data.currItem.project_name"
+                    hc-col-count="4"
+                    hc-readonly="true"
+                ></div>
+
+                <div
+					hc-label="交易公司"
+					hc-input="data.currItem.trading_company_name"
+					hc-readonly="true"
+				></div>
+            </div>
+
+            <div class="row">
+                <div
+					hc-label="进销商编码"
+					hc-input="data.currItem.customer_code"
+                    hc-required="true"
+                    hc-class-id="customer_org"
+					hc-common-search="commonSearch.customer_code"
+				>
+				</div>
+
+                <div
+                    hc-label="进销商名称"
+                    hc-input="data.currItem.customer_name"
+                    hc-col-count="4"
+					hc-readonly="true"
+                ></div>
+                
+				<div
+					hc-label="开票单位"
+					hc-input="data.currItem.billing_unit_name"
+					hc-readonly="true"
+				></div>
+            </div>
+
+            <div class="row">
+                <div
+                    hc-label="所属事业部"
+                    hc-input="data.currItem.division_id"
+                    hc-dict-code="epm.division"
+                    hc-readonly="true"
+                ></div>
+
+                <div
+                    hc-label="订单产品线"
+                    hc-input="data.currItem.order_pdt_line"
+                    hc-dict-code="epm.order_pdt_line"
+                    hc-readonly="true"
+                ></div>
+
+                <div
+                    hc-label="折扣类型"
+                    hc-input="data.currItem.discount_type"
+                    hc-dict-code="epm.discount_type"
+                ></div>
+
+                <div
+                    hc-label="折扣有效期至"
+                    hc-input="data.currItem.discount_valid_date" 
+                    hc-type="date"
+                    hc-date-options="{ startDate: 'today' }"
+                ></div>
+            </div>
+
+        </div>
+        <div hc-box class="flex1 flex-column" style="min-height: 300px;"> 
+            <div hc-grid="gridOptions" class="flex1"></div>
+        </div>
+    </div>
+</div>

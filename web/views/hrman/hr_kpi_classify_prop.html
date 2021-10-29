@@ -1,0 +1,72 @@
+<div hc-obj-prop>
+    <!--基本信息：-->
+    <div id="base" hc-box class="active">
+        <div class="row other-h" >
+            <div hc-input="data.currItem.empkpiclassify_no"
+                 hc-label="绩效分等编码"
+                 hc-readonly="true"></div>
+            <div hc-input="data.currItem.kpicase_name"
+                 hc-label="考核方案名称"
+                 hc-readonly="true"></div>
+            <div hc-input="data.currItem.kpicase_type"
+                 hc-label="方案类别"
+                 hc-dict-code="kpicase_type"
+                 hc-readonly="true"></div>
+            <div hc-input="data.currItem.stat"
+                 hc-label="单据状态"
+                 hc-readonly="true"
+                 hc-dict-code="check_stat"
+                 hc-col-count="2"></div>
+        </div>
+
+        <div class="row other-h" >
+            <div hc-input="data.currItem.kpi_period"
+                 hc-label="考核周期类型"
+                 hc-dict-code="kpi_period"
+                 hc-readonly="true"></div>
+            <div hc-input="data.currItem.cyear"
+                 hc-label="考核年度"
+                 hc-type="year"
+                 hc-readonly="true"></div>
+            <div hc-input="data.currItem.seasonmth"
+                 hc-label="考核期间"
+                 hc-type="year"
+                 ng-show="data.currItem.kpi_period==1"
+                 hc-readonly="true"></div>
+            <div hc-input="data.currItem.seasonmth"
+                 hc-label="考核期间"
+                 hc-type="month"
+                 ng-show="data.currItem.kpi_period==4"
+                 hc-readonly="true"></div>
+            <div hc-input="data.currItem.seasonmth"
+                 hc-label="考核期间"
+                 hc-select-options="assess_time"
+                 ng-show="data.currItem.kpi_period!=1&&data.currItem.kpi_period!=4"
+                 hc-readonly="true"></div>
+            <div hc-input="data.currItem.creator"
+                 hc-label="创建人"
+                 hc-readonly="true"
+                 hc-col-count="2"></div>
+        </div>
+
+        <div class="row other-h" >
+            <div hc-input="data.currItem.scale"
+                 hc-label="分等比例"
+                 hc-class-id="kpi_classifyscale"
+                 hc-common-search="commonSearchOfScale"></div>
+            <div hc-input="data.currItem.note"
+                 hc-label="备注"
+                 hc-readonly="true"
+                 hc-col-count="4"></div>
+            <div hc-input="data.currItem.create_time"
+                 hc-label="创建时间"d
+                 hc-type = "date"
+                 hc-readonly="true"></div>
+        </div>
+
+        <div >
+            <div  hc-grid="gridOptions" hc-auto-height></div>
+        </div>
+
+    </div>
+</div>

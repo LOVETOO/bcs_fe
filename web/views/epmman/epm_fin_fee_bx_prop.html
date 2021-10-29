@@ -1,0 +1,125 @@
+ <!--工程费用报销-属性页-->
+ <!--shenguocheng-->
+ <!--2019-07-06-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.bx_no"
+                     hc-label="费用报销单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.chap_name"
+                     hc-label="报销人"
+                     hc-btn-click="chooseUser()"
+                     hc-required="!data.currItem.fee_apply_id">
+                </div>
+
+                <div hc-input="data.currItem.org_name"
+                     hc-label="报销部门"
+                     hc-btn-click="chooseOrg()"
+                     hc-required="!data.currItem.fee_apply_id">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.fee_apply_no"
+                     hc-label="费用申请单号"
+                     hc-class-id="epm_fin_fee_apply_header"
+                     hc-common-search="commonSearchSettingOfFeeApplyNo"
+                     hc-delete-together="fee_apply_id"
+                     hc-after-delete="afterDeleteApplyNo()">
+                </div>
+
+                <div hc-input="data.currItem.is_finish_bx"
+                     hc-readonly="!data.currItem.fee_apply_id"
+                     hc-label="已报销完毕"
+                     hc-required="data.currItem.fee_apply_id > 0"
+                     hc-dict-code="yesno">
+                </div>
+
+                <div hc-input="data.currItem.balance_type_name"
+                     hc-label="结算方式"
+                     hc-btn-click="chooseBalanceType()">
+                </div>
+
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="工程编码"
+                     hc-class-id="epm_project"
+                     hc-common-search="commonSearchSettingOfProjectName"
+                     hc-required="!(data.currItem.fee_apply_id>0)"
+                     hc-readonly="data.currItem.fee_apply_id>0">
+                </div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="工程名称"
+                     hc-col-count="4"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.receiver"
+                     hc-label="收款人">
+                </div>
+
+                <div hc-input="data.currItem.receive_bank"
+                     hc-label="收款银行"
+                     ng-show="data.currItem.receiver">
+                </div>
+
+                <div hc-input="data.currItem.receive_accno"
+                     hc-label="收款账号"
+                     ng-show="data.currItem.receiver">
+                </div>
+
+                <div hc-input="data.currItem.credence_no"
+                     hc-readonly="true"
+                     hc-label="凭证号">
+                </div>
+
+                <div hc-input="data.currItem.purpose"
+                     hc-label="费用用途"
+                     hc-type="textarea"
+                     ng-show="!data.currItem.receiver"
+                     hc-col-count="4">
+                </div>
+            </div>
+
+            <div class="row" ng-show="data.currItem.receiver">
+                <div hc-input="data.currItem.purpose"
+                     hc-label="费用用途"
+                     hc-col-count="8">
+                </div>
+            </div>
+
+        </div>
+
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+    </div>
+
+    <div id="payList">
+        <div hc-box hc-grid="payListGridOptions" hc-auto-height="grid"></div>
+    </div>
+
+</div>

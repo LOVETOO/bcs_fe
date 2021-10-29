@@ -1,0 +1,117 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="cpcarea_pro">
+    <div class="wrapper wrapper-content" ng-init="init();">
+        <div class="modal-footflex">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active m-l-sm">
+                        <a data-toggle="tab" href="tabs.html#tab-cg">基本信息</a>
+                    </li>
+                    <li><a data-toggle="tab" href="tabs.html#tab-qt">社会经济指标</a></li>
+                </ul>
+                <div class="tab-content ibox-content">
+                    <div id="tab-cg" class="tab-pane active form-inline mline">
+                        <div class="row">
+                            <label class="control-label">地区编码</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                   ng-model="data.currItem.areacode">
+                            <label class="control-label">地区名称</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid non-empty"
+                                   ng-model="data.currItem.areaname">
+                            <label class="control-label">地区类型</label>
+                            <select ng-model="data.currItem.areatype"
+                                    class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading non-empty"
+                                    ng-options="s.id as s.name for s in levs">
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label class="control-label">地区简称</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.shorter_form">
+                            <label class="control-label">地区全称</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.areaname_full">
+                            <label class="control-label">电话区号</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.telzone">
+
+                        </div>
+                        <div class="row">
+                            <label class="control-label">备注</label>
+                            <textarea class="form-control width_ml"  ng-model="data.currItem.note"></textarea>
+                        </div>
+                    </div>
+                    <div id="tab-qt" class="tab-pane form-inline mline" >
+                        <div class="row">
+                            <label class="control-label">面积(平方公里)</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.area">
+                            <label class="control-label">总人口(万人)</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.total_people">
+                            <label class="control-label">GDP(亿元)</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.gdp">
+                        </div>
+                        <div class="row">
+                            <label class="control-label">人均GDP(亿元)</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.people_gdp">
+                            <label class="control-label">城镇人年均收入(元)</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.town_per_revenue">
+                            <label class="control-label">城镇人口(万人)</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.town_people">
+
+                        </div>
+                        <div class="row">
+                            <label class="control-label">农村人年均收入(元)</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.rural_per_revenue">
+                            <label class="control-label">农村人口(万人)</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.rural_people">
+                            <label class="control-label">男性比例</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.male_ratio">
+
+                        </div>
+                        <div class="row">
+                            <label class="control-label">女性比例</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.female_ratio">
+                            <label class="control-label">社会消费品零售总额(亿元)</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.sale_amout">
+                            <label class="control-label">社商比</label>
+                            <input type="text"
+                                   class="form-control ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.currItem.sale_amout_ratio">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="saveData()">保存</button>
+                <button type="button" class="btn btn-white" ng-click="closeWindow()">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

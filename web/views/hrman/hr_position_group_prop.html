@@ -1,0 +1,54 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.position_group_code"
+                 hc-required="true"
+                 hc-label="职群/职种编码">
+            </div>
+
+            <div hc-input="data.currItem.position_group_name"
+                 hc-required="true"
+                 hc-label="职群/职种名称">
+            </div>
+
+            <div hc-input="data.currItem.position_group_level"
+                 hc-label="层级"
+                 hc-readonly="true">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.remark" hc-label="备注" hc-type="textarea"
+                 hc-col-count="6"></div>
+        </div>
+    </div>
+    <!--其他-->
+    <div id="other" hc-box="">
+        <div class="row">
+            <div hc-input="data.currItem.created_by"
+                 hc-readonly="true"
+                 hc-label="创建人">
+            </div>
+            <div hc-input="data.currItem.creation_date"
+                 hc-type="date"
+                 hc-readonly="true"
+                 hc-label="创建时间"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by"
+                 hc-readonly="true"
+                 hc-label="最后修改人">
+            </div>
+            <div hc-input="data.currItem.last_update_date"
+                 hc-type="date"
+                 hc-readonly="true"
+                 hc-label="最后修改时间"></div>
+        </div>
+    </div>
+
+</div>
+
+
+

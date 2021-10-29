@@ -1,0 +1,295 @@
+<!--属性modal-->
+<div>
+
+    <div hc-switch="type">
+        <div hc-switch-when="fdr" class="hc-box grid-other-h">
+            <div class="row">
+                <div hc-label="名称" hc-input="data.fdrname" hc-readonly="true" hc-col-count="4"></div>
+                <div hc-label="id" hc-input="data.fdrid" hc-readonly="true" hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-label="创建用户" hc-input="data.creator" hc-readonly="true" hc-col-count="4"></div>
+                <div hc-label="创建时间" hc-input="data.createtime" hc-readonly="true" hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-label="最后修改用户" hc-input="data.updator" hc-readonly="true" hc-col-count="4"></div>
+                <div hc-label="最后修改时间" hc-input="data.updatetime" hc-readonly="true" hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-label="上级文件夹id" hc-input="data.parentfdrid" hc-readonly="true" hc-col-count="4"></div>
+                <div hc-label="上级文件夹名称" hc-input="data.parentfdrname" hc-readonly="true" hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-label="备注" hc-type="textarea" hc-input="data.note" hc-col-count="8"></div>
+            </div>
+        </div>
+
+        <div hc-switch-when="wftemp" class="hc-box grid-other-h">
+            <div class="row">
+                <div hc-label="流程名称" hc-input="data.wftempname" hc-readonly="true" hc-col-count="4"></div>
+                <div hc-label="流程id" hc-input="data.wftempid" hc-readonly="true" hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-label="创建用户" hc-input="data.creator" hc-readonly="true" hc-col-count="4"></div>
+                <div hc-label="创建时间" hc-input="data.createtime" hc-readonly="true" hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-label="最后修改用户" hc-input="data.updator" hc-readonly="true" hc-col-count="4"></div>
+                <div hc-label="最后修改时间" hc-input="data.updatetime" hc-readonly="true" hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-label="所属文件夹" hc-input="data.parentfdrid" hc-readonly="true" hc-col-count="4"></div>
+                <div hc-label="所属文件夹名称" hc-input="data.parentfdrname" hc-readonly="true" hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-label="备注" hc-type="textarea" hc-input="data.note" hc-col-count="8"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="js/plugins/z-tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<style type="text/css">
+    div#rMenu > ul > li {
+        text-align: left;
+    }
+
+    div#rMenu > ul > li > i {
+        display: inline-block;
+        padding: 0px 10px 0px 5px;
+    }
+
+    .grid_modal .ag-blue {
+        height: auto;
+    }
+
+    .resource-tree {
+        width: 288px;
+        flex-shrink: 0;
+        flex-grow: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        margin-right: 10px;
+        border: 1px #ddd solid;
+        border-radius: 2px;
+    }
+
+    div#rMenu {
+        width: 110px;
+        z-index: 4;
+        position: absolute;
+    / / 使用绝对定位 visibility: hidden;
+        top: 0;
+        background-color: #fff;
+        padding: 1px;
+        visibility: hidden;
+        text-align: center;
+    }
+
+    div#rMenu ul {
+        margin: 0px;
+        padding: 0px;
+        /* border-collapse: separate; */
+        border: 1px solid #dbe0e8;
+        box-shadow: 1px 3px 4px rgba(189, 201, 214, 0.3);
+    }
+
+    div#rMenu ul li {
+        font-size: 11px;
+        line-height: 20px;
+        margin: 0px;
+        padding: 2px;
+        cursor: pointer;
+        list-style: none outside none;
+    / / 取消样式 background-color: #DFDFDF;
+        border-bottom: 1px solid #efefef;
+        padding-left: 3px;
+        color: #222;
+    }
+
+    div#rMenu ul li:hover {
+        background: #eee;
+    }
+
+    div.wrap-height {
+        display: flex;
+    }
+
+    div.wrap-height > div.ng-scope {
+        display: flex;
+        flex-shrink: 1;
+        flex-grow: 1;
+    }
+
+    .wrapper.animated.fadeInRight.ng-scope {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+
+    .resource-root {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        flex-shrink: 1;
+        flex-grow: 1;
+        background-color: #fff;
+        padding: 3px 2px;
+    }
+
+    .resource {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        flex-shrink: 1;
+        flex-grow: 1;
+        background-color: #fff;
+    }
+
+    div.left-nav-div {
+        width: 180px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        display: flex;
+    }
+
+    div.client-content {
+        flex-grow: 1;
+        flex-shrink: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    div.more_news {
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+
+    div.ibox-content.modal-open {
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+    .ztree li {
+        padding: 2px;
+        margin: 0;
+        list-style: none;
+        line-height: 14px;
+        text-align: left;
+        white-space: nowrap;
+        outline: 0;
+    }
+
+    .ztree li {
+        line-height: 20px;
+    }
+
+    .ztree li a {
+        color: #5d5d5d;
+    }
+
+    .ztree li a.curSelectedNode {
+        height: 20px;
+        border-radius: 2px;
+    }
+
+    .round {
+        -moz-border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -khtml-border-radius: 15px;
+        border-radius: 15px;
+    }
+
+    /*.ag-blue .ag-body {
+        background-color: rgba(246, 246, 246, 0);
+    }
+
+    .ag-blue .ag-cell-focus {
+        border: 2px solid rgba(200, 220, 209, 0.05);
+    }
+
+    .ag-blue .ag-cell-no-focus {
+        border-top: 2px solid transparent;
+        border-bottom: 1px dotted rgba(155, 194, 230, 0.02);
+    }
+
+    .ag-blue .ag-row-odd {
+        background-color: rgba(221, 235, 247, 0);
+    }
+
+    .ag-blue .ag-ltr .ag-cell-no-focus {
+        border-right: 1px dotted rgba(155, 194, 230, 0);
+        border-left: 2px solid transparent;
+    }*/
+
+    .buttonfile {
+        line-height: 0;
+        margin: 0;
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        vertical-align: middle;
+        border: 0 none;
+        cursor: pointer;
+        outline: none;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-image: url(./img/zTreeStandard.png);
+    }
+
+    .fa-lg {
+        font-size: 1.222em;
+        line-height: .75em;
+        vertical-align: -15%;
+    }
+
+    /*
+    .resource .ag-blue {
+        width: 100%!important;
+        padding-top: 1px !important;
+        height: 100%!important;
+    }*/
+    #pro {
+        width: 400px;
+        z-index: 4;
+        position: absolute;
+        top: 0;
+        background-color: #f5f5f5;
+        padding: 1px;
+        visibility: hidden;
+        text-align: center;
+        margin-top: 20px;
+        margin-left: -13px;
+    }
+
+    .ag-blue .ag-row-selected {
+        background-color: rgba(90, 215, 241, 0.31);
+    }
+
+    .ag-blue .ag-cell-range-selected-1:not(.ag-cell-focus) {
+        background-color: rgba(120, 120, 120, 0);
+    }
+
+    .ag-blue .ag-cell-range-selected-2:not(.ag-cell-focus) {
+        background-color: rgba(80, 80, 80, 0);
+    }
+
+    .modal-backdrop {
+        z-index: 2000 !important;
+    }
+</style>
+<script>
+    setTimeout(function () {
+        $('#dropzone').height($('#dropzone').parent().height());
+    }, 500);
+
+    window.onresize = function () {
+        setTimeout(function () {
+            $('#dropzone').height($('#dropzone').parent().height());
+        }, 200);
+    }
+</script>

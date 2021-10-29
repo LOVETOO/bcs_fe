@@ -1,0 +1,99 @@
+﻿<div local-storage ng-model="proitem" class="bill-form">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox-title" style=" height: 500;width:1100px">
+                <a style="font-size: small;font-weight: bold;color:black"><i ng-click="show_profit()"
+                                                                             class="fa fa-minus"></i>配件查询条件</a>
+                <div ng-show="profit_stat" class="ibox-content" id="sqlWhereBlock">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini">整机编码</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.item_h_code"
+                                   name="like"
+                                   id="pro_item.item_h_code"
+                                   type="text" class="form-control input-sm">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label-mini">整机名称</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.item_h_name"
+                                   name="like"
+                                   id="pro_item.item_h_name"
+                                   type="text" class="form-control input-sm">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label-mini">分体机编码</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.item_code"
+                                   name="like"
+                                   id="pro_item.item_code"
+                                   type="text" class="form-control input-sm">
+                        </div>
+                        <div class="col-md-3">
+                            <div class="col-md-4">
+                                <label class="form-label-mini">分体机名称</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input ng-model="proitem.item_name"
+                                       name="like"
+                                       id="pro_item.item_name"
+                                       type="text" class="form-control input-sm">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="search()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    查询
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini">配件编码</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input ng-model="proitem.item_p_code"
+                                   name="like"
+                                   id="item_p_code"
+                                   type="text" class="form-control input-sm">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label-mini">配件描述</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input ng-model="proitem.part_desc"
+                                   name="like"
+                                   id="pro_item_part.part_desc"
+                                   type="text" class="form-control input-sm">
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <a style="font-size: small;font-weight: bold;color:black"><i class="fa fa-floppy-o"></i>查询结果</a>
+                    <div class="ibox-content">
+                        <div ag-gridview sg-options="options"   
+                             sg-columns="columns" style="width:100%;height:300px;"
+                             class="slick-grid"></div>
+                    </div>
+
+                    <div class="ibox-content modal-open" page-pagination></div>
+                    <div class="modal-footer">
+                        <!--div class="col-md-2">
+                            <label class="form-label-mini not-null">客户型号</label>
+                        </div-->
+                        <!--div class="col-md-3">
+                            <input ng-model="proitem.cust_item_name" type="text" class="form-control input-sm">
+                        </div-->
+                        <a class="btn btn-sm btn-primary" ng-click="ok()"> 确定</a>
+                        <a class="btn btn-sm btn-info" ng-click="cancel()">取消</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

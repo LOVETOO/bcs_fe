@@ -1,0 +1,79 @@
+<div class="bill-form" ng-controller="wffile_d">
+	<!---->
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="cpcwf-contant">
+			<div class="row">
+				<div class="ibox-content">
+					<h3 class='subtitle'>{{data.currItem.wfname}}</h3>
+					<table class="table table-borderer table-condensed">
+						<thead>
+							<tr>
+								<!--<td style="width: 50px;">序号</td>-->
+								<td>名称</td>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="obj in data.currItem.wfobjofwfs">
+								<!--<td>{{obj.seq}}</td>-->
+								<td>
+									<a target="_blank" ng-click="viewDoc({docname:obj.objname,downloadcode:obj.downloadcode})">{{obj.objname}}({{data.currItem.startor}})</a>
+								</td>
+
+							</tr>
+						</tbody>
+					</table>
+					<!--添加附件-->
+					<button style="height: 25px;padding: 0px 3px 0px 3px;" swf-upload title="添加附件" class="btn btn-sm btn-info" upload-list="data.currItem.objattachs" ng-disabled='can_submit' ng-model="data.currItem.objattachs" filed='#attach-area'>
+                        		<i class="fa lightblue font-size-15  fa-paperclip"></i> 添加附件
+                    		</button>
+					<div ng-show="data.currItem.objattachs.length!=0" class="ibox-content icons-box" style="max-height: 120px;overflow: auto;">
+						<ul id="attach-area">
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" ng-if="data.currItem.stat != 8 && data.currItem.wfid!=0">
+
+				<div class="ibox-content">
+					<div wf-ystep size="large" class="p-xs clear" ng-model="data.currItem.wfid"></div>
+				</div>
+			</div>
+
+			<div class="row" ng-if="data.currItem.stat == 8 || data.currItem.wfid==0">
+				<h2>流程已中断</h2>
+			</div>
+			<!---->
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.cpcwf-contant {
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	
+	.subtitle {
+		margin-right: 0px;
+		border-bottom: 1px #e7eaec solid;
+		padding-bottom: 10px;
+	}
+	
+	.table {
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 0px;
+	}
+	
+	ul,
+	ol {
+		margin-top: 0;
+		margin-bottom: 0px;
+	}
+	
+	.table-hover {
+		width: 80%;
+	}
+</style>

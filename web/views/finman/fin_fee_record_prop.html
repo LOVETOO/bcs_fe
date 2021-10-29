@@ -1,0 +1,295 @@
+<div hc-obj-prop>
+
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.org_code"
+                     hc-label="报销部门"
+                     hc-class-id="dept"
+                     hc-common-search="commonSearchSetting.dept">
+                </div>
+                <div hc-input="data.currItem.org_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.xf_date"
+                     hc-label="消费时间"
+                     hc-type="date">
+                </div>
+
+                <div hc-input="data.currItem.xf_amt"
+                     hc-type="money"
+                     hc-label="金额"
+                     hc-required="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.bud_type_code"
+                     hc-label="预算类别"
+                     hc-class-id="fin_bud_type_header"
+                     hc-common-search="commonSearchSetting.bud_type"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.bud_type_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.xf_addr"
+                     hc-label="消费地点"
+                     hc-btn-click="chooseArea('all')"
+                     hc-col-count="4">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.fee_code"
+                     hc-label="费用项目名称"
+                     hc-class-id="fin_bud_type_line_obj"
+                     hc-common-search="getCommonSearchSetting_fee_object()"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.fee_name"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="消费说明"
+                     hc-placeholder="请填写消费事由及费用说明"
+                     hc-col-count="8">
+                </div>
+            </div>
+
+            <button  ng-show="data.currItem.fee_id > 0 && data.currItem.warm_prompt"
+                     type="button" class="btn btn-link btn-xs tips">
+                报销提示：{{data.currItem.warm_prompt}}
+            </button>
+
+            <!-- 相关补充-住宿相关 -->
+
+            <div hc-box="住宿相关" ng-show='data.currItem.fee_property == 1'>
+                <div class="row">
+                    <div hc-input="data.currItem.xf_platform"
+                        hc-label="预订平台">
+                    </div>
+
+                    <div hc-input="data.currItem.xf_seller"
+                        hc-label="消费酒店">
+                    </div>
+
+                    <div hc-input="data.currItem.room_type"
+                        hc-label="房型">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.check_in_date"
+                        hc-label="入住日期"
+                        hc-type="date">
+                    </div>
+
+                    <div hc-input="data.currItem.check_out_date"
+                        hc-label="离开日期"
+                        hc-type="date">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 相关补充-打车/火车/汽车/高铁相关 -->
+            <div hc-box="打车/火车/汽车/高铁相关" ng-show='data.currItem.fee_property == 2'>
+                <div class="row">
+                    <div hc-input="data.currItem.xf_platform"
+                        hc-label="预订平台">
+                    </div>
+
+                    <div hc-input="data.currItem.start_time"
+                        hc-label="出发时间"
+                        hc-type="date">
+                    </div>
+
+                    <div hc-input="data.currItem.arrival_time"
+                        hc-label="抵达时间"
+                        hc-type="date">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.start_addr"
+                        hc-btn-click="chooseArea('start_area')"
+                        hc-label="出发地">
+                    </div>
+
+                    <div hc-input="data.currItem.arrival_addr"
+                        hc-btn-click="chooseArea('arrival_area')"
+                        hc-label="目的地">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 相关补充-机票相关 -->
+            <div hc-box="机票相关" ng-show='data.currItem.fee_property == 3'>
+                <div class="row">
+                    <div hc-input="data.currItem.xf_platform"
+                            hc-label="预订平台">
+                    </div>
+
+                    <div hc-input="data.currItem.start_time"
+                            hc-label="出发时间"
+                            hc-type="date">
+                    </div>
+
+                    <div hc-input="data.currItem.arrival_time"
+                            hc-label="抵达时间"
+                            hc-type="date">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.start_addr"
+                            hc-btn-click="chooseArea('start_area')"
+                            hc-label="出发地">
+                    </div>
+
+                    <div hc-input="data.currItem.arrival_addr"
+                            hc-btn-click="chooseArea('arrival_area')"
+                            hc-label="目的地">
+                    </div>
+
+                    <div hc-input="data.currItem.flight_number"
+                            hc-label="航班号">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.flight_class"
+                            hc-label="航位级别"
+                            hc-dict-code="flight_class">
+                    </div>
+
+                    <div hc-input="data.currItem.voyage_type"
+                            hc-label="航程类型"
+                            hc-dict-code="voyage_type">
+                    </div>
+
+                    <div hc-input="data.currItem.flight_type"
+                            hc-label="航班类型"
+                            hc-dict-code="flight_type">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 关联或添加的发票 -->
+            <div hc-box="发票" ng-show="data.currItem.fin_fee_record_lines.length > 0">
+
+                <div class="photo_view">
+                    <div class="photo_div" ng-repeat="invoice in data.currItem.fin_fee_record_lines">
+                        <img ng-show="invoice.doc_id > 0"
+                             src="/downloadfile?docid={{invoice.doc_id}}"
+                             id="invoice_img"
+                             title="双击查看大图"
+                             ng-click="viewFullImg(invoice)">
+                        <button class="btn photo_del" ng-click="del_invoice(invoice)" ng-show="invoice.doc_id > 0">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<style>
+    /*照片预览*/
+    /*外层布局*/
+    .photo_view {
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: row;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-flex-direction: row;
+        /*justify-content: flex-start;
+        -webkit-justify-content: flex-start;*/
+        align-content: flex-start;
+        -webkit-align-content: flex-start;
+    }
+    /*容器*/
+    .photo_view .photo_div {
+        position: relative;
+        border: 0px dashed #f5f5f5;
+        height: 110px;
+        width: 125px;
+        margin-top: 15px;
+        margin-right: 15px;
+        color: #8d9092;
+    }
+    /*右上角定位*/
+    .photo_view .cha-no {
+        display: inline-block;
+        width: 70px;
+        height: 20px;
+        position: absolute;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, .5);
+        right: 0;
+        top: 0;
+        text-align: center;
+    }
+    /* photo_div的img标签 */
+    .photo_div img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 3;
+        left: 0px;
+        top: 0px;
+    }
+    /* 右上角垃圾桶按钮 */
+    .photo_div .photo_del{
+        display: none;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 5;
+        color: #828282;
+    }
+    .photo_div:hover .photo_del{
+        display: block;
+    }
+
+    /*右上角文字样式*/
+    .photo_view .cha-x {
+        color: #fff;
+        font-size: 14px;
+        /*line-height: 30px;*/
+    }
+    /*img*/
+    .photo_view .cha-img {
+        height: 119px;
+        width: 100%;
+    }
+    /*文字描述*/
+    .photo_view .cha-p {
+        background-color: rgba(31, 52, 13, 0.19);
+        position: absolute;
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+        bottom: 0;
+        height: 39px;
+    }
+    .photo_view .cha-p select{
+        background-color: rgba(51,45,42,0)!important;/*覆盖禁用样式*/
+        border:none!important;
+        text-align: center;
+        text-align-last: center;
+    }
+</style>

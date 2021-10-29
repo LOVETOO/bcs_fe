@@ -1,0 +1,73 @@
+<div hc-obj-list>
+    <!-- 查询条件面板 -->
+    <hc-obj-list-search-panel>
+        <div class="row">
+            <div
+                    hc-label="项目编码"
+                    hc-input="searchObj.project_code"
+            ></div>
+
+            <div
+                    hc-label="项目名称"
+                    hc-input="searchObj.project_name"
+            ></div>
+
+            <div hc-label="客户编码"
+                 hc-input="searchObj.customer_code"></div>
+
+            <div hc-label="客户名称"
+                 hc-input="searchObj.customer_name"></div>
+
+        </div>
+        <div class="row">
+            <div hc-label="申报日期从"
+                 hc-type="date"
+                 hc-can-delete="true"
+                 hc-input="searchObj.report_time_start"></div>
+
+            <div hc-label="申报日期至"
+                 hc-type="date"
+                 hc-can-delete="true"
+                 hc-input="searchObj.report_time_end"></div>
+
+            <div hc-label="甲方名称"
+                 hc-input="searchObj.party_a_name"></div>
+
+            <div hc-label="乙方名称"
+                 hc-input="searchObj.party_b_name"></div>
+        </div>
+        <div class="row">
+          <div hc-label="本地/异地"
+               hc-can-delete="true"
+               hc-dict-code="epm.is_local"
+               hc-input="searchObj.is_local"></div>
+
+          <div hc-label="报备类型"
+               hc-can-delete="true"
+               hc-dict-code="epm.report_type"
+               hc-input="searchObj.report_type"></div>
+
+          <div hc-label="工程类型"
+               hc-can-delete="true"
+               hc-dict-code="epm.project_source"
+               hc-input="searchObj.project_source"></div>
+
+          <div hc-label="有效状态"
+               hc-dict-code="valid"
+               hc-can-delete="true"
+               hc-input="searchObj.project_valid"></div>
+            
+        </div>
+        <div class="row">
+          <div hc-label="省"
+               hc-input="searchObj.province_name"></div>
+          <div hc-label="市"
+               hc-input="searchObj.city_name"></div>
+          <div hc-label="区"
+               hc-input="searchObj.area_name"></div>
+          <div hc-label="详细地址"
+               hc-input="searchObj.address"></div>
+        </div>
+    </hc-obj-list-search-panel>
+</div>
+

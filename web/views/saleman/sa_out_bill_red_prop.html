@@ -1,0 +1,78 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.invbillno"
+                     hc-label="出库红冲单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.date_invbill"
+                     hc-label="单据日期"
+                     hc-type="date"
+                     hc-required="true"
+                     hc-change="dateChangeEvent()">
+                </div>
+                <div hc-input="data.currItem.parent_billno"
+                     hc-label="销售出库单号"
+                     hc-required="true"
+                     hc-btn-click="chooseFeeBud()">
+                </div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-readonly="true"
+                     hc-dict-code="stat">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.customer_name"
+                     hc-label="客户"
+                     hc-col-count="4"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.warehouse_name"
+                     hc-label="仓库"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+
+                <div hc-input="data.currItem.dept_name"
+                     hc-label="部门"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.employee_name"
+                     hc-label="业务员"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.crm_entid"
+                     hc-label="品类"
+                     hc-dict-code="crm_entid"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="8">
+                </div>
+            </div>
+        </div>
+
+        <div hc-box hc-grid="gridOptions" hc-auto-height></div>
+            
+    </div>
+    
+</div>

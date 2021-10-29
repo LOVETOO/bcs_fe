@@ -1,0 +1,147 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box="" class="grid-other-h">
+            <div class="row">
+                <div hc-input="data.currItem.ordinal_no"
+                     hc-label="流水号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.vendor_code"
+                     hc-label="供应商"
+                     hc-readonly="!data.canEdit"
+                     hc-class-id="vendor_org"
+                     hc-common-search="commonSearchSetting.vendor_org"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.vendor_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                        hc-label="单据状态"
+                        hc-dict-code="stat"
+                        hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+               <div hc-input="data.currItem.date_fund"
+                    hc-label="记账日期"
+                    hc-type="date"
+                    hc-readonly="!data.canEdit"
+                    hc-required="true">
+               </div>
+
+                <div hc-input="data.currItem.dept_code"
+                     hc-label="部门"
+                     hc-readonly="!data.canEdit"
+                     hc-class-id="dept"
+                     hc-common-search="commonSearchSetting.dept">
+                </div>
+                <div hc-input="data.currItem.dept_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.created_by"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+               <div hc-input="data.currItem.balance_type_name"
+                    hc-label="结算方式"
+                    hc-readonly="!data.canEdit"
+                    hc-delete-together="base_balance_type_id"
+                    hc-class-id="base_balance_type"
+                    hc-common-search="commonSearchSetting.balance_type"
+                    hc-required="true">
+               </div>
+
+               <div hc-input="data.currItem.fund_account_code"
+                    hc-label="资金账号"
+                    hc-delete-together="fd_fund_account_id"
+                    hc-readonly="!data.canEdit || data.currItem.settlement_type == 9"
+                    hc-class-id="fd_fund_account"
+                    hc-required="data.currItem.settlement_type == 1 || data.currItem.settlement_type == 2 || data.currItem.settlement_type == 2"
+                    hc-common-search="getCommonSearchSetting_fund_account()">
+               </div>
+               <div hc-input="data.currItem.fund_account_name"
+                    hc-readonly="true">
+               </div>
+
+                <div hc-input="data.currItem.creation_date"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.amount_credit"
+                     hc-label="付款金额"
+                     hc-readonly="!data.canEdit"
+                     hc-type="money"
+                     hc-required="true">
+                </div>
+
+               <div hc-input="data.currItem.bill_no"
+                    hc-readonly="!data.canEdit"
+                    hc-label="票据号">
+               </div>
+
+               <div hc-input="data.currItem.base_ac_object_name"
+                    hc-label="往来对象"
+                    hc-readonly="!data.canEdit"
+                    hc-class-id="base_ac_object"
+                    hc-common-search="commonSearchSetting.ac_object">
+               </div>
+
+               <div hc-input="data.currItem.credence_no"
+                    hc-label="凭证号"
+                    hc-readonly="true">
+               </div>
+            </div>
+
+            <div class="row">
+               <!--<div hc-input="data.currItem.crm_entid"-->
+                    <!--hc-label="品类"-->
+                    <!--hc-type="checkbox"-->
+                    <!--hc-readonly="!data.canEdit"-->
+                    <!--hc-dict-code="crm_entid">-->
+               <!--</div>-->
+
+               <div hc-input="data.currItem.syscreate_type"
+                    hc-label="来源单据类型"
+                    hc-type="checkbox"
+                    hc-dict-code="syscreate_type"
+                    hc-readonly="true">
+               </div>
+
+               <div hc-input="data.currItem.io_type_name"
+                    hc-label="收支类型"
+                    hc-delete-together="fd_io_type_id"
+                    hc-readonly="!data.canEdit"
+                    hc-class-id="fd_io_type"
+                    hc-common-search="commonSearchSetting.io_type">
+               </div>
+
+                <div hc-input="data.currItem.bx_no"
+                     hc-label="费用报销单号"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-readonly="!data.canEdit"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="8">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,185 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.norm_id"
+                 hc-label="标准Id"
+                 hc-readonly="true"></div>
+
+            <div hc-input="data.currItem.norm_name"
+                 hc-label="标准名称"
+                 hc-required="true"></div>
+
+            <div hc-input="data.currItem.stat"
+                 hc-label="单据状态"
+                 hc-dict-code="stat"
+                 hc-readonly="true"></div>
+
+            <!--
+                        <div hc-input="data.currItem.creator"
+                             hc-label="制单人"
+                             hc-readonly="true"></div>
+            -->
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.repair_way"
+                 hc-label="服务方式"
+                 hc-dict-code="service_way"></div>
+
+            <div hc-input="data.currItem.fix_step_name"
+                 hc-label="维修类型"
+                 hc-class-id="css_fix_step"
+                 hc-common-search="commonSearchSettingOfFixStep"></div>
+
+            <div hc-input="data.currItem.entname"
+                 hc-label="经营单位"
+                 hc-readonly="true"></div><!--默认当前登入用户机构-->
+
+            <!--
+                        <div hc-input="data.currItem.create_time"
+                             hc-label="制单时间"
+                             hc-type="date"
+                             hc-readonly="true"></div>
+            -->
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.start_date"
+                 hc-label="开始日期"
+                 hc-type="date"
+                 hc-required="true"></div>
+
+            <div hc-input="data.currItem.end_date"
+                 hc-label="结束日期"
+                 hc-type="date"
+                 hc-required="true"></div>
+
+            <div hc-input="data.currItem.distance_start"
+                 hc-label="公里数开始"></div>
+
+            <div hc-input="data.currItem.distance_end"
+                 hc-label="公里数结束"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.way_fee"
+                 hc-label="上门费"
+                 hc-type="money"
+                 hc-change="calculateNormAmt()"></div>
+
+            <div hc-input="data.currItem.info_fee"
+                 hc-label="信息费"
+                 hc-type="money"
+                 hc-change="calculateNormAmt()"></div>
+
+            <div hc-input="data.currItem.fix_fee"
+                 hc-label="维修费"
+                 hc-type="money"
+                 hc-change="calculateNormAmt()"></div>
+
+            <div hc-input="data.currItem.norm_amt"
+                 hc-label="总金额"
+                 hc-type="money"
+                 hc-placeholder="上门费+信息费+维修费"
+                 hc-readonly="true"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.is_perdistance"
+                 hc-label="是否按每公里计算"
+                 hc-type="checkbox"></div>
+
+            <div hc-input="data.currItem.perdistance_fee"
+                 hc-label="每公里上门费"
+                 hc-type="money"></div>
+
+            <div hc-input="data.currItem.perdistance_basefee"
+                 hc-label="基础上门费"
+                 hc-type="money"></div>
+        </div>
+
+        <div class="row">
+            <!--产品大类、产品小类、产品系列，对应“产品分类”中的大类、中类、小类-->
+            <div hc-input="data.currItem.item_type_no"
+                 hc-label="产品大类"
+                 hc-class-id="item_class"
+                 hc-common-search="commonSearchSettingOfItemClass.big"
+                 hc-required="true"
+                 hc-delete-together="item_type_id item_type_name
+                 smallc_id smallc_code smallc_name
+                 series_id series_code series_name
+                 item_id item_code item_name"></div>
+
+            <div hc-input="data.currItem.item_type_name"
+                 hc-readonly="true"></div>
+
+            <div hc-input="data.currItem.smallc_code"
+                 hc-label="产品小类"
+                 hc-class-id="item_class"
+                 hc-common-search="commonSearchSettingOfItemClass.middle"
+                 hc-delete-together="smallc_id smallc_name
+                 series_id series_code series_name
+                 item_id item_code item_name"></div>
+
+            <div hc-input="data.currItem.smallc_name"
+                 hc-readonly="true"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.series_code"
+                 hc-label="产品系列"
+                 hc-class-id="item_class"
+                 hc-common-search="commonSearchSettingOfItemClass.small"
+                 hc-delete-together="series_id series_name
+                  item_id item_code item_name"></div>
+
+            <div hc-input="data.currItem.series_name"
+                 hc-readonly="true"></div>
+
+            <div hc-input="data.currItem.item_code"
+                 hc-label="产品"
+                 hc-class-id="item_org"
+                 hc-common-search="commonSearchSettingOfItemOrg"
+                 hc-delete-together="item_id item_name"></div>
+
+            <div hc-input="data.currItem.item_name"
+                 hc-readonly="true"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.note"
+                 hc-label="备注"
+                 hc-col-count="8"></div>
+        </div>
+    </div>
+
+    <!--其他-->
+    <div id="other" hc-box="">
+        <div class="row">
+            <div hc-input="data.currItem.creator"
+                 hc-readonly="true"
+                 hc-label="创建人">
+            </div>
+            <div hc-input="data.currItem.create_time"
+                 hc-type="date"
+                 hc-readonly="true"
+                 hc-label="创建时间"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.updator"
+                 hc-readonly="true"
+                 hc-label="最后修改人">
+            </div>
+            <div hc-input="data.currItem.update_time"
+                 hc-type="date"
+                 hc-readonly="true"
+                 hc-label="最后修改时间"></div>
+        </div>
+    </div>
+
+</div>
+
+
+

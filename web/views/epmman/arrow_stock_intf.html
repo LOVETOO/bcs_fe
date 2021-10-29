@@ -1,0 +1,40 @@
+<div hc-diy-page>
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.item_code"
+                 hc-label="产品编码"
+                 hc-can-input="true"
+                 hc-class-id="item_org"
+                 hc-common-search="commonSearchItem">
+            </div>
+            <div hc-input="data.currItem.item_name"
+                 hc-label="产品名称"
+                 hc-col-count="4">
+            </div>
+            <div hc-input="data.currItem.item_model"
+                 hc-label="产品型号">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.entorgid"
+                 hc-label="产品线"
+                 hc-dict-code="entorgid">
+            </div>
+            <div hc-input="data.currItem.mftr_base_name"
+                 hc-label="生产基地"
+                 hc-class-id="scporg"
+                 hc-common-search="commonSearchScporg">
+            </div>
+            <div hc-input="data.currItem.specs"
+                 hc-label="产品规格">
+            </div>
+            <div hc-input="data.currItem.item_class3_name"
+                 hc-label="产品小类">
+            </div>
+        </div>
+    </div>
+    <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+</div>
+
+
+

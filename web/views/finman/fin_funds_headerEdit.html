@@ -1,0 +1,673 @@
+<div class="bill-form" ng-controller="fin_funds_headerEdit">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <div style="float: left;margin-top: 5px;font-size: 18px;" ng-hide="!(s_flag==1)">
+                TT到款录入
+            </div>
+            <div style="float: left;margin-top: 5px;font-size: 18px;" ng-hide="!(s_flag==2)">
+                TT到款客户认领
+            </div>
+            <button ng-click="search()" class="btn btn-toolbar" ng-hide="mainbtn.search" type="button">
+                <i class="fa fa-search"></i>查询
+            </button>
+            <button ng-click="new()" class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button"
+                    ng-hide="s_flag==2 || data.currItem.confirm_stat==2">
+                <i class="fa fa-file-o"></i>新增
+            </button>
+            <button ng-click="save($event)" class="btn btn-toolbar" type="button" ng-disabled="mainbtn.add"  ng-hide="data.currItem.confirm_stat==2 && s_flag==1">
+                <i class="fa fa-floppy-o"></i>保存
+            </button>
+            <button ng-click="refresh()" class="btn btn-toolbar" type="button">
+                <i class="fa fa-history"></i>刷新
+            </button>
+            <button ng-click="delete()" class="btn btn-toolbar" type="button"
+                    ng-hide="!(data.currItem.stat==1)">
+                <i class="fa fa-trash"></i>删除
+            </button>
+            <button ng-click="wfstart()" class="btn btn-toolbar" type="button" ng-hide="s_flag==1">
+                <i class="fa fa-check-square-o">提交</i></button>
+            <button ng-click="confirm()" class="btn btn-toolbar" type="button" ng-hide="!(s_flag==1)||data.currItem.confirm_stat==2">
+                <i class="fa fa-check-square-o">确认</i></button>
+            <button ng-click="closefrm()" class="btn btn-toolbar" type="button">
+                <i class="fa fa-times"></i>关闭
+            </button>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>基本信息</h5>
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content icons-box">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">到款单号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder="" ng-readonly="true"
+                                       class="input-sm form-control"
+                                       ng-model="data.currItem.funds_no">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">制单时间</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input bs-datepacker ng-readonly="true"
+                                       ng-model="data.currItem.create_time" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">制单人</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder="" ng-readonly="true"
+                                       class="input-sm form-control"
+                                       ng-model="data.currItem.creator">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">单据状态</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select ng-disabled="true" readonly ng-model="data.currItem.stat"
+                                        class="input-sm chosen-select form-control"
+                                        ng-options="s.dictvalue as s.dictname for s in stats">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">资金系统单号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder=""
+                                       ng-readonly="s_flag==2 || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                       name="other_no" id="other_no"
+                                       class="input-sm form-control"
+                                       ng-model="data.currItem.other_no">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">到款日期</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder="" bs-datepacker
+                                       ng-readonly="s_flag==2 || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                       data-rule-required="true"
+                                       data-msg-required="到款日期不能空"
+                                       name="funds_date"
+                                       id="funds_date"
+                                       class="input-sm form-control"
+                                       ng-model="data.currItem.funds_date">
+
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">到款类型</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select id="tt_type" name="tt_type" type="number"
+                                        ng-disabled="!(data.currItem.stat==1) || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        ng-readonly="s_flag==2 || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        ng-model="data.currItem.tt_type" ng-change="ttchange()"
+                                        data-rule-required="true" data-msg-required="到款类型不能为空"
+                                        ng-options="type.dictvalue as type.dictname for type in tt_types"
+                                        class="form-control chosen-select input-sm ng-pristine ng-untouched ng-valid localytics-chosen">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <!--<div class="col-md-1" ng-hide="true">
+                                <label class="form-label-mini not-null">到款类型</label>
+                            </div>
+                            <div class="col-md-2" ng-hide="true">
+                                <select chosen-select id="funds_type"  name="funds_type" type="number"
+                                        ng-model="data.currItem.funds_type"
+                                        data-rule-required="true" data-msg-required="到款类型不能为空"
+                                        ng-options="type.dictvalue as type.dictname for type in pay_types"
+                                        class="form-control chosen-select input-sm">
+                                    <option value=""></option>
+                                </select>
+                            </div>-->
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">回款组织</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select
+                                        ng-disabled="!(data.currItem.stat==1) || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        ng-readonly="s_flag==2 || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        data-rule-required="true" data-msg-required="回款组织不能为空"
+                                        ng-change="HKchange()"
+                                        ng-options="type.dictvalue as type.dictname for type in return_ent_types"
+                                        ng-model="data.currItem.return_ent_type" type="text"
+                                        class="form-control chosen-select input-sm">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">币种</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select
+                                        ng-disabled="!(data.currItem.stat==1) || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        ng-readonly="s_flag==2 || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        data-rule-required="true"
+                                        data-msg-required="币种不能空"
+                                        ng-model="data.currItem.currency_code" type="text"
+                                        ng-options="type.currency_code as type.currency_name for type in base_currencys"
+                                        class="form-control chosen-select input-sm">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">实收金额</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input name="amt" ng-readonly="s_flag==2||((data.currItem.confirm_stat==2 && s_flag==1) && s_flag==1)"
+                                       data-msg-required="实收金额不能为空"
+                                       data-rule-required="true"
+                                       ng-change="lc_interestChange()"
+                                       ng-model="data.currItem.amt" type="number"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">扣费</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-model="data.currItem.amt_deduct" type="number"
+                                       ng-readonly="s_flag==2|| (data.currItem.confirm_stat==2 && s_flag==1)"
+                                       ng-change="lc_interestChange()" class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">付款总额</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-readonly="true" ng-change="amtChangeAmt()"
+                                       ng-model="data.currItem.fact_amt" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="col-md-6">
+                                    <label class="form-label-mini">原币种首次实收金额</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input ng-readonly="true" ng-change="lc_interestChange()"
+                                           ng-model="data.currItem.f_amt" type="text"
+                                           class="form-control input-sm">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="col-md-6">
+                                    <label class="form-label-mini">原币种首次扣费</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input ng-readonly="true" ng-change="lc_interestChange()"
+                                           ng-model="data.currItem.f_amt_deduct" type="text"
+                                           class="form-control input-sm">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="col-md-6">
+                                    <label class="form-label-mini">原币种首次付款总额</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input ng-readonly="true" ng-change="lc_interestChange()"
+                                           ng-model="data.currItem.f_fact_amt" type="text"
+                                           class="form-control input-sm">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="col-md-6">
+                                    <label class="form-label-mini">是否客户约定汇率</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select chosen-select
+                                            ng-readonly="!(data.currItem.stat==1)|| (data.currItem.confirm_stat==2 && s_flag==1)"
+                                            ng-disabled="!(data.currItem.stat==1)|| (data.currItem.confirm_stat==2 && s_flag==1)"
+                                            ng-options="type.id as type.name for type in trueorfalsetests"
+                                            ng-model="data.currItem.is_yd" type="number"
+                                            class="form-control chosen-select input-sm">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">转换币种</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select
+                                        ng-disabled="!(data.currItem.stat==1) || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        ng-readonly="s_flag==2 || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        ng-model="data.currItem.trans_currency_id" type="text"
+                                        ng-options="type.id as type.name for type in trans_currencys"
+                                        class="form-control chosen-select input-sm">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-1">
+                                <label class="form-label-mini">转换币种金额</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-model="data.currItem.trans_currency_amt" type="text"
+                                       ng-readonly="s_flag==2||(data.currItem.confirm_stat==2 && s_flag==1)"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">转换币种扣费</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-model="data.currItem.trans_amt" type="text"
+                                       ng-readonly="data.currItem.stat!=1 || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">约定汇率</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input  ng-model="data.currItem.yd_rate" type="text"
+                                        ng-readonly="!(data.currItem.stat==1)||(data.currItem.confirm_stat==2 && s_flag==1)"
+                                        class="form-control input-sm">
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">会计期间</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input ng-readonly="true" name="dname" id="dname"
+                                           ng-model="data.currItem.dname" type="text"
+                                           data-rule-required="true"
+                                           data-msg-required="会计期间不能为空"
+                                           class="form-control input-sm">
+                                    <a class="input-group-addon" ng-click="fin_bud_period_header()">
+                                        <li class="fa fa-ellipsis-h"></li>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">汇款人</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input id="hk_man" ng-readonly="s_flag==2 ||(data.currItem.confirm_stat==2 && s_flag==1)"
+                                       data-rule-required="true"
+                                       data-msg-required="汇款人不能为空"
+                                       name="hk_man"
+                                       ng-model="data.currItem.hk_man" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">汇出国家</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input ng-readonly="true"
+                                           ng-model="data.currItem.areaname" type="text"
+                                           class="form-control input-sm">
+                                    <a class="input-group-addon" ng-click="cpcarea()">
+                                        <li class="fa fa-ellipsis-h"></li>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="col-md-6">
+                                    <label class="form-label-mini not-null">是否引资金系统</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select chosen-select type="number"
+                                            ng-disabled="s_flag==2 || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                            ng-readonly="s_flag==2 || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                            data-msg-required="是否引资金系统不能为空" data-rule-required="true"
+                                            ng-model="data.currItem.is_into_amt"
+                                            ng-options="type.id as type.name for type in trueorfalsetests"
+                                            class="form-control chosen-select input-sm">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--div class="col-md-1">
+                                <label class="form-label-mini not-null">订单类型</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select    id="sale_order_type" name="sale_order_type"
+                                        ng-disabled="!(data.currItem.stat==1) || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        ng-readonly="data.currItem.confirm_stat==2 && s_flag==1"
+                                        data-rule-required="true" data-msg-required="订单类型不能为空"
+                                        ng-options="type.dictvalue as type.dictname for type in sale_order_types"
+                                        ng-model="data.currItem.sale_order_type" type="text"
+                                        class="form-control chosen-select input-sm">
+                                    <option value=""></option>
+                                </select>
+                            </div-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">银行</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input data-rule-required="true"
+                                           data-msg-required="银行不能为空"
+                                           ng-readonly="true"
+                                           name="bank_code" id="bank_code"
+                                           ng-model="data.currItem.bank_code" type="text"
+                                           class="form-control input-sm">
+                                    <a class="input-group-addon" ng-click="bank()">
+                                        <li class="fa fa-ellipsis-h"></li>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input ng-readonly="true"
+                                       ng-model="data.currItem.bank_name" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">银行简称</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-readonly="true"
+                                       ng-model="data.currItem.bank_jc" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">银行账号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-readonly="true" ng-model="data.currItem.account_no" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">融资类型</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select
+                                        ng-disabled="!(data.currItem.stat==1) || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        ng-readonly="s_flag==2 || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        ng-options="type.dictvalue as type.dictname for type in rongzi_types"
+                                        ng-model="data.currItem.rongzi_type" type="number"
+                                        class="form-control chosen-select input-sm">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">融资到期日</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input bs-datepacker ng-model="data.currItem.rongzi_dqdate" type="text"
+                                       ng-readonly="s_flag==2||(data.currItem.confirm_stat==2 && s_flag==1)"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">银行利息</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-model="data.currItem.lc_interest" type="text"
+                                       ng-readonly="s_flag==2||(data.currItem.confirm_stat==2 && s_flag==1)"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">银行利率</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-model="data.currItem.bank_ll" type="text"
+                                       ng-readonly="!(data.currItem.stat==1)||(data.currItem.confirm_stat==2 && s_flag==1)"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">信用证号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-model="data.currItem.tt_lc_no" type="text"
+                                       ng-readonly="!(data.currItem.stat==1) || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-3">
+                                <div class="col-md-6">
+                                    <label class="form-label-mini">传资金系统发票号</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input ng-model="data.currItem.tt_invoice_no" type="text"
+                                           ng-readonly="!(data.currItem.stat==1) || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                           class="form-control input-sm">
+                                </div>
+                            </div>
+                            <div class="col-md-1" ng-hide="data.currItem.tt_type!=3 && data.currItem.tt_type!=6">
+                                <label class="form-label-mini">合同号</label>
+                            </div>
+                            <div class="col-md-2" ng-hide="data.currItem.tt_type!=3 && data.currItem.tt_type!=6">
+                                <input ng-model="data.currItem.hth" type="text"
+                                       ng-readonly="(data.currItem.confirm_stat==2 && s_flag==1)"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1" ng-hide="data.currItem.tt_type!=3 && data.currItem.tt_type!=6">
+                                <label class="form-label-mini">发票号</label>
+                            </div>
+                            <div class="col-md-2" ng-hide="data.currItem.tt_type!=3 && data.currItem.tt_type!=6">
+                                <div class="input-group">
+                                    <input ng-model="data.currItem.fact_invoice_no"
+                                           ng-readonly="true"
+                                           type="text" class="form-control input-sm">
+                                    <a class="input-group-addon" ng-click="Invoice()">
+                                        <li class="fa fa-ellipsis-h"></li>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">SAP凭证号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input id="sap_no"  name="sap_no" ng-readonly="true"
+                                       ng-model="data.currItem.sap_no" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">SAP科目</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input id="sap_account" name="sap_account"
+                                       ng-readonly="true"
+                                       data-rule-required="true" data-msg-required="SAP科目不能为空"
+                                       ng-model="data.currItem.sap_account" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">引SAP时间</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input bs-datepacker ng-readonly="true"
+                                       ng-readonly="true"
+                                       ng-model="data.currItem.sap_date" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">需要引SAP</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select
+                                        ng-disabled="!(data.currItem.stat==1) || (data.currItem.confirm_stat==2 && s_flag==1)"
+                                        ng-readonly="data.currItem.confirm_stat==2 && s_flag==1"
+                                        ng-model="data.currItem.is_yin" type="text"
+                                        ng-options="type.id as type.name for type in trueorfalsetests"
+                                        class="form-control chosen-select input-sm">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">销售部门</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input ng-model="data.currItem.org_code"
+                                           type="text" ng-readonly="true"
+                                           class="form-control input-sm">
+                                    <a class="input-group-addon" ng-click="cpcorg()">
+                                        <li class="fa fa-ellipsis-h"></li>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input ng-model="data.currItem.org_name"
+                                       type="text"
+                                       ng-readonly="true"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">客户</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input ng-model="data.currItem.cust_code" type="text"
+                                           ng-readonly="true"
+                                           class="form-control input-sm">
+                                    <a class="input-group-addon" ng-click="customer()">
+                                        <li class="fa fa-ellipsis-h"></li>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input ng-readonly="true"
+                                       ng-model="data.currItem.cust_name" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">备注</label>
+                            </div>
+                            <div class="col-md-5">
+										<textarea ng-model="data.currItem.note" rows="3"
+                                                  ng-readonly="(data.currItem.stat!=1)||(data.currItem.confirm_stat==2 && s_flag==1)"
+                                                  class="form-control noresize"> </textarea>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">确认人</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-readonly="true"
+                                       ng-model="data.currItem.confirm_man" type="text"
+                                       ng-change="lc_interestChange()"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">确认时间</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input bs-datepacker ng-readonly="true"
+                                       ng-readonly="true"
+                                       ng-model="data.currItem.confirm_date" type="text"
+                                       class="form-control input-sm">
+                            </div>
+                            <div class="col-md-6"></div>
+                            <div class="col-md-1">
+                                <label style="align:left">
+                                    <input type="checkbox" ng-model="data.currItem.confirm_stat"
+                                           ng-true-value="2" ng-false-value="1"
+                                           ng-disabled="true" ng-readonly="true"
+                                           class="ng-valid ng-dirty ng-valid-parse ng-touched ng-pristine ng-untouched">
+                                    已确认
+                                </label>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="col-md-3">
+                                    <button class="btn btn-sm btn-info dropdown-toggle ng-binding" ng-click="Update()">
+                                        生成分配单
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-sm btn-info dropdown-toggle ng-binding" ng-click="Import()">
+                                        导入资金系统到款单
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top:5px" ng-hide="!(s_flag==1)">
+                            <ul class="btn-group" id="tabs2" class="tri-nav-tabs"  ng-hide=!(s_flag==1)">
+                                <button type="button" class="btn btn-xs btn-white active" data-target="#tab1"
+                                        data-toggle="tab" class="tab-nav">SAP凭证明细
+                                </button>
+                            </ul>
+                            <div class="tab-content-button"  ng-hide=!(s_flag==1)">
+                                <div id="tab1" class="tab-pane active">
+                                    <div ag-gridview sg-options="options_11"
+                                         sg-columns="columns_11" style="width:100%;height:167px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-hide="!(s_flag==2)">
+                            <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <a class="pull-right" style="padding-right: 10px;line-height: 25px;"><i
+                                            class="fa fa-list"></i></a>
+                                </div>
+                                <div class="col-md-8" style=" padding-right: 0px; ">
+                                    产品部信息
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-hide="!(s_flag==2)">
+                            <div class="col-md-12">
+                                <div ag-gridview sg-options="options_15"
+                                     sg-columns="columns_15" style="width:100%;height:167px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>附件</h5>
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content icons-box">
+                    <button swf-upload title="swfupload-control" class="btn btn-toolbar"
+                            upload-list="data.currItem.objattachs" ng-model="data.currItem.objattachs"
+                            filed='#attach-area'>
+                        <i class="fa lightblue font-size-15  fa-paperclip"></i> 添加附件
+                    </button>
+                    <ul id="attach-area">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-hide="data.currItem.stat== 1||s_flag==1">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>审批流程</h5>
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content icons-box">
+                    <div wf-ystep size="large" class="p-xs clear"
+                         ng-model="data.currItem.wfid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,24 @@
+<div class="ibox flex1 flex-column" hc-init="doInit()">
+
+	<div class="ibox-title other-h" ng-hide="hideToolButtons">
+		<div class="ibox-tools pull-right">
+			<div
+				hc-buttons="toolButtons"
+				hc-buttons-pull-right
+			></div>
+		</div>
+	</div>
+
+	<div ng-form="form" class="flex1 flex-column">
+		<div hc-transclude></div>
+	</div>
+
+	<div class="modal-footer other-h" ng-show="footerLeftButtons || footerRightButtons">
+
+		<div hc-buttons="footerLeftButtons" hc-buttons-pull-left></div>
+
+		<div hc-buttons="footerRightButtons" hc-buttons-pull-right></div>
+
+	</div>
+
+</div>

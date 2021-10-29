@@ -1,0 +1,269 @@
+<div id="client-workarea" style="padding-top: 1px;" class="wrapper wrapper-content animated fadeInRight" ng-controller="ctrl_desktop">
+    <div class="wrapper sidebar-content1 wrapper-content col-lg-12">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">当天</span>
+                        <h5>销售与回款</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2 class="no-margins" style="font-weight: 300; margin-bottom: 10px;">{{data.today_sale_amt|number:2}}</h2>
+                                <div class="font-bold text-danger" ng-if="data.today_sale_amt_rate>0"><small>{{data.today_sale_amt_rate|number:2}}% 销售额(万元)<i class="fa fa-level-up"></i></small></div>
+                                <div class="font-bold text-info" ng-if="data.today_sale_amt_rate<0"><small>{{data.today_sale_amt_rate|number:2}}% 销售额(万元)<i class="fa fa-level-down"></i></small></div>
+                                <div class="font-bold" ng-if="data.today_sale_amt_rate==0 || data.today_sale_amt_rate == undefined"><small>{{data.today_sale_amt_rate|number:2}} 销售额(万元)</small></div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h2 class="no-margins" style="font-weight: 300; margin-bottom: 10px;">{{data.today_return_amt|number:2}}</h2>
+                                <div class="font-bold text-danger" ng-if="data.today_return_amt_rate>0"><small>{{data.today_return_amt_rate|number:2}}% 回款(万元)<i class="fa fa-level-up"></i></small></div>
+                                <div class="font-bold text-info" ng-if="data.today_return_amt_rate<0"><small>{{data.today_return_amt_rate|number:2}}% 回款(万元)<i class="fa fa-level-down"></i></small></div>
+                                <div class="font-bold" ng-if="data.today_return_amt_rate==0 || data.today_return_amt_rate == undefined"><small>{{data.today_return_amt_rate|number:2}} 回款(万元)</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-info pull-right">本月累计</span>
+                        <h5>销售与回款</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2 class="no-margins" style="font-weight: 300; margin-bottom: 10px;">{{data.month_sale_amt|number:2}}</h2>
+                                <div class="font-bold text-danger" ng-if="data.month_sale_amt_rate>0"><small>{{data.month_sale_amt_rate|number:2}}% 销售额(万元)<i class="fa fa-level-up"></i></small></div>
+                                <div class="font-bold text-info" ng-if="data.month_sale_amt_rate<0"><small>{{data.month_sale_amt_rate|number:2}}% 销售额(万元)<i class="fa fa-level-down"></i></small></div>
+                                <div class="font-bold" ng-if="data.month_sale_amt_rate==0 || data.month_sale_amt_rate == undefined"><small>{{data.month_sale_amt_rate|number:2}}销售额(万元)</small></div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h2 class="no-margins" style="font-weight: 300; margin-bottom: 10px;">{{data.month_return_amt|number:2}}</h2>
+                                <div class="font-bold text-danger" ng-if="data.month_return_amt_rate>0"><small>{{data.month_return_amt_rate|number:2}}% 回款(万元)<i class="fa fa-level-up"></i></small></div>
+                                <div class="font-bold text-info" ng-if="data.month_return_amt_rate<0"><small>{{data.month_return_amt_rate|number:2}}% 回款(万元)<i class="fa fa-level-down"></i></small></div>
+                                <div class="font-bold" ng-if="data.month_return_amt_rate==0 || data.month_return_amt_rate == undefined"><small>{{data.month_return_amt_rate|number:2}}回款(万元)</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-warning pull-right">本年累计</span>
+                        <h5>销售与回款</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2 class="no-margins" style="font-weight: 300; margin-bottom: 10px;">{{data.year_sale_amt|number:2}}</h2>
+                                <div class="font-bold text-danger" ng-if="data.year_sale_amt_rate>0"><small>{{data.year_sale_amt_rate|number:2}}% 销售额(万元)<i class="fa fa-level-up"></i></small></div>
+                                <div class="font-bold text-info" ng-if="data.year_sale_amt_rate<0"><small>{{data.year_sale_amt_rate|number:2}}% 销售额(万元)<i class="fa fa-level-down"></i></small></div>
+                                <div class="font-bold" ng-if="data.year_sale_amt_rate==0 || data.year_sale_amt_rate == undefined"><small>{{data.year_sale_amt_rate|number:2}}销售额(万元)</small></div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h2 class="no-margins" style="font-weight: 300; margin-bottom: 10px;">{{data.year_return_amt|number:2}}</h2>
+                                <div class="font-bold text-danger" ng-if="data.year_return_amt_rate>0"><small>{{data.year_return_amt_rate|number:2}}% 回款(万元)<i class="fa fa-level-up"></i></small></div>
+                                <div class="font-bold text-info" ng-if="data.year_return_amt_rate<0"><small>{{data.year_return_amt_rate|number:2}}% 回款(万元)<i class="fa fa-level-down"></i></small></div>
+                                <div class="font-bold" ng-if="data.year_return_amt_rate==0 || data.year_return_amt_rate == undefined"><small>{{data.year_return_amt_rate|number:2}}回款(万元)</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="col-sm-4">
+                            <h3>月度走势分析</h3></div>
+                        <div class="col-sm-8 m-b-xs">
+                            <div data-toggle="buttons" class="btn-group pull-right">
+                                <label class="btn btn-sm btn-white active" ng-click="onchangemthflag(1)">
+                                    <input type="radio" id="option1" value="1" name="monthtrack"> 销量 </label>
+                                <label class="btn btn-sm btn-white" ng-click="onchangemthflag(2)">
+                                    <input type="radio" id="option2" value="2" name="monthtrack"> 销售额 </label>
+                                <label class="btn btn-sm btn-white" ng-click="onchangemthflag(3)">
+                                    <input type="radio" id="option2" value="2" name="monthtrack"> 回款 </label>
+                                <label class="btn btn-sm btn-white" ng-click="onchangemthflag(4)">
+                                    <input type="radio" id="option3" value="3" name="monthtrack"> 毛利 </label>
+                            </div>
+                        </div>
+                        <div>
+                            <canvas linechart options="lineOptions" data="lineData" height="135" maintainAspectRatio=false responsive=true></canvas>
+                        </div>
+                        <div class="m-t-md">
+                            <small class="pull-right">
+                        <i class="fa fa-clock-o"> </i>
+                        数据更新时间: {{data.last_update_at}}
+                    </small>
+                            <small>
+                        <a ng-click="selectorg()" style="padding: .3em .6em .3em;" class="label label-primary"><i class="fa fa-gear"></i></a>
+                        <!--span class="label label-primary">i</span--> 
+                        <strong>统计部门:</strong> {{data.analysis_org.org_name}} 单位(万)
+                        <span class="label" style="margin-left: 20px;min-width: 48px; background-color: rgba(220,220,220,1); color: rgba(220,220,220,0.5)"><i class="fa fa-area-chart"></i></span><small style="margin-left: 3px;">{{data.currSet.lastyear}}年</small>
+                        <span class="label" style="margin-left: 10px;min-width: 48px; background-color: rgba(26,179,148,1); color: rgba(26,179,148,0.5)"><i class="fa fa-area-chart"></i></span><small style="margin-left: 3px;">{{data.currSet.thisyear}}年</small>
+                    </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>销售排名 </h5>
+                        <div ibox-tools></div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-3 m-b-xs">
+                                <div data-toggle="buttons" class="btn-group">
+                                    <label ng-click="dashdataflag($event, 1)" class="btn btn-sm btn-white active">
+                                        <input type="radio" id="option1" name="options"> 销量 </label>
+                                    <label ng-click="dashdataflag($event, 2)" class="btn btn-sm btn-white">
+                                        <input type="radio" id="option2" name="options"> 销售额 </label>
+                                    <label ng-if="data.currSet.dash3.type2==0" ng-click="dashdataflag($event, 3)" class="btn btn-sm btn-white">
+                                        <input type="radio" id="option2" name="options"> 回款 </label>
+                                    <label ng-click="dashdataflag($event, 4)" class="btn btn-sm btn-white">
+                                        <input type="radio" id="option3" name="options"> 毛利 </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" font-size: 14px; ">
+                                <div style="padding-right: 15px; " class="dropdown inline open " dropdown=" ">
+                                    <a class="dropdown-toggle " dropdown-toggle=" " href=" " aria-haspopup="true " aria-expanded="true "> <span class="clear "> <span class="block m-t-xs "> <strong class="font-bold ">统计类别：{{data.currSet.dash3.type1name}}</strong>
+                                                            </span></span>
+                                    </a>
+                                    <ul class="dropdown-menu animated fadeInRight m-t-xs ">
+                                        <li><a ng-click="menuclick(1, '客户') ">客户</a>
+                                        </li>
+                                        <li><a ng-click="menuclick(2, '部门') ">部门</a>
+                                        </li>
+                                        <li><a ng-click="menuclick(3, '品类') ">品类</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div style="padding-right: 15px; " class="dropdown inline open " dropdown=" ">
+                                    <a class="dropdown-toggle " dropdown-toggle=" " href=" " aria-haspopup="true " aria-expanded="true "> <span class="clear "> <span class="block m-t-xs "> <strong class="font-bold ">产品品类：{{data.currSet.dash3.type2name}}</strong>
+                                                            </span></span>
+                                    </a>
+                                    <ul class="dropdown-menu animated fadeInRight m-t-xs ">
+                                        <li ng-repeat="item in dash3type2s "><a ng-click="menuclick2(item.id, item.name) ">{{item.name}}</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                                <!--div style="padding-right: 15px; " class="dropdown inline open " dropdown=" ">
+                                    <a class="dropdown-toggle " dropdown-toggle=" " href=" " aria-haspopup="true " aria-expanded="true "> <span class="clear "> <span class="block m-t-xs "> <strong class="font-bold ">统计期间：本月</strong>
+                                                            </span></span>
+                                    </a>
+                                </div-->
+                            </div>
+                            <div class="col-sm-3 ">
+                                <div class="input-group ">
+                                    <input type="text " ng-model="data.currSet.dash3.month" placeholder="统计期间：本月 " class="input-sm form-control " style="height: 30px; "> <span class="input-group-btn ">
+                                        <button type="button " ng-click="reloaddata()" class="btn btn-sm btn-primary "> Go!</button> </span></div>
+                            </div>
+                        </div>
+                        <div class="table-responsive " style="min-height: 600px; ">
+                            <table class="table table-striped ">
+                                <thead>
+                                    <tr>
+                                        <th>排名</th>
+                                        <th ng-if="data.currSet.dash3.type1==1 ">客户</th>
+                                        <th ng-if="data.currSet.dash3.type1 <=2 ">区域</th>
+                                        <th ng-if="data.currSet.dash3.type1==3 ">品类</th>
+                                        <th ng-if="data.currSet.dash3.dash3type < 3 " style="text-align:right; ">销量</th>
+                                        <th ng-if="data.currSet.dash3.dash3type < 3 " style="text-align:right; ">均价</th>
+                                        <th ng-if="data.currSet.dash3.dash3type !=33 " style="text-align:right; ">销售额(万元)</th>
+                                        <th ng-if="data.currSet.dash3.dash3type < 3 " style="text-align:right; ">上月销量</th>
+                                        <th ng-if="data.currSet.dash3.dash3type < 3 " style="text-align:right; ">上月均价</th>
+                                        <th ng-if="data.currSet.dash3.dash3type !=33 " style="text-align:right; ">上月销额(万元)</th>
+
+                                        <th ng-if="data.currSet.dash3.dash3type==3 " style="text-align:right; ">本月回款(万元)</th>
+                                        <th ng-if="data.currSet.dash3.dash3type==3 " style="text-align:right; ">上月回款(万元)</th>
+
+                                        <th ng-if="data.currSet.dash3.dash3type==4 " style="text-align:right; ">本月毛利(万元)</th>
+                                        <th ng-if="data.currSet.dash3.dash3type==4 " style="text-align:right; ">上月毛利(万元)</th>
+
+                                        <th style="text-align:right; ">上月排名</th>
+                                        <th style="text-align:right; ">占比</th>
+                                        <th style="text-align:right; ">同比</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in dash_data ">
+                                        <td>{{item.idx}}</td>
+                                        <td ng-if="data.currSet.dash3.type1==1 ">{{item.short_name}}</td>
+                                        <td ng-if="data.currSet.dash3.type1 <=2 ">{{item.org_name||item.orgname}}</td>
+                                        <td ng-if="data.currSet.dash3.type1==3 ">{{item.item_type_name}}</td>
+                                        <td ng-if="data.currSet.dash3.dash3type < 3 " align="right ">{{item.this_qty*10000|number:0}}</td>
+                                        <td ng-if="data.currSet.dash3.dash3type < 3 " align="right ">{{item.this_price|number:0}}</td>
+                                        <td ng-if="data.currSet.dash3.dash3type !=33 " align="right ">{{item.this_amt|number}}</td>
+                                        <td ng-if="data.currSet.dash3.dash3type < 3 " align="right ">{{item.last_qty*10000|number:0}}</td>
+                                        <td ng-if="data.currSet.dash3.dash3type < 3 " align="right ">{{item.last_price|number}}</td>
+                                        <td ng-if="data.currSet.dash3.dash3type !=33 " align="right ">{{item.last_amt|number}}</td>
+
+                                        <td ng-if="data.currSet.dash3.dash3type==3 " align="right ">{{item.this_return_amt|number}}</td>
+                                        <td ng-if="data.currSet.dash3.dash3type==3 " align="right ">{{item.last_return_amt|number}}</td>
+
+                                        <td ng-if="data.currSet.dash3.dash3type==4 " align="right ">{{item.this_profit|number}}</td>
+                                        <td ng-if="data.currSet.dash3.dash3type==4 " align="right ">{{item.last_profit|number}}</td>
+
+                                        <td align="right ">
+                                            <div class="font-bold text-danger " ng-if="item.p_idx>item.idx">{{item.p_idx}} <i class="fa fa-level-up"></i></div>
+                            <div ng-if="item.p_idx==item.idx">{{item.p_idx}} <i class="fa fa-flash"></i></div>
+                            <div class="font-bold text-info" ng-if="item.p_idx<item.idx">{{item.p_idx}} <i class="fa fa-level-down"></i></div>
+                            </td>
+                            <td align="right">
+                                <pie-chart data="item.ratio" options="PieChartOption"></pie-chart>{{item.ratiox|number:2}}%
+                            </td>
+                            <td align="right">
+                                <div class="font-bold text-danger" ng-if="item.yoy>=0">{{item.yoy|number:2}}% <i class="fa fa-level-up"></i></div>
+                                <div class="font-bold text-info" ng-if="item.yoy<0">{{item.yoy|number:2}}% <i class="fa fa-level-down"></i></div>
+                            </td>
+                            </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="widget p-lg text-center col-lg-2" ng-if="false" ng-click="showmycurrwf()" style="cursor:pointer; padding: 10px 10px 10px 20px;">
+        <div class="m-b-md">
+            <i class="fa fa-flash fa-4x text-success"></i>
+            <h1 class="m-xs">{{needcheckwfs}}</h1>
+            <h3 class="font-bold no-margins">
+                    待审批流程
+                </h3>
+            <!--small>amount</small-->
+        </div>
+    </div>
+    <div class="widget p-lg text-center col-lg-2" ng-if="false" ng-click="test()" style="cursor:pointer; padding: 10px 10px 10px 20px;">
+        <div class="m-b-md">
+            <i class="fa fa-warning fa-4x text-warning"></i>
+            <h1 class="m-xs">{{worknotices}}</h1>
+            <h3 class="font-bold no-margins">
+                    工作提醒
+                </h3>
+            <!--small>amount</small-->
+        </div>
+    </div>
+    <div class="widget p-lg text-center col-lg-2" ng-if="false" ng-click="test()" style="cursor:pointer; padding: 10px 10px 10px 20px;">
+        <div class="m-b-md">
+            <i class="fa fa-bell fa-4x text-info"></i>
+            <h1 class="m-xs">{{unreadtopics}}</h1>
+            <h3 class="font-bold no-margins">
+                    未读通知
+                </h3>
+            <!--small>amount</small-->
+        </div>
+    </div>
+
+</div>

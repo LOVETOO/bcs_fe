@@ -1,0 +1,128 @@
+<div local-storage ng-model="data.currItem" class=" bill-form" ng-controller="objconf_view">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h3>窗体配置查询</h3>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-title">
+                    <a style="font-size: small;font-weight: bold;color:black"><i
+                            ng-click="show_profit()" class={{icon}}></i>查询条件</a>
+                    <div style="float: right;color:gray;">
+                        <button class="btn btn-toolbar" type="button" ng-click="search()">
+                            <i class="fa fa-search"></i>查询
+                        </button>
+                        <button class="btn btn-toolbar" type="button" ng-click="new()">
+                            <i class="fa fa-file-o"></i>新增
+                        </button>
+                        <button class="btn btn-toolbar" type="button" ng-click="edit()">
+                            <i class="fa fa-file-text"></i>编辑
+                        </button>
+                        <button class="btn btn-toolbar" type="button" ng-click="look_detail()">
+                            <i class="fa fa-file-text-o"></i>查看详情
+                        </button>
+                        <button class="btn btn-toolbar" type="button" ng-click="clearSelection()">
+                            <i class="fa fa-trash"></i>清空
+                        </button>
+                    </div>
+                </div>
+
+                <div ng-show="profit_stat" class="ibox-content" id="sqlWhereBlock">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini ">单据类型编号</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="input-sm form-control"
+                                   name="like"
+                                   id="objtypeid"
+                                   ng-model="data.currItem.objtypeid">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label-mini ">单据类型描述</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="input-sm form-control"
+                                   name="like"
+                                   id="objtypename"
+                                   ng-model="data.currItem.objtypename">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label-mini ">窗体类名</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="input-sm form-control"
+                                   name="like"
+                                   id="formclass"
+                                   ng-model="data.currItem.formclass">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label-mini">表名</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="input-sm form-control"
+                                   name="like"
+                                   id="tablename"
+                                   ng-model="data.currItem.tablename">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label class="form-label-mini">JAVA类名</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text"
+                                   name="like"
+                                   id="javaname"
+                                   class="input-sm form-control"
+                                   ng-model="data.currItem.javaname">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label-mini">网页Gallery</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text"
+                                   name="like"
+                                   id="web_gallery"
+                                   class="input-sm form-control"
+                                   ng-model="data.currItem.web_gallery">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label-mini">主键名</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="input-sm form-control"
+                                   name="like"
+                                   id="pkfield"
+                                   ng-model="data.currItem.pkfield">
+                        </div>
+
+                        <div class="col-md-1">
+                            <label class="form-label-mini">流程模板</label>
+                        </div>
+                        <div class="col-md-2">
+                            <select chosen-select ng-model="data.currItem.haswftemp"
+                                    class="input-sm chosen-select form-control"
+                                    ng-options="type.id as type.name  for type in haswftemps">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <a style="font-size: small;font-weight: bold;color:black"><i class="btn btn-toolbar"></i>查询结果</a>
+                    <div slick-grid
+                         sg-options="viewOptions"
+                         sg-data="data.currItem.objconfofobjconfs"
+                         sg-columns="viewColumns"
+                         class="slick-grid"
+                         style="width:100%;height:450px;"></div>
+                    <div class="ibox-content modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

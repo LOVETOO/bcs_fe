@@ -1,0 +1,168 @@
+<div hc-diy-page>
+	<div hc-box>
+        <div hc-box="级联选择器">
+            <div class="row">
+                <hc-cascader
+                    ng-init="options = [
+                        {
+                            value: 1,
+                            label: 'A',
+                            disabled: false,
+                            children: [
+                                { value: 3, label: 'C', disabled: false },
+                                { value: 4, label: 'D', disabled: false }
+                            ]
+                        },
+                        {
+                            value: 2,
+                            label: 'B',
+                            disabled: false,
+                            children: [
+                                { value: 5, label: 'E' },
+                                { value: 6, label: 'F' }
+                            ]
+                        }
+                    ]"
+                    model="zzz"
+                    options="options"
+                ></hc-cascader>
+
+                <hc-cascader
+                    model="zzz"
+                    options="options"
+                ></hc-cascader>
+            </div>
+            <div class="row">
+                {{ zzz }}
+            </div>
+        </div>
+        <div hc-box="地址选择器">
+            <div class="row">
+                <hc-address
+                    label="地址"
+                    province-id="province_id"
+                    province-name="province_name"
+                    city-id="city_id"
+                    city-name="city_name"
+                    county-id="county_id"
+                    county-name="county_name"
+                    id-path="id_path"
+                    name-path="name_path"
+                    address="address"
+                    on-change="changeCount = changeCount + 1"
+                    on-area-change="areaChangeCount = areaChangeCount + 1"
+                    on-address-change="addressChangeCount = addressChangeCount + 1"
+                ></hc-address>
+                <hc-address
+                    label="地址"
+                    province-id="province_id"
+                    province-name="province_name"
+                    city-id="city_id"
+                    city-name="city_name"
+                    county-id="county_id"
+                    county-name="county_name"
+                    id-path="id_path"
+                    name-path="name_path"
+                    address="address"
+                    on-btn-click="clickCount = clickCount + 1"
+                ></hc-address>
+            </div>
+            <div class="row">
+                <pre>
+province_id: {{ province_id }} //省ID
+province_name: {{ province_name }} //省名称
+city_id: {{ city_id }} //市ID
+city_name: {{ city_name }} //市名称
+county_id: {{ county_id }} //县ID
+county_name: {{ county_name }} //县名称
+id_path: {{ id_path }} //全路径ID
+name_path: {{ name_path }} //全路径名称
+address: {{ address }} //详细地址，非必须
+changeCount: {{ changeCount }} //change 改变事件触发次数
+areaChangeCount: {{ areaChangeCount }} //areaChange 区域改变事件触发次数
+addressChangeCount: {{ addressChangeCount }} //addressChange 地址改变事件触发次数
+clickCount: {{ clickCount }} //点击次数
+                </pre>
+            </div>
+        </div>
+		<div hc-box>
+			<div class="row">
+				<div
+					hc-label="焦点事件"
+					hc-input="data.currItem.focusOrBlur"
+					hc-focus="onFocus($event)"
+					hc-blur="onBlur($event)"
+				></div>
+			</div>
+
+			<hc-box-title>焦点事件<button class="btn btn-default">test</button></hc-box-title>
+		</div>
+
+		<div hc-box="星标和爱心">
+			<div class="row">
+				<div
+					hc-label="星标"
+					hc-input="data.currItem.star"
+					hc-type="star"
+				></div>
+
+				<div
+					hc-label="爱心"
+					hc-input="data.currItem.heart"
+					hc-type="heart"
+				></div>
+			</div>
+		</div>
+
+		<div hc-box>
+			<hc-box-title ng-click="showProjAttach()">项目附件</hc-box-title>
+			<div hc-if="projAttachVisible">
+				<hc-proj-attach
+					hc-proj-attach-model="attaches"
+				></hc-proj-attach>
+			</div>
+		</div>
+
+		<div hc-box="表格">
+			<div hc-grid="gridOptions" style="height: 300px;"></div>
+		</div>
+
+		<div hc-box="图表">
+			<hc-chart hc-chart-option="chartOption" hc-chart-as="chart" hc-chart-ready="doWhenChartReady($chart)" />
+		</div>
+
+		<div hc-box="组织架构图">
+			<hc-org-chart hc-org-chart-option="orgChartOption" hc-org-chart-ready="doWhenOrgChartReady($orgChart)" />
+		</div>
+
+		<div hc-box="排序">
+			<ul
+				style="
+					padding: 8px;
+					display: flex;
+				"
+				hc-sortable="{}"
+				hc-sortable-update="sortableUpdate"
+				ng-model="items"
+			>
+				<li
+					style="
+						height: 80px;
+						width:  80px;
+						border: 2px dashed black;
+						background-color: #0365b2;
+						color: white;
+						cursor: move;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+					"
+					ng-style="{ 'margin-left': $first ? null : '8px' }"
+					ng-repeat="item in items"
+					ng-bind="item"
+				></li>
+			</ul>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,110 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.bill_no"
+                     hc-label="离职单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.abdicate_date"
+                     hc-label="离职生效日期"
+                     hc-type="date"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.change_type_name"
+                     hc-label="离职类型"
+                     hc-class-id="hr_change_type"
+                     hc-common-search="commonHrChangeTypeId"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.employee_code"
+                     hc-label="员工姓名"
+                     hc-required="true"
+                     hc-change="changeEmp(data.currItem.employee_id)"
+                     hc-class-id="employee_header"
+                     hc-common-search="commonSearchSettingOfErpemployee"></div>
+                <div hc-input="data.currItem.employee_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.org_name"
+                     hc-label="所属部门"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.position_name"
+                     hc-label="职位"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.start_date"
+                     hc-label="入职日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.salary_stop_date"
+                     hc-label="薪资截至日期"
+                     hc-type="date"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.reson"
+                     hc-label="离职原因"
+                     hc-class-id="hr_abdicate_reson"
+                     hc-common-search="commonSearchSettingOfHrAbdicateReson"
+                     hc-required="true"
+                     hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="6"></div>
+                <div hc-input="data.currItem.is_need_stop_insure"
+                     hc-label="需停保"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1"></div>
+                <div hc-input="data.currItem.is_heimingdan"
+                     hc-label="特殊名单标识"
+                     hc-type="checkbox"
+                     hc-change="isChangeChose()"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="1"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.lock_type"
+                     hc-label="锁定类型"
+                     hc-dict-code="lock_type"
+                     hc-change="changeLockType()"
+                     ng-show="data.currItem.is_heimingdan==2"></div>
+                <div hc-input="data.currItem.lock_start_date"
+                     hc-label="开始锁定日期"
+                     hc-type="date"
+                     hc-readonly="data.currItem.lock_type==1"
+                     ng-show="data.currItem.is_heimingdan==2"></div>
+                <div hc-input="data.currItem.lock_days"
+                     hc-label="锁定天数"
+                     hc-unit="天"
+                     hc-type="number"
+                     hc-change="setFormalDate()"
+                     hc-readonly="data.currItem.lock_type==1"
+                     ng-show="data.currItem.is_heimingdan==2"></div>
+                <div hc-input="data.currItem.lock_end_date"
+                     hc-label="截至锁定日期"
+                     hc-change="setTryDay()"
+                     hc-type="date"
+                     ng-show="data.currItem.is_heimingdan==2"
+                     hc-readonly="data.currItem.lock_type==1"></div>
+            </div>
+            <div class="row" ng-show="data.currItem.is_heimingdan==2">
+                <div hc-input="data.currItem.heimingdan_reson"
+                     hc-label="列入特殊名单原因"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>

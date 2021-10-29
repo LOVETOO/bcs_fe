@@ -1,0 +1,204 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+        <!--项目变更-->
+        <div hc-if="parameter == 1">
+            <div class="row">
+                <div hc-input="data.currItem.ecn_code"
+                     hc-label="变更单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="申请人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.createtime"
+                     hc-label="申请日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.contract_code"
+                     hc-label="合同编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_name"
+                     hc-label="合同名称"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_amt"
+                     hc-label="合同金额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.ecn_type"
+                     hc-label="变更类型"
+                     hc-dict-code="contract.ecn_type"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-label="客户名称"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.signed_date"
+                     hc-label="签约时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_type"
+                     hc-label="签约类型"
+                     hc-dict-code="epm.contract_type"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="工程编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="工程名称"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.address"
+                     hc-label="工程地址"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.trading_company_name"
+                     hc-label="交易公司名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.billing_unit_name"
+                     hc-label="开票单位"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.ecn_reason"
+                     hc-col-count="8"
+                     hc-required="true"
+                     hc-label="变更说明"></div>
+            </div>
+        </div>
+        <div hc-box="原周期条件" hc-grid="gridOptions_line_sta" style="height: 204px;" ng-show="parameter == 1"></div>
+        <div hc-box="新周期条件" hc-grid="gridOptions_line" style="height: 204px;" ng-show="parameter == 1"></div>
+        <!--项目失效-->
+        <div hc-if="parameter == 2">
+            <div class="row">
+                <div hc-input="data.currItem.ecn_code"
+                     hc-label="变更单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="申请人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.createtime"
+                     hc-label="申请日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.contract_code"
+                     hc-label="合同编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_name"
+                     hc-label="合同名称"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_amt"
+                     hc-label="合同金额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.ecn_type"
+                     hc-label="变更类型"
+                     hc-dict-code="contract.ecn_type"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-label="客户名称"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.signed_date"
+                     hc-label="签约时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_type"
+                     hc-label="签约类型"
+                     hc-dict-code="epm.contract_type"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.bbb"
+                     hc-label="交易公司编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.trading_company_name"
+                     hc-label="交易公司名称"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_unit"
+                     hc-label="签约单位"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.billing_unit_name"
+                     hc-label="开票单位"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.ecn_reason"
+                     hc-col-count="6"
+                     hc-required="true"
+                     hc-label="失效说明"></div>
+                <div hc-input="data.currItem.disable_project"
+                     hc-label="同时失效项目报备"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     class="oneis"></div>
+            </div>
+        </div>
+        <div hc-box="工程信息" class="other-h" hc-if="parameter == 2">
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="工程编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="工程名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stage_name"
+                     hc-label="项目当前进度"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.report_time"
+                     hc-label="申报日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.address"
+                     hc-label="工程地址"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.is_local"
+                     hc-label="本地/异地"
+                     hc-dict-code="epm.is_local"
+                     hc-readonly="true"></div>
+            </div>
+        </div>
+        <div hc-box hc-grid="gridOptions" style="height: 408px;" ng-show="parameter == 2"></div>
+    </div>
+    <div id="outstanding">
+        <div hc-box hc-grid="gridOptionsOutstanding" hc-auto-height="grid"></div>
+    </div>
+</div>
+<style>
+    .oneis{
+        padding-left: 30px;
+        padding-top: 3px;
+    }
+</style>
+
+
+

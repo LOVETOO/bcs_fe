@@ -1,0 +1,92 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base"  class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <!-- <div hc-input="data.currItem.invbillno"
+                     hc-label="出库单号"
+                     hc-readonly="true"></div> -->
+                <div hc-input="data.currItem.invbill_sap_no"
+                     hc-label="ERP出库单号"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.order_type"
+                     hc-label="订单类型"
+                     hc-dict-code="epm.bill_type"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户信息"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.delivery_base"
+                     hc-label="发货基地"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.outbill_date"
+                     hc-label="发货日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.contract_code"
+                     hc-label="合同信息"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.take_man"
+                     hc-label="提货人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.qty_sum"
+                     hc-label="总数量"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.legal_entity_code"
+                     hc-label="法人客户信息"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.legal_entity_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.total_cubage"
+                     hc-label="总体积"
+                     hc-unit="m³"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.wtamount_total_f"
+                     hc-label="总金额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.attribute4"
+                     hc-label="广告费点数"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.attribute5"
+                     hc-label="返点点数"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.plate_number"
+                     hc-label="车牌号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.printtimes"
+                     hc-label="打印次数"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-col-count="8"
+                     hc-label="备注"
+                     hc-readonly="true"></div>
+            </div>
+        </div>
+        <div hc-box hc-grid="gridOptions" class="flex1" style="min-height: 200px"></div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,99 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div class="hc-box  other-h">
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-class-id="epm_project"
+                     hc-common-search="commonSearchSettingOfEpmProject"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.report_time"
+                     hc-label="报备时间"
+                     hc-type="time"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.division_id"
+                     hc-label="所属事业部"
+                     hc-dict-code="epm.division"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.project_source"
+                     hc-label="工程类型"
+                     hc-dict-code="epm.project_source"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.project_type"
+                     hc-label="业主类型"
+                     hc-dict-code="epm.project_type"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.background"
+                     hc-label="背景关系"
+                     hc-dict-code="epm.background"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+
+            <div id="req" hc-box="报名信息">
+                <div class="row">
+                    <div hc-input="data.currItem.signup_people"
+                         hc-label="报名经办人"
+                         hc-required="true">
+                    </div>
+                    <div hc-input="data.currItem.signup_method"
+                         hc-label="报名方式"
+                         hc-dict-code="epm.signup_method"
+                         hc-required="true">
+                    </div>
+                    <div hc-input="data.currItem.signup_charge"
+                         hc-label="报名费"
+                         hc-type="money"
+                         hc-required="data.currItem.is_signup == 2"
+                         hc-unit="元">
+                    </div>
+                    <div hc-input="data.currItem.is_signup"
+                         hc-label="报名费已缴纳"
+                         hc-true-value="2"
+                         hc-false-value="1"
+                         hc-type="checkbox"
+                         class="oneis">
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div hc-input="data.currItem.signup_url"
+                         hc-label="报名窗口">
+                    </div>
+                    <div hc-input="data.currItem.bid_url"
+                         hc-label="招标网址"
+                         hc-col-count="4">
+                    </div>
+                    <div hc-input="data.currItem.signup_end_time"
+                         hc-label="报名截止日期"
+                         hc-type="date">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>
+<style>
+    .oneis {
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+</style>

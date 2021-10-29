@@ -1,0 +1,29 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+        <div class="row">
+            <div hc-input="data.currItem.search_flag"
+                 hc-label="分配状态"
+                 hc-change="changeSearchFlag()"
+                 hc-dict-code="search_flag">
+            </div>
+
+            <div hc-input="data.currItem.salary_group_name"
+                 hc-label="薪资组"
+                 hc-change="changeSalary()"
+                 hc-class-id="hr_salary_group"
+                 hc-common-search="choose_salary_group_area_name">
+            </div>
+            <div hc-input="data.currItem.employee_name"
+                 hc-label="员工姓名"
+                 hc-change="changeEmployeeName()"
+                 hc-class-id="employee_header"
+                 hc-common-search="choose_employee_name">
+            </div>
+        </div>
+
+    </div>
+    <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+</div>
+
+
+

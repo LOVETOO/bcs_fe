@@ -1,0 +1,96 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.enduser_code"
+                 hc-label="用户编码"
+                 hc-col-count="4"
+                 hc-readonly="true"></div>
+
+            <div hc-input="data.currItem.enduser_name"
+                 hc-label="用户姓名"
+                 hc-required="true"></div>
+
+            <div hc-input="data.currItem.entname"
+                 hc-label="经营单位"
+                 hc-readonly="true"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.area_code"
+                 hc-label="区域"
+                 hc-class-id="scparea"
+                 hc-common-search="commonSearchSettingOfArea"></div>
+
+            <div hc-input="data.currItem.area_name"></div>
+
+            <div hc-input="data.currItem.work_tel"
+                 hc-label="办公电话"></div>
+
+            <div hc-input="data.currItem.mobile"
+                 hc-label="手机"></div>
+        </div>
+
+
+        <div class="row">
+            <div hc-input="data.currItem.org_code"
+                 hc-label="负责机构"
+                 hc-required="true"
+                 hc-class-id="scporg"
+                 hc-common-search="commonSearchSettingOfScporg"></div>
+
+            <div hc-input="data.currItem.org_name"></div>
+
+            <div hc-input="data.currItem.family_member"
+                 hc-label="家庭成员姓名"></div>
+
+            <div hc-input="data.currItem.tel"
+                 hc-label="家庭电话"
+                 hc-required="true"></div>
+        </div>
+
+
+        <div class="row">
+            <div hc-input="data.currItem.zip_code"
+                 hc-label="邮编"></div>
+
+            <div hc-input="data.currItem.enduser_address"
+                 hc-label="通信地址"
+                 hc-col-count="6"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.note"
+                 hc-label="备注"
+                 hc-col-count="8"></div>
+        </div>
+
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+
+    <!--其他-->
+    <div id="other" hc-box="">
+        <div class="row">
+            <div hc-input="data.currItem.creator"
+                 hc-readonly="true"
+                 hc-label="创建人">
+            </div>
+            <div hc-input="data.currItem.create_time"
+                 hc-type="date"
+                 hc-readonly="true"
+                 hc-label="创建时间"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.updator"
+                 hc-readonly="true"
+                 hc-label="最后修改人">
+            </div>
+            <div hc-input="data.currItem.update_time"
+                 hc-type="date"
+                 hc-readonly="true"
+                 hc-label="最后修改时间"></div>
+        </div>
+
+    </div>
+</div>

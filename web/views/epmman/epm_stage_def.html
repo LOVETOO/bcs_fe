@@ -1,0 +1,47 @@
+<div hc-diy-page>
+    <div class="p-w-sm flex1 flex-column">
+        <div hc-grid="gridOptions" class="m-t-xs flex1"></div>
+    </div>
+    <div class="row other-h m-t-xs">
+        <div hc-button="addTechnology()"
+             hc-icon="fa fa-plus"
+             class="addadndel"
+             style="margin-left: 15px;"></div>
+        <div hc-button="delTechnology()"
+             hc-icon="fa fa-minus"
+             class="addadndel"
+             hc-if="isManual"></div>
+        <div hc-button="stick()"
+             hc-icon="fa fa-angle-double-up"
+             class="addadndel"></div>
+        <div hc-button="moveUp()"
+             hc-icon="fa fa-angle-up"
+             class="addadndel"></div>
+        <div hc-button="shiftDown()"
+             hc-icon="fa fa-angle-down"
+             class="addadndel"></div>
+        <div hc-button="rear()"
+             hc-icon="fa fa-angle-double-down"
+             class="addadndel"></div>
+    </div>
+</div>
+<style>
+    /*.addadndel{
+        margin: 2px 0 0 2px;
+    }
+    .ibox-title{
+        padding: 0px 15px 0px;
+    }
+    .page_modal{
+        padding: 0px 10px;
+    }*/
+    .row{
+        margin: 5px 0px;
+    }
+    .addadndel{
+        margin-left: 2px;
+    }
+    .page_modal{
+        padding: 0px;
+    }
+</style>

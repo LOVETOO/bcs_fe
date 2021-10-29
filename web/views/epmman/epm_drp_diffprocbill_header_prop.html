@@ -1,0 +1,81 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box  class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.diffbill_no"
+                     hc-label="签收单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="签收人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.create_time"
+                     hc-label="签收时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <!-- <div hc-input="data.currItem.outbill_no"
+                     hc-label="出库单号"
+                     hc-class-id="inv_out_bill_head"
+                     hc-common-search="commSearchObjInvOutBillHead.out"
+                     hc-required="true"></div> -->
+                <div hc-input="data.currItem.invbill_sap_no"
+                     hc-label="ERP出库单号"
+                     hc-col-count="4"
+                     hc-required="true"
+                     hc-class-id="inv_out_bill_head"
+                     hc-common-search="commSearchObjInvOutBillHead.sap"></div>
+                <div hc-input="data.currItem.cust_code"
+                     hc-label="客户信息"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.cust_name"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.send_date"
+                     hc-label="出库日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.anticipate_date"
+                     hc-label="到货日期"
+                     hc-required="true"
+                     hc-type="date"></div>
+                <div hc-input="data.currItem.receive_address"
+                     hc-label="收货地址"
+                     hc-col-count="4"></div>
+            </div>
+            <div class="row"><!--total_amount 总金额-->
+                <div hc-input="data.currItem.qty_sum"
+                     hc-label="出库数量"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.total_amount"
+                     hc-label="出库金额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.received_qty"
+                     hc-label="签收数量"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.received_amount"
+                     hc-label="签收金额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.mo_remark"
+                     hc-col-count="8"
+                     hc-label="备注"></div>
+            </div>
+        </div>
+        <div hc-box hc-grid="gridOptions" class="flex1" style="min-height: 200px"></div>
+    </div>
+</div>
+
+
+
+
+

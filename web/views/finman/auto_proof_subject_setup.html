@@ -1,0 +1,225 @@
+<style>
+    .row>.input-inline{margin-right:15px;}
+    .row>.input-inline.hc-w1 {
+        /*width: calc(25% - 12px);*/
+    }
+    .row label.control-label{
+        float: left;
+    }
+</style>
+<div hc-diy-page><!--class="ibox" hc-init="doInit()"-->
+
+    <div class="ibox-title grid-other-h">
+        <div class="ibox-tools">
+            <h4 class="pull-left" ng-show="form.$dirty">
+                <span>正在</span><span ng-hide="data.isInsert">修改数据</span><span>，请选择：</span>
+            </h4>
+            <div hc-buttons="editButtons" hc-buttons-pull-left style="margin-left:8px"></div>
+            <!--<div hc-buttons="toolButtons" hc-buttons-pull-right></div>-->
+        </div>
+    </div>
+
+    <div hc-box class="other-h"  ng-form="form" ng-show="data.currItem">
+
+        <ul class="nav nav-tabs other-h ng-scope" id="detailtab">
+            <li class="active">
+                <a data-toggle="tab" id="tab11" href="tabs.html#tab1" aria-expanded="false">常规</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" id="tab22" href="tabs.html#tab2" aria-expanded="true">其它</a>
+            </li>
+        </ul>
+
+        <div class="tabs-container" style="margin-left: 15px"><!--style="margin-left: 30px;margin-top: 10px"-->
+            <div class="tab-content">
+                <!--常规-->
+                <div id="tab1" class="tab-pane active">
+                    <div class="row">
+                        <div hc-input="data.currItem.gl_account_subject_code_xx"
+                             hc-label="应交税金-销项税会计科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.xx"
+                             hc-after-delete="clearSubjectAfterDelete('xx')">
+                        </div>
+                        <div hc-input="data.currItem.gl_account_subject_name_xx"
+                             hc-readonly="true">
+                        </div>
+
+                        <div hc-input="data.currItem.km_code_dtzspcy"
+                             hc-label="商品结存差异调整会计科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.dtzspcy"
+                             hc-after-delete="clearSubjectAfterDelete('dtzspcy')">
+                        </div>
+                        <div hc-input="data.currItem.km_name_dtzspcy"
+                             hc-readonly="true">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div hc-input="data.currItem.gl_account_subject_code_jx"
+                             hc-label="应交税金-进项税会计科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.jx"
+                             hc-after-delete="clearSubjectAfterDelete('jx')">
+                        </div>
+                        <div hc-input="data.currItem.gl_account_subject_name_jx"
+                             hc-readonly="true">
+                        </div>
+
+                        <div hc-input="data.currItem.gl_account_subject_code_ckpk"
+                             hc-label="仓库盘亏费用科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.ckpk"
+                             hc-after-delete="clearSubjectAfterDelete('ckpk')">
+                        </div>
+                        <div hc-input="data.currItem.gl_account_subject_name_ckpk"
+                             hc-readonly="true">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div hc-input="data.currItem.km_code_wt"
+                             hc-label="委托代销科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.wt"
+                             hc-after-delete="clearSubjectAfterDelete('wt')">
+                        </div>
+                        <div hc-input="data.currItem.km_name_wt"
+                             hc-readonly="true">
+                        </div>
+
+                        <div hc-input="data.currItem.gl_account_subject_code_yhkf"
+                             hc-label="银行扣费科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.yhkf"
+                             hc-after-delete="clearSubjectAfterDelete('yhkf')">
+                        </div>
+                        <div hc-input="data.currItem.gl_account_subject_name_yhkf"
+                             hc-readonly="true">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div hc-input="data.currItem.km_code_yf"
+                             hc-label="预付账款科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.yf"
+                             hc-after-delete="clearSubjectAfterDelete('yf')">
+                        </div>
+                        <div hc-input="data.currItem.km_name_yf"
+                             hc-readonly="true">
+                        </div>
+
+                        <div hc-input="data.currItem.km_code_ys"
+                             hc-label="预收账款科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.ys"
+                             hc-after-delete="clearSubjectAfterDelete('ys')">
+                        </div>
+                        <div hc-input="data.currItem.km_name_ys"
+                             hc-readonly="true">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div hc-input="data.currItem.gl_account_subject_code_profit"
+                             hc-label="损益结转科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.profit"
+                             hc-after-delete="clearSubjectAfterDelete('profit')">
+                        </div>
+                        <div hc-input="data.currItem.gl_account_subject_name_profit"
+                             hc-readonly="true">
+                        </div>
+
+                        <!--gl_account_subject_id_fcsp-->
+                        <div hc-input="data.currItem.gl_account_subject_code_fcsp"
+                             hc-label="发出商品科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.fcsp"
+                             hc-after-delete="clearSubjectAfterDelete('fcsp')">
+                        </div>
+                        <div hc-input="data.currItem.gl_account_subject_name_fcsp"
+                             hc-readonly="true">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div hc-input="data.currItem.km_code_ayq"
+                             hc-label="固定资产减值准备对方科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.ayq"
+                             hc-after-delete="clearSubjectAfterDelete('ayq')">
+                        </div>
+                        <div hc-input="data.currItem.km_name_ayq"
+                             hc-readonly="true">
+                        </div>
+
+                        <!--gl_account_subject_id_zjrg ?-->
+                        <div hc-input="data.currItem.km_code_yfgz"
+                             hc-label="应付工资科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.yfgz"
+                             hc-after-delete="clearSubjectAfterDelete('yfgz')">
+                        </div>
+                        <div hc-input="data.currItem.km_name_yfgz"
+                             hc-readonly="true">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!--gl_account_subject_id_ar-->
+                        <div hc-input="data.currItem.gl_account_subject_code_ar"
+                             hc-label="应收票据科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.ar"
+                             hc-after-delete="clearSubjectAfterDelete('ar')">
+                        </div>
+                        <div hc-input="data.currItem.gl_account_subject_name_ar"
+                             hc-readonly="true">
+                        </div>
+
+                        <!--gl_account_subject_id_ap-->
+                        <div hc-input="data.currItem.gl_account_subject_code_ap"
+                             hc-label="应付票据科目"
+                             hc-class-id="gl_account_subject"
+                             hc-common-search="commonSearchSettingOfSubject.ap"
+                             hc-after-delete="clearSubjectAfterDelete('ap')">
+                        </div>
+                        <div hc-input="data.currItem.gl_account_subject_name_ap"
+                             hc-readonly="true">
+                        </div>
+                    </div>
+                </div>
+
+                <!--其它-->
+                <div id="tab2" class="tab-pane">
+                    <div class="row">
+                        <div hc-input="data.currItem.created_by"
+                             hc-label="创建人"
+                             hc-readonly="true">
+                        </div>
+
+                        <div hc-input="data.currItem.creation_date"
+                             hc-label="创建日期"
+                             hc-type="date"
+                             hc-readonly="true">
+                        </div>
+
+                        <div hc-input="data.currItem.last_updated_by"
+                             hc-label="修改人"
+                             hc-readonly="true">
+                        </div>
+
+                        <div hc-input="data.currItem.last_update_date"
+                             hc-label="修改日期"
+                             hc-type="date"
+                             hc-readonly="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--结束标签 tabs-container -->
+    </div>
+</div>

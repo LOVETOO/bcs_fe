@@ -1,0 +1,110 @@
+
+<div hc-diy-page>
+    <div class="hc-box p-n">
+        <div class="row other-h">
+            <div hc-input="data.searchItem.cyear"
+                 hc-label="年度"
+                 hc-type="year" style="width: calc(12% - 12px);">
+            </div>
+
+            <div hc-input="data.searchItem.cmonth"
+                 hc-label="月度"
+                 hc-type="month" style="width: calc(12% - 18px);">
+            </div>
+
+            <div hc-input="data.searchItem.balance_type_name"
+                 hc-label="结算方式"
+                 hc-class-id="base_balance_type"
+                 hc-common-search="commonSearchSetting.base_balance_type_search"
+                 style="width: calc(18% - 18px);">
+            </div>
+
+            <div hc-input="data.searchItem.source_bill_no"
+                 hc-label="报销单号"
+                 style="width: calc(18% - 18px);">
+            </div>
+            <div hc-input="data.searchItem.org_name"
+                 hc-label="部门"
+                 hc-class-id="dept"
+                 hc-common-search="commonSearchSetting.dept"
+                 style="width: calc(18% - 18px);">
+            </div>
+
+            <div hc-input="data.searchItem.chap_name"
+                 hc-label="报销人"
+                 style="width: calc(18% - 18px);">
+            </div>
+        </div>
+        <div id="grid" hc-grid="gridOptions" hc-auto-height="grid"></div>
+        <div class="row other-h">
+            <button type="button" class="btn btn-link btn-xs" style="font-weight: bold">支付确认信息</button>
+            <div hc-input="data.currItem.pay_date"
+                 hc-label="付款日期"
+                 hc-required="true"
+                 hc-type="date" class="dropdown-top" style="width: 180px;">
+            </div>
+
+            <div hc-input="data.currItem.balance_type_name"
+                 hc-label="结算方式"
+                 hc-required="true"
+                 hc-class-id="base_balance_type"
+                 hc-common-search="commonSearchSetting.base_balance_type">
+            </div>
+
+            <div hc-input="data.currItem.total_pay_amt"
+                 hc-label="付款合计"
+                 hc-type="money"
+                 hc-readonly="true">
+            </div>
+            <div hc-input="data.currItem.fund_account_code"
+                 hc-label="资金账户"
+                 hc-class-id="fd_fund_account"
+                 hc-common-search="getCommonSearchSetting_fd_account()"
+                 hc-required="data.currItem.settlement_type == 1 || data.currItem.settlement_type == 2">
+            </div>
+            <!-- <div hc-input="data.currItem.fund_account_name">
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<style>
+    .input-inline>label{
+        width: 60px;
+    }
+    .show-cell {
+        background: white;
+        border-left: 1px dotted lightgrey !important;
+        border-right: 1px dotted lightgrey !important;
+        border-top: 1px dotted lightgrey !important;
+    }
+    .dropdown-top .datetimepicker{
+        left: 0px!important;
+        top: -280px!important;
+    }
+    .dropdown-top .datetimepicker:before {    
+        bottom: -7px;
+        left: 6px;
+        top: auto;
+        content: '';
+        display: inline-block;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 7px solid #ccc;
+        border-top-color: rgba(0,0,0,0.2);
+        position: absolute;
+        border-bottom: 0px;
+    }
+    .dropdown-top .datetimepicker:after {
+        bottom: -6px;
+        left: 7px;
+        top: auto;
+        content: '';
+        display: inline-block;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid #fff;
+        position: absolute;
+        border-bottom: 0px;
+    }
+</style>

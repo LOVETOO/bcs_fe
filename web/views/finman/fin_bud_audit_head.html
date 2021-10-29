@@ -1,0 +1,151 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fin_bud_audit_head">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="doSearch()">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{headername}}</h5>
+                    <!--按钮栏-->
+                    <div class="ibox-tools form-inline">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="addBtn()">
+                            <i class="fa fa-plus"></i> 增加
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" id="searchBtn">
+                            <i class="fa fa-search"></i> 查找
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" id="saveBtn" ng-click="audit()">
+                            <i class="fa fa-check-square-o"></i> 审核
+                        </button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="myTabContent" class="tab-content">
+                        <div id="viewGrid" style="width:100%;min-height:500px;"
+                             class="slick-grid">
+                        </div>
+                    </div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--modal-明细-->
+    <div class="modal inmodal fade" id="detailModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">预算审核</h4>
+                </div>
+                <div class="modal-body" style="height:455px;">
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs m-t-sm">
+                            <li class="active"><a data-toggle="tab" href="tabs.html#tab_common">常规</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab_wfins">流程</a></li>
+                        </ul>
+                        <form method="get" class="form-horizontal" name="entityForm" novalidate>
+                            <div class="tab-content">
+                                <div id="tab_common" class="tab-pane active form-inline mline">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <label>单号</label>
+                                            <input type="text" class="form-control" ng-readonly="true"
+                                                   ng-model="data.currItem.fin_bud_audit_code">
+                                            <label class="control-label">制单人</label>
+                                            <input type="text" class="form-control" ng-readonly="true"
+                                                   ng-model="data.currItem.created_by">
+                                            <label class="control-label">制单时间</label>
+                                            <input type="text" class="form-control" id="time"
+                                                   ng-model="data.currItem.finbilldate">
+                                        </div>
+                                        <div class="row">
+                                            <label>月度</label>
+                                            <input type="text" class="form-control" ng-readonly="true"
+                                                   ng-model="data.currItem.year_month">
+                                            <label class="control-label">单据状态</label>
+                                            <select chosen-select ng-model="data.currItem.stat"
+                                                    class="input-sm chosen-select form-control"
+                                                    ng-options="s.id as s.name for s in billStats"
+                                                    ng-selected="s.id==data.currItem.stat"
+                                                    ng-disabled="true">
+                                            </select>
+                                            <label class="control-label">预算</label>
+                                            <div class="input-group width_m">
+                                                <input type="text" class="form-control">
+                                                <span class="input-group-btn"><button type="button"
+                                                                                      class="btn btn-primary"
+                                                                                      ng-click="budBtn()">•••</button></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label>备注</label>
+                                            <input type="text" class="form-control" style="width:413px"
+                                                   ng-model="data.currItem.note">
+                                        </div>
+                                        <div id="detailGrid" style="height: 280px;margin-top:15px;"></div>
+                                    </div>
+                                    <!--列表-->
+                                </div>
+                                <div id="tab_wfins" class="tab-pane">
+                                    <div class="modal-body" style="width: 900px;height: 600px;" id="wfinsform">
+                                        <iframe id="wfinspage" src=""
+                                                style="width: 100%;height: 100%;background-color: #e2e5ec;">
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="saveData()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="opinionModal" tabindex="-1" role="dialog" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">新建工作流程</h4>
+                </div>
+                <div class="modal-body" style="width: 900px;height: 600px;" id="wfprocmodal">
+                    <iframe id="iframepage" src="{{data.url}}"
+                            style="width: 100%;height: 100%;background-color: #e2e5ec;">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--流程-->
+    <div class="modal inmodal fade" id="auditModal" tabindex="-1" role="dialog" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">新建工作流程</h4>
+                </div>
+                <div class="modal-body" style="width: 900px;height: 600px;" id="wfprocmodal">
+                    <iframe id="iframepage" src="{{data.url}}"
+                            style="width: 100%;height: 100%;background-color: #e2e5ec;">
+                    </iframe>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="../．./lib/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"
+        charset="UTF-8"></script>

@@ -1,0 +1,393 @@
+<div class="bill-form" ng-controller="ctrl_oa_attrecord" style="width: 100%;height: 93%;">
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-12">
+			<div class="ab-form-title">
+				考勤报表
+			</div>
+			<div class="ab-form-toolbar">
+				<div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">
+				</div>
+				<button ng-click="closefrm()" class="btn btn-white btn-xs" type="button"><i class="fa fa-times"></i>
+                </button>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper wrapper-content animated fadeInRight resource-root" style="width: 100%; margin-top: 3.5%;">
+		<div id="row_div" class="row row_div" style="width: 100%;">
+			<div class="col-lg-12">
+				<ul id="maintabs" class="tri-nav-tabs">
+					<li class="active" ng-click="changing_over(1)">
+						<a data-target="#tab1" data-toggle="tab" class="tab-nav"><i class="fa fa-desktop">考勤报表</i></a>
+					</li>
+					<!--<li ng-click="changing_over(2)">
+						<a data-target="#tab2" data-toggle="tab" class="tab-nav"><i class="fa fa-automobile"> 外出打卡记录</i></a>
+					</li>-->
+				</ul>
+
+				<div id="main-tab-content " class="tab-content">
+
+					<div id="tab1" class="main-tab-pane tab-pane active resource">
+						<div class="ibox-content">
+							<div class="row">
+								<div class="col-sm-12 m-b-xs">
+
+									<div data-toggle="buttons" class="btn-group">
+
+										<label class="btn btn-sm btn-white active" data-target="#onchangemthflag1_1" data-toggle="tab" ng-click="on_interior(1)">
+                                            <input type="radio" id="option1" value="1" name="statType1"> 按日统计 </label>
+
+										<label class="btn btn-sm btn-white" data-target="#onchangemthflag1_2" data-toggle="tab" ng-click="on_interior(2)">
+                                            <input type="radio" id="option2" value="2" name="statType1"> 按月统计 </label>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-content-button">
+
+							<!--
+                        	时间：2017-09-06
+                        	描述：上下班打卡日统计
+                        		-->
+							<div id="onchangemthflag1_1" class="tab-pane active">
+
+								<div class="row">
+									<div class="col-md-1">
+										<label class="form-label-mini not-null">时间</label>
+									</div>
+									<div class="col-md-2">
+										<input style="text-align: center;" bs-datepacker="" ng-model="data.currItem.start_time_day" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+									</div>
+									<div class="col-md-1">
+										<label class="form-label-mini not-null">至</label>
+									</div>
+									<div class="col-md-2">
+										<input style="text-align: center;" bs-datepacker="" ng-model="data.currItem.finish_time_day" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+									</div>
+									<div class="col-md-1">
+										<label class="form-label-mini">姓名</label>
+									</div>
+									<div class="col-md-2">
+										<text-input ng-readonly="false" ng-model="data.currItem.name">
+									</div>
+									<div class="col-md-3">
+										<button style="width: 31%; height: 25px;margin: 0 auto; padding: 2px;" class="btn btn-sm btn-info dropdown-toggle" ng-click="search()">查询</button>
+										<button ng-show="userbean.userauth.authority||userbean.userauth.admins" style="width: 31%; height: 25px;" class="btn btn-white btn-xs" type="button" ng-click="on_leading()"><i class="fa fa-file-excel-o"></i></i>导入日报
+               							</button>
+										<button ng-show="userbean.userauth.authority||userbean.userauth.admins" style="width: 31%; height: 25px;" class="btn btn-white btn-xs" type="button" ng-click="on_detail()"><i class="fa fa-file-excel-o"></i></i>导入明细
+               							</button>
+									</div>
+
+								</div>
+								<div class="ibox-content">
+									<div class="row">
+										<!--<div class="ab-option-toolbar">
+											<button class="btn btn-white btn-xs" type="button" ng-click="addItem('oa_attrecord_11')"><i class="fa fa-plus-square-o"></i>增加
+                                    </button>
+											<button class="btn btn-white btn-xs" type="button" ng-click="delItem('oa_attrecord_11')"><i class="fa fa-minus-square-o"></i>删除
+                                    </button>
+										</div>-->
+										<div ag-gridview sg-options="oa_attrecord_11" sg-columns="reseau_11" id="grid" style="width:100%;height:400px;" class="slick-grid"></div>
+									</div>
+								</div>
+							</div>
+
+							<!--
+                        	作者：785252673@qq.com
+                        	时间：2017-09-06
+                        	描述：上下班打卡月统计
+                        -->
+							<div id="onchangemthflag1_2" class="tab-pane">
+								<div class="row">
+									<div class="col-md-1">
+										<label class="form-label-mini not-null">时间</label>
+									</div>
+									<div class="col-md-2">
+										<input style="text-align: center;" readonly="readonly" class="input-sm form-control form_datetime" ng-model="data.currItem.start_time_mody" type="text" value="" size="16">
+									</div>
+									<div class="col-md-1">
+										<label class="form-label-mini not-null">至</label>
+									</div>
+									<div class="col-md-2">
+										<input style="text-align: center;" readonly="readonly" class="input-sm form-control form_datetime" ng-model="data.currItem.finish_time_mody" type="text" value="" size="16">
+									</div>
+									<div class="col-md-1">
+										<label class="form-label-mini">姓名</label>
+									</div>
+									<div class="col-md-2">
+										<text-input ng-readonly="false" ng-model="data.currItem.name1">
+									</div>
+									<div class="col-md-2" style="width: 15.5%;"></div>
+									<div class="col-md-1">
+										<button style="width: 90px;height: 25px;margin: 0 auto; padding: 2px;" class="btn btn-sm btn-info dropdown-toggle" ng-click="search_mody()">查询</button>
+									</div>
+
+								</div>
+								<div class="ibox-content">
+									<div class="row">
+										<div ag-gridview sg-options="oa_attrecord_12" sg-columns="reseau_12" id="grid1" style="width:100%;" class="slick-grid"></div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<!--
+                        	作者：785252673@qq.com
+                        	时间：2017-09-07
+                        	描述：外出统计
+                        -->
+					<!--<div id="tab2" class="main-tab-pane tab-pane">
+
+						<div class="ibox-content">
+							<div class="row">
+								<div class="col-sm-12 m-b-xs">
+									<div data-toggle="buttons" class="btn-group">
+										<label class="btn btn-sm btn-white active" data-target="#onchangemthflag2_1" data-toggle="tab" ng-click="on_egress(1)">
+                                            <input type="radio" id="option1" value="1" name="statType2"> 按日统计 </label>
+
+										<label class="btn btn-sm btn-white" data-target="#onchangemthflag2_2" data-toggle="tab" ng-click="on_egress(2)">
+                                            <input type="radio" id="option2" value="2" name="statType2"> 按月统计 </label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">时间</label>
+								</div>
+								<div class="col-md-1">
+									<input ng-show="andex!=4" bs-datepacker="" ng-model="data.currItem.s_time_day" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+									<input ng-show="andex==4" readonly="readonly" class="input-sm form-control form_datetime" ng-model="data.currItem.s_time_mody" type="text" value="" size="16">
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">至</label>
+								</div>
+								<div class="col-md-1">
+									<input ng-show="andex!=4" bs-datepacker="" ng-model="data.currItem.e_time_mody" type="text" placeholder="" class="input-sm form-control ng-valid ng-dirty ng-valid-parse ng-touched">
+									<input ng-show="andex==4" readonly="readonly" class="input-sm form-control form_datetime" ng-model="data.currItem.e_time_mody" type="text" value="" size="16">
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">部门</label>
+								</div>
+								<div class="col-md-2">
+									<button-edit ng-show="andex!=4" be-delete="empty_org_name()" be-search="org_name()" be-edit="false" ng-model="data.currItem.org_name" />
+									<button-edit ng-show="andex==4" be-delete="empty_org_name()" be-search="org_name()" be-edit="false" ng-model="data.currItem.org_name" />
+								</div>
+								<div class="col-md-1">
+									<label class="form-label-mini not-null">姓名</label>
+								</div>
+								<div class="col-md-2">
+									<text-input ng-readonly="false" ng-model="data.currItem.name">
+								</div>
+								<div ng-if="idx==2&&egress_andex==1" class="col-md-1">
+									<button style="width: 100px; height: 25px;" class="btn btn-white btn-xs" type="button" ng-click="on_leading()"><i class="fa fa-file-excel-o"></i></i>导入
+               					</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-content-button">
+							<!--外出打卡日统计-->
+					<!--<div id="onchangemthflag2_1" class="tab-pane active">
+								<div class="ibox-content">
+									<div class="row">
+										<div class="ab-option-toolbar">
+											<button class="btn btn-white btn-xs" type="button" ng-click="addItem('oa_attrecord_21')"><i class="fa fa-plus-square-o"></i>增加
+                                    </button>
+											<button class="btn btn-white btn-xs" type="button" ng-click="delItem('oa_attrecord_21')"><i class="fa fa-minus-square-o"></i>删除
+                                    </button>
+										</div>
+										<div ag-gridview sg-options="oa_attrecord_21" sg-columns="reseau_21" id="grid" style="width:100%;height:400px;" class="slick-grid"></div>
+									</div>
+								</div>
+							</div>-->
+					<!--外出打卡月统计-->
+					<!--<div id="onchangemthflag2_2" class="tab-pane">
+								<div class="ibox-content">
+									<div class="row">
+										<div class="ab-option-toolbar">
+											<button class="btn btn-white btn-xs" type="button" ng-click="addItem('oa_attrecord_22')"><i class="fa fa-plus-square-o"></i>增加
+                                    </button>
+											<button class="btn btn-white btn-xs" type="button" ng-click="delItem('oa_attrecord_22')"><i class="fa fa-minus-square-o"></i>删除
+                                    </button>
+										</div>
+										<div ag-gridview sg-options="oa_attrecord_22" sg-columns="reseau_22" id="grid" style="width:100%;height:400px;" class="slick-grid"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>-->
+
+				</div>
+			</div>
+		</div>
+		<!--<div class="tab-content-button">-->
+	</div>
+</div>
+<script language="JavaScript">
+	$('.form_datetime').datetimepicker({
+		format: 'yyyy-mm',
+		autoclose: true,
+		todayBtn: true,
+		startView: 'year',
+		minView: 'year',
+		maxView: 'decade',
+		language: 'zh-CN',
+	});
+	setTimeout(function() {
+		$('#grid').height($("#row_div").height() - $("#maintabs").height() - 100);
+	}, 500);
+	window.onresize = function() {
+		setTimeout(function() {
+			$('#grid').height($("#row_div").height() - $("#maintabs").height() - 100);
+		}, 200);
+	}
+</script>
+<style type="text/css">
+	.resource-tree {
+		width: 288px;
+		flex-shrink: 0;
+		flex-grow: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		margin-right: 10px;
+		border: 1px #ddd solid;
+		border-radius: 2px;
+	}
+	
+	.resource {
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+		flex-shrink: 1;
+		flex-grow: 1;
+		background-color: #fff;
+	}
+	
+	div#rMenu {
+		width: 110px;
+		z-index: 4;
+		position: absolute; //使用绝对定位  
+		visibility: hidden;
+		top: 0;
+		background-color: #f6f6f6;
+		padding: 1px;
+		visibility: hidden;
+		text-align: center;
+	}
+	
+	div#rMenu ul {
+		margin: 0px;
+		padding: 0px;
+		/* border-collapse: separate; */
+		border: 1px solid #808080;
+	}
+	
+	div#rMenu ul li {
+		font-size: 11px;
+		line-height: 20px;
+		margin: 0px;
+		padding: 2px;
+		cursor: pointer;
+		list-style: none outside none; //取消样式
+		background-color: #DFDFDF;
+		border-bottom: 1px solid #d3d3d3;
+		padding-left: 3px;
+		color: #222;
+	}
+	
+	div#rMenu ul li:hover {
+		background: #eee;
+	}
+	
+	div.wrap-height {
+		display: flex;
+	}
+	
+	.wrapper.animated.fadeInRight.ng-scope {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	.wrapper-content {
+		padding: 0px 0px 10px!important;
+	}
+	
+	.resource-root {
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+		flex-shrink: 1;
+		flex-grow: 1;
+		background-color: #fff;
+		padding: 3px 2px;
+	}
+	
+	div.left-nav-div {
+		width: 180px;
+		flex-grow: 0;
+		flex-shrink: 0;
+		display: flex;
+	}
+	
+	div.client-content {
+		flex-grow: 1;
+		flex-shrink: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	div.more_news {
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	div.ibox-content.modal-open {
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+	
+	.fadeInRight {
+		z-index: 10;
+	}
+	
+	.tab-content {
+		position: initial;
+	}
+	
+	.row_div {
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+	
+	.wrap-height {
+		height: 334px;
+		margin-right: 0px !important;
+		padding-right: 0px !important;
+		overflow: hidden;
+		outline: none;
+	}
+	
+	div.col-lg-12 {
+		padding-right: 0px !important;
+		padding-left: 0px!important;
+	}
+	
+	div.wrap-height>div.ng-scope {
+		display: flex;
+		flex-shrink: 1;
+		flex-grow: 1;
+		width: 100%;
+		height: 100%;
+	}
+	
+	.ag-blue .ag-ltr .ag-header-group-cell-label {
+		padding-left: 10px;
+		text-align: center;
+	}
+</style>

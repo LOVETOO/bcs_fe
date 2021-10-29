@@ -1,0 +1,180 @@
+<div hc-obj-prop>
+    <!--    --基本信息--   -->
+    <div id="base" hc-box class="active">
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.item_apply_no "
+                     hc-label="单据单号"
+                     hc-readonly="true"
+                ></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-readonly="true"
+                     hc-Dict-Code="stat"
+                ></div>
+                <div hc-input="data.currItem.creator"
+                     hc-label="制单人"
+                     hc-readonly="true"
+                ></div>
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true"
+                     hc-type="time"
+                ></div>
+            </div>
+
+
+            <div class="row">
+                <div hc-input="data.currItem.org_name"
+                     hc-label="所属区域"
+                     hc-required="true"
+                     hc-class-id="scporg"
+                     hc-col-count=2
+                     hc-common-search="commonSearchOfScporg"
+                ></div>
+               <!-- <div hc-input="data.currItem.org_name"
+                     hc-readonly="true"
+                     hc-col-count=2
+                ></div>-->
+
+                <div hc-input="data.currItem.in_warehouse_name"
+                     hc-label="入库仓库"
+                     hc-required="true"
+                     hc-class-id="warehouse"
+                     hc-col-count=2
+                     hc-common-search="commonSearchOfWarehouse"
+                ></div>
+
+                <div hc-input="data.currItem.fix_org_name"
+                     hc-label="网点名称"
+                     hc-col-count=2
+                     hc-class-id="css_fix_org"
+                     hc-common-search="commonSearchOfItemFixOrg"
+                ></div>
+                <!-- <div hc-input="data.currItem.fix_org_name"
+                hc-readonly="true" ></div> -->
+
+            </div>
+            <div class="row">
+                <!-- <div hc-input="data.currItem.out_org_code "
+                    hc-label="受理机构"
+
+                    hc-class-id="scporg"
+                    hc-readonly="true"
+                    hc-common-search="commonSearchOfOutScporg"
+                ></div> -->
+                <div hc-input="data.currItem.appeal_org_name "
+                     hc-label="受理机构"
+                     hc-col-count=4
+                     hc-readonly="true"
+                ></div>
+                <div hc-input="data.currItem.appeal_fix_org_name "
+                     hc-label="受理网点"
+                     hc-col-count=2
+                     hc-readonly="true"
+                ></div>
+                <div hc-input="data.currItem.out_warehouse_name "
+                     hc-label="出库仓库"
+                     hc-col-count=2
+                     hc-readonly="true"
+                ></div>
+                <!-- <div hc-input="data.currItem.out_org_name"
+                    hc-readonly="true"
+                    ></div> -->
+                <!-- <div hc-input="data.currItem.fix_org_name"
+                    hc-label="受理网点"
+                    hc-class-id="css_fix_org"
+                    hc-readonly="true"
+                    hc-common-search="commonSearchOfItemFixOrg"
+                ></div>
+                <div hc-input="data.currItem.fix_org_name"
+                    hc-readonly="true" ></div> -->
+
+                <!-- <div hc-input="data.currItem.org_code"
+                hc-label="出库仓库"
+                hc-required="true"
+                hc-class-id="warehouse"
+                hc-readonly="true"
+                hc-common-search=""
+            ></div>
+            <div hc-input="data.currItem.org_name"
+                hc-readonly="true"     你好吗
+
+            ></div> -->
+            </div>
+
+
+            <div class="row">
+
+                <div
+                        hc-input="data.currItem.total_qty"
+                        hc-label="申请总数"
+                        hc-readonly="true"
+                ></div>
+
+                <div
+                        hc-input="data.currItem.check_number"
+                        hc-label="审批总数"
+                        hc-readonly="true"
+                ></div>
+                <div
+                        hc-input="data.currItem.total_amount"
+                        hc-label="申请总金额"
+                        hc-readonly="true"
+                ></div>
+
+
+                <div
+                        hc-input="data.currItem.check_amount"
+                        hc-label="审批总金额"
+                        hc-readonly="true"
+                ></div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="8"
+                ></div>
+            </div>
+            <div hc-box="收货信息">
+                <div class="row">
+                    <div hc-input="data.currItem.to_area_name"
+                         hc-label="所属市"
+                         hc-class-id="scparea"
+                         hc-common-search="commonSearchOfScpareaCity"
+                    ></div>
+
+                    <div hc-input="data.currItem.to_man"
+                         hc-label="收货人"
+                    ></div>
+
+                    <div hc-input="data.currItem.to_tel"
+                         hc-label="电话号码"
+                    ></div>
+                </div>
+                <div class="row">
+                    <div hc-input="data.currItem.to_address"
+                         hc-label="详细地址"
+                         hc-col-count="6"
+                    ></div>
+                </div>
+                <div class="row">
+                    <div
+                            hc-input="data.currItem.send_qty"
+                            hc-label="可发货额度"
+                            hc-readonly="true"
+                    ></div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <!--   明细信息      -->
+        <div hc-grid="gridOptions" hc-box hc-auto-height="grid"></div>
+
+
+    </div>
+</div>

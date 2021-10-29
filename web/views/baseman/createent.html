@@ -1,0 +1,74 @@
+<!-- <script src="js/controllers/baseman/onlineuser.js"></script> -->
+<div hc-diy-page>
+    <div hc-box>
+        <div class="row">
+            <div hc-input="data.currItem.organization_id"
+                 hc-label="组织号"
+                 hc-type="number"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.organization_name"
+                 hc-label="组织名称"
+                 hc-col-count="4"
+                 hc-required="true">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.set_of_books_id"
+                 hc-label="帐套"
+                 hc-type="number"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.set_of_books_name"
+                 hc-label="帐套名称"
+                 hc-col-count="4"
+                 hc-required="true">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.ent_type"
+                 hc-label="组织类型"
+                 hc-select-options="data.ent_type_options"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.account_type"
+                 hc-label="业务类型"
+                 hc-select-options="data.account_type_options"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.statmonth"
+                 hc-label="模块启动月份"
+                 hc-type="date"
+                 hc-col-count="2"
+                 hc-required="true">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.company_number"
+                 hc-label="公司代码"
+                 hc-col-count="2"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.areaname"
+                 hc-label="省份"
+                 hc-btn-click="chooseArea()"
+                 hc-col-count="4"
+                 hc-required="true">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.ar_type"
+                 hc-label="收入确认方式"
+                 hc-select-options="data.ar_type_options"
+                 hc-col-count="2"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.cost_calu"
+                 hc-label="成本核算方式"
+                 hc-select-options="data.cost_calu_options"
+                 hc-col-count="2"
+                 hc-required="true">
+            </div>
+        </div>
+    </div>
+</div>

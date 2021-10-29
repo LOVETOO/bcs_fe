@@ -1,0 +1,25 @@
+<div hc-diy-page>
+    <!--基本信息-->
+    <div class="hc-box grid-other-h">
+        <div class="row">
+            <div hc-input="data.currItem.org_name"
+                 hc-label="机构"
+                 hc-class-id="scporg"
+                 hc-common-search="commonSearchOfScporg"></div>
+            <div hc-input="data.currItem.fix_org_name"
+                 hc-label="网点"
+                 hc-class-id="css_fix_org"
+                 hc-common-search="commonSearchOfFixOrg"></div>
+            <div hc-input="data.currItem.fix_org_type"
+                 hc-label="网点类型"
+                 hc-dict-code="service_store_type"></div>
+            <div hc-input="data.currItem.fix_org_class"
+                 hc-dict-code="service_store_level"
+                 hc-label="网点级别"></div>
+            <!-- <button  type="button" ng-click="searchDrp_Item()" style="border:1px solid #dbe0e8;font-size:13px;background: white">查询</button>-->
+        </div>
+    </div>
+    <div hc-box="" hc-grid="gridOptions" hc-auto-height="grid"></div>
+</div>
+
+</div>

@@ -1,0 +1,99 @@
+<div hc-diy-page>
+    <div class="hc-box">
+        <div class="row">
+            <div hc-input="data.currItem.apply_bill_no"
+                 hc-label="借出申请号"
+                 hc-change="seasonmthDate()"
+                 hc-class-id="epm_resouce_loan_return_head"
+                 hc-common-search="commonSearchSettingOfApplyBillNo">
+            </div>
+            <div hc-input="data.currItem.apply_bill_dates"
+                 hc-label="申请时间"
+                 hc-type="date"
+                 hc-change="seasonmthDate()">
+            </div>
+            <div hc-input="data.currItem.apply_bill_datee"
+                 hc-label="至"
+                 hc-change="seasonmthDate()"
+                 hc-type="date">
+            </div>
+            <div hc-input="data.currItem.loan_project_name"
+                 hc-label="使用项目"
+                 hc-change="seasonmthDate()"
+                 hc-class-id="epm_project"
+                 hc-common-search="commonSearchSettingOfLoanProjectName">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.apply_dept_name"
+                 hc-label="申请部门"
+                 hc-change="seasonmthDate()"
+                 hc-class-id="dept"
+                 hc-common-search="deptSerachObj">
+            </div>
+            <div hc-input="data.currItem.apply_person_name"
+                 hc-label="申请人"
+                 hc-change="seasonmthDate()"
+                 hc-class-id="scpuser"
+                 hc-common-search="scpuserSerachObj">
+            </div>
+            <div hc-input="data.currItem.resouce_type"
+                 hc-label="资源类型"
+                 hc-dict-code="resouce_type"
+                 hc-change="seasonmthDate()">
+            </div>
+            <div hc-input="data.currItem.resouce_category_name"
+                 hc-label="资源类别"
+                 hc-change="seasonmthDate()"
+                 hc-btn-click="epmResouceCategorySerachObj()">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.loan_description"
+                 hc-label="使用用途"
+                 hc-blur="seasonmthDate()">
+            </div>
+            <div hc-input="data.currItem.resource_identifier"
+                 hc-label="资源编号"
+                 hc-change="seasonmthDate()"
+                 hc-class-id="epm_resouce_archives"
+                 hc-common-search="resourceIdentifierSerachObj">
+            </div>
+            <div hc-input="data.currItem.resource_name"
+                 hc-label="资源名称"
+                 hc-change="seasonmthDate()"
+                 hc-class-id="epm_resouce_archives"
+                 hc-common-search="resourceNameSerachObj">
+            </div>
+            <div hc-input="data.currItem.keeper_name"
+                 hc-label="保管人"
+                 hc-change="changeColor()"
+                 hc-class-id="scpuser"
+                 hc-common-search="keeperNameSerachObj">
+            </div>
+        </div>
+    </div>
+    <div class="hc-box flex1 flex-column">
+        <div hc-tab="epm_tab" ng-click="asd(params)" hc-tab-change="onTabChange_hr(params)" class="other-h"></div>
+
+        <div hc-tab-page class="flex1 flex-column">
+            <!--待借出-->
+            <div id="score" class="active">
+                <div  hc-grid="gridOptions_jie" class="flex1"></div>
+            </div>
+            <!--已借出-->
+            <div id="completion" >
+                <div  hc-grid="gridOptions_completionrate" class="flex1"></div>
+            </div>
+            <!--已归还-->
+            <div id="back" >
+                <div hc-grid="gridOptions_back" class="flex1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

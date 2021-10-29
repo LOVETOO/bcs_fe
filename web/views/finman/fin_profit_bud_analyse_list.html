@@ -1,0 +1,28 @@
+<div hc-diy-page>
+    <div class="hc-box other-h">
+        <div class="row">
+
+            <div hc-input="data.currItem.unknown"
+                 hc-label="预算编制年度"
+                 hc-type="year">
+            </div>
+
+            <button type="button" class="btn btn-primary"
+                    style="margin-left: 30px; width: 100px;"
+                    ng-click="searchByCon()">
+                <i class="fa fa-search"></i> 查询
+            </button>
+
+            <button type="button" class="btn btn-primary"
+                    style="margin-left: 30px; width: 180px;"
+                    ng-click="searchByCon()">
+                <i class="fa fa-paper-plane"></i> 更新执行数据
+            </button>
+
+        </div>
+
+        <div id="grid" hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+    </div>
+
+</div>

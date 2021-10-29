@@ -1,0 +1,63 @@
+<div hc-diy-page ng-init="init()">
+    <div class="tree-grid-box flex1 flex-row" hc-splitter-box>
+        <div class="tree-box">
+            <div class="tree-title">资产投资项目类型</div>
+            <ul id="zTree" class="ztree"></ul>
+        </div>
+        <div class="tree-box tabs-container flex-column" style="border:1px solid #dbe0e8">
+            <div hc-tab="tabs"></div>
+            <div hc-tab-page class="tab-content ibox-content">
+
+                <div id='base' hc-box="" class="active maxlabel">
+                    <div class="row">
+                        <div hc-input="data.currItem.invitem_type_code"
+                             hc-label="资产投资项目类型编码"
+                             hc-readonly="true"
+                             hc-col-count="8">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.invitem_type"
+                             hc-label="资产投资项目类型名称"
+                             hc-required="true"
+                             hc-col-count="8">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.class"
+                             hc-label="资产投资项目类型级别"
+                             hc-readonly="true"
+                             hc-col-count="8">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.note"
+                             hc-label="备注"
+                             hc-col-count="8">
+                        </div>
+                    </div>
+                    <!--<div class="row">-->
+                    <!--<div hc-input="data.currItem.creator" hc-label="创建人" hc-readonly="true">-->
+                    <!--</div>-->
+                    <!--<div hc-input="data.currItem.create_time" hc-label="创建时间" hc-readonly="true">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<div hc-input="data.currItem.updator" hc-label="最后修改人" hc-readonly="true">-->
+                    <!--</div>-->
+                    <!--<div hc-input="data.currItem.update_time" hc-label="最后修改时间" hc-readonly="true">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .splitter_panel .vsplitter{
+        border-right-width: 1px;
+    }
+    .maxlabel>.row label{
+        width: 180px;
+    }
+</style>

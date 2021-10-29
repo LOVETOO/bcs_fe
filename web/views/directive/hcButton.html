@@ -1,0 +1,11 @@
+<button
+	class="btn btn-sm"
+	ng-click="click({ $event: $event })"
+	ng-disabled="clickRunning || disabled()"
+	tabindex="-1"
+>
+	<i class="fa fa-spinner fa-pulse" hc-if="clickRunning" />
+	<i class="{{icon}}" hc-if="icon && !clickRunning" />
+	<span ng-bind="title" hc-if="!(title === '···' && clickRunning)" />
+	<div hc-transclude="parent" />
+</button>

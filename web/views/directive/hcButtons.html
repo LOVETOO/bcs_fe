@@ -1,0 +1,53 @@
+<div
+    class="btn-group"
+    hc-btn-group-id="{{groupId}}"
+    ng-repeat="(groupId, group) in getGroups()"
+>
+
+    <!-- 紧凑型按钮分组 - 默认 -->
+    <div
+        ng-repeat="(id, button) in getButtons({ groupId: groupId, group: group })"
+        hc-if="group.type !== 'dropdown' && !isButtonNeedHide({ id: id, button: button })"
+        hc-button="button.click({ id: id, button: button, event: $event })"
+        hc-button-id="{{ id }}"
+        hc-icon="{{ getButtonIcon({ id: id, button: button }) }}"
+        hc-title="{{ getButtonTitle({ id: id, button: button }) }}"
+        hc-disabled="isButtonDisabled({ id: id, button: button })"
+    />
+
+    <!-- 下拉式按钮分组 -->
+    <div
+        hc-button="groupClick({ id: groupId, group: group, event: $event })"
+        hc-if-start="group.type === 'dropdown' && !isButtonNeedHide({ id: groupId, button: group })"
+        class="btn btn-white"
+        data-toggle="dropdown"
+    >
+        <i class="{{ group.icon }}" />
+        <span ng-bind="group.title" />
+    </div>
+    <div
+        hc-button
+        data-toggle="dropdown"
+        class="dropdown-toggle"
+    >
+        <span class="iconfont hc-moreunfold"/>
+    </div>
+    <ul
+        hc-if-end
+        class="dropdown-menu"
+        ng-class="{ 'pull-right': pullRight }"
+    >
+        <li
+            ng-repeat="(id, button) in getButtons({ groupId: groupId, group: group })"
+            hc-if="!isButtonNeedHide({ id: id, button: button })"
+            ng-click="button.click && button.click({ id: id, button: button, event: $event })"
+            ng-disabled="isButtonDisabled({ id: id, button: button })"
+            hc-button-id="{{ id }}"
+        >
+            <a>
+                <i class="{{ button.icon }}"/>
+                <span ng-bind="button.title"/>
+            </a>
+        </li>
+    </ul>
+</div>

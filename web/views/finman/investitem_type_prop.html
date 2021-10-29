@@ -1,0 +1,17 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.invitem_type_code" hc-label="投资项目编码"></div>
+            <div hc-input="data.currItem.invitem_type_name" hc-label="投资项目名称" hc-required="true"></div>
+            <div hc-input="data.currItem.invitem_type" hc-label="投资项目类型" hc-select-options="[{name:'固定资产',value:1},{name:'无形资产',value:2},{name:'长期待摊费用',value:3}]" ></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.subject_no" hc-label="会计科目编码" hc-btn-click="getSubject()"></div>
+            <div hc-input="data.currItem.subject_name" hc-label="会计科目名称" ></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.note" hc-label="备注" hc-type="textarea" hc-col-count="6"></div>
+            
+        </div>
+    </div>
+</div>

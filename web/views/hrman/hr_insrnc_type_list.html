@@ -1,0 +1,12 @@
+<div hc-edit-list>
+
+        <div class="row">
+            <div hc-input="data.currItem.insrnc_type_code" hc-label="社保类型编码" hc-required="true" ></div>
+            <div hc-input="data.currItem.insrnc_type_name" hc-label="社保类型名称" hc-required="true" ></div>
+            <div hc-input="data.currItem.usable" hc-label="有效状态" hc-required="true" hc-select-options="[{name:'无效',value:'1'},{name:'有效',value:'2'}]"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.remark" hc-label="备注" hc-col-count="6"></div>
+            <div hc-input="data.currItem.is_sysvalue" hc-label="系统预设" hc-type="checkbox" hc-readonly="true"></div>
+        </div>
+    </div>

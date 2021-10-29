@@ -1,0 +1,120 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h" style="margin-bottom: 30px">
+            <div class="row">
+                <div hc-input="data.currItem.item_code"
+                     hc-label="配件编码"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.item_name"
+                     hc-label="配件名称"
+                     hc-required="true" ></div>
+                <div hc-input="data.currItem.item_spec"
+                     hc-label="规格型号"
+                     hc-required="true"  ></div>
+                <div hc-input="data.currItem.usabled"
+                     hc-label="可用"  
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.use_type"
+                     hc-label="主要用途"
+                     hc-required="true"
+                     hc-dict-code="use_type" ></div>
+                <div hc-input="data.currItem.rec_type"
+                     hc-label="旧处理方式"
+                     hc-required="true"
+                     hc-dict-code="rec_type" ></div>
+                <div hc-input="data.currItem.sur_stat"
+                     hc-label="供应状态"
+                     hc-required="true"
+                     hc-dict-code="sur_stat" ></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.uom_name"
+                     hc-label="单位"
+                     hc-class-id="uom"
+                     hc-common-search="commonSearchOfUom"></div>
+                <div hc-input="data.currItem.met_type"
+                     hc-label="材料属性"
+                     hc-required="true"
+                     hc-dict-code="met_type" ></div>
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-type="textarea" ></div>
+            </div>
+        </div>
+        <div  hc-box="仓库参数">
+            <div class="row">
+                <div hc-input="data.currItem.norm_inv_qty"
+                     hc-label="合理库存"
+                     hc-change="isNumFormat(data.currItem.norm_inv_qty,'norm_inv_qty')"></div>
+                <div hc-input="data.currItem.max_inv_qty"
+                     hc-label="最大库存"
+                     hc-change="isNumFormat(data.currItem.max_inv_qty,'max_inv_qty')"></div>
+                <div hc-input="data.currItem.min_inv_qty"
+                     hc-label="最小库存"
+                     hc-change="isNumFormat(data.currItem.min_inv_qty,'min_inv_qty')"></div>
+
+            </div>
+        </div>
+
+        <!--可替换配件-->
+        <div  hc-box="可替换配件"   hc-grid="gridOptions_css_item_alt" style="height: 200px">
+
+        </div>
+        <div  hc-box="配件图片">
+        <div id="Css_Item_Photo" class="active">
+
+            <div class="hc-box-upload">
+                <div class="hc-list" ng-dblclick="open(img)"
+                     ng-repeat="img in data.currItem.css_item_photoofcss_items">
+                    <div class="hc-list-img">
+                        <img title="双击查看大图" class="img" ng-show="img.docid&&img.docid!='0'> 0"
+                             src="/downloadfile?docid={{img.docid}}&viewtype=1"/>
+                        <span class="btn-upload" id="uploadFileFirst" ng-click="uploadFile($index)"
+                              ng-show="img.docid==0||img.docid=='0'||img.docid==undefined">上传照片</span>
+                        <button class="btn btn_del" ng-click="del_image($index)"
+                                ng-show="img.docid> 0&&img.docid!='0'">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="hc-list-infor">
+                        <input type="text" readonly="readonly" class="hc-list-infor-name" name="img_name"
+                               ng-model="img.img_name"/>
+                        <input type="hidden" name="locationid" ng-model='img.locationid'/>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--<div hc-attach="attachSetting" class="ng-isolate-scope">
+                   <div class="hc-file-list hc-box ng-scope" hc-box hc-if="!error">
+                       <div class="hc-file-div" ng-hide="readonly" hc-tooltip="新增图片" hc-tooltip-placement="bottom">
+                         <div class="hc-file-img" ng-click="uploadImg()">
+                         </div>
+                       </div>
+                   </div>
+
+            </div>-->
+        </div>
+        </div>
+    </div>
+</div>
+<!--</div>-->
+<style>
+    /*.ibox-title {
+        display: inline-block;
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    .modal-footer{
+        padding-top: 0px;
+    }
+    .TreeGridBox .ibox-title{
+        border: none;
+    }*/
+</style>

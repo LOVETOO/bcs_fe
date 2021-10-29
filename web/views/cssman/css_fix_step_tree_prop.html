@@ -1,0 +1,68 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.fix_step_code"
+                 hc-required="true"
+                 hc-label="服务措施编码">
+            </div>
+
+            <div hc-input="data.currItem.fix_step_name"
+                 hc-required="true"
+                 hc-label="服务措施描述">
+            </div>
+
+            <div hc-input="data.currItem.item_class_code"
+                 hc-label="产品大类"
+                 hc-class-id="item_class"
+                 hc-common-search="commonSearchSettingOfItemClass">
+            </div>
+
+            <div hc-input="data.currItem.item_class_name"
+                 hc-readonly="true">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.server_type"
+                 hc-required="true"
+                 hc-label="服务类型"
+                 hc-dict-code="server_type">
+            </div>
+
+
+            <div hc-input="data.currItem.note"
+                 hc-label="备注"
+                 hc-type="textarea"
+                 hc-col-count="6"></div>
+        </div>
+    </div>
+    <!--其他-->
+    <div id="other" hc-box="">
+        <div class="row">
+            <div hc-input="data.currItem.creator"
+                 hc-readonly="true"
+                 hc-label="创建人">
+            </div>
+            <div hc-input="data.currItem.create_time"
+                 hc-type="date"
+                 hc-readonly="true"
+                 hc-label="创建时间"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.updator"
+                 hc-readonly="true"
+                 hc-label="最后修改人">
+            </div>
+            <div hc-input="data.currItem.update_time"
+                 hc-type="date"
+                 hc-readonly="true"
+                 hc-label="最后修改时间"></div>
+        </div>
+    </div>
+
+</div>
+
+
+

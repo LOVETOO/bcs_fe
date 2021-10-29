@@ -1,0 +1,59 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+        <div class="row">
+            <div hc-input="data.currItem.year_month"
+                 hc-label="当前应收期间"
+                 hc-type="month"
+                 hc-readonly="true" >
+            </div>
+            <div hc-input="data.currItem.group_customer_code"
+                 hc-label="总公司"
+                 hc-class-id="customer_org"
+                 hc-common-search="chooseGroupCustomer">
+            </div>
+            <div hc-input="data.currItem.group_customer_name"
+                 hc-readonly="true"></div>
+
+            <div hc-input="data.currItem.ar_flag_is_on"
+                 hc-type="checkbox"
+                 hc-change="ChangeAr_flag()"
+                 hc-label="已开票">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.beginyear_month"
+                 hc-label="起始月份"
+                 hc-type="year-month">
+            </div>
+            <div hc-input="data.currItem.customer_code"
+                 hc-label="客户"
+                 hc-class-id="customer_org"
+                 hc-common-search="chooseCustomer">
+            </div>
+            <div hc-input="data.currItem.customer_name"
+                 hc-readonly="true"></div>
+
+            <div hc-input="data.currItem.ar_flag_is_off"
+                 hc-type="checkbox"
+                 hc-change="ChangeAr_flag()"
+                 hc-label="未开票">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.endyear_month"
+                 hc-label="终止月份"
+                 hc-type="year-month">
+            </div>
+            <div hc-input="data.currItem.crm_entid"
+                 hc-label="品类"
+                 hc-dict-code="crm_entid">
+            </div>
+        </div>
+
+    </div>
+
+    <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+</div>

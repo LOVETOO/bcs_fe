@@ -1,0 +1,360 @@
+<div hc-diy-page class="news_index">
+    <!--startprint-->
+    <div class="content" id="printcontent">
+        <div class="subject">
+            <h2>{{data.currItem.subject}}</h2>
+        </div>
+        <div class="author">
+            <p class="author_left">
+                {{data.currItem.pub_time}}
+                <span ng-if="data.currItem.publisher != ''">
+                    <span class="author_left"> 发布人：</span>
+                    <span class="author_right">{{data.currItem.publisher}}</span>
+                </span>
+                <span ng-if="data.currItem.publish_dept != ''">
+                    <span class="author_left">发布部门：</span>
+                    <span class="author_right">{{data.currItem.publish_dept}}</span>
+                </span>
+            </p>
+        </div>
+        <div ng-bind-html='html' class="content">
+
+            </div>
+            <hr class="line clear">
+
+            <!--添加附件-->
+            <div class="hc-enclosure-list jdslist">
+                <!--<button class="hc-enclosure-div btn btn-blue canuse"><i class="iconfont hc-xiazai2"></i>批量下载</button>
+                <button class="hc-enclosure-div btn btn-orange canuse"><i class="iconfont hc-lajitong"></i>批量删除</button>-->
+
+                <div ng-repeat="doc in data.currItem.scp_news_attachs track by $index">
+                    <div class="hc-enclosure-div jds" title="{{doc.docname}}">
+
+                        <img
+                                class="jdsimg"
+                                ng-click="open(doc)"
+                                ng-src="{{(isImage(doc.docname))?'/downloadfile?docid='+doc.docid:''}}"><!--如果是图片直接显示-->
+
+                        <i class="iconfont"
+                           ng-click="open(doc)"  
+                           ng-class="attachClass($index)"
+                           ng-hide="isImage(doc.docname)"
+                           style="cursor:pointer;margin-left: -10px" 
+                        ></i>
+ 
+ 
+                        <p>{{doc.docname}}</p>
+
+                        <i class="iconfont hc-icondownload" 
+                           ng-show='status!=1'
+                           ng-click="$event.stopPropagation();downloadAttach($index)"
+                           style="cursor: pointer"
+                           title="下载附件"
+                        ></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ng-if="data.currItem.scp_news_attachs.length>0" -->
+<!--旧版附件
+            <div ng-if="data.currItem.scp_news_attachs.length>0">
+                <p style="font-size: 14px;color: cornflowerblue;">附件</p>
+                <ul style="padding: 0">
+                    <li ng-repeat="file in data.currItem.scp_news_attachs" class="fileitem">
+                        <span class="index" style="">{{$index +1}}</span>
+                        <span class="swf-pr name" style="padding-left: 10px;">{{file.docname}}
+                            ({{(file.oldsize/1024).toFixed(0)}}KB)</span>
+                        <span class="swf-pr look" ng-click="showPhoto(file)"><a>查看</a></span>
+                        <span class="swf-pr look" ng-click="btnDownloadAttachClick(file)"><a>下载</a></span>
+                    </li>
+                </ul>
+            </div>
+-->
+
+
+            <div class="notices_footer">
+                <!-- <ul id="myTab" class="nav nav-tabs nav_color">
+                    <li class="active tab1">
+                        <a href="#home" data-toggle="tab">
+                            <span>阅读记录({{data.currItem.scp_news_viewhs.length}})</span>
+                        </a>
+                    </li>
+                    <li class="tab1" ng-if="data.currItem.showwf == 2">
+                        <a href="#opinion" data-toggle="tab">
+                            审批意见
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active " id="home" style="position: relative;">
+
+                        <div class="readdiv">
+                            <div class="readitem" ng-if="newsreaders[nowpage][0].length>0">
+                                <div class="readbody" ng-repeat="item in newsreaders[nowpage][0]">
+                                    <span>{{($index+1)+(nowpage*30)}}</span>
+                                    <span>{{item.reader_name}}</span>
+                                    <span>{{item.read_time}}</span>
+                                </div>
+                            </div>
+                            <div class="readitem" ng-if="newsreaders[nowpage][1].length>0">
+                                <div class="readbody" ng-repeat="item in newsreaders[nowpage][1]">
+                                    <span>{{($index+1)+(nowpage*30)+10}}</span>
+                                    <span>{{item.reader_name}}</span>
+                                    <span>{{item.read_time}}</span>
+                                </div>
+                            </div>
+                            <div class="readitem" ng-if="newsreaders[nowpage][2].length>0">
+                                <div class="readbody" ng-repeat="item in newsreaders[nowpage][2]">
+                                    <span>{{($index+1)+(nowpage*30)+20}}</span>
+                                    <span>{{item.reader_name}}</span>
+                                    <span>{{item.read_time}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="pageBox" ng-show="showpage"></div>
+                    </div>
+                    <div class="tab-pane fade in" id="opinion">
+                        <div style="margin-top: 10px;">
+                            <ul style="padding: 0">
+                                <li class="opinionItem" ng-repeat="userOpinion in userOpinions">
+                                    <span class="opinionUser">{{userOpinion.username}}</span>
+                                    <span>{{userOpinion.statname}}</span>
+                                    <span class="opinionTime">{{userOpinion.signtime}}</span>
+                                    <span class="opinionText">{{userOpinion.opinion}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- hc-tab-change="onOrgTabChange(params)" -->
+                <div hc-box class="other-h" hc-tab="other_tab" ></div>
+                <div hc-tab-page>
+                    <!-- 服务区域 -->
+                    <div id="home" style="position: relative;" hc-box class="active">
+                        <div class="readdiv">
+                            <div class="readitem" ng-if="newsreaders[nowpage][0].length>0">
+                                <div class="readbody" ng-repeat="item in newsreaders[nowpage][0]">
+                                    <span>{{($index+1)+(nowpage*30)}}</span>
+                                    <span>{{item.reader_name}}</span>
+                                    <span>{{item.read_time}}</span>
+                                </div>
+                            </div>
+                            <div class="readitem" ng-if="newsreaders[nowpage][1].length>0">
+                                <div class="readbody" ng-repeat="item in newsreaders[nowpage][1]">
+                                    <span>{{($index+1)+(nowpage*30)+10}}</span>
+                                    <span>{{item.reader_name}}</span>
+                                    <span>{{item.read_time}}</span>
+                                </div>
+                            </div>
+                            <div class="readitem" ng-if="newsreaders[nowpage][2].length>0">
+                                <div class="readbody" ng-repeat="item in newsreaders[nowpage][2]">
+                                    <span>{{($index+1)+(nowpage*30)+20}}</span>
+                                    <span>{{item.reader_name}}</span>
+                                    <span>{{item.read_time}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="{{'pageBox' + newsid}}" ng-show="showpage"></div>
+                    </div>
+                    <!-- 服务管控 -->
+                    <div id="opinion">
+                        <div style="margin-top: 10px;">
+                            <ul style="padding: 0">
+                                <li class="opinionItem" ng-repeat="userOpinion in userOpinions">
+                                    <span class="opinionUser">{{userOpinion.username}}</span>
+                                    <span>{{userOpinion.statname}}</span>
+                                    <span class="opinionTime">{{userOpinion.signtime}}</span>
+                                    <span class="opinionText">{{userOpinion.opinion}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--endprint-->
+</div>
+
+<style>
+    .news_index .subject {
+        margin: 20px 0 10px;
+    }
+
+    .news_index .subject>h2 {
+        text-align: center;
+        font-size: 24px;
+    }
+
+    .news_index .author>p {
+        text-align: center;
+    }
+
+    .news_index .author_left,
+    .news_index .author_right {
+        font-size: 12px;
+        color: #a5a5a5;
+    }
+
+    .news_index .author_left {
+        padding-left: 5px;
+    }
+
+    .news_index .content {
+        margin: 0 auto;
+    }
+
+    .news_index .att_bt {
+        _zoom: 1;
+        padding: 5px 2px;
+        clear: both;
+        margin: 5px 0 10px;
+        min-height: 40px;
+    }
+
+    .news_index .name_big {
+        float: left;
+        line-height: 26px;
+    }
+
+    .news_index .name_big .down_big {
+        margin-left: 2px;
+    }
+
+    .news_index .graytext {
+        color: #a0a0a0;
+    }
+
+    .news_index .ico_big {
+        float: left;
+        margin: 2px 8px 0 0;
+    }
+
+    .news_index .readhead,
+    .news_index .readbody {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .news_index .readhead {
+        font-weight: bold;
+        border-bottom: 1px solid #a0a0a0;
+    }
+
+    .news_index .readbody {
+        border-bottom: 1px solid #a5a5a5;
+    }
+
+    .news_index .news_index .tab-pane span {
+        padding: 5px 10px 5px 10px;
+    }
+
+    .news_index .news_index .tab-pane span:not(:first-child) {
+        text-align: center;
+        position: relative;
+        /* left: -10%; */
+    }
+
+    .news_index .tab1 {
+        font-size: 16px;
+        padding: 5px 0;
+    }
+
+    .news_index .tab1>a {
+        color: #007fff !important;
+    }
+
+    .news_index .mail-attachment {
+        border-top: none;
+    }
+
+    .news_index .line {
+        height: 1px;
+        border: none;
+        border-top: 1px dashed #a5a5a5;
+    }
+
+    .news_index .content {
+        width: 900px;
+        margin: 0 auto;
+    }
+
+    .news_index .clear {
+        clear: both;
+    }
+
+    .news_index #pageBox {
+        width: 100%;
+        position: absolute;
+        bottom: -60px;
+    }
+
+    .news_index #pageBox>ul.pagination>li>span {
+        width: 30px;
+    }
+
+    .news_index #pageBox>ul.pagination>li {
+        float: left;
+    }
+
+    .news_index .swf-pr {
+        padding-right: 8px;
+    }
+
+    .news_index .fileitem {
+        padding: 5px 10px;
+    }
+
+    .news_index .readdiv {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+
+    .news_index .readitem {
+        height: 294px;
+        overflow: auto;
+    }
+
+    .news_index #opinion {
+        height: 314px;
+        overflow: auto;
+    }
+
+    .news_index .nav_color {
+        background: #f6f8fb;
+    }
+
+    .news_index .opinionItem {
+        display: flex;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .news_index .opinionItem>span {
+        padding: 0 3px;
+    }
+
+    .news_index .opinionUser {
+        font-weight: bold;
+    }
+
+    .news_index table {
+        border-top: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+    }
+
+    .news_index table th {
+        border-bottom: 2px solid #ccc;
+        text-align: center;
+    }
+
+    .news_index table td,
+    .news_index table th {
+        border-bottom: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        padding: 3px 5px;
+    }
+    
+    
+</style>

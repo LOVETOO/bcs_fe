@@ -1,0 +1,276 @@
+<div class="wrapper wrapper-content animated fadeInRight ng-scope" ng-controller="flow_path">
+	<div class="containner">
+		<div class="left-nav-div">
+			<ul class="newstypenav nav" style="background-color:rgb(237, 236, 245)">
+				<li ng-click="getwflist(1)">
+					<a class="{{data.wftype==1?'flow_high':''}} flow_normal" style="color: #000000;" href="#/crmman/flow_path?flag=1">
+						待审批流程
+					</a>
+				</li>
+				<li ng-click="getwflist(3)">
+					<a  class="{{data.wftype==3?'flow_high':''}} flow_normal" style="color: #000000;" href="#/crmman/flow_path?flag=3">
+						未到达流程
+					</a>
+				</li>
+				<li ng-click="getwflist(2)">
+					<a  class="{{data.wftype==2?'flow_high':''}} flow_normal" style="color: #000000;" href="#/crmman/flow_path?flag=2">
+						我启动流程
+					</a>
+				</li>
+				<li ng-click="getwflist(4)">
+					<a  class="{{data.wftype==4?'flow_high':''}} flow_normal" style="color: #000000;" href="#/crmman/flow_path?flag=4">
+						已完成流程
+					</a>
+				</li>
+				<li ng-click="getwflist(5)">
+					<a  class="{{data.wftype==5?'flow_high':''}} flow_normal" style="color: #000000;" href="#/crmman/flow_path?flag=5">
+						已超时流程
+					</a>
+					<div ng-model="flag"></div>
+				</li>
+			</ul>
+		</div>
+		<div class="client-content">
+			<div class="more_news">
+				<div class="flow_path ibox-content no-padding">
+					<div class="ibox-title list-group-work">
+
+						<ul class="list-group-work">
+							<li class="list-group-item" ng-repeat="item in data.wfcurrents">
+								<p>
+									<a class="text-muted" ng-click="wftempcheck($index)">
+										<span><i class="fa fa-angle-right" ng-class="{'fa-angle-down': !item.hide, 'fa-angle-right': item.hide}"></i>
+{{item.wfname+'('+(item.normalqty+item.delayqty+item.overqty)+')'}}
+                                </span>
+									</a>
+									<!--span class="label label-info pull-right ng-binding">{{item.normalqty+item.delayqty+item.overqty}}</span-->
+									<pie-chart ng-hide="data.wftype!=1" class="pull-right" data="[item.normalqty,item.delayqty+item.overqty]" options="xoption"></pie-chart>
+
+									<!--<span class="text pull-right text-info" ng-class="{'hide': item.normalqty==0}">{{item.normalqty}} </span>
+                                <span class="text pull-right text-warning" ng-class="{'hide': item.delayqty==0}">{{item.delayqty}} </span>
+                                <span class="text pull-right text-danger" ng-class="{'hide': item.overqty==0}">{{item.overqty}} </span>-->
+								</p>
+
+								<!--table ng-hide="item.hide" class="item-info table table-hover margin bottom"-->
+
+								<table foo-table ng-hide="item.hide" class="table default footable-loaded footable" data-page-size="5">
+									<!--table-stripped toggle-arrow-tiny-->
+									<thead>
+										<tr>
+											<th>主题</th>
+											<th ng-hide="data.wftype!=1&&data.wftype!=4&&data.wftype!=3">启动者</th>
+											<th ng-hide="data.wftype!=1&&data.wftype!=2&&data.wftype!=4&&data.wftype!=3">当前过程</th>
+											<th ng-hide="data.wftype!=1&&data.wftype!=2&&data.wftype!=4&&data.wftype!=3">当前审批人</th>
+											<th>到达时间</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="wf in item.wf">
+											<!--href="#{{wf.formclass}}"-->
+											<td>
+												<a href="#{{wf.formclass}}?param={{wf.url_param}}" class="link">{{wf.subject}}</a>
+												<span class="label pull-right label-danger" ng-class="{'hide':delay_stat!=2}">超时</span>
+												<!--<span class="label pull-right label-warning" ng-class="{'hide': delay_stat!=2}">延迟</span>-->
+											</td>
+											<td ng-hide="data.wftype!=1 && data.wftype!=4&&data.wftype!=3">{{wf.startor}}</td>
+											<td ng-hide="data.wftype!=1&&data.wftype!=2 && data.wftype!=4&&data.wftype!=3">{{wf.currprocname}}</td>
+											<td ng-hide="data.wftype!=1&&data.wftype!=2 && data.wftype!=4&&data.wftype!=3">{{wf.userid}}</td>
+
+											<td>{{wf.lasttime}}</td>
+											<!--td><a class="text-infoa">审批</a></td-->
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<td colspan="5">
+												<ul class="pagination pull-right"></ul>
+											</td>
+										</tr>
+									</tfoot>
+								</table>
+							</li>
+							<li class="list-group-item" ng-class="{'hide':data.wfcurrents.length != 0}">
+								<p>没有数据</p>
+							</li>
+						</ul>
+
+					</div>
+
+					<!--</div>-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	/*弹性布局开始*/
+	
+	div.wrap-height {
+		display: flex;
+	}
+	
+	div.wrap-height>div.ng-scope {
+		display: flex;
+		flex-shrink: 1;
+		flex-grow: 1;
+	}
+	
+	.wrapper.wrapper-content.animated.fadeInRight.ng-scope {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	div.containner {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	div.left-nav-div {
+		width: 180px;
+		flex-grow: 0;
+		flex-shrink: 0;
+		display: flex;
+	}
+	
+	ul.newstypenav {
+		background-color: floralwhite;
+		flex-shrink: 1;
+		flex-grow: 1;
+		margin-bottom: 0;
+		padding-top: 20px;
+		margin-right: 10px;
+	}
+	
+	div.client-content {
+		flex-grow: 1;
+		flex-shrink: 1;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	div.more_news {
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	div.ibox-content.modal-open {
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+	/*弹性布局结束*/
+	
+	p {
+		color: #0c0a0a;
+		font-family: Microsoft YaHei;
+	}
+	
+	h3 {
+		border-top: 10px;
+	}
+	/**标题的内上下边距*/
+	
+	.title {
+		padding-top: 30px;
+		padding-bottom: 8px;
+	}
+	
+	.div {
+		height: 500px;
+	}
+	/*导航区*/
+	
+	.nav {
+		position: static;
+	}
+	/*头部*/
+	
+	.head {
+		position: static;
+		background-color: #FFFFFF;
+	}
+	/*内容区*/
+	
+	.more_news {
+		width: 100%;
+		height: 563px;
+		overflow: auto;
+		overflow-x: hidden;
+		background-color: #FFFFFF;
+	}
+	/*	/*
+	.nav>li>a:hover {
+		text-decoration: none;
+		background-color: #0f7abb;
+	}
+	
+	.nav>li>a:focus {
+		text-decoration: none;
+		background-color: #0f7abb;
+	}*/
+	
+	li.selected>a>p {
+		color: red;
+	}
+	
+	span.wfcheckstat-c {
+		display: none
+	}
+	
+	span.wfcheckstat-b {
+		background-color: rgb(237, 85, 101);
+		color: rgb(255, 255, 255);
+	}
+	
+	span.wfcheckstat-a {
+		background-color: rgb(248, 172, 89);
+		color: rgb(255, 255, 255);
+	}
+	
+	.list-group-work ul>li p {
+		margin-top: 5px;
+	}
+	
+	.table>tbody>tr td,
+	.table>tfoot>tr td {
+		border-top: 1px solid #e7eaec;
+		line-height: 1.42857;
+		/* padding: 3px; */
+		vertical-align: top;
+	}
+	
+	.list-group-item {
+		background-color: inherit;
+		border: 1px solid #e7eaec;
+		display: block;
+		margin-bottom: -1px;
+		padding: 8px 15px;
+		position: relative;
+	}
+	
+	.list-group-item table tbody>tr>td {
+		padding-top: 10px;
+		height: 30px;
+	}
+	
+	.flow_high {
+		background: #0f7abb;
+	}
+	
+	.flow_normal:hover {
+		background-color: azure !important;
+	}
+	
+	.flow_high {
+		background-color: #0f7abb !important;
+	}
+	
+	.flow_high:hover {
+		background-color: #0f7abb !important;
+	}
+</style>

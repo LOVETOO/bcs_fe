@@ -1,0 +1,190 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base"  class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.blacklist_no"
+                     hc-label="登记单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.position_name"
+                     hc-label="职位"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+                <div class="big_div">
+                    <div class="invoice_div">
+                        <img hc-img="data.currItem.docid1" >
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.employee_code"
+                     hc-label="员工名称"
+                     hc-class-id="employee_header"
+                     hc-common-search="commonSearchSettingOfEmployee_Header"
+                     hc-required="data.isApply"></div>
+                <div hc-input="data.currItem.employee_name"
+                     hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.idcard"
+                     hc-label="身份证号"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+
+                <div hc-input="data.currItem.org_name"
+                     hc-label="所属部门"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.nation"
+                     hc-label="民族"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.heometown"
+                     hc-label="籍贯"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.phone"
+                     hc-label="联系电话"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.start_date"
+                     hc-label="上岗日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.sex"
+                     hc-label="性别"
+                     hc-dict-code="sex"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+            </div>
+
+        <!--特殊名单信息-->
+        <div id="req" hc-box="特殊名单信息：">
+            <div class="row">
+                <div hc-input="data.currItem.lock_type"
+                     hc-label="锁定类型"
+                     hc-dict-code="lock_type"
+                     hc-change="typeChange()"
+                     hc-type="number"
+                     hc-readonly="!data.isApply"
+                ></div>
+                <div hc-input="data.currItem.lock_start_date"
+                     hc-label="开始锁定日期"
+                     hc-type="date"
+                     hc-change="setLockDays()"
+                     hc-readonly="(data.currItem.lock_type == 1)||(!data.isApply)"></div>
+                <div hc-input="data.currItem.lock_end_date"
+                     hc-label="截止锁定日期"
+                     hc-type="date"
+                     hc-readonly="(data.currItem.lock_type == 1)||(!data.isApply)"
+                     hc-change="setLockDays()"></div>
+                <div hc-input="data.currItem.lock_days"
+                     hc-label="锁定天数"
+                     hc-readonly="(data.currItem.lock_type == 1)||(!data.isApply)"
+                     hc-type="number"
+                     hc-unit="天"
+                     hc-change="setLockEndDate()"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.reason"
+                     hc-label="列入原因"
+                     hc-col-count="8"
+                     hc-required="data.isApply"
+                     hc-readonly="!data.isApply"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.dispose"
+                     hc-label="建议举措"
+                     hc-col-count="8"
+                     hc-readonly="!data.isApply"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.unlock_reason"
+                     hc-label="解除原因"
+                     hc-col-count="4"
+                     hc-required="!data.isApply"
+                     hc-readonly="data.isApply"></div>
+                <div hc-input="data.currItem.registor"
+                     hc-label="登记单位"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.bill_stat"
+                     hc-label="特殊名单状态"
+                     hc-dict-code="is_specialbill_stat"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.unlock_advise"
+                     hc-label="解除后建议"
+                     hc-col-count="4"
+                     hc-required="!data.isApply"
+                     hc-readonly="data.isApply"></div>
+                <div hc-input="data.currItem.unlock_man"
+                     hc-label="解除人"
+                     hc-readonly="data.isApply"></div>
+                <div hc-input="data.currItem.unlock_date"
+                     hc-label="解除日期"
+                     hc-type="date"
+                     hc-readonly="data.isApply"></div>
+            </div>
+        </div>
+
+<style>
+    .big_div{
+        position: relative;
+    }
+    .invoice_div {
+        border: 2px solid #f5f5f5;
+        width: 110px;
+        min-height: 130px;
+        position: absolute;
+        left: 65px;
+        top: 0px;
+        color: #8d9092;
+        cursor: pointer;
+    }
+    .invoice_div input[type="file"] {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 1;
+    }
+    .invoice_div .icon {
+        font-size: 18px;
+        text-align: center;
+        line-height: 130px;
+        font-weight: 200;
+    }
+    .invoice_div img {
+        /* width: auto;
+        height: auto; */
+        width: 100%;
+        height: auto;
+        /* max-width: 100%;
+        max-height: 100%; */
+        position: absolute;
+        z-index: 3;
+        left: 0px;
+        top: 0px;
+    }
+</style>
+
+
+

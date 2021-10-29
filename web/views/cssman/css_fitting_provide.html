@@ -1,0 +1,37 @@
+<div hc-diy-page>
+
+    <div class="row">
+        <div hc-input="filterItem.fix_org_name"
+             hc-label="网点"
+             hc-class-id="css_fix_org"
+             hc-common-search="commonSearchSettingOfFix"
+        ></div>
+
+        <div hc-input="filterItem.out_warehouse_name"
+             hc-label="发货仓库"
+             hc-class-id="warehouse"
+             hc-common-search="commonSearchSettingOfWarehouse"
+        ></div>
+
+        <div hc-label="申请单号"
+             hc-input="filterItem.apply_no"
+        ></div>
+
+        <div hc-label="已确认"
+             hc-input="filterItem.stat"
+             hc-type="checkbox"
+             hc-col-count="1"
+        ></div>
+
+        <button type="button" class="btn btn-white" ng-click="doSearch()">查询</button>
+    </div>
+
+    <div hc-box="配件发放单信息">
+        <div hc-grid="gridOptions"  style="height: 250px;"></div>
+    </div>
+
+    <div hc-box="配件发放单明细">
+        <div hc-grid="gridOptionsLine"  style="height: 250px;"></div>
+    </div>
+
+</div>

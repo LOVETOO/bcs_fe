@@ -1,0 +1,78 @@
+<div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 60px;" ng-controller="SaleOrderFeeController">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title" style="padding-top:8px;">
+                    <h5 style="margin:0;"><strong>费用项目设置</strong></h5>
+
+                    <div ibox-tools class="pull-right"></div>
+                </div>
+                <div class="ibox-content">
+                    <!-- 搜索框 -->
+                    <div>
+                        <form name="seaport_search">
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td width="70%"><input ng-model="searchtext" type="text" name="keyword"
+                                                           placeholder="输入文本..." class="form-control"></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-info dropdown-toggle" ng-click="search()">查询
+                                            </button>
+                                            <!-- <button data-toggle="dropdown" class="btn btn-sm btn-info dropdown-toggle">
+                                                <span class="caret"></span>
+                                            </button> -->
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a onClick="init_table()"
+                                                       data-target="#currency_highlevelsearch"
+                                                       data-toggle="modal">高级查询</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <button class="btn btn-sm btn-info dropdown-toggle" ng-click="new()">新增费用项目设置</button>
+                    </div>
+
+                    <!-- 列表内容 -->
+                    <div class="bill-search-panel">
+                        <table foo-table
+                               class="footable table table-striped table-bordered table-hover toggle-arrow-tiny"
+                               data-filter="#filter" data-page-size="5" data-page-previous-text="prev"
+                               data-page-next-text="next">
+                            <thead>
+                            <tr class="currency_list">
+                                <th class="footable-visible footable-first-column">订单费用编码</th>
+                                <th>订单费用名称</th>
+                                <th>订单费用类型</th>
+                                <th>是否可用</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="currency_list" ng-repeat="sale_order_fee in data.currItem.sale_order_fees">
+                                <td>{{ sale_order_fee.order_fee_code}}</td>
+                                <td>{{ sale_order_fee.order_fee_name}}</td>
+                                <td>
+                                    <span ng-switch on="sale_order_fee.order_fee_type">
+                                            <span ng-switch-when="1">费用类型</span>
+                                    </span>
+                                </td>
+                                <td>{{ sale_order_fee.usable|trueorfalse:2:'是':'否'}}</td>
+                                <td
+                                <button class="btn btn-white btn-xs" ng-click="edit($index,$event)"> 编辑</button>
+                                <button class="btn btn-white btn-xs" ng-click="so_delete($index)"> 删除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="ibox-content modal-open" page-pagination></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

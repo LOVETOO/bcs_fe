@@ -1,0 +1,60 @@
+<div hc-obj-prop>
+    <!--基本信息：-->
+    <div id="base" hc-box class="active">
+        <div class="row other-h" >
+            <div hc-input="data.currItem.kpiitem_no"
+                 hc-label="考核指标编码"
+                 hc-blur="checkKpiItemNo()"
+                 hc-required="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.itemtype_name"
+                 hc-label="指标类别"
+                 hc-readonly="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.kpi_object"
+                 hc-label="考核对象"
+                 hc-dict-code="kpi_object"
+                 hc-required="true"
+                 hc-col-count="4"></div>
+        </div>
+
+        <div class="row other-h" >
+            <div hc-input="data.currItem.kpiitem_name"
+                 hc-label="考核指标名称"
+                 hc-blur="checkKpiItemNo()"
+                 hc-required="true"
+                 hc-col-count="4"></div>
+            <div hc-input="data.currItem.aim"
+                 hc-label="目标"
+                 hc-col-count="4"></div>
+        </div>
+
+        <div class="row other-h" >
+            <div hc-input="data.currItem.countformula"
+                 hc-label="计算公式"
+                 hc-col-count="4"></div>
+            <div hc-input="data.currItem.note"
+                 hc-label="备注"
+                 hc-col-count="4"></div>
+        </div>
+
+
+        <div hc-tab="kpi_tab" hc-tab-change="onTabChange_hr(params)" class="other-h"></div>
+
+        <div hc-tab-page  hc-auto-height>
+            <!--适用部门-->
+            <div id="dept" class="active">
+                <div  hc-grid="gridOptions_dept" hc-auto-height></div>
+            </div>
+            <!--适用岗位-->
+            <div id="position" >
+                <div  hc-grid="gridOptions_position" hc-auto-height></div>
+            </div>
+            <!--评分标准-->
+            <div id="grade" >
+                <div  hc-grid="gridOptions_grade" hc-auto-height></div>
+            </div>
+        </div>
+    </div>
+
+</div>

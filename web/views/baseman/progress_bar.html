@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<style type="text/css">
+
+</style>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" />
+<script type="text/javascript"> 
+ var progress_node_id = "progress"; 
+ function SetProgress(progress) { 
+ if (progress) { 
+ $("#span").css("width", String(progress) + "%"); 
+ $("#span").html(String(progress) + "%"); 
+ } 
+ } 
+ var i = 0; 
+ function doProgress() { 
+ if (i > 99) { 
+ return; 
+ } 
+ if (i <= 99) { 
+ setTimeout("doProgress()", 10); 
+ SetProgress(i); 
+ i++; 
+ } 
+ } 
+ $(document).ready(function() { 
+ doProgress(); 
+ }); 
+ 
+</script>
+</head>
+<body>
+
+<div  id="progress"><span id="span"></span></div>
+</body>
+</html>

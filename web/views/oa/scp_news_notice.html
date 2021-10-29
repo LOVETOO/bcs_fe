@@ -1,0 +1,25 @@
+<div jq-widget class="flex1 flex-column" hc-init="doInit()">
+    <div class="ibox-title grid-other-h">
+        <div class="pull-left" hc-filter="filterSetting" hc-if="filterSetting"></div>
+    </div>
+
+    <div class="tree-grid-box flex1" hc-splitter-box hc-init="doInit()">
+        <div class="tree-box h100">
+            <div class="tree-content h100">
+                <div class="tree-title">通知公告</div>
+                <div hc-tree="treeSetting"></div>
+            </div>
+        </div>
+        <div class="grid-box h100">
+            <div hc-grid="gridOptions" class="h100"></div>
+        </div>
+    </div> 
+</div>
+ 
+<style>
+    .ztree li span.button.ico_close,
+    .ztree li span.button.ico_open,
+    .ztree li span.button.ico_docu {
+        background-size: 16px 16px !important;
+    }
+</style>

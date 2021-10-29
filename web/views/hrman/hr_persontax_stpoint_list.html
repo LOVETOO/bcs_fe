@@ -1,0 +1,37 @@
+<div hc-edit-list>
+
+    <div class="row">
+        
+        <div hc-input="data.currItem.persontax_area_code"
+            hc-label="税收地域"
+            hc-class-id="hr_persontax_area"
+            hc-common-search="commonSearchSetting.hr_persontax_area">
+       </div>
+
+       <div hc-input="data.currItem.persontax_area_name"
+            hc-readonly="true">
+       </div>
+
+        <div hc-input="data.currItem.start_point"
+             hc-label="起征点"
+             hc-required="true"
+             hc-type="money">
+        </div>
+
+        <div hc-input="data.currItem.start_month"
+             hc-label="生效年月"
+             hc-required="true"
+             hc-type="year-month">
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.remark"
+             hc-label="备注"
+             hc-col-count="8">
+        </div>
+    </div>
+
+    
+</div>

@@ -1,0 +1,130 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.position_code"
+                     hc-label="职位编码"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.position_name"
+                     hc-label="职位名称"
+                     hc-required="true"
+                     hc-col-count="2"></div>
+
+                <div hc-input="data.currItem.quota_num"
+                     hc-label="编制数"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.usable"
+                     hc-label="有效"
+                     hc-type="checkbox"></div>
+                <div hc-input="data.currItem.is_in_charge"
+                     hc-label="部门负责人"
+                     hc-type="checkbox"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.dept_code"
+                     hc-label="所属部门"
+                     hc-class-id="dept"
+                     hc-common-search="commonSearchSettingOfDept"></div>
+                <div hc-input="data.currItem.dept_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.position_group_name"
+                     hc-label="职群/职种"
+                     hc-required="true"
+                     hc-class-id="hr_position_group"
+                     hc-common-search="commonSearchSettingOfPositionGroup"></div>
+                <div hc-input="data.currItem.position_class_name"
+                     hc-label="职类"
+                     hc-required="true"
+                     hc-class-id="hr_position_class"
+                     hc-common-search="commonSearchSettingOfPositionClass"></div>
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.position_level_code"
+                     hc-label="职级"
+                     hc-class-id="hr_position_level"
+                     hc-required="true"
+                     hc-common-search="commonSearchSettingOfLevel"></div>
+
+                <div hc-input="data.currItem.position_grade"
+                     hc-select-options="position_grades"
+                     hc-required="true"
+                     hc-label="职等"></div>
+                <div hc-input="data.currItem.position_desc"
+                     hc-label="职位设置目的"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+            </div>
+        </div>
+        <!--任职资格要求-->
+        <div id="req" hc-box="任职资格要求:">
+            <div class="row">
+                <div hc-input="data.currItem.sex_req"
+                     hc-label="性别"
+                     hc-dict-code="gender"></div>
+
+                <div hc-input="data.currItem.age_req"
+                     hc-label="年龄"
+                     hc-dict-code="age_req"></div>
+                <!--不限、25岁以下、30岁以下、35岁以下、40岁以下-->
+                <!--
+                hc-select-options=
+                "[{name:'变动费用',value:'1'},{name:'固定费用',value:'2'}]">  
+                -->
+
+                <div hc-input="data.currItem.experience_req"
+                     hc-label="工作经验"
+                     hc-dict-code="experience_req"></div>
+                <!--不限、一年以上、二年以上、三年以上、五年以上-->
+
+                <div hc-input="data.currItem.degree_req"
+                     hc-label="学历"
+                     hc-dict-code="degree_req"></div>
+                <!--初中、高中/技校、中专、大专、本科、硕士、博士、博士后-->
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.specialty_req"
+                     hc-label="专业要求"></div>
+
+                <div hc-input="data.currItem.lang_req"
+                     hc-label="语言"></div>
+                <div hc-input="data.currItem.knowledge_req"
+                     hc-label="专业知识"
+                     hc-col-count="4"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.ability_req"
+                     hc-label="能力要求"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.special_req"
+                     hc-label="其他特殊要求"
+                     hc-col-count="4"></div>
+            </div>
+        </div>
+        <div hc-box="职业发展:">
+            <div class="row">
+                <div hc-input="data.currItem.career_desc"
+                     hc-label="描述"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+        <div hc-box="职位工作内容:">
+            <div hc-grid="gridOptions" hc-auto-height="grid"></div>
+        </div>
+    </div>
+    <!--包含用户-->
+    <div id="users">
+        <div hc-box hc-grid="gridOptions_users" hc-auto-height="grid"></div>
+    </div>
+
+</div>
+
+
+

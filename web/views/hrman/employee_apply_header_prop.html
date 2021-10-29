@@ -1,0 +1,327 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.employee_code"
+                     hc-label="员工编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.employee_name"
+                     hc-label="姓名"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+                <div class="big_div">
+                    <div class="invoice_div">
+                        <div class="icon">+</div>
+                        <button class="btn invoice_add"  ng-click="uploadFile()"></button>
+                        <img id="invoice_div_img" class="invoice_div_img" hc-img="data.currItem.docid1" >
+                        <button class="btn invoice_del"
+                                ng-click="del_invoice_image()"
+                                ng-show="data.currItem.docid1 > 0">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.stat1"
+                     hc-label="入职状态"
+                     hc-required="true"
+                     hc-dict-code="stat1"></div>
+                <div hc-input="data.currItem.change_type_name"
+                     hc-label="入职类型"
+                     hc-required="true"
+                     hc-class-id="hr_change_type"
+                     hc-common-search="commonSearchOfChangeTypeName"></div>
+                    <div hc-input="data.currItem.source_human"
+                         hc-label="人员来源"
+                         hc-dict-code="source_human"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.org_name"
+                     hc-label="所属部门"
+                     hc-required="true"
+                     hc-class-id="dept"
+                     hc-common-search="commonSearchSettingOfDept"></div>
+                <div hc-input="data.currItem.position_name"
+                     hc-label="职位"
+                     hc-class-id="hr_position"
+                     hc-common-search="commonSearchSettingOfPosition"></div>
+                <div hc-input="data.currItem.username"
+                     hc-label="登录用户名"
+                     hc-class-id="erpemployee"
+                     hc-common-search="commonSearchSettingOfErpemployee"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.start_date"
+                     hc-label="入职日期"
+                     hc-type="date"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.try_day"
+                     hc-label="试用期"
+                     hc-unit="天"
+                     hc-type="number"
+                     hc-change="setFormalDate()"></div>
+                <div hc-input="data.currItem.formal_date"
+                     hc-label="转正日期"
+                     hc-change="setTryDay()"
+                     hc-type="date"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="6"></div>
+            </div>
+        </div>
+
+        <div hc-box="基本信息">
+            <div class="row">
+                <div hc-input="data.currItem.idcard"
+                     hc-label="身份证号"
+                     hc-change="birthdaySex()"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.birthday"
+                     hc-label="出生日期"
+                     hc-readonly="true"
+                     hc-type="date"></div>
+                <div hc-input="data.currItem.sex"
+                     hc-label="性别"
+                     hc-dict-code="sex"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.is_married"
+                     hc-label="婚姻状况"
+                     hc-dict-code="is_valuation"></div>
+                <div hc-input="data.currItem.nation"
+                     hc-label="民族"></div>
+                <div hc-input="data.currItem.hometown"
+                     hc-class-id="scparea"
+                     hc-common-search="commonSearchSettingOfOrigin"
+                     hc-label="籍贯"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.school_name"
+                     hc-label="毕业学校"></div>
+                <div hc-input="data.currItem.career"
+                     hc-label="最高学历"
+                     hc-dict-code="degree_req"></div>
+                <div hc-input="data.currItem.zipcode"
+                     hc-label="邮编"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.card_addrinfo"
+                     hc-label="户籍地"
+                     hc-col-count="4"
+                     hc-type="textarea"></div>
+                <div hc-input="data.currItem.address"
+                     hc-label="现住址"
+                     hc-col-count="4"
+                     hc-type="textarea"></div>
+            </div>
+        </div>
+        <div hc-box="联系人及紧急联系人">
+            <div class="row">
+                <div hc-input="data.currItem.phone"
+                     hc-label="联系电话"></div>
+                <div hc-input="data.currItem.e_mail"
+                     hc-label="电子邮箱"></div>
+                <div hc-input="data.currItem.contactor1"
+                     hc-label="紧急联系人"></div>
+                <div hc-input="data.currItem.contactor1_tel"
+                     hc-label="紧急联系人电话"></div>
+            </div>
+        </div>
+
+        <!--主要家庭情况-->
+        <div id="req" hc-box="主要家庭情况">
+
+            <div class="row">
+                <div hc-input="data.currItem.family_member_ship1"
+                     hc-label="关系"></div>
+                <div hc-input="data.currItem.family_member_name1"
+                     hc-label="姓名"></div>
+                <div hc-input="data.currItem.family_member_entity1"
+                     hc-label="工作单位"></div>
+                <div hc-input="data.currItem.family_member_jobtitle1"
+                     hc-label="职务"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.family_member_ship2"
+                     hc-label="关系"></div>
+                <div hc-input="data.currItem.family_member_name2"
+                     hc-label="姓名"></div>
+                <div hc-input="data.currItem.family_member_entity2"
+                     hc-label="工作单位"></div>
+                <div hc-input="data.currItem.family_member_jobtitle2"
+                     hc-label="职务"></div>
+            </div>
+        </div>
+        <!--本集团亲戚情况：-->
+        <div hc-box="本公司亲戚情况">
+            <div class="row">
+                <div hc-input="data.currItem.kindred_ship1"
+                     hc-label="关系"></div>
+                <div hc-input="data.currItem.kindred_name1"
+                     hc-label="姓名"></div>
+                <div hc-input="data.currItem.kindred_dept1"
+                     hc-label="工作部门"></div>
+                <div hc-input="data.currItem.kindred_jobtitle1"
+                     hc-label="职务"></div>
+            </div>
+            <div class="row">
+            <div hc-input="data.currItem.kindred_ship2"
+                 hc-label="关系"></div>
+            <div hc-input="data.currItem.kindred_name2"
+                 hc-label="姓名"></div>
+            <div hc-input="data.currItem.kindred_dept2"
+                 hc-label="工作部门"></div>
+            <div hc-input="data.currItem.kindred_jobtitle2"
+                 hc-label="职务"></div>
+        </div>
+        </div>
+        <!--突出成绩及特长-->
+        <div hc-box="突出成绩及特长">
+            <div class="row">
+                <div hc-input="data.currItem.contribution"
+                     hc-label="描述"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+        <!--个人发展规划-->
+        <div hc-box="个人发展规划">
+            <div class="row">
+                <div hc-input="data.currItem.career_plan"
+                     hc-label="描述"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+    </div>
+    <!--教育经历-->
+    <div id="education">
+        <div hc-box hc-grid="gridOptions_education" hc-auto-height="grid"></div>
+    </div>
+    <!--工作经历-->
+    <div id="line">
+        <div hc-box hc-grid="gridOptions_line" hc-auto-height="grid"></div>
+    </div>
+    <!--培训经历-->
+    <div id="training">
+        <div hc-box hc-grid="gridOptions_training" hc-auto-height="grid"></div>
+    </div>
+    <!--薪酬福利信息-->
+    <div id="fsalay">
+        <div hc-box="银行账户信息:">
+            <div class="row">
+                <div hc-input="data.currItem.employee_name"
+                     hc-label="账户名"></div>
+                <div hc-input="data.currItem.bank_acc"
+                     hc-label="银行账号"></div>
+                <div hc-input="data.currItem.bank"
+                     hc-label="开户行"
+                     hc-placeholder="请输入完整的开户银行及支行信息"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+            </div>
+        </div>
+        <div hc-box="社保信息:">
+            <div class="row">
+                <div hc-input="data.currItem.is_insured"
+                     hc-label="入职前是否参保"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+                <div hc-input="data.currItem.is_need_insure"
+                     hc-label="是否需购买保险"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+                <div hc-input="data.currItem.insrnc_group_name"
+                     hc-label="所属社保组"
+                     hc-readonly="data.currItem.is_need_insure==1"
+                     hc-class-id="hr_insrnc_group"
+                     hc-common-search="commonSearchSettingOfHrInsrncGroup"></div>
+            </div>
+        </div>
+        <div hc-box="薪酬信息:">
+            <div class="row">
+                <div hc-input="data.currItem.hr_salary_group_id"
+                     hc-label="所属薪资组"
+                     hc-change="changePosition()"
+                     hc-select-options="salary_groups"></div>
+            </div>
+            <div hc-grid="gridOptions_fsalay" hc-auto-height="grid"></div>
+        </div>
+    </div>
+
+</div>
+<style>
+    .big_div{
+        position: relative;
+        margin:0 auto;
+    }
+    .invoice_div {
+        border: 2px solid #f5f5f5;
+        width: 110px;
+        min-height: 130px;
+        position: absolute;
+        left: -55px;
+        top: 0px;
+        color: #8d9092;
+        cursor: pointer;
+    }
+    .invoice_div .invoice_add {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 4;
+    }
+    .invoice_div .icon {
+        font-size: 18px;
+        text-align: center;
+        line-height: 130px;
+        font-weight: 200;
+    }
+    .invoice_div img {
+        /* width: auto;
+        height: auto; */
+        width: 100%;
+        height: 130px;
+        /* max-width: 100%;
+        max-height: 100%; */
+        position: absolute;
+        z-index: 3;
+        left: 0px;
+        top: 0px;
+    }
+    .invoice_div .invoice_del {
+        display: none;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 5;
+        color: #828282;
+    }
+    .invoice_div:hover .invoice_del {
+        display: block;
+    }
+    .approval—status {
+        right: 300px;
+    }
+</style>
+
+
+

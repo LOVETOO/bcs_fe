@@ -1,0 +1,26 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>{{FrmInfo.title}}</h3><span>{{search_hint}}</span>
+    </div>
+    <div class="modal-body">
+        <div style="max-height:200px;overflow-y:auto;">
+	         <table class="table table-border table-striped">
+	            <thead style="border: 1px solid #e7e7e7;background-color: #F5F5F6;line-height: 25px;height:25px;" search-thead></thead>
+	            <tbody>
+	                <tr ng-dblclick="addConfirm($index)" ng-click="addLine($index,$event)" ng-repeat="iitem in items" style="cursor: pointer;">
+	                	<td ng-bind='$index+1' search-td>1</td>
+						<!-- <td ng-bind="$index+1">1</td>
+						<td>{{item.code}}</td>
+						<td>{{country.areaname}}</td> -->
+					</tr>
+	            </tbody>
+	         </table>
+         </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+          确定
+        </a>
+     </div>
+</div>

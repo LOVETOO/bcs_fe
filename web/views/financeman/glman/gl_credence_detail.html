@@ -1,0 +1,106 @@
+
+<div hc-diy-page>
+
+    <!--查询条件-->
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.year_month_start"
+                 hc-label="会计期间从"
+                 hc-type="year-month">
+            </div>
+            <button type="button" class="btn btn-link" style="margin-right:18px;">
+                至
+            </button>
+            <div hc-input="data.currItem.year_month_end"
+                 hc-col-count="1"
+                 hc-readonly="true"
+                 hc-type="year-month">
+            </div>
+
+            <!--查询组织：由明细分类账打开时-->
+            <div hc-input="data.currItem.organization_name"
+                 hc-label="查询组织"
+                 ng-show="!data.openOtherList"
+                 hc-delete-together="organization_id"
+                 hc-col-count="3"
+                 hc-class-id="base_search"
+                 hc-common-search="commonSearchSetting.ent">
+            </div>
+            <!--查询组织：由科目余额表打开时-->
+            <div hc-input="data.currItem.organization_name"
+                 hc-label="查询组织"
+                 ng-show="data.openOtherList"
+                 hc-delete-together="organization_id"
+                 hc-class-id="base_search"
+                 hc-common-search="commonSearchSetting.ent">
+            </div>
+
+            <div hc-input="data.currItem.tally_flag"
+                 hc-select-options="[{name: '全部', value: '0'},{name: '已过账', value: '2'},{name: '未过账', value: '1'}]"
+                 hc-label="过账查询选项">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.km_code_start"
+                 hc-class-id="gl_account_subject"
+                 hc-common-search="commonSearchSetting.gl_account_subject_start"
+                 hc-after-delete="afterDeleteKmStart()"
+                 hc-label="科目编码从">
+            </div>
+            <button type="button" class="btn btn-link" style="margin-right:18px;">
+                至
+            </button>
+            <div hc-input="data.currItem.km_code_end"
+                 hc-class-id="gl_account_subject"
+                 hc-common-search="commonSearchSetting.gl_account_subject_end"
+                 hc-after-delete="afterDeleteKmEnd()"
+                 hc-col-count="1">
+            </div>
+
+            <!--会计科目:科目编码范围无值时，显示选择框-->
+            <div hc-input="data.currItem.km_code"
+                 ng-show="!data.currItem.km_code_start && !data.currItem.km_code_end"
+                 hc-delete-together="gl_account_subject_id"
+                 hc-class-id="gl_account_subject"
+                 hc-common-search="commonSearchSetting.gl_account_subject"
+                 hc-label="会计科目">
+            </div>
+            <div hc-input="data.currItem.km_name"
+                 ng-show="(!data.currItem.km_code_start && !data.currItem.km_code_end) && !data.openOtherList">
+            </div>
+            <!--会计科目：由科目余额表打开时-->
+            <div hc-input="data.currItem.km_name"
+                 hc-col-count="1"
+                 ng-show="(!data.currItem.km_code_start && !data.currItem.km_code_end) && data.openOtherList">
+            </div>
+
+            <!--会计科目:科目编码范围有值时，显示下拉-->
+            <div hc-input="data.currItem.gl_account_subject_id"
+                 ng-show="(data.currItem.km_code_start || data.currItem.km_code_end) && !data.openOtherList"
+                 hc-select-options="data.selectOption_km"
+                 hc-delete-together="gl_account_subject_id"
+                 hc-col-count="4"
+                 hc-label="会计科目">
+            </div>
+            <!--会计科目：由明细分类账打开时-->
+            <div hc-input="data.currItem.gl_account_subject_id"
+                 ng-show="(data.currItem.km_code_start || data.currItem.km_code_end) && data.openOtherList"
+                 hc-select-options="data.selectOption_km"
+                 hc-delete-together="gl_account_subject_id"
+                 hc-col-count="3"
+                 hc-label="会计科目">
+            </div>
+
+            <button type="button"
+                    class="btn btn-primary"
+                    ng-click="searchByCon()">查询
+            </button>
+        </div>
+
+    </div>
+
+    <!--网格-->
+    <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+
+</div>

@@ -1,0 +1,88 @@
+<div class="bill-form" ng-controller="fin_bud_period_headerEdit">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                财务账务期间
+            </div>
+            <div style="float:left">
+                <div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">
+
+                </div>
+
+
+                <button class="btn btn-toolbar" ng-hide="mainbtn.select" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button" ng-click="new()"><i
+                        class="fa fa-file-o"></i>新增
+                </button>
+                <button class="btn btn-toolbar" type="button"  type="button"  ng-click="save($event)"><i
+                        class="fa fa-floppy-o"></i>保存
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i
+                        class="fa fa-history"></i>刷新
+                </button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-title">
+                    <h5>基本信息</h5>
+                    <div ibox-tools></div>
+                </div>
+                <div id="content" class="first tab-content">
+                    <div id="tab1" class="tab-pane active">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">年度</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input bs-datepacker="" view="decade" format="yyyy" data-rule-required="true"
+                                           data-msg-required="预算年度不能空" ng-disabled="false"
+                                           ng-model="data.currItem.period_year" type="number"
+                                           class="form-control input-sm ng-valid ng-dirty ng-valid-number ng-touched">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">描述</label>
+                                </div>
+                                <div class="col-md-11">
+									<textarea ng-readonly="false"
+                                              ng-model="data.currItem.description"
+                                              rows="2"
+                                              class="form-control noresize ng-pristine ng-valid ng-touched">
+									</textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="ibox-content">
+                                        <div ag-gridview sg-options="options_13"
+                                             sg-columns="columns_13" style="width:100%;height:160px;"
+                                             class="slick-grid"></div>
+                                    </div>
+                                    <button class="btn btn-toolbar" type="button"
+                                            ng-click="addpo()"><i class="fa fa-plus-square-o"></i>增加明细
+                                    </button>
+                                    <button class="btn btn-toolbar" type="button" ng-click="delpo()"><i
+                                            class="fa fa-minus-square-o"></i>删除明细
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+          <div>
+          <div class="row">
+               <!-- <div hc-input="data.currItem.payment_import_code"
+                    hc-label="到款单号"
+                    hc-readonly="true"></div> -->
+               <div hc-input="data.currItem.serial_number"
+                    hc-label="银行流水号"
+                    hc-col-count="4"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.receive_date"
+                    hc-label="收款日期"
+                    hc-type="date"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.stat"
+                    hc-label="状态"
+                    hc-dict-code="stat"
+                    hc-readonly="true"></div>
+          </div>
+          <div class="row">
+               <div hc-input="data.currItem.division_id"
+                    hc-label="事业部"
+                    hc-dict-code="epm.division"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.receive_bank"
+                    hc-label="收款银行"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.receive_account"
+                    hc-label="收款账号"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.receive_unit_name"
+                    hc-label="收款公司"
+                    hc-readonly="true"></div>
+          </div>
+          <div class="row">
+                    <div hc-input="data.currItem.customer_code"
+                         hc-label="客户编码"
+                         hc-readonly="true"></div>
+                    <div hc-input="data.currItem.crm_cust_code"
+                         hc-label="客户旧编码"
+                         hc-readonly="true"></div>
+                    <div hc-input="data.currItem.customer_name"
+                         hc-label="客户名称"
+                         hc-col-count="4"
+                         hc-readonly="true"></div>
+               </div>
+          <div class="row">
+               <div hc-input="data.currItem.remit_unit_code"
+                    hc-label="汇款单位编号"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.remit_unit_old_code"
+                    hc-label="汇款单位旧编码"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.remit_unit_name"
+                    hc-label="汇款单位名称"
+                    hc-col-count="4"
+                    hc-readonly="true"></div>
+          </div>
+          <div class="row">
+               <div hc-input="data.currItem.receive_amt"
+                    hc-label="收款金额"
+                    hc-type="money"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.currency_name"
+                    hc-label="币别"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.exchange_rate"
+                    hc-label="汇率"
+                    hc-readonly="true"></div>
+               <div hc-input="data.currItem.confirmed_amt"
+                    hc-label="已认款金额"
+                    hc-type="money"
+                    hc-readonly="true"></div>
+          </div>
+          <div class="row">
+               <div hc-input="data.currItem.payment_remark"
+                    hc-col-count="8"
+                    hc-readonly="true"
+                    hc-type="textarea"
+                    hc-label="打款说明"></div>
+               </div>
+          </div>
+     </div>
+</div>
+
+
+
+
+

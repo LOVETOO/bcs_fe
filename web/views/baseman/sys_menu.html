@@ -1,0 +1,175 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="sys_menu">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="searchws();">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>菜单定义</h5>
+                    <div class="ibox-tools">
+                        <form class="pull-right">
+                            <!--
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip"
+                                    ng-click="save()"><i class="fa fa-refresh"></i>保存
+                            </button>
+                            -->
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left"
+                                    ng-click="refresh()"><i class="fa fa-refresh"></i>刷新
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top"
+                                    ng-click="del()"><i class="fa fa-trash-o"></i> 删除
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal"
+                                    ng-click="add()"><i class="fa fa-plus"></i> 新建
+                            </button>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content TreeGridBox">
+                    <div class="ibox-title" style="width:30%">
+                        <h5>模块</h5>
+                        <ul id="tree" class="ztree"></ul>
+                    </div>
+                    <div class="ibox-title" style="width:70%">
+                        <h5>菜单</h5>
+                        <ul id="menuTree" class="ztree"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--属性窗口-->
+    <div class="modal inmodal fade" id="attributeModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">菜单属性</h4>
+                </div>
+                <div class="modal-body">
+                    <!--tab-->
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="tabs.html#tab-common"> 常规</a></li>
+                            <li ><a data-toggle="tab" href="tabs.html#tab-other"> 其它</a></li>
+                        </ul>
+                        <form method="get" class="form-inline mline ng-pristine ng-valid" name="entityForm" novalidate>
+                            <div class="tab-content">
+                                <div id="tab-common" class="tab-pane active">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <label class="control-label">菜单代码</label>
+                                            <input type="text" class="form-control width_m" name="menucode"
+                                                   ng-model="data.currItem.menucode" >
+                                            <label class="control-label">菜单名称</label>
+                                            <input type="text" class="form-control width_m"  name="menuname"
+                                                   ng-model="data.currItem.menuname">
+                                            <label class="control-label">类型</label>
+                                            <select ng-model="data.currItem.clas"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                                    ng-options="s.id as s.name for s in class"
+                                                    ng-selected="s.id==data.currItem.clas">
+                                            </select>
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">窗体类型</label>
+                                            <select ng-model="data.currItem.formstyle"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                                    ng-options="s.id as s.name for s in formstyles"
+                                                    ng-selected="s.id==data.currItem.formstyle">
+                                            </select>
+                                            <label class="control-label">关联对象类型</label>
+                                            <select ng-model="data.currItem.objtype"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                                    ng-options="s.id as s.name for s in objtypes"
+                                                    ng-selected="s.id==data.currItem.objtypes">
+                                            </select>
+                                            <!--<label class="control-label">客户端类型</label>
+                                            <select ng-model="data.currItem.menutype"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                                    ng-options="s.id as s.name for s in menutypes"
+                                                    ng-selected="s.id==data.currItem.menutype">
+                                            </select>-->
+                                            <label class="control-label">菜单分类名称</label>
+                                            <input type="text" class="form-control width_m"  name="catname"
+                                                   ng-model="data.currItem.catnames" ng-readonly="true">
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">菜单图标</label>
+                                            <input type="text" class="form-control width_m" name="imgsrc"
+                                                   ng-model="data.currItem.imgsrc" >
+                                            <label class="control-label">关联对象值</label>
+                                            <input type="text" class="form-control width_m"  name="objid"
+                                                   ng-model="data.currItem.objid">
+                                            <label class="control-label">所属模块</label>
+                                            <input type="text" class="form-control width_m"
+                                                   ng-model="data.currItem.modname" ng-readonly="true">
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">引用地址</label>
+                                            <input type="text" class="form-control width_m" name="refaddr"
+                                                   ng-model="data.currItem.refaddr" >
+                                            <label class="control-label">内建索引</label>
+                                            <input type="text" class="form-control width_m"  name="menutag"
+                                                   ng-model="data.currItem.menutag">
+                                            <label class="control-label">菜单排序</label>
+                                            <input type="text" class="form-control width_m"  name="sortindex"
+                                                   ng-model="data.currItem.sortindex">
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">窗体类名</label>
+                                            <input type="text" class="form-control " style="width: 303px;"  name="webrefaddr"
+                                                   ng-model="data.currItem.webrefaddr" >
+                                            <label class="control-label">需加载JS</label>
+                                            <input type="text" class="form-control width_l"  name="webloadfile"
+                                                   ng-model="data.currItem.webloadfile" >
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">描述</label>
+                                            <textarea class="form-control " style="width: 303px; " name="describe"  ng-model="data.currItem.describe" ></textarea>
+                                            <label class="control-label">
+                                                <input type="checkbox" class="i-checks" ng-model="data.currItem.flag" ng-false-value="1"  ng-true-value="2"
+                                                       ng-checked=""> 可用
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab-other" class="tab-pane">
+                                    <div class="panel-body">
+                                        <div class="row" >
+                                            <div class="form-group">
+                                                <label class="control-label">创建用户</label>
+                                                <input type="text" class="form-control width_l" name="creator"
+                                                       ng-model="data.currItem.creator" ng-readonly="true">
+                                                <label class="control-label">创建时间</label>
+                                                <input type="text" class="form-control width_l" name="createTime"
+                                                       ng-model="data.currItem.createtime" ng-readonly="true">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">最后修改用户</label>
+                                                <input type="text" class="form-control width_l" name="updator"
+                                                       ng-model="data.currItem.updator" ng-readonly="true">
+                                                <label class="control-label">最后修改时间</label>
+                                                <input type="text" class="form-control width_l" name="updatetime"
+                                                       ng-model="data.currItem.updatetime" ng-readonly="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save()"
+                            ng-disabled="entityForm.confdesc.$invalid || entityForm.confdesc.$invalid || entityForm.confvalue.$invalid ">保存
+                    </button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

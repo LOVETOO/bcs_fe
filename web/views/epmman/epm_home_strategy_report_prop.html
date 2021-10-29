@@ -1,0 +1,97 @@
+<!--
+/**
+ * 家装战略报备
+ * zengjinhua
+ * 2020-03-06
+ */
+-->
+<div hc-obj-prop>
+
+	<!-- 战略项目报备 -->
+	<div id="base" class="active">
+		<div hc-box>
+			<div class="row">
+				<div hc-label="战略家装编码" hc-input="data.currItem.project_code" hc-readonly="true"></div>
+
+                <div hc-label="申报日期" hc-input="data.currItem.report_time" hc-type="time" hc-readonly="true"></div>
+                
+                <div hc-label="产品线" hc-input="data.currItem.pdt_line" hc-select-options="pdtLine" hc-required="true"></div>
+
+				<div hc-label="审核状态" hc-input="data.currItem.audit_stat" hc-readonly="true"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="交易公司" hc-input="data.currItem.trading_company_name" hc-class-id="epm_trading_company"
+					hc-common-search="commonSearch.trading_company_name" hc-required="true" hc-col-count="4"></div>
+
+                <div hc-label="竞争品牌" hc-input="data.currItem.competitive_brand"></div>
+
+                <div hc-label="合作区域" hc-input="data.currItem.cooperation_area"></div>
+			</div>
+
+            <div class="row">
+                <div hc-label="审批经办人意见" hc-input="data.currItem.agent_opinion" hc-col-count="4"></div>
+
+                <div hc-label="审批经办人" hc-input="data.currItem.agent" ></div>
+
+                <div hc-label="战略合作范围涉及区域" hc-input="data.currItem.strac_coop_inv_region"></div>
+            </div>
+		</div>
+
+		<div hc-box="家装公司信息">
+			<div class="row">
+				<div hc-label="公司名称" hc-input="data.currItem.project_name" hc-required="true"></div>
+
+                <div hc-label="公司性质" hc-input="data.currItem.natureb_usiness" hc-dict-code="epm.natureb_usiness"></div>
+
+                <div hc-label="业务范围" hc-input="data.currItem.line_business" hc-dict-code="epm.line_business"></div>
+
+                <div hc-label="背景关系" hc-input="data.currItem.background" hc-dict-code="epm.background"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="总部所在地" hc-input="data.currItem.area_full_name" hc-class-id="scparea"
+					hc-common-search="commonSearch.area_full_name"
+					hc-delete-together="province_id province_name city_id city_name area_id area_name"
+					hc-readonly="data.currItem.is_foreign == 2" hc-required="true"></div>
+
+				<div hc-label="详细地址" hc-required="true"  hc-input="data.currItem.address" hc-col-count="4"></div>
+
+				<div hc-button="showMap()" hc-icon="fa fa-map-marker" hc-title="地图" style="margin-left: 40px;"></div>
+			</div>
+
+			<div class="row">
+                <div hc-label="总部联系人" hc-input="data.currItem.own_follower"></div>
+
+                <div hc-label="联系人职务" hc-input="data.currItem.follow_people_duty"></div>
+
+                <div hc-label="联系人电话" hc-input="data.currItem.own_follower_phone"></div>
+
+				<div hc-label="年销售额" hc-input="data.currItem.predict_sales_amount" hc-type="money" hc-unit="万元"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="意向产品" hc-input="data.currItem.intent_product" hc-col-count="8"></div>
+			</div>
+		</div>
+		<!-- <div hc-box class="flex1 flex-row flex-between"  style="height:98%;">
+			<div hc-box="分配经销商" style="width: 49%;display: flex; flex-direction: column;">
+				<div hc-box hc-grid="dealerGridOptions" class="flex1"></div>
+			</div>
+			<div hc-box="家装网点信息" style="width: 49%;display: flex; flex-direction: column;">
+				<div hc-box hc-grid="stageGridOptions" class="flex1"></div>
+			</div>
+		</div> -->
+		<div hc-box="分配经销商" class="flex1 flex-column" style="min-height: 300px;">
+			<div hc-box hc-grid="dealerGridOptions" class="flex1"></div>
+		</div>
+		<div  hc-box="家装网点信息" class="flex1 flex-column" style="min-height: 300px;">
+			<div hc-box hc-grid="stageGridOptions" class="flex1"></div>
+		</div>
+	</div>
+</div>
+<style>
+	.fa-map-marker {
+		color: red;
+	}
+</style>

@@ -1,0 +1,52 @@
+<!--产品渠道设置--自定义页面-->
+<!--Created by shenguocheng-->
+<!--Date:2019-08-02-->
+<div hc-diy-page>
+    <div class="ibox-title other-h">
+        <div class="row">
+            <div hc-input="data.currItem.sales_channel"
+                 hc-label="销售渠道"
+                 hc-change="search()"
+                 hc-dict-code="sales.channel"
+                 hc-after-delete="deleteSalesChannel()">
+            </div>
+
+            <div hc-input="data.currItem.item_channel"
+                 hc-label="产品渠道"
+                 hc-change="search()"
+                 hc-dict-code="item.channel"
+                 hc-after-delete="deleteItemChannel()">
+            </div>
+
+        </div>
+    </div>
+
+    <div hc-grid="gridOptions" class="hc-box" hc-auto-height="grid"></div>
+
+    <div hc-modal="channel">
+        <div hc-box>
+            <div class="ibox-title">
+                <div hc-input="data.currItem.sales_channel"
+                     hc-label="销售渠道"
+                     hc-required="true"
+                     hc-dict-code="sales.channel"
+                     hc-blur="checkItemTypeName()"
+                     hc-col-count="6"
+                     style="padding-left:30px;">
+                </div>
+            </div>
+
+            <div class="ibox-title">
+                <div hc-input="data.currItem.item_channel"
+                     hc-label="产品渠道"
+                     hc-required="true"
+                     hc-dict-code="item.channel"
+                     hc-col-count="6"
+                     style="padding-left:30px;margin-top: 10px;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

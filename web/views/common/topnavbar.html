@@ -1,0 +1,712 @@
+<div ng-switch="showmode" id="MainCtrl" class="hc-header">
+    <div ng-switch-when="2"></div>
+    <div ng-switch-default>
+        <div class="hc-header-list flex-row flex-between" id="header">
+            <div class="navbar-header">
+                <span hc-collapse-left-bar></span>
+                <div class="m-l-xs" style="line-height: 35px; display:inline-block;">
+                    欢迎使用 <span style="color: #e7e7e7">|</span> <span ng-bind="entConfig.entname"></span> <span
+                        style="color: #e7e7e7">|</span> <span ng-bind="entConfig.app_title || '企业智慧云平台'"></span>
+                </div>
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li ng-show="entConfig.enable_oa == 2">
+                    <a href="../web/oa.jsp">
+                        <i class="iconfont hc-shouye2"></i>首页</a>
+                </li>
+                <!-- <li >
+                    <a>
+                        <i class="iconfont hc-jiantou_zuoyouqiehuan"></i> D1系统
+                    </a>
+                </li> -->
+                <li class="box-ent">
+                    <!-- <div  ng-show="ent.showEnt" ng-click="cutEnt()" class="pointerCursor"><i class="iconfont hc-jiantou_zuoyouqiehuan"></i>切换</div> -->
+                    <div class="dropdown" ng-show="ent.showEnt">
+                        <a id="entLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="iconfont hc-jiantou_zuoyouqiehuan"></i>切换
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="entLabel" data-stopPropagation='true'
+                            ng-mouseleave="mouseleaveEnt()" ng-mouseenter="mouseenterEnt()" style="max-height: 325px;">
+                            <!--搜索栏-->
+                            <li class="search-ent">
+                                <input class="form-control ng-pristine ng-valid ng-touched search-input"
+                                    placeholder="按组织名称或组织id搜索" ng-model="ent.searchInput" ng-keyup="enterEnt($event)"
+                                    ng-change="searchEnt()" autocomplete="off" spellcheck="false">
+                                <input class="form-control ng-pristine ng-valid ng-touched search-input"
+                                    autocomplete="off" spellcheck="false" style="display: none">
+                                <span class="search-btn" ng-click="searchEnt()"><i class="fa fa-search"></i></span>
+                            </li>
+                            <div class="search-mh">
+                                <!--显示列表-->
+                                <!-- <li class='first-ent' ng-repeat="fitem in ent.firstent_list"
+                                    ng-show="ent.ent_show=='list'">
+                                    <a ng-click="showEnt(fitem)" ng-class="{'current-ent':fitem.current==true}">
+                                        {{fitem.set_of_books_id}} {{fitem.set_of_books_name}}
+                                        <span class='caret'></span>
+                                    </a>
+                                    <ul class='second-ul' ng-show="fitem.show==true">
+                                        <li class='second-ent' ng-click="setEnt(sitem)"
+                                            ng-repeat="sitem in fitem.secondent_list">
+                                            <a ng-class="{'current-ent':sitem.entid==ent.entData.loginuserifnos[0].entid}">
+                                                {{sitem.entid}} {{sitem.entname}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li> -->
+
+                                <li ng-repeat="sitem in ent.all_list" ng-show="ent.ent_show=='list'"
+                                    ng-click="setEnt(sitem)" style="margin-bottom: 4px;">
+                                    <a style="padding: 6px 20px 6px 0px;" ng-class="{'current-ent':sitem.entname==ent.entData.loginuserifnos[0].entname}">
+                                        <span style="margin-left: 5px;border-radius: 5px;background-color: rgb(231,249,255);">&nbsp;&nbsp;&nbsp;{{sitem.entid}}&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;{{sitem.entname}}
+                                    </a>
+                                </li>
+                                <!--搜索结果列表-->
+                                <li ng-repeat="sitem in ent.searchent_list" ng-show="ent.ent_show=='search'"
+                                    ng-click="setEnt(sitem)" style="margin-bottom: 4px;">
+                                    <a style="padding: 6px 20px 6px 0px;" ng-class="{'current-ent':sitem.entname==ent.entData.loginuserifnos[0].entname}">
+                                        <span style="margin-left: 5px;border-radius: 5px;background-color: rgb(231,249,255);">&nbsp;&nbsp;&nbsp;{{sitem.entid}}&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;{{sitem.entname}}
+                                    </a>
+                                </li>
+                                <li ng-show="ent.ent_show=='search'&&ent.searchent_list&&ent.searchent_list.length==0">
+                                    <a>
+                                        无搜索结果
+                                    </a>
+                                </li>
+                            </div>
+                            <div class="pointerCursor" style="color : #2796ff;float: right; margin-right: 10px;" ng-click="cutEnt()">默认登陆设置》</div>
+                        </ul>
+                        <div class="clearfloat"></div>
+                    </div>
+                </li>
+                <li>
+                    <a href="login.html dropdown-toggle" data-toggle="dropdown" class="hc-head">
+                        <!-- <img src="img/logo_white.png"> -->
+                        <i class="iconfont hc-setting"></i>设置
+                    </a>
+                    <div class="contact-box center-version w_200 adminter dropdown-menu dropdown-alerts">
+                        <div class="contact-box-footer">
+                            <a class="btn btn-block btn-default" ui-sref="baseman.mysettings" target="_self">
+                                <i class="fa fa-user"></i> 个人信息</a>
+                            <a class="btn btn-block btn-default" ng-click="logout()">
+                                <i class="fa fa-power-off"></i> 退出</a>
+                            <div class="ibox-tools m-t-md">
+                                <h5>个性换肤</h5>
+                            </div>
+                            <div class="colorlist">
+                                <button class="btn btn-block btn-primary" style="background-color: #44c0ad;
+                        border-color: #39B3A0;" onclick="changeSkin('skin-green')" type="button">绿色
+                                </button>
+                                <button class="btn btn-block btn-success" onclick="changeSkin('skin-blue')"
+                                    type="button">蓝色
+                                </button>
+                                <button class="btn btn-block btn-warning" onclick="changeSkin('skin-yellow')"
+                                    type="button">黄色
+                                </button>
+                                <button class="btn btn-block" onclick="changeSkin('skin-night')" type="button"
+                                    style="background-color:#3a3971;border-color:#3a3971;color:#fff;">夜间
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="hc-header-tab hc-nav-modal">
+            <ul class="hc-nav-tabs tab-scroll">
+                <li ng-repeat="tab in displayedTabs" ng-class="{ 'tab-current': tab.active }"
+                    ng-click="tab.active = true" ng-dblclick="tab.unclosable || tab.close()">
+                    <div class="hc-tabs-l"></div>
+                    <a class="url" ng-bind="tab.name" onclick="return false;"></a>
+                    <marquee class="scrolldiv" width="120%" scrolldelay="100" direction="left" vspace="0"
+                        behavior="scroll" ng-bind="tab.name"></marquee>
+                    <div class="hc-tabs-r"></div>
+                    <i class="iconfont hc-close" ng-click="tab.close()" ng-hide="tab.unclosable"></i>
+                </li>
+                <li class="dropdown hiddenTabs" ng-class="{ 'tab-current': hiddenTabs.active }"
+                    ng-hide="!hiddenTabs.length">
+                    <div class="hc-tabs-l"></div>
+                    <a class="dropdown-toggle url" data-toggle="dropdown">
+                        <span ng-bind="activeTab.name" ng-show-start="hiddenTabs.active"></span>
+                        <span style="font-weight: bold;" ng-show-end>|</span>
+                        <span>更多</span>
+                        <i class="fa fa-angle-double-right" style="margin-left: 12px;"></i>
+                    </a>
+                    <div class="hc-tabs-r"></div>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="tab in hiddenTabs" ng-class="{ 'tab-current': tab.active }"
+                            ng-click="tab.active = true">
+                            <a ng-bind="tab.name" ng-href="{{ tab.url }}" onclick="return false;"></a>
+                            <button class="btn btn-close" ng-click="tab.close()" ng-hide="tab.unclosable">
+                                <i class="iconfont hc-close"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="navbar_close">
+                <a class="close dropdown-toggle" data-toggle="dropdown" aria-expanded="true"
+                    ng-show="allTabs.length > 1">
+                    <i class="iconfont hc-close"></i>
+                </a>
+                <ul class="dropdown-menu animated navtab_close_btn">
+                    <li style="cursor: pointer;" ng-click="activeTab.close()" ng-hide="activeTab.unclosable">关闭当前</li>
+                    <li style="cursor: pointer;" ng-click="allTabs.closeOthers()">关闭其他</li>
+                    <li style="cursor: pointer;" ng-click="allTabs.close()">关闭所有</li>
+                </ul>
+            </div>
+            <div class="tab-l-btn js-tab-btn"><i class="iconfont hc-back"></i></div>
+            <div class="tab-r-btn js-tab-btn"><i class="iconfont hc-more"></i></div>
+        </div>
+        <div class="notices">
+            <!-- <div class="notice">
+                <div>
+                    <i class="iconfont hc-notices"></i>
+                </div>
+                <div class="itemmsg">
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <!--添加用户窗口-->
+    <div class="modal inmodal fade" id="chgpswModal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content" style="height: 0px;border: 0px;">
+                <div class="modal-header" draggable-model style="border: 0px;height: 110px;">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                </div>
+                <div class="form">
+                    <h1>修改密码</h1>
+                    <div>
+                        <div class="field-wrap">
+                            <label>
+                                新密码<span class="req">*</span>
+                            </label>
+                            <input type="password" autocomplete="off" ng-model="data.loginUser.newpass" />
+                        </div>
+                        <div class="field-wrap">
+                            <label>
+                                确认密码<span class="req">*</span>
+                            </label>
+                            <input type="password" autocomplete="off" ng-model="data.loginUser.renewpass" />
+                        </div>
+                        <button class="btn btn-primary button-block button" ng-click="chgpsw()">
+                            保存
+                        </button>
+                    </div>
+                </div>
+
+                <!--tab-->
+                <!--<div class="tabs-container">
+                    <form method="get" class="form-horizontal" name="chgpswForm" novalidate>
+                        <div class="tab-content form-inline mline">
+                            <div id="tab_other" class="tab-pane active">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="control-label"></label>
+                                            <label class="control-label"></label>
+                                            <label class="control-label"></label>
+                                            <label class="control-label">新密码</label>
+                                            <input type="password" class="form-control width_l" name="newpass"
+                                                   ng-model="data.loginUser.newpass" >
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="control-label"></label>
+                                            <label class="control-label"></label>
+                                            <label class="control-label"></label>
+                                            <label class="control-label">确认密码</label>
+                                            <input type="password" class="form-control width_l" name="renewpass"
+                                                   ng-model="data.loginUser.renewpass">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>-->
+                <div class="modal-footer" style="display: none;">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="chgpsw()">
+                        保存
+                    </button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--切换用户窗口-->
+    <div class="modal inmodal fade" id="entModal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="searchs">
+                    <div class="modal-header" draggable-model>
+                        <button type="button" class="close" data-dismiss="modal" ng-click="cancel()">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title">{{FrmInfo.title}}</h4>
+                    </div>
+                    <div class="modal-body ibox-content">
+                        <div class="ibox-content">
+                            <div class="input-group m-b">
+                                <input autofocus id="autofocus" auto-focus ng-model="searchtext" type="text"
+                                    name="keyword" placeholder="输入查询内容..." style="height: 28px;border-color: transparent;border-radius: 0px;
+                    border-bottom-color: #ccc;padding-right: 0px;"
+                                    class="form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" ng-click="search()"
+                                        style="height: 28px;border-color: transparent;border-radius: 0px;
+                                            border-bottom-color: #ccc;padding-right: 0px;background-color:transparent;color: #666a6b;">
+                                        <i class="fa fa-search" aria-hidden="true"></i> 搜索
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="table-scrollable">
+                                <div hc-grid="gridOptions" style="width:100%;height:280px;">
+                                </div>
+                            </div>
+                            <!-- <div class="page_modal modal-open" page-pagination></div> -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-sm btn-primary" ng-click="ok()">确定</a>
+                        <a class="btn btn-sm btn-white" ng-click="cancel()">取消</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hc-header .tab-l-btn,
+    .hc-header .tab-r-btn {
+        display: none;
+        position: absolute;
+        top: 0px;
+        width: 29px;
+        padding: 3px 5px;
+        font-weight: bold;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px #909ec3;
+        cursor: pointer;
+    }
+
+    .hc-header .tab-l-btn {
+        left: 0px;
+        background-image: linear-gradient(90deg, #d5d7e0, #d5d7e0, #d5d7e0, #d5d7e0, transparent);
+    }
+
+    .hc-header .tab-r-btn {
+        right: 34px;
+        background-image: linear-gradient(90deg, transparent, #d5d7e0, #d5d7e0, #d5d7e0, #d5d7e0);
+    }
+
+    .search-mh {
+        max-height: 500px;
+        margin-bottom: 5px;
+    }
+
+    .search-over {
+        overflow: auto;
+    }
+
+    .second-ent:before {
+        content: '';
+        display: block;
+        height: 26px;
+        width: 1px;
+        border-left: 1px solid #f1f1f1;
+        position: absolute;
+        left: 27px;
+    }
+
+    .search-ent {
+        cursor: default;
+        margin-bottom: 5px;
+    }
+
+    .search-ent:after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 1px;
+        border-top: 1px solid #ebebeb;
+        position: relative;
+    }
+
+    .first-ent {
+        white-space: nowrap;
+        margin: 3px 0px;
+    }
+
+    .current-ent {
+        color: #337ab7 !important;
+    }
+
+    .second-ent>a {
+        padding-right: 5px !important;
+    }
+
+    .search-input {
+        width: calc(100% - 45px);
+        margin: 12px;
+        margin-right: 0px;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+    .search-btn {
+        padding-left: 3px;
+        line-height: 26px;
+        display: inline-block;
+        padding-right: 10px;
+        cursor: pointer;
+    }
+
+    .search-btn>i {
+        font-size: 12px;
+    }
+
+    .second-ul {
+        padding-left: 15px;
+    }
+
+    .second-ul>li {
+        width: 100%;
+    }
+
+    .second-ul>li>a {
+        white-space: nowrap;
+        display: inline-block;
+        width: 100%;
+        padding-right: 10px;
+    }
+
+    [aria-labelledby="entLabel"] {
+        min-width: 260px;
+    }
+
+    [aria-labelledby="entLabel"]>li {
+        width: 100%;
+        display: inline-block;
+    }
+
+    [aria-labelledby="entLabel"]>li>a {
+        width: 100%;
+        margin: 0px;
+    }
+
+    .btn-primary {
+        background-color: #8292bf;
+        border-color: #586792;
+        color: #FFFFFF;
+    }
+
+    .nav a.hc-head {
+        width: auto;
+        height: auto;
+    }
+
+    /*修改密码样式*/
+    .form {
+        background: rgb(255, 255, 255);
+        padding: 40px;
+        max-width: 600px;
+        margin: 0px auto;
+        border-radius: 4px;
+        box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+        position: relative;
+        top: -110px;
+        z-index: -1;
+    }
+
+    .form h1 {
+        text-align: center;
+        color: #98a0b3;
+        font-weight: 300;
+        margin: 0 0 40px;
+    }
+
+    .form label {
+        position: absolute;
+        -webkit-transform: translateY(6px);
+        transform: translateY(6px);
+        left: 13px;
+        color: #9FA4AF;
+        -webkit-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+        -webkit-backface-visibility: hidden;
+        pointer-events: none;
+        font-size: 22px;
+    }
+
+    .form label .req {
+        margin: 2px;
+        color: #53AFF1;
+    }
+
+    .form label.active {
+        -webkit-transform: translateY(50px);
+        transform: translateY(50px);
+        left: 2px;
+        font-size: 14px;
+    }
+
+    .form label.active .req {
+        opacity: 0;
+    }
+
+    .form label.highlight {
+        color: #3E495F;
+    }
+
+    .form input {
+        font-size: 22px;
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 5px 10px;
+        background: none;
+        background-image: none;
+        border: 1px solid #a0b3b0;
+        color: #a0b3b0;
+        border-radius: 0;
+        -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+        transition: border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .form input:focus {
+        outline: 0;
+        border-color: #53AFF1;
+        color: #3E495F;
+    }
+
+    .form .field-wrap {
+        position: relative;
+        margin-bottom: 40px;
+    }
+
+    .form .button {
+        border: 0;
+        outline: none;
+        border-radius: 0;
+        padding: 15px 0;
+        font-size: 2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        color: #ffffff;
+        -webkit-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        -webkit-appearance: none;
+    }
+
+    .form .button:hover,
+    .form .button:focus {
+        background: #57b9ff;
+    }
+
+    .form .button-block {
+        display: block;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    /*下载App*/
+    .downloadF {
+        position: relative;
+    }
+
+    .downloadF+.downloadApp {
+        display: block;
+        border: 1px solid #E2EBF1;
+        border-radius: 3px;
+        transition: all .5s;
+        width: 230px;
+        position: fixed;
+        left: 50% !important;
+        top: 20% !important;
+        opacity: 0;
+    }
+
+    .downloadF:hover+.downloadApp {
+        opacity: 1;
+    }
+
+    .notices {
+        max-height: 300px;
+        overflow: auto;
+        width: 250px;
+        position: fixed;
+        top: 0px;
+        right: 10px;
+        transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        /* Firefox 4 */
+        -webkit-transition: all 0.5s;
+        /* Safari and Chrome */
+        -o-transition: all 0.5s;
+        /* Opera */
+    }
+
+    .notice {
+        position: relative;
+        opacity: 0;
+        width: 100%;
+        height: 60px;
+        text-align: center;
+        background: rgba(26, 179, 148, 0.7);
+        display: flex;
+        align-items: center;
+        transition: all 1s;
+        -moz-transition: all 1s;
+        /* Firefox 4 */
+        -webkit-transition: all 1s;
+        /* Safari and Chrome */
+        -o-transition: all 1s;
+        /* Opera */
+    }
+
+    .notice>i.iconfont {
+        position: absolute;
+        color: #fff;
+        right: 5px;
+        top: 2px;
+    }
+
+    .notice>div {
+        padding: 5px;
+    }
+
+    .notice-left {
+        width: 35px;
+    }
+
+    .notice-right {
+        width: calc(100% - 35px);
+        font-size: 13px;
+        text-align: left;
+        padding: 0 5px 5px 0 !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #fff;
+    }
+    .pointerCursor:hover {/* 可点击元素 */
+        cursor: pointer;
+        color: #2796ff;
+    }
+</style>
+<script>
+    /**
+     * 设置cookie
+     * @param name cookie的名称
+     * @param value cookie的值
+     * @param day cookie的过期时间
+     */
+    var setCookie = function (name, value, day) {
+        if (day !== 0) {     //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+            var expires = day * 24 * 60 * 60 * 1000;
+            var date = new Date(+new Date() + expires);
+            document.cookie = name + "=" + escape(value) + ";expires=" + date.toUTCString();
+        } else {
+            document.cookie = name + "=" + escape(value);
+        }
+    };
+
+    /**
+     * 获取对应名称的cookie
+     * @param name cookie的名称
+     * @returns {null} 不存在时，返回null
+     */
+    var getCookie = function (name) {
+        var arr;
+        var reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    };
+
+    /**
+     * 更换皮肤
+     */
+    function changeSkin(skinNmae) {
+        skinNmae = skinNmae || 'skin-1';
+
+        setCookie('skin', skinNmae);
+
+        _changeSkin(top);
+
+        /**
+         * 递归更换皮肤
+         */
+        function _changeSkin(theWindow) {
+            var $ = theWindow.$;
+
+            if (!$) return;
+
+            $('body')
+                .removeClass(function (index, classAttr) {
+                    return classAttr.split(/\s+/).filter(function (className) {
+                        return className && (className === 'greenSty' || className.indexOf('skin-') >= 0);
+                    });
+                })
+                .addClass(skinNmae);
+
+            Array.prototype.forEach.call(theWindow.frames, _changeSkin);
+        }
+    }
+
+    //关闭所有、关闭其他
+    $(document).ready(function () {
+        $(".navtab_close_btn").mouseleave(function () {
+            $(this).parent().removeClass("open");
+        })
+        //滚动tab
+        $(".hc-header-tab").on("mousewheel", function (e) {
+            var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||
+                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));
+            tabw = $(this).outerWidth(true);
+            tablist = $(this).children(".hc-nav-tabs");
+            ml = parseInt(tablist.css('marginLeft'));
+            TabListW = tablist.outerWidth(true);
+            if (delta > 0 && ml < 0) {
+                tablist.css("margin-left", ml + 250 + "px");
+                if (ml + 250 > 0) {
+                    tablist.css("margin-left", "0px");
+                }
+            }
+            else if (delta < 0 && ml > 250 - TabListW && TabListW > tabw) {
+                tablist.css("margin-left", ml - 250 + "px");
+            }
+        });
+        //点击tab切换
+        $(".tab-l-btn").click(function () {
+            var tablist = $(".hc-nav-tabs");
+            ml = parseInt(tablist.css('marginLeft'));
+            if (ml < 0) {
+                tablist.css("margin-left", ml + 250 + "px");
+                if (ml + 250 > 0) {
+                    tablist.css("margin-left", "0px");
+                }
+            }
+        });
+        $(".tab-r-btn").click(function () {
+            var tablist = $(".hc-nav-tabs");
+            TabListW = tablist.outerWidth(true);
+            tabw = $(".hc-header-tab").outerWidth(true);
+            ml = parseInt(tablist.css('marginLeft'));
+            if (ml > 250 - TabListW && TabListW > tabw) {
+                tablist.css("margin-left", ml - 250 + "px");
+            }
+        });
+    })
+
+</script>

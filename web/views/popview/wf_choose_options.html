@@ -1,0 +1,36 @@
+<!-- 审批流程意见 -->
+  <div class="modal-header">
+      <h4 class="modal-title"><span ng-bind="FrmInfo.title"></span><span ng-show="item.userid && FrmInfo.stype != 1">&nbsp;&nbsp;&nbsp;转办  - <label class="not-null" ng-bind="item.userid"></label></span></h4>
+  </div>
+  <div class="modal-body" style="overflow: hidden;">
+         <div class="col-md-12">
+         	  <div class="table-head">
+	         	  	 <table>
+				       <colgroup>
+				           <col style="width: 80px;" />
+				           <col />
+				       </colgroup>
+				       <thead class="table-head">
+				       		<tr><td>用户</td><td>用户编码</td><td>部门</td></tr>
+				       </thead>
+				   </table>
+         	  </div>
+         	  <div class="table-body">
+         	  	  <table class="table table-border table-striped">
+			        <colgroup><col style="width: 80px;" /><col /></colgroup>  
+		            <tbody>
+		                <tr ng-repeat="iitem in items" ng-click="addLine($index,$event)" ng-dblclick="dblLine($index)">
+         	  	   	  	<td ng-bind="iitem.userid"></td>
+         	  	   	  	<td ng-bind="iitem.username"></td>
+						<td ng-bind="iitem.orgname"></td>
+         	  	   	  </tr>
+		            </tbody>
+		         </table>
+         	  </div>
+         </div>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-white" ng-click="cancel()">取消</button>
+      <button type="button" class="btn btn-primary" ng-click="ok()">确定</button>
+  </div>
+

@@ -1,0 +1,101 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.short_name"
+                     hc-label="客户简称"></div>
+                <div hc-input="data.currItem.attribute11"
+                     hc-label="简写拼音"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.customer_name"
+                     hc-label="客户名称"
+                     hc-col-count="4"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.customer_class"
+                     hc-label="客户分类"
+                     hc-required="true"
+                     hc-dict-code="epm.customer_class"></div>
+                <div hc-input="data.currItem.crm_cust_code"
+                     hc-label="旧编码"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.manager"
+                     hc-label="责任人"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.contact"
+                     hc-label="联系电话"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.fax"
+                     hc-label="传真"></div>
+                <div hc-input="data.currItem.email"
+                     hc-label="邮箱"></div>
+            </div>
+            <div class="row"><!--province_id-->
+                <div hc-input="data.currItem.province_name"
+                     hc-label="地址"
+                     hc-required="true"
+                     hc-col-count="4"
+                     hc-class-id="scparea"
+                     hc-common-search="commonSearchSettingOfOrigin"></div>
+                <div hc-input="data.currItem.address"
+                     hc-placeholder="详细地址"
+                     hc-col-count="4"></div>
+            </div>
+        </div>
+        <div hc-box="财务信息">
+            <div class="row">
+                <div hc-input="data.currItem.invoice_type"
+                     hc-label="发票类型"
+                     hc-required="true"
+                     hc-dict-code="epm.invoice_type"></div>
+                <!--base_currency_id,Currency表-->
+                <div hc-input="data.currItem.currency_name"
+                     hc-label="结算货币"
+                     hc-required="true"
+                     hc-class-id="base_currency"
+                     hc-common-search="commonSearchCurrency"></div>
+                <div hc-input="data.currItem.tax_rate"
+                     hc-label="默认税率"
+                     hc-type="money"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.attribute1"
+                     hc-label="现金流量表项"
+                     hc-required="true"
+                     hc-dict-code="epm.cash_flow_item"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.tax_type"
+                     hc-label="纳税人类型"
+                     hc-required="true"
+                     hc-dict-code="tax_type"></div>
+                <div hc-input="data.currItem.tax_no"
+                     hc-required="true"
+                     hc-label="纳税人识别号"></div>
+                <div hc-input="data.currItem.bank"
+                     hc-required="true"
+                     hc-label="开户银行"></div>
+                <div hc-input="data.currItem.bank_accno"
+                     hc-required="true"
+                     hc-label="银行账号"></div>
+            </div>
+        </div>
+        <div hc-box="打款账户"></div>
+        <div hc-box hc-grid="gridOptions" style="height:204px"></div>
+    </div>
+</div>
+
+
+

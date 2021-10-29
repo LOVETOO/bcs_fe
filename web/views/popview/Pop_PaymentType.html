@@ -1,0 +1,44 @@
+<!-- 配件弹窗 -->
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>付款条件查询</h3>
+    </div>
+    <div class="modal-body">
+    	<table class="table table-striped table-bordered no-paging footable-loaded">
+              <tr style="display: table-row;">
+                  <td width="70%">
+                  	<span class="footable-toggle"></span>
+                  	<input ng-model="searchtext" type="text" name="keyword" placeholder="输入文本..." class="form-control">
+                  </td>
+                  <td>
+                      <button class="btn btn-sm btn-primary" ng-click="search()"><strong>立即搜索</strong></button>  
+                  </td>
+              </tr>
+         </table>
+         <div style="max-height:200px;overflow-y:auto;">
+	         <table class="table table-striped">
+	            <thead>
+	                <th></th>
+	                <th>付款条件编码</th>
+	                <th>付款条件名称</th>
+	            </thead>
+	            <tbody>
+	                <tr ng-click="addLine($index,$event)" ng-repeat="payment_type in items " >
+						<td ng-bind="$index+1">1</td>
+						<td>{{payment_type.payment_type_code}}</td>
+						<td>{{payment_type.payment_type_name}}</td>
+					</tr>
+	            </tbody>
+	         </table>
+	     </div>    
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+          确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+          取消
+        </a>
+     </div>
+</div>

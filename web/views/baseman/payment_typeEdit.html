@@ -1,0 +1,194 @@
+<div class="bill-form" ng-controller="payment_typeEdit">
+    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h3>付款方式</h3>
+                <button class="btn btn-toolbar" type="button" ng-click="search()"><i class="fa fa-search"></i>查询
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="new()"><i class="fa fa-file-o"></i>新增</button>
+                <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i class="fa fa-history"></i>刷新
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="save($event)"><i class="fa fa-floppy-o"></i>保存
+                </button>
+                <button class="btn btn-toolbar" type="button"
+                        ng-hide="!data.currItem.currency_id && data.currItem.stat!= 1" ng-click="delete($event)"><i
+                        class="fa fa-trash"></i>删除
+                </button>
+                <button ng-hide="true" class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>导出
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="closefrm()"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <!--div class="row" ng-hide="data.currItem.stat == 1">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>审批流程</h5>
+                                        <div ibox-tools></div>
+                                    </div>
+                                    <div class="ibox-content icons-box">
+                                        <div wf-ystep size="large" class="p-xs clear"
+                                             wf-apply-id="data.currItem.payment_type_id"
+                                             ng-model="data.currItem.wfid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <a  style="font-size: small;font-weight: bold;color:black"><i ng-click="show_profit()" class="fa fa-minus"></i>基本信息</a>
+                                    </div>
+                                    <div ng-show="profit_stat" class="ibox-content icons-box">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <label class="form-label-mini not-null">付款方式</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input data-rule-required="true"
+                                  data-msg-required="付款方式不能空" class="form-control input-sm" type="text"
+                                                       ng-model="data.currItem.payment_type_code">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label class="form-label-mini not-null">方式名称</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input data-rule-required="true"
+                                  data-msg-required="方式名称不能空" class="form-control input-sm" type="text"
+                                                       ng-model="data.currItem.payment_type_name">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label class="form-label-mini">英文名称</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input class="form-control input-sm" type="text"
+                                                       ng-model="data.currItem.eng_name">
+                                            </div>
+
+                                            <div class="col-md-1">
+                                                <label class="form-label-mini not-null">ERP名称</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <select data-rule-required="true"
+                                  data-msg-required="ERP名称不能空" chosen-select ng-model="data.currItem.erp_type_id"
+                                                        class="input-sm chosen-select form-control"
+                                                        ng-options="type.id as type.name for type in erptypeids">
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <label class="form-label-mini not-null">付款条件</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input data-rule-required="true"
+                                  data-msg-required="付款条件不能空" class="form-control input-sm" type="text"
+                                                       ng-model="data.currItem.pay_condition">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label class="form-label-mini">信保额度(%)</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input class="form-control input-sm" max="100" type="number"
+                                                       ng-model="data.currItem.insurance_rate">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label class="form-label-mini">回款期限</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input class="form-control input-sm" type="number"
+                                                       ng-model="data.currItem.pdays">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label style="margin-left: 30px;"><input
+                                                        type="checkbox"
+                                                        ng-false-value="1"
+                                                        ng-true-value="2"
+                                                        ng-checked="data.currItem.usable"
+                                                        ng-model="data.currItem.usable">是否可用
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <label class="form-label-mini">到期日加</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="col-md-11">
+                                                    <input class="form-control input-sm" type="number"
+                                                           ng-model="data.currItem.ship_days">
+                                                </div>
+                                                <div class="col-md-1" style=" padding-right: 0px; ">
+                                                    <label class="form-label-mini">天</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label class="form-label-mini">考核日加</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="col-md-11">
+                                                    <input class="form-control input-sm" type="number"
+                                                           ng-model="data.currItem.check_days">
+                                                </div>
+                                                <div class="col-md-1" style=" padding-right: 0px; ">
+                                                    <label class="form-label-mini">天</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <a style="font-size: small;font-weight: bold;color:black"><i ng-click="show_profit2()" class="fa fa-minus"></i>付款条件明细</a>
+                            <div ng-show="profit_stat2">
+                                <button ng-click="additem()" class="btn btn-toolbar" type="button"><i
+                                        class="fa fa-plus-square-o"></i>增加行
+                                </button>
+                                <button ng-click="delitem()" class="btn btn-toolbar" type="button">
+                                    <i class="fa fa-minus-square-o"></i>删除行
+                                </button>
+								<button ng-disabled="data.currItem.stat != 1" class="btn btn-toolbar" id="swfupload-control" swf-upload import-grid='paymenttype_Options' import-columns='paymenttype_Columns'  flag="1">
+                                    <i class="fa lightblue font-size-15  fa-paperclip"></i>导入
+                                </button>
+								
+								<button class="btn btn-toolbar" emport-excel sg-options='paymenttype_Options' sg-columns='paymenttype_Columns'>
+                                    <i class="fa lightblue font-size-15  fa-paperclip"></i>导出
+                                </button>
+                                <div ag-gridview sg-options="paymenttype_Options"
+                                     sg-columns="paymenttype_Columns" style="width:100%;height:120px;"
+                                     class="slick-grid"></div>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <a style="font-size: small;font-weight: bold;color:black"><i ng-click="show_profit3()" class="fa fa-minus"></i>信保比例明细</a>
+                            <div ng-show="profit_stat3">
+                                <button ng-click="additem2()" class="btn btn-toolbar" type="button"><i
+                                        class="fa fa-plus-square-o"></i>增加行
+                                </button>
+                                <button ng-click="delitem2()" class="btn btn-toolbar" type="button">
+                                    <i class="fa fa-minus-square-o"></i>删除行
+                                </button>
+                                <div ag-gridview sg-options="level_Options"
+                                     sg-columns="level_Columns" style="width:100%;height:120px;"
+                                     class="slick-grid"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+

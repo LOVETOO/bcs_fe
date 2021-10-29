@@ -1,0 +1,53 @@
+<div hc-edit-list>
+	<div class="row">
+		<div hc-input="data.currItem.enterprise_name"
+			 hc-label="组织名称"
+			 hc-readonly="true"
+			 hc-col-count="4">
+		</div>
+		<div hc-input="data.currItem.is_system"
+			 hc-label="系统值"
+			 hc-type="checkbox"
+			 hc-readonly="data.currItem.param_id>0">
+		</div>
+	</div> 
+	<div class="row">
+		<div hc-input="data.currItem.param_code"
+			 hc-label="参数编码"
+			 hc-readonly="data.currItem.param_id>0">
+		</div>
+		<div hc-input="data.currItem.param_value"
+			 hc-label="参数值">
+		</div>
+		<div hc-input="data.currItem.param_type"
+			 hc-label="参数类型"
+			 hc-select-options="data.param_type_options"
+			 hc-readonly="data.currItem.param_id>0"
+			 hc-required="!(data.currItem.param_id>0)">
+		</div>
+	</div>
+	<div class="row">
+		<div hc-input="data.currItem.remark"
+			 hc-label="参数说明"
+			 hc-col-count="8">
+		</div>
+	</div>
+	<div class="row">
+		<div hc-input="data.currItem.creator"
+			 hc-label="创建者"
+			 hc-readonly="true">
+		</div>
+		<div hc-input="data.currItem.create_time"
+			 hc-label="创建时间"
+			 hc-readonly="true">
+		</div>
+		<div hc-input="data.currItem.updator"
+			 hc-label="更新人"
+			 hc-readonly="true">
+		</div>
+		<div hc-input="data.currItem.update_time"
+			 hc-label="更新时间"
+			 hc-readonly="true">
+		</div>
+	</div>
+</div>

@@ -1,0 +1,116 @@
+
+<div hc-diy-page>
+
+    <!--查询条件-->
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.year_month_start"
+                 hc-label="会计期间从"
+                 hc-readonly="data.is_balancetab == 1"
+                 hc-type="year-month"
+                 style="width: calc(16% - 18px);margin-right: 0px;">
+            </div>
+            <button type="button" class="btn btn-link">
+                至
+            </button>
+            <div hc-input="data.currItem.year_month_end"
+                 hc-col-count="1"
+                 hc-readonly="true"
+                 hc-type="year-month"
+                 style="width: calc(10% - 18px);">
+            </div>
+
+            <div hc-input="data.currItem.km_level_start"
+                 hc-label="科目级别从"
+                 hc-readonly="data.is_balancetab == 1"
+                 hc-select-options="[{name:'1',value:'1'},{name:'2',value:'2'},{name:'3',value:'3'},
+                 {name:'4',value:'4'},{name:'5',value:'5'},{name:'6',value:'6'}]"
+                 style="width: calc(16% - 18px);margin-right: 0px;">
+            </div>
+            <button type="button" class="btn btn-link">
+                至
+            </button>
+            <div hc-input="data.currItem.km_level_end"
+                 hc-readonly="data.is_balancetab == 1"
+                 hc-select-options="[{name:'1',value:'1'},{name:'2',value:'2'},{name:'3',value:'3'},
+                 {name:'4',value:'4'},{name:'5',value:'5'},{name:'6',value:'6'}]"
+                 hc-col-count="1"
+                 style="width: calc(10% - 18px);">
+            </div>
+
+            <div hc-input="data.currItem.organization_names"
+                 hc-label="查询组织"
+                 hc-readonly="data.is_balancetab == 1"
+                 hc-class-id="base_search"
+                 delete-together="organization_ids"
+                 hc-common-search="commonSearchSetting.ent"
+                 hc-readonly="data.currItem.is_multi_ent == 1">
+            </div>
+
+
+            <button type="button"
+                    class="btn btn-primary"
+                    ng-show="data.is_balancetab == 2"
+                    ng-click="searchByCon()" style="line-height: 18px;">
+                    <i class="iconfont hc-search"></i>
+                    查询
+            </button>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.km_code_start"
+                 hc-class-id="gl_account_subject"
+                 hc-readonly="data.is_balancetab == 1"
+                 hc-common-search="commonSearchSetting.gl_account_subject_start"
+                 hc-label="会计科目从" style="margin-right: 0px;">
+            </div>
+            <button type="button" class="btn btn-link">
+                至
+            </button>
+            <div hc-input="data.currItem.km_code_end"
+                 hc-readonly="data.is_balancetab == 1"
+                 hc-class-id="gl_account_subject"
+                 hc-common-search="commonSearchSetting.gl_account_subject_end"
+                 hc-col-count="1">
+            </div>
+
+            <div hc-input="data.currItem.tally_flag"
+                 hc-label="含未过账凭证"
+                 hc-readonly="data.is_balancetab == 1"
+                 hc-type="checkbox" style="width: calc(12% - 18px);">
+            </div>
+
+            <div hc-input="data.currItem.is_object"
+                 hc-readonly="data.is_balancetab == 1"
+                 hc-change="data.currItem.attribute1 = data.currItem.is_object;"
+                 hc-label="含核算对象"
+                 hc-type="checkbox" style="width: calc(12% - 18px);">
+            </div>
+        </div>
+
+    </div>
+
+    <!--网格-->
+    <div class="hc-box m-t-n">
+        <ul class="nav nav-tabs other-h m-t">
+            <li class="active" ng-click="tabChangeEvent('balance')">
+                <a data-toggle="tab" href="tabs.html#balanceTab">科目余额列表</a>
+            </li>
+            <li ng-click="tabChangeEvent('ac')">
+                <a data-toggle="tab" href="tabs.html#acdetailTab">往来明细列表</a>
+            </li>
+        </ul>
+
+        <div class="tabs-container">
+            <div class="tab-content">
+                <div id="balanceTab" class="tab-pane active">
+                    <div hc-grid="balanceGridOptions"  hc-auto-height="grid"></div>
+                </div>
+                <div id="acdetailTab" class="tab-pane">
+                    <div hc-grid="acdetailGridOptions"  hc-auto-height="grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

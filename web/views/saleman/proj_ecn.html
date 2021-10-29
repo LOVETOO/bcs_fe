@@ -1,0 +1,172 @@
+<!--
+/**
+ * 工程项目变更(详情页)
+ * @since 2018-07-19
+ */
+-->
+<div local-storage class="bill-form" ng-controller="proj_ecn">
+    <div class="wrapper wrapper-content">
+        <ul class="nav nav-tabs p-w-m" id="tabs">
+            <li class="active">
+                <a id="tab_common" data-toggle="tab" href="tabs.html#page_common">单据详情</a>
+            </li>
+            <li>
+                <a id="tab_wf" data-toggle="tab" href="tabs.html#page_wf">审批流程</a>
+            </li>
+        </ul>
+        <div class="modal-footflex">
+            <div class="tabs-container">
+                <form id="form_head" method="get" class="form-inline mline" name="form_head" novalidate>
+                    <div class="tab-content">
+                        <div id="page_common" class="tab-pane active form-inline mline">
+                            <div class="panel-body">
+                                <fieldset>
+                                    <legend>概要</legend>
+                                    <div class="row">
+                                        <label class="control-label">工程编码</label>
+                                        <!--<div class="input-group width_ml">-->
+                                        <input class="form-control width_ml"
+                                               ng-model="data.currItem.project_code"
+                                               ng-readonly="true">
+                                            <!--<span class="input-group-btn">
+                                                <button class="btn btn-primary"
+                                                        ng-click="chooseProject()">•••</button>
+                                            </span>-->
+                                        <!--</div>-->
+                                        <label class="control-label">工程名称</label>
+                                        <input class="form-control width_ml"
+                                               ng-model="data.currItem.project_name"
+                                               ng-readonly="true">
+                                    </div>
+                                </fieldset>
+                                <fieldset id="ecn">
+                                    <legend>变更内容</legend>
+                                    <div class="row">
+                                        <button class="btn btn-primary"
+                                                ng-click="chooseEcn()"
+                                                ng-show="data.editable">选择变更项</button>
+                                    </div>
+                                    <div class="row" ng-if="data.ecn.project_name">
+                                        <label class="control-label">工程名称</label>
+                                        <input class="form-control width_ml"
+                                               ng-model="data.ecn.project_name.oldvalue"
+                                               ng-readonly="true">
+                                        <label class="control-label">变更为</label>
+                                        <div class="input-group width_ml">
+                                            <input class="form-control non-empty"
+                                                   required
+                                                   ng-readonly="!data.editable"
+                                                   ng-model="data.ecn.project_name.newvalue">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary" ng-click="projLikeness()">相似性检索</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-if="data.ecn.project_type">
+                                        <label class="control-label">项目类型</label>
+                                        <select class="form-control input-sm width_ml"
+                                                ng-options="x.value as x.name for x in data.ngOptions.project_type"
+                                                ng-model="data.ecn.project_type.oldvalue"
+                                                ng-disabled="true"></select>
+                                        <label class="control-label">变更为</label>
+                                        <select class="form-control non-empty input-sm width_ml"
+                                                required
+                                                ng-disabled="!data.editable"
+                                                ng-options="x.value as x.name for x in data.ngOptions.project_type"
+                                                ng-model="data.ecn.project_type.newvalue"></select>
+                                    </div>
+                                    <div class="row" ng-if="data.ecn.dealer_name">
+                                        <label class="control-label">经销商</label>
+                                        <input class="form-control width_ml"
+                                               ng-model="data.ecn.dealer_name.oldvalue"
+                                               ng-readonly="true">
+                                        <label class="control-label">变更为</label>
+                                        <input class="form-control non-empty width_ml"
+                                               required
+                                               ng-readonly="!data.editable"
+                                               ng-model="data.ecn.dealer_name.newvalue">
+                                    </div>
+                                    <div class="row" ng-if="data.ecn.project_address">
+                                        <label class="control-label">工程地址</label>
+                                        <input class="form-control width_ml"
+                                               ng-model="data.ecn.project_address.oldvalue"
+                                               ng-readonly="true">
+                                        <label class="control-label">变更为</label>
+                                        <input class="form-control non-empty width_ml"
+                                               required
+                                               ng-readonly="!data.editable"
+                                               ng-model="data.ecn.project_address.newvalue">
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div id="page_wf" class="tab-pane">
+                            <div hc-wf="18071402" a-biz="data.currItem"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-primary"
+                        ng-show="data.editable"
+                        ng-click="btnSaveClick()">保存
+                </button>
+                <button type="button"
+                        class="btn btn-white"
+                        ng-click="btnCloseClick()">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 变更内容 -->
+    <div class="modal inmodal fade" id="modal_ecn" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">请选择要变更的内容</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <label class="width_xs">
+                                <input type="checkbox"
+                                       class="i-checks"
+                                       ng-checked="data.ecn.project_name!==undefined"
+                                       ng-click="chooseEcnClick('project_name')">
+                                工程名称
+                            </label>
+                            <label class="width_xs">
+                                <input type="checkbox"
+                                       class="i-checks"
+                                       ng-checked="data.ecn.project_type!==undefined"
+                                       ng-click="chooseEcnClick('project_type')">
+                                项目类型
+                            </label>
+                            <label class="width_xs">
+                                <input type="checkbox"
+                                       class="i-checks"
+                                       ng-checked="data.ecn.dealer_name!==undefined"
+                                       ng-click="chooseEcnClick('dealer_name')">
+                                经销商
+                            </label>
+                            <label class="width_xs">
+                                <input type="checkbox"
+                                       class="i-checks"
+                                       ng-checked="data.ecn.project_address!==undefined"
+                                       ng-click="chooseEcnClick('project_address')">
+                                工程地址
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div hc-diy-page>
+    <div class="ibox">
+        <div hc-grid="gridOptions" class="m-t-xs" hc-auto-height="grid"></div>
+        <!-- 模态框 -->
+        <div class="modal inmodal fade" id="newModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="width:800px">
+                <div class="modal-content">
+                    <div class="modal-header" draggable-model>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                                class="sr-only">Close</span></button>
+                        <h4 class="modal-title">公司战略目标</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div hc-input="data.currItem.stratetarget_code" hc-label="战略目标编码" hc-required="true"></div>
+                            <div hc-input="data.currItem.strate_year" hc-label="年度" hc-required="true"
+                                hc-select-options="[{name:'A',value:1},{name:'B',value:2}]"></div>
+                            <div hc-input="data.currItem.entorgid" hc-label="品类" hc-required="true" hc-select-options="[{name:'A',value:1},{name:'B',value:2}]"></div>
+                        </div>
+                        <div class="row">
+                            <div hc-input="data.currItem.sales_amt" hc-label="销售收入目标" hc-required="true"></div>
+                            <div hc-input="data.currItem.profit_amt" hc-label="利润目标" hc-required="true"></div>
+                        </div>
+                        <div class="row">
+                            <div hc-input="data.currItem.note" hc-label="说明" hc-type="textarea" hc-col-count="6"></div>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

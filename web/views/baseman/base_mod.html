@@ -1,0 +1,162 @@
+<div hc-diy-page ng-init="init()">
+    <div class="tree-grid-box flex1 flex-row" hc-splitter-box>
+        <div class="tree-box">
+            <div class="tree-title">模块</div>
+            <ul id="zTree" class="ztree"></ul>
+        </div>
+        <div class="tree-box tabs-container flex-column" style="border:1px solid #dbe0e8">
+            <div hc-tab="tabs" style="background-color: #f8f8f8;border-bottom: 1px solid #dbe0e8;"></div>
+            <div hc-tab-page class="tab-content ibox-content flex1">
+
+                <div id='base' hc-box="" class="active" >
+                    <div class="row">
+                        <div hc-input="data.currItem.modcode" hc-label="模块编码">
+                        </div>
+                        <div hc-input="data.currItem.modname" hc-label="模块名称">
+                        </div>
+                        <div hc-input="data.currItem.clas" hc-label="模块类型" hc-select-options="[
+                        {name:'系统内建',value:1},
+                        {name:'自定义',value:2}
+                        ]">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--<div hc-input="data.currItem.bplname" hc-label="需加载包">-->
+                        <!--</div>-->
+                        <div hc-input="data.currItem.submenushowstyle" hc-label="菜单样式" hc-select-options="[
+                        {name:'弹出式',value:1},
+                        {name:'嵌入式',value:2}
+                        ]">
+                        </div>
+                        <div hc-input="data.currItem.imageindex" hc-label="模块图标">
+                        </div>
+                        <div hc-input="data.currItem.modtype" hc-label="客户端类型" hc-select-options="[
+                        {name:'Client',value:1},
+                        {name:'WEB',value:2},
+                        {name:'Client&WEB',value:3}
+                        ]">
+                        </div>
+                    </div>
+                    <div class="row" style="position: relative">
+                        <!--<div hc-input="data.currItem.modtag" hc-label="内建索引">-->
+                        <!--</div>-->
+                        <div hc-input="data.currItem.sortindex" hc-label="模块序号">
+                        </div>
+
+                        <!--<div hc-input="data.currItem.isws" hc-label="工作区" hc-type="checkbox">-->
+                        <!--</div>-->
+                        <div hc-input="data.currItem.flag" hc-label="可用" hc-type="checkbox">
+                        </div>
+                        <div hc-label="点击统计" hc-input="data.currItem.logonclick" hc-type="checkbox" />
+                        <div class="picdiv">
+                            <div class="picture">
+                                <div style="display: flex;flex-direction: column;" ng-hide="data.bool">
+                                    <button ng-click="uploadFile()" style="background-color:#fff;border: none;">
+                                        <i class="iconfont hc-add" ></i>
+                                    </button>  
+                                    <br>
+                                    <p>模块图标</p>  
+                                </div>
+                                <img id="invoice_div_img" class="invoice_div_img" hc-img="data.currItem.docid" ng-if="data.currItem.docid !='0'">
+                                <button class="btn invoice_del"
+                                        ng-click="del_invoice_image()"
+                                        ng-show="data.currItem.docid > 0">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="row">-->
+                        <!--<div hc-input="data.currItem.refaddr" hc-label="引用地址" hc-col-count="6">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="row">
+                        <div hc-input="data.currItem.webrefaddr" hc-label="路由名称" hc-col-count="6">
+                        </div>
+                    </div>
+                    <!--<div class="row">-->
+                        <!--<div hc-input="data.currItem.webloadfile" hc-label="需加载JS" hc-col-count="6">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="row">
+                        <div hc-input="data.currItem.webimageurl" hc-btn-click="chooseIcon()" hc-label="模块图标" hc-col-count="6">
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div hc-input="data.currItem.note" hc-label="备注" hc-col-count="6">
+                            </div>
+                        </div>
+                </div>
+                <div id='other' hc-box="">
+                    <div class="row">
+                        <div hc-input="data.currItem.creator" hc-readonly="true" hc-label="创建用户">
+                        </div>
+                        <div hc-input="data.currItem.createtime" hc-readonly="true" hc-label="创建时间">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.updator" hc-readonly="true" hc-label="最后修改用户">
+                        </div>
+                        <div hc-input="data.currItem.updatetime" hc-readonly="true" hc-label="最后修改时间">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.modid" hc-readonly="true" hc-label="模块ID">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style> 
+    .invoice_div_img {
+        width: 98px;
+        height: 0;
+        position: absolute;
+        z-index: 3;
+        top: 0.5px;
+    }
+    .invoice_del {
+        display: none;
+        position: absolute;
+        right: 1px;
+        top: 1px;
+        z-index: 5;
+        color: #828282;
+    }
+    div.picture:hover .invoice_del {
+        display: block;
+    }
+    .none{
+        display: none !important;
+    }
+    .picture{
+        border:1px #e4eaf1 solid;
+        width:100px;
+        height:100px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } 
+    .picture p{
+        text-align: center;
+        margin: 0;
+        font-size: 13px;
+        color: #717171;
+    }
+    .picdiv:after {
+        content: '';
+        clear: both;
+        width: 0px;
+        display: block;
+    }
+    .picdiv{
+        width: 100px;
+        position: absolute;
+        right: 10%; 
+        top: 60px;
+    }
+
+</style>

@@ -1,0 +1,125 @@
+<div class="bill-form" ng-controller="BaseTypeXsEditController">
+	   <div class="row wrapper border-bottom white-bg page-heading"
+         style="position: fixed;z-index: 999;width:88%;top: 51px;">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                ��������
+            </div>
+
+<div style="float:right">
+            <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+            	<i class="fa fa-search"></i>��ѯ
+            </button>
+            <button ng-click="new()" class="btn btn-toolbar" type="button"><i class="fa fa-file-o"></i>����</button>
+            <button class="btn btn-toolbar" type="button"><i class="fa fa-history"></i>ˢ��</button>
+            <button ng-click="save()" class="btn btn-toolbar" type="button"><i class="fa fa-floppy-o"></i>����</button>
+            <button ng-click="delete()" class="btn btn-toolbar" type="button"><i class="fa fa-trash"></i>ɾ��</button>
+             <!-- <button class="btn btn-toolbar" type="button"><i class="fa fa-check-square-o">�ύ</i></button>-->
+            <button class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>����</button>
+            <button ng-click="closefrm()" class="btn btn-toolbar" type="button">
+				<i class="fa fa-times"></i>�ر�
+            </button>
+                        </div>
+        </div>
+
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 90px;">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul id="tabs" class="tri-nav-tabs">
+                    <li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav"><i
+                            class="fa fa-pencil-square">����</i></a></li>
+                    <div class="btn-group pull-right form-topright-btn">
+                        <a class="btn-close"><i class="fa fa-times"></i></a>
+                    </div>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab1" class="tab-pane active">
+                        <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+                            <div class="ibox-content">
+                            	<div class="row" ng-class="{false:'hide'}[isEdit]">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">������:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input readonly class="form-control readonly input-sm" type="text"
+                                               ng-model="data.currItem.creator">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">����ʱ��:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input readonly class="form-control readonly input-sm" type="text"
+                                               ng-model="data.currItem.create_time">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">�޸���:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input readonly class="form-control readonly input-sm" type="text"
+                                               ng-model="data.currItem.updator">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">�޸�ʱ��:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input readonly class="form-control readonly input-sm" type="text"
+                                               ng-model="data.currItem.update_time">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini" >����Id:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input class="form-control input-sm" type="number" ng-model="data.currItem.sx_id">
+                                    </div>
+                                    <div class="col-md-1">
+                                    	<label class="form-label-mini not-null">����:</label>
+                                	</div>
+	                                <div class="col-md-2">
+	                                    <select chosen-select  ng-model="data.currItem.cool_stand" class="input-sm chosen-select form-control" 
+	                                    	ng-options="type.dictvalue as type.dictname for type in coolStands">
+	                                        <option value=""></option>
+                                   		 </select>
+                               		 </div>
+                               		<div class="col-md-1">
+	                                    <label class="form-label-mini not-null">��Ʒ����:</label>
+	                                </div>
+	                                <div class="col-md-2">
+	                                    <div class="input-group">
+	                                        <input data-rule-required="true" data-msg-required="��Ʒ���಻�ܿ�" type="text" class="input-sm form-control" ng-model="data.currItem.item_type_name">
+	                                        <a class="input-group-addon" ng-click="selectItemType()"><i class="fa fa-ellipsis-h"></i></a>
+	                                    </div>
+	                                </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">ϵ��:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input class="form-control input-sm" type="number" ng-model="data.currItem.sx">
+                                    </div>
+                                </div>
+                                <div class="row">
+									<div class="col-md-1">
+                                        <label class="form-label-mini">����ϵ��:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input class="form-control input-sm" type="number" ng-model="data.currItem.modify_value">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">��ע:</label>
+                                    </div>
+                                    <div class="col-md-8">
+										<input class="form-control input-sm" type="text" ng-model="data.currItem.note">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

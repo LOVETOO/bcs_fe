@@ -1,0 +1,158 @@
+body{ background-color: #F3F3F3;}
+#leftTree{
+    padding-top: 0px!important;
+    background-color: #FE676C;
+    border-radius: 3px;
+    }
+#leftTree .mini-outlookbar-border{ background:#fff;  }
+div#leftTree .mini-tree-treecell .mini-grid-cell-inner {
+}
+.mini-outlookbar .mini-outlookbar-groupHeader{ background:#fff;}
+.mini-outlookbar .mini-outlookbar-group{ border-color: #F7F7F7; }
+.mini-outlookbar-border{border-color:#d8d8d8;}
+.mini-outlookbar .mini-outlookbar-groupBody{border-color:#d8d8d8;}
+.mini-outlookbar-groupHeader .mini-tools {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+	display:block;
+	}
+.mini-splitter-handler{ background:#fff;}
+.mini-tabs-scrollCt {border-color: #F5F5F5;background: #f0f0f0 url(/static/img/toolbar.jpg) repeat-x 0 bottom;}
+.mini-splitter-handler {
+    background: #F3F3F3;
+}
+.mini-panel-border {
+    border:1px solid #F3F3F3;
+}
+.mini-panel-header {
+    border-bottom: solid 1px #FFFFFF;
+}
+.mini-panel .mini-panel-border .mini-panel-body{ }
+.mini-panel-header {
+    background: #f8f8f8;
+    color: #FE676C;
+}
+.mini-tab
+{
+    border: 1px solid #F3F3F3;
+    border-bottom: solid 1px #F5F5F5;
+    background: #FFFFFF;
+    background-repeat: repeat-x;
+    background: 
+    -webkit-linear-gradient(top,#FDFDFD 0,#EFEFEF 100%);
+    background: 
+    
+    
+    -moz-linear-gradient(top,#FDFDFD 0,#EFEFEF 100%);
+    background: 
+    
+    
+    
+    
+    -o-linear-gradient(top,#FDFDFD 0,#EFEFEF 100%);
+    background: linear-gradient(to bottom,#FDFDFD 0,#EFEFEF 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ffffff,GradientType=0);
+}
+.mini-tab-active {
+    border: 1px solid #F3F3F3;
+    border-bottom: solid 1px #FFFFFF;
+    background: #FFFFFF;
+    background-repeat: repeat-x;
+    background: 
+    -webkit-linear-gradient(top,#F5F5F5 0,#FFFFFF 100%);
+    background: 
+    -moz-linear-gradient(top,#F5F5F5 0,#FFFFFF 100%);
+    background: 
+    -o-linear-gradient(top,#F5F5F5 0,#FFFFFF 100%);
+    background: linear-gradient(to bottom,#F5F5F5 0,#FFFFFF 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ffffff,GradientType=0);
+}
+
+.mini-tab-close
+{
+    display: inline-block;
+    width:13px;
+    height:13px;
+    vertical-align:top;
+    margin-top:1px;
+    background:url(images/tabs/close.gif) no-repeat 3px 3px;
+    /* background-color:#ccc; */
+    cursor:pointer;
+    opacity: .3;
+}
+.mini-outlookbar-border {
+    border-color: #fff;
+}
+.mini-tools .mini-tools-collapse
+{
+    background: url(/static/img/expand1.png) no-repeat 50% 50%;
+    width:15px;	
+}
+.mini-outlookbar .mini-outlookbar-expand .mini-tools-collapse {
+    background: url(/static/img/expand.png) no-repeat 50% 50%;
+}
+.mini-outlookbar .mini-outlookbar-collapse .mini-tools-collapse {
+    background: url(/static/img/expand2.png) no-repeat 50% 50%;
+}
+.mini-toolbar {
+    border: solid 1px #EFEFEF;
+    border-top: none;
+    background: #fff;
+}
+.mini-tree-selectedNode .mini-tree-nodeshow {
+    background: #FE676C;
+    border: none;
+}
+#leftTree .mini-tree-selectedNode .mini-tree-nodeshow span.mini-tree-nodetext {
+    color: #fff;
+}
+.mini-tree-node-hover .mini-tree-nodeshow
+{
+    background: #FE676C;
+    border: none;	  
+}
+#leftTree .mini-tree-node-hover .mini-tree-nodeshow span.mini-tree-nodetext {
+    color: #fff;
+}
+.mini-splitter .mini-splitter-pane1 {
+    border-color: #fff;
+    background-color: #fff;
+}
+.mini-splitter .mini-splitter-pane2 {
+    border-color: #fff;
+    background-color: #fff;
+}
+.mini-splitter-border {
+    border: solid 1px #fff;
+}
+.mini-button .mini-button-icon {
+    padding-left: 30px;
+    background-position: 6px 50%;
+    background-repeat: no-repeat;
+}
+.mini-grid-footer, .mini-grid-pager {
+    border-top: 1px solid #fff;
+    background: #FFFFFF;
+}
+.icon-add{
+	background: url(/static/img/add.png) no-repeat;
+}
+.icon-addnew{
+	background:url(icons/addnew.gif) no-repeat;
+}
+.icon-edit{
+	background: url(/static/img/edit.png) no-repeat;
+}
+.icon-remove{
+	background: url(/static/img/remove.png) no-repeat;
+}
+
+.icon-reload{
+	background:url(/static/img/reload.png) no-repeat;
+}
+.icon-save{
+	background: url(/static/img/save.png) no-repeat;
+}

@@ -1,0 +1,7 @@
+<div class="tooltip {{placement}}" ng-class="{ in: isOpen(), fade: animation() }">
+	<div class="tooltip-arrow"></div>
+	<div class="tooltip-inner">
+		<div hc-if="!asHtml()" ng-bind="content"></div>
+		<div hc-if="asHtml()" bind-html-unsafe="content"></div>
+	</div>
+</div>

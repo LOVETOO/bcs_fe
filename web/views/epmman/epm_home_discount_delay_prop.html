@@ -1,0 +1,123 @@
+<!--
+/**
+ * 家装折扣延期
+ * zengjinhua
+ * 2020-3-27
+ */
+-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+				<div
+					hc-label="延期申请单号"
+					hc-input="data.currItem.discount_ecn_code"
+					hc-readonly="true"
+				></div>
+				
+				<div
+					hc-label="申请人"
+					hc-input="data.currItem.creator_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="申请时间"
+					hc-input="data.currItem.createtime"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="单据状态"
+					hc-input="data.currItem.stat"
+                    hc-dict-code="stat"
+					hc-readonly="true"
+				></div>
+			</div>
+			
+			<div class="row">
+				<div
+					hc-label="折扣单号"
+					hc-input="data.currItem.source_discount_apply_code"
+					hc-class-id="epm_discount_apply"
+					hc-common-search="commonSearch.source_discount_apply_code"
+					hc-required="true"
+                ></div>
+                
+                <div
+					hc-label="家装公司"
+					hc-input="data.currItem.project_name"
+					hc-readonly="true"
+                ></div>
+                
+                <div
+					hc-label="经销商编码"
+					hc-input="data.currItem.customer_code"
+                    hc-readonly="true"
+				>
+				</div>
+
+                <div
+                    hc-label="经销商名称"
+					hc-input="data.currItem.customer_name"
+					hc-readonly="true"
+				></div>
+			</div>
+			
+			<div class="row">
+				<div
+					hc-label="所属事业部"
+					hc-input="data.currItem.division_id"
+					hc-dict-code="epm.division"
+					hc-readonly="true"
+                ></div>
+                
+				<div
+					hc-label="产品线"
+					hc-input="data.currItem.order_pdt_line"
+					hc-dict-code="epm.order_pdt_line"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="交易公司"
+					hc-input="data.currItem.trading_company_name"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="开票单位"
+					hc-input="data.currItem.billing_unit_name"
+					hc-readonly="true"
+				></div>
+            </div>
+
+            <div class="row">
+				<div
+					hc-label="延期说明"
+					hc-input="data.currItem.ecn_reason"
+					hc-required="true"
+					hc-col-count="4"
+                ></div>
+                
+                <div
+					hc-label="原折扣有效期"
+					hc-input="data.currItem.source_discount_valid_date" 
+					hc-type="date"
+					hc-readonly="true"
+				></div>
+
+				<div
+					hc-label="新折扣延期至"
+					hc-input="data.currItem.discount_valid_date" 
+                    hc-type="date"
+                    hc-required="true"
+					hc-date-options="{ startDate: 'today' }"
+				></div>
+            </div>
+        </div>
+        <div hc-box  class="flex1 flex-column">
+            <div hc-grid="gridOptions" class="flex1"></div>
+        </div>
+    </div>
+</div>

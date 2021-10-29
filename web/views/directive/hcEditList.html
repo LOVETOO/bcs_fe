@@ -1,0 +1,41 @@
+<div class="ibox flex1 flex-column" hc-init="doInit()">
+
+	<div class="ibox-title grid-other-h">
+		<div class="ibox-tools">
+			<div
+				hc-buttons="toolButtons"
+				hc-buttons-pull-right
+				hc-btn-groups="toolButtonGroups"
+				hc-btn-default-group="more"
+			></div>
+
+			<div
+				class="pull-right"
+				style="line-height: 29px;"
+				ng-show="form.$dirty"
+			>
+				<span>正在</span><span ng-show="data.isInsert">新增</span><span ng-hide="data.isInsert">修改第{{ data.currRowNode.rowIndex + 1 }}行</span><span>，请选择：</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="hc-box grid-other-h" ng-form="form" ng-show="data.currItem">
+		<div hc-transclude></div>
+	</div>
+
+	<div class="p-w-sm flex1 flex-column" style="position: relative;">
+		<div hc-grid="gridOptions" class="m-t-xs flex1"></div>
+		<div
+			style="
+				position: absolute;
+				top: 0px;
+				bottom: 0px;
+				left: 0px;
+				right: 0px;
+				background-color: rgba(255, 255, 255, 0.5);
+			"
+			ng-show="form.$dirty"
+		></div>
+	</div>
+
+</div>

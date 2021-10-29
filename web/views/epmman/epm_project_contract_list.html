@@ -1,0 +1,86 @@
+<div hc-obj-list>
+	<!-- 查询条件面板-->
+	<hc-obj-list-search-panel>
+		<div class="row">
+			<div
+				hc-label="合同编码"
+				hc-input="searchObj.contract_code"
+			></div>
+			<div
+				hc-label="合同名称"
+				hc-input="searchObj.contract_name"
+			></div>
+
+            <div hc-label="开票单位"
+				 hc-input="searchObj.billing_unit_name"></div>
+			<div hc-label="审核状态"
+				hc-select-options="[
+					{ name: '新建', value: '新建' },
+					{ name: '已提交', value: '已提交' },
+					{ name: '审核通过', value: '审核通过' },
+					{ name: '审核拒绝', value: '审核拒绝' },
+					{ name: '已送签OA', value: '已送签OA' }
+				]"
+				 hc-can-delete="true"
+				 hc-input="searchObj.audit_stat"></div>
+		</div>
+		<div class="row">
+			<div hc-label="经销商编码"
+				 hc-input="searchObj.customer_code"></div>
+
+			<div hc-label="经销商名称"
+				 hc-input="searchObj.customer_name"></div>
+
+			<div hc-label="工程签约单位"
+				 hc-input="searchObj.contract_unit"></div>
+
+			<div hc-label="交易公司"
+				 hc-input="searchObj.trading_company_name"></div>
+		</div>
+		<div class="row">
+            <div hc-label="项目编码"
+				 hc-input="searchObj.project_code"></div>
+
+			<div hc-label="项目名称"
+                 hc-input="searchObj.project_name"></div>
+                 
+            <div hc-label="结案状态"
+				 hc-dict-code="epm.contract_completed_type"
+				 hc-can-delete="true"
+				 hc-input="searchObj.completed_type"></div>
+			<div hc-label="合同总额"
+				 hc-input="searchObj.contract_amt_staer"
+				 hc-type="money"></div>
+				 
+			<div hc-label="至"
+				 hc-input="searchObj.contract_amt_end"
+				 hc-type="money"></div>
+		</div>
+		<div class="row">
+			<div hc-label="战略工程相关"
+				hc-can-delete="true"
+				hc-input="searchObj.strategic_related"
+				hc-dict-code="yesno"></div>
+
+			<div hc-label="战略项目名称"
+				hc-input="searchObj.stas_name"></div>
+
+			<div hc-label="主合同名称"
+				hc-input="searchObj.main_contract_name"></div>
+			
+		</div>
+	</hc-obj-list-search-panel>
+</div>
+<style>
+		[hc-input="searchObj.contract_amt_staer"]{
+			width: calc(13% + 15px);
+			margin-right: 0px;
+		}
+		[hc-input="searchObj.contract_amt_end"] {
+			width: calc(12% - 35px);
+		}
+		[hc-input="searchObj.contract_amt_end"] label {
+			width: 13px;
+			min-width: 0px;
+		}
+	</style>

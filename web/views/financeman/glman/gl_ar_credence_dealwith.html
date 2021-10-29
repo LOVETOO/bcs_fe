@@ -1,0 +1,56 @@
+
+<div hc-diy-page>
+
+    <!--查询条件-->
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.character"
+                 hc-label="凭证字"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.dept_code"
+                 hc-label="部门"
+                 hc-class-id="dept"
+                 hc-common-search="commonSearchSetting.dept">
+            </div>
+            <div hc-input="data.currItem.dept_name"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.dealwithtype"
+                 hc-label="处理方式"
+                 hc-dict-code="dealwith_type">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.affairtype"
+                 hc-label="业务类型"
+                 hc-dict-code="ar_order_type">
+            </div>
+
+            <div hc-input="data.currItem.date_invbill_start"
+                 hc-label="查询日期"
+                 hc-type="date">
+            </div>
+            <button type="button" class="btn btn-link" style="margin-right:33px; margin-left:15px; color: #24262b;cursor: default;">
+                至
+            </button>
+            <div hc-input="data.currItem.date_invbill_end"
+                 hc-col-count="1"
+                 hc-type="date">
+            </div>
+
+            <button type="button"
+                    class="btn btn-primary"
+                    style="margin-left: 30px; width: 198px"
+                    ng-click="searchBySqlWhere()">查询</button>
+        </div>
+
+    </div>
+
+    <!--网格-->
+    <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+</div>

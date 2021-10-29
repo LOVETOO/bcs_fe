@@ -1,0 +1,155 @@
+<div hc-init="doInit()" class="hc-ibox nav-knowledge box-shadow">
+    <div class="page-content flex-row">
+        <div class="logo">
+            <i class="iconfont hc-zhishiku2"></i>
+            知识库
+        </div>
+        <div class="hc-search-box flex-row">
+            <div class="input-group">
+                <input class="form-control" placeholder="请输入标题关键字" type="text" ng-model="condition_text"
+                   ng-keypress="keyListener($event)" ng-blur="searchKnowledge()">
+                <div class="input-group-btn">
+                    <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">
+                        <i class="iconfont hc-wangxia"></i>
+                        {{condition_field_chinese}}
+                    </button>
+                    <button class="btn btn-white" type="button" hc-btn-click="searchKnowledge()">
+                        <i class="iconfont hc-search"  hc-btn-click="searchKnowledge()"></i>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="#" ng-click="changeCondition('subject')">标题</a></li>
+                        <li><a href="#" ng-click="changeCondition('summary')">摘要</a></li>
+                        <li><a href="#" ng-click="changeCondition('tags')">标签</a></li>
+                        <li><a href="#" ng-click="changeCondition('content')">全文</a></li>
+                    <!--    <li><a href="#">粘贴</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">收藏</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="nav-list">
+            <a href="" ng-click="openKnowledge()">首页</a>
+            <a href="" ng-click="openKnowledgeManage()"><i class="iconfont hc-edit"></i>知识编辑</a>
+        </div>
+    </div>
+</div>
+<div class="row p-w-xs m-n bg-gray" style="height:100vh;padding-top: 54px;" id="shared-lists">
+    <div class="page-content">
+        <div class="col-lg-3 col-md-3 col-sm-3 p-w-xs">
+            <div class="hc-card box-shadow navs">
+                <div ng-repeat-start="element in data.navi_list" class="hc-card-title" ng-click="changeStatus(element.news_type_name)" >
+                    <i class="iconfont hc-fenlei"></i>{{element.news_type_name}}
+                    <i class="iconfont hc-wangxia pull-right js-telescoping-btn"></i>
+                </div>
+                <div class="hc-card-content js-telescoping-box" ng-repeat-end>
+                    <ul>
+                        <li ng-repeat="element_sub in element.children"
+                            ng-class="(isHighLight==element_sub.news_type_name)?'active':''" ng-hide="isOff[element.news_type_name]">
+                            <a href="" ng-click="searchKnowledge(element_sub);showHighLight(element_sub.news_type_name)">{{element_sub.news_type_name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>         
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 p-w-xs">
+
+            <!---搜索结果-->
+            <div class="hc-card box-shadow list searched">
+                <div class="hc-card-title">
+                    <span>{{data.card_title}} </span>
+                    搜索结果：共
+                    <span>{{data.knowledge_list.length}}</span>条
+                </div>
+                <div class="hc-card-content">
+                    <ul><!--index.jsp#/oa/scp_news_detail?news_id={{element.newsid}}-->
+                        <li ng-repeat="element in data.knowledge_list">
+                            <a href="" ng-click="openDetail(element.newsid) ">{{element.subject}}</a>
+                            <p>{{element.summary}}</p>
+                            <span class="name"><i class="iconfont hc-account"></i>{{element.author}}</span>
+                            <span class="time">{{element.create_time | date:element.create_time_format }}</span>
+                            <span class="pull-right">{{element.time_desc}}</span>
+                            <span class="amount"><i class="iconfont hc-yidu" ng-hide="element.viewnum==0"></i>{{element.viewnum}}
+                                <i class="iconfont hc-discount" ng-hide="element.tags==''"></i>{{element.tags}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 p-w-xs">
+            <div class="hc-card box-shadow list">
+                <div class="hc-card-title"><i class="iconfont hc-shu"></i>我的常用知识</div>
+                <div class="hc-card-content">
+                    <ul>
+                        <li ng-repeat="element in data.currItem.my_common_list">
+                           <!--  <i class="num">{{$index+1}}</i> --><a href="" ng-click="openDetail(element.newsid)">{{element.subject}}</a>
+                            <span class="amount">人气:{{element.viewnum}}</span>
+                        </li>
+
+                        <!--<li>关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li>关于《知识产权备案》流程提纲<span class="amount">1288</span></li>
+                        <li>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>-->
+                    </ul>
+                </div>
+            </div>
+            <div class="hc-card box-shadow list">
+                <div class="hc-card-title"><i class="iconfont hc-paihang"></i>知识排名</div>
+                <div class="hc-card-content">
+                    <ul>
+                        <li ng-repeat="element in data.currItem.hot_rank_list">
+                            <i class="num">{{$index+1}}</i>
+                            <a href="" ng-click="openDetail(element.newsid)">{{element.subject}}</a>
+                            <span class="amount">人气:{{element.viewnum}}</span>
+                        </li>
+
+                        <!--<li><i class="num">1</i>关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li><i class="num">2</i>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li><i class="num">3</i>关于《知识产权备案》流程提纲<span class="amount">1288</span></li>
+                        <li><i class="num">4</i>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>-->
+                    </ul>
+                </div>
+            </div>
+            <div class="hc-card box-shadow list">
+                <div class="hc-card-title"><i class="iconfont hc-yiguanzhu"></i>我的收藏</div>
+                <div class="hc-card-content">
+                    <ul>
+                        <li ng-repeat="element in data.currItem.my_favorite_list">
+                           <!--  <i class="num">{{$index+1}}</i> --><a href="" ng-click="openDetail(element.newsid)">{{element.subject}}</a>
+                            <span class="amount">人气:{{element.viewnum}}</span>
+                        </li>
+
+                        <!--<li>关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li>关于《知识产权备案》流程提纲<span class="amount">1288</span></li>
+                        <li>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>-->
+                    </ul>
+                </div>
+            </div>
+
+            <!--<div class="hc-card box-shadow list">
+                <div class="hc-card-title"><i class="iconfont hc-shu"></i>常用知识</div>
+                <div class="hc-card-content">
+                    <ul>
+                        <li><i class="num">1</i>关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li><i class="num">2</i>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li><i class="num">3</i>关于《知识产权备案》流程提纲<span class="amount">1288</span></li>
+                        <li><i class="num">4</i>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                    </ul>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+<script type="text/javascript"> 
+$(document).ready(function(){
+    $(".js-telescoping-btn").click(function(){
+        $(this).parent().next().slideToggle("slow");
+        $(this).toggleClass("rotate-90");
+    });
+    $(".navs .hc-card-content li").click(function(){
+        removeClass("active");
+        $(this).addClass("active");
+    });
+});
+</script>

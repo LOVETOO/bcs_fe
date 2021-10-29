@@ -1,0 +1,62 @@
+<div hc-tree-list></div>
+<!--modal-类别-->
+<div class="modal inmodal fade" id="AddSortModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 900px;">
+            <div class="modal-header" draggable-model>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">费用类别属性</h4>
+            </div>
+            <div class="modal-body">
+                <div hc-obj-prop>
+                    <div id="base" hc-box="" class="active">
+                        <div class="row">
+                            <div hc-input="sort.AddSortCode" hc-label="类别编码"></div>
+                            <div hc-input="sort.AddSortName" hc-label="类别名称"></div>
+
+                        </div>
+                        <!--
+                                                <div class="row">
+                                                    <div hc-input="sort.AddHierarchy" hc-label="层级"></div>
+                                                    <div hc-input="sort.AddUsable" hc-label="可用标志" hc-type="checkbox"></div>
+                                                </div>
+                        -->
+                        <div class="row">
+                            <div hc-input="sort.AddHierarchy" hc-label="层级"></div>
+                            <div hc-input="sort.AddComment" hc-label="备注" ></div>
+                            <div hc-input="sort.AddUsable" hc-label="可用标志" hc-type="checkbox"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="SortModal()">保存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--modal --明细的模态框-->
+<div class="modal inmodal fade" id="LookModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:700px;">
+            <div class="modal-header" draggable-model>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">{{ParentNode2}}>>{{ParentNode3}}</h4>
+            </div>
+            <!--<div>-->
+            <!--<span style="font-style: italic;color: #da4534;margin-left: 20px;">当前类别: </span>-->
+            <!--<span style="font-style: italic;color: #da4534;margin-left: 20px;">所属大类: </span>-->
+            <!--</div>-->
+            <div class="modal-body" hc-box="">
+                <div hc-grid="gridOptions1" style="height:380px;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="saveDetail()">保存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

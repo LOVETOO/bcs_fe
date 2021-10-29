@@ -1,0 +1,114 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+        <div class="other-h">
+                <div class="row">
+                    <div hc-input="data.currItem.normal_code"
+                        hc-label="奖罚单号"
+                        hc-readonly="true"
+                    ></div>
+                    <div hc-input="data.currItem.stat"
+						hc-label="状态"
+						hc-dict-code="stat_up"
+                    ></div>
+                    <div hc-input="data.currItem.business_org"
+						hc-label="经营单位"
+                    ></div>
+                </div>
+                
+                
+				<div class="row">
+                    <div hc-input="data.currItem.normal_code_settlement"
+                        hc-label="结算单号"
+                        hc-readonly="true"
+                    ></div>
+                    <div hc-input="data.currItem.settlement_type"
+						hc-label="结算类型"
+						hc-dict-code='pay_settlement_type'
+                    >   </div>
+                    <div hc-input="data.currItem.ascription_name"
+                    hc-label="制单人"
+                    ></div>
+				</div>
+				 <div class="row">
+                    <div hc-input="data.currItem.normal_code_strive"
+                        hc-label="安装/维护单号"
+                        hc-readonly="true"
+                    ></div>
+                    <div hc-input="data.currItem.identification_level"
+						hc-label="满意度"
+						hc-dict-code="identification_level"
+						hc-required="true"
+                    >   </div>
+                    <div hc-input="data.currItem.ascription_time"
+						hc-label="制单时间"
+						hc-type="date"
+                    ></div>
+				</div> 
+				<div class="row">
+                    <div hc-input="data.currItem.normal_name"
+                        hc-label="安装/维护人员"
+                        hc-required="true"
+                    ></div>
+                    <div hc-input="data.currItem.normal_amt"
+						hc-label="奖罚金额"
+						
+                    >   </div>
+				</div>
+				<div class="row">
+                    <div hc-input="data.currItem.entid"
+                        hc-label="机构名称"
+                        hc-class-id="scporg"
+						hc-common-search="commonSearchOfScporg"
+						hc-required="true"
+						hc-col-count="2"
+                    >
+                    </div>
+					<div hc-input="data.currItem.entname"
+						hc-col-count="2"
+					></div>
+                    
+                    <div hc-input="data.currItem.assign_idpath"
+						hc-label="派工网点"
+						hc-required="true"
+						hc-class-id="css_fix_org"
+						hc-common-search="commonSearchOfItemFixOrg"
+                    ></div>
+					<div hc-input="data.currItem.assign_name"
+                    
+                    ></div>
+				</div>  
+				<div class="row">
+                    <div hc-input="data.currItem.note"
+                        hc-label="备注"
+                        hc-type="textarea"
+						hc-col-count="8"
+                    ></div>
+				</div> 
+			<div class="row">
+            <div hc-input="data.currItem.creator"
+                 hc-readonly="true"
+                 hc-label="创建人">
+            </div>
+
+            <div hc-input="data.currItem.create_time"
+                 hc-readonly="true"
+                 hc-label="创建时间"></div>
+
+            <div hc-input="data.currItem.updator"
+                 hc-readonly="true"
+                 hc-label="最后修改人">
+            </div>
+
+            <div hc-input="data.currItem.update_time"
+                 hc-readonly="true"
+                 hc-label="最后修改时间"></div>
+        </div>
+				  
+				  
+				  
+                </div>
+        </div>
+    </div>
+</div>

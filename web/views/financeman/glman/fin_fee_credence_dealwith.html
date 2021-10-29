@@ -1,0 +1,56 @@
+
+<div hc-diy-page>
+
+    <!--查询条件-->
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.character"
+                 hc-label="凭证字"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.dept_code"
+                 hc-label="报销部门"
+                 hc-btn-click="chooseOrg()">
+            </div>
+            <div hc-input="data.currItem.dept_name"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.dealwith_type"
+                 hc-label="处理方式"
+                 hc-dict-code="dealwith_type">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.settlement_type"
+                 hc-label="结算类型"
+                 hc-dict-code="settlement_type">
+            </div>
+
+            <div hc-input="data.currItem.balance_type_codes"
+                 hc-label="结算方式"
+                 hc-btn-click="chooseBalanceType()">
+            </div>
+            <div hc-input="data.currItem.balance_type_names"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.is_onlypayed"
+                 hc-label="仅显示支付完成的报销单"
+                 hc-type="checkbox">
+            </div>
+
+            <button type="button"
+                    class="btn btn-primary"
+                    style="margin-left: 30px;"
+                    ng-click="searchBySqlWhere()">查询</button>
+        </div>
+
+    </div>
+
+    <!--网格-->
+    <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+</div>

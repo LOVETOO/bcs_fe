@@ -1,0 +1,170 @@
+<div class="ibox float-e-margins" wrap-height>
+    <div class="mailbox-content" style="height: 100%;overflow: auto;">
+        <div class="file-manager">
+            <!--<div  style = 'padding-bottom: 10px;'>-->
+            <!--<div class="profile-element">-->
+            <!--<a class="block"> <img alt="image" class="img-circle" src="{{userbean.avatar}}" id="useravatar" style="height:48px; width:48px;"> </a>-->
+            <!--<div style="padding-right: 15px;" class="dropdown inline" dropdown="">-->
+            <!--<a class="dropdown-toggle" dropdown-toggle="" href="" aria-haspopup="true" aria-expanded="false"> -->
+            <!--<span class="clear"> -->
+            <!--<span class="block m-t-xs"> <strong class="font-bold">{{userbean.username}}</strong> -->
+            <!--</span>						-->
+            <!--</span>-->
+            <!--</a>-->
+
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <a class="btn btn-block compose-mail btn-success" ng-click="show(2)">
+                <img src="img/xx.png" style="width: 16px;margin-right: 5px;">
+                写信
+            </a>
+
+            <!--内部邮箱-->
+            <h5><i class="iconfont hc-zhankai zhankai"></i> 内部邮箱</h5>
+            <ul id='inn_mail' class="folder-list m-b-md" style="padding: 0px;">
+                <li><a ng-click="show_box(1,$event)">
+                    <i class="fa fa-inbox "></i> 收件箱
+                    <span class="label label-warning pull-right mt-2">{{data.receivenew||0}}</span>
+                </a></li>
+                <li><a ng-click="show_box(2,$event)"> <i class="fa fa-envelope-o"></i> 已发邮件</a></li>
+                <li><a ng-click="show_box(3,$event)"> <i class="fa fa-star-half-empty"></i> 星标邮件</a></li>
+                <li><a ng-click="show_box(4.5,$event)"> <i class="iconfont hc-yishanchu" style="font-size: 12px;"></i> 已删除邮件</a></li>
+                <li><a ng-click="show_box(4,$event)">
+                    <i class="fa fa-file-text-o"></i> 草稿
+                    <span class="label label-danger pull-right mt-2">{{data.receivedraft||0}}</span>
+                </a></li>
+                <!--<li><a ng-click="show_box(5,$event)"> <i class="fa fa-trash-o"></i> 垃圾箱</a></li>-->
+            </ul>
+            <!--<h5 >外部邮件<a ng-click='add_outmail()' class='fa fa-download' style='float:right'>收信</a></h5>
+            <ul id='out_mail' class="folder-list m-b-md" style="padding: 0;display: block">
+                <li><a  ng-click="show_box(6,$event)"> <i class="fa fa-inbox "></i> 收件箱 <span class="label label-warning pull-right">{{data.receivenew_out||0}}</span> </a></li>
+                <li><a  ng-click="show_box(7,$event)"> <i class="fa fa-envelope-o"></i> 已发邮件</a></li>
+                <li><a  ng-click="show_box(8,$event)"> <i class="fa fa-star-half-empty"></i> 星标邮件</a></li>
+                <li><a  ng-click="show_box(9,$event)"> <i class="fa fa-file-text-o"></i> 草稿 <span class="label label-danger pull-right">{{data.receivedraft_out||0}}</span></a></li>
+                <li><a  ng-click="show_box(10,$event)"> <i class="fa fa-trash-o"></i> 垃圾箱</a></li>
+            </ul>-->
+
+            <!--外部邮箱-->
+            <h5>
+                <i class="iconfont hc-zhankai zhankai"></i>
+                外部邮箱
+                <a ng-click='add_outmail()' class='fa fa-download nozhankai'
+                   style='float:right;line-height: 18px;'>收信</a>
+                <a ng-click='open_setting()' class="iconfont hc-setting nozhankai"
+                   style='float: right;font-weight: normal;line-height: 14px;font-size: 13px;margin-right: 5px;padding-top: 4px;'>配置</a>
+            </h5>
+            <ul id='out_mail' class="folder-list m-b-md" style="display: block;padding: 0px;">
+                <li ng-repeat="item in data.outusermails">
+                    <a class="hc-ellipsis hc-right-outmail"
+                       ng-click="show_box(6,$event,item)"
+                       hc-right-click="hc_right_out">
+                        <i class="fa fa-inbox "></i> {{item.email}}
+                        <!--<span class="label label-warning pull-right">{{data.receivenew_out||0}}</span>-->
+                    </a>
+                </li>
+            </ul>
+
+            <!--自定义文件-->
+            <h5>
+                <i class="iconfont hc-zhankai zhankai"></i>
+                自定义文件夹
+                <a ng-click='add_scpemailc()' class="iconfont hc-add nozhankai"
+                   style='float: right;font-weight: normal;line-height: 14px;font-size: 13px;margin-right: 5px;padding-top: 4px;'>新建</a>
+            </h5>
+            <ul id='scpe_mail' class="folder-list m-b-md" style="display: block;padding: 0px;">
+                <li ng-repeat="item in data.scpemailc">
+                    <a class="hc-ellipsis hc-right-custom"
+                       data-emailcname="{{item.emailcname}}"
+                       data-emailcid="{{item.emailcid}}"
+                       ng-click="show_box(4.7,$event,item)"
+                       hc-right-click="hc_right_custom"
+                       ng-style="{'font-weight':(item.newmail>0?'bold':'normal')}">
+                        <i class="fa fa-folder-open-o"></i>{{item.emailcname}} ({{item.newmail?item.newmail:0}}/{{item.totalmail}})
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<style>
+    /*展开箭头*/
+    .zhankai {
+        font-size: 18px;
+        transition: all 0.4s;
+        display: inline-block;
+        transform: rotate(0deg);
+    }
+
+    .hc-right-outmail{
+        position: relative;
+    }
+
+    #inn_mail > li, #out_mail > li, #scpe_mail > li {
+        padding-left: 8px;
+    }
+    .mailbox-content{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .mt-2{
+        margin-top: 3px;
+    }
+    .hc-ellipsis{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    .file-manager > h5 {
+        font-weight: bold;
+        font-size: 14px;
+        background-color: #ebebeb;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        padding: 8px 5px;
+    }
+
+    .write-button {
+        background-color: #1AB394 !important;
+        color: #fff !important;
+        border: 1px solid #1AB394 !important;
+        transition: all .2s;
+    }
+
+    .write-button:hover {
+        background-color: #18A689 !important;
+        border: 1px solid #18A689 !important;
+    }
+
+    ul li, ul li:hover ul {
+        display: block;
+    }
+
+    ul li ul {
+    / / display: none;
+    }
+
+    a {
+        color: #5d6267;
+        text-decoration: none;
+    }
+</style>
+<script>
+    $('h5').click(function (e) {
+        if (e.target.className.indexOf('nozhankai') > -1) {
+            return;
+        }
+        $v = $(this).next().css('display');
+        console.warn($v);
+        console.warn($(this));
+        console.warn(e);
+        if ($v == 'none') {
+            $(this).next().css('display', 'block');
+            $(this).find(".hc-zhankai").css("transform","rotate(0deg)");
+        } else {
+            $(this).next().css('display', 'none');
+            $(this).find(".hc-zhankai").css("transform","rotate(-90deg)");
+        }
+    })
+</script>

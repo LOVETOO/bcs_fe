@@ -1,0 +1,132 @@
+<div hc-edit-list>
+
+    <div class="row">
+        <div hc-input="data.currItem.project_name"
+             hc-label="项目名称"
+             hc-required="true"
+             hc-col-count="4">
+        </div>
+
+        <div hc-input="data.currItem.address"
+             hc-label="项目所在地"
+             hc-required="true"
+             hc-col-count="4">
+        </div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.project_type"
+             hc-label="项目类型"
+             hc-dict-code="projec_type2">
+        </div>
+        <div hc-input="data.currItem.sale_area_name"
+             hc-label="所属销售区域"
+             hc-class-id="dept"
+             hc-common-search="commonSearchSettingOfDept"
+             hc-required="true">
+        </div>
+        <div hc-input="data.currItem.brand"
+             hc-label="品牌">
+        </div>
+        <div hc-input="data.currItem.bid_open_time"
+             hc-label="开标时间"
+             hc-change="setSubtractDays()"
+             hc-type="date">
+        </div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.offer_price"
+             hc-label="报价"
+             hc-change="checkNumber(1)"
+             hc-unit="元">
+        </div>
+        <div hc-input="data.currItem.rank"
+             hc-label="名次">
+        </div>
+        <div hc-input="data.currItem.score"
+             hc-label="得分"
+             hc-type="number">
+        </div>
+        <div hc-input="data.currItem.is_bid_win"
+             hc-label="中标"
+             hc-dict-code="is_bid_win">
+        </div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.bid_win_time"
+             hc-label="中标时间"
+             hc-change="setSubtractDays()"
+             hc-type="date">
+        </div>
+        <div hc-input="data.currItem.bid_win_amount"
+             hc-label="中标金额"
+             hc-change="checkNumber(2)"
+             hc-unit="元">
+        </div>
+        <div hc-input="data.currItem.plan_start_date"
+             hc-label="投标工期">
+        </div>
+        <div hc-input="data.currItem.competitors_org_name"
+             hc-label="所属单位">
+        </div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.builder_name"
+             hc-label="建造师姓名">
+        </div>
+        <div hc-input="data.currItem.publicity_start_time"
+             hc-label="公示开始时间"
+             hc-change="setSubtractDays()"
+             hc-type="date">
+        </div>
+        <div hc-input="data.currItem.publicity_end_time"
+             hc-label="公示结束时间"
+             hc-change="setSubtractDays()"
+             hc-type="date">
+        </div>
+        <div hc-input="data.currItem.company_type"
+             hc-label="所属行业"
+             hc-dict-code="industry">
+        </div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.performance_manage"
+             hc-label="业绩项目经理">
+        </div>
+        <div hc-input="data.currItem.performance_amt"
+             hc-label="业绩金额"
+             hc-unit="元"
+             hc-blur="checkNumber(3)">
+        </div>
+        <div hc-input="data.currItem.customer_name"
+             hc-label="业主单位"
+             hc-col-count="4">
+        </div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.performance_name"
+             hc-label="业绩名称"
+             hc-col-count="8">
+        </div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.agent"
+             hc-label="代理联系人">
+        </div>
+        <div hc-input="data.currItem.agent_phone"
+             hc-label="代理联系电话"
+             hc-blur="checkPhone()">
+        </div>
+        <div hc-input="data.currItem.agent_org"
+             hc-label="代理机构"
+             hc-col-count="4">
+        </div>
+    </div>
+
+</div>

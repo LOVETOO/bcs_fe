@@ -1,0 +1,375 @@
+<div class="wrapper wrapper-content animated fadeInRight"
+     style="background-color: #f5f6f9;"
+     hc-init="doInit()">
+    <div class="myinfor">
+        <div class="profile-image" style="margin-top: 10px;">
+            <img style="height: 110px;" class="headimg" hc-cropper-modal="data.hcCropper"
+                 ng-src={{(data.currItem.headimgdocid)?"/downloadfile?docid="+data.currItem.headimgdocid:"img/head.png"}}
+                 class="img-circle circle-border m-b-md" alt="profile">
+            <!--ng-click="updateHead()"-->
+            <!--<div>
+                <img id="image"
+                     src="img/userhead.png"
+                     style=" max-width: 100%;">
+            </div>
+            <button ng-click="getCropper()"></button>-->
+
+            <input type="file" onchange="fileChange(event)" id="photofile" accept="image/*" style="display: none;">
+        </div>
+        <div class="myname">
+            <form method="get" class="form-horizontal">
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label class="col-xs-3 control-label"><i class="fa fa-user"></i> 姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</label>
+                    <div class="col-xs-9"><h2>{{data.currItem.username}}</h2></div>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label class="col-xs-3 control-label"><i class="fa fa-mobile-phone"></i> 联系电话:</label>
+                    <div class="col-xs-9">{{data.currItem.mobil}}</div>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label class="col-xs-3 control-label"><i class="fa fa-map-marker"></i> 上班地址:</label>
+                    <div class="col-xs-9"></div>
+                </div>
+                <div class="form-group " style="margin-bottom: 10px;">
+                    <p ng-show="goout!=2" class="col-xs-10" style="padding-left:50px;">&nbsp;&nbsp;当前没有设置出差</p>
+                    <p ng-show="goout==2" class="col-xs-10" style="padding-left:50px;">&nbsp;&nbsp;出差中</p>
+                </div>
+            </form>
+        </div>
+        <!--<div class="mywork">-->
+        <!--<ul>-->
+        <!--<li>-->
+        <!--<h4>部门</h4>-->
+        <!--<div>HR人力资源部</div>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<h4>职位</h4>-->
+        <!--<div>HR人力专员</div>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<h4>年资</h4>-->
+        <!--<div>5 年</div>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+    </div>
+    <div class="ibox myinfor-text">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <!--<li class="active"><a data-toggle="tab" href="tabs.html#tab-1" ><i class="fa fa-user"></i> 我的资料</a></li>-->
+                <!--<li><a data-toggle="tab" href="tabs.html#tab-2"><i class="fa fa-arrow-circle-o-up"></i> 上传头像</a></li>-->
+                <li ng-click="change_password()">
+                    <a data-toggle="tab" href="tabs.html#tab-3">
+                        <i class="fa fa-gear"></i>修改密码
+                    </a>
+                </li>
+                <li class="active" ng-click="gooutSetting()">
+                    <a data-toggle="tab" href="tabs.html#tab-4">
+                        <i class="fa fa-briefcase"></i> 出差设置
+                    </a>
+                </li>
+                <li ng-click="change_password()">
+                    <a data-toggle="tab" href="tabs.html#tab-5">
+                        <i class="fa fa-gear"></i>参数设置
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content ibox-content">
+                <div id="tab-1" class="tab-pane ">
+                    <form method="get" class="form-inline">
+                        <div ag-gridview sg-options="userImfoOptions" sg-columns="userImfoColumns"
+                             autoHeight="auto"></div>
+                        <div class="row">
+                            <div class="col-sm-12" style="text-align: right;">
+                                <button class="btn btn-primary" type="submit" ng-click="saveUserImfo()">保存</button>
+                                <button class="btn btn-white" type="submit">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="tab-2" class="tab-pane headsize">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="img/userhead.png" class="circle-border m-b-md" alt="profile" width="120px">
+                            <img src="img/userhead.png" class="circle-border m-b-md" alt="profile" width="80px">
+                            <img src="img/userhead.png" class="circle-border m-b-md" alt="profile" width="40px">
+                        </div>
+                    </div>
+
+                </div>
+                <div id="tab-3" class="tab-pane ">
+                    <form role="form" class="form-inline">
+                        <!--<div class="row">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-8">
+                                <div class="row">
+                                    <label class="col-xs-3 control-label">原密码</label>
+                                    <div class="col-xs-9"><input type="text" class="form-control" ng-model="oldpass">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-xs-3 control-label">新密码</label>
+                                    <div class="col-xs-9"><input type="text" class="form-control" ng-model="newpass">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-xs-3 control-label">确认新密码</label>
+                                    <div class="col-xs-9"><input type="text" class="form-control" ng-model="renewpass">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-3" style="width: 80px;"></div>
+                                    <div class="col-xs-9" style="text-align: right;">
+                                        <button class="btn btn-primary" type="submit" ng-click="pwSave()">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="row">
+                            <div hc-input="newpass"
+                                 hc-label="新密码"
+                                 hc-col-count="2">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div hc-input="renewpass"
+                                 hc-label="确认新密码"
+                                 hc-col-count="2">
+                            </div>
+                            <button class="btn btn-primary" type="submit" ng-click="pwSave()" style="margin-left: 40px;">确定</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="tab-4" class="tab-pane  business active">
+                    <form role="form" class="form-inline">
+                        <!--<div class="row" style="text-align: left;">
+                            <div class="form-group ">
+                                <label>
+                                    <input type="checkbox" ng-model="goout" ng-change="gooutChange()"
+                                           ng-true-value="2" ng-false-value="1">是否出差
+                                </label>
+                            </div>
+                            <div class="form-group ">
+                                <label>出差时间 </label>
+                            </div>
+                            <div class="form-group">
+                                <label> 从</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control"
+                                       ng-disabled="goout == 1" bs-date-picker
+                                       ng-model="data.currItem.gooutstarttime">
+                            </div>
+                            <div class="form-group">
+                                <label> 到</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control"
+                                       ng-disabled="goout == 1" bs-date-picker
+                                       ng-model="data.currItem.gooutendtime">
+                            </div>
+                        </div>-->
+                        <div class="row">
+                            <div hc-input="goout"
+                                 hc-label="我要出差"
+                                 hc-type="checkbox"
+                                 hc-change="gooutChange()">
+                            </div>
+                            <div hc-input="data.currItem.gooutstarttime"
+                                 hc-label="出差时间"
+                                 hc-type="date"
+                                 hc-readonly="goout==1">
+                            </div>
+                            <div hc-input="data.currItem.gooutendtime"
+                                 hc-label="到"
+                                 hc-type="date"
+                                 hc-readonly="goout==1">
+                            </div>
+                        </div>
+
+                        <div class="hc-flexbox">
+                            <div hc-grid="gooutOptions" class="hc-gridbox" id="gooutGrid"></div>
+                            <!--<div class="row">
+                                <div class="col-sm-12" style="text-align: right;padding: 0px;">
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="addItem()"> 增加代理用户
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="gooutbuttonRenderer()"> 删除
+                                    </button>
+                                    <button class="btn btn-primary" type="submit" ng-click="gooutsave()">保存</button>
+                                </div>
+                            </div>-->
+                            <div class="hc-btnbox">
+                                <button type="button" class="btn btn-default"
+                                        ng-click="addItem()"> 增加
+                                </button>
+                                <button type="button" class="btn btn-default"
+                                        ng-click="gooutbuttonRenderer()"> 删除
+                                </button>
+                                <button class="btn btn-primary" type="submit" ng-click="gooutsave()">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="tab-5" class="tab-pane">
+                    <form role="form" class="form-inline">
+                        <div class="hc-flexbox">
+                            <div hc-grid="settingOptions" class="hc-gridbox" style="width: 100%;height:410px;" id="settingGrid"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div hc-modal="settingModal" class="settingModal"  hc-auto-height>
+    <div hc-box >
+        <div class="row">
+            <div hc-col-count="8" hc-label="参数名称" hc-input="data.confname" hc-readonly="true">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-col-count="8" hc-label="参数描述" hc-input="data.confdesc" hc-readonly="true">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-col-count="8" hc-label="参数值" hc-input="data.confvalue">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-col-count="8" hc-label="参数说明" hc-input="data.note" hc-type="textarea" hc-readonly="true">
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .hc-flexbox{
+        display: flex;
+    }
+    .hc-gridbox{
+        height:120px;
+        width: calc(100% - 65px);
+        display: inline-block;
+    }
+    .hc-btnbox{
+        width: 65px;
+        display: table;
+        text-align: right;
+    }
+    .hc-btnbox>button{
+        display: table-cell;
+        margin-bottom: 5px;
+    }
+
+    .headimg {
+        width: 60px;
+        cursor: pointer;
+    }
+
+    .myinfor {
+        padding: 5px 20px;
+        background-color: #fff;
+        box-shadow: 0px 2px 3px rgba(177, 189, 204, 0.3);
+    }
+
+    .myinfor:after {
+        content: " ";
+        display: block;
+        clear: both;
+    }
+
+    .myinfor h2 {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .myinfor .myname {
+        float: left;
+        width: 500px;
+        margin-left: 20px;
+        margin-top: 15px;
+    }
+
+    .myinfor .mywork {
+        float: right;
+        margin-top: 62px;
+    }
+
+    .headsize img {
+        border-radius: 50%;
+        margin-left: 30px;
+    }
+
+    .myinfor li {
+        margin: 0px;
+        padding: 0px 15px;
+        text-align: center;
+        float: left;
+        border-right: 1px solid #EBEDF1;
+    }
+
+    .myinfor li:last-child {
+        border: none;
+    }
+
+    .myinfor li div {
+        white-space: nowrap;
+    }
+
+    .myinfor h4 {
+    }
+
+    .myinfor .form-group:last-child {
+        margin-bottom: 0px;
+    }
+
+    .myinfor .headimg {
+        border-radius: 50%;
+        width: 110px;
+        height: auto;
+    }
+
+    .myinfor input {
+        height: 34px !important;
+    }
+
+    .myinfor-text {
+        margin-top: 15px !important;
+        background-color: #fff;
+    }
+
+    .myinfor-text .nav-tabs {
+          background-color: #f5f6f9;
+    }
+
+    .myinfor-text li.active a {
+        border-bottom: 0px !important;
+        color: #1b89ff !important;
+    }
+
+    .myinfor-text .tab-content {
+        font-size: 14px;
+        /*line-height: 32px;*/
+    }
+
+    .myinfor-text .tab-content .form-control {
+        height: 32px;
+        width: 100%;
+    }
+
+    .myinfor-text .tab-content .btn {
+        /*margin-left: 10px;*/
+    }
+
+    .business {
+        font-size: 14px;
+        /*line-height: 32px;*/
+    }
+
+    .business label {
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
+</style>
+

@@ -1,0 +1,701 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="ctrl_base_wf">
+    <div class="wrapper wrapper-content" ng-init="drawWfFlow();">
+        <div class="tabs-container" flow-height>
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="tabs.html#routine">常规</a></li>
+                <li><a data-toggle="tab" href="tabs.html#process">过程定义</a></li>
+                <li><a data-toggle="tab" href="tabs.html#other">其他</a></li>
+                <!--<li><a data-toggle="tab" href="tabs.html#definition">自定义</a></li>-->
+            </ul>
+            <form method="get" class="form-inline">
+                <div class="tab-content">
+                    <div id="routine" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="control-label">名称</label>
+                                    <input type="text" class="form-control  width_xxxl" ng-model="data.currItem.wftempname"/>
+                                    <!--<label class="control-label">所属公司</label>-->
+                                    <!--<div class="input-group width_m">-->
+                                        <!--<input type="text" class="form-control" ng-model="data.currItem.comporgname">-->
+                                        <!--<span class="input-group-btn">-->
+                                            <!--<button type="button" class="btn btn-primary">•••</button>-->
+                                        <!--</span>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group">-->
+                                        <!--<label class="control-label">管理者</label>-->
+                                        <!--<div class="input-group width_m">-->
+                                            <!--<input type="text" class="form-control" ng-model="data.currItem.managers">-->
+                                            <!--<span class="input-group-btn">-->
+                                                <!--<button type="button" class="btn btn-primary">•••</button>-->
+                                            <!--</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                            <!--<div class="row">-->
+                                <!--<label class="control-label">编码</label>-->
+                                <!--<input type="text" class="form-control" ng-model="data.currItem.code"/>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label class="control-label">编码规则</label>-->
+                                    <!--<div class="input-group width_m">-->
+                                        <!--<input type="text" class="form-control" ng-model="data.currItem.codename">-->
+                                        <!--<span class="input-group-btn">-->
+													<!--<button type="button" class="btn btn-primary">•••</button>-->
+												<!--</span>-->
+                                    <!--</div>-->
+                                    <!--<label class="control-label">秘级</label>-->
+                                    <!--<input type="text" class="form-control" ng-model="data.currItem.issecret"/>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="control-label">周期(小时)</label>
+                                    <input type="text" class="form-control" ng-model="data.currItem.period"/>
+                                    <label>驳回后提交方式</label>
+                                    <select class="input-sm chosen-select form-control">
+                                    </select>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="history" ng-model="data.currItem.submitctrl">
+                                        <label for="history">
+                                            驳回后允许保留提交历史
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="wbecan" ng-model="data.currItem.canselect">
+                                        <label for="wbecan">
+                                            可选择
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="control-label">中断设置</label>
+                                    <select ng-model="data.currItem.breakprocid"
+                                            class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                            ng-options="s.id as s.name for s in breakprocids" ng-disabled="false">
+                                    </select>
+                                    <label>步骤运行后不允许中断</label>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="flaseuse" ng-model="data.currItem.actived"
+                                               ng-true-value="1" ng-false-value="2" ng-disabled="">
+                                        <label for="flaseuse">
+                                            禁止使用
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="week" ng-model="data.currItem.modifyperiod">
+                                        <label for="week">
+                                            修改过程周期
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkture" ng-model="data.currItem.canmodifytime">
+                                        <label for="checkture">
+                                            修改过程时间
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="control-label">备注</label>
+                                <textarea class="form-control width_xxxl" ng-model="data.currItem.note"></textarea>
+                            </div>
+                            <div class="row">
+                                <label class="control-label">中断执行语句</label>
+                                <textarea class="form-control width_xxxl" ng-model="data.currItem.breakfunc"></textarea>
+                            </div>
+                            <!--<div class="row">-->
+                                <!--<label class="control-label">调度</label>-->
+                                <!--<div class="input-group width_xxxl">-->
+                                    <!--<input type="text" class="form-control" ng-model="data.currItem.scheduler">-->
+                                    <!--<span class="input-group-btn">-->
+                                        <!--<button type="button" class="btn btn-primary">•••</button>-->
+                                    <!--</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        </div>
+                    </div>
+                    <div id="process" class="tab-pane">
+                        <div class="ibox">
+                            <div class="clear">
+                                <div class="pull-left">
+                                    <div id="wfFlowChart"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--<div class="ibox">-->
+                        <!--<div class="clear">-->
+                        <!--<div class="rwo m-t m-l-md">-->
+                        <!--<h4>对象列表</h4>-->
+                        <!--</div>-->
+                        <!--<div class="pull-left ibox-content m-t-n">-->
+                        <!--<table class="table table-bordered" style="width: 755px;">-->
+                        <!--<thead>-->
+                        <!--<tr>-->
+                        <!--<th>名称</th><th>版本</th><th>编码</th><th>路径</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--<tr>-->
+                        <!--<td></td><td></td><td></td><td></td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                        <!--</table>-->
+                        <!--</div>-->
+                        <!--<div class="pull-left">-->
+                        <!--<button class="btn btn-white width_s center-block m-b-xs">添加对象</button>-->
+                        <!--<button class="btn btn-white width_s center-block m-b-xs">删除对象</button>-->
+                        <!--<button class="btn btn-white width_s center-block m-b-xs">检入对象</button>-->
+                        <!--<button class="btn btn-white width_s center-block m-b-xs">取消检出</button>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                    <div id="other" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="row">
+                                <label class="control-label">创建用户</label>
+                                <input type="text" ng-readonly="true" class="form-control width_xxxl" ng-model="data.currItem.creator"/>
+                            </div>
+                            <div class="row">
+                                <label class="control-label">创建时间</label>
+                                <input type="text" ng-readonly="true" class="form-control width_xxxl" ng-model="data.currItem.createtime"/>
+                            </div>
+                            <div class="row">
+                                <label class="control-label">最后修改用户</label>
+                                <input type="text" ng-readonly="true" class="form-control width_xxxl" ng-model="data.currItem.updator"/>
+                            </div>
+                            <div class="row">
+                                <label class="control-label">最后修改时间</label>
+                                <input type="text" ng-readonly="true" class="form-control width_xxxl" ng-model="data.currItem.updatetime"/>
+                            </div>
+                            <!--<div class="row">-->
+                                <!--<label class="control-label">发布时间</label>-->
+                                <!--<input type="text" class="form-control width_xxxl"-->
+                                       <!--ng-model="data.currItem.publishtime"/>-->
+                            <!--</div>-->
+                            <!--<div class="row">-->
+                                <!--<label class="control-label">发布用户</label>-->
+                                <!--<input type="text" class="form-control width_xxxl" ng-model="data.currItem.publishor"/>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <!--<div id="definition" class="tab-pane">-->
+                        <!--<div class="panel-body">-->
+                            <!--<div class="ibox">-->
+                                <!--<div class="clear">-->
+                                    <!--<div class="pull-left">-->
+                                        <!--<table class="table table-bordered" style="width: 755px;">-->
+                                            <!--<thead>-->
+                                            <!--<tr>-->
+                                                <!--<th></th>-->
+                                                <!--<th>属性名称</th>-->
+                                                <!--<th>属性值</th>-->
+                                                <!--<th>类型</th>-->
+                                            <!--</tr>-->
+                                            <!--</thead>-->
+                                            <!--<tbody>-->
+                                            <!--<tr>-->
+                                                <!--<td>1</td>-->
+                                                <!--<td></td>-->
+                                                <!--<td></td>-->
+                                                <!--<td></td>-->
+                                            <!--</tr>-->
+                                            <!--<tr>-->
+                                                <!--<td>2</td>-->
+                                                <!--<td></td>-->
+                                                <!--<td></td>-->
+                                                <!--<td></td>-->
+                                            <!--</tr>-->
+                                            <!--</tbody>-->
+                                        <!--</table>-->
+                                    <!--</div>-->
+                                    <!--<div class="pull-left m-l">-->
+                                        <!--<button class="btn btn-white width_s center-block m-b-xs">添加</button>-->
+                                        <!--<button class="btn btn-white width_s center-block m-b-xs">删除</button>-->
+                                        <!--&lt;!&ndash;<button class="btn btn-white width_s center-block m-b-xs">上移</button>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<button class="btn btn-white width_s center-block m-b-xs">下移</button>&ndash;&gt;-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="saveWfTemp()">确定</button>
+            <button type="button" class="btn btn-white" ng-click="closeForm()">取消</button>
+        </div>
+    </div>
+
+    <!--新建流程----查看/编辑-->
+    <div class="modal inmodal fade" id="procprop" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-nthree">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">过程信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs p-w-m">
+                            <li class="active"><a data-toggle="tab" href="tabs.html#tab_common">常规</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab_excutor">执行人</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab_function">高级功能</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab_ctrlfunction">控制参数</a></li>
+                            <li><a data-toggle="tab" href="tabs.html#tab_noticeset">通知设置</a></li>
+                        </ul>
+                        <form method="get" class="form-inline">
+                            <div class="tab-content" style="overflow-x:auto;height: 300px;">
+                                <div id="tab_common" class="tab-pane active">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">过程名称</label>
+                                                <input type="text" class="form-control"
+                                                       ng-model="data.currProc.proctempname"/>
+                                                <label class="control-label">状态</label>
+                                                <select ng-model="data.currProc.stat"
+                                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                        ng-options="s.id as s.name for s in stats"
+                                                        disabled="disabled" ng-disabled="true">
+                                                </select>
+                                                <label class="control-label">类型</label>
+                                                <select ng-model="data.currProc.proctype"
+                                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                        ng-options="s.id as s.name for s in proctypes">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">权限</label>
+                                                <select ng-model="data.currProc.operright"
+                                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                        ng-options="s.id as s.name for s in operrights">
+                                                </select>
+                                                <label class="control-label">优先级</label>
+                                                <select ng-model="data.currProc.priority"
+                                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                        ng-options="s.id as s.name for s in prioritys">
+                                                </select>
+                                                <label class="control-label">可控过程</label>
+                                                <div class="input-group width_m">
+                                                    <input type="text" class="form-control" ng-model="data.currProc.ctrlprocname" ng-readonly="true"/>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-white" type="button"><i
+                                                                class="fa fa-ellipsis-h" ng-click="selectCtrlProc()"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">周期(小时)</label>
+                                                <input type="text" class="form-control" value="8"
+                                                       ng-model="data.currProc.period"/>
+                                                <label class="control-label">后续节点类型</label>
+                                                <select ng-model="data.currProc.sufproctype"
+                                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                        ng-options="s.id as s.name for s in sufproctypes">
+                                                </select>
+                                                <label class="control-label">过程设置</label>
+                                                <select ng-model="data.currProc.isskip"
+                                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                        ng-options="s.id as s.name for s in isskips">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">延迟周期</label>
+                                                <input type="text" class="form-control"
+                                                       value="0"
+                                                       ng-model="data.currProc.delayperiod"/>
+                                                <label class="control-label">实际周期</label>
+                                                <input type="text" class="form-control"
+                                                       ng-model="data.currProc.aperiod"
+                                                       ng-readonly="true"/>
+                                                <label class="control-label">评分</label>
+                                                <input type="text" class="form-control" ng-model="data.currProc.score"
+                                                       ng-readonly="true"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">实际开始时间</label>
+                                                <input type="text" class="form-control"
+                                                       ng-model="data.currProc.astatime" ng-readonly="true"/>
+                                                <label class="control-label">计划开始时间</label>
+                                                <input type="text" class="form-control" value="8"
+                                                       ng-model="data.currProc.pstatime" ng-readonly="true"/>
+                                                <label class="control-label">计划结束时间</label>
+                                                <input type="text" class="form-control" value="8"
+                                                       ng-model="data.currProc.pendtime" ng-readonly="true"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">实际结束时间</label>
+                                                <input type="text" class="form-control"
+                                                       ng-model="data.currProc.aendtime" ng-readonly="true"/>
+                                                <label class="control-label">归档路径设置</label>
+                                                <div class="input-group width_xl">
+                                                    <input type="text" class="form-control"
+                                                           ng-model="data.currProc.archiveto"/>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-white" type="button"><i
+                                                                class="fa fa-ellipsis-h"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">驳回类型</label>
+                                                <select ng-model="data.currProc.canreject"
+                                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                        ng-options="s.id as s.name for s in canrejects">
+                                                </select>
+                                                <div class="checkbox m-r-xs">
+                                                    <input type="checkbox" id="cannot"
+                                                           ng-model="data.currProc.unreject" ng-true-value="2" ng-false-value="1"/>
+                                                    <label for="cannot">
+                                                        不能被驳回
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox m-r-xs">
+                                                    <input type="checkbox" id="canmodify" class="i-checks" ng-model="data.currProc.canmodify"
+                                                           ng-true-value="2" ng-false-value="1">
+                                                    <label for="canmodify">
+                                                        禁止修改
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">可驳回过程</label>
+                                                <div class="input-group  width_xl">
+                                                    <input type="text" class="form-control"
+                                                           ng-model="data.currProc.rejectprocname">
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-white" type="button"><i
+                                                                class="fa fa-ellipsis-h"  ng-click="selectRejectProc()"></i></button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!--<div class="row">-->
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="control-label">归档设置</label>-->
+                                                <!--<select ng-model="data.currProc.archiveset"-->
+                                                        <!--class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"-->
+                                                        <!--ng-options="s.id as s.name for s in archivesets">-->
+                                                <!--</select>-->
+                                                <!--<div class="checkbox m-r-xs">-->
+                                                    <!--<input type="checkbox" id="keepshortcut"-->
+                                                           <!--ng-model="data.currProc.keepshortcut">-->
+                                                    <!--<label for="keepshortcut">-->
+                                                        <!--归档后保留快捷方式-->
+                                                    <!--</label>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">备注</label>
+                                                <textarea rows="3" cols="" class="form-control width_xxxl"
+                                                          ng-model="data.currProc.note"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">缺省提交意见</label>
+                                                <textarea rows="2" cols="" class="form-control width_xxxl"
+                                                          ng-model="data.currProc.defopinion"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="tab_excutor" class="tab-pane">
+                                    <div class="clear">
+                                        <div class="ibox-content text-right m-b-n">
+                                            <button class="btn btn-white width_s"
+                                                    ng-click="addProcUser('{{data.currProc.id}}')">添加
+                                            </button>
+                                            <button class="btn btn-white width_s"
+                                                    ng-click="delProcUser('{{data.currProc.id}}')">删除
+                                            </button>
+                                            <button class="btn btn-white width_s" ng-click="">地址薄</button>
+                                            <button class="btn btn-white width_s"
+                                                    ng-click="addOrgPosition('{{data.currProc.id}}')">机构岗位
+                                            </button>
+                                            <button class="btn btn-white width_s"
+                                                    ng-click="addSysPosition('{{data.currProc.id}}')">企业岗位
+                                            </button>
+                                            <button class="btn btn-white width_s" ng-click="">设为决策人</button>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <div id="usergrid" slick-grid></div>
+                                        </div>
+                                    </div>
+                                    <div class="row clear" style="display: none;">
+                                        <div class="rwo m-t m-l-md">
+                                            <h4>用户范围</h4>
+                                        </div>
+                                        <div class="ibox-content pull-left">
+                                            <div id="userrangegrid" slick-grid style="width:700px;"></div>
+                                        </div>
+                                        <div class="pull-left m-t">
+                                            <button class="btn btn-white width_s center-block m-b-xs">添加</button>
+                                            <button class="btn btn-white width_s center-block m-b-xs">删除</button>
+                                        </div>
+                                    </div>
+                                    <div class="ibox-content text-right m-t-n">
+                                        <div class="form-group">
+                                            <div class="checkbox m-r-xs">
+                                                <input type="checkbox" class="i-checks"
+                                                       ng-checked="data.currProc.allperson==2"
+                                                       ng-modal="data.currProc.allperson"
+                                                       ng-click="checkAllperson($event)">
+                                                <label for="checkbox1">
+                                                    所有人签字
+                                                </label>
+                                            </div>
+                                            <label class="control-label">至少执行人</label>
+                                            <input class="form-control" type="number" value="1"
+                                                   ng-model="data.currProc.minperson">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab_function" class="tab-pane">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <label>提交成功执行语句</label>
+                                            <textarea class="form-control width_xxxl"
+                                                      ng-model="data.currProc.submitfunc"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <label>驳回成功执行语句</label>
+                                            <textarea class="form-control width_xxxl"
+                                                      ng-model="data.currProc.rejectfunc"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <label>已到达时执行语句</label>
+                                            <textarea class="form-control width_xxxl"
+                                                      ng-model="data.currProc.arrivefunc"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <label>监控提交执行语句</label>
+                                            <textarea class="form-control width_xxxl"
+                                                      ng-model="data.currProc.ctrlsubmitfunc"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab_ctrlfunction" class="tab-pane">
+                                    <div class="ibox-content">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">结束标志过程</label>
+                                                <input type="text" class="form-control"
+                                                       ng-model="data.currProc.endprocid">
+                                                <label class="control-label">监控/负责人</label>
+                                                <input type="text" class="form-control"
+                                                       ng-model="data.currProc.ctrluser">
+                                                <label class="control-label">监控转交</label>
+                                                <select ng-model="data.currProc.ctrltrans"
+                                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                        ng-options="s.id as s.name for s in ctrltranss">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">延迟许可次数</label>
+                                                <input type="number" class="form-control"
+                                                       ng-model="data.currProc.delaytimes">
+                                            </div>
+                                            <label class="control-label">检查设置</label>
+                                            <select ng-model="data.currProc.checkset"
+                                                    class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                    ng-options="s.id as s.name for s in checksets">
+                                            </select>
+                                            <div class="checkbox m-r-xs">
+                                                <input type="checkbox" ng-model="data.currProc.sufprocuserset">
+                                                <label for="checkbox1">
+                                                    自动设置后续过程用户
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label">检查定义</label>
+                                            <textarea class="form-control width_xxxl"
+                                                      ng-model="data.currProc.checkfunc"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <label class="control-label"><!--占为符号--></label>
+                                            <div class="checkbox m-r-xs">
+                                                <input type="checkbox" ng-model="data.currProc.varsufproc">
+                                                <label for="checkbox1">
+                                                    可转交过程
+                                                </label>
+                                            </div>
+                                            <div class="checkbox m-r-xs">
+                                                <input type="checkbox" ng-model="data.currProc.isdynamic">
+                                                <label for="checkbox1">
+                                                    动态(转交)过程
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab_noticeset" class="tab-pane">
+                                    <div class="panel-body">
+                                        <div id="noticesetgrid" slick-grid></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="saveProcData();">确定</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="condprop" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">过程条件</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">来源过程</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control"
+                                               ng-model="data.currLine.fromprocname" ng-readonly="true">
+                                    </div>
+                                    <label class="col-sm-2 control-label">目标过程</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control"
+                                               ng-model="data.currLine.toprocname" ng-readonly="true">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 control-label">说明</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                                <textarea style="width: 100%;"
+                                                          ng-model="data.currLine.lefttext"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 control-label">条件</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                                <textarea style="width: 100%;"
+                                                          ng-model="data.currLine.conditions"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-6 form-inline">
+                                    <div class="checkbox m-r-xs">
+                                        <input type="checkbox" class="i-checks" id="isdefault"
+                                               ng-checked="data.currLine.isdefault==2"
+                                               ng-modal="data.currLine.isdefault"
+                                               ng-click="checkIsdefault($event)">
+                                        <label for="isdefault">
+                                            缺省步骤
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="saveCondData();">确定</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="ctrlproc" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">可控过程</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <div ag-gridview sg-options="ctrlProcOptions" sg-columns="ctrlProcColums" style="height:120px;"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="saveCtrlProc();">确定</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="rejectproc" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">可驳回过程</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <div ag-gridview sg-options="ctrlProcOptions" sg-columns="ctrlProcColums" style="height:120px;"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="saveRejectProc();">确定</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .modal-footer{
+        position: fixed;
+        bottom: 0px;
+        right: 0px;
+        width: 100%;
+    }
+</style>

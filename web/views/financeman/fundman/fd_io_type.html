@@ -1,0 +1,46 @@
+<div hc-edit-list>
+
+    <div class="other-h" hx-box>
+        <div class="row">
+            <div hc-input="data.currItem.io_type_code"
+                 hc-label="收支类型编码"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.io_type_name"
+                 hc-label="收支类型名称"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.io"
+                 hc-label="收支方向"
+                 hc-dict-code="io"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.usable"
+                 hc-label="可用"
+                 hc-type="checkbox">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.io_business"
+                 hc-label="所属业务类型"
+                 hc-required="true"
+                 hc-dict-code="io_business">
+            </div>
+
+            <div hc-input="data.currItem.subject_code"
+                 hc-label="会计科目"
+                 hc-class-id="gl_account_subject"
+                 hc-common-search="commonSearchSetting.gl_account_subject">
+            </div>
+            <div hc-input="data.currItem.subject_name"
+                 hc-readonly="true">
+            </div>
+        </div>
+
+    </div>
+
+</div>

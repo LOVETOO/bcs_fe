@@ -1,0 +1,64 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.employee_code"
+                     hc-label="业务员"
+                     hc-class-id="erpemployee"
+                     hc-common-search="commonSearchSettingOfErpemployee"
+                     hc-required="true">
+                </div><!--hc-btn-click="chooseEmployee()"-->
+                <div hc-input="data.currItem.employee_name">
+                </div>
+
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注">
+
+                </div>
+
+                <div hc-input="data.currItem.isuseable"
+                     hc-type="checkbox"
+                     hc-label="可用"></div>
+
+            </div>
+        </div>
+
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+    </div>
+
+    <!--其他-->
+    <div id="other" hc-box>
+        <div class="row">
+            <div hc-input="data.currItem.created_by"
+                 hc-label="创建人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.creation_date"
+                 hc-type="date"
+                 hc-label="创建时间"
+                 hc-readonly="true">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by"
+                 hc-label="最后修改人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.last_update_date"
+                 hc-type="date"
+                 hc-label="最后修改时间"
+                 hc-readonly="true">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

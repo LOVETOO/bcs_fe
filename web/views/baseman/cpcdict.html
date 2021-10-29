@@ -1,0 +1,96 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="cpcdict">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="searchws();">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>系统词汇</h5>
+                    <div class="ibox-tools">
+                        <form class="pull-right">
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip"
+                                    ng-click="save()"><i class="fa fa-save"></i> 保存
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left"
+                                    ng-click="refresh()"><i class="fa fa-refresh"></i> 刷新
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top"
+                                    ng-click="del()"><i class="fa fa-trash-o"></i> 删除
+                            </button>
+                           <button class="btn btn-white btn-sm" data-toggle="modal"
+                                    ng-click="addCat()"><i class="fa fa-plus"></i> 新建分类
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal"
+                                    ng-click="addValue()"><i class="fa fa-plus"></i> 新建词汇值
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content TreeGridBox">
+                    <div class="ibox-title">
+                        <h5>词汇编码</h5>
+                        <ul id="tree" class="ztree"></ul>
+                    </div>
+                    <div class="grid_modal tabs-container" id="attributeModal" style="border: 1px solid #E2EBF1;">
+                        <ul class="nav nav-tabs">
+                            <li class="active m-l-sm">
+                                <a data-toggle="tab" href="tabs.html#tab-cg">常规</a>
+                            </li>
+                            <li><a data-toggle="tab" href="tabs.html#tab-qt">其他</a></li>
+                        </ul>
+                        <div class="tab-content ibox-content">
+                            <div id="tab-cg" class="tab-pane active form-inline mline">
+                                <div class="row">
+                                    <label class="control-label">词汇编码</label>
+                                    <input type="text" class="form-control width_m" ng-model="data.currItem.dictcode">
+                                    <label class="control-label">词汇名称</label>
+                                    <input type="text" class="form-control width_m" ng-model="data.currItem.dictname">
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">词汇值</label>
+                                    <input type="text" class="form-control width_m" ng-model="data.currItem.dictvalue">
+                                    <label class="control-label">库存组织</label>
+                                    <input type="text" class="form-control width_m" ng-model="data.currItem.useinvorg">
+                                    <!--<select ng-model="data.currItem.clas"
+                                            class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                            ng-options="s.id as s.name for s in class"
+                                            ng-selected="s.id==data.currItem.clas">
+                                    </select>-->
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">备注</label>
+                                    <textarea class="form-control width_xl"  ng-model="data.currItem.note" ></textarea>
+                                    <label class="form-label-mini">
+                                        <input type="checkbox" class="i-checks" ng-model="data.currItem.usable" ng-false-value="1"  ng-true-value="2"
+                                               ng-checked=""> 可用
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="tab-qt" class="tab-pane form-inline mline" >
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">创建用户</label>
+                                        <input type="text" class="form-control width_l" name="creator"
+                                               ng-model="data.currItem.creator" ng-readonly="true">
+                                        <label class="control-label">创建时间</label>
+                                        <input type="text" class="form-control width_l" name="createTime"
+                                               ng-model="data.currItem.createtime" ng-readonly="true">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">最后修改用户</label>
+                                        <input type="text" class="form-control width_l" name="creator"
+                                               ng-model="data.currItem.creator" ng-readonly="true">
+                                        <label class="control-label">最后修改时间</label>
+                                        <input type="text" class="form-control width_l" name="createtime"
+                                               ng-model="data.currItem.createtime" ng-readonly="true">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

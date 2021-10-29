@@ -1,0 +1,121 @@
+<div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 60px;" ng-controller="main1">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>订单概览</h5>
+
+                <div class="pull-right">
+					<!--<ul id="tabs" class="tri-nav-tabs">
+						<li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav"><i
+								class="fa ">本月</i></a></li>
+						<li ng-click="resizegrid()"><a data-target="#tab2" data-toggle="tab" class="tab-nav"><i
+								class="fa ">本年</i></a></li>
+					</ul> 
+					
+						
+					<ul id="tabs" class="tri-nav-tabs">
+						<li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav"><i
+								class="fa ">本月</i></a></li>
+						<li ng-click="resizegrid()"><a data-target="#tab2" data-toggle="tab" class="tab-nav"><i
+								class="fa ">本年</i></a></li>
+					</ul> -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-xs btn-white active" ng-click="refreshchart($event,1)">本月</button>
+                        <button type="button" class="btn btn-xs btn-white" ng-click="refreshchart($event,2)">本年</button>
+                    </div> 
+                </div>
+            </div>
+			
+            <div ng-hide="s_flag==1" id = "monthflot" class="ibox-content" style = "display:block;">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="flot-chart" >
+                            <div flot class="flot-chart-content" dataset="dataset" options="options"></div>
+                        </div>
+                    </div>
+					<div class="col-lg-3">
+                        整体:{{str1[0]}}</br>
+						独联体:{{str1[1]}}</br>
+						亚太:{{str1[2]}}</br>
+						欧非:{{str1[3]}}</br>
+						中东:{{str1[4]}}</br>
+						美洲:{{str1[5]}}</br>
+                    </div>
+				</div>
+			</div>
+			<div ng-hide="s_flag==2" id = "yearflot" class="ibox-content" style = "display:block;">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="flot-chart" >
+                            <div flot class="flot-chart-content" dataset="yeardataset" options="options"></div>
+                        </div>
+                    </div>
+					<div class="col-lg-3">
+                        整体:{{str2[0]}}</br>
+						独联体:{{str2[1]}}</br>
+						亚太:{{str2[2]}}</br>
+						欧非:{{str2[3]}}</br>
+						中东:{{str2[4]}}</br>
+						美洲:{{str2[5]}}</br>
+                    </div>
+				</div>
+			</div> 
+			
+			
+		</div>
+		        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>销售概览</h5>
+
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-xs btn-white active" ng-click="refreshchart1($event,1)">本月</button>
+                        <button type="button" class="btn btn-xs btn-white" ng-click="refreshchart1($event,2)">本年</button>
+                    </div> 
+                </div>
+            </div>
+			
+            <div ng-hide="g_flag==1"  class="ibox-content" style = "display:block;">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="flot-chart" >
+                            <div flot class="flot-chart-content" dataset="dataset1" options="options"></div>
+                        </div>
+                    </div>
+					<div class="col-lg-3">
+                        整体:{{str3[0]}}</br>
+						独联体:{{str3[1]}}</br>
+						亚太:{{str3[2]}}</br>
+						欧非:{{str3[3]}}</br>
+						中东:{{str3[4]}}</br>
+						美洲:{{str3[5]}}</br>
+                    </div>
+				</div>
+			</div>
+			<div ng-hide="g_flag==2"  class="ibox-content" style = "display:block;">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="flot-chart" >
+                            <div flot class="flot-chart-content" dataset="yeardataset1" options="options"></div>
+                        </div>
+                    </div>
+				<div class="col-lg-3">
+                        整体:{{str4[0]}}</br>
+						独联体:{{str4[1]}}</br>
+						亚太:{{str4[2]}}</br>
+						欧非:{{str4[3]}}</br>
+						中东:{{str4[4]}}</br>
+						美洲:{{str4[5]}}</br>
+                    </div>
+				</div>
+			</div> 
+			
+			
+		</div>
+		
+    </div>
+</div>
+
+</div>
+</div>

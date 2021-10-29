@@ -1,0 +1,40 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="ctrl_fin_fee_bx_header">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>费用报销</h5>
+                    <div class="ibox-tools">
+                        <form class="form-inline ng-pristine ng-valid">
+                            <button type="button" class="btn btn-default btn-sm"
+                                    ng-click="refreshGridView()" ><i class="fa fa-refresh"></i> 刷新
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm"
+                                    ng-click="addFeeBx()"><i class="fa fa-plus"></i> 增加
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
+                                    ng-click="searchBySql()"><i class="fa fa-search"></i> 查询
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="headerViewGrid" slick-grid sg-options="headerOptions"
+                         sg-columns="headerColumns"
+                         class="slick-grid">
+                    </div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+

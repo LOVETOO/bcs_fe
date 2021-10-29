@@ -1,0 +1,38 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+        <div class="row">
+
+            <div hc-input="data.currItem.last_year_month"
+                 hc-label="上次月结月份"
+                 hc-readonly = "true">
+            </div>
+            <div hc-input="data.currItem.year_month"
+                 hc-label="本次月结月份"
+                 hc-readonly = "true">
+            </div>
+        </div>
+
+    </div>
+
+    <ul class="nav nav-tabs other-h" id="detailtab">
+        <li class="active">
+            <a data-toggle="tab" id="tab11" href="tabs.html#tab1">月结检查项</a>
+        </li>
+        <li>
+            <a data-toggle="tab" id="tab22" href="tabs.html#tab2">待处理单据</a>
+        </li>
+    </ul>
+
+    <div class="tabs-container">
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active">
+                <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+            </div>
+            <div id="tab2" class="tab-pane">
+                <div hc-grid="detailOptions"  hc-auto-height="grid"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

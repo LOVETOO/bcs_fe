@@ -1,0 +1,80 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box="" class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.bud_type_code"
+                     hc-label="预算类别编码"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.bud_type_name"
+                     hc-label="预算类别名称"
+                     hc-required="true"> 
+                </div>
+                <div hc-input="data.currItem.fee_type_code"
+                     hc-label="费用大类"
+                     hc-required="true"
+                     hc-class-id="fin_fee_type"
+                     hc-common-search="commonSearchSettingOfFinFeeType">
+                </div>
+                <div hc-input="data.currItem.fee_type_name"
+                     hc-readonly="true"
+                     hc-label="">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.fee_type_level"
+                     hc-label="费用项目层级"
+                     hc-required="true"
+                     hc-change="onLevelChange()"
+                     hc-dict-code="fee_type_level">
+                </div>
+
+                <div hc-input="data.currItem.period_type"
+                     hc-label="预算期间类别"
+                     hc-required="true"
+                     hc-dict-code="period_type">
+                </div>
+
+                <div hc-input="data.currItem.fee_property"
+                     hc-label="费用类型"
+                     hc-select-options="[{name:'变动费用',value:'1'},{name:'固定费用',value:'2'}]"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.control_type"
+                     hc-label="预算释放方式"
+                     hc-required="data.currItem.fee_property == 1 "
+                     hc-dict-code="fin_bud_control_types"
+                     hc-readonly="data.currItem.is_control_bud != 2">
+                </div>
+
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.is_control_bud"
+                     hc-type="checkbox"
+                     hc-label="受预算控制"
+                     hc-change="is_control_budChange()">
+                </div>
+
+                <div hc-input="data.currItem.usable"
+                     hc-type="checkbox"
+                     hc-label="可用">
+                </div>
+
+                <div hc-input="data.currItem.description"
+                     hc-label="描述"
+                     hc-col-count="4">
+                </div>
+            </div>
+        </div>
+        <!-- 表格视图 -->
+        <div hc-grid="gridOptions" hc-auto-height="grid" hc-box></div>
+
+        <div class="foot-left-btn">
+        <button type="button" ng-click="addLineRow()" class="btn btn-white btn-sm">增加行</button>
+        <button type="button" ng-click="deleteLineRow()" class="btn btn-white btn-sm">删除行</button>
+        </div>
+
+    </div>
+</div>

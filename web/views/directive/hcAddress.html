@@ -1,0 +1,54 @@
+<div>
+    <label
+        class="control-label"
+        v-once
+    >{{ label }}<i class="star" v-show='actualRequired'>*</i></label>
+    <el-cascader
+        ref="cascader"
+        :class="{ flex1: !needAdress }"
+        v-model="areaIds"
+        :options="areas"
+        :props="props"
+        :separator="separator"
+        :disabled="actualDisabled"
+        clearable
+        filterable
+        placeholder="请选择省市区"
+        @change="handleAreaChange"
+    ></el-cascader>
+    <el-input
+        class="flex1"
+        v-if="needAdress"
+        v-model="address"
+        :disabled="actualDisabled"
+        clearable
+        placeholder="请输入详细地址"
+        @input="handleAddressChange"
+    >
+        <el-button
+            v-if="hasButton"
+            slot="append"
+            icon="el-icon-map-location"
+            @click="onBtnClick"
+        ></el-button>
+    </el-input>
+    <ul class="ng-hide">
+        <li>{{ areaIds }}</li>
+        <li>{{ areaNames }}</li>
+    </ul>
+</div>
+<style>
+    .hc-star::before{
+        content: '*';
+    }
+
+    .el-input input.el-input__inner {
+        border: none;
+        border-radius: unset;
+        border-bottom: 1px solid #adadad;
+    }
+    .el-input.is-disabled input.el-input__inner {
+        border-bottom-style: dashed;
+        background-color: unset;
+    }
+</style>

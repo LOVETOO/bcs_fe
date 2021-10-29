@@ -1,0 +1,395 @@
+<!--
+/**
+ * 工程项目(详情页)
+ * @since 2018-07-14
+ */
+-->
+<div local-storage class="bill-form" ng-controller="proj">
+    <div class="wrapper wrapper-content">
+        <ul class="nav nav-tabs p-w-m" id="tabs">
+            <li class="active">
+                <a id="tab_common" data-toggle="tab" href="tabs.html#page_common">单据详情</a>
+            </li>
+            <li>
+                <a id="tab_wf" data-toggle="tab" href="tabs.html#page_wf" ng-hide="data.currItem.is_init==2">审批流程</a>
+            </li>
+        </ul>
+        <div class="modal-footflex">
+            <div class="tabs-container">
+                <form id="form_head" method="get" class="form-inline mline" name="form_head" novalidate>
+                    <div class="tab-content">
+                        <div id="page_common" class="tab-pane active form-inline mline">
+                            <div class="panel-body">
+                                <!-- 这里增加字段组件 -->
+                                <fieldset>
+                                    <legend>基本信息</legend>
+                                    <div class="row">
+                                        <label>工程编码</label>
+                                        <input name="project_code" ng-readonly="true">
+                                        <label>申请时间</label>
+                                        <input name="createtime" ng-readonly="true">
+                                        <label>申请人</label>
+                                        <input name="creator" ng-readonly="true">
+                                        <label>报备时间</label>
+                                        <input name="audittime" ng-readonly="true">
+                                        <!--<label>单据状态</label>
+                                        <select name="stat" ng-disabled="true"></select>-->
+                                    </div>
+                                    <div class="row">
+                                        <label>运营中心/申请机构</label>
+                                        <input name="dept_name" ng-readonly="true">
+                                        <label>归属方</label>
+                                        <div w="3">
+                                            <input name="sale_center_name" ng-readonly="true">
+                                            <span>
+                                                <button ng-click="chooseSaleCenter()"></button>
+                                            </span>
+                                        </div>
+                                        <label>本地/异地</label>
+                                        <select name="remote" ng-change="whenRemoteChange()" required></select>
+                                    </div>
+                                    <div class="row">
+                                        <label>工程项目名称(加开发方)</label>
+                                        <div w="5">
+                                            <input name="project_name" required ng-readonly="!editable('project_name')" ng-disabled="false">
+                                            <span>
+                                                <button ng-click="projLikeness()" ng-disabled="false">相似性检索</button>
+                                            </span>
+                                        </div>
+                                        <label>项目类型</label>
+                                        <select name="project_type" required></select>
+                                    </div>
+                                    <div class="row">
+                                        <label>工程所在运营区域</label>
+                                        <div w="1">
+                                            <input name="proj_city_name" required>
+                                            <span>
+                                                <button ng-click="chooseProjCity()"></button>
+                                            </span>
+                                        </div>
+                                        <label>工程地址</label>
+                                        <input name="project_address" w="3" required>
+                                        <div class="form-group" ng-if="data.currItem.remote==2">
+                                            <label>项目阶段</label>
+                                            <select name="project_period" required></select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label>报备方城市</label>
+                                        <div w="1">
+                                            <input name="apply_city_name" required>
+                                            <span>
+                                                <button ng-click="chooseApplyCity()"></button>
+                                            </span>
+                                        </div>
+                                        <label>经销商</label>
+                                        <input name="dealer_name" w="3" required>
+                                        <div class="form-group">
+                                            <label>经销商类型</label>
+                                            <select name="dealer_type" required></select>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>采购信息</legend>
+                                    <div class="row">
+                                        <label>预采日期</label>
+                                        <input name="sourcing_date" bs-date-picker required>
+                                        <label>主要预采产品品类</label>
+                                        <div w="5">
+                                            <input name="main_product" required>
+                                            <span>
+                                                <button ng-click="chooseMainProduct()"></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label>采购模式</label>
+                                        <select name="model" required></select>
+                                        <label>室内预采金额(万元)</label>
+                                        <input name="in_amt" ng-change="data.ngChange.in_amt()" required>
+                                        <label>户外预采金额(万元)</label>
+                                        <input name="out_amt" ng-change="data.ngChange.out_amt()" required>
+                                        <label>合计预采金额(万元)</label>
+                                        <input name="amount_plan" ng-readonly="true">
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>跟进信息</legend>
+                                    <div class="row">
+                                        <label>项目跟进人</label>
+                                        <input name="dealer_manager" required>
+                                        <label>联系电话</label>
+                                        <input name="dealer_tel" required>
+                                        <label>运营中心跟进人</label>
+                                        <input name="oc_manager">
+                                        <label>联系电话</label>
+                                        <input name="oc_tel">
+                                    </div>
+                                    <div class="row">
+                                        <label>雷士跟进人</label>
+                                        <input name="hq_manager" required>
+                                        <label>联系电话</label>
+                                        <input name="hq_tel" required>
+                                    </div>
+                                    <div class="row">
+                                        <label>项目跟进进度</label>
+                                        <select name="stage_value" w="7" required ng-change="whenStageValueChange()"></select>
+                                    </div>
+                                    <div class="row">
+                                        <label>项目进度描述(跟进过程、资源优势)</label>
+                                        <textarea name="stage_desc" w="7" required style="height:100px;"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <label>项目开发方</label>
+                                        <input name="dev_unit_name" w="3" required>
+                                        <label>联系人</label>
+                                        <input name="dev_unit_man">
+                                        <label>联系电话</label>
+                                        <input name="dev_unit_phone">
+                                    </div>
+                                    <div class="form-group" ng-if="data.currItem.remote==2">
+                                        <div class="row">
+                                            <label>内装设计方</label>
+                                            <input name="des_unit_name" w="3">
+                                            <label>联系人</label>
+                                            <input name="des_unit_man">
+                                            <label>联系电话</label>
+                                            <input name="des_unit_phone">
+                                        </div>
+                                        <div class="row">
+                                            <label>内装总包/分包方</label>
+                                            <input name="con_unit_name" w="3">
+                                            <label>联系人</label>
+                                            <input name="con_unit_man">
+                                            <label>联系电话</label>
+                                            <input name="con_unit_phone">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label>立项日期</label>
+                                        <input name="setup_date" bs-date-picker>
+                                        <label>送样日期</label>
+                                        <input name="sample_date" bs-date-picker>
+                                        <label>投标日期</label>
+                                        <input name="bid_date" bs-date-picker>
+                                        <label>签约日期</label>
+                                        <input name="contract_date" bs-date-picker>
+                                    </div>
+                                    <div class="row">
+                                        <label>首次供货日期</label>
+                                        <input name="supply_date" date-format ng-readonly="true">
+                                        <label>验收日期</label>
+                                        <input name="accept_date" bs-date-picker>
+                                        <label>竞品品牌</label>
+                                        <input name="cpt_brand">
+                                        <label>竞品产品</label>
+                                        <input name="cpt_product">
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>附件</legend>
+                                    <div class="row">
+                                        <button class="btn btn-primary"
+                                                ng-click="btnUploadAttachClick()"
+                                                ng-show="editable('UploadAttach')">上传</button>
+                                        <button class="btn btn-primary"
+                                                ng-click="btnDownloadAttachClick()">下载</button>
+                                        <!--<button class="btn btn-primary" ng-click="btnViewAttachClick()">查看</button>-->
+                                        <button class="btn btn-primary"
+                                                ng-click="btnDeleteAttachClick()"
+                                                ng-show="editable('DeleteAttach')">删除</button>
+                                    </div>
+                                    <div id="grid_attach" style="height:240px"></div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>跟进进度历程</legend>
+                                    <div id="grid_stage" style="height:240px"></div>
+                                </fieldset>
+                                <fieldset id="fs_fund" ng-show="needFund()">
+                                    <legend>付款信息</legend>
+                                    <div class="row">
+                                        <label>合同总额(万元)</label>
+                                        <input name="compact_amt" required ng-change="onCompactAmtChange()">
+                                        <label>质保金形式</label>
+                                        <select name="qgd_form" required></select>
+                                        <label ng-if="qgdAmtVisible()">质保金金额(万元)</label>
+                                        <input name="qgd_amt" required ng-if="qgdAmtVisible()">
+                                        <label ng-if="qgdRateVisible()">质保金比例(%)</label>
+                                        <input name="qgd_rate" required ng-if="qgdRateVisible()">
+                                        <label>质保金期限</label>
+                                        <input name="qgd_date" required bs-date-picker>
+                                    </div>
+                                    <div id="grid_fund" style="height:240px"></div>
+                                </fieldset>
+                                <!--<fieldset ng-show="userbean.userid==='admin'&&data.currItem.proj_ecns&&data.currItem.proj_ecns.length">
+                                    <legend>变更单</legend>
+                                    <div id="grid_ecn" style="height:240px"></div>
+                                </fieldset>-->
+                            </div>
+                        </div>
+                        <div id="page_wf" class="tab-pane">
+                            <div hc-wf="18071401" a-biz="data.currItem"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-primary"
+                        ng-show="editable('save')"
+                        ng-click="btnSaveClick()">保存
+                </button>
+                <button type="button"
+                        class="btn btn-white"
+                        ng-click="btnCloseClick()">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要预采产品品类选择器 -->
+    <div class="modal inmodal fade" id="modal_main_product" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" style="width:800px;">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">请选择主要预采产品品类</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <fieldset ng-repeat="x in data.ppkds">
+                            <legend>{{x.ppk_name}}</legend>
+                            <div class="row">
+                                <label style="margin-left:20px;" ng-repeat="y in x.ppds">
+                                    <input type="checkbox"
+                                           class="i-checks"
+                                           ng-model="y.checked">
+                                    {{y.pp_name}}
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="chooseMainProductOK()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 变更 -->
+    <!--<div class="modal inmodal fade" id="modal_ecn" tabindex="-1" role="dialog" aria-hidden="true" style="width:1034px;height:628px;">
+        <div class="modal-dialog" style="width: 100%;height: 100%;">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">变更</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <iframe id="iframe_ecn"></iframe>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>
+<script>
+    (function () {
+        console.log('预处理开始 proj.html');
+
+        //此时尚未加载控制器
+        //可预处理ng属性
+
+        var formId = '#form_head';
+        var domTypes = 'input,select,textarea';
+
+        //标签类
+        $('label').addClass('control-label');
+
+        //文本框类
+        $(domTypes).addClass('form-control');
+        $('input.i-checks').removeClass('form-control');
+
+        //选择框类
+        $('select').addClass('input-sm');
+
+        //占1列的文本框
+        $('[w="1"]').addClass('width_m');
+
+        //占3列的文本框
+        $('[w="3"]').addClass('width_ml');
+
+        //占5列的文本框
+        $('[w="5"]').addClass('width_xxxl');
+
+        //占7列的文本框
+        $('[w="7"]').css('width', '887px');
+
+        //必填字段增加css类
+        $(formId).find(domTypes).filter('[required]').addClass('non-empty');
+
+        //设置带按钮的文本框的样式
+        $('input+span').addClass('input-group-btn');
+        $('input+span').parent().addClass('input-group');
+        $('span>button').addClass('btn btn-primary');
+        $('span>button:empty').html('•••');
+
+        //设置ngModel
+        //最好设定name，这样可以在form控制器里获取各个字段的model控制器
+        $(formId).find(domTypes).filter('[name]').each(function () {
+            //根据名称设定模型
+            $(this).attr('ng-model', 'data.currItem.' + $(this).attr('name'));
+        });
+
+        //下拉选择的设置ngOptions
+        $(formId).find('select[name]').each(function () {
+            var ngOptions = 'a.value as a.name for a in data.ngOptions.' + $(this).attr('name');
+            $(this).attr('ng-options', ngOptions);
+        });
+
+        //过滤进度下拉值
+        (function () {
+            var element = $('select[name="stage_value"]');
+            element.attr('ng-options', element.attr('ng-options') + '|filter:filterStage');
+        })();
+
+        //过滤经销商类型
+        /*(function () {
+            var element = $('select[name="dealer_type"]');
+            element.attr('ng-options', element.attr('ng-options') + '|filter:filterDealerType');
+        })();*/
+
+        //带按钮的文本框设为disabled
+        $('div.input-group>input:not([ng-readonly])').attr('ng-disabled', 'true');
+
+        //没设置ng-readonly的文本框设置为默认的ng-readonly控制
+        $('input:not([ng-readonly])').each(function () {
+            $(this).attr('ng-readonly', "!editable('" + $(this).attr('name') + "')");
+        });
+
+        //文本框的按钮设置为默认的ng-readonly控制
+        $('span>button:not([ng-disabled])').each(function () {
+            $(this).attr('ng-disabled', "!editable('" + $(this).parent().parent().find('input').attr('name') + "')");
+        });
+
+        //选择框设置为默认的ng-readonly控制
+        $('label+select:not([ng-disabled])').each(function () {
+            $(this).attr('ng-disabled', "!editable('" + $(this).attr('name') + "')");
+        });
+
+        //大文本框设置为默认的ng-readonly控制
+        $('label+textarea:not([ng-readonly])').each(function () {
+            $(this).attr('ng-readonly', "!editable('" + $(this).attr('name') + "')");
+        });
+
+        console.log('预处理结束 proj.html');
+    })();
+</script>

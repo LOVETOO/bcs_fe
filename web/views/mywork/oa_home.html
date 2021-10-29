@@ -1,0 +1,478 @@
+<div class="wrapper wrapper-content animated fadeInRight view-root" ng-controller="oa_home">
+	<div class="myhome-root" style="height: 100%;">
+		<div id="myhome-left" class="myhome-left">
+			<div id="banner" class="banner">
+				<img style="max-width: 100%;" src="images/oah_header_2.jpg" />
+			</div>
+			<div class="news">
+				<!--img class="subtitle" src="http://e8.weaver.com.cn/page/resource/userfile/image/self/workflow.png"/-->
+				<img class="subtitle" src="images/news.png" />
+				<div class="newscontant">
+					<ul>
+						<li ng-click="newstypeclick(1)" ng-class="{active: newstypeidx==1}">公司动态</li>
+						<!--<li ng-click="newstypeclick(2)" ng-class="{active: newstypeidx==2}">销售新闻</li>-->
+						<!--<li ng-click="newstypeclick(3)" ng-class="{active: newstypeidx==3}">项目新闻</li>-->
+						<li ng-click="newstypeclick(4)" ng-class="{active: newstypeidx==4}">市场新闻</li>
+						<!--<li ng-click="newstypeclick(5)" ng-class="{active: newstypeidx==5}">产品动态</li>-->
+					</ul>
+					<div id="wfitem" ng-init="a='hidden'" ng-mouseenter="a='auto'" ng-mouseleave="a='hidden'" style="min-height: {{height1}}px; max-height:{{height1}}px;overflow-y: {{a}};">
+						<div class="newsitem" ng-repeat="item in filterNews(1)">
+							<a ng-click="on_statistics(item.info_id)" href="#/crmman/oa_home_info_news?param={{item.url_param}}&showmode=2" target="_blank">{{item.title}}</a>
+							<span>{{item.create_time.substring(0, 10)}}</span>
+						</div>
+
+					</div>
+					<div style="height: 23px;" class="contant-footer">
+						<a ng-if="filterNews(1).length>=20" style="padding-right: 15px;" href="#/crmman/more_news?flag=1">更多>></a>
+					</div>
+				</div>
+			</div>
+			<!--<div class="notice">
+				<img class="subtitle" src="http://e8.weaver.com.cn/page/resource/userfile/image/company/co_notice.png" />
+
+				<div>
+					<div class="newsitem" ng-repeat="item in filterNews(2)">
+						<a href="#/crmman/oa_home_info_news?param={{item.url_param}}&showmode=2" target="_blank">{{item.title}}</a>
+						<span>{{item.create_time.substring(0, 10)}}</span>
+					</div>
+					<div class="contant-footer" ng-if="filterNews(2).length>=3">
+						<a href="#/crmman/more_news?flag=2">更多>></a>
+					</div>
+				</div>
+			</div>-->
+			<div class="companynemp">
+				<div class="institution">
+					<img class="subtitle" src="images/co_ins01.png" />
+					<div ng-init="b='hidden'" ng-mouseenter="b='auto'" ng-mouseleave="b='hidden'" style="min-height: {{height2}}px;max-height: {{height2}}px; overflow-y: {{b}};">
+						<div class="listitem" ng-repeat="item in filterNews(3)">
+							<a ng-click="on_statistics(item.info_id)" href="#/crmman/oa_home_info_news?param={{item.url_param}}&showmode=2" target="_blank">{{item.title}}</a>
+						</div>
+					</div>
+					<div class="contant-footer" ng-if="filterNews(3).length>=20">
+						<a href="#/crmman/more_news?flag=3">更多>></a>
+					</div>
+				</div>
+				<div class="activity">
+					<img class="subtitle" src="images/co_ac01.png" />
+
+					<div ng-init="c='hidden'" ng-mouseenter="c='auto'" ng-mouseleave="c='hidden'" style="min-height: {{height3}}px;max-height: {{height3}}px; overflow-y: {{c}};">
+						<div class="listitem" ng-repeat="item in filterNews(4)">
+							<a ng-click="on_statistics(item.info_id)" href="#/crmman/oa_home_info_news?param={{item.url_param}}&showmode=2" target="_blank">{{item.title}}</a>
+						</div>
+					</div>
+					<div style="margin-right: 25px;" class="contant-footer" ng-if="filterNews(4).length>=20">
+						<a href="#/crmman/more_news?flag=4">更多>></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="myhome-right">
+			<div ng-click="more_news(5)" class="development">
+				<p class="fastaccess">发展历程</p>
+			</div>
+			<div ng-click="more_news(6)" class="hr">
+				<p class="fastaccess">人才体系</p>
+			</div>
+			<div ng-click="more_news(7)" class="knowledge">
+				<p class="fastaccess">知识管理</p>
+			</div>
+			<div class="welcome">
+				<img class="subtitle" src="images/co_welcome.png" />
+				<div class="welcomecontant">
+					<div class="welcomecontanttitle">
+						<p>欢迎新同事</p>
+					</div>
+					<div class="userinfo">
+						<div ng-repeat='item in data.arr_show'>
+							<div class="userinfoitem">
+								<div class="avator">
+									<img alt="image" ng-if="item.avatar_docid!=0" class="img-circle" src='/downloadfile.do?docid={{item.avatar_docid}}&loginguid=' {{ window.strLoginGuid}}>
+									<img alt="image" ng-if="item.avatar_docid==0" class="img-circle" src="{{item.avatar}}">
+								</div>
+								<div class="userdesc">
+									<span class="desc">{{item.contant}}</span>
+									<span class="time">{{item.create_time.substring(0, 10)}}</span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="periodical">
+				<!--img class="subtitle" src="http://e8.weaver.com.cn/page/resource/userfile/image/company/co_per.png"/-->
+				<img class="subtitle" src="img/happy birthday-1.png" />
+				<div class="welcomecontant">
+					<div class="welcomecontanttitle">
+						<p>今天过生日的员工</p>
+					</div>
+					<div class="userinfo">
+						<div ng-repeat="birthday in data.arr_birthday">
+							<div class="userinfoitem">
+								<div class="avator">
+									<img alt="image" ng-if="birthday.avatar_docid!=0" class="img-circle" src='/downloadfile.do?docid={{birthday.avatar_docid}}&loginguid=' {{ window.strLoginGuid}}>
+									<img alt="image" ng-if="birthday.avatar_docid==0" class="img-circle" src="{{birthday.avatar}}">
+									<span>{{birthday.emp_name}}</span>
+								</div>
+								<div class="hb-userdesc">
+									<span class="desc">今天是你的生日，祝你生日快乐！感谢你为公司创造的价值！</span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.myhome-root {
+		display: flex;
+		flex-direction: row;
+		--background-color: #fff;
+		min-height: 100%;
+		width: 100%;
+		background-color: #F4F6F9;
+		color: #54698D;
+		--max-width: 1200px;
+	}
+	
+	.myhome-left {
+		display: flex;
+		flex-direction: column;
+		background-color: #fff;
+		flex-grow: 1;
+		flex-shrink: 1;
+		margin-right: 5px;
+	}
+	
+	img.subtitle {
+		cursor: pointer;
+	}
+	
+	.banner {
+		/*width: 100%;
+		--height: 185px;
+		--background-image: url(http://e8.weaver.com.cn/Axure/1/images/home/u3.jpg);
+		--background-repeat: no-repeat;
+		--background-size: 100% 100%;
+		-moz-background-size: 100% 100%;*/
+	}
+	
+	.img {
+		width: 200px;
+		position: absolute;
+		left: 10px;
+		top: 20px;
+		height: 30px;
+		background: url(images/oah_header_text.png) no-repeat;
+		background-size: 80% 80%;
+	}
+	
+	.banner_text {
+		color: #fff;
+		font-size: 15px;
+		margin: 0 22px;
+		font-family: monospace;
+	}
+	
+	.news {
+		margin-top: 2%;
+		width: 100%;
+		/*height: 220px;*/
+	}
+	
+	.newscontant {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.newscontant>ul {
+		margin-top: 5px;
+	}
+	
+	.newscontant>ul>li {
+		display: block;
+		float: left;
+		margin-left: 20px;
+		color: #aaa;
+		cursor: pointer;
+	}
+	
+	.newscontant>ul>li.active {
+		display: block;
+		float: left;
+		margin-left: 20px;
+		color: #54698D;
+	}
+	
+	.newscontant>div {
+		margin-left: 20px;
+		margin-right: 15px;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.newsitem {
+		margin-top: 5px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	
+	.notice {
+		width: 100%;
+		height: 177px;
+	}
+	
+	.notice>div {
+		margin-top: 10px;
+		margin-left: 20px;
+		margin-right: 15px;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.companynemp {
+		margin-top: 1%;
+		width: 100%;
+		/*height: 220px;*/
+		display: flex;
+		flex-direction: row;
+	}
+	
+	.institution {
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	.institution>div {
+		margin-top: 10px;
+		margin-left: 20px;
+		margin-right: 15px;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.activity {
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+	
+	.activity>div {
+		margin-top: 10px;
+		margin-left: 20px;
+		margin-right: 15px;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.listitem {
+		margin-top: 5px;
+	}
+	
+	.myhome-right {
+		display: flex;
+		flex-direction: column;
+		background-color: #fff;
+		flex-grow: 0;
+		flex-shrink: 0;
+		width: 290px;
+		padding-right: 3px;
+		padding-left: 3px;
+	}
+	
+	.fastaccess {
+		padding: 0px;
+		margin: 0px;
+	}
+	
+	.development {
+		cursor: pointer;
+		margin-bottom: 5px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-image: url(images/u1.png);
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		-moz-background-size: 100% 100%;
+		color: #fff;
+		font-size: 16px;
+		font-weight: 700;
+	}
+	
+	.hr {
+		cursor: pointer;
+		margin-bottom: 5px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-image: url(images/u8.png);
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		-moz-background-size: 100% 100%;
+		color: #fff;
+		font-size: 16px;
+		font-weight: 700;
+	}
+	
+	.knowledge {
+		cursor: pointer;
+		margin-bottom: 5px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-image: url(images/u15.png);
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		-moz-background-size: 100% 100%;
+		color: #fff;
+		font-size: 16px;
+		font-weight: 700;
+	}
+	
+	.welcome {
+		margin-top: 10px;
+		--min-height: 275px;
+	}
+	
+	.welcomecontant {
+		background-color: #F4F6F9;
+		--min-height: 255px;
+		margin-top: 3px;
+		margin-left: 5px;
+		padding-bottom: 3px;
+	}
+	
+	.welcomecontanttitle {
+		background-color: #ddedfb;
+		padding-left: 5px;
+		padding-bottom: 5px;
+		padding-top: 5px;
+	}
+	
+	.welcomecontanttitle>p {
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	.userinfoitem {
+		margin: 5px;
+		display: flex;
+		flex-direction: row;
+		background-color: #fff;
+		border-radius: 3px;
+		padding-right: 5px;
+		padding-top: 3px;
+	}
+	
+	.avator {
+		display: flex;
+		flex-grow: 0;
+		flex-shrink: 0;
+		flex-direction: column;
+		align-items: center;
+		padding-left: 5px;
+		padding-right: 5px;
+		font-size: 12px;
+	}
+	
+	.avator>img {
+		width: 38px;
+		height: 38px;
+	}
+	
+	.avator>span {
+		margin-top: 3px;
+	}
+	
+	.userdesc {
+		display: flex;
+		flex-shrink: 1;
+		flex-grow: 1;
+		flex-direction: column;
+		margin-left: 5px;
+	}
+	
+	.hb-userdesc {
+		display: flex;
+		flex-shrink: 1;
+		flex-grow: 1;
+		flex-direction: column;
+		margin-left: 5px;
+	}
+	
+	.userdesc>span.desc {
+		margin: 3px 0px 3px 0px;
+	}
+	
+	.userdesc>span.time {
+		margin: 3px 3px 3px 0px;
+		text-align: right;
+	}
+	
+	.periodical {
+		margin-top: 10px;
+		min-height: 255px;
+	}
+	
+	.periodicalinfo {
+		background-image: url(img/qikan3.png);
+		background-repeat: no-repeat;
+		background-size: contain;
+		margin-bottom: 10px;
+		height: 200px;
+		display: flex;
+		align-items: center;
+	}
+	
+	.periodicalinfo>select {
+		margin-left: 150px;
+		margin-right: 5px;
+	}
+	
+	.wrap-height>div.ng-scope {
+		width: 100%;
+		height: 100%;
+	}
+	
+	div.view-root {
+		width: 100%;
+		height: 100%;
+		margin: 0px;
+		padding: 5px 2px 5px 2px;
+	}
+	
+	div.contant-footer {
+		display: flex;
+		flex-direction: row-reverse !important;
+		padding-top: 5px !important;
+		margin-right: 15px;
+	}
+	
+	.newscontant>div.contant-footer,
+	.notice>div.contant-footer,
+	.institution>div.contant-footer,
+	.activity>div.contant-footer {
+		display: flex;
+		flex-direction: row-reverse !important;
+		padding-top: 5px !important;
+		margin-top: 0px;
+	}
+	
+	#page-wrapper {
+		padding: 0 5px !important;
+	}
+	
+	.navbar-right {
+		margin-right: 10px !important;
+	}
+</style>

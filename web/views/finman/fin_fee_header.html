@@ -1,0 +1,203 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fin_fee_header">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>费用项目</h5>
+                    <div class="ibox-tools">
+                        <form class="form-inline ng-pristine ng-valid">
+                            <button type="button" class="btn btn-default btn-sm"
+                                    ng-click="searchBySql()"><i class="fa fa-search"></i> 查询
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm"
+                                    ng-click="newFee()"><i class="fa fa-plus"></i> 增加
+                            </button>
+
+                            <button type="button" class="btn btn-default " data-toggle="modal"
+                                    ng-click="searchData()"><i class="fa fa-refresh"></i> 刷新
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="headerGrid" slick-grid sg-options="headerOptions" sg-columns="headerColumns"
+                         class="slick-grid">
+                    </div>
+                    <div class="page_modal modal-open" page-pagination> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--     查看   -->
+    <div class="modal inmodal fade" id="editModal" role="dialog"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">查看项目</h4>
+                </div>
+                <div class="modal-body ibox-content">
+                    <div class="ibox-content">
+                        <form method="get" class="form-inline mline">
+                            <div class="row">
+                                <label class="control-label width_xs">费用项目编码</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.fee_code"
+                                       ng-disabled="true">
+                                <label class="control-label  width_xs not-null">费用项目名称</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.fee_name">
+                            </div>
+                            <div class="row">
+                                <label class="control-label width_xs not-null">报销方式</label>
+                                <select ng-model="data.currItem.apply_type"
+                                        class="input-sm chosen-select form-control"
+                                        ng-options="s.id as s.name for s in applytypes">
+                                    <!--<option value=""></option>-->
+                                </select>
+                                <label class="control-label width_xs">状态</label>
+                                <select ng-model="data.currItem.stat"
+                                        class="input-sm chosen-select form-control"
+                                        ng-options="s.id as s.name for s in stats">
+                                    <!--<option value=""></option>-->
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label class="control-label width_xs not-null">会计科目编码</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control"
+                                           ng-model="data.currItem.subject_no">
+                                    <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary"
+                                                    ng-click="searchAccountSub('KM_Code')">•••</button>
+                                        </span>
+                                </div>
+                                <label class="control-label width_xs">会计科目名</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.subject_name"
+                                       ng-disabled="true">
+                            </div>
+                            <div class="row">
+                                <label class="control-label width_xs not-null">会计科目描述</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.subject_des">
+                                <label class="control-label width_xs">备注</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.note">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="saveFee()">保存</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--modal-导出-->
+    <div class="modal inmodal fade" id="ImportModal" role="dialog"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">请选择要导出的列</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-condensed table-hover">
+                        <tr>
+                            <th></th>
+                            <th>导出</th>
+                            <th>列名</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <input type="checkbox" value="1" id="FeeId">
+                            </td>
+                            <td>
+                                <label for="FeeId">费用项目编码</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <input type="checkbox" value="1" id="FeeName">
+                            </td>
+                            <td>
+                                <label for="FeeName">费用项目名称</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <input type="checkbox" value="1" id="SubjectId">
+                            </td>
+                            <td>
+                                <label for="SubjectId">会计科目编码</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <input type="checkbox" value="1" id="SubjectName">
+                            </td>
+                            <td>
+                                <label for="SubjectName">会计科目名称</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <input type="checkbox" value="1" id="SubjectDescription">
+                            </td>
+                            <td>
+                                <label for="SubjectDescription">会计科目描述</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>
+                                <input type="checkbox" value="1" id="Reimbursement">
+                            </td>
+                            <td>
+                                <label for="Reimbursement">报销方式</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>
+                                <input type="checkbox" value="1" id="State">
+                            </td>
+                            <td>
+                                <label for="State">状态</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>
+                                <input type="checkbox" value="1" id="Comment">
+                            </td>
+                            <td>
+                                <label for="Comment">备注</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul id="contextMenu" style="display:none;position:absolute">
+    <b>Set priority:</b>
+    <li data="Low">Low</li>
+    <li data="Medium">Medium</li>
+    <li data="High">High</li>
+</ul>
+
+

@@ -1,0 +1,34 @@
+<div hc-diy-page ng-init="load()">
+    <div class="hc-box other-h" style="border: 1px solid transparent;">
+        <div class="row">
+            <div hc-input="data.currItem.bud_year"
+                 hc-label="预算年度"
+                 hc-type="year"
+                 hc-change="yearChange()"></div>
+            <div hc-input="data.currItem.bud_type_code"
+                 hc-label="预算类别"
+                 hc-btn-click="viewTypeSearch();"
+                 hc-change="refresh()"></div>
+            <div hc-input="data.currItem.bud_type_name" hc-label=""></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.object_name"
+                 hc-label="费用项目"
+                 hc-change="refresh()"
+                 hc-btn-click="FeeTypeSearch();"
+            ></div>
+            <div hc-input="data.currItem.crm_entid" hc-label="品类" hc-dict-code="crm_entid"
+                 hc-change="refresh()"></div>
+            <!--<div hc-input="data.currItem.entorgid" hc-label="产品线" hc-dict-code="entorgid"-->
+                 <!--hc-change="refresh()"></div>-->
+        </div>
+    </div>
+    <div hc-box class="p-w-sm" style="display: table;width: 100%;"><!--hc-box class="TreeGridBox" style="display: table;width: 100%;"-->
+        <div style="display:table-cell;width: 222px;">
+            <div hc-grid="gridOptions1" hc-auto-height></div>
+        </div>
+        <div  style="display:table-cell;">
+            <div hc-grid="gridOptions2" hc-auto-height></div>
+        </div>
+    </div>
+</div>

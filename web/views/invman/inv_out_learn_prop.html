@@ -1,0 +1,69 @@
+<div hc-obj-prop>
+    <!--基本信息：-->
+    <div id="base" hc-box class="active">
+        <div class="row other-h">
+            <div hc-input="data.currItem.invbillno"
+                 hc-label="单据号"
+                 hc-readonly="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.dept_code"
+                 hc-label="部门"
+                 hc-required="true"
+                 hc-common-search="commonSearchSettingOfDept"
+                 hc-class-id="dept"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.dept_name"
+                 hc-readonly="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.stat"
+                 hc-label="单据状态"
+                 hc-dict-code="stat"
+                 hc-readonly="true"
+                 hc-col-count="2"></div>
+        </div>
+        <div class="row other-h">
+            <div hc-input="data.currItem.bill_type"
+
+                 hc-label="单据类型"
+                 hc-required="true"
+                 hc-dict-code="bill_type"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.customer_code"
+                 hc-label="客户"
+                 hc-required="true"
+                 hc-class-id="customer_org"
+                 hc-common-search="commonSearchSettingOfCustom"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.customer_name"
+                 hc-readonly="true"
+                 hc-required="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.creator"
+                 hc-label="创建人"
+                 hc-readonly="true"
+                 hc-col-count="2"></div>
+        </div>
+        <div class="row other-h">
+            <div hc-input="data.currItem.quantity_total"
+                 hc-label="总数量"
+                 hc-readonly="true"
+                 hc-required="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.amount_total"
+                 hc-label="总金额"
+                 hc-readonly="true"
+                 hc-type="money"
+                 hc-required="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.note"
+                 hc-label="备注"
+                 hc-col-count="2"></div>
+        </div>
+        <div>
+            <!-- 表格视图  -->
+            <div hc-grid="gridOptions" hc-auto-height></div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,115 @@
+<!-- 审批流程意见 -->
+  <div class="modal-header"  draggable-model>
+      <h4 class="modal-title">过程属性</h4>
+  </div>
+  <div class="modal-body" style="padding-top: 0px; padding-left: 20px; padding-right: 20px;">        
+            <div class="col-lg-12">
+				           <ul class="btn-group" id="tabs" class="tri-nav-tabs">
+                                <button type="button" class="btn btn-xs btn-white active" data-target="#tab_detial1"
+                                        data-toggle="tab" class="tab-nav">高级功能
+                                </button>
+                                <button type="button" class="btn btn-xs btn-white" data-target="#tab_detial2"
+                                        data-toggle="tab" class="tab-nav">控制参数
+                                </button>
+                            </ul>
+                            <div class="tab-content-button">
+                               <div id="tab_detial1" class="tab-pane active">
+							        <div class="row">
+                                        <div class="col-md-3">
+                                               <label style="float:left" class="form-label-mini">提交成功后执行语句</label>                                     
+										</div>
+									</div>
+									<div class="row">
+									     <div class="col-md-12">
+                                               <textarea ng-model="item.submitfunc" rows="2"
+                                                class="form-control noresize ng-pristine ng-valid ng-touched">
+                                               </textarea>										  
+										 </div>
+									</div>
+									<div class="row">
+                                        <div class="col-md-3">
+                                               <label style="float:left" class="form-label-mini">驳回成功后执行语句</label>                                     
+										</div>
+									</div>
+									<div class="row">
+									     <div class="col-md-12">
+                                               <textarea ng-model="item.rejectfunc" rows="2"
+                                                class="form-control noresize ng-pristine ng-valid ng-touched">
+                                               </textarea>										  
+										 </div>
+									</div>
+									<div class="row">
+                                        <div  class="col-md-3">
+                                               <label style="float:left" class="form-label-mini">到达时执行语句</label>                                     
+										</div>
+									</div>
+									<div class="row">
+									     <div class="col-md-12">
+                                               <textarea ng-model="item.arrivefunc" rows="2"
+                                                class="form-control noresize ng-pristine ng-valid ng-touched">
+                                               </textarea>										  
+										 </div>
+									</div>
+									<div class="row">
+                                        <div class="col-md-3">
+                                               <label style="float:left" class="form-label-mini">监控提交执行语句</label>                                     
+										</div>
+									</div>
+									<div class="row">
+									     <div class="col-md-12">
+                                               <textarea ng-model="item.ctrlsubmitfunc" rows="2"
+                                                class="form-control noresize ng-pristine ng-valid ng-touched">
+                                               </textarea>										  
+										 </div>
+									</div>
+									<div class="row">
+                                        <div  class="col-md-3">
+                                               <label style="float:left" class="form-label-mini">前台提交执行</label>                                     
+										</div>
+									</div>
+									<div class="row">
+									     <div class="col-md-12">
+                                               <textarea ng-model="item.clientsubfunc" rows="2"
+                                                class="form-control noresize ng-pristine ng-valid ng-touched">
+                                               </textarea>										  
+										 </div>
+									</div>
+							   </div>
+							   <div id="tab_detial2" class="tab-pane">
+							      <div class="row">
+							        <div style="float:left"  class="col-md-2">
+                                    <label  class="form-label-mini">检查设置</label>
+                                    </div>
+							        <div class="col-md-10">
+                                    <select data-placeholder=" " chosen-select
+                                            ng-model="item.checkset"
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="s.dictvalue as s.dictname for s in checksets">
+                                        <option value=""></option>
+                                    </select>
+                                    </div>
+								</div>
+								
+								<div class="row">
+                                    <div style="float:left"  class="col-md-2">
+                                         <label class="form-label-mini">检查定义</label>                                     
+								   </div>	
+                                   
+                                    <div class="col-md-10">	
+									     <textarea ng-model="item.checkfunc" rows="6"
+                                                class="form-control noresize ng-pristine ng-valid ng-touched">
+                                         </textarea>	
+                                    </div>									
+							   </div>
+							</div>
+			</div>
+	</div>
+  <div class="modal-footer">
+   <div class="row">
+      <div  class="col-md-12" style="padding-top:10px">
+      <button type="button" class="btn btn-white" ng-click="cancel()">取消</button>
+      <button type="button" class="btn btn-primary" ng-click="ok()">确定</button>
+	  </div>
+	</div>
+  </div>
+

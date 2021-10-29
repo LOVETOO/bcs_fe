@@ -1,0 +1,38 @@
+<!DOCTYPE div PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<body>
+	<div class="modal-content">
+		<div class="modal-header" draggable-model>
+			<a class="close" data-dismiss="modal"><i class="fa fa-close"></i>
+			</a>
+			<h3>弹屏信息</h3>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal form-inline">
+				<div class="ibox-content">
+					<div class="row">
+						<div class="col-md-2">
+							<label class="form-label-mini ">信息:</label>
+						</div>
+						<div class="col-md-4">
+							<input ng-model="item.discount" type="number"
+								class="form-control input-sm">
+						</div>
+						<div class="col-md-2">
+							<label class="form-label-mini ">备注:</label>
+						</div>
+						<div class="col-md-4">
+							<input ng-model="item.note" type="text"
+								class="form-control input-sm">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a class="btn btn-sm btn-primary" ng-click="ok()"> 确定 </a> <a
+				class="btn btn-sm btn-info" ng-click="cancel()"> 取消 </a>
+		</div>
+	</div>
+</body>
+</html>

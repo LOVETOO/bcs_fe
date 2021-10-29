@@ -1,0 +1,97 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+        <div class="row">
+            <div hc-input="data.currItem.unknown1"
+                 hc-label="成本预算类型"
+                 hc-dict-code="stat">
+            </div>
+            <div hc-input="data.currItem.unknown"
+                 hc-label="预算编制年度"
+                 hc-type="year">
+            </div>
+
+            <div hc-input="data.currItem.unknown"
+                 hc-label="成本预算单号"
+                 hc-dict-code="stat"><!--hc-btn-click="chooseunknown()"-->
+            </div>
+            <button type="button"
+                    class="btn btn-white"
+                    ng-click="unknown()">查询</button><!-- ng-disabled="toolButtons.show_group.title=='显示明细'"-->
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs other-h" id="detailtab">
+        <li class="active">
+            <a data-toggle="tab" id="tab11" href="tabs.html#tab1">报表</a>
+        </li>
+        <li>
+            <a data-toggle="tab" id="tab22" href="tabs.html#tab2">汇总</a>
+        </li>
+    </ul>
+
+    <div class="tabs-container">
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active">
+                <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+            </div>
+            <div id="tab2" class="tab-pane">
+                <div hc-grid="groupGridOptions"  hc-auto-height="grid"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 分类汇总 -->
+    <div class="modal inmodal fade" id="groupModal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg" style="width: 500px;">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" style="font-size: 16px;">汇总明细</h4>
+                </div>
+                <div class="modal-body" style="height: 60px;">
+                    <form method="get" class="form-inline mline">
+                        <div class="row">
+                          <!--  <div hc-input="warehouse" style="margin-left: 10px;"
+                                 hc-type="checkbox"
+                                 hc-label="按仓库"></div>
+                            <div hc-input="item"
+                                 hc-type="checkbox"
+                                 hc-label="按产品"></div>-->
+                            <div hc-input="crm_entid"
+                                 hc-type="checkbox"
+                                 hc-label="按品类"></div>
+                           <!-- <div hc-input="entorgid"
+                                 hc-type="checkbox"
+                                 hc-label="按产品线"></div>
+                            <div hc-input="item_class"
+                                 hc-type="checkbox"
+                                 hc-label="按产品分类"></div>-->
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" ng-click="initGroup()">汇总</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="remainModal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg" style="width: 900px;">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" style="font-size: 16px;">保留库存量明细</h4>
+                </div>
+                <div class="modal-body" style="height: 400px;">
+                    <div hc-grid="gridOptions1"  style="height: 400px;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

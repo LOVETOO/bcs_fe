@@ -1,0 +1,94 @@
+<div hc-diy-page>
+    <div hc-box class="hc-box grid-other-h">
+
+        <div class="row">
+            <div hc-input="data.current_period"
+                 hc-label="当前应收期间"
+                 hc-type="year-month"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.year_month"
+                 hc-label="截止月份"
+                 hc-required="true"
+                 hc-type="year-month">
+            </div>
+
+            <div hc-input="data.currItem.sale_area_name"
+                 hc-label="销售区域"
+                 hc-class-id="sale_salearea"
+                 hc-common-search="chooseSaleArea">
+            </div>
+
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.group_customer_code"
+                 hc-label="总公司"
+                 hc-class-id="customer_org"
+                 hc-common-search="chooseGroupCustomer">
+            </div>
+            <div hc-input="data.currItem.group_customer_name"
+                 hc-readonly="true"></div>
+
+            <div hc-input="data.currItem.customer_code"
+                 hc-label="客户"
+                 hc-class-id="customer_org"
+                 hc-common-search="chooseCustomer">
+            </div>
+            <div hc-input="data.currItem.customer_name"
+                 hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.employee_name"
+                 hc-label="业务员"
+                 hc-common-search="chooseEmployee"
+                 hc-class-id="sale_employee">
+            </div>
+
+            <div hc-input="data.currItem.dept_code"
+                 hc-label="部门"
+                 hc-common-search="chooseDept"
+                 hc-class-id="dept"
+            >
+            </div>
+            <div hc-input="data.currItem.dept_name"
+                 hc-readonly="true">
+            </div>
+        </div>
+
+        <div hc-tab="tabs_detail" hc-tab-change="onTabChange(params)"></div>
+
+        <div hc-tab-page>
+            <div id="lines" hc-box="" class="active">
+                <div hc-grid="gridOptions" class="hc-grid m" style="height: 400px"></div>
+            </div>
+
+            <div id="collect" hc-box="">
+                <div class="row">
+                    <div hc-input="group_conditions.customer"
+                         hc-label="按客户"
+                         hc-type="checkbox">
+                    </div>
+                    <div hc-input="group_conditions.group_customer"
+                         hc-label="总公司"
+                         hc-type="checkbox">
+                    </div>
+
+                    <div hc-input="group_conditions.sale_area"
+                         hc-label="销售区域"
+                         hc-type="checkbox">
+                    </div>
+
+                    <div hc-input="group_conditions.sale_employee"
+                         hc-label="业务员"
+                         hc-type="checkbox">
+                    </div>
+                </div>
+                <div hc-grid="gridOptions_collect" class="hc-grid m" style="height: 400px"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,143 @@
+<!--
+	共享资料编辑界面
+-->
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="info_share">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>共享资料</h5>
+                    <div class="ibox-tools">
+                        <form class="form-inline">
+                            <button type="button" class="btn btn-default btn-sm" ng-click="addNew()"><i
+                                    class="fa fa-plus"></i> 新增
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="searchData()"><i
+                                    class="fa fa-refresh"></i> 刷新
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" class="form-inline mline title-form">
+                        <div id="viewGrid"></div>
+                        <div class="page_modal modal-open" page-pagination></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--     查看-新增   -->
+    <div class="modal inmodal fade" id="editModal" role="dialog"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">资料</h4>
+                </div>
+                <div class="modal-body ibox-content">
+                    <div class="ibox-content">
+                        <form method="get" class="form-inline mline">
+                            <div class="row">
+                                <label >标&nbsp;&nbsp;&nbsp;&nbsp;题&nbsp;:&nbsp;&nbsp;</label>
+                                <input type="text" class="form-control width_xl" ng-model="data.currItem.subject">
+                            </div>
+                            <div class="row">
+                                <label >过期日期&nbsp;</label>
+                                <input type="text" ng-model="data.currItem.duedate"
+                                       id="duedate"
+                                       class="form-control ng-pristine ng-untouched ng-valid">
+                            </div>
+                            <div class="row">
+                                <label >发&nbsp;布&nbsp;人&nbsp;&nbsp;</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.creator"
+                                       ng-readonly="true">
+                                <label >发布日期</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.createtime"
+                                       ng-readonly="true">
+                            </div>
+                            <div class="row">
+                                <label >更&nbsp;新&nbsp;人&nbsp;&nbsp;</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.updator"
+                                       ng-readonly="true">
+                                <label >更新日期</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.updatetime"
+                                       ng-readonly="true">
+                            </div>
+                            <div class="row">
+                                <label >内&nbsp;&nbsp;&nbsp;&nbsp;容&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <button type="button" class="btn btn-primary " data-toggle="modal"
+                                        data-target="#attModal">
+                                    附件({{data.currItem.objattachs?data.currItem.objattachs.length:0}})
+                                </button>
+                            </div>
+                            <div class="row">
+                            <textarea rows="8" cols="256" ng-model="data.currItem.content" class="form-control"  style="width: 420px">
+                            </textarea>
+                                <!--<input type="text" class="form-control" ng-model="data.currItem.content"-->
+                                <!--style="width: 815px;">-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="save()">保存并发布</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--附件模态框-->
+    <div class="modal inmodal fade" id="attModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">附件</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <table class="table table-bordered ui-widget m-n">
+                            <thead>
+                            <tr>
+                                <td style="width: 50px;">序号</td>
+                                <td>文件名称</td>
+                                <td>操作</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="doc in data.currItem.objattachs">
+                                <td>{{$index+1}}</td>
+                                <td><a href="/downloadfile.do?docid={{doc.docid}}" target="_blank">{{doc.docname}}</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-info viewbtn" ng-click="downloadAttFile(doc)">下载
+                                    </button>
+                                    <button class="btn btn-sm btn-info viewbtn" ng-click="deleteFile(doc)">删除
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="addFile()">添加附件
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--时间插件引入中文-->
+<script type="text/javascript" src="../../lib/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"
+        charset="UTF-8"></script>
+
+

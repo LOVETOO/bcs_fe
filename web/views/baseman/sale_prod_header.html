@@ -1,0 +1,194 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="saleprodheaderEditController">
+    <div class="row">
+        <div class="col-lg-12">
+            <ul id="tabs" class="tri-nav-tabs">
+                <li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav"><i class="fa fa-pencil-square">常规</i></a></li>
+                <li><a data-target="#tab2" data-toggle="tab" class="tab-nav"><i class="fa fa-shopping-cart">产品</i></a></li>
+                <li style="display:hidden"><a data-target="#tab4" data-toggle="tab" class="tab-nav"><i class="fa fa-cogs">选配清单</i></a></li>
+                <li><a data-target="#tab4" data-toggle="tab" class="tab-nav"><i class="fa fa-cogs">印刷件要求</i></a></li>
+                <li><a data-target="#tab3" data-toggle="tab" class="tab-nav"><i class="fa fa-truck">资金风险</i></a></li>
+                <div class="btn-group pull-right form-topright-btn">
+                    <a class="btn-close"><i class="fa fa-times"></i></a>
+                </div>
+                
+            </ul>
+            <div id="content" class="first tab-content">
+                <div id="tab1" class="tab-pane active">
+					<div class="">
+						<button class="btn btn-toolbar" type="button"><i class="fa fa-file-o"></i>新增</button>
+						<button class="btn btn-toolbar" type="button" ng-click="save()"><i class="fa fa-floppy-o" ></i>保存</button>
+						<button class="btn btn-toolbar" type="button"><i class="fa fa-history"></i>刷新</button>
+						<button class="btn btn-toolbar" type="button"><i class="fa fa-trash"></i>删除</button>
+						<button class="btn btn-toolbar" type="button"><i class="fa fa-check-square-o">提交</i></button>
+						<button class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>导出</button>
+					</div>
+                    
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">订单号:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder="" class="input-sm form-control">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">排产月份:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input bs-datepacker ng-model="sale_prod_header.prod_month" type="text" class="form-control input-sm">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">订单类型:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen id="order_type_id" ng-model="sale_prod_header.order_type_id" class="input-sm chosen-select form-control" ng-options="sale_order_type.order_type_id as sale_order_type.order_type_name  for sale_order_type in basedata.sale_order_types">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">状态:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input ng-model="sale_prod_header.stat" type="text" class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">销售部门:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text" class="input-sm form-control" ng-model="sale_prod_header.org_name">
+                                    <a class="input-group-addon" ng-click="openSalesPartFrm()" id="#abc"><i class="fa fa-ellipsis-h"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">客户:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text" class="input-sm form-control" ng-model="sale_prod_header.cust_name">
+                                    <a class="input-group-addon" ng-click="openCustFrm()" id="#abc"><i class="fa fa-ellipsis-h"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">业务员:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text" class="input-sm form-control" ng-model="sale_prod_header.sales_user_id">
+                                    <a class="input-group-addon" ng-click="openSalesUserFrm()" id="#abc"><i class="fa fa-ellipsis-h"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">总数量:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" class="input-sm form-control" ng-model="sale_prod_header.qty_total">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">付款条件:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select id="astat" ng-model="sale_prod_header.payment_type_code" class="input-sm chosen-select form-control" ng-options="payment_type.payment_type_id as payment_type.payment_type_name for payment_type in basedata.payment_types">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">生产定金率:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" class="input-sm form-control" ng-model="sale_prod_header.deposit_rate">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">信用证号:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" class="input-sm form-control" ng-model="sale_prod_header.credit_no">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">总金额:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" class="input-sm form-control" ng-model="sale_prod_header.amt_total">
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini not-null">币种:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <select chosen-select id="astat" ng-model="sale_prod_header.currency_id" class="input-sm chosen-select form-control" ng-options="base_currency.currency_id as base_currency.currency_name for base_currency in basedata.base_currencys">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label-mini"><input type="checkbox" ng-model="sale_prod_header.is_follow" ng-checked="sale_prod_header.is_follow">是否有随批配件</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label-mini"><input type="checkbox" ng-model="sale_prod_header.is_fine" ng-checked="sale_prod_header.is_fine">是否有罚金</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label-mini"><input type="checkbox" ng-model="sale_prod_header.is_inspection" ng-checked="sale_prod_header.is_inspection">是否需要验货</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label-mini"><input type="checkbox"  ng-model="sale_prod_header.is_reform" ng-checked="sale_prod_header.is_reform">是否改制</label>
+                            </div>
+                            
+                        </div>
+						
+						<div class="row">
+							<div class="col-md-1">
+								<label class="form-label-mini">备注:</label>
+							</div>
+							<div class="col-md-11">
+								<input class="input-sm form-control" type="text">
+							</div>
+						</div>
+                        <!-- <h4 class="ibox-content-title">附件</h4>
+                        <div class="ibox-content" style="height:100px;">
+                        </div>
+                         <h4 class="ibox-content-title">流程</h4>
+                        <div class="ibox-content" style="height:150px;">
+                        </div> -->
+                    </div>
+                </div>
+                <div id="tab2" class="tab-pane">
+                    <button class="btn btn-toolbar" type="button"><i class="fa fa-plus-square-o"></i>增加明细</button>
+                    <button class="btn btn-toolbar" type="button" ng-click="test('test!!')"><i class="fa fa-minus-square-o"></i>删除明细</button>
+                    <button class="btn btn-toolbar" type="button"><i class="fa fa-external-link">从历史订单导入</i></button>
+                    <button class="btn btn-toolbar" type="button"><i class="fa fa-cubes"></i>订单选配</button>
+                    <div class="ibox-content">
+                        <div slick-grid sg-dbclick="test(msg);" sg-options="aoptions" sg-data="adata" sg-columns="acolumns" style="width:100%;height:240px;" class="slick-grid"></div>
+                    </div>
+
+                    <h4 class="ibox-content-title">印刷件要求</h4>
+                    <div class="ibox-content">
+                        <div slick-grid sg-dbclick="test(msg);" sg-options="printoptions" sg-data="feeline" sg-columns="printcolumns" style="width:100%;height:180px;" class="slick-grid"></div>
+                    </div>
+
+                </div>
+                <div id="tab3" class="tab-pane">
+                    <button class="btn btn-toolbar" type="button"><i class="fa fa-plus-square-o"></i>增加柜型</button>
+                    <button class="btn btn-toolbar" type="button"><i class="fa fa-minus-square-o"></i>删除柜型</button>
+                    <div class="ibox-content">
+                        <div slick-grid sg-dbclick="test(msg);" sg-options="cntoptions" sg-data="cntline" sg-columns="cntcolumns" style="width:100%;height:240px;" class="slick-grid"></div>
+                    </div>
+                    <h4 class="ibox-content-title">订单费用清单</h4>
+                    <div class="ibox-content">
+                        <div slick-grid sg-dbclick="test(msg);" sg-options="feeoptions" sg-data="feeline" sg-columns="feecolumns" style="width:100%;height:180px;" class="slick-grid"></div>
+                    </div>
+                </div>
+                <div id="tab4" class="tab-pane">
+                    <h4 class="ibox-content-title">订单选配清单</h4>
+                    <div class="ibox-content">
+                        <div slick-grid sg-dbclick="test(msg);" sg-options="confoptions" sg-data="confdata" sg-columns="confcolumns" style="width:100%;height:430px;" class="slick-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

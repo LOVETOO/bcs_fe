@@ -1,0 +1,245 @@
+<div hc-obj-prop>
+    <!--基本信息：-->
+    <div id="base" hc-box class="active">
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.employee_code"
+                     hc-label="员工编号"
+                     hc-readonly="true"
+                     hc-col-count="2"></div>
+
+                <div hc-input="data.currItem.employee_name"
+                     hc-label="员工姓名"
+                     hc-readonly="true"
+                     hc-col-count="2"></div>
+
+                <div hc-label="在职状态"
+                     hc-input="data.currItem.stat"
+                     hc-dict-code="emp_stat"
+                     hc-readonly="true"
+                     hc-col-count="2"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.dept_name"
+                     hc-label="所属部门"
+                     hc-readonly="true"
+                     hc-col-count="2"></div>
+
+                <div hc-input="data.currItem.position_name"
+                     hc-label="职位"
+                     hc-readonly="true"
+                     hc-col-count="2"></div>
+            </div>
+        </div>
+        <!--异动前：-->
+        <div id="req" hc-box="合同信息：" >
+            <div class="row" >
+                <div hc-input="data.currItem.contract_no"
+                     hc-label="合同编码"
+                     hc-required="true"
+                     hc-col-count="2"
+                     hc-readonly="!flag_change"></div>
+
+                <div hc-input="data.currItem.sign_partya"
+                     hc-label="签定甲方"
+                     hc-col-count="2"
+                     hc-readonly="!flag_change"></div>
+
+                <div hc-input="data.currItem.sign_date"
+                     hc-label="签定日期"
+                     hc-type="date"
+                     hc-col-count="2"
+                     hc-readonly="!flag_change"></div>
+
+                <div hc-input="data.currItem.contract_stat"
+                     hc-label="合同状态"
+                     hc-dict-code="contract_stat"
+                     hc-readonly="true"
+                     ng-show="flag_change"
+                     hc-col-count="2"></div>
+            </div>
+
+            <div class="row" >
+                <div hc-input="data.currItem.start_date"
+                     hc-label="生效日期"
+                     hc-required="true"
+                     hc-type="date"
+                     hc-col-count="2"
+                     hc-readonly="!flag_change"></div>
+
+                <div hc-change="changeDate()"
+                     hc-input="data.currItem.contract_years"
+                     hc-label="合同期限"
+                     hc-unit="年"
+                     hc-col-count="2"
+                     hc-readonly="!flag_change"></div>
+
+                <div hc-input="data.currItem.end_date"
+                     hc-change="showYears()"
+                     hc-label="结束日期"
+                     hc-required="true"
+                     hc-type="date"
+                     hc-col-count="2"
+                     hc-readonly="!flag_change"></div>
+
+                <div hc-input="data.currItem.attribute4"
+                     hc-label="已签竞业协议"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="2"
+                     hc-readonly="!flag_change"></div>
+
+            </div>
+
+            <div class="row" >
+                <div hc-input="data.currItem.sign_address"
+                     hc-label="签定地址"
+                     hc-col-count="6"
+                     hc-readonly="!flag_change"></div>
+
+                <div hc-input="data.currItem.attribute5"
+                     hc-label="已签保密协议"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     hc-col-count="2"
+                     hc-readonly="!flag_change"></div>
+            </div>
+        </div>
+
+        <div  hc-box="续签信息：" hc-if="!flag_change&&div_show==1">
+            <div class="row">
+                <div hc-input="data.currItem.sign_date1"
+                     hc-label="签定日期"
+                     hc-type="date"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.start_date1"
+                     hc-label="生效日期"
+                     hc-type="date"
+                     hc-col-count="2"
+                     hc-readonly="true"
+                     hc-required="true"></div>
+                <div hc-input="data.contract_years"
+                     hc-label="续签期限"
+                     hc-type="number"
+                     hc-blur="changeDate()"
+                     hc-unit="年"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.contract_stat"
+                     hc-label="合同状态"
+                     hc-dict-code="contract_stat"
+                     hc-readonly="true"
+                     hc-col-count="2"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.end_date1"
+                     hc-label="结束日期"
+                     hc-type="date"
+                     hc-col-count="2"
+                     hc-change="showYears()"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.change_reason"
+                     hc-label="续签原因"
+                     hc-col-count="6"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.change_remark"
+                     hc-label="续签说明"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+
+        <div  hc-box="解除信息：" hc-if="!flag_change&&div_show==2">
+            <div class="row">
+                <div hc-input="data.currItem.end_date1"
+                     hc-label="解除日期"
+                     hc-type="date"
+                     hc-required="true"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.change_reason"
+                     hc-label="解除原因"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.contract_stat"
+                     hc-label="合同状态"
+                     hc-readonly="true"
+                     hc-required="true"
+                     hc-dict-code="contract_stat"
+                     hc-col-count="2"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.change_remark"
+                     hc-label="解除说明"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+
+        <div  hc-box="终止信息：" hc-if="!flag_change&&div_show==3">
+            <div class="row">
+                <div hc-input="data.currItem.end_date1"
+                     hc-label="终止日期"
+                     hc-type="date"
+                     hc-required="true"
+                     hc-col-count="2"></div>
+                <div hc-input="data.currItem.change_reason"
+                     hc-label="终止原因"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.contract_stat"
+                     hc-label="合同状态"
+                     hc-readonly="true"
+                     hc-required="true"
+                     hc-dict-code="contract_stat"
+                     hc-col-count="2"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.change_remark"
+                     hc-label="终止说明"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<style>
+    .big_div{
+        position: relative;
+    }
+    .invoice_div {
+        border: 2px solid #f5f5f5;
+        width: 110px;
+        min-height: 130px;
+        position: absolute;
+        left: 65px;
+        top: 0px;
+        color: #8d9092;
+        cursor: pointer;
+    }
+    .invoice_div input[type="file"] {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 1;
+    }
+    .invoice_div .icon {
+        font-size: 18px;
+        text-align: center;
+        line-height: 130px;
+        font-weight: 200;
+    }
+    .invoice_div img {
+        /* width: auto;
+        height: auto; */
+        width: 100%;
+        height: auto;
+        /* max-width: 100%;
+        max-height: 100%; */
+        position: absolute;
+        z-index: 3;
+        left: 0px;
+        top: 0px;
+    }
+</style>

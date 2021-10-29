@@ -1,0 +1,41 @@
+<div hc-obj-prop>
+    <!--常规-->
+    <div id="base" class="active">
+        <div hc-box class="flex1 flex-column">
+            <div class="row">
+                <div hc-input="data.currItem.intfname" hc-label="接口名称"></div>
+                <div hc-input="data.currItem.dsname" hc-label="外部数据源" hc-class-id="rptds" hc-common-search="commonSearch.dsname"></div>
+                <div hc-input="data.currItem.opertype" hc-label="操作类型"
+                    hc-select-options="[{'value':1,'name':'新增记录'},{'value':2,'name':'修改记录'},{'value':3,'name':'同步记录'}]"></div>
+                <div hc-input="data.currItem.fromorgid" hc-label="源组织"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.param1" hc-label="参数1"></div>
+                <div hc-input="data.currItem.param2" hc-label="参数2"></div>
+                <div hc-input="data.currItem.param3" hc-label="参数3"></div>
+                <div hc-input="data.currItem.toorgid" hc-label="目标组织"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.objectname" hc-label="对象名称" hc-col-count="6"></div>
+                <div hc-input="data.currItem.entcode" hc-label="EntCode"></div>
+            </div>
+            <div class="row">
+                <div
+                    hc-label="调度"
+                    hc-input="data.currItem.schedulername"
+                    hc-class-id="scpscheduler"
+                    hc-common-search="commonSearch.schedulername"
+                    hc-can-delete="true"
+                    hc-delete-together="schedulerdesc"
+                ></div>
+
+                <div hc-input="data.currItem.schedulerdesc" hc-col-count="4"></div>
+
+                <div hc-buttons="schedulerButtons"></div>
+            </div>
+            <div class="row flex1">
+                <div hc-input="data.currItem.note" hc-label="说明" hc-type="textarea" hc-col-count="8" hc-row="3"></div>
+            </div>
+        </div>
+    </div>
+</div>

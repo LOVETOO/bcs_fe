@@ -1,0 +1,72 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base"  class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.payment_plan_code"
+                     hc-label="回款计划单号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.form_date"
+                     hc-label="单据日期"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="创建人"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.createtime"
+                     hc-label="创建时间"
+                     hc-type="time"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.contract_code"
+                     hc-label="合同信息"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.plan_amt"
+                     hc-label="计划回款金额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.payment_stat"
+                     hc-label="回款状态"
+                     hc-dict-code="epm.payment_stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目信息"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.received_amt"
+                     hc-label="已回款金额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.collected_amt"
+                     hc-label="待回款金额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户信息"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-col-count="4"
+                     hc-type="textarea"
+                     hc-readonly="true"></div>
+            </div>
+        </div>
+        <div hc-box="计划明细" class="other-h"></div>
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+</div>
+
+
+
+
+

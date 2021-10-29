@@ -1,0 +1,18 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.stratetarget_code" hc-label="战略目标编码" hc-required="true"></div>
+            <div hc-input="data.currItem.strate_year" hc-label="年度" hc-required="true" hc-select-options="[{name:'A',value:1},{name:'B',value:2}]"></div>
+            <div hc-input="data.currItem.entorgid" hc-label="品类" hc-required="true" hc-select-options="[{name:'A',value:1},{name:'B',value:2}]"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.sales_amt" hc-label="销售收入目标" hc-required="true"></div>
+            <div hc-input="data.currItem.profit_amt" hc-label="利润目标" hc-required="true"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.note" hc-label="说明" hc-type="textarea" hc-col-count="6"></div>
+            {{isresolve}}
+        </div>
+        <!-- 表格视图  -->
+        <div hc-grid="gridOptions" class="hc-grid m" hc-auto-height="grid" ng-show = "data.flag==2" ></div>
+</div>

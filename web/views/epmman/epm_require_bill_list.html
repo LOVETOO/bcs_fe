@@ -1,0 +1,99 @@
+<div hc-obj-list>
+	<!-- 查询条件面板-->
+	<hc-obj-list-search-panel>
+		<div class="row">
+			<div
+				hc-label="要货单号"
+				hc-input="searchObj.sa_salebillno"  	
+			></div>
+			<div
+				hc-label="订单日期"
+				hc-input="searchObj.date_invbill_date_start"
+				hc-can-delete="true"
+				hc-type="date"
+			></div>
+			<div
+				hc-label="订单日期至"
+				hc-input="searchObj.date_invbill_date_end"
+				hc-can-delete="true"
+				hc-type="date"
+			></div>
+			<div hc-label="申请人"
+				 hc-input="searchObj.created_by"></div>
+		</div>
+		<div class="row">
+			<div hc-label="客户编码"
+				 hc-input="searchObj.customer_code"
+				 hc-class-id="customer_org"
+				 hc-can-delete="true"
+				 hc-common-search="commonSearch.customer_org"></div>
+
+			<div hc-label="客户名称"
+				 hc-input="searchObj.customer_name"></div>
+
+			<div hc-label="折扣单号"
+				 hc-input="searchObj.discount_apply_code"></div>
+
+			<div hc-label="订单类型"
+				 hc-select-options="[
+					{ name: '常规订单', value: '1' },
+					{ name: '计划订单', value: '2' },
+					{ name: '定制订单', value: '3' }
+				 ]"
+				 hc-can-delete="true"
+				 hc-input="searchObj.bill_type"></div>
+		</div>
+		<div class="row">
+			<div hc-label="产品线"
+				hc-input="searchObj.order_pdt_line"
+				hc-can-delete="true"
+				hc-dict-code="epm.order_pdt_line"></div>
+			<div hc-label="业务类型"
+				hc-input="searchObj.business_type"
+				hc-can-delete="true"
+				hc-dict-code="epm.business_type"></div>
+			<div hc-label="产品编码"
+				hc-input="searchObj.item_code"></div>
+			<div hc-label="订单状态"
+				hc-dict-code="epm.require_bill.order_stat"
+				hc-can-delete="true"
+				hc-input="searchObj.order_stat"></div>
+		</div>
+		<div class="row">
+			<div hc-label="交易公司"
+				hc-input="searchObj.trading_company_name"
+				hc-can-delete="true"
+				hc-class-id="sa_out_bill_head"
+				hc-common-search="commonSearch.trading_company_name"></div>
+		   <div hc-label="开票单位"
+				hc-input="searchObj.billing_unit_name"
+				hc-can-delete="true"
+				hc-class-id="sa_out_bill_head"
+				hc-common-search="commonSearch.billing_unit_name"></div>
+			<div hc-label="合同编码"
+				 hc-can-delete="true"
+				 hc-class-id="epm_project_contract"
+				 hc-common-search="commonSearch.contract_code"
+				 hc-input="searchObj.contract_code"></div>
+			<div hc-label="合同名称"
+				 hc-input="searchObj.contract_name"></div>
+		</div>
+		<div class="row">
+			<div hc-label="项目编码"
+				 hc-can-delete="true"
+				 hc-class-id="epm_project"
+				 hc-common-search="commonSearch.project_code"
+				hc-input="searchObj.project_code"></div>
+		   <div hc-label="项目名称"
+				hc-input="searchObj.project_name"></div>
+			<div
+				hc-label="签约方式"
+				hc-input="searchObj.contract_type"
+				hc-can-delete="true"
+				hc-dict-code="epm.contract_type"></div>
+			<div
+				hc-label="客户自编号"
+				hc-input="searchObj.dhl_no"></div>
+		</div>
+	</hc-obj-list-search-panel>
+</div>

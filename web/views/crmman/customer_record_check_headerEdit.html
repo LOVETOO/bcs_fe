@@ -1,0 +1,155 @@
+<div class="bill-form" ng-controller="customer_record_check_headerEdit">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                客户接待明细认领客户
+            </div>
+            <div style="float:left">
+                <div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">
+
+                </div>
+
+
+                <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button" ng-click="new()"><i
+                        class="fa fa-file-o"></i>新增
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1" ng-click="save($event)"><i
+                        class="fa fa-floppy-o"></i>保存
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i
+                        class="fa fa-history"></i>刷新
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                        ng-click="delete()"><i class="fa fa-trash"></i>删除
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                        ng-click="wfstart()"><i class="fa fa-check-square-o">提交</i></button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-title">
+                    <h5>基本信息</h5>
+                    <div ibox-tools></div>
+                </div>
+                <div id="content" class="first tab-content">
+                    <div id="tab1" class="tab-pane active">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">认领单号</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-model="data.currItem.check_no"
+                                           placeholder=""
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">状态</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select chosen-select readonly="true" ng-disabled="true"
+                                            ng-model="data.currItem.stat"
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="s.id as s.name for s in stats">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">创建人</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.creator"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">创建时间</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.create_time"
+                                           class="input-sm form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">备注</label>
+                                </div>
+                                <div class="col-md-11">
+									<textarea ng-readonly="data.currItem.stat!=1"
+                                              ng-model="data.currItem.note"
+                                              rows="3"
+                                              class="form-control noresize ng-pristine ng-valid ng-touched">
+									</textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="ibox-content">
+                                        <div ag-gridview sg-options="options_3"
+                                             sg-columns="columns_3" style="width:100%;height:160px;"
+                                             class="slick-grid"></div>
+                                    </div>
+                                    <button class="btn btn-toolbar" type="button" ng-readonly="data.currItem.stat!=1"
+                                            ng-click="addpo()"><i class="fa fa-plus-square-o"></i>增加明细
+                                    </button>
+                                    <button class="btn btn-toolbar" type="button"
+                                            ng-readonly="data.currItem.stat!=1"
+                                            ng-click="delpo()"><i
+                                            class="fa fa-minus-square-o"></i>删除明细
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <h5>附件</h5>
+                                            <div ibox-tools></div>
+                                        </div>
+                                        <div class="ibox-content icons-box">
+                                            <button swf-upload title="添加附件" class="btn btn-toolbar"
+                                                    ng-disabled="data.currItem.stat!=1"
+                                                    upload-list="data.currItem.objattachs" ng-model="data.currItem.objattachs"
+                                                    filed='#attach-area'>
+                                                <i class="fa lightblue font-size-15  fa-paperclip"></i> 添加附件
+                                            </button>
+                                            <ul id="attach-area">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-hide="data.currItem.stat == 1">
+                                <div class="col-lg-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <h5>审批流程</h5>
+
+                                            <div ibox-tools></div>
+                                        </div>
+                                        <div class="ibox-content icons-box">
+                                            <div wf-ystep size="large" class="p-xs clear"
+                                                 ng-model="data.currItem.wfid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

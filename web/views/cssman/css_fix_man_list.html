@@ -1,0 +1,70 @@
+<div hc-edit-list>
+    <div class="row">
+        <div hc-input="data.currItem.fix_man_name"
+             hc-label="姓名"
+             hc-required="true"></div>
+
+        <div hc-input="data.currItem.birthday"
+             hc-label="出生年月"
+             hc-type="year-month"></div>
+
+        <div hc-input="data.currItem.sex"
+             hc-label="性别"
+             hc-dict-code="sex"></div>
+
+        <div hc-input="data.currItem.entid"
+             hc-label="经营单位"
+             hc-readonly="true"></div><!--？根据当前登录用户，默认赋值-->
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.education"
+             hc-label="文化程度"
+             hc-dict-code="educational_level"></div>
+
+        <div hc-input="data.currItem.position_type"
+             hc-label="岗位类型"
+             hc-dict-code="post_type"></div>
+
+        <div hc-input="data.currItem.position"
+             hc-label="岗位"></div>
+
+        <div hc-input="data.currItem.mount_name"
+             hc-label="上岗证名称"></div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.mount_no"
+             hc-label="上岗证证号"></div>
+
+        <div hc-input="data.currItem.mount_class"
+             hc-label="上岗证级别"
+             hc-dict-code="work_certificate_level"></div>
+
+        <div hc-input="data.currItem.work_no"
+             hc-label="工号"></div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.org_name"
+             hc-label="所属机构"
+             hc-class-id="scporg"
+             hc-common-search="commonSearchSettingOfScporg"
+             hc-required="true">
+        </div>
+
+        <div hc-input="data.currItem.fix_org_code"
+             hc-label="网点"
+             hc-class-id="css_fix_org"
+             hc-common-search="commonSearchSettingOfFix">
+        </div>
+
+        <div hc-input="data.currItem.fix_org_name"
+             hc-readonly="true"></div>
+    </div>
+
+
+    <div class="row">
+        <div hc-input="data.currItem.note" hc-label="备注" hc-col-count="8"></div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="google" value="notranslate">
+<title>高级查询</title>
+<!--
+<link href="high_files/bootstrap.css" rel="stylesheet">
+<script src="high_files/jquery-2.1.1.min.js"></script>
+<script src="high_files/bootstrap.js"></script>  
+
+<script src="high_files/myfilter.js"></script>    
+ <link href="high_files/myfilter.css" rel="stylesheet">
+ 
+ -->  
+
+<link href="/web/css/bootstrap.css" rel="stylesheet">
+<script src="/web/js/jquery/jquery-2.1.1.min.js"></script>
+<script src="/web/js/bootstrap/bootstrap.js"></script>  
+   
+ <!--自定义CSS及JS--->
+ <script src="/web/views/common/high/high_files/myfilter.js"></script>    
+ <link href="/web/views/common/high/high_files/myfilter.css" rel="stylesheet">
+
+  </head>
+ 
+  <body>
+
+
+  <div class="container">
+  <div class="row">
+    <div class="col-md-6 col-sm-5" style="width:700px">
+      <div class="tabs-left">
+	     <!-- 1.条件字段列表 --> 
+		 <!-- start-条件字段列表 -->
+        <ul class="nav nav-tabs"  style="min-height:300px;width: 100px;background:#ccccff;border-right: 1px solid rgb(102, 102, 102)" id="field_list" title="条件字段列表" > </ul>
+        <!-- end-条件字段列表 -->
+
+	   <!--  2.条件输入区 -->
+		<!-- start -tab-content -->
+	    <div class="tab-content " id="tab-content" style="min-height:300px;background:#fff" title="条件字段输入区" ></div>
+        <!-- end -tab-content -->
+       </div>
+ 
+    </div><!-- /col -->
+ 
+  </div><!-- /row -->
+  <div class="row">
+    <div class="col-md-6 col-sm-5" style="width:700px">
+	
+	 <div class="hasBeenSelected "><span id="time-num"></span>
+            <dl><dd style="margin-left:200px"><span class="eliminateCriteria" >【清空全部】</span> <span class="confirm" >【确认查询】</span></dd>
+		  </dl>
+
+          <dl>
+            <dt>已选条件：</dt>
+            <dd style="" class="clearDd">
+               <div class="clearList"></div>
+                </dd>
+		  </dl>
+		  
+	      <dl>
+            <dt>条件组成</dt>
+            <dd ><div id="sql1" style="word-wrap: break-word;width: 550px;" ">sql1</div></dd>
+		  </dl>
+		  	  
+	      <dl>
+            <dt>正式条件</dt>
+            <dd>
+			<textarea  
+			name="textarea" id="mysql" style="overflow-y: hidden; height: 46px;width:550px" 
+				onchange="this.style.height = (this.scrollHeight +5)+ 'px';" 
+		></textarea> 
+		   <!--
+		     	
+			style="overflow-y: hidden; height: 46px;min-width:550px" 
+			onpropertychange="this.style.height = this.scrollHeight + 'px';" 
+			oninput="this.style.height = this.scrollHeight + 'px';"
+		   -->
+			
+			</dd>
+		  </dl>
+
+		  
+		   
+			 
+         </div>
+	
+	</div>
+</div>
+</div><!-- /container -->
+
+
+
+ 
+ <script>
+     var tabsFn = function () {
+    function init() {
+        setHeight();
+    }
+    function setHeight() {
+        var $tabPane = $('.tab-pane'), tabsHeight = $('.nav-tabs').height();
+        $tabPane.css({ height: tabsHeight });
+    }
+    $(init);
+}();
+      //@ sourceURL=pen.js
+</script>
+ <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+ 
+ 
+ 
+ 
+</body></html>

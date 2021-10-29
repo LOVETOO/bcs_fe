@@ -1,0 +1,197 @@
+<!--
+/**
+ * 项目报备 - 详情页
+ * @since 2019-06-20
+ */
+-->
+<div hc-obj-prop ng-class="'project-valid-' + data.currItem.project_valid">
+
+	<!-- 战略项目报备 -->
+	<div id="base" class="active">
+		<div hc-box>
+			<div class="row">
+				<div hc-label="项目编码" hc-input="data.currItem.project_code" hc-readonly="true"></div>
+
+				<div hc-label="申报日期" hc-input="data.currItem.report_time" hc-type="time" hc-readonly="true"></div>
+
+				<div hc-label="审核状态" hc-input="data.currItem.audit_stat" hc-readonly="true"></div>
+
+				<div hc-label="项目当前进度" hc-input="data.currItem.stage_name" hc-readonly="true"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="交易公司" hc-input="data.currItem.trading_company_name" hc-class-id="epm_trading_company"
+					hc-common-search="commonSearch.trading_company_name" hc-required="true"></div>
+
+				<div hc-label="项目经理" hc-input="data.currItem.manager"></div>
+
+				<div hc-label="产品线" hc-input="data.currItem.pdt_line" hc-select-options="pdtLine" hc-required="true">
+				</div>
+
+				<div hc-label="管理类型" hc-input="data.currItem.operating_mode" hc-dict-code="epm.operating_mode"
+					hc-required="true"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="甲方名称" hc-input="data.currItem.party_a_name" hc-required="true" hc-col-count="4"></div>
+				<!--
+					hc-class-id="customer_org"
+					hc-common-search="commonSearch.party_a_name"
+					hc-can-input="true"
+				-->
+
+				<div hc-label="甲方联系人" hc-input="data.currItem.party_a_link_person" hc-required="true"></div>
+
+				<div hc-label="甲方联系电话" hc-input="data.currItem.party_a_phone" hc-readonly="!creatorLog"></div>
+
+			</div>
+
+			<div class="row">
+				<div hc-label="乙方名称" hc-input="data.currItem.party_b_name" hc-col-count="4"></div>
+				<!--
+					hc-class-id="customer_org"
+					hc-common-search="commonSearch.party_b_name"
+					hc-can-input="true"
+				-->
+
+				<div hc-label="乙方联系人" hc-input="data.currItem.party_b_link_person"></div>
+
+				<div hc-label="乙方联系电话" hc-input="data.currItem.party_b_phone" hc-readonly="!creatorLog"></div>
+
+			</div>
+		</div>
+
+		<div hc-box="工程信息">
+			<div class="row">
+				<div hc-label="项目名称" hc-input="data.currItem.project_name" hc-required="true" hc-col-count="6"></div>
+
+				<div hc-label="战略对接进度" hc-input="data.currItem.strategic_stage" hc-required="true"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="项目类型" hc-input="data.currItem.project_type" hc-dict-code="epm.project_type"></div>
+
+				<div hc-label="背景关系" hc-input="data.currItem.background" hc-dict-code="epm.background"></div>
+
+				<div hc-label="预计项目数量" hc-input="data.currItem.predict_proj_qty"></div>
+
+				<div hc-label="工程用量" hc-input="data.currItem.predict_pdt_qty" hc-unit="套"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="预计签订日期" hc-input="data.currItem.predict_sign_date" hc-type="date" hc-required="true">
+				</div>
+
+				<div hc-label="预计销售收入" hc-input="data.currItem.predict_sales_amount" hc-type="money" hc-unit="万元"></div>
+
+				<div hc-label="工程意向产品" hc-input="data.currItem.intent_product" hc-col-count="4"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="竞争对手" hc-input="data.currItem.competitor" hc-col-count="8"></div>
+			</div>
+		</div>
+
+		<div hc-box="分配经销商" ng-show="data.currItem.report_times > 1 && is_project_open" class="flex-auto flex-box-v" style="min-height: 300px">
+			<div hc-grid="dealerGridOptions" class="flex-auto"></div>
+		</div>
+	</div>
+	<!-- 地图模态框 -->
+	<!-- <div class="mapdiv">
+		<div class="mapHeader">
+			<span class="title">详细地址</span>
+			<div class="mapBtn">
+				<button class="btn" hc-tooltip="关闭" ng-click="closeMap()">
+					<i class="iconfont hc-close"></i>
+				</button>
+			</div>
+		</div>
+		<div class="modal-body">
+			<div id="allmap"></div>
+		</div>
+		<div class="modal-footer">
+
+		</div>
+	</div> -->
+</div>
+
+<style>
+	.tab-content>.tab-pane {
+		height: 100%;
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.tab-content>.tab-pane:not(.active) {
+		display: none;
+	}
+
+	.flex-box-v {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.flex-auto {
+		flex: 1;
+	}
+
+	.fa-map-marker {
+		color: red;
+	}
+
+	/* 未生效 */
+	.project-valid-1 [hc-input="data.currItem.project_valid"] input {
+		color: gray;
+	}
+	/* 已生效 */
+	.project-valid-2 [hc-input="data.currItem.project_valid"] input {
+		color: green;
+	}
+	/* 已失效 */
+	.project-valid-3 [hc-input="data.currItem.project_valid"] input {
+		color: red;
+	}
+	/* 已冻结 */
+	.project-valid-4 [hc-input="data.currItem.project_valid"] input {
+		color: blue;
+	}
+
+	/* .btnMap {
+		position: relative;
+		left: -155px;
+	} 
+
+	#allmap {
+		width: 800px;
+		height: 500px;
+	}
+
+	.mapdiv {
+		display: none;
+		position: absolute;
+		z-index: 1000;
+		top: 50px;
+		left: calc(50% - 400px);
+	}
+
+	.mapHeader {
+		background: #fff;
+		padding: 10px 20px;
+		text-align: center;
+	}
+
+	.mapBtn {
+		float: right;
+	}
+
+	.mapBtn>button {
+		background: #ffF;
+		padding: 2px;
+	}
+
+	.title {
+		font-size: 16px;
+		font-weight: 500;
+	} */
+</style>

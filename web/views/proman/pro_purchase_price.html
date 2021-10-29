@@ -1,0 +1,107 @@
+<div hc-edit-list>
+
+        <div hc-box class="other-h">
+            <!-- 模态框 -->
+            <div class="row">
+                <div hc-input="data.currItem.billno"
+                     hc-label="单据号"
+                     hc-readonly="true"></div>
+
+                <div hc-input="data.currItem.vendor_code"
+                     hc-label="供应商"
+                     hc-required="true"
+                     hc-class-id="vendor_org"
+                     hc-common-search="commonSearchSettingOfVendor"
+                     hc-readonly="data.currItem.price_status == 3">
+                </div>
+                <div hc-input="data.currItem.vendor_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.price_status"
+                     hc-label="单据状态"
+                     hc-dict-code="price_status"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.item_code"
+                     hc-label="产品"
+                     hc-required="true"
+                     hc-class-id="item_org"
+                     hc-common-search="commonSearchSettingOfItem"
+                     hc-readonly="data.currItem.price_status == 3">
+                </div>
+                <div hc-input="data.currItem.item_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.price_type"
+                     hc-label="采购价格类型"
+                     hc-required="true"
+                     hc-dict-code="price_type"
+                     hc-readonly="data.currItem.price_status == 3"></div>
+
+                <div hc-input="data.currItem.created_by"
+                     hc-label="创建人"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.start_date"
+                     hc-label="开始日期"
+                     hc-required="true"
+                     hc-type="date"
+                     hc-readonly="data.currItem.price_status == 3"></div>
+
+                <div hc-input="data.currItem.end_date"
+                     hc-label="结束日期"
+                     hc-required="true"
+                     hc-type="date"
+                     hc-readonly="data.currItem.price_status == 3"></div>
+
+                <div hc-input="data.currItem.price_tax"
+                     hc-label="含税价"
+                     hc-type="money"
+                     hc-change="calculatePriceTax('price_notax')"
+                     hc-readonly="data.currItem.price_status == 3"></div>
+
+                <div hc-input="data.currItem.creation_date"
+                     hc-label="创建时间"
+                     hc-readonly="true"></div><!--hc-type="date"-->
+            </div>
+
+
+            <div class="row">
+                <div hc-input="data.currItem.qty_start"
+                     hc-label="开始数量"
+                     hc-required="true"
+                     hc-readonly="data.currItem.price_status == 3"></div>
+
+                <div hc-input="data.currItem.qty_end"
+                     hc-label="结束数量"
+                     hc-required="true"
+                     hc-readonly="data.currItem.price_status == 3"></div>
+
+                <div hc-input="data.currItem.price_notax"
+                     hc-label="未税价"
+                     hc-type="money"
+                     hc-change="calculatePriceTax('price_tax')"
+                     hc-readonly="data.currItem.price_status == 3"></div>
+
+                <div hc-input="data.currItem.vendortaxrate_percent"
+                     hc-label="税率"
+                     hc-readonly="true"
+                     hc-unit="%"
+                     hc-type="number"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-col-count="8"
+                     hc-readonly="data.currItem.price_status == 3"></div>
+            </div>
+
+        </div>
+</div>

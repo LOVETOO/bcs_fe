@@ -1,0 +1,19 @@
+<div tabindex="-1" role="dialog" class="modal fade" ng-class="{in:animate}" ng-style="{'z-index':1050+index*10,display:'block'}" ng-click="close($event)">
+	<div class="modal-dialog" ng-class="{'modal-sm':size==='sm','modal-lg':size==='lg','modal_lgmax':size==='max'}">
+		<div class="modal-content">
+			<div class="modal-header" draggable-model>
+				<button type="button" class="close" ng-click="$parent.$dismiss('头部关闭')">
+					<i class="fa fa-close"></i>
+				</button>
+				<h4 class="modal-title" ng-bind="title"></h4>
+			</div>
+			<!-- 以下是模态框的实际内容 -->
+			<div class="modal-body" modal-transclude />
+			<!-- 以上是模态框的实际内容 -->
+			<div class="modal-footer">
+				<div hc-buttons="$parent.footerLeftButtons" hc-buttons-pull-left></div>
+				<div hc-buttons="$parent.footerRightButtons" hc-buttons-pull-right></div>
+			</div>
+		</div>
+	</div>
+</div>

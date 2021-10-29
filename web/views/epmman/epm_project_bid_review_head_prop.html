@@ -1,0 +1,100 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row" >
+                <div hc-input="data.currItem.project_bid_review_no"
+                     hc-label="单据编号"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.creator_name"
+                     hc-label="创建人"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.createtime"
+                     hc-label="创建时间"
+                     hc-type="date"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true" ></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-required="true"
+                     hc-change="changeEpmProject()"
+                     hc-class-id="epm_project"
+                     hc-common-search="searchObjEpmProject"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.project_source"
+                     hc-label="工程类型"
+                     hc-dict-code="epm.project_source"
+                     hc-readonly="true" ></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.report_time"
+                     hc-label="报备时间"
+                     hc-type="time"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.signup_time"
+                     hc-label="报名时间"
+                     hc-type="date"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.signup_plan_people"
+                     hc-label="报名经办人"
+                     hc-readonly="true" ></div>
+                <div hc-input="data.currItem.signup_method"
+                     hc-label="报名方式"
+                     hc-readonly="true" ></div>
+            </div>
+        </div>
+        <div hc-box="开标信息">
+            <div class="row">
+                <div hc-input="data.currItem.bid_open_date"
+                     hc-label="开标时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.bid_open_method"
+                     hc-label="开标方式"
+                     hc-dict-code="epm.bid_open_method"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.bid_open_address"
+                     hc-label="开标地点"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.bid_open_primary"
+                     hc-label="开标授权人"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.bid_security"
+                     hc-label="保证金金额"
+                     hc-type="money"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.bid_security_end_date"
+                     hc-label="保证金截止时间"
+                     hc-type="date"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.bid_doc_maker"
+                     hc-label="标书制作人"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.bid_doc_finish_time"
+                     hc-label="标书完成时间"
+                     hc-type="date"
+                     hc-required="true"></div>
+            </div>
+        </div>
+        <div hc-box="投标文件评审" class="other-h">
+        </div>
+        <div hc-box>
+            <div hc-grid="gridOptions" style="height: 228px;"></div>
+        </div>
+    </div>
+
+</div>
+
+
+

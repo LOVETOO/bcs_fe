@@ -41,10 +41,10 @@ define(
                             field: 'printer',
                             headerName: '打印人' 
                         },
-                        // {
-                        //     field: 'printnumber',
-                        //     headerName: '打印数量'
-                        // },
+                        {
+                            field: 'printnumber',
+                            headerName: '打印数量'
+                        },
                         {
                             field: 'printtime',
                             headerName: '打印时间'

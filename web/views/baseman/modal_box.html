@@ -1,0 +1,108 @@
+<div
+	tabindex="-1"
+	role="dialog"
+	class="modal fade"
+	ng-class="{
+		in: animate
+	}"
+	style="
+		display: flex;
+		align-items: center;
+	"
+	ng-style="{
+		'z-index': 2050 + index * 10
+	}"
+	ng-click="close($event)"
+>
+	<div
+		class="modal-dialog"
+		ng-class="{
+			'modal-sm': size === 'sm',
+			'modal-lg': size === 'lg',
+			'modal_lgmax': size === 'max'
+		}"
+	>
+		<div
+			class="modal-content"
+			ng-style="{
+				width: $parent.width,
+				height: $parent.height
+			}"
+		>
+			<!-- 模态框的头部 -->
+			<div
+				class="modal-header other-h"
+			>
+				<div class="modal-header-btns">
+					<button
+						class="btn modmax"
+						hc-tooltip="{{ $parent.fullScreen ? '退出全屏' : '全屏' }}"
+						hc-tooltip-placement="bottom"
+					>
+						<i class="iconfont hc-quanping"></i>
+					</button>
+
+					<button
+						class="btn"
+						ng-click="$parent.$dismiss('头部关闭')"
+						ng-show="$parent.closeable"
+						hc-tooltip="关闭"
+						hc-tooltip-placement="bottom"
+					>
+						<i class="iconfont hc-close"></i>
+					</button>
+				</div>
+
+				<h4
+					class="modal-title"
+					ng-bind="$parent.title"
+				></h4>
+			</div>
+
+			<!-- 模态框的内容，modal-transclude 指令 会引入实际内容 -->
+			<div
+				class="modal-body"
+				style="
+					display: flex;
+					flex-direction: column;
+                    flex: 1;
+                    min-height: 0;
+					overflow-y: auto;
+				"
+				modal-transclude
+				ng-form="$parent.modalForm"
+			></div>
+
+			<!-- 模态框的底部高度占位 -->
+			<div
+				style="
+					visibility: hidden;
+					height: 48.2px;
+				"
+			></div>
+
+			<!-- 模态框的底部 -->
+			<div
+				class="modal-footer other-h"
+				style="
+					position: absolute;
+					bottom: 0px;
+					height: 48.2px;
+					width: 100%;
+					background-color: white;
+				"
+			>
+				<div
+					hc-buttons="$parent.footerLeftButtons"
+					hc-btn-groups="$parent.footerLeftButtonGroups"
+					hc-buttons-pull-left
+				></div>
+
+				<div
+					hc-buttons="$parent.footerRightButtons"
+					hc-buttons-pull-right
+				></div>
+			</div>
+		</div>
+	</div>
+</div>

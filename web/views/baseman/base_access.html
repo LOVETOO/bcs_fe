@@ -1,0 +1,148 @@
+<div class="full-of-window" hc-splitter-box="{ position: '500px' }" hc-auto-height>
+	<div class="h100">
+		<div hc-tab="ownerTabs"></div>
+		<div class="tab-content">
+			<div
+				ng-repeat="(id, owner) in owners"
+				id="{{id}}"
+				class="tab-pane"
+				ng-class="{ active: ownerTabs[id].active }"
+			>
+				<div class="row">
+					<div
+						hc-input="keyword"
+						hc-btn-click="owner.gridOptions.hcApi.searchByKeyword(keyword)"
+						hc-btn-icon="iconfont hc-search"
+						hc-can-input="true"
+						hc-placeholder="请输入关键字进行搜索"
+						hc-change="onKeywordChange()"
+					></div>
+				</div>
+				<div class="owner-grid" hc-grid="owner.gridOptions"></div>
+			</div>
+		</div>
+		<div class="shade" ng-show="editing"></div>
+	</div>
+	<div class="h100">
+		<div hc-tab="targetTabs" hc-tab-change="currTargetId = params.id"></div>
+		<div class="tab-content">
+			<div
+				ng-repeat="(id, target) in targets"
+				id="{{id}}"
+				class="tab-pane"
+				ng-class="{ active: targetTabs[id].active }"
+			>
+				<div class="row" style="visibility: hidden;">
+					<div
+						hc-input="keyword"
+						hc-btn-click="target.gridOptions.hcApi.searchByKeyword(keyword)"
+						hc-btn-icon="iconfont hc-search"
+						hc-can-input="true"
+						hc-placeholder="请输入关键字进行搜索"
+						hc-change="onKeywordChange()"
+					></div>
+				</div>
+				<div style="position: relative; height: calc(100% - 47px);">
+					<div class="target-grid target-yes-grid" hc-grid="target.yesGridOptions"></div>
+					<div class="target-button-panel">
+						<div class="row">
+							<div
+								hc-button="addPart()"
+								hc-icon="iconfont hc-back"
+								hc-title="添加选中"
+							></div>
+						</div>
+						<div class="row">
+							<div
+								hc-button="addAll()"
+								hc-icon="iconfont hc-back"
+								hc-title="添加全部"
+							></div>
+						</div>
+						<div class="row">
+							<div
+								hc-button="deletePart()"
+								hc-icon="iconfont hc-more"
+								hc-title="移除选中"
+							></div>
+						</div>
+						<div class="row">
+							<div
+								hc-button="deleteAll()"
+								hc-icon="iconfont hc-more"
+								hc-title="移除全部"
+							></div>
+						</div>
+						<div class="row">
+							<div
+								hc-button="ok()"
+								hc-icon="iconfont hc-selected"
+								hc-title="确定"
+								ng-show="editing"
+							></div>
+						</div>
+						<div class="row">
+							<div
+								hc-button="cancel()"
+								hc-icon="iconfont hc-close"
+								hc-title="取消"
+								ng-show="editing"
+							></div>
+						</div>
+					</div>
+					<div class="target-grid target-no-grid" hc-grid="target.noGridOptions"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="shelter ng-hide"></div>
+</div>
+
+<style>
+	.h100 {
+		height: 100%;
+	}
+	.tab-content {
+		height: calc(100% - 32px);
+	}
+	.tab-pane {
+		height: 100%;
+		padding: 8px;
+	}
+	.owner-grid {
+		height: calc(100% - 74px);
+	}
+	.target-grid,.target-button-panel {
+		position: absolute;
+		height: 100%;
+		width: calc((100% - 100px) / 2);
+	}
+	.target-yes-grid {
+		left: 0px;
+	}
+	.target-no-grid {
+		right: 0px;
+	}
+	.target-button-panel {
+		width: 100px;
+		left : calc((100% - 100px) / 2);
+		text-align: center;
+	}
+	full-of-window {
+		position: fixed;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+	}
+	.shade {
+		position: absolute;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+		background: rgba(255,255,255,0.5);
+		z-index: 10000;
+	}
+</style>

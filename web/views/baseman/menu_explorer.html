@@ -1,0 +1,149 @@
+<div class="nav-list-home" style="padding-top: 15px;">
+	<!-- 菜单分类 -->
+	<div
+		ng-repeat="menuCategory in menuCategories"
+		hc-box
+	>
+		<!--没有权限父级 class 添加 "no-authority" -->
+
+		<hc-box-title ng-bind="menuCategory.menuname" ng-show="menuCategories.length > 1"></hc-box-title>
+
+		<!-- 菜单 -->
+		<div class="icon-list">
+			<a	class="href"
+				ng-repeat="menu in menuCategory.submenus"
+				ui-sref="{{ menu.webrefaddr || 'noop' }}">
+				
+				<i ng-class="menu.imgsrc" hc-if="menu.imgsrc !=''"></i>
+				<img hc-img="menu.docid" hc-if="+menu.docid && menu.imgsrc ==''">
+				<i class="iconfont hc-yingyong" hc-if="!+menu.docid  && menu.imgsrc ==''"></i>
+				<span ng-show="menu.webrefaddr" ng-bind="menu.menuname"></span>
+				<span ng-show="!menu.webrefaddr" ng-bind="menu.menuname" style="color: #fc773e;"></span>
+			</a>
+			<div class="nav-empty" hc-if="!menuCategory.submenus.length">
+				<i class="iconfont hc-kong"></i>
+				<p>当前模块内容为空</p>
+			</div>
+		</div>
+	</div>
+</div>
+<style type="text/css">
+	[hc-state-name="baseman.menu_explorer"] {
+	    background: url(/web/img/nav_list_bg.jpg) no-repeat right bottom;
+    	background-color: #fff;
+    	background-size: 100%;
+	}
+	.nav-empty{
+		display: block;
+		margin: 0px auto;
+		width: 110px;
+	    text-align: center;
+    	color: #89cfff;
+	}
+	.nav-empty .iconfont{
+		font-size: 54px;
+	    color: #1f94ff;
+	    display: block;
+	    width: 72px;
+	    height: 72px;
+	    margin: 0px auto;
+	}
+	.nav-list-home{}
+	.nav-list-home .hc-box{}
+	.nav-list-home .icon-list{	
+	    padding: 4px 10px;
+	    box-shadow: 2px 2px 0px 3px rgba(111, 127, 208, 0.1);
+	}
+	.nav-list-home .no-authority{
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+	.nav-list-home .hc-box-title{
+	    padding: 0px 15px;
+	    border: 0px;
+	    background: transparent;
+	    font-size: 13px;
+	}
+	.nav-list-home .hc-box-title:before{
+		left: 0px;
+	}
+	.nav-list-home .href{
+	    display: inline-block;
+	    width: 95px;
+	    margin-right: 10px;
+	    margin-bottom: 10px;
+	    text-align: center;
+	}
+	.nav-list-home .href .iconfont{
+	    color: #0095ff;
+	    border-radius: 50%;
+	    font-size: 44px;
+	    display: block;
+	    width: 52px;
+	    height: 52px;
+	    text-align: center;
+	    margin: 0px auto;
+	    margin-bottom: 5px;
+	    text-shadow:4px 4px rgba(48, 96, 142, 0.1);
+	}
+	.nav-list-home .href img{
+	    color: #fff;
+	    padding: 5px;
+	    font-weight: bold;
+	    font-size: 30px;
+	    display: block;
+	    width: 52px;
+	    height: 52px;
+	    line-height: 32px;
+	    text-align: center;
+	    margin: 0px auto;
+	    margin-bottom: 5px;
+	}
+
+	/*第一行颜色*/
+	.nav-list-home>div:nth-child(1) a:nth-child(2) .iconfont{
+	    /*background-color: #00a1f9;*/
+	    color: #00a1f9;
+	}
+	.nav-list-home>div:nth-child(1) a:nth-child(3) .iconfont{
+	    /*background-color: #fc773e;*/
+	    color: #fc773e;
+	}
+	.nav-list-home>div:nth-child(1) a:nth-child(4) .iconfont{
+	    /*background-color: #12c7a8;*/
+	    color: #12c7a8;
+	}
+	.nav-list-home>div:nth-child(1) a:nth-child(6) .iconfont{
+	    /*background-color: #0095ff;*/
+	    color: #0095ff;
+	}
+	.nav-list-home>div:nth-child(1) a:nth-child(7) .iconfont{
+	    /*background-color: #fbb93f;*/
+	    color: #fbb93f;
+	}
+
+	/*第二行颜色*/
+	.nav-list-home>div:nth-child(2) a:nth-child(2) .iconfont{
+	    /*background-color: #12c7a8;*/
+	    color: #12c7a8;
+	}
+	.nav-list-home>div:nth-child(2) a:nth-child(4) .iconfont{
+	    /*background-color: #fbb93f;*/
+	    color: #fbb93f;
+	}
+	.nav-list-home>div:nth-child(2) a:nth-child(5) .iconfont{
+	    /*background-color: #fc773e;*/
+	    color: #fc773e;
+	}
+
+</style>
+
+
+
+
+
+
+
+
+
+

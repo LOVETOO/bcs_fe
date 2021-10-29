@@ -1,0 +1,43 @@
+<div hc-edit-list>
+	<div class="row">
+		<div
+			hc-label="项目编码"
+			hc-input="data.currItem.project_code"
+			hc-readonly="true"
+		></div>
+
+		<div
+			hc-label="项目名称"
+			hc-input="data.currItem.project_name"
+			hc-readonly="true"
+			hc-col-count="6"
+		></div>
+	</div>
+
+	<div class="row">
+		<div
+			hc-label="项目进度名称"
+			hc-input="data.currItem.stage_name"
+			hc-class-id="epm_stage_def"
+			hc-common-search="commonSearch.stage_name"
+			hc-delete-together="stage_id stage_note stage_desc"
+			hc-required="true"
+		></div>
+
+		<div
+			hc-label="项目进度备注"
+			hc-input="data.currItem.stage_note"
+			hc-readonly="true"
+			hc-col-count="6"
+		></div>
+	</div>
+
+	<div class="row">
+		<div
+			hc-label="项目进度描述"
+			hc-input="data.currItem.stage_desc"
+			hc-required="true"
+			hc-col-count="8"
+		></div>
+	</div>
+</div>

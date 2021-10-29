@@ -1,0 +1,110 @@
+<!--<div class="hc-box" style="height: 100%;display: flex;flex-direction: column;">-->
+<div ng-init="doInit()" class="flex-column">
+	<div hc-tab="kpi_tab" hc-tab-change="onTabChange(params)" class="other-h"></div>
+	<div hc-tab-page class="flex-column flex1" >
+		<!--适用评分标准-->
+		<div id="score" class="active flex-column flex1">
+			<div hc-box="当前项目" class="hc-box hc-box-title">
+				<div class="row">
+					<div hc-input="data.project_name"
+						 hc-readonly="true"
+						 hc-col-count="4"
+						 hc-label="项目名称"></div>
+					
+					<div hc-input="data.address"
+						 hc-col-count="4"
+						 hc-readonly="true"
+						 hc-label="项目地址"></div>
+				</div>
+				<div class="row" hc-if="data.report_type == 1 || data.report_type == 2">
+					<div hc-input="data.party_a_name"
+						hc-col-count="4"
+						hc-readonly="true"
+						hc-label="项目甲方"></div>
+					<div hc-input="data.party_b_name"
+						hc-col-count="4"
+						hc-readonly="true"
+						hc-label="项目乙方"></div>
+				</div>
+			</div>
+			<div hc-box="查重项" class="hc-box hc-box-title">
+				<div class="row" style="margin-left: 20px;">
+					<div class="input-inline m-n" style="display: flex;">
+						<label class="control-label" style="text-align: right;">
+							<div hc-input="data.by_project_name"
+								 hc-label="按项目名称"
+								 hc-change = "search()"
+								 hc-type="checkbox"
+								 style="width:100px"
+							></div>
+						</label>
+					</div>
+					<div class="input-inline m-n" style="display: flex;" hc-if="data.report_type == 1 || data.report_type == 2">
+						<label class="control-label" style="text-align: right;margin-left: 30px;">
+							<div hc-input="data.by_party_a_name"
+								 hc-label="按项目甲方"
+								 hc-change = "search()"
+								 hc-type="checkbox"
+								 style="width:100px"
+							></div>
+						</label>
+					</div>
+					<div class="input-inline m-n" style="display: flex;" hc-if="data.report_type == 1 || data.report_type == 2">
+						<label class="control-label" style="text-align: right;margin-left: 30px;">
+							<div hc-input="data.by_party_b_name"
+								 hc-label="按项目乙方"
+								 hc-change = "search()"
+								 hc-type="checkbox"
+								 style="width:100px"
+							></div>
+						</label>
+					</div>
+					<div class="input-inline m-n" style="display: flex;">
+						<label class="control-label" style="text-align: right;margin-left: 34px;">
+							<div hc-input="data.by_address"
+								 hc-label="按项目地址"
+								 hc-change = "search()"
+								 hc-type="checkbox"
+								 style="width:100px"
+							></div>
+						</label>
+					</div>
+
+				</div>
+			</div>
+			<div class="flex-column flex1" hc-box>
+				<div class="flex1" hc-grid="gridOptions"></div>
+			</div>
+		</div>
+		<!--适用重点工作完成率-->
+		<div id="completion" class="flex-column flex1">
+			<div hc-box>
+				<div class="row">
+					<div style="width: 50%;">
+						<div hc-input="data.keyword"
+							 hc-btn-click="searchByKeyword()"
+							 hc-btn-icon="iconfont hc-search"
+							 hc-can-input="true"
+							 hc-col-count="8"
+							 hc-placeholder="{{data.placeholder}}"
+							 hc-autofocus="true"></div>
+					</div>
+				</div>
+			</div>
+			<div class="flex-column flex1" hc-box>
+				<div class="flex1" hc-grid="gridOptions1"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--</div>-->
+
+<style>
+	.hc-box .hc-box-title {
+		background: transparent;
+		border: 0px;
+	}
+	.row {
+		margin: 1px 0px;
+	}
+</style>

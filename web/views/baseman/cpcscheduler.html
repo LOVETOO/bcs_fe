@@ -1,0 +1,199 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="cpcscheduler">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="searchws();">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>调度管理</h5>
+                    <div class="ibox-tools">
+                        <form>
+                            <!--<button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left"
+                                    ng-click="search()"><i class="fa fa-search"></i>查询
+                            </button>-->
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left"
+                                    ng-click="refresh()"><i class="fa fa-refresh"></i>刷新
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal" data-target="#attributeModal"
+                                    ng-click="add()"><i class="fa fa-plus"></i> 新建
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <!--<form method="get" class="form-inline mline title-form">
+                        <div class="row">
+                            <label class="control-label">调度名称</label>
+                            <input type="text" class="form-control width_l ng-pristine ng-untouched ng-valid"
+                                   ng-model="data.searchItem.schedulername" >
+                        </div>
+                    </form>-->
+                    <div id="headerGrid" slick-grid class="slick-grid">
+                    </div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--属性窗口-->
+    <div class="modal inmodal fade" id="attributeModal" tabindex="-1" role="dialog" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">调度管理</h4>
+                </div>
+                <div class="modal-body">
+                    <!--tab-->
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="tabs.html#tab-common"> 常规</a></li>
+                        </ul>
+                        <form method="get" class="form-horizontal" name="entityForm" novalidate>
+                            <div class="tab-content form-inline mline">
+                                <div id="tab-common" class="tab-pane active">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">调度名称</label>
+                                                <input type="text" class="form-control width_no" name="schedulername"
+                                                       ng-model="data.currItem.schedulername"
+                                                       ng-minlength=2
+                                                       ng-maxlength=50 required>
+                                                <span style="color:red"
+                                                      ng-show="entityForm.schedulername.$dirty && entityForm.schedulername.$invalid">
+                                                            <span ng-show="entityForm.schedulername.$error.required">请输入</span>
+                                                            <span ng-show="entityForm.schedulername.$error.minlength">最少2个字符</span>
+                                                            <span ng-show="entityForm.schedulername.$error.maxlength">最多50个字符</span>
+                                                        </span>
+
+                                                <label class="control-label">开始/下一次运行时间</label>
+                                                <input type="text" class="form-control width_no" name="nexttime"
+                                                       id="nexttime"
+                                                       ng-model="data.currItem.nexttime">
+                                                <label class="control-label">上次运行时间</label>
+                                                <input type="text" class="form-control width_no" name="lasttime"
+                                                       ng-readonly="true"
+                                                       ng-model="data.currItem.lasttime">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">暂停时间范围 从</label>
+                                                <input type="text" class="form-control width_no" name="pausetime"
+                                                       id="pausetime"
+                                                       ng-model="data.currItem.pausetime">
+                                                <label class="control-label">到</label>
+                                                <input type="text" class="form-control width_no" name="resumetime"
+                                                       id="resumetime"
+                                                       ng-model="data.currItem.resumetime">
+                                                <label class="control-label"></label>
+                                                <label class="form-label-mini">
+                                                    <input type="checkbox" class="i-checks"
+                                                           ng-model="data.currItem.autorun"
+                                                           ng-false-value="1" ng-true-value="2">自动运行
+                                                </label>
+                                                <label class="form-label-mini">
+                                                    <input type="checkbox" class="i-checks"
+                                                           ng-model="data.currItem.objtype"
+                                                           ng-false-value="0" ng-true-value="23">系统接口
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">间隔时间</label>
+                                                <input type="number" min="1" step="1" class="form-control width_no"
+                                                       name="runinterval"
+                                                       ng-model="data.currItem.runinterval">
+                                                <label class="control-label">间隔单位</label>
+                                                <select ng-model="data.currItem.intervalunit"
+                                                        class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_no"
+                                                        ng-options="s.id as s.name for s in intervalunits"
+                                                        ng-selected="s.id==data.currItem.intervalunit">
+                                                </select>
+                                                <label class="control-label">月末提前执行天数</label>
+                                                <input type="number" min="1" step="1" class="form-control width_no"
+                                                       name="aheaddays"
+                                                       ng-model="data.currItem.aheaddays">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">EntCode</label>
+                                                <input type="number" min="1" step="1" class="form-control width_no"
+                                                       name="entcode"
+                                                       ng-model="data.currItem.entcode">
+                                                <label class="control-label">最大运行次数</label>
+                                                <input type="number" min="1" step="1" class="form-control width_no"
+                                                       name="maxcount"
+                                                       ng-model="data.currItem.maxcount">
+                                                <label class="control-label">已经运行次数</label>
+                                                <input type="number" ng-readonly="true" class="form-control width_no"
+                                                       name="totalcount"
+                                                       ng-model="data.currItem.totalcount">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">参数1</label>
+                                                <input type="text" class="form-control width_no" name="param1"
+                                                       ng-model="data.currItem.param1">
+                                                <label class="control-label">参数2</label>
+                                                <input type="text" class="form-control width_no" name="param2"
+                                                       ng-model="data.currItem.param2">
+                                                <label class="control-label">参数3</label>
+                                                <input type="text" class="form-control width_no" name="param3"
+                                                       ng-model="data.currItem.param3">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">运行失败通知用户</label>
+                                                <input type="text" class="form-control " style="width: 443px;"
+                                                       name="noticeuser"
+                                                       ng-model="data.currItem.noticeuser">
+                                                <label class="control-label">服务器类型</label>
+                                                <select ng-model="data.currItem.servertype"
+                                                        class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_no"
+                                                        ng-options="s.id as s.name for s in servertypes"
+                                                        ng-selected="s.id==data.currItem.servertype">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">对象名称</label>
+                                                <input type="text" class="form-control " style="width: 443px;"
+                                                       name="objectname"
+                                                       ng-model="data.currItem.objectname">
+                                                <label class="control-label">服务器ID</label>
+                                                <input type="text" class="form-control width_no" name="serverid"
+                                                       ng-model="data.currItem.serverid">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label">说明</label>
+                                                <textarea class="form-control" style="width: 443px;" name="note"
+                                                          ng-model="data.currItem.note"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save()"
+                            ng-disabled="entityForm.schedulername.$invalid  ">
+                        保存
+                    </button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

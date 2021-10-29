@@ -1,0 +1,345 @@
+<!-- 文本标签 -->
+<label class="control-label" hc-if="::type !== 'checkbox' && label" ng-bind="::label"></label>
+
+<i
+	class="iconfont hc-help"
+	style="cursor: help;"
+	hc-if="::$parent.data.objConf.$objFields[modelController.$name].tooltip"
+	hc-tooltip="帮助"
+	ng-click="showHelp()"
+></i>
+
+<!-- 根据类型切换输入组件 -->
+<div hc-switch="::type" class="flex1 h100">
+
+    <!-- 普通输入框 -->
+    <div hc-switch-default class="hc-input input-group" ng-class="ngClass()" >
+		<input
+			class="form-control"
+			ng-model
+			hc-actual-input
+			hc-model-number="type==='number'||type==='money' || type==='percent'"
+			hc-model-money="type==='money'"
+			hc-model-unit
+			hc-required="ngRequired()"
+			ng-change="ngChange()"
+			ng-click="!canInput() && btnClick()"
+			ng-dblclick="ngDblclick($event)"
+			ng-focus="ngFocus($event)"
+			ng-blur="ngBlur($event)"
+			ng-keydown="ngKeydown($event)"
+			ng-readonly="( hasBtnClick && !canInput() ) || ngReadonly()"
+			ng-style="ngStyle()"
+			placeholder="{{ ::placeholder }}"
+			title="{{ modelController.$viewValue }}"
+		>
+        <span class="input-group-addon" ng-bind="::unit" hc-if="::unit"></span>
+        <span class="input-group-btn" hc-if="hasBtnClick && !ngReadonly()">
+			<button class="btn hc-input-del-btn ng-hide"
+                    ng-click="deleteClick()">×</button>
+
+			<button class="btn" ng-click="btnClick()">
+                <!-- <i class="fa fa-spinner fa-pulse" hc-if="clickRunning"></i> -->
+				<i class="{{::btnIcon}}"></i>
+				<span ng-bind="::btnTitle"></span>
+			</button>
+		</span>
+        <i class="star">*</i>
+    </div>
+
+    <!-- 密码 -->
+    <div hc-switch-when="password" class="hc-input input-group" ng-class="ngClass()">
+        <input type="password"
+               class="form-control"
+               ng-model
+               hc-actual-input
+               hc-required="ngRequired()"
+               ng-change="ngChange()"
+               ng-focus="ngFocus($event)"
+               ng-blur="ngBlur($event)"
+               ng-readonly="passwordVisible||ngReadonly()"
+               ng-style="ngStyle()"
+               placeholder="{{ ::placeholder }}">
+        <span class="input-group-btn" hc-if="!ngReadonly()">
+			<button class="btn"
+                    ng-click="btnClick()">
+				<i class="fa"
+                   ng-class="{'fa-eye':passwordVisible,'fa-eye-slash':!passwordVisible}"></i>
+			</button>
+		</span>
+        <i class="star">*</i>
+    </div>
+
+    <!-- 下拉框 -->
+    <div hc-switch-when="select" class="hc-input input-group" ng-class="ngClass()" style="{{::style}}">
+		<input
+			class="form-control"
+			ng-model
+			hc-actual-input
+			hc-model-select
+			hc-required="ngRequired()"
+			ng-style="ngStyle()"
+			ng-change="ngChange()"
+			ng-click="dropdown()"
+			ng-dblclick="ngDblclick($event)"
+			ng-focus="ngFocus($event)"
+			ng-blur="ngBlur($event)" 
+			readonly
+			placeholder="{{ ::placeholder }}"
+		>
+        <span class="input-group-btn" hc-if="!ngReadonly()">
+			<button class="btn hc-input-del-btn ng-hide" ng-click="deleteClick()">×</button>
+			<button data-toggle="dropdown" class="btn dropdown-toggle" type="button" aria-expanded="false">
+				<i class="fa fa-angle-down"></i>
+			</button>
+			<ul class="dropdown-menu pull-right">
+				<li ng-repeat="selectOption in selectOptions" ng-show="::selectFilter({option:selectOption})">
+					<a
+						ng-bind="::selectOption.name"
+						ng-click="selectClick(selectOption)"
+						ng-style="::{
+							'color': selectOption.value == modelController.$modelValue ? '#007eff' : null
+						}"
+					></a>
+				</li>
+			</ul>
+		</span>
+        <i class="star">*</i>
+    </div>
+
+    <!-- 日期 -->
+    <div hc-switch-when="date" class="hc-input input-group" ng-class="ngClass()">
+		<input
+			class="form-control" 
+			ng-model
+			hc-actual-input
+			hc-model-date
+			hc-required="ngRequired()"
+			ng-readonly="ngReadonly()"
+			ng-change="ngChange()"
+			ng-click="showDate($event)"
+			ng-dblclick="ngDblclick($event)"
+			ng-focus="ngFocus($event)" 
+			ng-blur="ngBlur($event)"
+			ng-style="ngStyle()"
+			placeholder="{{ ::placeholder }}"
+		>
+        <span class="input-group-btn" hc-if="!ngReadonly()">
+			<button class="btn hc-input-del-btn ng-hide" ng-click="deleteClick()">×</button>
+			<button class="btn" ng-click="btnClick()">
+				<i class="fa fa-angle-down"></i>
+			</button>
+		</span>
+        <i class="star">*</i>
+    </div>
+
+    <!-- 时间 -->
+    <div hc-switch-when="time" class="hc-input input-group" ng-class="ngClass()">
+		<input
+			class="form-control"
+			ng-model
+			hc-actual-input
+			hc-model-time
+			hc-required="ngRequired()"
+            ng-readonly="ngReadonly()"
+			ng-change="ngChange()"
+			ng-click="showDate($event)"
+			ng-dblclick="ngDblclick($event)"
+			ng-focus="ngFocus($event)"
+			ng-blur="ngBlur($event)"
+			ng-style="ngStyle()"
+			placeholder="{{ ::placeholder }}"
+		>
+        <span class="input-group-btn" hc-if="!ngReadonly()">
+			<button class="btn hc-input-del-btn ng-hide" ng-click="deleteClick()">×</button>
+			<button class="btn" ng-click="btnClick()">
+				<i class="fa fa-angle-down"></i>
+			</button>
+		</span>
+        <i class="star">*</i>
+    </div>
+
+    <!-- 月份 -->
+    <div hc-switch-when="month" class="hc-input input-group input-date" ng-class="ngClass()">
+		<input
+			class="form-control"
+			ng-model
+			hc-actual-input
+			hc-model-month
+			hc-required="ngRequired()"
+			readonly
+			ng-change="ngChange()"
+			ng-click="showDate($event)"
+			ng-dblclick="ngDblclick($event)"
+			ng-focus="ngFocus($event)"
+			ng-blur="ngBlur($event)"
+			ng-style="ngStyle()"
+			placeholder="{{ ::placeholder }}"
+		>
+        <span class="input-group-btn" hc-if="!ngReadonly()">
+			<button class="btn hc-input-del-btn ng-hide" ng-click="deleteClick()">×</button>
+			<button class="btn" ng-click="btnClick()">
+				<i class="fa fa-angle-down"></i>
+			</button>
+		</span>
+        <i class="star">*</i>
+    </div>
+
+    <!-- 年份 -->
+    <div hc-switch-when="year" class="hc-input input-group input-date" ng-class="ngClass()">
+		<input
+			class="form-control"
+			ng-model
+			hc-actual-input
+			hc-model-year
+			hc-required="ngRequired()"
+			readonly
+			ng-change="ngChange()"
+			ng-click="showDate($event)"
+			ng-dblclick="ngDblclick($event)"
+			ng-focus="ngFocus($event)"
+			ng-blur="ngBlur($event)"
+			ng-style="ngStyle()"
+			placeholder="{{ ::placeholder }}"
+		>
+        <span class="input-group-btn" hc-if="!ngReadonly()">
+			<button class="btn hc-input-del-btn ng-hide" ng-click="deleteClick()">×</button>
+			<button class="btn" ng-click="btnClick()">
+				<i class="fa fa-angle-down"></i>
+			</button>
+		</span>
+        <i class="star">*</i>
+    </div>
+
+    <!-- 年月 -->
+    <div hc-switch-when="year-month" class="hc-input input-group input-date" ng-class="ngClass()">
+		<input
+			class="form-control"
+			ng-model
+			hc-actual-input
+			hc-model-year-month
+			hc-required="ngRequired()"
+			readonly
+			ng-change="ngChange()"
+			ng-click="showDate($event)"
+			ng-dblclick="ngDblclick($event)"
+			ng-focus="ngFocus($event)"
+			ng-blur="ngBlur($event)"
+			ng-style="ngStyle()"
+			placeholder="{{ ::placeholder }}"
+		>
+        <span class="input-group-btn" hc-if="!ngReadonly()">
+			<button class="btn hc-input-del-btn ng-hide" ng-click="deleteClick()">×</button>
+			<button class="btn" ng-click="btnClick()">
+				<i class="fa fa-angle-down"></i>
+			</button>
+		</span>
+        <i class="star">*</i>
+    </div>
+
+    <!-- 复选框 -->
+    <div hc-switch-when="checkbox" class="i-checks checkbox-inline">
+        <label>
+            <div class="icheckbox_square-green" style="position:relative;"
+                 ng-class="{ checked: modelController.$modelValue == trueValue, disabled: ngReadonly() }">
+                <input type="checkbox" ng-model hc-actual-input hc-model-checkbox ng-change="ngChange()"
+                       ng-true-value="2" ng-false-value="1" ng-disabled="ngReadonly()"
+                       style="position:absolute;opacity:0;">
+                <ins class="iCheck-helper"
+                     style="position:absolute;top:0%;left:0%;display:block;width:100%;height:100%;margin:0px;padding:0px;background:rgb(255, 255, 255);border:0px;opacity:0;"></ins>
+            </div>
+            <i></i> <span ng-bind="label"></span>
+        </label>
+    </div>
+
+    <!-- 大文本框 -->
+    <div hc-switch-when="textarea" class="hc-textarea input-group h100 flex1 flex-column" ng-class="ngClass()">
+		<textarea
+            class="form-control flex1"
+            style="resize: none;"
+			ng-model
+			hc-required="ngRequired()"
+			ng-readonly="ngReadonly()"
+			hc-actual-input
+			ng-change="ngChange()"
+			ng-dblclick="ngDblclick($event)"
+			ng-focus="ngFocus($event)"
+			ng-blur="ngBlur($event)"
+			placeholder="{{ ::placeholder }}"
+			title="{{ modelController.$viewValue }}"
+		></textarea>
+        <i class="star">*</i>
+	</div>
+
+	<!-- 星标 -->
+    <div hc-switch-when="star" class="hc-input input-group" ng-class="ngClass()">
+		<div
+			class="form-control"
+			style="
+				display: flex;
+			"
+		>
+			<input
+				style="display: none;"
+				hc-actual-input
+				ng-model
+				ng-change="ngChange()"
+			>
+			<i
+				ng-repeat="value in [1, 2, 3, 4, 5]"
+				class="fa"
+				ng-class="value <= modelController.$modelValue ? 'fa-star' : 'fa-star-o'"
+				ng-style="{
+					'cursor': ngReadonly() ? null : 'pointer',
+					'color': value <= modelController.$modelValue ? '#f8ac59' : '#888888',
+					'margin-left': $first ? null : '4px'
+				}"
+				ng-click="starClick(value)"
+			></i>
+		</div>
+
+		<span class="input-group-btn" hc-if="!ngReadonly()">
+			<button
+				class="btn hc-input-del-btn"
+                ng-click="deleteClick()"
+				ng-show="modelController.$modelValue > 0"
+			>×</button>
+		</span>
+	</div>
+
+	<!-- 爱心 -->
+    <div hc-switch-when="heart" class="hc-input input-group" ng-class="ngClass()">
+		<div
+			class="form-control"
+			style="
+				display: flex;
+			"
+		>
+			<input
+				style="display: none;"
+				hc-actual-input
+				ng-model
+				ng-change="ngChange()"
+			>
+			<i
+				ng-repeat="value in [1, 2, 3, 4, 5]"
+				class="fa"
+				ng-class="value <= modelController.$modelValue ? 'fa-heart' : 'fa-heart-o'"
+				ng-style="{
+					'cursor': ngReadonly() ? null : 'pointer',
+					'color': value <= modelController.$modelValue ? '#ff6a6a' : '#888888',
+					'margin-left': $first ? null : '4px'
+				}"
+				ng-click="heartClick(value)"
+			></i>
+		</div>
+
+		<span class="input-group-btn" hc-if="!ngReadonly()">
+			<button
+				class="btn hc-input-del-btn"
+                ng-click="deleteClick()"
+				ng-show="modelController.$modelValue > 0"
+			>×</button>
+		</span>
+    </div>
+</div>

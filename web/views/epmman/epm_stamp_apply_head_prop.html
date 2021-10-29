@@ -1,0 +1,101 @@
+<div hc-obj-prop>
+    <!--基本信息：-->
+    <div id="base" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.apply_bill_no"
+                 hc-label="申请单号"
+                 hc-readonly="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.apply_bill_date"
+                 hc-label="申请日期"
+                 hc-type="date"
+                 hc-required="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.apply_person_name"
+                 hc-label="申请人"
+                 hc-class-id="scpuser"
+                 hc-common-search="commonSearchSettingOfScpuser"
+                 hc-required="true"
+                 hc-col-count="2"></div>
+            <div hc-input="data.currItem.stat"
+                 hc-dict-code="stat"
+                 hc-label="流程状态"
+                 hc-readonly="true"
+                 hc-col-count="2"></div>
+        </div>
+        <div class="row">
+
+            <div hc-input="data.currItem.apply_dept_name"
+                 hc-label="申请部门"
+                 hc-class-id="dept"
+                 hc-required="true"
+                 hc-common-search="commonSearchSettingOfDept"
+                 hc-col-count="2"></div>
+            <!--<div hc-input="data.currItem.carry"-->
+            <!--hc-label="需外带"-->
+            <!--hc-type="checkbox"-->
+            <!--hc-col-count="2"-->
+            <!--style="padding-left: 30px ;padding-top: 3px"></div>-->
+            <div hc-input="data.currItem.apply_project_name"
+                 hc-label="申请项目"
+                 hc-class-id="epm_project"
+                 hc-common-search="commonSearchSettingOfEpmProject"
+                 hc-col-count="6"></div>
+            <!--<div hc-input="data.currItem.apply_partner_name"-->
+            <!--hc-label="使用合伙人"-->
+            <!--hc-readonly="true"-->
+            <!--hc-col-count="2"></div>-->
+            <!--<div hc-input="data.currItem.apply_holder_name"-->
+            <!--hc-label="使用业主"-->
+            <!--hc-readonly="true"-->
+            <!--hc-col-count="2"></div>-->
+        </div>
+
+
+        <!--<div hc-box>-->
+        <!--<hc-box-title>具体用章项<span style="color: red;">*</span></hc-box-title>-->
+
+        <!--<div class="row" >-->
+        <!--<div hc-input="data.currItem.apply_data"-->
+        <!--hc-label="公司常规资料类"-->
+        <!--hc-change="applyTypeChange('apply_data|公司常规资料类')"-->
+        <!--hc-type="checkbox"-->
+        <!--style="margin-left: 10px ;padding-top: 3px;width: 120px"></div>-->
+        <!--<div hc-input="data.currItem.apply_bid_doc"-->
+        <!--hc-label="标书类"-->
+        <!--hc-change="applyTypeChange('apply_bid_doc|标书类')"-->
+        <!--hc-type="checkbox"-->
+        <!--style="margin-left: 0px ;padding-top: 3px;width: 120px"></div>-->
+        <!--<div hc-input="data.currItem.apply_record"-->
+        <!--hc-label="备案类"-->
+        <!--hc-change="applyTypeChange('apply_record|备案类')"-->
+        <!--hc-type="checkbox"-->
+        <!--style="margin-left: 0px ;padding-top: 3px;width: 120px"></div>-->
+        <!--<div hc-input="data.currItem.apply_construction_project"-->
+        <!--hc-label="施工项目类"-->
+        <!--hc-change="applyTypeChange('apply_construction_project|施工项目类')"-->
+        <!--hc-type="checkbox"-->
+        <!--style="margin-left: 0px ;padding-top: 3px;width: 120px"></div>-->
+        <!--<div hc-input="data.currItem.apply_sign_up_data"-->
+        <!--hc-label="报名资料类"-->
+        <!--hc-change="applyTypeChange('apply_sign_up_data|报名资料类')"-->
+        <!--hc-type="checkbox"-->
+        <!--style="margin-left: 0px ;padding-top: 3px;width: 120px"></div>-->
+        <!--<div hc-input="data.currItem.apply_others"-->
+        <!--hc-label="其他"-->
+        <!--hc-change="applyTypeChange('apply_others|其他')"-->
+        <!--hc-type="checkbox"-->
+        <!--style="margin-left: 0px ;padding-top: 3px;width: 120px"></div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="row">
+            <div hc-input="data.currItem.apply_reason"
+                 hc-label="用章事由详细描述"
+                 hc-required="true"
+                 hc-col-count="8"
+                 hc-type="textarea"></div>
+        </div>
+
+        <div hc-grid="gridOptions" class="hc-box flex1"></div>
+    </div>
+</div>

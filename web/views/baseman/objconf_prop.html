@@ -1,0 +1,153 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.objtypeid" hc-label="对象类型编号" hc-required="true" hc-readonly="!data.isInsert"></div>
+            <div hc-input="data.currItem.objtypename" hc-label="对象类型描述" hc-required="true" hc-col-count="2"></div>
+            <!--<div hc-input="data.currItem.wftype" hc-label="工作流类型"-->
+            <!--hc-select-options="[{'value':'1','name':'手动'},{'value':'2','name':'自动'},{'value':'3','name':'半自动'}]"></div>-->
+            <div hc-input="data.currItem.pkfield" hc-label="主键名" hc-required="true"></div>
+            <div hc-input="data.currItem.codefield" hc-label="编码字段"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.namefield" hc-label="名称字段"></div>
+            <div hc-input="data.currItem.subjectfield" hc-label="主题字段"></div>
+            <div hc-input="data.currItem.tablename" hc-label="表名" hc-required="true"></div>
+            <div hc-input="data.currItem.tblalias" hc-label="表别名"></div>
+        </div>
+
+        <div class="row">
+            <!--<div hc-input="data.currItem.typefield" hc-label="类型字段"></div>-->
+
+            <!--<div hc-input="data.currItem.objclass" hc-label="对象类名"></div>-->
+            <div hc-input="data.currItem.javaname" hc-label="JAVA类名" hc-required="true" hc-col-count="6"></div>
+            <div hc-input="data.currItem.attacharrayname" hc-label="附件数组名称"></div>
+        </div>
+        <!--<div class="row">-->
+        <!--<div hc-input="data.checkbox.checksht" hc-type="checkbox" hc-label="表单有效性校验"></div>-->
+        <!--<div hc-input="data.checkbox.canchangewf" hc-type="checkbox" hc-label="允许变更流程"></div>-->
+        <!--<div hc-input="data.checkbox.isacai" hc-type="checkbox" hc-label="新增后审核"></div>-->
+        <!--<div hc-input="data.checkbox.uselock" hc-type="checkbox" hc-label="启用锁定"></div>-->
+        <!--</div>-->
+        <div class="row">
+            <div hc-input="data.currItem.creator" hc-label="创建用户" hc-readonly="true"></div>
+            <div hc-input="data.currItem.createtime" hc-label="创建时间" hc-readonly="true"></div>
+            <div hc-input="data.currItem.updator" hc-label="最后修改用户" hc-readonly="true"></div>
+            <div hc-input="data.currItem.updatetime" hc-label="最后修改时间" hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.mainfields" hc-label="主要字段" hc-type="textarea" hc-col-count="8"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.haspath" hc-type="checkbox" hc-label="有路径"></div>
+            <div hc-input="data.currItem.hasrev" hc-type="checkbox" hc-label="有版本"></div>
+            <div hc-input="data.currItem.isflow" hc-type="checkbox" hc-label="有流程"></div>
+            <div hc-input="data.currItem.isbill" hc-type="checkbox" hc-label="单据"></div>
+            <div hc-input="data.currItem.cancopy" hc-type="checkbox" hc-label="可复制"></div>
+            <div hc-input="data.currItem.reverseauditable" hc-type="checkbox" hc-label="可逆向审核"></div>
+        </div>
+        <div class="row" style="margin-top: 30px">
+            <div class="mail-box" style="width: 100%;">
+            <div class="mail-body" style="padding:0;border:none">
+                <!-- 工具提示 -->
+                <div class="form-group">
+                    <label class="control-label write-label">工具提示</label>
+                    <div id='main' class="write-input">
+                        <hc-rich-text hc-option="data.noteOption" hc-model="data.currItem.tooltip"></hc-rich-text>
+                    </div>
+                </div>
+            </div>	
+            </div>
+        </div>
+    </div>
+    <div id="field">
+            <div hc-grid="fieldOption" hc-box hc-auto-height></div>
+	</div>
+	
+	<div id="attachType">
+		<div hc-grid="attachTypeGridOptions" hc-box hc-auto-height></div>
+	</div>
+
+	<div id="projAttachRel">
+		<div hc-grid="projAttachRelGridOptions" hc-box hc-auto-height></div>
+	</div>
+
+    <div id="workflow">
+        <div hc-grid="wfTempGridOptions" hc-box hc-auto-height></div>
+    </div>
+
+    <div id="rightRule">
+        <div hc-grid="rightRuleGridOptions" hc-box hc-auto-height></div>
+    </div>
+
+    <div id="accessSettings" class="flex-column" >
+        <div class="flex1 " hc-grid="accessObjConfigSet" ></div> <!--hc-box hc-auto-height-->
+    </div>
+
+    <!-- <div id="accessSettings" style="height: 100%;">
+        <div hc-box style="display: flex;flex-direction: column;flex: 1;">
+            <div hc-grid="accessObjConfigSet" style="flex: 1;"></div> 
+        </div>
+    </div> -->
+
+    <div id="diyOpinion">
+        <div hc-grid="diyOpinionGridOptions" hc-box hc-auto-height></div>
+    </div>
+
+    <div id="printtemplate">
+        <div hc-grid="printGridOptions" hc-box hc-auto-height></div>
+    </div>
+    <div hc-modal="tooltipModal">
+        <div hc-box>
+            <div class="row">
+                <div class="mail-box" style="width: 100%;">
+                    <div class="mail-body" style="padding:0;border:none">
+                        <div class="form-group">
+                            <div id='main' class="write-input">
+                                <hc-rich-text hc-option="data.noteOption" hc-model="data.tooltip"></hc-rich-text>
+                            </div>
+                        </div>
+                    </div>	
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div hc-modal="accessSettingsModel">
+        <div class="row" hc-box>
+            <div hc-label="模式"
+                 hc-input="before_line.is_contain"
+                 hc-col-count="4"
+                 hc-required="true"
+                 hc-select-options="before_line.patternArr"></div>
+        </div>
+        <div hc-box>
+            <div hc-grid="gridOptionAccessSet" style="height: 300px;"></div>
+        </div>
+    </div>
+</div>
+<style>
+    .write-input {
+    width: calc(100% - 80px);
+    float: left;
+    }
+    .form-group:after {
+        content: '';
+        clear: both;
+        width: 0px;
+        display: block;
+    }
+    .write-label{
+        float:left;
+        color: #717171;
+        font-size: 16px;
+        font-size: 14px;
+        padding-right: 5px;
+        padding-top: 10px;
+    }
+    .form-group{
+        border: none;
+    }
+    .note-editor{
+        min-height: 200px !important;
+    }
+</style>

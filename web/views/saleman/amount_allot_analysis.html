@@ -1,0 +1,107 @@
+<div local-storage ng-model="data.currItem" class=" bill-form" ng-controller="amount_allot_analysis">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h3>到款PI分配完成情况查询</h3>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                 <div class="ibox-title">
+                            <h5>搜索条件</h5>
+                            <div ibox-tools></div>
+                        </div>
+                <div id="content" class="first ">
+                    <div id="tab1" class="tab-pane active">
+                       <div class="ibox-content" id="sqlWhereBlock">
+                            <div class="row">
+                               <div class="col-md-1">
+                                    <label class="form-label-mini " >业务部门名称</label>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="input-group">
+                                        <input data-rule-required="true" type="text"
+												id="org_code"
+											   name="like"
+											   ng-change="changeAreaName()"
+                                               ng-readonly="false" class="input-sm form-control"
+                                               ng-model="data.currItem.org_code">
+                                        <a class="input-group-addon" ng-click="select()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="data.currItem.org_name" ng-readonly="true"
+                                           class="input-sm form-control">
+                                </div>
+                                
+                            </div>
+                           	<div class="row">
+                                 <div class="col-md-1">
+                                    <label class="form-label-mini " >客户</label>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="input-group">
+                                        <input data-rule-required="true" type="text"
+											   id="cust_code"
+											   name="like"
+											   ng-change="change_customer()"
+                                               ng-readonly="false" class="input-sm form-control"
+                                               ng-model="data.currItem.cust_code">
+                                        <a class="input-group-addon" ng-click="select2()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="data.currItem.cust_name" ng-readonly="true"
+                                           class="input-sm form-control">
+                                </div>
+                              
+                            </div>				
+							<div class="row">
+								<div class="col-md-1">
+                                    <label class="form-label-mini " >到款单号</label>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="input-group">
+                                        <input data-rule-required="true" type="text"
+											   id="funds_no"
+											   name="like"
+                                               ng-readonly="false" class="input-sm form-control"
+                                               ng-model="data.currItem.funds_no">
+                                        <a class="input-group-addon" ng-click="select3()"><i
+                                                class="fa fa-ellipsis-h"></i></a>
+                                    </div>
+                                </div>
+							    <div class="col-md-1">
+                                    <label class="form-label-mini ">金额是否分配完</label>
+                                </div>
+                                <div class="col-md-1" not-null>
+                                   <select  id="is_over"
+	                                        ng-model="data.currItem.is_over"
+	                                        class="input-xm chosen-select form-control"
+	                                        ng-options="s.id as s.name for s in is_overs">
+	                                    <option value=""></option>
+	                                </select>
+                                </div>
+                                <button style="margin-left: 100px;" class="btn btn-sm btn-info" type="button" ng-click="search()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    查询
+                                </button>
+							</div>
+						</div>   
+				<div class="ibox-content">
+                    <a style="font-size: small;font-weight: bold;color:black"><i class="btn btn-toolbar"></i>查询结果</a>
+                    <div ag-gridview
+                         sg-options="options_13"
+                         sg-data="data.currItem.fin_funds_headers"
+                         sg-columns="columns_13"
+                         class="ag-gridview"
+                         style="width:100%;height:450px;"></div>
+                    <!--div class="ibox-content modal-open" page-pagination></div-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  

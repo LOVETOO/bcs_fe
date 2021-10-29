@@ -1,0 +1,41 @@
+<div hc-obj-list>
+	<!-- 查询条件面板-->
+	<hc-obj-list-search-panel>
+		<div class="row">
+			<div
+				hc-label="客户编码"
+				hc-input="searchObj.customer_code"
+			></div>
+
+			<div hc-label="客户名称"
+				 hc-input="searchObj.customer_name"></div>
+			<div
+				 hc-label="退货单号"
+				 hc-input="searchObj.sa_salebillno"
+			 ></div>
+			 
+			<div hc-label="出库单号"
+				 hc-dict-code="epm.inv_out_bill_code"></div>
+		</div>
+		<div class="row">
+			<div hc-label="交易公司"
+				 hc-input="searchObj.trading_company_name"></div>
+
+			<div hc-label="开票单位"
+				 hc-input="searchObj.billing_unit_name"></div>
+
+			<div hc-label="产品线"
+				 hc-dict-code="epm.order_pdt_line"
+				 hc-input="searchObj.order_pdt_line"></div>
+		</div>
+		<div class="row">
+			<div hc-label="订单日期"
+				 hc-type="date"
+				 hc-can-delete="true"
+				 hc-input="searchObj.date_invbill"></div>
+			<div hc-label="产品料号"
+				 hc-input="searchObj.item_code"></div>
+		</div>
+	</hc-obj-list-search-panel>
+</div>
+

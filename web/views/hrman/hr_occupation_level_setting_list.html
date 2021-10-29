@@ -1,0 +1,43 @@
+<div hc-edit-list>
+
+    <div class="row">
+        <div hc-input="data.currItem.position_class_code"
+             hc-label="职类编码"
+             hc-required="true"
+             hc-class-id="hr_position_class"
+             hc-common-search="commonSearchSettingOfOcctype">
+        </div>
+        <div hc-input="data.currItem.position_class_name"
+             hc-readonly="true">
+        </div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.position_level_num"
+             hc-label="级别"
+             hc-select-options="[{name:'1',value:'1'},{name:'2',value:'2'},{name:'3',value:'3'}
+             ,{name:'4',value:'4'},{name:'5',value:'5'},{name:'6',value:'6'},{name:'7',value:'7'}]"
+             hc-required="true"
+             hc-change="changeLevelCode()">
+        </div>
+
+        <div hc-input="data.currItem.position_level_code"
+             hc-label="职级码"
+             hc-readonly="true"><!--hc-required="true"-->
+        </div>
+
+        <div hc-input="data.currItem.usable"
+             hc-label="可用"
+             hc-required="true"
+             hc-type="checkbox">
+        </div>
+    </div>
+
+    <div>
+        <div hc-input="data.currItem.remark"
+             hc-label="备注"
+             hc-col-count="8">
+        </div>
+    </div>
+
+</div>

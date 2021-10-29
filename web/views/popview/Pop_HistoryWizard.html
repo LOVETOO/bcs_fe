@@ -1,0 +1,84 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>结算单创建新增</h3>
+    </div>
+    <div class="modal-body">
+    	<div class="row">
+	    	<div class="col-lg-1">
+	            <label class="form-label-mini">结算年月:</label>
+	       </div>
+            <div class="col-lg-2">
+            	<div class="col-lg-4">
+	                <input bs-datepacker view="decade" format="yyyy" ng-disabled = "true"  ng-model="item.settle_year" type="text"  class="form-control input-sm">
+	            </div>
+	            <div class="col-md-8">
+	                <select chosen-select   ng-model="item.settle_month" ng-disabled = "true" class="input-sm chosen-select form-control" ng-options="s.id as s.name for s in months">
+	                    <option value=""></option>
+	                </select>
+	            </div>
+            </div>
+	        <div class="col-lg-1" >
+	            <label class="form-label-mini">管理中心:</label>
+	        </div>
+	        <div class="col-lg-2" >
+	            <div class="input-group">
+                    <input type="text" class="input-sm form-control" ng-readonly="true"  ng-model="item.org_name">
+                    <a class="input-group-addon" ng-click="selectOrg1(2)"><i class="fa fa-ellipsis-h"></i> </a>
+                </div>
+	        </div>
+	        <div class="col-lg-1" >
+	            <label class="form-label-mini">网点:</label>
+	        </div>
+	        <div class="col-lg-2" >
+	            <div class="input-group">
+                    <input type="text" class="input-sm form-control" ng-readonly="true"  ng-model="item.fix_org_name">
+                    <a class="input-group-addon" ng-click="selectToFix1(2)"><i class="fa fa-ellipsis-h"></i> </a>
+                </div>
+	        </div>
+	        <!--<div class="col-lg-2">
+	        	<div class="col-lg-6">
+                    <label style="align:left">
+                        <input type="checkbox" ng-model="item.is_sq" ng-false-value="1" ng-true-value="2">售前网点</label>
+                </div>
+                <div class="col-lg-6">
+                    <label style="align:left">
+                        <input type="checkbox" ng-model="item.is_sh" ng-false-value="1" ng-true-value="2">售后网点</label>
+                </div>
+	        </div>-->
+	        <div class="col-lg-1">
+	        	<div class="btn_group col-lg-8">
+					<button class="btn btn-sm" style = "padding-top:3px;padding-bottom: 3px; " ng-click="Determine($event)">确认</button>
+				</div>
+	        </div>
+	    </div>
+   		<div class="ibox-content">
+   			<div slick-multi-grid sg-options="repOptions" sg-data="repList" ng-model="repList" sg-columns="repColumns" style="width:100%;height:240px;" class="slick-grid"></div>
+   		</div>
+   		<div class="row">
+	    	<div class="col-lg-1">
+	            <label class="form-label-mini">开始日期:</label>
+	       	</div>
+           	<div class="col-lg-2">
+                <input type="text" bs-datepacker ng-readonly="true"  ng-model="item.stat_date" class="input-sm form-control" >   
+            </div>
+            <div class="col-lg-1">
+	            <label class="form-label-mini">结束日期:</label>
+	       	</div>
+           	<div class="col-lg-2">
+                <input type="text" bs-datepacker ng-readonly="true"  ng-model="item.end_date" class="input-sm form-control" >   
+            </div>
+	       	<div class="col-lg-1">
+	       		<button class="btn btn-sm" style = "padding-top:3px;padding-bottom: 3px; " ng-click="modification($event)">全部修改</button>
+	       	</div>
+	    </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+          确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+          取消
+        </a>
+     </div>
+</div>

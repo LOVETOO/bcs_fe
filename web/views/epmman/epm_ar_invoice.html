@@ -1,0 +1,70 @@
+<div hc-diy-page>
+    <div class="hc-box other-h">
+        <div class="row">
+            <div hc-input="data.currItem.customer_code"
+                 hc-label="客户编码"
+                 hc-readonly="resellerEditable">
+            </div>
+            <div hc-input="data.currItem.customer_name"
+                 hc-label="客户名称"
+                 hc-col-count="4"
+                 hc-readonly="resellerEditable">
+            </div>
+            <div hc-input="data.currItem.attribute21"
+                 hc-label="客户旧编码"
+                 hc-readonly="resellerEditable">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.date_invoice"
+                 hc-label="开票日期 从"
+                 hc-change="changeDate()"
+                 hc-type="date">
+            </div>
+            <div hc-input="data.currItem.date_invoice_end"
+                 hc-label="至"
+                 hc-change="changeDate()"
+                 hc-type="date">
+            </div>
+            <div hc-input="data.currItem.contract_code"
+                 hc-label="工程合同号">
+            </div>
+            <div hc-input="data.currItem.invoice_no"
+                 hc-label="发票编号">
+            </div>
+            <div hc-input="data.currItem.attribute11"
+                 hc-label="发票类型">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.trading_company_name"
+                 hc-label="开票公司">
+            </div>
+            <div hc-input="data.currItem.legal_entity_name"
+                 hc-label="法人客户">
+            </div>
+            <div hc-input="data.currItem.express_no"
+                 hc-label="快递单号">
+            </div>
+            <div hc-input="data.currItem.item_code"
+                 hc-label="产品编码">
+            </div>
+        </div>
+    </div>
+    <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+</div>
+<style>
+	[hc-input="data.currItem.date_invoice"]{
+        width: calc(13% + 15px);
+		margin-right: 0px;
+    }
+	[hc-input="data.currItem.date_invoice_end"] {
+        width: calc(12% - 35px);
+    }
+	[hc-input="data.currItem.date_invoice_end"] label {
+        width: 13px;
+		min-width: 0px;
+    }
+</style>
+
+

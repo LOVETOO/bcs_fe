@@ -1,0 +1,89 @@
+<!--<div hc-obj-prop>
+
+    &lt;!&ndash;基本信息&ndash;&gt;
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.base_ac_object_code"
+                 hc-label="往来对象编码">
+            </div>
+
+            <div hc-input="data.currItem.base_ac_object_name"
+                 hc-label="往来对象名称">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.remark" hc-label="备注" hc-type="textarea"
+                 hc-col-count="4"></div>
+
+        </div>
+    </div>
+
+    &lt;!&ndash;其他&ndash;&gt;
+    <div id="other" hc-box="">
+        <div class="row">
+            <div hc-input="data.currItem.created_by"
+                 hc-label="创建人">
+            </div>
+
+            <div hc-input="data.currItem.creation_date"
+                 hc-type="date"
+                 hc-label="创建时间"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by"
+                 hc-label="最后修改人">
+            </div>
+
+            <div hc-input="data.currItem.last_update_date"
+                 hc-type="date"
+                 hc-label="最后修改时间"></div>
+        </div>
+    </div>
+
+</div>-->
+
+<div hc-diy-page>
+    <div class="ibox">
+        <div hc-grid="gridOptions" class="m-t-xs" hc-auto-height="grid"></div>
+        <!-- 模态框 -->
+        <div class="modal inmodal fade" id="newModal" tabindex="-1" role="dialog" aria-hidden="true"
+             data-backdrop="static">
+            <div class="modal-dialog" style="width:520px">
+                <div class="modal-content">
+                    <div class="modal-header" draggable-model>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                                class="sr-only">Close</span></button>
+                        <h4 class="modal-title">价格类型明细</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div hc-input="data.currItem.saleprice_type_code" hc-label="价格类型编码"
+                                 hc-required="true"></div>
+                            <div hc-input="data.currItem.saleprice_type_name" hc-label="价格类型名称"
+                                 hc-required="true"></div>
+                        </div>
+                        <!--
+                                                <div class="row">
+                                                    <div hc-input="data.currItem.created_by" hc-label="创建人" ></div>
+                                                    <div hc-input="data.currItem.creation_date" hc-label="创建时间"  hc-type="date" ></div>
+                                                    <div hc-input="data.currItem.last_updated_by" hc-label="修改人" ></div>
+                                                    <div hc-input="data.currItem.last_update_date" hc-label="最后修改时间"  hc-type="date" ></div>
+                                                </div>
+                        -->
+                        <div class="row">
+                            <div hc-input="data.currItem.remark" hc-label="备注"
+                                 hc-col-count="4"></div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

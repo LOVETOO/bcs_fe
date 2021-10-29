@@ -1,0 +1,48 @@
+<!-- 
+ * 网点变更申请
+ * 2020/03/05
+ * zengjinhua
+ -->
+   <div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active flex-column">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-label="变更单号" hc-input="data.currItem.branch_ecn_code" hc-readonly="true"></div>
+
+                <div hc-label="申请日期" hc-input="data.currItem.audittime" hc-type="date" hc-readonly="true"></div>
+                
+                <div hc-label="申请人" hc-input="data.currItem.auditor_name" hc-readonly="true"></div>
+
+                <div hc-label="单据状态" hc-input="data.currItem.stat" hc-dict-code="stat" hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-label="网点编码" hc-input="data.currItem.branch_message_code" hc-class-id="epm_branch_message" hc-common-search="commonSearch.branch_message_code" hc-required="true"></div>
+
+                <div hc-label="网点名称" hc-input="data.currItem.branch_message_name" hc-col-count="4" hc-required="true"></div>
+
+                <div hc-label="联系人" hc-input="data.currItem.linkman" hc-required="true"></div>
+                
+                <div hc-label="联系人电话" hc-input="data.currItem.phone" hc-required="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-label="营业执照名称" hc-input="data.currItem.business_name" hc-col-count="4" hc-required="true"></div>
+                
+                <div hc-label="网点法人" hc-input="data.currItem.branch_legal_name" hc-required="true"></div>
+
+                <div hc-label="所属经销商" hc-input="data.currItem.customer_code" hc-class-id="customer_org" hc-common-search="commonSearch.customercode" hc-required="true" hc-readonly="isCustomerCode"></div>
+            </div>
+
+            <div class="row">
+                <div hc-label="地址" hc-input="data.currItem.address" hc-col-count="8"></div>
+            </div>
+
+            <div class="row">
+                <div hc-label="变更说明" hc-input="data.currItem.ecn_note" hc-required="true" hc-col-count="8"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

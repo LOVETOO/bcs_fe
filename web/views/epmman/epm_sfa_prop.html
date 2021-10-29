@@ -1,0 +1,276 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box class="active">
+        <div>
+            <div class="row">
+                <div hc-input="data.currItem.contract_code"
+                     hc-label="合同协议编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.contract_name"
+                     hc-label="合同协议名称"
+                     hc-required="true"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="审核状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="战略项目编码"
+                     hc-required="true"
+                     hc-class-id="epm_project"
+                     hc-common-search="searchObjectEpmProject"></div>
+                <div hc-input="data.currItem.project_name"
+                     hc-label="战略项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+                <!--<div hc-input="data.currItem.address"
+                     hc-label="战略项目地址"
+                     hc-readonly="true"></div>-->
+               <div hc-label="所属事业部"
+                    hc-input="data.currItem.division_id"
+                    hc-dict-code="epm.division"
+                    hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.signed_date"
+                     hc-label="签订时间"
+                     hc-change="updateDate()"
+                     hc-required="true"
+                     hc-type="date"></div>
+                <div hc-input="data.currItem.signed_location"
+                     hc-label="签订地点"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.contract_effect_date"
+                     hc-label="合作开始时间"
+                     hc-change="changeDate()"
+                     hc-required="true"
+                     hc-type="date"></div>
+                <div hc-input="data.currItem.contract_expire_date"
+                     hc-label="合作结束时间"
+                     hc-change="changeDate()"
+                     hc-required="true"
+                     hc-type="date"></div>
+                <!--<div hc-input="data.currItem.stage_name"
+                     hc-label="项目当前进度"
+                     hc-readonly="true"></div>-->
+            </div>
+            <div class="row">
+               <div hc-input="data.currItem.contract_amt"
+                    hc-label="合同总额"
+                    hc-change="changeAmt()"
+                    hc-type="money"></div>
+                <div hc-input="data.currItem.deposit_amt"
+                     hc-label="履约金"
+                     hc-type="money"></div>
+                <div hc-input="data.currItem.retention_money_ratio"
+                     hc-label="质保金比例"
+                     hc-blur="moneyRatio()"
+                     hc-type="percent"></div>
+                <div hc-input="data.currItem.retention_money"
+                     hc-label="质保金金额"
+                     hc-readonly="data.read == 1"
+                     hc-type="money"></div>
+               
+                <!--<div hc-input="data.currItem.performance_bond_type"
+                     hc-label="履约保证金类型"
+                     hc-dict-code="epm.performance_bond_type"></div>
+                <div hc-input="data.currItem.performance_bond"
+                     hc-label="履约保证金金额"
+                     hc-type="money"></div>-->
+                <!--<div hc-input="data.currItem.retention_money_type"
+                     hc-label="质保金类型"
+                     hc-required="true"
+                     hc-dict-code="epm.retention_money_type"></div>-->
+
+                <!--<div hc-input="data.currItem.retention_money_return"
+                     hc-label="质保金收回金额"
+                     hc-readonly="true"
+                     hc-type="money"></div>-->
+            </div>
+            <div class="row">
+               <div hc-input="data.currItem.goods_scope"
+                    hc-label="供货范围"
+                    hc-col-count="4"></div>
+                <div hc-input="data.currItem.remark"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="4"></div>
+            </div>
+        </div>
+        <div id="req" hc-box="付款信息">
+            <div class="row">
+                <div hc-input="data.currItem.payment_way"
+                     hc-label="付款方式"
+                     hc-dict-code="epm.payment_way"></div>
+                <div hc-input="data.currItem.receiving_bank"
+                     hc-label="付款方银行名称"></div>
+                <div hc-input="data.currItem.receiving_account"
+                     hc-label="付款方银行账号"
+                     hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.payment_remark"
+                     hc-label="付款说明"
+                     hc-col-count="8"></div>
+            </div>
+        </div>
+        <div hc-box="开票信息">
+            <div class="row">
+                <!--<div hc-input="data.currItem.payment_unit_name"
+                     hc-label="打款单位名称"
+                     hc-required="true"
+                     hc-col-count="4"></div>-->
+                <div hc-input="data.currItem.billing_unit_name"
+                     hc-label="开票单位名称"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.billing_address"
+                     hc-label="单位地址"
+                     hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.tax_identify_num"
+                     hc-label="纳税识别号"></div>
+                <div hc-input="data.currItem.billing_bank"
+                     hc-label="开户银行"></div>
+                <div hc-input="data.currItem.billing_account"
+                     hc-label="银行账号"></div>
+                <div hc-input="data.currItem.billing_phone"
+                     hc-label="电话"></div>
+            </div>
+        </div>
+        <div hc-box="交收信息">
+            <div class="row">
+                <div hc-input="data.currItem.shipping_type"
+                     hc-label="运输方式"
+                     hc-dict-code="epm.shipping_type"></div>
+                <div hc-input="data.currItem.delivery_type"
+                     hc-label="交货方式"
+                     hc-dict-code="epm.delivery_type"></div>
+                <div hc-input="data.currItem.shipping_remark"
+                     hc-label="运输说明"
+                     hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.receiving_party"
+                     hc-label="收货人"></div>
+                <div hc-input="data.currItem.receiving_party_phone"
+                     hc-label="联系方式"></div>
+                <div hc-input="data.currItem.delivery_place"
+                     hc-label="交货地点"
+                     hc-col-count="4"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.warranty_period"
+                     hc-label="质保期"
+                     hc-unit="年"
+                     hc-type="number"></div>
+                <div hc-input="data.currItem.warranty_remark"
+                     hc-label="质保期说明"
+                     hc-col-count="6"></div>
+            </div>
+        </div>
+        <div hc-box="甲方信息">
+            <div class="row">
+                <div hc-input="data.currItem.party_a_name"
+                     hc-label="甲方名称"
+                     hc-required="true"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.party_a_legal_person"
+                     hc-label="法定代表人/委托代理人"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.party_a_address"
+                     hc-label="甲方地址"
+                     hc-col-count="4"></div>
+                <!--<div hc-input="data.currItem.party_a_agent_person"
+                     hc-label="委托代理人"></div>-->
+                <div hc-input="data.currItem.party_a_phone"
+                     hc-label="电话"></div>
+            </div>
+        </div>
+        <div hc-box="乙方信息">
+            <div class="row">
+                <div hc-input="data.currItem.party_b_name"
+                     hc-label="乙方名称"
+                     hc-required="true"
+                     hc-col-count="4"
+                     hc-can-input="true"
+                     hc-class-id="epm_trading_company"
+                     hc-common-search="searchObjectScporg"></div>
+                <div hc-input="data.currItem.party_b_legal_person"
+                     hc-label="法定代表人/委托代理人"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.party_b_address"
+                     hc-label="乙方地址"
+                     hc-col-count="4"></div>
+                <!--<div hc-input="data.currItem.party_b_agent_person"
+                     hc-label="委托代理人"></div>-->
+                <div hc-input="data.currItem.party_b_phone"
+                     hc-label="电话"></div>
+            </div>
+        </div>
+    </div>
+    <!--产品清单-->
+    <div id="product" class="h100">
+        <div hc-box>
+            <div class="row">
+                <div hc-input="data.currItem.price_contain_tax"
+                     hc-label="价格含税"
+                     hc-dict-code="assure_stat"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.price_contain_tax_desc"
+                     hc-label="含税说明"
+                     hc-type="textarea"></div>
+               <div hc-input="data.currItem.price_contain_freight"
+                     hc-label="价格含运费"
+                     hc-dict-code="assure_stat"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.price_contain_freight_desc"
+                     hc-label="含运费说明"
+                     hc-type="textarea"></div>
+            </div>
+        </div>
+        <div hc-box  class="flex-box-v" style="height: calc(100% - 96px)">
+            <div hc-box  class="flex-auto flex-box-v">
+                <div hc-box hc-grid="gridOptions_product" class="flex-auto"></div>
+            </div>
+            <div hc-box="取消产品" ng-show="data.cancel==1" class="flex-auto flex-box-v">
+                <div hc-box hc-grid="gridOptions_cancel" class="flex-auto"></div>
+            </div>
+        </div>
+    </div>
+    <!--周期条件-->
+    <div id="line">
+        <div hc-box hc-grid="gridOptions_line" hc-auto-height="grid"></div>
+    </div>
+    <!--约定条款-->
+    <div id="items">
+        <div hc-box hc-grid="gridOptions_terms" hc-auto-height="grid"></div>
+    </div>
+</div>
+<style>
+    .oneis{
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+    .h100 {
+        height: 100%;
+    }
+    .flex-box-v {
+        display: flex;
+        flex-direction: column;
+    }
+    .flex-auto {
+        flex: 1;
+    }
+    .tab-content>.flex-box-v.active {
+        display: flex;
+    }
+</style>
+
+
+
+

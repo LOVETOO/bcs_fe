@@ -1,0 +1,20 @@
+<div hc-edit-list>
+
+        <div class="row">
+            <div hc-input="data.currItem.salary_group_code" hc-label="薪资组编码" hc-required="true" ></div>
+            <div hc-input="data.currItem.salary_group_name" hc-label="薪资组名称" hc-required="true" ></div>
+            <div hc-input="data.currItem.usable" hc-label="有效状态" hc-required="true" hc-select-options="[{name:'无效',value:'1'},{name:'有效',value:'2'}]"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.remark" hc-label="备注" hc-col-count="6"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.created_by" hc-label="创建人" hc-readonly="true"></div>
+            <div hc-input="data.currItem.creation_date" hc-label="创建时间" hc-readonly="true"></div>
+            <div hc-input="data.currItem.last_updated_by" hc-label="修改人" hc-readonly="true"></div>  
+            <div hc-input="data.currItem.last_update_date" hc-label="修改时间" hc-readonly="true"></div> 
+        </div>
+
+</div>

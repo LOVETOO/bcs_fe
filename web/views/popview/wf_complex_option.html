@@ -1,0 +1,70 @@
+<!-- 审批流程意见 -->
+  <div class="modal-header">
+      <h4 class="modal-title"><span ng-bind="FrmInfo.title"></span><span ng-show="item.userid && FrmInfo.stype != 1">&nbsp;&nbsp;&nbsp;转办  - <label class="not-null" ng-bind="item.userid"></label></span></h4>
+  </div>
+  <div class="modal-body" style="overflow: hidden;">
+  		<table class="table table-striped table-bordered no-paging footable-loaded">
+              <tr style="display: table-row;">
+                  <td width="70%">
+                  	<span class="footable-toggle"></span>
+                  	<input autofocus id="autofocus" auto-focus ng-keyup="enter($event)" ng-model="searchtext" type="text" name="keyword" placeholder="输入文本..." class="form-control">
+                  </td>
+                  <td>
+                      <button class="btn btn-sm btn-primary" ng-click="search()"><strong>立即搜索</strong></button>  
+                  </td>
+              </tr>
+         </table>
+         <div class="col-md-12">
+         	  <div class="table-head">
+	         	  	 <table>
+				       <colgroup>
+				           <col style="width: 80px;" />
+				           <col />
+				       </colgroup>
+				       <thead class="table-head">
+				       		<tr><td>用户</td><td>部门</td></tr>
+				       </thead>
+				   </table>
+         	  </div>
+         	  <div class="table-body">
+         	  	  <table class="table table-border table-striped">
+			        <colgroup><col style="width: 80px;" /><col /></colgroup>  
+		            <tbody>
+		                <tr ng-repeat="iitem in items" ng-click="addLine($index,$event)" ng-dblclick="dblLine($index)">
+         	  	   	  	<td ng-bind="iitem.userid"></td>
+         	  	   	  	<td ng-bind="iitem.orgname"></td>
+         	  	   	  </tr>
+		            </tbody>
+		         </table>
+         	  </div>
+         </div>
+         <div class="col-md-12" ng-show="FrmInfo.stype == 1">
+         	<div class="header">
+	         	<label>当前流程审批人列表</label>
+         		<!-- <button></button> -->
+         	</div>
+         	<div>
+         		<table class="table table-striped table-bordered">
+         			<thead>
+			       		<tr><td>用户</td></tr>
+			       </thead>
+			       <tbody>
+			       		<tr ng-repeat="aitem in item.wfcpcprocusers">
+			       			<td>{{aitem.userid}}&nbsp;&nbsp;&nbsp;
+			       				<a ng-click="delchecker($index)" class=""> 删除</a>
+		       				</td>	
+			       		</tr>
+			       </tbody>
+         		</table>
+         	</div>
+         </div>
+         <div ng-hide="FrmInfo.stype == 1" class="row p-xs">
+         	<label>转办说明</label>
+         </div>
+     	 <textarea ng-hide="FrmInfo.stype == 1" class="form-control noresize" ng-model="item.opinion" rows="3"></textarea>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-white" ng-click="cancel()">取消</button>
+      <button type="button" class="btn btn-primary" ng-click="ok()">确定</button>
+  </div>
+

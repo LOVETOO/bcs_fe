@@ -1,0 +1,23 @@
+<div style="height: 100%; display: flex; flex-direction: column;">
+	<div hc-box>
+		<div class="row">
+			<div hc-label="Excel文件" hc-input="fileName" hc-readonly="true" hc-col-count="4"></div>
+
+			<div hc-title="选择Excel" hc-icon="iconfont hc-wendangshangchuan" hc-button="chooseExcel()"></div>
+		</div>
+
+		<div class="row">
+			<div hc-label="表名" hc-input="tableName" hc-col-count="4"></div>
+
+			<div hc-title="导入Excel" hc-icon="iconfont hc-daoru" hc-button="importExcel()" hc-disabled="!fileName || !tableName"></div>
+		</div>
+
+		<div class="row">
+			<div hc-label="查询语句" hc-input="sql" hc-readonly="true" hc-col-count="8"></div>
+		</div>
+	</div>
+
+	<div id="error" hc-box="错误" class="ng-hide" style="flex: 1; display: flex; flex-direction: column;">
+		<iframe style="flex: 1"></iframe>
+	</div>
+</div>

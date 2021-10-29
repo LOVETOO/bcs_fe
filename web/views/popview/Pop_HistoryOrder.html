@@ -1,0 +1,64 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>历史订单</h3>
+    </div>
+    <div class="modal-body">
+         
+        <table class="table table-striped table-bordered no-paging footable-loaded">
+              <tr style="display: table-row;">
+                  <td width="70%">
+                  	<span class="footable-toggle"></span>
+                  	<input ng-keyup="enter($event)" ng-model="searchtext" type="text" name="keyword" placeholder="输入文本..." class="form-control">
+                  </td>
+                  <td>
+                      <button class="btn btn-sm btn-primary" ng-click="search()"><strong>搜索</strong></button>  
+                  </td>
+              </tr>
+         </table>
+        <div style="max-height:200px;overflow-y:auto;">
+	         <table id="history_table" class="table  table-bordered table-striped">
+	            <thead>
+	                <th><input id="selectall" ng-click="selectall()" type="checkbox" name="selectall">选择</th>
+	                <th>形式发票号</th>
+	                <th>生成单号</th>
+	                <th>订单日期</th>
+	                <th>出口型号</th>
+	                <th>批次号</th>
+	                <th>基准机型</th>
+	                <th>工厂型号</th>
+	                <th>价格</th>
+	                <th>数量</th>
+	                <th>备注</th>
+	            </thead>
+	            <tbody>
+	                <tr ng-click="trselect($index,$event)" ng-repeat="item in items" >
+						<td><input name="item" type="checkbox"></td>
+						<td ng-bind="item.pi_no"></td>
+						<td ng-bind="item.prod_no"></td>
+						<td>{{item.pi_date | limitTo:10}}</td>
+						<td ng-bind="item.item_code"></td>
+						<td ng-bind="item.fd_batch_no"></td>
+						<td title="{{item.std_spec}}">{{item.std_spec | ellipsis:true:20:'...'}}</td>
+						<td ng-bind="item.pdm_item_spec"></td>
+						<td ng-bind="item.apply_price"></td>
+						<td ng-bind="item.qty"></td>
+						<td ng-bind="item.note"></td>
+					</tr>
+	            </tbody>
+	         </table>
+         </div>
+    </div>
+    <div class="modal-footer">
+    	<div class="pull-left" style="padding-left: 15px;">
+    		<label class="form-label-mini"><input value="2" name="replacetype" class="" ng-model="replacetype" type="radio"><span class="not-null">并存修改</span>(全新首批)</label>
+    		<label class="form-label-mini" style="padding-right:25px;"><input class="" name="replacetype" ng-model="replacetype" value="1" type="radio"><span class="not-null">替换修改</span>(首批更新、重复订单)</label>
+    	</div>
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+          确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+          取消
+        </a>
+     </div>
+</div>

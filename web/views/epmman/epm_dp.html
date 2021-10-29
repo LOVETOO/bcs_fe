@@ -1,0 +1,25 @@
+<!--
+/**
+ * 交货计划
+ * @since 2019-12-09
+ */
+-->
+<div class="h100" hc-diy-page>
+    <div class="flex1 flex-column padding">
+        <div class="animated fadeInRight flex1" hc-grid="headGridOptions" ng-show="!data"></div>
+        <div class="animated fadeInRight flex1 flex-column" ng-show="data">
+            <div ng-show="data.dp_name">
+                <div class="row">
+                    <div hc-label="交货计划名称" hc-input="data.dp_name" hc-readonly="true" hc-col-count="8"></div>
+                </div>
+                <div class="row">
+                    <div hc-label="创建人" hc-input="data.creator" hc-readonly="true"></div>
+                    <div hc-label="创建时间" hc-input="data.createtime" hc-readonly="true"></div>
+                    <div hc-label="修改人" hc-input="data.updator" hc-readonly="true"></div>
+                    <div hc-label="修改时间" hc-input="data.updatetime" hc-readonly="true"></div>
+                </div>
+            </div>
+            <div class="flex1" hc-grid="lineGridOptions"></div>
+        </div>
+    </div>
+</div>

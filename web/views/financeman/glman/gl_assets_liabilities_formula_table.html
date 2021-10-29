@@ -1,0 +1,51 @@
+<div hc-diy-page>
+
+    <div class="">
+
+        <ul class="nav nav-tabs other-h ng-scope" id="detailtab">
+            <li class="active">
+                <a data-toggle="tab" id="tab11" href="tabs.html#tab1" aria-expanded="false">常规</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" id="tab22" href="tabs.html#tab2" aria-expanded="true">其它</a>
+            </li>
+        </ul>
+
+        <div class="tabs-container">
+            <div class="tab-content">
+                <div id="tab1" class="tab-pane active">
+                    <p>&nbsp;&nbsp;格式提示：</p>
+                    <p> &nbsp;&nbsp;&nbsp;&nbsp;资产、负债项目描述：在前面增加一个"*"，空格才有效</p>
+                    <p> &nbsp;&nbsp;&nbsp;&nbsp;相关科目(+、-)：单个科目：5401，多个科目：54010102','54010103','54010104','54010199</p>
+                    <p> &nbsp;&nbsp;&nbsp;&nbsp;计算公式：如(1+2-3)为(1,+,2,-3)，跨列加减格式[列数-1资产年初2资产末期3负债年初4负债期末|行数]如(3|60,-,2|60)，只有加减</p>
+                    <p> &nbsp;&nbsp;&nbsp;&nbsp;运算标记：1 单加减、4 加减、5 计算</p>
+                </div>
+
+                <div id="tab2" class="tab-pane">
+                    <div class="row">
+                        <div hc-input="data.currItem.created_by"
+                             hc-label="创建人">
+                        </div>
+
+                        <div hc-input="data.currItem.creation_date"
+                             hc-label="创建日期"
+                             hc-type="date">
+                        </div>
+
+                        <div hc-input="data.currItem.last_updated_by"
+                             hc-label="修改人">
+                        </div>
+
+                        <div hc-input="data.currItem.last_update_date"
+                             hc-label="修改日期"
+                             hc-type="date">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--结束标签-->
+
+        <div id="grid" hc-grid="gridOptions" hc-auto-height="grid"></div>
+    </div>
+
+</div>

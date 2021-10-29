@@ -1,0 +1,32 @@
+<div class="modal-body flex1 flex-column" hc-init-start="doInit()">
+
+	<div hc-tab="tabs" hc-tab-as="tabController" hc-tab-change="onTabChange(params)" hc-tab-sort="tabSort" class="hc-nav-modal"></div>
+
+	<div class="flex1-scroll" hc-tab-page ng-form="form" hc-form-readonly="isFormReadonly()">
+
+		<div hc-transclude></div>
+
+		<div id="attach">
+			<div hc-attach="attachSetting"></div>
+		</div>
+
+		<div id="wf" ng-form="wfForm">
+			<div style="height: 100%;" hc-new-wf="data.currItem.wfid" hc-wf-as="wf" hc-new-wf-on-click-obj="tabController.setActiveTab('base')"></div>
+		</div>
+
+		<div id="actionLog" class="flex-column">
+			<div hc-box hc-grid="actionLogGridOptions" style="flex: 1;"></div>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal-footer other-h" hc-init-end>
+	<div hc-buttons="footerLeftButtons" hc-buttons-pull-left ng-hide="!form.editing || isFormReadonly() || tabs.wf.active"></div>
+	<div hc-buttons="footerRightButtons" hc-buttons-pull-right></div>
+</div>
+
+<!--审批状态印章-->
+<!-- 状态是【已审核】且当前标签页是【单据详情】时可见 -->
+<div class="approval—status" ng-show="data.currItem.stat == 5 && (tabs.base.active || tabs.wf.active)"></div>

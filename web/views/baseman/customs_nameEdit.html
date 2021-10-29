@@ -1,0 +1,150 @@
+<div class="bill-form" ng-controller="customs_nameEdit">
+    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h3>报关税率设置</h3>
+                <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button ng-click="new()" class="btn btn-toolbar" type="button"><i class="fa fa-file-o"></i>新增</button>
+                <button class="btn btn-toolbar" type="button"
+                        ng-click="refresh()">
+                    <i class="fa fa-history"></i>刷新
+                </button>
+                <button ng-click="save()" class="btn btn-toolbar" type="button"><i class="fa fa-floppy-o"></i>保存
+                </button>
+                <button ng-click="delete()" class="btn btn-toolbar" type="button"><i class="fa fa-trash"></i>删除</button>
+                <!-- <button class="btn btn-toolbar" type="button"><i class="fa fa-check-square-o">提交</i></button>-->
+                <button ng-hide="true" class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>导出</button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>基本信息</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <div class="row">
+
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null" style="font-size: 12px">英文品名</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           data-rule-required="true" data-msg-required="英文品名不能为空"
+                                           ng-model="data.currItem.name_yw">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null" style="font-size: 12px">中文品名</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           data-rule-required="true" data-msg-required="中文品名能为空"
+                                           ng-model="data.currItem.name_zw">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null" style="font-size: 12px">HS编码</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           data-rule-required="true" data-msg-required="HS编码不能为空"
+                                           ng-model="data.currItem.hs_code">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini" style="font-size: 12px"></label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label><input
+                                            type="checkbox"
+                                            ng-false-value="1"
+                                            ng-true-value="2"
+                                            ng-checked="data.currItem.usable"
+                                            ng-model="data.currItem.usable">是否可用
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">退税率</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="number"
+                                           data-rule-required="true" data-msg-required="退税率不能为空"
+                                           ng-model="data.currItem.ts_lv">
+                                </div>
+                                 <div class="col-md-1">
+                                    <label class="form-label-mini not-null">不退税率</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm"
+                                           data-rule-required="true" data-msg-required="不退税率不能为空"
+                                           type="小数" ng-model="data.currItem.bts_lv">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null" style="font-size: 12px">排序号</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="number"
+                                           data-rule-required="true" data-msg-required="排序号不能为空"
+                                           ng-model="data.currItem.name_id">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">单位</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text" ng-model="data.currItem.uom_name">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null" style="font-size: 12px">制冷量</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           data-rule-required="true" data-msg-required="制冷量不能为空"
+                                           ng-model="data.currItem.item_cool">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">要素品名</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           data-rule-required="true" data-msg-required="要素品名不能为空"
+                                           ng-model="data.currItem.brand_name">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">报关要素</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           data-rule-required="true" data-msg-required="报关要素不能为空"
+                                           ng-model="data.currItem.elements_name">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">备注</label>
+                                </div>
+                                <div class="col-md-11">
+                                        <textarea ng-model="data.currItem.note" rows="3"
+                                                  class="form-control noresize"></textarea>
+                                </div>
+                            </div>
+							
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+

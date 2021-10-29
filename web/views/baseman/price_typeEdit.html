@@ -1,0 +1,110 @@
+<div class="bill-form" ng-controller="price_typeEdit">
+    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h3>价格条款维护</h3>
+                <button ng-click="search()" class="btn btn-toolbar" ng-hide="mainbtn.search" type="button"
+                        ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button ng-click="new()" class="btn btn-toolbar" type="button"><i class="fa fa-file-o"></i>新增</button>
+                <button ng-click="refresh()" class="btn btn-toolbar" type="button"><i class="fa fa-history"></i>刷新
+                </button>
+                <button ng-click="save()" class="btn btn-toolbar" type="button"><i class="fa fa-floppy-o"></i>保存
+                </button>
+                <button ng-click="delete()" class="btn btn-toolbar" type="button"><i class="fa fa-trash"></i>删除</button>
+                <button ng-hide="true" class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>导出</button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>基本信息</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+
+                            <div class="row" ng-class="{false:'hide'}[isEdit]">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">创建者:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input readonly="readonly" class="form-control readonly input-sm" type="text"
+                                           ng-model="data.currItem.creator">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">创建时间:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input readonly="readonly" class="form-control readonly input-sm" type="text"
+                                           ng-model="data.currItem.create_time">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">修改者:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input readonly="readonly" class="form-control readonly input-sm" type="text"
+                                           ng-model="data.currItem.updator">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">修改时间:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input readonly="readonly" class="form-control readonly input-sm" type="text"
+                                           ng-model="data.currItem.update_time">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini" style="font-size: 12px">价格类型编码:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input ng-model="data.currItem.price_type_code" type="text"
+                                           class="form-control input-sm">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini" style="font-size: 12px">价格类型名称:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input ng-model="data.currItem.price_type_name" type="text"
+                                           class="form-control input-sm">
+                                </div>
+                                <div class="col-md-2">
+                                    <label><input
+                                            type="checkbox"
+                                            ng-false-value="1"
+                                            ng-true-value="2"
+                                            ng-checked="data.currItem.usable"
+                                            ng-model="data.currItem.usable">是否可用
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <div ag-gridview sg-options="aoptions" sg-data="data.currItem.price_type_lineofprice_types"
+                                 sg-columns="acolumns" style="width:100%;height:180px;" class="slick-grid">
+                            </div>
+                            <button class="btn btn-toolbar" type="button" ng-click="additem()"><i
+                                    class="fa fa-plus-square-o"></i>增加行
+                            </button>
+                            <button class="btn btn-toolbar" type="button" ng-click="delitem()"><i
+                                    class="fa fa-minus-square-o"></i>删除行
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+

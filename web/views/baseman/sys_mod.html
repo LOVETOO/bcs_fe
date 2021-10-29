@@ -1,0 +1,142 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="sys_mod">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="searchws();">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>模块定义</h5>
+                    <div class="ibox-tools">
+                        <form class="pull-right">
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip"
+                                    ng-click="save()"><i class="fa fa-save"></i> 保存
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left"
+                                    ng-click="refresh()"><i class="fa fa-refresh"></i> 刷新
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top"
+                                    ng-click="del()"><i class="fa fa-trash-o"></i> 删除
+                            </button>
+                           <button class="btn btn-white btn-sm" data-toggle="modal"
+                                    ng-click="addCat()"><i class="fa fa-plus"></i> 新建分类
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal"
+                                    ng-click="addMod()"><i class="fa fa-plus"></i> 新建模块
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content TreeGridBox">
+                    <div class="ibox-title">
+                        <h5>模块</h5>
+                        <ul id="tree" class="ztree"></ul>
+                    </div>
+                    <div class="grid_modal tabs-container" id="attributeModal" style="border: 1px solid #E2EBF1;">
+                        <ul class="nav nav-tabs">
+                            <li class="active m-l-sm">
+                                <a data-toggle="tab" href="tabs.html#tab-cg">常规</a>
+                            </li>
+                            <li><a data-toggle="tab" href="tabs.html#tab-qt">其他</a></li>
+                        </ul>
+                        <div class="tab-content ibox-content">
+                            <div id="tab-cg" class="tab-pane active form-inline mline">
+                                <div class="row">
+                                    <label class="control-label">模块编码</label>
+                                    <input type="text" class="form-control width_m" ng-model="data.currItem.modcode">
+                                    <label class="form-label-mini">模块名称</label>
+                                    <input type="text" class="form-control width_m" ng-model="data.currItem.modname">
+                                    <label class="form-label-mini">模块类型</label>
+                                    <select ng-model="data.currItem.clas"
+                                            class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                            ng-options="s.id as s.name for s in class"
+                                            ng-selected="s.id==data.currItem.clas">
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">需加载包</label>
+                                    <input type="text" class="form-control width_m" ng-model="data.currItem.bplname">
+                                    <label class="form-label-mini">模块图标</label>
+                                    <input type="text" class="form-control width_m" ng-model="data.currItem.imageindex">
+                                    <label class="form-label-mini">显示方式</label>
+                                    <select ng-model="data.currItem.showstyle"
+                                            class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                            ng-options="s.id as s.name for s in showstyles"
+                                            ng-selected="s.id==data.currItem.showstyle">
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <!--<label class="control-label">客户端 </label>
+                                    <select ng-model="data.currItem.modtype"
+                                            class="input-sm chosen-select form-control ng-pristine ng-valid localytics-chosen loading width_m"
+                                            ng-options="s.id as s.name for s in modtypes"
+                                            ng-selected="s.id==data.currItem.modtype">
+                                    </select>-->
+                                    <label class="control-label">内建索引</label>
+                                    <input type="text" class="form-control width_m" ng-model="data.currItem.modtag">
+                                    <label class="form-label-mini">模块排序</label>
+                                    <input type="text" class="form-control width_m" ng-model="data.currItem.sortindex">
+                                    <label class="control-label">
+                                        <input type="checkbox" class="i-checks" ng-model="data.currItem.isws" ng-false-value="1"  ng-true-value="2"
+                                               ng-checked=""> 工作区
+                                    </label>
+                                    <label class="control-label">
+                                        <input type="checkbox" class="i-checks" ng-model="data.currItem.flag" ng-false-value="1"  ng-true-value="2"
+                                               ng-checked=""> 可用
+                                    </label>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">引用地址</label>
+                                    <input type="text" class="form-control width_xxl" ng-model="data.currItem.refaddr">
+
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">窗体类名</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control width_xxl" ng-model="data.currItem.webrefaddr">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">需加载JS</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control width_xxl" ng-model="data.currItem.webloadfile">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">模块图标</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control width_xxl" ng-model="data.currItem.webimageurl">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">备注</label>
+                                    <textarea class="form-control width_xxl" name="mainfields"  ng-model="data.currItem.note" ></textarea>
+                                </div>
+                            </div>
+                            <div id="tab-qt" class="tab-pane form-inline mline" >
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">创建用户</label>
+                                        <input type="text" class="form-control width_l" name="creator"
+                                               ng-model="data.currItem.creator" ng-readonly="true">
+                                        <label class="control-label">创建时间</label>
+                                        <input type="text" class="form-control width_l" name="createTime"
+                                               ng-model="data.currItem.createtime" ng-readonly="true">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">最后修改用户</label>
+                                        <input type="text" class="form-control width_l" name="creator"
+                                               ng-model="data.currItem.creator" ng-readonly="true">
+                                        <label class="control-label">最后修改时间</label>
+                                        <input type="text" class="form-control width_l" name="createtime"
+                                               ng-model="data.currItem.createtime" ng-readonly="true">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

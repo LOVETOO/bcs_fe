@@ -1,0 +1,176 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="base_role">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="wrapper wrapper-content">
+            <div class="row">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>角色列表</h5>
+                        <div class="ibox-tools">
+                            <form class="form-inline">
+                                <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left"
+                                        title="刷新" ng-click="refresh()"><i class="fa fa-refresh"></i> 刷新
+                                </button>
+                                <button class="btn btn-white btn-sm" data-toggle="modal" data-target="#attributeModal"
+                                        title="新建角色" ng-click="add()"><i class="fa fa-plus"></i> 新建角色
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="ibox-content TreeGridBox">
+                        <div class="ibox-title">
+                            <h5>角色管理</h5>
+                            <ul id="tree" class="ztree"></ul>
+                        </div>
+                        <div class="grid_modal">
+                            <div id="headerGrid" slick-grid sg-options="headerOptions" sg-columns="headerColumns" class="slick-grid">
+                            </div>
+
+                            <!--<div id="headerViewGrid" slick-grid sg-options="headerOptions" sg-columns="headerColumns" class="slick-grid">-->
+                            <!--</div>-->
+                            <div class="page_modal modal-open" page-pagination></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--添加角色窗口-->
+     </div>
+
+    <div class="modal inmodal fade" id="attributeModal" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" draggable-model>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">角色属性</h4>
+            </div>
+            <div class="modal-body">
+                <!--tab-->
+                <div class="tabs-container">
+                    <ul class="nav nav-tabs">
+                        <li class="active m-l-sm"><a data-toggle="tab" href="tabs.html#tab_common">常规</a></li>
+                        <li><a data-toggle="tab" href="tabs.html#tab_user">包含用户</a></li>
+                        <li><a data-toggle="tab" href="tabs.html#tab_right">权限</a></li>
+                        <li><a data-toggle="tab" href="tabs.html#tab_org">包含组织</a></li>
+                    </ul>
+                    <form method="get" class="form-inline mline" name="entityForm" novalidate>
+                        <div class="tab-content">
+                            <div id="tab_common" class="tab-pane active">
+                                <div class="panel-body form-inline">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="control-label">角色名称</label>
+                                            <input type="text" class="form-control width_l" name="rolename"
+                                                   ng-model="data.currItem.rolename"
+                                                   ng-minlength=2
+                                                   ng-maxlength=20 required>
+                                            <span style="color:red"
+                                                  ng-show="entityForm.rolename.$dirty && entityForm.rolename.$invalid">
+                                                            <span ng-show="entityForm.rolename.$error.required">请输入</span>
+                                                            <span ng-show="entityForm.rolename.$error.minlength">最少2个字符</span>
+                                                            <span ng-show="entityForm.rolename.$error.maxlength">最多20个字符</span>
+                                                        </span>
+                                            <label class="control-label">角色代号</label>
+                                            <input type="text" class="form-control width_l" name="roleid"
+                                                   ng-model="data.currItem.roleid"
+                                                   ng-minlength=2
+                                                   ng-maxlength=20 required>
+                                            <span style="color:red"
+                                                  ng-show="entityForm.roleid.$dirty && entityForm.roleid.$invalid">
+                                                        <span ng-show="entityForm.roleid.$error.required">请输入</span>
+                                                        <span ng-show="entityForm.roleid.$error.minlength">最少2个字符</span>
+                                                        <span ng-show="entityForm.roleid.$error.maxlength">最多20个字符</span>
+                                                    </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="control-label">创建用户</label>
+                                                <input type="text" class="form-control width_l" name="creator"
+                                                       ng-model="data.currItem.creator" ng-readonly="true">
+                                                </span>
+                                            <label class="control-label">创建时间</label>
+                                                <input type="text" class="form-control width_l" name="createTime"
+                                                       ng-model="data.currItem.createtime"
+                                                       ng-readonly="true">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class=" control-label">最后修改用户</label>
+                                                <input type="text" class="form-control width_l" name="creator"
+                                                       ng-model="data.currItem.creator" ng-readonly="true">
+                                                </span>
+                                            <label class="control-label">最后修改时间</label>
+                                                <input type="text" class="form-control width_l" name="createtime"
+                                                       ng-model="data.currItem.createtime"
+                                                       ng-readonly="true">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="form-group">
+                                                <label class=" control-label">备注</label>
+                                                    <textarea class="form-control" name="note" style="width: 603px"
+                                                       ng-model="data.currItem.note"></textarea>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab_user" class="tab-pane">
+                                <div class="panel-body">
+                                    <button type="button" class="btn btn-white footer-btn"
+                                            ng-click="searchUser('addUserLineRow')">增加
+                                    </button>
+                                    <div id="lineUserGridView" slick-grid sg-options="lineUserOptions"
+                                         sg-data=""
+                                         sg-columns="lineUserColumns" style="width:100%;height:381px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab_right" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h4>模块</h4>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h4>菜单</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <ul id="modTree" class="ztree scroll400" ></ul>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <ul id="menuTree" class="ztree scroll400" ></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab_org" class="tab-pane">
+                                <div class="panel-body">
+                                    <button type="button" class="btn btn-white footer-btn"
+                                            ng-click="searchOrg('addOrgLineRow')">增加
+                                    </button>
+                                    <div id="lineOrgGridView" slick-grid sg-options="lineOrgOptions"
+                                         sg-data=""
+                                         sg-columns="lineOrgColumns" style="width:100%;height:381px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save()"
+                        ng-disabled="entityForm.rolename.$invalid || entityForm.roleid.$invalid">保存
+                </button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

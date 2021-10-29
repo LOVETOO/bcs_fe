@@ -1,0 +1,16 @@
+<div class="ibox flex-column" hc-init="doInit()">
+	<div class="ibox-title grid-other-h">
+		<div class="ibox-tools">
+			<div class="pull-left" hc-filter="filterSetting" hc-if="filterSetting"></div>
+			<div hc-buttons="toolButtons"
+				hc-buttons-pull-right
+				hc-btn-groups="toolButtonGroups"
+				hc-btn-default-group="more"></div>
+		</div>
+	</div>
+    <!-- 查询条件面板，此处的元素只是占位符，会被实际的查询条件面板替换 -->
+	<hc-obj-list-search-panel class="ng-hide"></hc-obj-list-search-panel>
+	<div class="p-w-sm flex1 flex-column">
+		<div hc-grid="gridOptions" class="m-t-xs flex1"></div>
+	</div>
+</div>

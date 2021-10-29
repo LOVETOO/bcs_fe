@@ -1,0 +1,355 @@
+<div class="hc-ibox nav-knowledge box-shadow" >
+    <div class="page-content flex-row">
+        <div class="logo">
+            <i class="iconfont hc-zhishiku2"></i>
+            知识库
+        </div>
+        <!-- <div class="hc-search-box flex-row">
+            <input type="text" name="">
+            <button class="btn">
+                <i class="iconfont hc-search"></i>
+            </button>
+        </div> -->
+        <div class="nav-list">
+            <a href="" ng-click="openKnowledge()">首页</a>
+            <a href="" ng-click="openKnowledgeManage()"><i class="iconfont hc-edit"></i>知识编辑</a>
+        </div>
+    </div>
+</div>
+<div hc-diy-page class="bg-gray">
+    <div class="row" style="min-height:100vh;width: 1124px;padding-top: 54px;margin: 0px auto;" id="shared-lists">
+        <div class="col-lg-9 col-md-9 col-sm-9 p-w-xs">
+            <div class="hc-card article box-shadow p-lg">
+                <div class="article-subject">
+                    <h2>{{data.currItem.subject}}</h2>
+                </div>
+                <div class="article-author">
+                    <p>
+                        <span style="color: #333;">作者：{{data.currItem.author}}</span>
+                        <span>{{data.currItem.pub_time | date:data.currItem.pub_time_format}} {{data.currItem.pub_time_desc}} </span>
+                        <span class="pull-right"> 
+                            <i class="iconfont hc-chakancishu"></i>{{data.currItem.viewnum+1}} </span>
+                        <span class="pull-right">
+                            <i class="iconfont hc-pinglun"></i>{{data.currItem.scp_news_discusss.length}} </span>
+                        <a class="pull-right" ng-click="insertFavorite(data.currItem.newsid)" ng-hide="noRight">
+                            收藏:
+                            <i class="iconfont hc-weiguanzhu" ng-show="data.currItem.isfavorite!=2"></i>
+                            <i class="iconfont hc-yiguanzhu" ng-show="data.currItem.isfavorite==2"></i>
+                        </a>
+                    </p>
+                </div>
+                <div id="content" class="content">
+
+                </div>
+                <hr class="line clear">
+                <div class="mail-attachment" style="padding: 10px 20px 15px;"
+                     ng-show='data.currItem.attachofemails.length>0'>
+                    <p style="font-size: 16px;">
+                        <span><i class="fa fa-paperclip"></i>文档附件（{{data.currItem.attachofemails.length}}）</span>
+                    </p>
+                    <div class="attachment att_bt" ng-repeat='item in data.currItem.attachofemails'>
+                        <div class="fa {{item.icon_file}} fa-2x ico_big"></div>
+                        <div class="name_big">
+                            <span>{{item.docname}}</span><span class="graytext">({{item.oldsize}}KB)</span>
+                            <span class="down_big">
+                                <a ng-show="item.reftype!='999'" target="_blank" ng-click='viewDoc(item)'>查看</a>
+                                <a style='padding-left:10px' ng-show="item.reftype!='999'" target="_blank"
+                                   href="/downloadfile.do?docid={{item.docid}}">下载</a>
+                                <a ng-show="item.reftype=='999'" target="_blank" href="{{item.url}}">查看</a>
+                                <!-- <a ng-hide='item.reftype=="999"' style='padding-left:10px'
+                                    ng-click='server_save(item.refid)'>服务端另存</a> -->
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hc-card comment box-shadow">
+                <!--阅读记录-->
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#talking" data-toggle="tab">
+                            <span>评论专区</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#home" data-toggle="tab">
+                            <span>阅读记录({{data.currItem.scp_news_viewhs.length}})</span>
+                        </a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content" style="margin-bottom:30px;"  ng-hide="noRight">
+                    <div class="tab-pane fade in active" id="talking">
+                        <div class="social-footer border-bottom">
+                            <div class="social-comment">
+                                <div class="media-body flex-row">
+                                    <textarea class="form-control" placeholder="输入评论" ng-model="data.currItem.discuss_content"></textarea>
+                                    <button class="btn btn-white btn-xs pull-right" ng-click="publishDiscuss()">发表评论</button>
+                                </div>
+                            </div>
+                            <div class="social-comment" ng-repeat="element in data.currItem.scp_news_discusss">
+                                <a href="" class="pull-left" >
+                                    <img class="headimg" hc-cropper-modal="data.hcCropper"
+                                         ng-src="/downloadfile?docid={{element.headimgdocid}}" alt="profile">
+                                    <!--+"&viewtype=1"-->
+                                    <!--  ng-src={{(element.headimgdocid)?"/downloadfile?docid="+element.headimgdocid:"img/head.png"}}-->
+                                    <!--<img alt="image" ng-src={{(element.headimgdocid)?"/downloadfile?docid="+element.headimgdocid:"img/head.png"}}>-->
+<!--
+                                    <img alt="image" src="http://cn.inspinia.cn/html/inspiniaen/img/a1.jpg">
+-->
+                                </a>
+                                <div class="media-body">
+                                    <a href="#">
+                                        {{element.reader_name}}
+                                    </a>
+                                    {{element.discuss_content}}
+                                    <br>
+                                    <small class="text-muted">{{element.create_time | date:element.create_time_format}}</small>
+                                    <small class="text-muted pull-right">{{element.time_desc}}</small>
+                                    <!-- -
+                                    <a href="#" class="small">回复</a>-->
+                                </div>
+                            </div>
+
+                            <!--<div class="social-comment">
+                                <a href="" class="pull-left">
+                                    <img alt="image" src="http://cn.inspinia.cn/html/inspiniaen/img/a2.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <a href="#">
+                                        小明
+                                    </a>
+                                    时间从何而来？为什么时间似乎是流动的？
+                                    <br>
+                                    <small class="text-muted">2017.12.12</small>
+                                    -
+                                    <a href="#" class="small">回复</a>
+                                </div>
+                                <div class="social-comment">
+                                    <div class="media-body flex-row">
+                                        <textarea class="form-control" placeholder="输入评论"></textarea>
+                                        <button class="btn btn-white btn-xs pull-right">发表评论</button>
+                                    </div>
+                                </div>
+                                <div class="social-comment">
+                                    <a href="" class="pull-left">
+                                        <img alt="image" src="http://cn.inspinia.cn/html/inspiniaen/img/a8.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <a href="#">小明</a>
+                                        时间从何而来？为什么时间似乎是流动的？
+                                        <br>
+                                        <small class="text-muted">2017.12.12</small>
+                                        -
+                                        <a href="#" class="small">回复</a>
+                                    </div>
+                                </div>
+                            </div>-->
+
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade p-w-m" id="home">
+                        <div class="readhead">
+                            <span>序号</span>
+                            <span>阅读人</span>
+                            <span>阅读时间</span>
+                        </div>
+                        <div class="readbody" ng-repeat="item in newsreaders[nowpage]"
+                             ng-if="data.currItem.scp_news_viewhs && data.currItem.scp_news_viewhs.length>0">
+                            <span>{{($index+1)+(nowpage*5)}}</span>
+                            <span>{{item.reader_name}}</span>
+                            <span>{{item.read_time}}</span>
+                        </div>
+                        <div id="pageBox" ng-show="showpage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 p-w-xs">
+            <div class="hc-card box-shadow list">
+                <div class="hc-card-title"><i class="iconfont hc-shu"></i>我的常用知识</div>
+                <div class="hc-card-content">
+                    <ul>
+                        <li ng-repeat="element in data.currItem.my_common_list">
+                            <a href="" ng-click="detail(element.newsid)">{{element.subject}}</a>
+                            <span class="amount">人气:{{element.viewnum}}</span>
+                        </li>
+
+                        <!--<li>关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li>关于《知识产权备案》流程提纲<span class="amount">1288</span></li>
+                        <li>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>-->
+                    </ul>
+                </div>
+            </div>
+            <div class="hc-card box-shadow list">
+                <div class="hc-card-title"><i class="iconfont hc-paihang"></i>知识排名</div>
+                <div class="hc-card-content">
+                    <ul>
+                        <li ng-repeat="element in data.currItem.hot_rank_list">
+                            <i class="num">{{$index+1}}</i>
+                            <a href="" ng-click="detail(element.newsid)">{{element.subject}}</a>
+                            <span class="amount">人气:{{element.viewnum}}</span>
+                        </li>
+
+                        <!--<li><i class="num">1</i>关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li><i class="num">2</i>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li><i class="num">3</i>关于《知识产权备案》流程提纲<span class="amount">1288</span></li>
+                        <li><i class="num">4</i>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>-->
+                    </ul>
+                </div>
+            </div>
+            <div class="hc-card box-shadow list">
+                <div class="hc-card-title"><i class="iconfont hc-yiguanzhu"></i>我的收藏</div>
+                <div class="hc-card-content">
+                    <ul>
+                        <li ng-repeat="element in data.currItem.my_favorite_list">
+                            <a href="" ng-click="detail(element.newsid)">{{element.subject}}</a>
+                            <span class="amount">人气:{{element.viewnum}}</span>
+                        </li>
+
+                        <!--<li>关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>
+                        <li>关于《知识产权备案》流程提纲<span class="amount">1288</span></li>
+                        <li>关于《知识产权备案》流程提纲关于《知识产权备案》流程提纲<span class="amount">人气:1288</span></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    .article-subject {
+        margin: 10px 20px 20px;
+    }
+
+    .article-subject > h2 {
+        text-align: center;
+        font-size: 24px;
+    }
+    .article-author{
+        margin: 35px 0px;
+    }
+    .article-author > p {
+        text-align: center;
+        line-height: 14px;
+    }
+    .social-footer{
+        background: #fff;
+        padding: 15px;
+        border: 0;
+    }
+    .article-author > p >span,
+    .article-author > p >a {
+        font-size: 12px;
+        color: #a5a5a5;
+        margin-right: 5px;
+        border-right: 1px solid #ccc;
+        padding-right: 10px;
+    }
+    .article-author > p >a .hc-yiguanzhu{
+        color: #f90;
+    }
+    .article-author > p >span i,
+    .article-author > p >a i{
+        font-size: 13px;
+        margin-right: 2px;
+    }
+    .social-comment{
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+    }
+    .social-comment .media-body{
+        line-height: 20px;
+    }
+    .social-comment .media-body a{
+        display: block;
+        font-weight: bold;
+    }
+    .content {
+        margin: 0 auto;
+    }
+
+    .att_bt {
+        _zoom: 1;
+        padding: 5px 2px;
+        clear: both;
+        margin: 5px 0 10px;
+        min-height: 40px;
+    }
+
+    .name_big {
+        float: left;
+        line-height: 26px;
+    }
+
+    .name_big .down_big {
+        margin-left: 2px;
+    }
+
+    .graytext {
+        color: #a0a0a0;
+    }
+
+    .ico_big {
+        float: left;
+        margin: 2px 8px 0 0;
+    }
+
+    .readhead, .readbody {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .readhead {
+        font-weight: bold;
+    }
+
+    .readbody {
+        border-top: 1px solid #f3f3f3;
+    }
+
+    .tab-pane span {
+        width: 33%;
+        padding: 10px 10px 15px 10px;
+    }
+
+    .tab-pane span:not(:first-child) {
+        text-align: center;
+        position: relative;
+        left: -10%;
+    }
+
+    .mail-attachment {
+        border-top: none;
+    }
+
+    .line {
+        height: 1px;
+        border: none;
+        border-top: 1px dashed #a5a5a5;
+    }
+
+    .body {
+        width: 900px;
+        margin: 0 auto;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    #pageBox > ul.pagination > li > span {
+        width: 30px;
+    }
+
+    #pageBox > ul.pagination > li {
+        float: left;
+    }
+
+    .ibox-title{
+        height: 0px;
+    display: none;
+    }
+</style>

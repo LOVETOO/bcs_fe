@@ -1,0 +1,27 @@
+ <ul>
+        <!--li id="m_add" onclick="menuAddNode();">输出当前版本</li-->
+        <li id="m_edit" onclick="menuEditNode();">
+            <i class="fa fa-search"></i><span>搜索</span>
+        </li>
+        <li ng-click="hcMenu.file_copy.func('tree')">
+            <i class="fa fa-files-o"></i><span>复制</span>
+        </li>
+        <li ng-click="file_cut1('tree')">
+            <i class="fa fa-arrows"></i><span>剪切</span>
+        </li>
+        <li ng-click="refreshTree()">
+            <i class="fa fa-refresh"></i><span>刷新</span>
+        </li>
+        <li ng-show='data.transfer==2||userbean.userid=="admin"' ng-click="share()">
+            <i class="fa fa-share"></i><span>权限</span>
+        </li>
+        <li ng-show='data.delete==2||userbean.userid=="admin"' ng-click="del_file(1,0)">
+            <i class="fa fa-trash-o"></i><span>删除</span>
+        </li>
+        <li id="m_delete" ng-click="new_name(1)">
+            <i class="fa fa-pencil"></i><span>重命名</span>
+        </li>
+        <li ng-show='data.transfer==2||userbean.userid=="admin"' ng-click="ftr_attr('tree')">
+            <i class="fa fa-info-circle"></i><span>属性</span>
+        </li>
+    </ul>

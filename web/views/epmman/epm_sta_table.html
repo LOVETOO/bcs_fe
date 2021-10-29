@@ -1,0 +1,173 @@
+<!-- 
+author：zengjinhua
+since：2020/1/3
+Description：销售任务基础
+-->
+<div hc-diy-page>
+    <!--========================== 按钮 ==========================-->
+    <div class="row other-h m-t-xs" style="padding-left: 15px; padding-right: 15px;margin: 5px 0 5px 0;">
+        <!--========================== 头部左边按钮 ==========================-->
+        <div hc-if="displayMode == 'newModel' || displayMode == 'editModel'" style="display: inline-block;">
+            <!--========================== 行按钮 ==========================-->
+            <div class="sta_table_text">行：</div>
+            <!-- 增加列按钮 -->
+            <div hc-button="addLine()" hc-icon="fa fa-plus"></div>
+            <!-- 删除列按钮 -->
+            <div hc-button="delLine()" hc-icon="fa fa-minus"></div>
+            <!-- 上移按钮 -->
+            <div hc-button="moveUp()" hc-icon="fa fa-angle-up"></div>
+            <!-- 置顶按钮 -->
+            <div hc-button="stick()" hc-icon="fa fa-angle-double-up"></div>
+            <!-- 下移按钮 -->
+            <div hc-button="shiftDown()" hc-icon="fa fa-angle-down"></div>
+            <!-- 置底按钮 -->
+            <div hc-button="rear()" hc-icon="fa fa-angle-double-down"></div>
+            <!-- 新增子节点按钮 -->
+            <div hc-button="childNode()">T</div>
+            <!--========================== 列按钮 ==========================-->
+            <div class="sta_table_text">列：</div>
+            <!-- 增加列按钮 -->
+            <div hc-button="addCol()" hc-icon="fa fa-plus"></div>
+            <!-- 删除列按钮 -->
+            <div hc-button="delCol()" hc-icon="fa fa-minus"></div>
+            <!-- 左移按钮 -->
+            <div hc-button="moveUpCol()" id="sta_table_left_btn"></div>
+            <!-- 置左按钮 -->
+            <div hc-button="stickCol()">《</div>
+            <!-- 右移按钮 -->
+            <div hc-button="shiftDownCol()">></div>
+            <!-- 置右按钮 -->
+            <div hc-button="rearCol()">》</div>
+            <!-- 编辑列按钮 -->
+            <div hc-button="editCol()">编辑</div>
+        </div>
+        <!--========================== 头部右边按钮 ==========================-->
+        <!-- 保存按钮 --><!-- 新增模式and编辑模式 可见 -->
+        <div hc-button="topRightSave()" class="sta_table_save_btn sta_table_top_right_btn" hc-if="displayMode == 'newModel' || displayMode == 'editModel'" hc-icon="iconfont hc-save">保存</div>
+        <!-- 取消编辑 --><!-- 新增模式and编辑模式 可见 -->
+        <div hc-button="topRightBohui1()" class="sta_table_bohui1_btn sta_table_top_right_btn" hc-if="displayMode == 'newModel' || displayMode == 'editModel'" hc-icon="iconfont hc-bohui1">取消编辑</div>
+        <!-- 删除按钮 --><!-- 列表清单and查看模式 可见 -->
+        <div hc-button="topRightDel()" class="sta_table_del_btn sta_table_top_right_btn" hc-if="displayMode == 'listing' || displayMode == 'viewModel'"><i class="iconfont hc-delete"></i>删除</div>
+        <!-- 新增按钮 --><!-- 列表清单 可见 -->
+        <div hc-button="topRightAdd()" class="sta_table_add_btn sta_table_top_right_btn" hc-if="displayMode == 'listing'"><i class="iconfont hc-add"></i>新增</div>
+        <!-- 编辑按钮 --><!-- 查看模式 可见 -->
+        <div hc-button="topRightEdit()" class="sta_table_edit_btn sta_table_top_right_btn" hc-if="displayMode == 'viewModel'" hc-icon="iconfont hc-edit">编辑</div>
+        <!-- 列表清单 --><!-- 查看模式 可见 -->
+        <div hc-button="topRightForm()" class="sta_table_form_btn sta_table_top_right_btn" hc-if="displayMode == 'viewModel'"><i class="iconfont hc-form"></i>列表清单</div>
+    </div>
+    <!-- 分割线 -->
+    <div class="sta_table_top_page"></div>
+    <!-- 内容部分 -->
+    <div hc-box class="flex-column">
+        <!-- 内容 -->
+        <div class="row" hc-if="displayMode != 'listing'">
+            <div hc-label="年份" hc-input="data.currItem.year" hc-type="year" hc-required="true" hc-readonly="displayMode == 'viewModel' || data.currItem.delivery_task_id > 0" hc-change="checkYear()"></div>
+    
+            <div hc-label="报表主题" hc-input="data.currItem.table_name" hc-required="true" hc-readonly="displayMode == 'viewModel'" hc-col-count="4"></div>
+        </div>
+        
+        
+        <div  class="flex1 flex-column">
+            <!-- 列表清单列表 -->
+            <div hc-box hc-grid="gridOptionsList" class="flex1 sta_table_gridOptions" ng-show="displayMode == 'listing'"></div>
+            <!-- 新增模式列表 -->
+            <div hc-box hc-grid="gridOptionsNew" class="flex1 sta_table_gridOptions" ng-show="displayMode == 'newModel'"></div>
+            <!-- 查看模式列表 -->
+            <div hc-box hc-grid="gridOptionsView" class="flex1 sta_table_gridOptions" ng-show="displayMode == 'viewModel'"></div>
+            <!-- 编辑模式列表 -->
+            <div hc-box hc-grid="gridOptionsEdit" class="flex1 sta_table_gridOptions" ng-show="displayMode == 'editModel'"></div>
+            <!-- 网格属性表单 -->
+            <div ng-show="displayMode != 'listing'">
+                <div hc-box="列属性">
+                    <div class="row">
+                        <div hc-input="data.currItem.col_code" hc-label="列编码" hc-change="formLoseFocus('col_code')" hc-readonly="displayMode == 'viewModel'"></div>
+                        <div hc-input="data.currItem.col_name" hc-label="列名称" hc-change="formLoseFocus('col_name')" hc-readonly="displayMode == 'viewModel'"></div>
+                        <div hc-input="data.currItem.col_type" hc-label="取值器类型" hc-change="formLoseFocus('col_type')" hc-readonly="displayMode == 'viewModel' || (data.currItem.cell_type != undefined && data.currItem.cell_type != '') || (data.currItem.cell_script != undefined && data.currItem.cell_script != '')"
+                            hc-can-delete="true"
+                            hc-select-options="[
+                                { name: 'java类', value: 'java' },
+                                { name: '合计', value: 'sum' },
+                                { name: 'sql', value: 'sql' },
+                                { name: '文本', value: 'text' },
+                                { name: '空值', value: 'empty' }
+                            ]">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.col_script" hc-label="取值器脚本" hc-change="formLoseFocus('col_script')" hc-type="textarea" hc-col-count="6" hc-row="2" hc-readonly="displayMode == 'viewModel' || (data.currItem.cell_type != undefined && data.currItem.cell_type != '') || (data.currItem.cell_script != undefined && data.currItem.cell_script != '')"></div>
+                    </div>
+                </div>
+                <div hc-box="单元格属性">
+                    <div class="row">
+                        <div hc-input="data.currItem.cell_code" hc-label="单元格编码" hc-change="formLoseFocus('cell_code')" hc-readonly="displayMode == 'viewModel'"></div>
+                        <div hc-input="data.currItem.cell_type" hc-label="取值器类型" hc-change="formLoseFocus('cell_type')" hc-readonly="displayMode == 'viewModel' || (data.currItem.col_type != undefined && data.currItem.col_type != '') || (data.currItem.col_script != undefined && data.currItem.col_script != '')"
+                            hc-can-delete="true"
+                            hc-select-options="[
+                                { name: 'java类', value: 'java' },
+                                { name: '合计', value: 'sum' },
+                                { name: 'sql', value: 'sql' },
+                                { name: '文本', value: 'text' },
+                                { name: '空值', value: 'empty' }
+                            ]">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.cell_script" hc-label="取值器脚本" hc-change="formLoseFocus('cell_script')" hc-type="textarea" hc-col-count="6" hc-row="2" hc-readonly="displayMode == 'viewModel' || (data.currItem.col_type != undefined && data.currItem.col_type != '') || (data.currItem.col_script != undefined && data.currItem.col_script != '')"></div>
+                    </div>
+                </div>
+                <div hc-box="行属性">
+                    <div class="row">
+                        <div hc-input="data.currItem.row_code" hc-label="行编码" hc-change="formLoseFocus('row_code')" hc-readonly="displayMode == 'viewModel'"></div>
+                        <div hc-input="data.currItem.row_name" hc-label="行名称" hc-change="formLoseFocus('row_name')" hc-readonly="displayMode == 'viewModel'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .sta_table_top_right_btn{/* 头部右边按钮 */
+        float: right;
+        margin-left: 4px;
+    }
+    .sta_table_save_btn{/* 保存按钮 */
+        background-color: #1b89ff;
+        color: #fff;
+        border-color: #1e7bde;
+    }
+    .sta_table_edit_btn{/* 编辑按钮 */
+        background-color: #1b89ff;
+        color: #fff;
+        border-color: #1e7bde;
+    }
+    .sta_table_bohui1_btn{/* 取消编辑按钮 */
+        background-color: #ec5c2b;
+        border-color: #c7461a;
+        color: white;
+    }
+    .sta_table_del_btn i{/* 删除按钮图标 */
+        color: #ff4100;
+    }
+    .sta_table_add_btn i{/* 新增按钮图标 */
+        color: #36a010;
+    }
+    .sta_table_form_btn i{/* 列表清单 */
+        color: #51a5ff;
+    }
+    .sta_table_text{/* 文本样式 */
+        font-size: 13px; 
+        display: inline-block;
+        line-height: 30px;
+        margin-left: 15px;
+    }
+    .sta_table_top_page{/* 头部分割线 */
+        border: 1px solid #f5f5f5;
+        margin: 0 15px 0 15px;
+    }
+    .sta_table_gridOptions{/* 网格样式 */
+        min-height: 240px;
+    }
+</style>
+<script>
+    $('#sta_table_left_btn').text('<');/* 赋值列左移文本内容 */
+</script>

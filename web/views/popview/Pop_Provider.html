@@ -1,0 +1,88 @@
+
+<div class="modal-content">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal"></a>
+        <h3>{{FrmInfo.title}}</h3>
+    </div>
+    <div class="modal-body">
+        <form name="SaleProdHeaderEdit" class="form-horizontal">
+            <div class="row">
+
+                <div class="col-md-2"><label class="form-label-mini ">收货城市:</label></div>
+                <div class="col-md-3">
+                    <input disabled="true" ng-model="item.areaname" type="text" class="form-control input-sm" style="width: 100%;">
+                </div>
+                 <div class="col-md-1">
+                        <a class="form-label-mini" ng-click="selectCity()" style="width: 100%;">修改</a>
+                  </div>
+                <div class="col-md-2"><label class="form-label-mini ">地址:</label></div>
+                <div class="col-md-4">
+                    <input ng-model="item.addresss" type="text" class="form-control input-sm" style="width: 100%;">
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 15px;">
+
+                <div class="col-md-2"><label class="form-label-mini ">收货人:</label></div>
+                <div class="col-md-4">
+                    <input ng-model="item.take_man" type="text" class="form-control input-sm" style="width: 100%;">
+                </div>
+                <div class="col-md-2"><label class="form-label-mini ">电话号码:</label></div>
+                <div class="col-md-4">
+                    <input ng-model="item.phone_code" type="text" class="form-control input-sm" style="width: 100%;">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 15px;" ng-show="FrmInfo.flag != 3">
+                <div class="col-md-2"><label class="form-label-mini ">发运方式:</label></div>
+                <div class="col-md-4">
+                    <select chosen-select ng-model="item.shipmode_id" class="input-sm chosen-select form-control"
+                            ng-options="s.id as s.name for s in ship_types">
+                        <option value=""></option>
+                    </select>
+                </div>
+
+            </div>
+        <div style="max-height:200px;overflow-y:auto;  margin-top: 15px;">
+	         <table  ng-hide="FrmInfo.flag == 3" class="table table-border table-striped">
+                  
+                    <thead style="border: 1px solid #e7e7e7;background-color: #F5F5F6;line-height: 25px;height:25px;" search-thead>
+                
+                    <tbody>
+                    
+                    
+                   <!--  <tr ng-click="trselect($index,$event)" ng-repeat="item in items" >
+                        <td><input name="item" type="checkbox"></td>
+                        <td>{{item.areaname}}</td>
+                        <td>{{item.saleorder_address}}</td>
+                        <td>{{item.take_man}}</td>
+                        <td>{{item.phone_code }}</td>
+                    </tr> -->
+                      <tr ng-dblclick="addConfirm($index)" ng-click="addLine($index,$event)" ng-repeat="item in items" style="cursor: pointer;">
+	                	<td ng-bind='$index+1' search-td>1</td>
+	                	
+						<td>{{item.areaname}}</td>
+						<td style="display:none;" >{{item.address}}</td>
+						<td style="display:none;">{{item.areaname_adds}}</td>
+                        <td>{{item.saleorder_address}}</td>
+                        <td>{{item.take_man}}</td>
+                        <td>{{item.phone_code }}</td>
+                        
+					</tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+    <a class="btn btn-sm btn-primary" ng-click="use()" ng-show="FrmInfo.flag != 3">
+        	   应用
+        </a>
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+            确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+            取消
+        </a>
+    </div>
+</div>

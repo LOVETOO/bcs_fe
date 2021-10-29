@@ -1,0 +1,93 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div class="hc-box other-h">
+            <div class="row">
+                <div hc-input="data.currItem.deptkpibill_no"
+                     hc-label="部门绩效表单编码"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.kpicase_name"
+                     hc-label="考核方案名称"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.kpi_period"
+                     hc-label="考核周期类型"
+                     hc-dict-code="kpi_period"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="check_stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.cyear"
+                     hc-label="考核年度"
+                     hc-type="year"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.seasonmth"
+                     hc-label="考核期间"
+                     ng-show="data.currItem.kpi_period==1"
+                     hc-type="year"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.seasonmth"
+                     hc-label="考核期间"
+                     ng-show="data.currItem.kpi_period==4"
+                     hc-type="month"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.seasonmth"
+                     hc-label="考核期间"
+                     ng-click="clickKpi()"
+                     hc-readonly="true"
+                     ng-show="data.currItem.kpi_period!=1&&data.currItem.kpi_period!=4"
+                     hc-select-options="assess_time"></div>
+                <div hc-input="data.currItem.org_name"
+                     hc-label="被考核部门"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-col-count="6">
+                </div>
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex;margin: 0px;" class="other-h" hc-auto-height>
+            <div class="hc-box" hc-grid="gridOptions" style="width: 1300px;margin-right: 5px;height: 100%;"></div>
+            <div style="width: 50%;height:100%;" class="hc-box">
+                <div hc-tab="kpi_tab" hc-tab-change="onTabChange(params)" style="width:100%"></div>
+                <div hc-tab-page style="height: calc(100% - 30px);">
+                    <!--适用部门五项费用控制率-->
+                    <div id="feectrlrate" class="hc-box active" style="margin: 0px;height: 100%">
+                        <div hc-grid="gridOptions_appraiser" style="height: 100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<style>
+    .approval—status {
+        display: none;
+    }
+</style>
+
+
+
+
+

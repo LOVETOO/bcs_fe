@@ -1,0 +1,84 @@
+<div class="hc-definition">
+   <!--  <div class="row">
+        <button type="button" class="btn btn-primary"
+                style="margin-left: 0px; width: 180px;"
+                ng-click="editshttemp()">
+            <i class="iconfont hc-survey"></i> 编辑表单模板
+        </button>
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-primary"
+                style="margin-left: 0px; width: 180px;"
+                ng-click="downloadtool()">
+            <i class="iconfont hc-icondownload"></i> 下载表单管理工具
+        </button>
+    </div> -->
+    <div class="row">
+        <div class="col-sm-12">
+            <p style="line-height: 40px;">注意：在编辑表单模板之前请确保已经安装了表单管理工具！</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-6 hc-definition-mod fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
+                <div class="hc-definition-edit">
+                    <div class="hc-iconfont-box"  ng-click="editshttemp()">
+                        <i class="iconfont hc-survey"></i>
+                    </div>
+                    <h4 class="hc-definition-name"><span style="color: #1b89ff">编辑</span> 表单模板</h4>
+                    <p>编辑表单模板时系统会先启动您本地的表单编辑工具。</p>
+                    <p>在编辑表单模板前请确保您已经下载了表单编辑工具。</p>
+                </div>
+            </div>
+
+            <div class="col-sm-6  hc-definition-mod fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;">
+                <div class="hc-definition-icondownload">
+                    <div class="hc-iconfont-box" ng-click="downloadtool()">
+                        <i class="iconfont hc-icondownload"></i>
+                    </div>
+                    <h4 class="hc-definition-name"><span style="color: #1b89ff">下载</span> 编辑工具</h4>
+                    <p>表单编辑工具是一个独立的软件安装包，为了确保您能正常编辑表单模板，在编辑模板前请先下载编辑工具！</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+.hc-definition{
+    width: 925px;
+    margin: 30px auto;
+    text-align: center;
+}
+.hc-definition-mod{
+    text-align: center;
+}
+.hc-definition-icondownload{}
+.hc-iconfont-box{
+    width: 160px;
+    height: 160px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #f7f7f7;
+    border-radius: 80px;
+    vertical-align: middle;
+    background-color: #1b89ff;
+    cursor: pointer;
+    color: #fff;
+}
+.hc-definition-edit{}
+.hc-definition p{
+    line-height: 22px;
+    font-size: 14px;
+    margin: 0px;
+    color: #777;
+    text-align: left;
+}
+.hc-definition-mod .iconfont{
+    font-size: 80px;
+}
+.hc-definition-icondownload{}
+.hc-definition-name{
+        font-size: 20px;
+    line-height: 50px;
+}
+</style>

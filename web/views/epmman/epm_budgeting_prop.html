@@ -1,0 +1,66 @@
+<!--2019-6-21-->
+<!--工程预算编制明细页面-->
+<div hc-obj-prop>
+    <div id="base" class="active">
+
+        <div hc-box class="other-h">
+
+            <div class="row">
+                <div hc-input="data.currItem.dsa_code"
+                     hc-label="预算编制编号"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.dsa_theme"
+                     hc-label="工程项目名称"
+                     hc-col-count="4"
+                     hc-class-id="epm_project_contract"
+                     hc-common-search="commonSearchSettingOfEpmProjectContract">
+                </div>
+                <div hc-input="data.currItem.dsa_type"
+                     hc-label="单据状态"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.signed_date"
+                     hc-label="工程合同编号"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.remark"
+                     hc-label="工程合同名称"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.signed_date"
+                     hc-label="签约金额"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.remark"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.signed_date"
+                     hc-label="所属部门"
+                     hc-class-id="epm_project_contract"
+                     hc-common-search="commonSearchSettingOfEpmProjectContract">
+                </div>
+                <div hc-input="data.currItem.remark"
+                     hc-label="项目经理"
+                     hc-class-id="epm_project_contract"
+                     hc-common-search="commonSearchSettingOfEpmProjectContract">
+                </div>
+                <div hc-input="data.currItem.signed_date"
+                     hc-label="编制说明"
+                     hc-col-count="4">
+                </div>
+            </div>
+
+        </div>
+
+        <div hc-box hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div hc-edit-list>
+    <div class="hc-box grid-other-h">
+        <div class="row">
+            <div hc-input="data.currItem.newitem_year" hc-label="新品年份" hc-required="true" hc-type="year"></div>
+            <div hc-input="data.currItem.item_specs" hc-label="产品型号" hc-required="true"></div>
+            <div hc-input="data.currItem.item_code" hc-label="产品编码"></div>
+            <div hc-input="data.currItem.item_name" hc-label="产品名称"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.brand_name" hc-label="品牌" hc-dict-code="brand_name"></div>
+            <div hc-input="data.currItem.entorgid" hc-label="品类" hc-dict-code="crm_entid"></div>
+            <div hc-input="data.currItem.creator" hc-label="创建人" hc-readonly="true"></div>
+            <div hc-input="data.currItem.create_time" hc-label="创建时间" hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.fee_plan" hc-type="checkbox" hc-label="预算内新品"></div>
+            <div hc-input="data.currItem.note" hc-label="备注" hc-col-count="4"></div>
+            <button type="button" class="btn btn-white" ng-disabled="data.currItem.is_import==2||!data.currItem.newitem_id"
+                    ng-click="importItem()">生成产品资料</button>
+        </div>
+
+    </div>
+</div>

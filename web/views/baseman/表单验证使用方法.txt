@@ -1,0 +1,105 @@
+
+======================基础部分-通用=================================================
+1.index.html文件
+  css及js
+  <link id="container_error" href="css/formcheck.css" rel="stylesheet"><!-- 使用了notify后可以不用该CSS -->
+  <script src="js/jquery/validate/jquery.validate.js"></script>
+
+2.在js/service.js 增加服务方法
+  
+// 表单有效性验证服务
+ function FormValidatorService(){
+    var is_pass=false;
+	this.validatorFrom=function(form){	
+				var container = $('div.container');
+				var validator = $("#saveform").validate({
+					debug:true, // 不需要提交模式
+					errorContainer: container,
+					errorLabelContainer: $("ol", container),
+					wrapper: 'li',
+					submitHandler: function() {
+						 is_pass=true;  
+					   }
+					}
+				);
+				$("#saveform").submit();
+				return is_pass;
+		}
+ }
+.service('FormValidatorService', FormValidatorService)
+
+========================业务部分=======================================================
+
+温馨提示：以下字段不符合数据规范要求，不禁止保存
+
+3.业务单据（html）使用方法,如 信用证证录入
+
+
+    
+  <!-----提示位置----->
+  <div id="container_error" class="container">
+			<h4>存在以下错误，不允许保存</h4>
+			<ol></ol>
+</div>
+
+
+  1.   <form class="form-horizontal"   id="saveform" >
+  2.对需要验证的字段增加属性
+
+
+<div class="control-group">
+  <label class="control-label font-noraml form_label_text  " for="lc_bill_no">单据编号</label>
+  <div class="input-append" style="width:48%">
+  <input class="form-control inline input-s-sm-im input-mini " id="lc_bill_no" type="text" ng-       model="fin_lc_bill.lc_bill_no"	
+
+       name="lc_bill_no"  
+       data-rule-required="true" 
+       data-rule-number="true" 
+       data-msg-required="单据编码不能空"  
+       data-msg-number="单据编码:无效数字"
+    >
+ </div>
+
+    <label for="字段代码"></label>
+    <input name="字段代码"   ></input>
+
+        name="lc_bill_no"  
+       data-rule-required="true"  必填项
+       data-rule-number="true" // 数据类型
+       data-msg-required="单据编码不能空" // 必填项为空时提示  
+       data-msg-number="单据编码:无效数字 // 数据型不正确时提示
+
+4.控制器
+  
+ a. 增加引用对象，
+ function finicbillEditController($scope,$location,notify,BasemanService,FormValidatorService){
+
+     ....
+ 	//客户资料保存更新
+	$scope.save = function(){
+         // 验证通过才进行保存
+         if (FormValidatorService.validatorFrom()){
+			  alert('验证通过了，可以保存');
+				if($scope.isEdit){
+					var promise = BasemanService.RequestPost("fin_lc_bill","update",$scope.fin_lc_bill);
+					promise.then(function(data){
+						BasemanService.notify(notify,"更新成功!","alert-info",1000);
+					},function(data){
+						console.log("error");
+						BasemanService.notify(notify,data.message,"alert-danger");
+					});
+				}else{
+					var promise = BasemanService.RequestPost("fin_lc_bill","insert",$scope.fin_lc_bill);
+					promise.then(function(data){
+						BasemanService.notify(notify,"保存成功!","alert-info",1000);
+						$scope.customer = data;
+						$scope.isEdit = true;
+					});
+				}
+	      }
+	}
+
+ }
+
+
+

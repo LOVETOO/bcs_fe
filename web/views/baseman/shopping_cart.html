@@ -1,0 +1,290 @@
+<div ng-init="doInit()">
+    <div class="hc-page-title flex-row ng-scope">
+        <div>
+            <button class="btn btn-orange" ng-click="backToGallery()">返回图库</button>
+        </div>
+    </div>
+    <div hc-box>
+        <div class="hc-box">
+            <table class="table" border="0">
+                <thead>
+                <tr>
+                    <th style="text-align: left;">
+                        <span hc-label="  全选"
+                             hc-input="data.isSelectedAll"
+                             hc-type="checkbox"
+                             hc-change="setShoppingCartSelectedAll()"
+                        ></span>
+                        产品描述
+                    </th>
+                    <th style="text-align: right;">单价</th>
+                    <th style="text-align: right;">数量</th>
+                    <th style="text-align: right;">折扣率(%)</th>
+                    <th style="text-align: right;">金额</th>
+                    <th style="text-align: right;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in data.currItem.scp_shopping_cartitems track by $index">
+                    <td class="product">
+                        <span hc-input="item.isSelected"
+                             hc-type="checkbox"
+                             hc-change="onSelectionChange($index)"
+                        ></span>
+                        <div class="img">
+                            <img hc-img="item.docid">
+                        </div>
+                        <div>
+                            {{item.item_name}} {{item.item_desc}}
+                        </div>
+                    </td>
+                    <td>
+                        <div hc-input="item.price"
+                             hc-blur="onRowDataChange($index,'price')"
+                             hc-focus="focusThenSetOld($index)"
+                             hc-type="money"
+                             hc-label="¥"
+                        ></div>
+
+                        <!--  ￥<input ng-model="item.price"
+                                  ng-blur="onRowDataChange($index,'price')"
+                                  ng-focus="focusThenSetOld($index)">-->
+                    </td>
+                    <td>
+                        <div class="input-group numbtn">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default"
+                                            ng-click="reduce($index)"
+                                            ng-disabled="item.qty == 0"
+                                            type="button"
+                                    >-
+                                    </button>
+                                </span>
+                            <input type="text"
+                                   style="text-align:center;width: 60px;"
+                                   ng-model="item.qty"
+                                   ng-blur="onRowDataChange($index,'qty')"
+                                   class="form-control"
+                                   ng-focus="focusThenSetOld($index)">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default"
+                                            ng-click="add($index)"
+                                            type="button">+
+                                    </button>
+                                </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div hc-input="item.discount_rate"
+                             class="percent"
+                             hc-focus="focusThenSetOld($index)"
+                             hc-blur="onRowDataChange($index,'discount_rate')"
+                             hc-type="percent"
+                        ></div>
+                    </td>
+                    <td>
+                        {{item.amount}}￥
+                    </td>
+                    <td>
+                        <a class="btn-del" ng-click="deleteItem($index)"> 删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="hc-box flex-row" style="border: 1px solid #ededed;">
+            <div class="footerLeftDiv">
+                <div hc-input="data.isSelectedAll"
+                     hc-type="checkbox"
+                     hc-change="setShoppingCartSelectedAll()"
+                     hc-label="  全选"
+                ></div>
+                <div><a>删除选中</a></div>
+                <div><a>清空购物车</a></div>
+            </div>
+            <div class="footerRightDiv">
+
+                <div class="row footerFontSize">
+                    <div>已选中:</div>
+                    <div class="footerMargin" style="color: #ff4d00;margin: 0px 5px;"> {{data.selectedCount}}
+                    </div>
+                    <div class="footerMargin" style="margin-right: 100px;">件商品
+                    </div>
+                    <div>优惠金额:</div>
+                    <div class="footerMargin" style="color: #ff4d00;margin-right: 15px;margin-left: 5px;">
+                        {{data.currItem.total_amount_saved}}
+                    </div>
+                    <div>总金额:</div>
+                    <div class="footerMargin num-price">{{data.currItem.total_amount}}</div>
+                    <div>
+                        <button type="button" ng-click="genQuotedPrice()" class="btn btn-orange chooseButton">工程报价
+                        </button>
+                        <!--<button type="button" ng-click="outAll()" class="btn btn-blue chooseButton">提交订单</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end -->
+    </div>
+</div>
+<style>
+    .table > thead > tr > th,
+    .table > tbody > tr > td {
+        text-align: right;
+        vertical-align: middle;
+        padding: 10px;
+        white-space: nowrap;
+    }
+    .table > thead > tr > th:first-child,
+    .table > tbody > tr > td:first-child{
+        text-align: left;
+        width: 580px;
+    }
+
+    td >.input-inline {
+        min-width: 105px;
+        display: inline-block;
+        margin-right: 0px;
+    }
+    td:first-child>[hc-type="checkbox"]{
+        min-width: 1px;
+        width: 25px;
+    }
+    td > div.input-inline label{
+        width: 12px;
+    }
+    [hc-type="checkbox"] {
+        min-width: 1px;
+        width: 25px;
+        white-space: nowrap;
+    }
+    label span{
+        vertical-align: middle;
+    }
+    .product {
+        text-align: left;
+    }
+
+    .product > div {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .product > div:last-child {
+        max-width: 300px;
+        flex-grow: 1;
+        text-align: left;
+        margin-right: 20px;
+    }
+    .product > div.img{
+        width: 80px;
+        background: #f8f8f8;
+    }
+    .product > div > img {
+        width: 100%;
+        max-height: 80px;
+    }
+
+    .numbtn {
+        width: 120px;
+        display: inline-flex;
+    }
+
+    .numbtn .input-group-btn {
+        width: 30px;
+    }
+
+    .numbtn .btn {
+        width: 30px;
+        border-radius: 0px;
+        border-color: #e3ebf2;
+    }
+
+    .numbtn input {
+        text-align: center;
+        width: 60px;
+        border: 1px solid #e3ebf2;
+        border-left: 0px;
+        border-right: 0px;
+    }
+
+    .percent {
+        width: 80px;
+        display: inline-block;
+        margin: 0px;
+    }
+
+    .input-group-btn:first-child > .btn,
+    .input-group-btn:first-child > .btn-group {
+        margin-right: 0px;
+    }
+
+    .input-group-btn:last-child > .btn,
+    .input-group-btn:last-child > .btn-group {
+        z-index: 2;
+        margin-left: 0px;
+    }
+
+    .chooseButton {
+        width: 108px;
+        height: 32px;
+        font-size: 14px;
+        margin-right: 15px;
+        box-shadow: 2px 2px 8px rgba(62, 69, 103, 0.15);
+    }
+
+    .img_style {
+        width: 80px;
+        height: 80px;
+        margin-right: 15px;
+        border: 1px solid #e4ebf3;
+    }
+
+    .footerLeftDiv {
+        width: 400px;
+        display: flex;
+        align-items: center;
+    }
+
+    .footerLeftDiv > div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: 10px;
+    }
+
+    .footerRightDiv {
+        flex-grow: 1;
+    }
+
+    .footerRightDiv > div {
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .footerFontSize {
+        font-size: 14px !important;
+    }
+
+    .input-inline > label {
+        font-size: 14px;
+        width: 130px;
+    }
+
+    .hc-input .form-control,
+    textarea.form-control {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+    }
+
+    .num-price {
+        color: #ff4d00;
+        font-size: 26px;
+        margin: -5px 15px 0px 5px;
+    }
+
+    .btn-del {
+        color: #d03434;
+    }
+</style>

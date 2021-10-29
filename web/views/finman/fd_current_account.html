@@ -1,0 +1,133 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fd_current_account">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <div class="ibox-tools">
+                        <div class="form-inline mline pull-left">
+                            客户&nbsp;&nbsp;
+                            <div class="input-group width_m">
+                                <input type="text" class="form-control non-empty" ng-model="data.currItem.customer_code" >
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" ng-click="searchItem()">•••</button>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control"
+                                   ng-model="data.currItem.customer_name" ng-readonly="true"/>
+                            对账日期
+                            <input type="text" id="startDate" bs-date-picker class="form-control non-empty" ng-model="data.currItem.start_date">
+                             至&nbsp;&nbsp;
+                            <input type="text" id="endDate" bs-date-picker class="form-control non-empty" ng-model="data.currItem.end_date">
+                            <label class="control-label" style="width: 120px;">
+                                <input type="checkbox" class="i-checks" ng-model="data.searchData.summary" ng-true-value="2" ng-false-value="1"
+                                          >按运营中心汇总<!--ng-click="check_summary($event)" ng-checked="data.searchData.summary==2"-->
+                            </label>
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-white btn-sm" data-toggle="modal" data-target="#attributeModal" ng-click="searchAccount()" >
+                                <i class="fa fa-search"></i> 查询
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div id="headerGridView" slick-grid sg-options="headerOptions"
+                         sg-columns="headerColumns"
+                         class="slick-grid" style="display: none">
+                    </div>
+                    <table class="table table-bordered ui-widget m-n">
+                        <thead>
+                            <tr>
+                                <td style="width: 80px;">序号</td>
+                                <td style="width: 105px;">日期</td>
+                                <td style="width: 130px;">摘要</td>
+                                <td style="width: 110px;">发票金额(借)</td>
+                                <td style="width: 110px;">收款金额(贷)</td>
+                                <td style="width: 110px;">各项扣款(借)</td>
+                                <td style="width: 110px;">各项冲账(贷)</td>
+                                <td style="width: 110px;">各项转账(借)</td>
+                                <td style="width: 110px;">余额(借)</td>
+                                <td style="width: 150px;">备注</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="table-scrollable-y ui-widget">
+                        <table class="table table-bordered m-n">
+                            <thead>
+                                <tr>
+                                    <td style="width: 80px;"></td>
+                                    <td style="width: 105px;"></td>
+                                    <td style="width: 130px;"></td>
+                                    <td style="width: 110px;"></td>
+                                    <td style="width: 110px;"></td>
+                                    <td style="width: 110px;"></td>
+                                    <td style="width: 110px;"></td>
+                                    <td style="width: 110px;"></td>
+                                    <td style="width: 110px;"></td>
+                                    <td style="width: 150px;"></td>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="head in data.currItem.fd_fund_businesss">
+                                <tr ng-show="data.currItem.customer_code==head.customer_code
+                                ||(data.currItem.customer_code!=head.customer_code &&data.searchData.summary==2) ">
+                                    <td colspan="10">{{head.company_and_customer}}</td>
+                                </tr>
+                                <tr ng-repeat="fddata in head.fddata"  ng-show="data.currItem.customer_code==head.customer_code
+                                ||(data.currItem.customer_code!=head.customer_code &&data.searchData.summary==2) ">
+                                    <td>{{$index+1}}</td>
+                                    <td >{{fddata.date}}</td>
+                                    <td >{{fddata.summary}}</td>
+                                    <!--<td >{{fddata.customer_code}}</td>
+                                    <td >{{fddata.customer_name}}</td>
+                                    <td >{{fddata.company_code}}</td>
+                                    <td >{{fddata.company_name}}</td>-->
+                                    <td >{{fddata.invoice_amt_debit}}</td>
+                                    <td >{{fddata.receivable_amt_credit}}</td>
+                                    <td >{{fddata.debit}}</td>
+                                    <td >{{fddata.credit}}</td>
+                                    <td >{{fddata.transfer_voucher_debit}}</td>
+                                    <td >{{fddata.balance_debit}}</td>
+                                    <td >{{fddata.memo}}</td>
+                                </tr>
+                                <tr   ng-show="(data.currItem.customer_code==head.customer_code
+                                    ||(data.currItem.customer_code!=head.customer_code && data.searchData.summary==2)) && head.fddata.length>1 ">
+                                    <td></td>
+                                    <td ></td>
+                                    <td >本期合计：</td>
+                                    <td>{{head.invoice_amt_debit_sum}}</td>
+                                    <td >{{head.receivable_amt_credit_sum}}</td>
+                                    <td >{{head.debit_sum}}</td>
+                                    <td >{{head.credit_sum}}</td>
+                                    <td >{{head.transfer_voucher_debit_sum}}</td>
+                                    <td ><!--{{head.balance_debit_sum}}--></td>
+                                    <td ></td>
+                                </tr>
+                            </tbody>
+                            <tbody  ng-show="data.searchData.summary==2">
+                                <tr >
+                                    <td></td>
+                                    <td ></td>
+                                    <td >运营中心合计：</td>
+                                    <td>{{data.currItem.invoice_amt_debit_all}}</td>
+                                    <td >{{data.currItem.receivable_amt_credit_all}}</td>
+                                    <td >{{data.currItem.debit_all}}</td>
+                                    <td >{{data.currItem.credit_all}}</td>
+                                    <td >{{data.currItem.transfer_voucher_debit_all}}</td>
+                                    <td >{{data.currItem.balance_debit_all+data.currItem.invoice_amt_debit_all}}</td>
+                                    <td ></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--<div class="page_modal modal-open" page-pagination></div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .table-scrollable-y{height: 400px;width: 100%;overflow-y:auto;overflow-x: auto;border-bottom: 1px solid #E2EBF1;border-right: 1px solid #E2EBF1;}
+    .table-scrollable-y>.table>thead>tr>td{padding: 0px;} 
+    .table-scrollable-y>.table{} 
+</style>

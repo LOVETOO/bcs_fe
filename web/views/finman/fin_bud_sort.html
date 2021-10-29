@@ -1,0 +1,100 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="base_org">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>预算类别设置</h5>
+					</div>
+					<div class="ibox-content">
+						<form method="get" class="form-horizontal">
+							<div class="row">
+								<div class="col-sm-5">
+									<div class="form-group">
+										<label class="col-sm-3 control-label">类别编码</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-5">
+									<div class="form-group">
+										<label class="col-sm-3 control-label not-null">类别名称</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<label class="m-l-lg">
+										<div class="icheckbox_square-green">
+											<input type="checkbox" class="i-checks">
+											<ins class="iCheck-helper"></ins>
+										</div>
+										是否可用
+									</label>
+								</div>
+							</div>
+						</form>
+						<div class="jqGrid_wrapper">
+							<table id="table_list_1" ng-repeat=""></table>
+							<div id="pager_list_1"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	$(document).ready(function(){
+        //icheck
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+		// 列表数据
+		var mydata = [
+			{id: "1", startdate: "2010-05-24", enddate: "2010-05-24", name: "test", note: "note", tax: "10.00", total: "2111.00"} ,
+			{id: "2", startdate: "2010-05-25", enddate: "2010-05-24", name: "test2", note: "note2", tax: "20.00", total: "320.00"},
+			{id: "3", startdate: "2007-09-01", enddate: "2010-05-24", name: "test3", note: "note3", tax: "30.00", total: "430.00"},
+			{id: "4", startdate: "2007-10-04", enddate: "2010-05-24", name: "test", note: "note", tax: "10.00", total: "210.00"},
+			{id: "5", startdate: "2007-10-05", enddate: "2010-05-24", name: "test2", note: "note2", tax: "20.00", total: "320.00"},
+			{id: "6", startdate: "2007-09-06", enddate: "2010-05-24", name: "test3", note: "note3", tax: "30.00", total: "430.00"},
+			{id: "7", startdate: "2007-10-04", enddate: "2010-05-24", name: "test", note: "note", tax: "10.00", total: "210.00"},
+			{id: "11", startdate: "2007-10-01", enddate: "2010-05-24", name: "test", note: "note", amount: "200.00", tax: "10.00", total: "210.00"},
+			{id: "12", startdate: "2007-10-02", enddate: "2010-05-24", name: "test2", note: "note2", amount: "300.00", tax: "20.00", total: "320.00"},
+			{id: "13", startdate: "2007-09-01", enddate: "2010-05-24", name: "test3", note: "note3", amount: "400.00", tax: "30.00", total: "430.00"},
+			{id: "14", startdate: "2007-10-04", enddate: "2010-05-24", name: "test", note: "note", amount: "200.00", tax: "10.00", total: "210.00"},
+			{id: "15", startdate: "2007-10-05", enddate: "2010-05-24", name: "test2", note: "note2", amount: "300.00", tax: "20.00", total: "320.00"},
+			{id: "16", startdate: "2007-09-06", enddate: "2010-05-24", name: "test3", note: "note3", amount: "400.00", tax: "30.00", total: "430.00"},
+			{id: "17", startdate: "2007-10-04", enddate: "2010-05-24", name: "test", note: "note", amount: "200.00", tax: "10.00", total: "210.00"}
+		];
+
+		// 列表设置1
+		$("#table_list_1").jqGrid({
+			data: mydata,
+			datatype: "local",
+			height: 250,
+			autowidth: true,
+			shrinkToFit: true,
+			rowNum: 14,
+			rowList: [10, 20, 30],
+			colNames: ['', '费用类别或项目编码', '费用类别或项目名称', '分类'],
+			colModel: [
+				{name: 'id', index: 'id', sorttype: "int"},
+				{name: 'name', index: 'name'},
+				{name: 'note', index: 'note'},
+			],
+			pager: "#pager_list_1",
+			viewrecords: true,
+			//caption: "Example jqGrid 1",  //标题
+			hidegrid: false
+		});
+
+</script>
+
+<!--时间插件引入中文-->
+<script type="text/javascript" src="../../lib/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>

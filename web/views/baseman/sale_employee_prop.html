@@ -1,0 +1,54 @@
+<div hc-obj-prop>
+
+    <!--基本信息-->
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.employee_code"
+                 hc-label="业务员" hc-btn-click="chooseEmployee()"
+                 hc-required="true">
+            </div>
+            <div hc-input="data.currItem.employee_name">
+            </div>
+
+            <div hc-input="data.currItem.remark"
+                 hc-label="备注">
+
+            </div>
+
+            <div hc-input="data.currItem.isuseable"
+                 hc-type="checkbox"
+                 hc-label="可用"></div>
+
+        </div>
+
+        <div hc-grid="gridOptions" hc-auto-height="grid"></div>
+
+    </div>
+
+    <!--其他-->
+    <div id="other" hc-box="">
+        <div class="row">
+            <div hc-input="data.currItem.created_by"
+                 hc-label="创建人">
+            </div>
+
+            <div hc-input="data.currItem.creation_date"
+                 hc-type="date"
+                 hc-label="创建时间"></div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by"
+                 hc-label="最后修改人">
+            </div>
+
+            <div hc-input="data.currItem.last_update_date"
+                 hc-type="date"
+                 hc-label="最后修改时间"></div>
+        </div>
+    </div>
+
+</div>
+
+
+

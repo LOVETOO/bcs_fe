@@ -1,0 +1,248 @@
+<div jq-widget hc-init="doInit()" class="flex-column">
+    <div class="hc-page-title flex-row flex-end">
+        <div hc-input="keyWord"
+             ng-keypress="keyEnterSearch($event)"
+             hc-btn-click="searchItemOrg()"
+             hc-btn-icon="iconfont hc-search"
+             hc-can-input="true"
+             hc-col-count="2"
+             hc-placeholder="请输入商品名称/商品型号进行搜索"
+             class="hc-search-box"
+        ></div>
+        <div class="btn-list">
+            <button class="btn btn-orange" ng-click="goShoppingCart()">我的购物车 [ 55 ]</button><!--{{itemnum}}-->
+            <button class="btn btn-orange">查看报价单</button>
+        </div>
+    </div>
+    
+    <div class="hc-location">
+        <ul>
+            <!-- 当前过滤项 -->
+            <li ng-click="chooseFilter('all')" style="cursor:pointer">所有商品
+                <i class="iconfont hc-moreunfold"></i><i class="iconfont hc-more"></i>
+            </li>
+            <li ng-repeat="filter in curFilter track by filter.name" ng-if="curFilter.length > 0">
+                {{(filter.groupData)?filter.name:filter.type+':'+filter.name}}
+                <i ng-if="filter.groupData == undefined"
+                   class="iconfont hc-close"
+                   ng-click="deleteFilter(filter)"></i>
+                <!--下拉面板-->
+                <i class="iconfont hc-moreunfold" ng-if="filter.groupData"></i>
+                <i class="iconfont hc-more" ng-if="filter.groupData"></i>
+                <ul class="hc-location-select" ng-if="filter.groupData">
+                    <li ng-repeat="filter2 in filter.groupData" ng-if="filter.name != filter2.name">
+                        <A ng-click="chooseFilter(filter2)">{{filter2.name}}</A>
+                    </li>
+                </ul>
+            </li>
+            <!--<li>
+                三级分类<i class="iconfont hc-close"></i>
+            </li>-->
+
+            <!--
+                        <li ng-repeat="filter in curFilter" ng-if="curFilter.item_class2.length > 0">
+                            {{filter[0]}}<i class="iconfont hc-moreunfold"></i><i class="iconfont hc-more"></i>
+                            <ul class="hc-location-select">
+                                <li ng-repeat="class1 in filter"><A>淋浴花洒</A></li>
+                                <li><A>儿童花洒</A></li>
+                                <li><A>手持花洒</A></li>
+                                <li><A>美容按摩花洒</A></li>
+                                <li><A>暗装花洒</A></li>
+                                <li><A>恒温花洒</A></li>
+                                <li><A>配件</A></li>
+                            </ul>
+                        </li>
+            -->
+
+            <!-- <li>淋浴花洒<i class="iconfont hc-moreunfold"></i></li>-->
+            {{(keyWord)?"\""+keyWord+"\"":""}}
+        </ul>
+    </div>
+
+    <!-- 过滤面板 -->
+    <div class="hc-box flex1 flex-column">
+        <div class="hc-nav-list-row">
+            <dl ng-repeat="filter in filterPanel">
+                <dt>{{filter.type}}</dt>
+                <dd class="flex1">
+                    <ul>
+                        <li ng-repeat="data in filter.groupData">
+                            <a ng-click="chooseFilter(data)">{{data.name}}</a>
+                        </li>
+                    </ul>
+
+                    <!-- 更多、多选 -->
+                    <div class="hc-nav-list-check js-toggle-modal1" ng-class="allFilterClass($index)">
+                        <ul class="js-toggle-modal2">
+                            <li ng-repeat="data in filter.groupData"
+                                ng-click="chooseMultipleFilter(data)"
+                                ng-class="(!isMoreButton && multipleFilterTemp
+                                && multipleFilterTemp.indexOf(data) != -1)?'active':''">
+                                <a>{{data.name}}</a><i class="iconfont hc-checked"></i>
+                            </li>
+                            <!--<li class="active"><a>龙头花洒</a><i class="iconfont hc-checked"></i></li>
+                            <li class="active"><a>舒乐智能产品</a><i class="iconfont hc-checked"></i></li>
+                            <li class="active"><a>沐浴房</a><i class="iconfont hc-checked"></i></li>
+                            <li class="active"><a>浴缸</a><i class="iconfont hc-checked"></i></li>
+                            <li class="active"><a>陶瓷盆</a><i class="iconfont hc-checked"></i></li>
+                            <li class="active"><a>地拖盆</a><i class="iconfont hc-checked"></i></li>-->
+                        </ul>
+                        <div class="btn-list" ng-hide="isMoreButton">
+                            <button class="btn btn-white js-toggle-btn1" ng-click="chooseMultipleFilterCancel($index)">
+                                取消
+                            </button>
+                            <button class="btn btn-white js-toggle-btn2" ng-click="chooseMultipleFilterConfirm($index)"
+                                    ng-disabled="$scope.multipleFilterTemp == 0">
+                                确定
+                            </button>
+                        </div>
+                    </div>
+                </dd>
+                <dd class="nav-add js-toggle-btn2" ng-click="showMore($index)"><i class="iconfont hc-moreunfold"></i>更多</dd>
+                <dd class="nav-add js-toggle-btn1" ng-click="showMultiple($index)"><i class="iconfont">+</i>多选</dd>
+            </dl>
+
+
+            <!--<dl ng-if="curFilter.length == 0">
+                <dt>产品大类</dt>
+                <dd class="flex1">
+                    <ul>
+                        <li ng-repeat="data in filterPanel[0].groupData">
+                            <a ng-click="chooseFilter(data)">{{data.name}}</a>
+                        </li>
+                    </ul>
+                    <div class="hc-nav-list-check js-toggle-modal1">
+                        <ul class="js-toggle-modal2">
+                            <li class="active"><a>龙头花洒</a><i class="iconfont hc-checked"></i></li>
+                            <li class="active"><a>舒乐智能产品</a><i class="iconfont hc-checked"></i></li>
+                            <li class="active"><a>沐浴房</a><i class="iconfont hc-checked"></i></li>
+                            <li class="active"><a>浴缸</a><i class="iconfont hc-checked"></i></li>
+                            <li class="active"><a>陶瓷盆</a><i class="iconfont hc-checked"></i></li>
+                            <li class="active"><a>地拖盆</a><i class="iconfont hc-checked"></i></li>
+                        </ul>
+                        <div class="btn-list">
+                            <button class="btn btn-white js-toggle-btn1">取消</button>
+                            <button class="btn btn-white js-toggle-btn1">保存</button>
+                        </div>
+                    </div>
+                </dd>
+                <dd class="nav-add js-toggle-btn2"><i class="iconfont hc-more"></i>更多</dd>
+                <dd class="nav-add js-toggle-btn1"><i class="iconfont">+</i>多选</dd>
+            </dl>-->
+
+<!--
+                        <dl>
+                            <dt>产品属性名称1</dt>
+                            <dd class="flex1">
+                                <ul>
+                                    <li><a>产品属性值1</a></li>
+                                    <li><a>产品属性值2</a></li>
+                                    <li><a>产品属性值3</a></li>
+                                    <li><a>产品属性值4</a></li>
+                                    <li><a>产品属性值5</a></li>
+                                    <li><a>产品属性值6</a></li>
+                                </ul>
+                            </dd>
+                            <dd class="nav-add js-toggle-btn2"><i class="iconfont">+</i>更多</dd>
+                            <dd class="nav-add js-toggle-btn1"><i class="iconfont">+</i>多选</dd>
+                        </dl>
+-->
+
+            <!--
+                        <dl>
+                            <dt>产品属性名称2</dt>
+                            <dd class="flex1">
+                                <ul>
+                                    <li><a>产品属性值1</a></li>
+                                    <li><a>产品属性值2</a></li>
+                                    <li><a>产品属性值3</a></li>
+                                    <li><a>产品属性值4</a></li>
+                                    <li><a>产品属性值5</a></li>
+                                    <li><a>产品属性值6</a></li>
+                                </ul>
+                            </dd>
+                            <dd class="nav-add js-toggle-btn2"><i class="iconfont">+</i>更多</dd>
+                            <dd class="nav-add js-toggle-btn1"><i class="iconfont">+</i>多选</dd>
+                        </dl>
+            -->
+
+        </div>
+
+        <!-- 商品列表 -->
+        <div class="hc-goods-list flex1-scroll">
+            <div class="hc-goods-box"
+                 ng-repeat="item in item_orgs track by $index">
+                <div class="hc-goods-img">
+                    <img ng-if="item.docid > 0" hc-img="item.docid" ng-click="goItemDetail(item)" class="hc-goods-img" style="cursor: pointer">
+                    <img ng-if="item.docid == 0" src="img/hc-goods-img.jpg" ng-click="goItemDetail(item)" class="hc-goods-img"  style="cursor:pointer">
+                </div>
+                <div class="hc-goods-text">
+                    <h3>{{item.item_name}} </h3>
+                    <p>{{item.item_desc}} </p>
+                    <button ng-click="addCartItem(item)" class="btn-orange" style="float:right">加入购物车</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="hc-page flex-row" page-pagination="">
+        <li><input ng-model="currPage" ng-keypress="keyEnterSearch($event)"> / <span ng-bind="pageCount"></span></li>
+        <li ng-click="firstPage()"> 首页</li>
+        <li ng-click="prevPage()"> 上页</li>
+        <li ng-click="nextPage()"> 下页</li>
+        <li ng-click="lastPage()"> 末页</li>
+        <li>
+            每页
+            <select ng-model="pageSize"
+                    ng-options="x for x in [10, 20, 50, 100, 200, 500, 1000]"
+                    ng-change="search(true)"></select>
+            个
+        </li>
+        <li>共有<span ng-bind="count"></span>个</li>
+    </ul>
+</div>
+<!-- <style>
+    .tree-box .ibox-title {
+        padding: 8px 15px 5px;
+    }
+
+    .tree-box .ibox-title .hc-input .form-control {
+        padding: 0px;
+    }
+
+    .grid-box .ibox {
+        margin-left: -15px;
+    }
+
+    .grid-box .pull-right .btn-group button {
+        margin-left: 4px;
+    }
+</style> -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        //编辑选择条件
+        $(".js-toggle-btn1").click(function () {
+            $(this).siblings().children(".js-toggle-modal1").toggle();
+        });
+        $("button.js-toggle-btn1").click(function () {
+            $(this).parents("div.js-toggle-modal1").toggle();
+        });
+
+        /*$(".js-toggle-btn1").on("click",function(){
+            $(this).siblings().children(".js-toggle-modal1").toggle();
+        });
+        $("button.js-toggle-btn1").on("click",function(){
+            $(this).parents("div.js-toggle-modal1").toggle();
+        });*/
+
+
+        //编辑选择条件
+        $(".js-toggle-btn2").click(function () {
+            $(this).siblings(".flex1").children("ul").toggleClass("showmore");
+        });
+
+        //勾选
+        $(".hc-nav-list-check li").click(function () {
+            $(this).toggleClass("active");
+        });
+    });
+</script>

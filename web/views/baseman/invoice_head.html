@@ -1,0 +1,35 @@
+<div hc-diy-page>
+    <div class="hc-box grid-other-h">
+        <!-- 模态框 -->
+        <div class="modal inmodal fade" id="newModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="width:1040px">
+                <div class="modal-content">
+                    <div class="modal-header" draggable-model>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                                class="sr-only">Close</span></button>
+                        <h6 class="modal-title">发票抬头</h6>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div hc-input="data.currItem.company_name" hc-label="名称" hc-required="true" hc-col-count="4"></div>
+                            <div hc-input="data.currItem.tax_no" hc-label="纳税人识别号" hc-required="true" hc-col-count="4"></div>
+                        </div>
+                        <div class="row">
+                            <div hc-input="data.currItem.address" hc-label="单位地址" hc-required="true" hc-col-count="4"></div>
+                            <div hc-input="data.currItem.phone" hc-label="电话号码" hc-required="true" hc-col-count="4"></div>
+                        </div>
+                        <div class="row">
+                            <div hc-input="data.currItem.bank" hc-label="开户银行" hc-required="true" hc-col-count="4"></div>
+                            <div hc-input="data.currItem.account_no" hc-label="银行账号" hc-required="true"  hc-col-count="4"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div hc-grid="gridOptions" class="m-t-xs" hc-auto-height="grid"></div>
+</div>

@@ -1,0 +1,221 @@
+<div class="bill-form" ng-controller="ctrl_fin_dj_materiel_header">
+    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h3>��������Ǽ�</h3>
+                <button class="btn btn-toolbar" type="button" ng-click="search()"><i class="fa fa-search"></i>��ѯ
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="new()"><i class="fa fa-file-o"></i>����</button>
+                <button class="btn btn-toolbar" type="button" ng-click="save($event)"><i class="fa fa-floppy-o"></i>����
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="refresh()"><i class="fa fa-history"></i>ˢ��
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1" ng-click="delete($event)">
+                    <i class="fa fa-trash"></i>ɾ��
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-hide="data.currItem.stat!=1"
+                        ng-click="wfstart($event)"><i class="fa fa-check-square-o">�ύ</i></button>
+                <button class="btn btn-toolbar" swf-upload id="swfupload-control" import-grid="linegridoption"
+                        import-columns="linecolumns" ng-model="templist" flag="1" ng-init="templist = []">
+                    <i class="fa lightblue font-size-15  fa-paperclip"></i> EXCEL����
+                </button>
+                <button class="btn btn-toolbar" type="button" ng-click="closefrm()"><i
+                        class="fa fa-times"></i>�ر�
+                </button>
+                <div class="btn-group">
+                    <button class="btn btn-toolbar dropdown-toggle" type="button">
+                        <i class="fa fa-file-excel-o"></i>����
+                    </button>
+                    <button data-toggle="dropdown" class="btn btn-toolbar dropdown-toggle">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <button class="btn btn-toolbar" swf-upload import-grid="linegridoption"
+                                    import-columns="linecolumns" ng-model="templist" flag="1" ng-init="templist = []">
+                                <i class="fa lightblue font-size-15  fa-paperclip"></i> T1ģ��
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn btn-toolbar" swf-upload import-grid="linegridoption"
+                                    import-columns="linecolumns" ng-model="templist" flag="2" ng-init="templist = []">
+                                <i class="fa lightblue font-size-15  fa-paperclip"></i> �������������
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn btn-toolbar" swf-upload import-grid="linegridoption"
+                                    import-columns="linecolumns" ng-model="templist" flag="3" ng-init="templist = []">
+                                <i class="fa lightblue font-size-15  fa-paperclip"></i> ���̵���
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn btn-toolbar" swf-upload import-grid="linegridoption"
+                                    import-columns="linecolumns" ng-model="templist" flag="4" ng-init="templist = []">
+                                <i class="fa lightblue font-size-15  fa-paperclip"></i> ˮ������
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn btn-toolbar" swf-upload import-grid="linegridoption"
+                                    import-columns="linecolumns" ng-model="templist" flag="5" ng-init="templist = []">
+                                <i class="fa lightblue font-size-15  fa-paperclip"></i> T3ģ��
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn btn-toolbar" swf-upload import-grid="linegridoption"
+                                    import-columns="linecolumns" ng-model="templist" flag="6" ng-init="templist = []">
+                                <i class="fa lightblue font-size-15  fa-paperclip"></i> ���ģ��
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn btn-toolbar" swf-upload import-grid="linegridoption"
+                                    import-columns="linecolumns" ng-model="templist" flag="7" ng-init="templist = []">
+                                <i class="fa lightblue font-size-15  fa-paperclip"></i> �ڻ�ģ��
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn btn-toolbar" swf-upload import-grid="linegridoption"
+                                    import-columns="linecolumns" ng-model="templist" flag="8" ng-init="templist = []">
+                                <i class="fa lightblue font-size-15  fa-paperclip"></i> ��Ƶģ��
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row" ng-hide="data.currItem.stat == 1">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>��������</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <div wf-ystep size="large" class="p-xs clear" ng-model="data.currItem.wfid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>�Ǽǵ��ţ�{{data.currItem.dj_no}}</h5>
+                            <!--div ibox-tools></div-->
+                            <h5 class="pull-right">
+
+							<span ng-switch on="data.currItem.stat"> 
+										<span ng-switch-when="1" class="label label-primary">�Ƶ�</span>
+										<span ng-switch-when="3" class="label label-warning">������</span>
+										<span ng-switch-when="5" class="label label-success">�����</span>
+										<span ng-switch-when="99" class="label label-danger">����</span> 
+							</span>
+
+                            </h5>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    <label class="form-label-mini not-null">���:</label>
+                                </div>
+                                <div class="col-lg-2">
+                                    <input ng-model="data.currItem.years" type="text" class="form-control input-sm"
+                                           ng-readonly="data.currItem.stat != 1">
+                                </div>
+                                <div class="col-lg-1">
+                                    <label class="form-label-mini not-null">�Ǽ�ʱ��:</label>
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="text" bs-datepacker ng-disabled="data.currItem.stat!=1"
+                                           ng-readonly="data.currItem.stat !=1" ng-model="data.currItem.dj_date"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-lg-1">
+                                    <label class="form-label-mini not-null">�Ǽǲ���:</label>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="input-group">
+                                        <input type="text" class="input-sm form-control"
+                                               ng-readonly="data.currItem.stat!=1" ng-model="data.currItem.org_name">
+                                        <a class="input-group-addon" ng-disabled="data.currItem.stat!=1"
+                                           ng-click="searchOrg(2)"><i class="fa fa-ellipsis-h"></i> </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1">
+                                    <label class="form-label-mini not-null">��������:</label>
+                                </div>
+                                <div class="col-lg-2">
+                                    <select chosen-select ng-model="data.currItem.materiel_apply_type"
+                                            ng-disabled="data.currItem.stat!=1"
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="s.id as s.name for s in materiel_apply_types">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    <label class="form-label-mini">����:</label>
+                                </div>
+                                <div class="col-lg-2">
+                                    <input ng-model="data.currItem.total_qty" type="text" class="form-control input-sm"
+                                           ng-readonly="true">
+                                </div>
+                                <div class="col-lg-1">
+                                    <label class="form-label-mini ">��ע:</label>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input ng-model="data.currItem.note" type="text" class="form-control input-sm"
+                                           ng-readonly="data.currItem.stat!=1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>������ϸ</h5>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <button class="btn btn-toolbar" type="button" ng-click="additem()"><i
+                                    class="fa fa-plus-square-o"></i>������
+                            </button>
+                            <button class="btn btn-toolbar" type="button" ng-click="delitem()"><i
+                                    class="fa fa-minus-square-o"></i>ɾ����
+                            </button>
+                            <div slick-grid sg-options="linegridoption"
+                                 sg-data="data.currItem.fin_dj_materiel_lineoffin_dj_materiel_headers"
+                                 sg-columns="linecolumns" style="width:100%;height:300px;" class="slick-grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>����</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content icons-box">
+                            <button swf-upload title="swfupload-control" class="btn btn-toolbar"
+                                    upload-list="data.currItem.objattachs" ng-model="data.currItem.objattachs"
+                                    filed='#attach-area'>
+                                <i class="fa lightblue font-size-15  fa-paperclip"></i> ��Ӹ���
+                            </button>
+                            <ul id="attach-area">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

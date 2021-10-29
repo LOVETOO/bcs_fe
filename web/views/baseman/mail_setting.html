@@ -1,0 +1,385 @@
+<div class="modal-content" local-storage ng-model="data.currItem">
+    <div draggable-model class="modal-header" style="width: 100%;">
+        <button type="button" class="close" data-dixsiss="modal" aria-label="Close" ng-click="cancel(e)">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h3>个人邮箱设置</h3>
+    </div>
+    <div class="modal-body" style="width: 100%;">
+        <ul id="maintabs" class="tri-nav-tabs">
+            <li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav active-a" aria-expanded="true"><i
+                    class="fa fa-desktop"> 账号</i></a></li>
+            <!--<li class=""><a data-target="#tab2" data-toggle="tab" class="tab-nav" aria-expanded="false"><i
+                    class="fa fa-desktop">邮件签名</i></a></li>-->
+            <!--<li class=""><a data-target="#tab3" data-toggle="tab" class="tab-nav" aria-expanded="false"><i
+                    class="fa fa-tag"> 其他</i></a></li>-->
+        </ul>
+        <div id="main-tab-content" class="tab-content">
+            <div id="tab1" class="main-tab-pane tab-pane active">
+                <div class="left-box">
+                    <div class="lm_panel">
+                        <div id="AddrTab" style='display:block'>
+                            <!--<div class="groupopen" style="display:" key="t3" sub="0">
+                                <div class="settingtable qqshowbd"
+                                     style="padding:4px 0 3px 8px;cursor:default;">外部邮箱
+                                </div>
+                            </div>-->
+                            <div id="lm150338581407203951792705359891tree" class="out-list"
+                                 style="overflow-y: auto;height:300px;overflow-x: hidden;">
+                                <div class="groupsub" key="t3" sub="1">
+                                    <div ng-repeat='item in data.usermails'
+                                         ng-click='out_mail($event,$index,item)'
+                                         ng-class="{true:'groupclose high',false:'groupclose'}[item.high==true?true:false]"
+                                         key="8" sub="0">
+                                        <a unselectable="on" class="lm_addr">{{item.email}}</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style='padding-top:5px'>
+                        <button ng-click='new_mail()' title="" data-placement="top" data-toggle="tooltip"
+                                type="button" class=""
+                                style="background: white;height: 20px;border: 1px solid #e7eaec;">新建
+                        </button>
+                        <button ng-click='del_mail()' title="" data-placement="top" data-toggle="tooltip"
+                                type="button" class=""
+                                style="background: white;height: 20px;border: 1px solid #e7eaec;">删除
+                        </button>
+
+                    </div>
+
+                </div>
+                <div ng-hide='data.currItem.email=="内部邮箱"' class="right-box">
+                    <div class="row">
+                        <div hc-input="data.currItem.domain"
+                             hc-label="邮件服务器"
+                             hc-col-count="4"
+                             hc-select-options="mailserverids"
+                             hc-required="true"
+                             hc-change="change_domain()"></div>
+                        <div hc-input="data.currItem.disabled"
+                             hc-label="收发模式"
+                             hc-col-count="4"
+                             hc-required="true"
+                             hc-select-options="disableds"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.email"
+                             hc-required="true"
+                             hc-col-count="4"
+                             hc-label="邮件地址"></div>
+                        <div hc-input="data.currItem.username"
+                             hc-col-count="4"
+                             hc-label="发送者姓名"></div>
+
+                    </div>
+                    <!--<div class="row">
+                        <div hc-input="data.currItem.smtppsw"
+                             hc-label="授权码"></div>
+                        <div hc-input="data.currItem.to_email"
+                             hc-label="发件地址"></div>
+                    </div>-->
+                    <div class="row">
+                        <div hc-input="data.currItem.pop3svrname"
+                             hc-required="true"
+                             hc-readonly="true"
+                             hc-col-count="4"
+                             hc-label="pop3服务器"></div>
+                        <div hc-input="data.currItem.smtpsvrname"
+                             hc-required="true"
+                             hc-readonly="true"
+                             hc-col-count="4"
+                             hc-label="smtp服务器"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.pop3user"
+                             hc-required="true"
+                             hc-col-count="4"
+                             hc-label="账号名"></div>
+                        <div hc-input="data.currItem.pop3psw"
+                             hc-required="true"
+                             hc-col-count="4"
+                             hc-label="密码/授权码"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.smtpsvrport"
+                             hc-required="true"
+                             hc-col-count="4"
+                             hc-readonly="true"
+                             hc-label="外发邮件端口"></div>
+                        <div hc-input="data.currItem.pop3svrport"
+                             hc-required="true"
+                             hc-col-count="4"
+                             hc-readonly="true"
+                             hc-label="接收邮件端口"></div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.isdefault"
+                             hc-label="默认发件箱"
+                             hc-col-count="8"
+                             hc-type="checkbox">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.smtpauthtype"
+                             hc-label="smtp服务器需要身份验证"
+                             hc-col-count="8"
+                             hc-type="checkbox">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div hc-input="data.currItem.nodelservermail"
+                             hc-col-count="8"
+                             hc-label="保留服务器备份,即邮件接收后不从服务器删除"
+                             hc-type="checkbox">
+                        </div>
+                    </div>
+
+                    <!--<div class="row">
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">邮箱类型</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <select chosen-select ng-model="data.currItem.domain"
+                                    class="input-sm chosen-select form-control"
+                                    ng-options="item_type.domain as item_type.domain  for item_type in mailserverids">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">收发模式</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <select chosen-select ng-model="data.currItem.disabled"
+                                    class="input-sm chosen-select form-control"
+                                    ng-options="item_type.value as item_type.name  for item_type in disableds">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">邮件地址</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input type="text" class="input-sm form-control" ng-model="data.currItem.email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">发件地址</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input type="text" class="input-sm form-control"
+                                   ng-model="data.currItem.to_email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">授权码</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input type="password" class="input-sm form-control"
+                                   ng-model="data.currItem.smtppsw">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">发信名称</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input type="text" class="input-sm form-control"
+                                   ng-model="data.currItem.username">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">pop3服务器</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input type="text" class="input-sm form-control"
+                                   ng-model="data.currItem.pop3server">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">账号名</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input type="text" class="input-sm form-control"
+                                   ng-model="data.currItem.pop3user">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">密码</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input type="text" class="input-sm form-control"
+                                   ng-model="data.currItem.pop3psw">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">smtp服务器</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input type="text" class="input-sm form-control"
+                                   ng-model="data.currItem.smtpserver">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">外发邮件端口</label>
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="number" class="input-sm form-control"
+                                   ng-model="data.currItem.smtpport">
+                        </div>
+                        <div class="col-xs-3">
+                            <label class="form-label-mini">接收邮件端口</label>
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="number" class="input-sm form-control"
+                                   ng-model="data.currItem.pop3port">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <input id="pz_checked" type="checkbox" ng-true-value="2"
+                                   ng-model="data.currItem.isdefault" ng-false-value="1"
+                                   class="ng-valid ng-dirty ng-valid-parse ng-touched">默认发件箱
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="checkbox" ng-true-value="2"
+                                   ng-model="data.currItem.smtpauthtype" ng-false-value="1"
+                                   class="ng-valid ng-dirty ng-valid-parse ng-touched">smtp服务器需要身份验证
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="checkbox" ng-true-value="2"
+                                   ng-model="data.currItem.nodelservermail" ng-false-value="1"
+                                   class="ng-valid ng-dirty ng-valid-parse ng-touched">保留服务器备份
+                        </div>
+                    </div>-->
+
+                    <div class="row">
+                        <div style='padding-top:10px;padding-left:10px;margin-left:30px'>
+                            授权码是指邮箱的客户端授权码,是用于登陆第三方邮件客户端专用密码
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tab2" class="main-tab-pane tab-pane">
+                <div class="row">
+                    <!--div class="row">
+                        <div class="col-md-1">
+                             <label class="form-label-mini">账号</label>
+                        </div>
+                        <div class="col-md-6">
+                            <select chosen-select ng-model="data.currItem.account"
+                                    class="input-sm chosen-select form-control"
+                                    ng-options="item_type.value as item_type.desc  for item_type in accounts">
+                                    <option value=""></option>
+                            </select>
+                        </div>
+                    </div-->
+                    <div class="col-xs-12">
+                        <textarea type="text" name="text" class="summernote" id="contents3" title="Contents"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- <div id="tab3" class="main-tab-pane tab-pane">
+                 <div class="">
+                     <h5 class="ng-binding">创建人: admin</h5>
+                     <h5 class="ng-binding">创建时间: 2017-05-08 17:59:54</h5>
+                     <h5 class="ng-binding">最后修改人: 童满云</h5>
+                     <h5 class="ng-binding">最后修改时间: 2017-05-08 18:57:32</h5>
+                     <h5 class="ng-binding">审核人: </h5>
+                     <h5 class="ng-binding">审核时间: </h5>
+                 </div>
+             </div>-->
+        </div>
+    </div>
+    <div class="modal-footer" style="width: 100%">
+        <a class="btn btn-sm btn-primary" ng-click="ok(e)">
+            确定
+        </a>
+        <a class="btn btn-sm btn-default" ng-click="cancel(e)">
+            取消
+        </a>
+    </div>
+</div>
+<style>
+    .high {
+        background: #f3f3f3;
+    }
+
+    .active-a:hover{
+        color: #56adff;
+    }
+    #tab1:after{
+        clear: both;
+        content: '';
+        width: 0px;
+        display: block;
+    }
+    .left-box {
+        width: 180px;
+        display: inline-block;
+        float: left;
+    }
+
+    .right-box {
+        width: calc(100% - 180px);
+        display: inline-block;
+        float: left;
+    }
+
+    .modal-dialog {
+        width: 750px !important;
+    }
+
+    label {
+        line-height: 26px;
+    }
+
+    #maintabs > li {
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+    #maintabs {
+        padding-left: 0px;
+    }
+
+    li.active > a {
+        color: #337ab7 !important;
+    }
+
+    .modal-body, .modal-footer {
+        padding: 15px !important;
+        margin: 0px !important;
+    }
+
+    .lm_panel {
+        border-style: groove;
+        border: 1px solid rgba(108, 124, 134, 0.39);
+        background: #fff;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: hidden;
+
+    }
+</style>
+<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+<link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+<script src="js/plugins/summernote/summernote.min.js"></script>
+
+

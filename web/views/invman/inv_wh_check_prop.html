@@ -1,0 +1,99 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box="" class="grid-other-h">
+            <div class="row">
+                <div hc-input="data.currItem.invbill_no"
+                     hc-label="盘点单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.date_invbill"
+                     hc-label="盘点日期"
+                     hc-type="date"
+                     hc-required="true"
+                     hc-change="dateChangeEvent()">
+                </div>
+
+                <div hc-input="data.currItem.year_month"
+                     hc-label="盘点月份"
+                     hc-type="date"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="stat"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.dept_code"
+                     hc-label="部门"
+                     hc-required="true"
+                     hc-btn-click="chooseOrg()">
+                </div>
+                <div hc-input="data.currItem.dept_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.invinbillno"
+                     hc-label="盘盈入库单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.created_by"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.warehouse_code"
+                     hc-label="盘点仓库"
+                     hc-required="true"
+                     hc-btn-click="chooseWareHouse()">
+                </div>
+                <div hc-input="data.currItem.warehouse_name"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.invoutbillno"
+                     hc-label="盘亏出库单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.creation_date"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div hc-input="data.currItem.whemployee_name"
+                     hc-label="仓管员"
+                     hc-btn-click="chooseWhemployee()"></div>
+
+                <div hc-input="data.currItem.crm_entid"
+                     hc-label="品类"
+                     hc-dict-code="crm_entid">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="8">
+                </div>
+            </div>
+        </div>
+        <div hc-grid="gridOptions" hc-box="" hc-auto-height="grid"></div>
+
+    </div>
+
+</div>

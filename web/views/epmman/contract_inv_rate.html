@@ -1,0 +1,182 @@
+<!--合同完成率分析--自定义页面-->
+<!--Created by whl-->
+<!--Date:2019-08-26-->
+<div hc-diy-page>
+    <div hc-box class="ibox-title other-h" ng-show="notPackQuery">
+        <div class="row">
+          <div hc-label="年份"
+               hc-input="data.currItem.contract_year"
+               hc-change="changePanel()"
+               hc-type="year"></div>
+         <div hc-label="月份"
+               hc-input="data.currItem.contract_month"
+               hc-change="changePanel()"
+               hc-can-delete="true"
+               hc-type="month"></div>
+
+            <div hc-input="data.currItem.contract_type"
+                 hc-label="合同类型"
+                 hc-can-delete="true"
+                 hc-dict-code="epm.contract_type"
+                 hc-change="changePanel()"
+                 hc-after-delete="deleteOrderPDTLine()">
+            </div>
+
+            <div hc-input="data.currItem.project_code"
+                 hc-label="工程项目编码"
+                 hc-change="changePanel()"
+                 hc-can-delete="true"
+                 hc-can-input="true"
+                 hc-class-id="epm_project"
+                 hc-common-search="commonSearchSetting.epmProject">
+            </div>
+            <div hc-input="data.currItem.project_name"
+                 hc-change="changePanel()"
+                 hc-label="工程项目名称">
+            </div>
+
+        </div>
+        <div class="row">
+          <div hc-input="data.currItem.valid"
+               hc-label="有效状态"
+               hc-change="changePanel()"
+               hc-can-delete="true"
+               hc-dict-code="valid"
+               hc-after-delete="deletePDTLine()">
+          </div>
+          <div hc-input="data.currItem.completed_type"
+               hc-label="结案状态"
+               hc-change="changePanel()"
+               hc-can-delete="true"
+               hc-dict-code="epm.contract_completed_type"
+               hc-after-delete="deletePDTLine()">
+          </div>
+            <div hc-input="data.currItem.contract_code"
+                 hc-label="工程合同编码"
+                 hc-change="changePanel()"
+                 hc-can-input="true"
+                 hc-can-delete="true"
+                 hc-class-id="epm_project_contract"
+                 hc-common-search="commonSearchSetting.epmProjectContract"></div>
+            <div hc-input="data.currItem.contract_name"
+                 hc-change="changePanel()"
+                 hc-label="工程合同名称">
+            </div>
+        </div>
+        <div class="row">
+          <div hc-input="data.currItem.customer_code"
+               hc-label="客户编码"
+               hc-can-input="true"
+               hc-can-delete="true"
+               hc-change="changePanel()"
+               hc-class-id="customer_org"
+               hc-common-search="commonSearchSetting.epmCustomer">
+          </div>
+          <div hc-input="data.currItem.customer_name"
+               hc-label="客户名称"
+               hc-change="changePanel()">
+          </div>
+          <div hc-input="data.currItem.short_name"
+               hc-label="客户简称"
+               hc-change="changePanel()">
+          </div>
+        </div>
+    </div>
+    <div hc-box class="other-h" hc-tab="contract_tab" hc-tab-as="invTabController"
+             hc-tab-change="onContractTabChange(params)"></div>
+          <div hc-tab-page class="flex1 flex-column">
+          <!--适用数据汇总-->
+          <div id="data"  class="active" style="padding: 0px;">
+               <div class="row">
+                    <div style="font-size: 13px;float :left; display: inline-block;width: 80px;line-height: 30px;margin-left: 15px;" class="hc-w1">
+                         【  汇总维度:
+                    </div>
+                    <div hc-input="press_year"
+                         hc-col-count="1"
+                         hc-label="按年度"
+                         hc-change="changePattern('year')"
+                         hc-type="checkbox">
+                    </div>
+                    <div hc-input="press_contract"
+                         hc-col-count="1"
+                         hc-label="按合同"
+                         hc-change="changePattern('contract')"
+                         hc-type="checkbox">
+                    </div>
+                    <div hc-input="press_project"
+                         hc-col-count="1"
+                         hc-label="按工程  】"
+                         hc-change="changePattern('project')"
+                         hc-type="checkbox">
+                    </div>
+                    <div hc-input="valid_contract_qty"
+                         hc-label="有效合同数量"
+                         hc-type="number"
+                         hc-readonly="true">
+                    </div>
+                    <div hc-input="deliver_qty"
+                         hc-label="发货总量"
+                         hc-type="number"
+                         hc-readonly="true">
+                    </div>
+                    <div hc-input="sum_percentage"
+                         hc-label="总完成率"
+                         hc-type="percent"
+                         hc-readonly="true">
+                    </div>
+               </div>
+               <div  ng-show="press_year == 2" class="flex1 flex-column">
+                    <div style="font-size: 20px;text-align: center;" id="year_show"></div>
+                    <div  class="flex1">
+                         <hc-chart hc-chart-option="chartOption" hc-chart-as="chart" ></hc-chart>
+                    </div>
+               </div>
+               <div hc-box hc-grid="gridOptions_contract" class="flex1" ng-show="press_contract == 2"></div>
+               <div hc-box hc-grid="gridOptions_project" class="flex1" ng-show="press_project == 2"></div>
+          </div>
+          <!--适用合同明细-->
+          <div id="line" style="padding: 0px;">
+               <div hc-box hc-grid="gridOptions" class="flex1"></div>
+          </div>
+     </div>
+</div>
+<style>
+     [hc-input="data.currItem.contract_year"]{
+          width: calc(13% + 15px);
+          margin-right: 0px;
+     }
+     [hc-input="data.currItem.contract_month"] {
+          width: calc(12% - 35px);
+     }
+     [hc-input="data.currItem.contract_month"] label {
+          width: 30px;
+          min-width: 0px;
+     }
+     [hc-input="valid_contract_qty"] label,
+     [hc-input="valid_contract_qty"] input,
+     [hc-input="deliver_qty"] label,
+     [hc-input="deliver_qty"] input,
+     [hc-input="sum_percentage"] label,
+     [hc-input="sum_percentage"] input,
+     #data > div.row > div:nth-child(7) > div > div > span {
+        color: #F35A05;
+    }
+    #data > div.flex1.flex-column > div.flex1 > hc-chart {
+     height: 90%;
+     width : 90%;
+     background-color : aliceblue;
+    }
+    #data > div.flex1.flex-column > div.flex1 > hc-chart > div {
+     height:95%;
+     width: 95%;
+    }
+    #data > div.flex1.flex-column > div.flex1 > hc-chart > div > canvas {
+         height: 100%;
+         width: 98%;
+    }
+    [hc-input="valid_contract_qty"] ,
+    [hc-input="deliver_qty"] ,
+    [hc-input="sum_percentage"] {
+        width: calc(18% - 18px);
+    }
+</style>

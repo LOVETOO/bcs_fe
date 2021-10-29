@@ -1,0 +1,89 @@
+﻿<div class="bill-form" ng-controller="AreaEditController">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                国家
+            </div>
+
+            <div style="float:right">
+                <button ng-click="search()" class="btn btn-toolbar" ng-hide="mainbtn.search" type="button"
+                        ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button ng-click="new()" class="btn btn-toolbar" type="button"><i class="fa fa-file-o"></i>新增</button>
+                <button ng-click="refresh()" class="btn btn-toolbar" type="button"><i class="fa fa-history"></i>刷新
+                </button>
+                <button ng-click="save()" class="btn btn-toolbar" type="button"><i class="fa fa-floppy-o"></i>保存
+                </button>
+                <button ng-click="delete()" class="btn btn-toolbar" type="button"><i class="fa fa-trash"></i>删除</button>
+                <button class="btn btn-toolbar" type="button"><i class="fa fa-file-excel-o"></i>导出</button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="tab-content">
+                    <form class="form-horizontal" id="saveform" local-storage ng-model="data.currItem">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">地区编码:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           ng-model="data.currItem.areacode">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">地区类型:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select chosen-select ng-model="data.currItem.areatype"
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="type.dictvalue as type.dictname for type in areatypes">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">地区名称:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control input-sm" type="text"
+                                           ng-model="data.currItem.areaname">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">区号:</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input class="form-control input-sm" type="text"
+                                           ng-model="data.currItem.telzone">
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">备注:</label>
+                                </div>
+                                <div class="col-md-5">
+                                        <textarea ng-model="data.currItem.note" rows="3"
+                                                  class="form-control noresize"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

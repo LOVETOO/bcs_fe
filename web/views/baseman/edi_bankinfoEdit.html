@@ -1,0 +1,258 @@
+﻿<div class="bill-form" ng-controller="edi_bankinfoEdit">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                银行档案查询
+            </div>
+            <div style="float:left">
+                <div class="btn-group" style="position:absolute;z-index:30;width:100px;left:650px">
+                    
+                </div>
+                <button class="btn btn-toolbar" ng-hide="mainbtn.search" type="button" ng-click="search()">
+                    <i class="fa fa-search"></i>查询
+                </button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                        class="fa fa-times"></i>关闭
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul id="tabs" class="tri-nav-tabs">
+                    <li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav"><i
+                            class="fa fa-pencil-square">总体信息</i></a></li>
+                   
+                </ul>
+                <div id="content" class="first tab-content">
+                    <div id="tab1" class="tab-pane active">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">单号</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" readonly="true" ng-model="data.currItem.corpserialno" placeholder=""
+                                           class="input-sm form-control">
+                                </div>
+                                
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">创建人</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.creator" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">创建时间</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input  bs-datepacker type="text"  ng-readonly="true" ng-model="data.currItem.create_time" class="input-sm form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">中信银行编码</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" readonly="true" ng-model="data.currItem.bankswift" placeholder=""
+                                           class="input-sm form-control">
+                                </div>
+                                
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">企业银行编号</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.omsbankswift" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">银行国家代码</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.Countrycode" class="input-sm form-control">
+                                </div>
+                             </div>
+
+                            <div class="row">
+                                
+								 <div class="col-md-1">
+                                    <label class="form-label-mini ">银行英文名称</label>
+                                </div>
+                                <div class="col-md-11">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.engname" class="input-sm form-control">
+                                </div>
+								 
+							</div>
+
+                            <div class="row">
+							  <div class="col-md-1">
+                                    <label class="form-label-mini ">银行中文名称</label>
+                                </div>
+                                <div class="col-md-11">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.Chnname" class="input-sm form-control">
+                                </div>
+							</div>
+								
+
+							<div class="row">
+								<div class="col-md-1">
+                                    <label class="form-label-mini ">银行地址</label>
+                                </div>
+                                <div class="col-md-11">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.address" class="input-sm form-control">
+                                </div>
+                            </div>
+							<div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">邮政编码</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" readonly="true" ng-model="data.currItem.zip" placeholder=""
+                                           class="input-sm form-control">
+                                </div>
+                                
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">银行电话</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.tel" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">银行传真</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.fax" class="input-sm form-control">
+                                </div>
+                            </div>
+							<div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">网站地址</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" readonly="true" ng-model="data.currItem.webaddress" placeholder=""
+                                           class="input-sm form-control">
+                                </div>
+                                
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">法人代表</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.corporation" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+									<label class="form-label-mini">成立日期</label>
+								</div>
+								<div class="col-md-3">
+									<input ng-readonly="true" bs-datepacker ng-disabled="data.currItem.stat!=1"
+										ng-model="data.currItem.pre_ship_date" type="text"
+										class="form-control input-sm">
+								</div>
+                            </div>
+							<div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">营业额</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" readonly="true" ng-model="data.currItem.turnover" placeholder=""
+                                           class="input-sm form-control">
+                                </div>
+                                
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">利润</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.profit" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">总资产</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.totalasset" class="input-sm form-control">
+                                </div>
+                            </div>
+							<div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">自有资本</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" readonly="true" ng-model="data.currItem.selfcapital" placeholder=""
+                                           class="input-sm form-control">
+                                </div>
+                                
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">自有资产比率</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.selfassetrate" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">分支数目</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.nodesum" class="input-sm form-control">
+                                </div>
+                            </div>
+							<div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">股东</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" readonly="true" ng-model="data.currItem.stockholder" placeholder=""
+                                           class="input-sm form-control">
+                                </div>
+                                
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">员工人数</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.employeesum" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">国内排名</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.interorder" class="input-sm form-control">
+                                </div>
+                            </div>
+							<div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">国际排名</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" readonly="true" ng-model="data.currItem.nationorder" placeholder=""
+                                           class="input-sm form-control">
+                                </div>
+                                
+                                <div class="col-md-1">
+                                    <label class="form-label-mini ">银行集团名称</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.belongbankname" class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">银行集团swift</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-readonly="true" ng-value="data.currItem.belongbankswift" class="input-sm form-control">
+                                </div>
+                            </div>
+
+                     
+							<div class="row">
+								<div class="col-md-1">
+									<label class="form-label-mini">备注</label>
+								</div>
+								<div class="col-md-11">
+									 <textarea ng-readonly="true"
+                                        ng-model="data.currItem.remark"
+                                         rows="3"
+                                         class="form-control noresize ng-pristine ng-valid ng-touched">
+									 </textarea>
+								</div>
+							</div>                        
+ 
+    </div>
+
+</div>    

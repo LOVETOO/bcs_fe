@@ -1,0 +1,396 @@
+<!--<div hc-edit-list>-->
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box class="other-h" style="margin-bottom: 30px">
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="合伙人编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.short_name"
+                     hc-label="简称"
+                     hc-required="true" ></div>
+                <div hc-input="data.currItem.customer_name"
+                     hc-label="合伙人名称"
+                     hc-required="true"  ></div>
+                <div hc-input="data.currItem.usable"
+                     hc-label="可用"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.province_name"
+                     hc-label="所属省份"
+                     hc-required="true"
+                     hc-change="areaChange(4)"
+                     hc-class-id="scparea"
+                     hc-common-search="commonSearchOfProvince"></div>
+                <div hc-input="data.currItem.city_name"
+                     hc-label="所属城市"
+                     hc-change="areaChange(5)"
+                     hc-required="true"
+                     hc-class-id="scparea"
+                     hc-common-search="commonSearchOfCity" ></div>
+                <div hc-input="data.currItem.district_name"
+                     hc-label="所属区、县"
+                     hc-required="true"
+                     hc-class-id="scparea"
+                     hc-common-search="commonSearchOfDistrict" ></div>
+                <div hc-input="data.currItem.business_address"
+                     hc-label="详细地址"
+                     hc-required="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.dept_code"
+                     hc-label="所属部门"
+                     hc-required="true"
+                     hc-class-id="dept"
+                     hc-common-search="commonSearchSettingOfDept"></div>
+                <div hc-input="data.currItem.dept_name"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.sale_area_code"
+                     hc-label="所属销售区域"
+                     hc-required="true"
+                     hc-class-id="sale_salearea"
+                     hc-common-search="commonSearchSettingOfSalearea"></div>
+                <div hc-input="data.currItem.sale_area_name"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.contact"
+                     hc-label="主要联系人"
+                ></div>
+                <div hc-input="data.currItem.customer_characteristics"
+                     hc-dict-code="customer_characteristics"
+                     hc-label="合伙人特征"
+                ></div>
+                <div hc-input="data.currItem.partner_source"
+                     hc-dict-code="partner_source"
+                     hc-label="合伙人来源"
+                ></div>
+                <div hc-input="data.currItem.partner_rank"
+                     hc-dict-code="partner_rank"
+                     hc-label="合伙人级别"
+                ></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.tele"
+                     hc-required="true"
+                     hc-label="联系电话"></div>
+                <div hc-input="data.currItem.customer_phone"
+                     hc-type="number"
+                     hc-required="true"
+                     hc-label="手机"></div>
+                <div hc-input="data.currItem.partner_type"
+                     hc-dict-code="partner_type"
+                     hc-label="合伙人类型"></div>
+                <div hc-input="data.currItem.chap_name"
+                     hc-class-id="customer_org"
+                     hc-common-search=""
+                     hc-label="结算负责人"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.fax"
+                     hc-label="传真"></div>
+                <div hc-input="data.currItem.email"
+                     hc-label="电子邮件"></div>
+                <div hc-input="data.currItem.firm_scale"
+                     hc-dict-code="firm_scale"
+                     hc-label="企业规模"></div>
+                <div hc-input="data.currItem.industry"
+                     hc-dict-code="industry"
+                     hc-label="所属行业"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="详情描述"
+                     hc-type="textarea"
+                     hc-col-count="8"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.cooperation_date"
+                     hc-type="date"
+                     hc-label="合作时间" ></div>
+                <div hc-input="data.currItem.username"
+                     hc-dict-code=""
+                     hc-label="系统账户" ></div>
+                <div hc-input="data.currItem.pattern"
+                     hc-dict-code="pattern"
+                     hc-label="经营模式" ></div>
+                <div hc-input="data.currItem.employee_partner_name"
+                     hc-label="业务员"
+                     hc-class-id="base_view_erpemployee_org"
+                     hc-common-search="commonSearchSettingOfSalesman">
+                   </div>
+            </div>
+            <div class="row" hc-label="合伙人资源及优势">
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.backgrounds"
+                     hc-label="合作方背景"
+                     hc-type="textarea"
+                     hc-col-count="6"></div>
+            </div>
+            <div class="row" hc-box>
+                <div hc-input="data.currItem.company_undergo"
+                     hc-label="分公司开设经历"
+                     hc-type="textarea"
+                     hc-col-count="6"></div>
+            </div>
+        </div>
+        <div  hc-box="联系人信息"   hc-grid="gridOptions_customer_contact" style="height: 200px"></div>
+    </div>
+    <!--财务信息-->
+    <div id="accountInfo">
+        <div hc-box hc-grid="gridOptions_accountInfo" hc-auto-height="grid"></div>
+    </div>
+    <!--详情信息-->
+    <div id="detaileInfo">
+        <div class="row">
+            <div hc-input="data.currItem.liquidity_position"
+                 hc-label="流动资金状况"
+                 hc-type="textarea"></div>
+            <div hc-input="data.currItem.fixed_assets"
+                 hc-label="固定资产"
+                 hc-type="textarea"
+            ></div>
+            <div hc-input="data.currItem.architect_information"
+                 hc-label="建造师信息"
+                 hc-type="textarea"
+            ></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.management_problem"
+                 hc-label="经营问题"
+                 hc-type="textarea"
+            ></div>
+            <div hc-input="data.currItem.main_quacooperatve"
+                 hc-label="主要资质合作单位"
+                 hc-type="textarea"
+            ></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.intended_cooperation"
+                 hc-label="意向合作区域"
+                 hc-type="textarea"
+                 hc-col-count="6">
+            </div>
+        </div>
+        <div  hc-box="意向合作方式">
+            <div class="row">
+                <!--子公司-->
+                <div hc-input="data.currItem.subsidiary"
+                     hc-label="子公司"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+                <!--项目部-->
+                <div hc-input="data.currItem.project_dept"
+                     hc-label="项目部"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--分公司-->
+                <div hc-input="data.currItem.filiale"
+                     hc-label="分公司"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--项目合作-->
+                <div hc-input="data.currItem.project_cooperation"
+                     hc-label="项目合作"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--其他-->
+                <div hc-input="data.currItem.intended_cooperation_rest"
+                     hc-label="其他"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+            </div>
+        </div>
+        <div  hc-box="了解我公司渠道">
+            <div class="row">
+                <!--业务人员主要联系-->
+                <div hc-input="data.currItem.primary_contact"
+                     hc-label="业务人员主要联系"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+                <!--微博-->
+                <div hc-input="data.currItem.microblog"
+                     hc-label="微博"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--网站-->
+                <div hc-input="data.currItem.sites"
+                     hc-label="网站"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--微信-->
+                <div hc-input="data.currItem.wechat"
+                     hc-label="微信"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--朋友介绍-->
+                <div hc-input="data.currItem.through_friends"
+                     hc-label="朋友介绍"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+            </div>
+        </div>
+        <div  hc-box="人脉资源优势区域">
+            <div class="row">
+                <!--政府-->
+                <div hc-input="data.currItem.government"
+                     hc-label="政府"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+                <!--行业主管部门-->
+                <div hc-input="data.currItem.industry_execu"
+                     hc-label="行业主管部门"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--开发商-->
+                <div hc-input="data.currItem.developers"
+                     hc-label="开发商"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--其他-->
+                <div hc-input="data.currItem.connection_to_other"
+                     hc-label="其他"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+
+            </div>
+        </div>
+        <div  hc-box="希望得到的支持">
+            <div class="row">
+                <!--资质-->
+                <div hc-input="data.currItem.lookingfor"
+                     hc-label="资质"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+                <!--技术-->
+                <div hc-input="data.currItem.want_technology"
+                     hc-label="技术"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--采购-->
+                <div hc-input="data.currItem.purchase_want"
+                     hc-label="采购"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--施工管理-->
+                <div hc-input="data.currItem.management_construc"
+                     hc-label="施工管理"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+            </div>
+            <div class="row">
+                <!--资金-->
+                <div hc-input="data.currItem.hope_to_get"
+                     hc-label="资金"
+                     hc-type="checkbox"
+                     hc-col-count="1"
+                     hc-true-value="2"
+                     hc-false-value="1"></div>
+                <!--预决算-->
+                <div hc-input="data.currItem.the_budget"
+                     hc-label="预决算"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--安装-->
+                <div hc-input="data.currItem.installed"
+                     hc-label="安装"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+                <!--其他-->
+                <div hc-input="data.currItem.want_rest"
+                     hc-label="其他"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-col-count="1"
+                     hc-false-value="1"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.scope_demand"
+                 hc-label="采购需求范围"
+                 hc-col-count="6"
+                 hc-type="textarea"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.feel"
+                 hc-label="感觉（合作意向）"
+                 hc-col-count="6"
+                 hc-type="textarea"></div>
+        </div>
+    </div>
+    <div id="extra">
+        <div class="row">
+            <div hc-input="data.currItem.created_by"
+                 hc-label="制单人" ></div>
+            <div hc-input="data.currItem.creation_date"
+                 type="date"
+                 hc-label="制单时间" ></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by"
+                 hc-label="修改人" ></div>
+            <div hc-input="data.currItem.last_update_date"
+                 type="date"
+                 hc-label="修改时间" ></div>
+        </div>
+    </div>
+</div>
+<!--</div>-->
+<style>
+    /*.ibox-title {
+        display: inline-block;
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    .modal-footer{
+        padding-top: 0px;
+    }
+    .TreeGridBox .ibox-title{
+        border: none;
+    }*/
+</style>

@@ -1,0 +1,205 @@
+/**
+  高级条件自定义CSS
+**/
+
+body {
+  background-color: #ddd;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+.badge {
+  background-color: #777;
+}
+
+.tabs-left {
+  margin-top: 3rem;
+}
+
+.nav-tabs {
+  float: left;
+  border-bottom: 0;
+}
+.nav-tabs li {
+  float: none;
+  margin: 0;
+}
+.nav-tabs li a {
+  margin-right: 0;
+  border: 0;
+  /* background-color: #333;*/
+}
+.nav-tabs li a:hover {
+  background-color: #ccffcc;
+}
+.nav-tabs .filedicon {
+  color: #fff;
+}
+.nav-tabs .active .glyphicon {
+  color: #333;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  border: 0;
+}
+
+.tab-content {
+  margin-left: 45px;
+}
+.tab-content .tab-pane {
+  display: none;
+  background-color: #fff;
+  padding: 1.6rem;
+  overflow-y: auto;
+}
+.tab-content .active {
+  display: block;
+}
+
+.list-group {
+  width: 100%;
+}
+.list-group .list-group-item {
+  height: 50px;
+}
+.list-group .list-group-item h4, .list-group .list-group-item span {
+  line-height: 11px;
+}
+
+
+
+
+.tab-content .active .inline{
+  display: inline-block;
+}
+
+
+.tab-content .myTab  li {
+ float: left;
+}
+
+.tab-content .myTab  .active{
+  color:red;
+}
+
+.myTabContent  .tab-pane {
+   float: left;
+   width:100%;
+   background:#ccffcc;
+}
+
+ table.gridtable {
+    width: 100%;
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+	width:80px;
+	text-align:center;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+
+table.gridtable .seq {
+	width:60px;
+	text-align:center;
+}
+
+.hasBeenSelected {
+    border-top: #ddd 1px solid;
+    padding: 2px;
+    overflow: hidden;
+    background: #f5f9fa;
+    --padding-left: 100px;
+    position: relative;
+}
+.clearfix {
+    display: block;
+}
+.clearfix {
+    display: inline-block;
+}
+#time-num {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+#time-num font {
+    color: #fa7003;
+}
+.eliminateCriteria {
+    line-height: 21px;
+    margin-top: 4px;
+    width: 80px;
+    float: left;
+    color: #118ecc;
+    cursor: pointer;
+}
+
+.confirm {
+    line-height: 21px;
+    margin-top: 4px;
+    width: 80px;
+    float: left;
+    color: #118ecc;
+    cursor: pointer;
+}
+
+.hasBeenSelected dl dt {
+	 
+	line-height: 30px;
+	width: 108px;
+	height: 30px;
+	margin-left:20px;
+}
+
+.hasBeenSelected dl dd {
+	padding-bottom: 4px;
+	padding-left: 0px;
+	width: 676px;
+	padding-right: 0px;
+	padding-top: 0px;
+	margin-left:80px;
+}
+
+
+.STYLE1 {
+	color: #000000;
+	font-size: 12px;
+	font-weight: normal;
+}
+.STYLE2 {
+	color: #000000;
+	font-size: 14px;
+	font-weight: bold;
+}
+.STYLE3 {
+	color: #000000;
+	font-size: 12px;
+	font-weight: bold;
+}
+body,td,th {
+	font-size: 12px;
+}
+.STYLE4 {color: #FF0000}
+.STYLE5 {
+	color: #FF0000;
+	font-weight: bold;
+	font-size: 18px;
+}

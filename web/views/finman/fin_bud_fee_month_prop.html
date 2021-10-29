@@ -1,0 +1,107 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.fee_bud_head_no"
+                     hc-label="费用预算单号"
+                     hc-btn-click="chooseFeeBud()">
+                </div>
+
+                <div hc-input="data.currItem.bud_year"
+                     hc-label="预算编制年度"
+                     hc-readonly="true"
+                     hc-type="year"
+                     hc-change="getSalesInfo('bud_year')">
+                </div>
+
+                <div hc-input="data.currItem.org_name"
+                     hc-label="部门"
+                     hc-btn-click="chooseOrg()"
+                     hc-readonly="true">
+                </div>
+
+                <!--<div hc-input="data.currItem.fee_type_name"-->
+                     <!--hc-label="所属费用大类"-->
+                     <!--hc-readonly="true"-->
+                     <!--hc-btn-click="chooseFeeType()">-->
+                <!--</div>-->
+
+                <!--<div hc-input="data.currItem.bud_type_code"-->
+                     <!--hc-label="预算类别"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+                <!--<div hc-input="data.currItem.bud_type_name"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-readonly="true"
+                     hc-dict-code="stat">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.total_bud_fee_amt"
+                     hc-label="费用预算总额"
+                     hc-type="money"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.comp_budyear_salesamt"
+                     hc-label="总预算销售收入"
+                     hc-type="money"
+                     hc-readonly="true">
+                    <!--hc-unit="万元"-->
+                </div>
+
+                <div hc-input="data.currItem.period_type"
+                     hc-label="预算期间类别"
+                     hc-readonly="true"
+                     hc-dict-code="period_type">
+                </div>
+
+                <div hc-input="data.currItem.creator"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <!--<div class="row">-->
+                <!--<div hc-input="data.currItem.growth_rate"-->
+                     <!--hc-label="部门销售增长率"-->
+                     <!--hc-unit="%"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+
+
+
+                <!--<div hc-input="data.currItem.target_salesamt"-->
+                     <!--hc-label="部门预算销售收入"-->
+                     <!--hc-type="money"-->
+                     <!--hc-readonly="true">-->
+                    <!--&lt;!&ndash;hc-unit="万元"&ndash;&gt;-->
+                <!--</div>-->
+
+
+            <!--</div>-->
+
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="说明"
+                     hc-type="textarea"
+                     hc-col-count="6">
+                </div>
+
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+        </div>
+
+        <div hc-box hc-grid="gridOptions" hc-auto-height></div>
+            
+    </div>
+    
+</div>

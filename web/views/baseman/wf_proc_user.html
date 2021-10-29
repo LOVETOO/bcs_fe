@@ -1,0 +1,43 @@
+<!--<div
+	ng-repeat="proc in procs"
+	ng-init="procUser = proc.procUser = {}"
+	hc-box="过程：{{ proc.procid }} - {{ proc.procname }}"
+>
+	<div
+		hc-label="执行人"
+		hc-input="procUser.userid"
+		hc-class-id="scpuser"
+		hc-common-search="getSearchUserSetting(procUser)"
+		hc-placeholder="请选择用户"
+		hc-required="true"
+		hc-col-count="4"
+	></div>
+</div>-->
+<ul class="nav nav-tabs other-h" id="detailtab" class="flex1 flex-column">
+    <li ng-repeat="proc in procs" ng-class="($index == 0)?'active':''" ><!--class="active"-->
+        <a data-toggle="tab" ng-click="changePointerOfPorcs($index)">{{proc.procname}}</a><!-- id="tab11" href="tabs.html#tab1"-->
+    </li>
+</ul>
+
+<div id="user" hc-box class="flex1 flex-column">
+    <!--执行人-->
+    <div class="ibox-content text-right m-b-n">
+        <span class="ng-binding pull-left">执行人</span>
+        <button class="btn btn-white" ng-click="addProcUser()" ng-hide="canmodify == 2">添加
+        </button>
+        <button class="btn btn-white" ng-click="deleteProcUser()">删除
+        </button>
+    </div>
+    <div hc-grid="procUserGridOptions" style="height:192px;width:572px" class="flex1 flex-column"/>
+
+    <!--用户范围-->
+    <div class="ibox-content text-right m-b-n" ng-hide="procs[pointerOfPorcs].wfuserrangeofwfproctemps == 0">
+        <span class="ng-binding pull-left">候选执行人</span>
+        <button class="btn btn-white" ng-click="addProcUserFomrRange()">添加到执行人</button>
+    </div>
+    <div hc-grid="procUserRangerGridOptions"
+         style="height:192px;width:572px"
+         ng-hide="procs[pointerOfPorcs].wfuserrangeofwfproctemps == 0"/>
+</div>
+
+

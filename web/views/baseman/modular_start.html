@@ -1,0 +1,297 @@
+<div hc-diy-page class="p-w-m">
+    <div hc-box="存货模块启用" class="tittle-box">
+        
+        <div class="row">
+            <!-- hc-readonly="data.currItem.inv_is_start == 2"-->
+
+            <div hc-input="data.currItem.inv_created_by"
+                 hc-label="启用人"
+                 id="test"
+                 hc-readonly="true"><!--
+                 style="margin-left: -60px">-->
+            </div>
+
+            <div hc-input="data.currItem.inv_creation_date"
+                 hc-label="启用日期"
+                 hc-readonly="true"
+                 hc-type="date"><!--
+                 style="margin-left: -50px">-->
+            </div>
+
+            <div hc-input="data.currItem.inv_last_updated_by"
+                 hc-label="修改人"
+                 hc-readonly="true"><!--
+                 style="margin-left: -55px">-->
+            </div>
+
+            <div hc-input="data.currItem.inv_last_update_date"
+                 hc-label="修改日期"
+                 hc-type="date"
+                 hc-readonly="true"><!--
+                 style="margin-left: -50px">-->
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.inv_year_month"
+                 hc-label="模块启用月份"
+                 hc-readonly="data.currItem.inv_is_start == 2"
+                 hc-type="year-month"><!--
+                 style="margin-left: -10px">-->
+            </div>
+
+            <div id="inv_is_start"
+                 hc-input="data.currItem.inv_is_start"
+                 hc-type="checkbox"
+                 hc-label="是否启用"
+                 hc-change="modularStart('inv_param')"
+                 hc-readonly="data.currItem.inv_is_start == 2"><!--
+                 style="margin-left: -90px">-->
+            </div>
+
+        </div>
+    </div>
+    <div hc-box="应收模块启用" class="tittle-box">
+        
+        <div class="row">
+            <div hc-input="data.currItem.ar_created_by"
+                 hc-label="启用人"
+                 hc-readonly="true"><!--
+                 style="margin-left: -60px">-->
+            </div>
+
+            <div hc-input="data.currItem.ar_creation_date"
+                 hc-label="启用日期"
+                 hc-type="date"
+                 hc-readonly="true"><!--
+                 style="margin-left: -50px">-->
+            </div>
+
+            <div hc-input="data.currItem.ar_last_updated_by"
+                 hc-label="修改人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.ar_last_update_date"
+                 hc-label="修改日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.ar_year_month"
+                 hc-label="模块启用月份"
+                 hc-readonly="data.currItem.ar_is_start == 2"
+                 hc-type="year-month"><!--
+                 style="margin-left: -10px">-->
+            </div>
+
+            <div hc-input="data.currItem.ar_is_start"
+                 hc-type="checkbox"
+                 hc-readonly="data.currItem.ar_is_start == 2"
+                 hc-label="是否启用"
+                 hc-change="modularStart('ar_param')"><!--
+                 style="margin-left: -90px">-->
+            </div>
+        </div>
+    </div>
+    <div hc-box="应付模块启用" class="tittle-box">
+        <div class="row">
+            <div hc-input="data.currItem.ap_created_by"
+                 hc-label="启用人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.ap_creation_date"
+                 hc-label="启用日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+
+            <div hc-input="data.currItem.ap_last_updated_by"
+                 hc-label="修改人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.ap_last_update_date"
+                 hc-label="修改日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.ap_year_month"
+                 hc-label="模块启用月份"
+                 hc-readonly="data.currItem.ap_is_start == 2"
+                 hc-type="year-month">
+            </div>
+
+            <div hc-input="data.currItem.ap_is_start"
+                 hc-type="checkbox"
+                 hc-label="是否启用"
+                 hc-readonly="data.currItem.ap_is_start == 2"
+                 hc-change="modularStart('ap_param')">
+            </div>
+        </div>
+    </div>
+    <div hc-box="出纳模块启用" class="tittle-box">
+        <div class="row">
+            <div hc-input="data.currItem.fd_created_by"
+                 hc-label="启用人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.fd_creation_date"
+                 hc-label="启用日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+
+            <div hc-input="data.currItem.fd_last_updated_by"
+                 hc-label="修改人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.fd_last_update_date"
+                 hc-label="修改日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.fd_year_month"
+                 hc-label="模块启用月份"
+                 hc-readonly="data.currItem.fd_is_start == 2"
+                 hc-type="year-month">
+            </div>
+
+            <div hc-input="data.currItem.fd_is_start"
+                 hc-type="checkbox"
+                 hc-readonly="data.currItem.fd_is_start == 2"
+                 hc-label="是否启用"
+                 hc-change="modularStart('fd_param')">
+            </div>
+        </div>
+    </div>
+    <div hc-box="固定资产模块启用" class="tittle-box">
+        <div class="row">
+            <div hc-input="data.currItem.ad_created_by"
+                 hc-label="启用人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.ad_creation_date"
+                 hc-label="启用日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+
+            <div hc-input="data.currItem.ad_last_updated_by"
+                 hc-label="修改人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.ad_last_update_date"
+                 hc-label="修改日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.ad_year_month"
+                 hc-label="模块启用月份"
+                 hc-readonly="data.currItem.ad_is_start == 2"
+                 hc-type="year-month">
+            </div>
+
+            <div hc-input="data.currItem.ad_is_start"
+                 hc-type="checkbox"
+                 hc-label="是否启用"
+                 hc-readonly="data.currItem.ad_is_start == 2"
+                 hc-change="modularStart('ad_param')">
+            </div>
+        </div>
+    </div>
+    <div hc-box="预算管理模块启用" class="tittle-box">
+        <div class="row">
+            <div hc-input="data.currItem.fin_fee_created_by"
+                 hc-label="启用人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.fin_fee_creation_date"
+                 hc-label="启用日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+
+            <div hc-input="data.currItem.fin_fee_last_updated_by"
+                 hc-label="修改人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.fin_fee_last_update_date"
+                 hc-label="修改日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.fin_fee_year_month"
+                 hc-label="模块启用月份"
+                 hc-readonly="data.currItem.fin_fee_is_start == 2"
+                 hc-type="year-month">
+            </div>
+
+            <div hc-input="data.currItem.fin_fee_is_start"
+                 hc-type="checkbox"
+                 hc-label="是否启用"
+                 hc-readonly="data.currItem.fin_fee_is_start == 2"
+                 hc-change="modularStart('fin_fee_param')">
+            </div>
+        </div>
+    </div>
+    <div hc-box="总账账套启用" class="tittle-box">
+        <div class="row">
+            <div hc-input="data.currItem.gl_account_created_by"
+                 hc-label="启用人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.gl_account_creation_date"
+                 hc-label="启用日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+
+            <div hc-input="data.currItem.gl_account_last_updated_by"
+                 hc-label="修改人"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.gl_account_last_update_date"
+                 hc-label="修改日期"
+                 hc-readonly="true"
+                 hc-type="date">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.gl_account_year_month"
+                 hc-label="模块启用月份"
+                 hc-readonly="data.currItem.gl_account_is_start == 2"
+                 hc-type="year-month">
+            </div>
+
+            <div hc-input="data.currItem.gl_account_is_start"
+                 hc-type="checkbox"
+                 hc-label="是否启用"
+                 hc-readonly="data.currItem.gl_account_is_start == 2"
+                 hc-change="modularStart('gl_account_start_option')">
+            </div>
+        </div>
+    </div>
+</div>

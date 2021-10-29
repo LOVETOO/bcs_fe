@@ -1,0 +1,87 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active flex-column">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.trading_company_code"
+                     hc-label="交易公司编码"
+                     hc-blur="dataEquality(1)"
+                     hc-readonly="initData"
+                     hc-required="!initData"></div>
+                <div hc-input="data.currItem.trading_company_name"
+                     hc-label="交易公司名称"
+                     hc-blur="dataEquality(2)"
+                     hc-readonly="initData"
+                     hc-required="!initData"></div>
+                <div hc-input="data.currItem.manager"
+                     hc-label="责任人"
+                     hc-readonly="initData"
+                     hc-required="!initData"></div>
+                <div hc-input="data.currItem.manager_tel"
+                     hc-label="联系电话"
+                     hc-readonly="initData"
+                     hc-required="!initData"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.tax_type"
+                     hc-label="纳税人类型"
+                     hc-dict-code="tax_type"
+                     hc-readonly="initData"
+                     hc-required="!initData"></div>
+                <div hc-input="data.currItem.tax_no"
+                     hc-label="纳税人识别号"
+                     hc-readonly="initData"
+                     hc-required="!initData"></div>
+                <div hc-input="data.currItem.invoice_type"
+                     hc-label="发票类型"
+                     hc-readonly="initData"
+                     hc-dict-code="epm.invoice_type"
+                     hc-required="!initData"></div>
+                <div hc-input="data.currItem.tax_rate"
+                     hc-label="默认税率"
+                     hc-readonly="initData"
+                     hc-blur="dataVerify()"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.site"
+                     hc-label="地址"
+                     hc-required="!initData"
+                     hc-readonly="initData"
+                     hc-placeholder="省/市/区"
+                     hc-class-id="scparea"
+                     hc-common-search="commonSearchSettingOfOrigin"></div>
+                <div hc-input="data.currItem.address"
+                     hc-label="详细地址"
+                     hc-readonly="initData"
+                     hc-col-count="4"></div>
+                <div hc-input="data.currItem.disable"
+                     hc-label="不可用"
+                     hc-type="checkbox"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     class="oneis"></div>
+            </div>
+        </div>
+        <div hc-tab="epm_tab" hc-tab-change="onTabChange(params)" class="other-h"></div>
+        <div hc-tab-page class="flex1">
+            <!--打款账户-->
+            <div id="out" class="active">
+                <div hc-box hc-grid="gridOptionsOut"  class="flex1" style="min-height:204px;"></div>
+            </div>
+            <!--收款账户-->
+            <div id="in">
+                <div hc-box hc-grid="gridOptionsIn"  class="flex1" style="min-height:204px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .oneis{
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+</style>
+
+

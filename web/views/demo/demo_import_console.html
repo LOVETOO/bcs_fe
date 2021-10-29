@@ -1,0 +1,47 @@
+<div class="modal-footflex">
+	<div class="modal-body">
+		<div class="form-inline mline">
+			<div class="row">
+				<lable class="control-label">文件名</lable>
+				<input type="text" class="form-control width_ml" ng-model="data.file" ng-readonly="true">
+				<button type="button" class="btn btn-primary" ng-click="importStart()" ng-hide="status.running||!data.file||(count.all===count.success)">{{count.all===count.remain?'开始':(count.remain?'继续':'失败数据重试')}}导入
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="importPause()" ng-show="status.running" ng-disabled="status.pause">{{status.pause?'正在暂停...':'暂停导入'}}
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="chooseFile()" ng-hide="status.running">{{data.file?'重新':''}}选择导入文件
+				</button>
+				<a type="button" class="btn btn-primary" href="{{data.import_template_url}}" ng-hide="!data.import_template_url||status.running">下载导入模板
+				</a>
+			</div>
+			<!--<div class="row">-->
+			<div id="progress" class="progress progress-striped" ng-class="{active:status.running}" style="margin-bottom:10px;">
+				<div id="progress-bar" class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+				 aria-valuemax="0" style="width:0%;min-width:10em;">
+					<span>{{progress.value}} / {{progress.max}} = {{progress.percent}}%</span>
+				</div>
+			</div>
+			<!--</div>-->
+		</div>
+		<div id="grid" style="height:380px;"></div>
+	</div>
+	<div class="modal-footer">
+		<div class="col-md-3">
+			<b>
+				<span>【导入统计】</span>
+				<span style="color:blue;margin-left:16px;">总数：{{count.all}}</span>
+				<span style="color:green;margin-left:16px;">成功：{{count.success}}</span>
+				<span style="color:red;margin-left:16px;">失败：{{count.fail}}</span>
+				<span style="color:orange;margin-left:16px;">剩余：{{count.remain}}</span>
+			</b>
+		</div>
+		<div class="col-md-8">
+			<b style="text-align: left;width: 100%;display: block;">
+				<span>{{data.import_msg}}</span>
+			</b>
+		</div>
+		<div class="col-md-1">
+			<button type="button" class="btn btn-white" ng-click="btnCloseClick()" ng-hide="status.running">关闭
+			</button>
+		</div>
+	</div>
+</div>

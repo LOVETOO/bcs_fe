@@ -1,0 +1,291 @@
+<div class="bill-form" ng-controller="objConf">
+    <div class="row wrapper border-bottom white-bg page-heading"
+         style="position: fixed;z-index: 999;width:88%;top: 51px;">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                ��������
+            </div>
+            <div style="float:right;">
+                <button ng-click="search($event)" class="btn btn-toolbar" ng-hide="mainbtn.search" type="button">
+                    <i class="fa fa-search"></i>��ѯ
+                </button>
+                <button ng-click="new($event)" class="btn btn-toolbar" ng-disabled="mainbtn.add" type="button">
+                    <i class="fa fa-file-o"></i>����
+                </button>
+                <button ng-click="save($event)" class="btn btn-toolbar" type="button">
+                    <i class="fa fa-floppy-o"></i>����
+                </button>
+                <button ng-click="refresh($event)" class="btn btn-toolbar" type="button" ng-click="refresh()">
+                    <i class="fa fa-history"></i>ˢ��
+                </button>
+                <button ng-click="delete($event)" class="btn btn-toolbar" type="button" ng-click="delete()">
+                    <i class="fa fa-trash"></i>ɾ��
+                </button>
+                <button ng-click="closefrm()" class="btn btn-toolbar" type="button">
+                    <i class="fa fa-times"></i>�ر�
+                </button>
+            </div>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 90px;">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="content">
+                    <form class="form-horizontal" id="saveform">
+                        <div class="ibox-content">
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">�������ͱ��</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="data.currItem.objtypeid"
+                                           ng-readonly="data.currItem.canintoid"
+                                           class="input-sm form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">������������</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control readonly input-sm" type="text"
+                                           data-msg-required="����������������Ϊ��"
+                                           ng-model="data.currItem.objtypename">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">����������</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select ng-model="data.currItem.wftype"
+                                            chosen-select
+                                            class="input-sm chosen-select form-control"
+                                    ng-options="s.id as s.name for s in wftypes">
+                                    <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">����</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control readonly input-sm" type="text"
+                                           data-rule-required="true"
+                                           data-msg-required="��������Ϊ��"
+                                           ng-model="data.currItem.tablename">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">������</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           data-rule-required="true"
+                                           data-msg-required="����������Ϊ��"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.pkfield">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">��������</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           data-rule-required="true"
+                                           data-msg-required="������������Ϊ��"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.formclass">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">JAVA����</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text"
+                                           data-rule-required="true"
+                                           data-msg-required="JAVA��������Ϊ��"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.javaname">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini not-null">��ҳGallery</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text"
+                                           class="input-sm form-control"
+                                           data-rule-required="true"
+                                           data-msg-required="��ҳGallery����Ϊ��"
+                                           ng-model="data.currItem.web_gallery">
+                                </div>
+
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">�����</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.formclass">
+                                </div>
+
+
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">�����ֶ�</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.codefield">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">�����ֶ�</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.namefield">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">�����ֶ�</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.typefield">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">��������</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.objclass">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">��������</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.subjectfield">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">���̴򿪷�ʽ</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select ng-model="data.currItem.formopenmodeinwf"
+                                            chosen-select
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="s.id as s.name for s in formopenmodeinwfs">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">��ģ���</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.extshtid">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">����ذ�</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.extshtid">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">��������</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select ng-model="data.currItem.rpttype"
+                                            chosen-select
+                                            class="input-sm chosen-select form-control"
+                                            ng-options="s.id as s.name for s in rpttypes">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label class="form-label-mini">��Ҫ�ֶ�</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text"
+                                           class="input-sm form-control"
+                                           ng-model="data.currItem.mainfields">
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    <label style="align:left">
+                                        <input type="checkbox"
+                                               ng-model="data.currItem.haspath"
+                                               ng-true-value="2"
+                                               ng-false-value="1">��·��</label>
+                                </div>
+                                <div class="col-md-1">
+                                    <label style="align:left">
+                                        <input type="checkbox"
+                                               ng-model="data.currItem.hasrev"
+                                               ng-true-value="2"
+                                               ng-false-value="1">�а汾</label>
+                                </div>
+                                <div class="col-md-1">
+                                    <label style="align:left">
+                                        <input type="checkbox"
+                                               ng-model="data.currItem.isflow"
+                                               ng-true-value="2"
+                                               ng-false-value="1">������</label>
+                                </div>
+                                <div class="col-md-1">
+                                    <label style="align:left">
+                                        <input type="checkbox"
+                                               ng-model="data.currItem.isbill"
+                                               ng-true-value="2"
+                                               ng-false-value="1">����</label>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="col-md-2">
+                                        <a class="pull-right"
+                                           style="padding-right: 10px;line-height: 25px;"><i class="fa fa-list"></i></a>
+                                    </div>
+                                    <div class="col-md-3" style=" padding-right: 0px; ">
+                                        ����ģ��
+                                    </div>
+                                    <div class="col-md-7">
+                                        <button ng-click="addLine('wftempOptions')" class="btn btn-toolbar"
+                                                type="button">
+                                            <i class="fa fa-plus-square-o"></i>������
+                                        </button>
+                                        <button ng-click="delLine('wftempOptions')" class="btn btn-toolbar"
+                                                type="button">
+                                            <i class="fa fa-minus-square-o"></i>ɾ����
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ibox-content icons-box">
+                                <div slick-grid
+                                     sg-options="wftempOptions"
+                                     sg-data="data.currItem.objwftempofobjconfs"
+                                     sg-columns="wftempColumns"
+                                     class="slick-grid"
+                                     style="width:100%;height:250px;"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

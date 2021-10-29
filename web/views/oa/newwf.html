@@ -1,0 +1,121 @@
+
+<div style="display: flex;">
+	<div class="process">
+		<div style="max-height: 400px;overflow: auto;">
+			<div class="process-box" ng-repeat="wfProc in wfProcs" ng-class="wfProc.class">
+				<h3>{{wfProc.procname}}</h3>
+				<div class="process-state">{{wfProc.statname}}</div>
+				<div class="process-list" ng-repeat="procuser in wfProc.procuserofwfprocs">
+					<div class="process-head"><img src="/web/img/head.jpg"></div>
+					<div class="process-information">
+						<span class="process-name">{{procuser.username}}</span>
+						<span class="process-department">[{{procuser.orgpath}}]</span>
+						<span class="process-time">{{procuser.signtime}}</span>
+					</div>
+					<p>{{procuser.opinion}}</p>
+				</div>
+				<div class="progress-bar">
+					<button><i class="iconfont" ng-class="wfProc.icon"></i></button>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="process-box finish">
+			<h3>1.申请</h3>
+			<div class="process-state">通过</div>
+			<div class="process-list">
+				<div class="process-head"><img src="/web/img/head.jpg"></div>
+				<div class="process-information">
+					<span class="process-name">马化云</span>
+					<span class="process-department">[人事部]</span>
+					<span class="process-time">06-20 11:30</span>
+				</div>
+				<p>同意申请</p>
+			</div>
+			<div class="progress-bar">
+				<button><i class="iconfont hc-dui"></i></button>
+			</div>
+		</div> 
+		<div class="process-box execute">
+			<h3>2.项目经理审批</h3>
+			<div class="process-state">待审</div>
+			<div class="process-list">
+				<div class="process-head"><img src="/web/img/head.jpg"></div>
+				<div class="process-information">
+					<span class="process-name">刘强西</span>
+					<span class="process-department">[IT部]</span>
+					<span class="process-time">06-20 11:30</span>
+				</div>
+				<p>同意申请！工作安排好，好好休息！</p>
+			</div>
+			<div class="process-list">
+				<div class="process-head"><img src="/web/img/head.jpg"></div>
+				<div class="process-information">
+					<span class="process-name">马化云</span>
+					<span class="process-department">[人事部]</span>
+					<span class="process-time">06-20 11:30</span>
+				</div>
+				<p>同意申请</p>
+			</div>
+			<div class="progress-bar">
+				<button><i class="iconfont hc-dengdai"></i></button>
+			</div>
+		</div>
+		<div class="process-box plan">
+			<h3>3.总经理审批</h3>
+			<div class="process-state">未到达</div>
+			<div class="progress-bar">
+				<button><i class="iconfont hc-dengdai"></i></button>
+			</div>
+		</div> -->
+		<div class="process-buttons">
+			<button class="btn btn-shadow pull-left"><i class="iconfont hc-liucheng"></i>查看流程图</button>
+			<button class="btn btn-shadow" ng-click="">撤回</button>
+			<button class="btn btn-shadow" ng-click="">转办</button>
+			<button class="btn btn-shadow" ng-click="">中断</button>
+			<button class="btn btn-primary btn-shadow" ng-click="">同意</button>
+		</div>
+	</div>
+	<div class="approval">
+		<div class="approval-object">
+			<div class="approval-object-box">
+				<i class="iconfont hc-wenjian"></i>
+				<p class="approval-object-name">请假申请单</p>
+				<p class="approval-object-time">2019-6-23 20:40:30</p>
+			</div>
+		</div>
+		<div class="approval-infor">
+			<h4>审批意见</h4>
+			<ul style="max-height: 300px;overflow: auto;">
+				<li ng-repeat="userOpinion in userOpinions">
+					<p>
+						<button ng-class="userOpinion.btnClass">{{userOpinion.statname}}</button>
+						{{userOpinion.signtime}}
+						{{data.currItem.wfname}}
+					</p>
+					<p><strong>{{userOpinion.username}}:</strong>{{userOpinion.opinion}}</p>
+				</li>
+			</ul>
+		</div>
+		<!-- <div class="approval-infor">
+			<h4>审批意见</h4>
+			<ul>
+				<li>
+					<p>
+						<button class="btn btn-blue">提交</button>
+						2019-06-20 14:30:22
+						请假申请
+					</p>
+					<p><strong>马化云:</strong>同意申请</p>
+				</li>
+				<li>
+					<p>
+						<button class="btn btn-orange">转办</button>
+						2019-06-20 14:30:22
+						请假申请
+					</p>
+					<p><strong>马化云:</strong>同意申请</p>
+				</li>
+			</ul>
+		</div> -->
+	</div>
+</div>

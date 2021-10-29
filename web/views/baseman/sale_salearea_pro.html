@@ -1,0 +1,82 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="sale_salearea_pro">
+    <div class="wrapper wrapper-content" ng-init="init();">
+        <div class="modal-footflex">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="tabs.html#tab-common"> 常规</a></li>
+                    <li><a data-toggle="tab" href="tabs.html#tab-areas"> 所辖地区</a></li>
+                </ul>
+                <form method="get" class="form-inline mline" name="entityForm" novalidate>
+                    <div class="tab-content">
+                        <div id="tab-common" class="tab-pane active">
+                            <div class="form-group">
+                                <div class="panel-body form-inline">
+                                    <div class="row">
+                                        <label class="control-label">销区名称</label>
+                                        <input type="text" class="form-control" name="sale_area_name"
+                                               ng-model="data.currItem.sale_area_name"
+                                               ng-minlength=2
+                                               ng-maxlength=20 required>
+                                        <span style="color:red"
+                                              ng-show="entityForm.sale_area_name.$dirty && entityForm.sale_area_name.$invalid">
+											<span ng-show="entityForm.sale_area_name.$error.required">请输入</span>
+											<span ng-show="entityForm.sale_area_name.$error.minlength">最少2个字符</span>
+											<span ng-show="entityForm.sale_area_name.$error.maxlength">最多20个字符</span>
+										</span>
+                                        <label class="control-label">销区编码</label>
+                                        <input type="text" class="form-control" name="sale_area_code"
+                                               ng-model="data.currItem.sale_area_code"
+                                               ng-minlength=2
+                                               ng-maxlength=20 required>
+                                        <span style="color:red"
+                                              ng-show="entityForm.sale_area_code.$dirty && entityForm.sale_area_code.$invalid">
+										<span ng-show="entityForm.sale_area_code.$error.required">请输入</span>
+										<span ng-show="entityForm.sale_area_code.$error.minlength">最少2个字符</span>
+										<span ng-show="entityForm.sale_area_code.$error.maxlength">最多20个字符</span>
+									</span>
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label">所属销售大区</label>
+                                        <select ng-model="data.currItem.sales_big_area"
+                                                class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                                ng-options="s.id as s.name for s in dictPool.sales_big_area">
+                                        </select>
+                                        <label class="control-label">可用</label>
+                                        <input type="checkbox" class="i-checks"
+                                               ng-checked="data.currItem.isuseable==2"
+                                               ng-modal="data.currItem.isuseable" ng-click="checkUsable($event)">
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class=" control-label">区域描述</label>
+                                            <textarea class="form-control" style="width: 400px"
+                                                      ng-model="data.currItem.area_note"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-areas" class="tab-pane">
+                            <div class="panel-body">
+                                <button type="button" class="btn btn-white footer-btn"
+                                        ng-click="searchArea()">增加
+                                </button>
+                                <div id="linegridview" slick-grid sg-options="lineOptions" sg-data=""
+                                     sg-columns="lineColumns" style="width:100%;height:320px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save()"
+                        ng-disabled="entityForm.sale_area_name.$invalid || entityForm.sale_area_code.$invalid ">
+                    保存
+                </button>
+                <button type="button" class="btn btn-white" ng-click="closeWindow()">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+

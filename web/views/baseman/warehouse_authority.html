@@ -1,0 +1,61 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="warehouse_authority" data-ng-init="init()">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="doSearch()">
+        <div class="row">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>仓库访问权限</h5>
+                    <div class="ibox-tools">
+                        <form class="form-inline">
+                            <button type="button" class="btn btn-default" ng-click="saveData()"><i
+                                    class="fa fa-save"></i> 保存
+                            </button>
+                            <button type="button" class="btn btn-default " data-toggle="modal"
+                                    ng-click="searchData()"><i class="fa fa-refresh"></i> 刷新
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-inline mline title-form">
+                        <label style="width: 30%;">
+                            <label>授权方式:</label>
+                            <label>
+                                <input type="radio" name="method" value="user" ng-click="uerMethod()" checked> 按客户
+                            </label>
+                            <label>
+                                <input type="radio" name="method" value="dept" ng-click="ctMethod()"> 按仓库
+                            </label>
+                        </label>
+                        <label style="width: 29%;">能访问的{{ listname }}</label>
+                        <label style="width: 30%;">不能访问的{{ listname }}</label>
+                    </form>
+                    <!--列表-->
+                    <div class="TreeGridBox Gridlist">
+                        <div class="ibox-title" style="width: 30%;">
+                            <div id="headerGrid"></div>
+                        </div>
+                        <div class="ibox-title" style="width: 30%;">
+                            <div id="ableGrid" class="w_gureen"></div>
+                        </div>
+                        <div class="ibox-title" style="width: 10%;">
+                            <h5>授权操作</h5>
+                            <div class="btnlink">
+                                <button type="button" class="btn btn-default" ng-click="allAccess()"> 全部授权
+                                </button>
+                                <button type="button" class="btn btn-default" ng-click="Access()"> 授权
+                                </button>
+                                <button type="button" class="btn btn-default" ng-click="allCancel()"> 全部取消
+                                </button>
+                                <button type="button" class="btn btn-default" ng-click="Cancel()"> 取消
+                                </button>
+                            </div>
+                        </div>
+                        <div class="ibox-title" style="width: 30%;">
+                            <div id="disableGrid" class="w_red"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

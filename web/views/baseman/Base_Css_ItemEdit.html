@@ -1,0 +1,155 @@
+<div class="bill-form" ng-controller="base_css_itemEditController">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h3>客户配件清单</h3>
+            <button ng-click="new()" class="btn btn-toolbar"><i class="fa fa-file-o"></i> 新建</button>
+            <button ng-click="refresh()" class="btn btn-toolbar"><i class="fa fa-refresh"></i> 刷新</button>
+            <button ng-click="delete()" class="btn btn-toolbar"><i class="fa fa-times"></i> 删除</button>
+            <button ng-click="save()" class="btn btn-toolbar"><i class="fa fa-floppy-o"></i> 保存</button>
+            <button ng-click="closefrm()" class="btn btn-toolbar" type="button"><i
+                    class="fa fa-times"></i>关闭
+            </button>
+
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul id="tabs" class="tri-nav-tabs">
+                    <li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav"><i
+                            class="fa fa-pencil-square">常规</i></a></li>
+                </ul>
+                <form class="form-horizontal" id="saveform">
+                    <div id="content" class="first tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">配件料号:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" ng-model="data.currItem.css_item_code"
+                                               class="input-sm form-control">
+                                    </div>
+
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml ">出口机型:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input ng-model="data.currItem.item_name" type="text"
+                                                   class="form-control input-sm">
+                                            <a class="input-group-addon" ng-click="openItemFrm()" id="#abc"><i
+                                                    class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml ">客户机型:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-model="data.currItem.cust_item_code" type="text"
+                                               class="form-control input-sm">
+                                    </div>
+
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">批次号:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-model="data.currItem.batch_no" type="text"
+                                               class="form-control input-sm">
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini font-noraml not-null">客户:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <input ng-model="data.currItem.cust_name" type="text"
+                                                   class="form-control input-sm">
+                                            <a class="input-group-addon" ng-click="selectcust()" id="cust_name"><i
+                                                    class="fa fa-ellipsis-h"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">币种:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select chosen-select id="astat" ng-model="data.currItem.currency_id"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="s.currency_id as s.currency_code for s in currencys">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini not-null">品牌:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select chosen-select id="brand" ng-model="data.currItem.brand"
+                                                class="input-sm chosen-select form-control"
+                                                ng-options="s.brand as s.brand for s in data.currItem.customer_brandofcustomers">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">参考价格:</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input ng-model="data.currItem.price" type="text" class="form-control input-sm">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini ">配件描述:</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input ng-model="data.currItem.css_item_desc" type="text"
+                                               class="form-control input-sm">
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="form-label-mini ">配件英文描述:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input ng-model="data.currItem.css_item_en_desc" type="text"
+                                               class="form-control input-sm">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="form-label-mini">备注:</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="text" ng-model="data.currItem.note" class="input-sm form-control">
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="form-label-mini">客户配件料号:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input ng-model="data.currItem.cust_css_item_code" type="text"
+                                               class="form-control input-sm">
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

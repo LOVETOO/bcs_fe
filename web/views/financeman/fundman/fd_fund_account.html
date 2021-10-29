@@ -1,0 +1,85 @@
+<div hc-edit-list>
+
+    <div class="other-h" hx-box>
+        <div class="row">
+            <div hc-input="data.currItem.fund_account_code"
+                 hc-label="账户编码"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.fund_account_name"
+                 hc-label="账户名称"
+                 hc-required="true">
+            </div>
+
+            <div hc-input="data.currItem.currency_name"
+                 hc-label="记账货币"
+                 hc-btn-click="chooseCurrency()">
+            </div>
+
+           <!-- <div hc-input="data.currItem.crm_entid"
+                 hc-label="品类"
+                 hc-dict-code="crm_entid">
+            </div>-->
+            <div hc-input="data.currItem.bank_name"
+                 hc-label="开户银行"
+                 hc-btn-click="chooseBank()">
+            </div>
+            <div hc-input="data.currItem.fund_account_status"
+                 hc-label="可用"
+                 hc-type="checkbox">
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.fund_account_type"
+                 hc-label="账户类型"
+                 hc-required="true"
+                 hc-change="changeEvent('fund_account_type')"
+                 hc-delete-together="fund_account_property"
+                 hc-dict-code="fund_account_type">
+            </div>
+
+            <div hc-input="data.currItem.fund_account_property"
+                 hc-label="账户类别"
+                 hc-required="true"
+                 hc-select-filter="accountPropertyFilter(option)"
+                 hc-dict-code="fund_account_property">
+            </div>
+
+            <div hc-input="data.currItem.subject_code"
+                 hc-label="会计科目"
+                 hc-required="true"
+                 hc-class-id="gl_account_subject"
+                 hc-common-search="commonSearchSetting.gl_account_subject">
+            </div>
+            <div hc-input="data.currItem.subject_name"
+                 hc-readonly="true">
+            </div>
+
+            <div hc-input="data.currItem.is_negative"
+                 hc-label="允许负数金额"
+                 hc-type="checkbox">
+            </div>
+            <!--<div hc-input="data.currItem.subject_code_ff"
+                 hc-label="财务科目"
+                 hc-class-id="gl_account_subject"
+                 hc-common-search="commonSearchSetting.gl_account_subject_ff">
+            </div>
+            <div hc-input="data.currItem.subject_name_ff"
+                 hc-readonly="true">
+            </div>-->
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.remark"
+                 hc-label="备注"
+                 hc-col-count="8"
+                 hc-type="textarea">
+            </div>
+        </div>
+    </div>
+
+</div>

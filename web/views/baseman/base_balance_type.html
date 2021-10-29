@@ -1,0 +1,61 @@
+<div hc-edit-list>
+
+    <div class="row">
+        <div hc-input="data.currItem.balance_type_code"
+             hc-label="结算方式编码"
+             hc-readonly="true">
+        </div>
+
+        <div hc-input="data.currItem.balance_type_name"
+             hc-label="结算方式名称"
+             hc-required="true">
+        </div>
+
+        <div hc-input="data.currItem.subject_code"
+             hc-label="会计科目编码"
+             hc-class-id="gl_account_subject"
+             hc-common-search="commonSearchSetting.gl_account_subject">
+        </div>
+
+        <div hc-input="data.currItem.subject_name"
+             hc-readonly="true">
+        </div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.settlement_type"
+             hc-label="结算类型"
+             hc-required="true"
+             hc-dict-code="settlement_type">
+        </div>
+
+        <div hc-input="data.currItem.feebx_create_bill_type"
+             hc-label="费用报销生成单据类型"
+             hc-readonly="true"
+             hc-dict-code="feebx_create_bill_type">
+        </div>
+
+        <div hc-input="data.currItem.is_fee"
+             hc-label="费用报销"
+             hc-type="checkbox">
+        </div>
+
+        <div hc-input="data.currItem.is_ap"
+             hc-label="采购付款"
+             hc-type="checkbox">
+        </div>
+
+        <div hc-input="data.currItem.is_ar"
+             hc-label="销售回款"
+             hc-type="checkbox">
+        </div>
+    </div>
+
+    <div class="row">
+        <div hc-input="data.currItem.remark"
+             hc-label="备注"
+             hc-type="textarea"
+             hc-col-count="8">
+        </div>
+    </div>
+</div>

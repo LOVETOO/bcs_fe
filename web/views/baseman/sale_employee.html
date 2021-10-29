@@ -1,0 +1,33 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="sale_employee">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <!--<h5>业务员</h5>-->
+                    <div class="ibox-tools">
+                        <form class="pull-right">
+                            <button class="btn btn-white btn-sm" data-placement="left"
+                                    ng-click="searchBySql()"><i class="fa fa-search"></i> 查询
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="刷新"
+                                    ng-click="refresh()"><i class="fa fa-refresh"></i>刷新
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal" data-target="#attributeModal"
+                                    ng-click="add()" title="新建业务员资料"><i class="fa fa-plus"></i> 新建业务员
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div id="headerGrid" slick-grid sg-options="headerOptions"
+                         sg-columns="headerColumns"
+                         class="slick-grid">
+                    </div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

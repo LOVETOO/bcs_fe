@@ -1,0 +1,183 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div hc-box="" class="grid-other-h">
+            <div class="row">
+                <div hc-input="data.currItem.fee_apply_no"
+                        hc-label="申请单号"
+                        hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.year_month"
+                     hc-type="year-month"
+                     hc-change="splitYM()"
+                     hc-label="年月"
+                     hc-required="data.isApply"
+                     hc-readonly="!data.isApply">
+                </div>
+
+                <div hc-input="data.currItem.bx_end_date"
+                     hc-label="报销截止时间"
+                     hc-type="date"
+                     hc-readonly="!data.isApply">
+                </div>
+                <!--<div hc-input="data.currItem.bud_type_code"-->
+                        <!--hc-label="预算类别"-->
+                        <!--hc-btn-click="chooseBudType()"-->
+                        <!--hc-required="data.isApply"-->
+                        <!--hc-readonly="!data.isApply">-->
+                <!--</div>-->
+                <!--<div hc-input="data.currItem.bud_type_name"-->
+                        <!--hc-readonly="true">-->
+                <!--</div>-->
+
+                <div hc-input="data.currItem.stat"
+                        hc-label="单据状态"
+                        hc-dict-code="stat"
+                        hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.chap_name"
+                     hc-label="申请人"
+                     hc-btn-click="chooseUser()"
+                     hc-required="data.isApply"
+                     hc-readonly="!data.isApply">
+                </div>
+
+                <div hc-input="data.currItem.org_name"
+                     hc-label="申请部门"
+                     hc-btn-click="chooseOrg()"
+                     hc-required="data.isApply"
+                     hc-readonly="!data.isApply">
+                </div>
+
+                <div hc-input="data.currItem.creator"
+                        hc-label="创建人"
+                        hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.create_time"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <!--<div class="row">-->
+                <!--<div hc-input="data.currItem.total_apply_amt"-->
+                        <!--hc-label="申请总额"-->
+                        <!--hc-type="money"-->
+                        <!--hc-readonly="true">-->
+                <!--</div>-->
+
+                <!--<div hc-input="data.currItem.total_allow_amt"-->
+                        <!--hc-label="批准总额"-->
+                        <!--hc-type="money"-->
+                        <!--hc-readonly="true">-->
+                <!--</div>-->
+
+                <!--<div hc-input="data.currItem.is_loan"-->
+                     <!--hc-label="借款"-->
+                     <!--ng-click="is_loan_clicked()"-->
+                     <!--hc-type="checkbox"-->
+                     <!--hc-readonly="!data.isApply">-->
+                <!--</div>-->
+
+                <!--<div hc-input="data.currItem.is_advance"-->
+                     <!--hc-label="代垫"-->
+                     <!--hc-type="checkbox"-->
+                     <!--hc-readonly="!data.isApply">-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!-- 借款 -->
+            <!--<div ng-show="data.currItem.is_loan == 2">-->
+                <!--<div class="row">-->
+                    <!--<div hc-input="data.currItem.fee_loan_no"-->
+                         <!--hc-label="借款单号"-->
+                         <!--hc-readonly="true">-->
+                    <!--</div>-->
+
+                    <!--<div hc-input="data.currItem.balance_type_name"-->
+                         <!--hc-label="结算方式"-->
+                         <!--hc-btn-click="chooseBalanceType()"-->
+                         <!--hc-readonly="!data.isApply">-->
+                    <!--</div>-->
+
+                    <!--<div hc-input="data.currItem.estimated_pay_time"-->
+                         <!--hc-label="预计还款时间"-->
+                         <!--hc-type="date"-->
+                         <!--hc-required="data.isApply && data.currItem.is_loan == 2"-->
+                         <!--hc-readonly="!data.isApply">-->
+                    <!--</div>-->
+
+
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div hc-input="data.currItem.receiver"-->
+                         <!--hc-label="收款人"-->
+                         <!--hc-readonly="!data.isApply">-->
+                    <!--</div>-->
+
+                    <!--<div hc-input="data.currItem.receive_bank"-->
+                         <!--hc-label="收款银行"-->
+                         <!--hc-readonly="!data.isApply">-->
+                    <!--</div>-->
+
+                    <!--<div hc-input="data.currItem.receive_accno"-->
+                         <!--hc-label="收款账号"-->
+                         <!--hc-readonly="!data.isApply">-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="row">-->
+                    <!--<div hc-input="data.currItem.loan_total_apply_amt"-->
+                         <!--hc-label="借款申请总额"-->
+                         <!--hc-readonly="true"-->
+                         <!--hc-type="money">-->
+                    <!--</div>-->
+
+                    <!--<div hc-input="data.currItem.loan_total_allow_amt"-->
+                         <!--hc-label="借款批准总额"-->
+                         <!--hc-readonly="true"-->
+                         <!--hc-type="money">-->
+                    <!--</div>-->
+
+                    <!--<button type="button" class="btn btn-primary" ng-click="searchLineForNoPay()">未还款明细查询</button>-->
+                <!--</div>-->
+
+                <!--<div ng-show="data.isOverdue && data.currItem.is_loan == 2">-->
+                    <!--<div class="row">-->
+                        <!--<button type="button" class="btn btn-link btn-xs tips" style="margin-left: 80px;">借款已逾期！请填写逾期原因！</button>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                        <!--<div hc-input="data.currItem.overdue_reason"-->
+                             <!--hc-label="逾期原因"-->
+                             <!--hc-col-count="8"-->
+                             <!--hc-required="data.isApply && isOverdue && data.currItem.is_loan == 2"-->
+                             <!--hc-readonly="!data.isApply">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="row">
+                <div hc-input="data.currItem.purpose"
+                     hc-label="费用用途"
+                     hc-type="textarea"
+                     hc-col-count="8"
+                     hc-readonly="!data.isApply">
+                </div>
+            </div>
+
+            <!--<div class="row" ng-show="!data.isApply">-->
+                <!--<div hc-input="data.currItem.settle_reason"-->
+                     <!--hc-label="结案原因"-->
+                     <!--hc-col-count="8">-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div hc-grid="gridOptions" hc-box="" hc-auto-height="grid"></div>
+
+    </div>
+
+</div>

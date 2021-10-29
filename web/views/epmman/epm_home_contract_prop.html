@@ -1,0 +1,129 @@
+<!-- 
+/**
+ * 家装合同
+ * 2020/3/26
+ * zengjinhua
+ */
+ -->
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" class="active">
+        <div hc-box>
+            <div class="row">
+                <div hc-label="合同编码" hc-input="data.currItem.contract_code" hc-readonly="true"></div>
+
+                <div hc-label="合同名称" hc-input="data.currItem.contract_name" hc-col-count="4" hc-required="true"></div>
+                     
+                <div hc-label="审核状态" hc-input="data.currItem.audit_stat" hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-label="报备项目编码" hc-input="data.currItem.project_code" hc-required="data.supplementaryRead == 1" hc-readonly="data.supplementaryRead == 2"
+                    hc-change="changeProject()" hc-class-id="epm_project" hc-common-search="searchObjectEpmProject"></div>
+                     
+                <div hc-label="家装公司名称" hc-input="data.currItem.project_name" hc-col-count="4" hc-readonly="true"></div>
+                     
+                <div hc-label="合同类型" hc-input="data.currItem.contract_type" hc-readonly="true" hc-dict-code="epm.contract_type"></div>
+            </div>
+            <div class="row">
+               <div hc-label="经销商编码" hc-input="data.currItem.customer_code" hc-readonly="true"></div>
+                    
+               <div hc-label="经销商名称" hc-input="data.currItem.customer_name" hc-readonly="true"></div>
+                    
+                <div hc-label="交易公司" hc-input="data.currItem.trading_company_name" hc-required="data.supplementaryRead == 1" hc-readonly="data.supplementaryRead == 2"
+                    hc-class-id="epm_trading_company" hc-common-search="searchObjectScporg"></div>
+
+               <div hc-label="开票单位" hc-input="data.currItem.billing_unit_name" hc-required="data.supplementaryRead == 1" hc-readonly="data.supplementaryRead == 2"
+                    hc-class-id="epm_project_contract" hc-common-search="searchObjectBillingUnitName"></div>
+            </div>
+            <div class="row">
+               <div hc-label="备注" hc-input="data.currItem.remark"hc-col-count="8" hc-type="textarea"></div> 
+            </div>
+            <div class="row" hc-if="data.currItem.main_contract_id > 0">
+                <div hc-label="主合同编码" hc-input="data.currItem.main_contract_code"hc-readonly="true"
+                    hc-open-state="{
+                        name:'epmman.epm_project_contract_prop',
+                        params : {
+                            id : data.currItem.main_contract_id,
+                            openedByListPage : 1
+                        }
+                    }"></div>
+                <div hc-label="主合同名称" hc-input="data.currItem.main_contract_name" hc-col-count="6" hc-readonly="true"
+                    hc-open-state="{
+                        name:'epmman.epm_project_contract_prop',
+                        params : {
+                            id : data.currItem.main_contract_id,
+                            openedByListPage : 1
+                        }
+                    }"></div>
+            </div>
+            <div class="row" hc-if="data.currItem.audit_stat == '审核拒绝'">
+                <div hc-label="拒绝理由" hc-input="data.currItem.reject_reason" hc-col-count="8"hc-type="textarea"></div>
+            </div>
+        </div>
+        <div hc-box="合同金额、签订信息">
+            <div class="row">
+                <div hc-label="币别" hc-input="data.currItem.currency_name" hc-class-id="base_currency" hc-common-search="searchObjectBaseCurrency"></div>
+                    
+                <div hc-label="合同预估金额" hc-input="data.currItem.contract_amt" hc-type="money"></div>
+
+                <div hc-label="订单产品线" hc-readonly="data.supplementaryRead == 2" hc-input="data.currItem.order_pdt_line" hc-select-options="order_pdt_lines"
+                    hc-change="epmman.doAfterChangeOrderPdtLineInDiscount({ gridOptions: gridOptions_product })"
+                    hc-after-delete="epmman.doAfterChangeOrderPdtLineInDiscount({ gridOptions: gridOptions_product })"></div>
+
+                <div hc-label="所属事业部" hc-input="data.currItem.division_id" hc-dict-code="epm.division" hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-label="签订时间" hc-input="data.currItem.signed_date" hc-required="true" hc-type="date"></div>
+                    
+               <div hc-label="签订地点" hc-input="data.currItem.signed_location" hc-required="true"></div>
+                    
+               <div hc-label="合作开始时间" hc-input="data.currItem.contract_effect_date" hc-change="changeDate()" hc-type="date" hc-required="true"></div>
+                    
+               <div hc-label="合作结束时间" hc-input="data.currItem.contract_expire_date" hc-change="changeDate()" hc-type="date" hc-required="true"></div>
+            </div>
+        </div>
+    </div>
+    <!--产品清单-->
+    <div id="product" class="h100 flex-column">
+        <div hc-box hc-if-start="!isMultipleDiscountTickets">
+            <div class="row">
+                <div hc-input="data.currItem.price_contain_tax"
+                     hc-label="价格含税"
+                     hc-required="true"
+                     hc-dict-code="yesno"></div>
+                <div hc-input="data.currItem.price_contain_tax_desc"
+                     hc-label="含税说明"></div>
+                <div hc-input="data.currItem.price_contain_freight"
+                     hc-label="价格含运费"
+                     hc-required="true"
+                     hc-dict-code="yesno"></div>
+                <div hc-input="data.currItem.price_contain_freight_desc"
+                     hc-label="含运费说明"></div>
+            </div>
+            <div class="row">
+                <div hc-label="折扣有效期至"
+                    hc-input="data.currItem.discount_valid_date"
+                    hc-type="date"
+                    hc-required="true"
+                    hc-date-options="{ startDate: 'today' }"></div>
+                <div
+                    hc-label="折扣类型"
+                    hc-required="true"
+					hc-input="data.currItem.discount_type"
+					hc-dict-code="epm.discount_type"
+                ></div>
+            </div>
+        </div>
+        <div hc-box hc-if-end class="flex1 flex-column" style="min-height: 200px;">
+            <div hc-grid="gridOptions_product" class="flex1"></div>
+        </div>
+        <div hc-box hc-if="isMultipleDiscountTickets" class="flex1 flex-column">
+            <!-- 多个折扣单 -->
+            <div hc-grid="gridOptionsDiscount" class="flex1"></div>
+        </div>
+    </div>
+</div>
+
+
+
+

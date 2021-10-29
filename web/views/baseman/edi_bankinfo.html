@@ -1,0 +1,145 @@
+﻿<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="ctrl_edi_bankinfo">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h3>银行档案</h3>
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-title">
+                    <a style="font-size: small;font-weight: bold;color:black"><i ng-click="show_profit()"
+                                                                                 class={{icon}}></i>查询条件</a>
+                    <div style="float: right;color:gray;">
+                        <button ng-click="search()" class="btn btn-toolbar"><i class="fa fa-file-o"></i> 查询</button>
+                        <button ng-click="look_detail()" class="btn btn-toolbar"><i class="fa fa-refresh"></i> 查看详情
+                        </button>
+                        <button ng-click="delete()" class="btn btn-toolbar"><i class="fa fa-times"></i> 导出excel表格
+                        </button>
+                    </div>
+                    <div class="ibox-content" ng-show="profit_stat" id="sqlWhereBlock">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">单号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder=""
+                                       id="corpserialno"
+                                       name="="
+                                       class="input-sm form-control" ng-model="data.currItem.corpserialno">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">中信保SWIFT</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder=""
+                                       id="bankswift"
+                                       name="like"
+                                       class="input-sm form-control" ng-model="data.currItem.bankswift">
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-3">
+                                    <label class="form1-label-mini">企业银行SWIFT</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <input type="text" placeholder=""
+                                           id="omsbankswift"
+                                           name="like"
+                                           class="input-sm form-control" ng-model="data.currItem.omsbankswift">
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">英文名称</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder=""
+                                       id="engname"
+                                       name="like"
+                                       class="input-sm form-control" ng-model="data.currItem.engname">
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label class="form-label-mini">中文名称</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder=""
+                                       id="chnname"
+                                       name="like"
+                                       class="input-sm form-control" ng-model="data.currItem.chnname">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">银行地址</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder=""
+                                       id="address"
+                                       name="like"
+                                       class="input-sm form-control" ng-model="data.currItem.address">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">银行国家代码</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder=""
+                                       id="countrycode"
+                                       name="like"
+                                       class="input-sm form-control" ng-model="data.currItem.countrycode">
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini">法人代表</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" placeholder=""
+                                       id="corporation"
+                                       name="="
+                                       class="input-sm form-control"
+                                       ng-model="data.currItem.corporation">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <a style="font-size: small;font-weight: bold;color:black"><i
+                                class="btn btn-toolbar"></i>查询结果</a>
+                        <div slick-grid
+                             sg-options="viewOptions"
+                             sg-data="data.currItem.edi_bankinfos"
+                             sg-columns="viewColumns"
+                             class="slick-grid"
+                             style="width:100%;height:450px;"></div>
+                        <div class="ibox-content modal-open" page-pagination></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-hide="true">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>附件</h5>
+
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content icons-box">
+                    <button title="添加附件" class="btn btn-toolbar swfobjContainer">
+                        <i class="fa lightblue font-size-15  fa-paperclip"></i> 添加附件
+                            <span class="swfobj">
+                                <!-- swfupload插件占位符 - 被object替换 -->
+                                <a swf-upload id="swfupload-control" filed='#attach-area'
+                                   ng-model="data.currItem.objattachs"
+                                   upload-ist="data.currItem.objattachs">添加附件</a>
+                             </span>
+                    </button>
+                    <ul id="attach-area">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

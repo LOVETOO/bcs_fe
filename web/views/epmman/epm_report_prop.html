@@ -1,0 +1,415 @@
+<!--
+/**
+ * 项目报备 - 详情页
+ * @since 2019-06-20
+ */
+-->
+<div hc-obj-prop ng-class="'project-valid-' + data.currItem.project_valid">
+
+	<!-- 单体项目报备 -->
+	<div id="base" class="active">
+		<div hc-box>
+			<div class="row">
+				<div hc-label="项目编码" hc-input="data.currItem.project_code" hc-readonly="true"></div>
+
+				<div hc-label="申报日期" hc-input="data.currItem.report_time" hc-type="time" hc-readonly="true"></div>
+
+				<div hc-label="审核状态" hc-input="data.currItem.audit_stat" hc-readonly="true" hc-if="data.currItem.stat != 5"></div>
+
+				<div hc-label="有效状态" hc-input="data.currItem.project_valid" hc-dict-code="valid" hc-readonly="true" hc-if="data.currItem.stat == 5"></div>
+
+				<div hc-label="项目当前进度" hc-input="data.currItem.stage_name" hc-readonly="true"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="客户编码" hc-input="data.currItem.customer_code" hc-class-id="customer_org"
+					hc-common-search="commonSearch.customer_code"
+					hc-delete-together="division_name belong_to rel_project_id rel_project_code rel_project_name operating_mode"
+					hc-required="true" hc-readonly="customer"></div>
+
+				<div hc-label="客户名称" hc-input="data.currItem.customer_name" hc-readonly="true"></div>
+
+				<div hc-label="所属事业部" hc-input="data.currItem.division_id" hc-dict-code="epm.division"
+					hc-readonly="true"></div>
+
+				<div hc-label="报备有效期至" hc-input="data.currItem.project_valid_date" hc-type="date"
+					hc-readonly="true"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="交易公司" hc-input="data.currItem.trading_company_name" hc-class-id="epm_trading_company"
+					hc-common-search="commonSearch.trading_company_name" hc-required="true"></div>
+
+				<div hc-label="项目经理" hc-input="data.currItem.manager"></div>
+
+				<div hc-label="产品线" hc-input="data.currItem.pdt_line" hc-select-options="pdtLine" hc-required="true">
+				</div>
+
+				<div hc-label="工程类型" hc-input="data.currItem.project_source" hc-dict-code="epm.project_source"
+					hc-required="true"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="甲方名称" hc-input="data.currItem.party_a_name" hc-required="true"></div>
+				<!--
+					hc-class-id="customer_org"
+					hc-common-search="commonSearch.party_a_name"
+					hc-can-input="true"
+				-->
+
+				<div hc-label="甲方联系人" hc-input="data.currItem.party_a_link_person" hc-required="true"></div>
+
+				<div hc-label="甲方联系电话" hc-input="data.currItem.party_a_phone" hc-required="creatorLog" hc-readonly="!creatorLog"></div>
+
+				<div hc-label="已生成折扣单" hc-input="data.currItem.is_discount" hc-type="checkbox" hc-readonly="true" class="oneis"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="乙方名称" hc-input="data.currItem.party_b_name" hc-required="true"></div>
+				<!--
+					hc-class-id="customer_org"
+					hc-common-search="commonSearch.party_b_name"
+					hc-can-input="true"
+				-->
+
+				<div hc-label="乙方联系人" hc-input="data.currItem.party_b_link_person" hc-required="true"></div>
+
+				<div hc-label="乙方联系电话" hc-input="data.currItem.party_b_phone" hc-required="creatorLog" hc-readonly="!creatorLog"></div>
+
+				<div hc-label="已生成合同" hc-input="data.currItem.is_contract" hc-type="checkbox" hc-readonly="true" class="oneis"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="经办人意见" hc-input="data.currItem.agent_opinion" hc-col-count="4" hc-readonly="true"></div>
+
+				<div hc-label="经办人" hc-input="data.currItem.agent" hc-readonly="true"></div>
+
+				<div hc-label="经办人电话" hc-input="data.currItem.agent_phone" hc-readonly="true"></div>
+
+			</div>
+
+			<!-- 若是战略工程，以下出现，必填 -->
+			<div class="row" hc-if="data.currItem.project_source == 2">
+				<div hc-label="战略项目编码" hc-input="data.currItem.rel_project_code" hc-class-id="epm_project"
+					hc-common-search="commonSearch.rel_project_code" hc-delete-together="operating_mode"
+					hc-required="true" hc-readonly="data.currItem.report_times > 1" hc-open-state="{
+						name: 'epmman.epm_strategy_report_prop',
+						params: {
+							project_id: data.currItem.rel_project_id,
+							is_report_open : 2
+						}
+					}"></div>
+
+				<div hc-label="战略项目名称" hc-input="data.currItem.rel_project_name" hc-readonly="true" hc-col-count="4">
+				</div>
+
+				<div hc-label="管理类型" hc-input="data.currItem.operating_mode" hc-dict-code="epm.operating_mode"
+					hc-readonly="true"></div>
+            </div>
+
+            <div class="row report_efficacy" ng-show="data.currItem.project_valid == 3">
+				<div hc-label="失效原因" hc-input="data.currItem.disable_reason" hc-readonly="true" hc-col-count="8"></div>
+			</div>
+        </div>
+
+        <!-- 若是异地项目，以下出现，必填 -->
+        <div hc-box hc-if="data.currItem.is_local == 1">
+            <hc-box-title style="display: flex;">
+                <span>
+                    异地保证金<span ng-show="data.currItem.remote_shared == 2">及划分</span>信息
+                </span>
+                <div
+                    ng-show="data.currItem.remote_shared == 2"
+                    style="
+                        color: #f8ac59;
+                        flex: 1;
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                    "
+                >项目完工后，划分{{ task_shared_rate }}任务及{{ service_fee_shared_rate }}售后服务金于当地客户</div>
+            </hc-box-title>
+
+			<div class="row">
+                <div
+                    hc-label="缴纳保证金"
+                    hc-input="data.currItem.need_deposit"
+                    hc-select-options="[
+						{ value: 2, name: '同意' },
+						{ value: 1, name: '不同意' }
+                    ]"
+                    hc-required="true"
+                ></div>
+
+                <div
+                    hc-label="保证金金额"
+                    hc-input="data.currItem.deposit_amount"
+                    hc-type="money"
+                    hc-required="data.currItem.need_deposit == 2"
+                ></div>
+
+                <div
+                    hc-label="任务划分比例"
+                    hc-input="data.currItem.task_shared_rate"
+                    hc-select-name="task_shared_rate"
+                    hc-dict-code="epm.report.task_shared_rate"
+                    hc-readonly="data.currItem.task_shared_rate == sysParams.task_shared_rate"
+                    hc-if-start="data.currItem.remote_shared == 2"
+                ></div>
+
+                <div
+                    hc-label="售后服务金划分比例"
+                    hc-input="data.currItem.service_fee_shared_rate"
+                    hc-select-name="service_fee_shared_rate"
+                    hc-dict-code="epm.report.service_fee_shared_rate"
+                    hc-readonly="data.currItem.service_fee_shared_rate == sysParams.service_fee_shared_rate"
+                    hc-if-end
+                ></div>
+
+                <div
+                    hc-label="保证金备注"
+                    hc-input="data.currItem.deposit_note"
+                    hc-if="data.currItem.remote_shared != 2"
+                    hc-col-count="4"
+                ></div>
+            </div>
+        </div>
+
+		<div hc-box="工程信息">
+			<div class="row">
+				<div hc-label="项目名称" hc-input="data.currItem.project_name" hc-required="true" hc-col-count="4"></div>
+
+				<div hc-label="本地/异地" hc-input="data.currItem.is_local" hc-dict-code="epm.is_local" hc-required="true"></div>
+
+				<div hc-label="预估合同金额" hc-input="data.currItem.predict_sales_amount" hc-type="money" hc-required="true"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="业主类型" hc-input="data.currItem.project_type" hc-dict-code="epm.project_type"
+					hc-required="true"></div>
+
+				<div hc-label="背景关系" hc-input="data.currItem.background" hc-dict-code="epm.background"
+					hc-required="true"></div>
+
+				<div hc-label="工程建筑面积" hc-input="data.currItem.site_area" hc-type="square"></div>
+
+				<div hc-label="工程用量" hc-input="data.currItem.predict_pdt_qty" hc-unit="套" hc-required="true" hc-if="!data.isTile"></div>
+
+				<div hc-label="工程用量" hc-input="data.currItem.predict_pdt_qty" hc-unit="平方" hc-required="true" hc-if="data.isTile"></div>
+			</div>
+
+			<div class="row">
+				<!-- <div hc-label="工程所在地" hc-input="data.currItem.area_full_name" hc-class-id="scparea"
+					hc-common-search="commonSearch.area_full_name"
+					hc-delete-together="province_id province_name city_id city_name area_id area_name"
+                    hc-readonly="data.currItem.is_foreign == 2" hc-required="true"></div> -->
+
+                <hc-address
+                    label="工程所在地"
+                    separator="-"
+                    required
+                    disabled="data.currItem.is_foreign == 2"
+                    province-id="data.currItem.province_id"
+                    province-name="data.currItem.province_name"
+                    city-id="data.currItem.city_id"
+                    city-name="data.currItem.city_name"
+                    county-id="data.currItem.area_id"
+                    county-name="data.currItem.area_name"
+                    name-path="data.currItem.area_full_name"
+                ></hc-address>
+
+				<div hc-label="详细地址" hc-required="true"  hc-input="data.currItem.address" hc-col-count="4"></div>
+
+				<div hc-button="showMap()" hc-icon="fa fa-map-marker" hc-title="地图"></div>
+
+				<div style="width: auto; margin-left: 26px;" hc-label="海外" hc-input="data.currItem.is_foreign"
+					hc-type="checkbox" hc-change="onChange('is_foreign')"></div>
+				<!-- hc-icon="iconfont hc-back" -->
+				<!-- <div
+					hc-label="省"
+					hc-input="data.currItem.province_name"
+					hc-class-id="scparea"
+					hc-common-search="commonSearch.province_name"
+					hc-delete-together="province city city_name area area_name"
+					hc-readonly="data.currItem.is_foreign == 2"
+					hc-required="true"
+				></div>
+				
+				<div
+					hc-label="市"
+					hc-input="data.currItem.city_name"
+					hc-class-id="scparea"
+					hc-common-search="commonSearch.city_name"
+					hc-delete-together="city area area_name"
+					hc-readonly="data.currItem.is_foreign == 2"
+					hc-required="true"
+				></div>
+
+				<div
+					hc-label="区"
+					hc-input="data.currItem.area_name"
+					hc-class-id="scparea"
+					hc-common-search="commonSearch.area_name"
+					hc-delete-together="area"
+					hc-readonly="data.currItem.is_foreign == 2"
+					hc-required="true"
+				></div> -->
+			</div>
+
+			<div class="row">
+				<div hc-label="工程施工进度" hc-input="data.currItem.construction_stage" hc-required="true"></div>
+
+				<div hc-label="竣工日期" hc-input="data.currItem.completion_date" hc-type="date" hc-required="true"></div>
+
+				<div hc-label="产品已送样" hc-input="data.currItem.need_sample"
+					hc-select-options="[{ name: '是', value: 2 }, { name: '否', value: 1 }]" hc-required="true"></div>
+
+				<div hc-label="产品已报价" hc-input="data.currItem.need_quote"
+					hc-select-options="[{ name: '是', value: 2 }, { name: '否', value: 1 }]" hc-required="true"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="工程意向产品" hc-input="data.currItem.intent_product" hc-col-count="4" hc-required="true"></div>
+
+				<div hc-label="竞争对手" hc-input="data.currItem.competitor" hc-col-count="4" hc-required="true"></div>
+			</div>
+		</div>
+
+		<div hc-box="跟进信息">
+			<div class="row">
+				<div hc-label="项目当前进度" hc-input="data.currItem.stage_name" hc-class-id="epm_stage_def"
+					hc-common-search="commonSearch.stage_name" hc-required="true"></div>
+
+				<div hc-input="data.currItem.stage_note" hc-readonly="true" hc-col-count="6"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="项目进度描述" hc-input="data.currItem.stage_desc" hc-type="textarea" hc-col-count="8"></div>
+			</div>
+
+			<div class="row">
+				<div hc-label="客户现场跟进人" hc-input="data.currItem.dealer_follower"></div>
+
+				<div hc-label="客户跟进人电话" hc-input="data.currItem.dealer_follower_phone"></div>
+
+				<div hc-label="乐华现场跟进人" hc-input="data.currItem.own_follower"></div>
+
+				<div hc-label="乐华跟进人电话" hc-input="data.currItem.own_follower_phone"></div>
+			</div>
+		</div>
+
+		<div hc-box="项目进度历程" hc-if="data.currItem.stat == 5">
+			<div hc-grid="stageGridOptions" style="height: 300px;"></div>
+		</div>
+	</div>
+
+	<!-- 地图模态框 -->
+	<!-- <div class="mapdiv">
+		<div class="mapHeader">
+			<span class="title">详细地址</span>
+			<div class="mapBtn">
+				<button class="btn" hc-tooltip="关闭" ng-click="closeMap()">
+					<i class="iconfont hc-close"></i>
+				</button>
+			</div>
+		</div>
+		<div class="modal-body">
+			<div id="allmap"></div>
+		</div>
+		<div class="modal-footer">
+
+		</div>
+	</div> -->
+</div>
+
+<style>
+	.reasonClass{
+		color : #F35A05
+	}
+	.oneis{
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+	.tab-content>.tab-pane {
+		height: 100%;
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.tab-content>.tab-pane:not(.active) {
+		display: none;
+	}
+
+	.flex-box-v {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.flex-auto {
+		flex: 1;
+	}
+
+	.fa-map-marker {
+		color: red;
+	}
+
+	/* 未生效 */
+	.project-valid-1 [hc-input="data.currItem.project_valid"] input {
+		color: gray;
+	}
+	/* 已生效 */
+	.project-valid-2 [hc-input="data.currItem.project_valid"] input {
+		color: green;
+	}
+	/* 已失效 */
+	.project-valid-3 [hc-input="data.currItem.project_valid"] input {
+		color: red;
+	}
+	/* 已冻结 */
+	.project-valid-4 [hc-input="data.currItem.project_valid"] input {
+		color: blue;
+	}
+
+	.report_efficacy [hc-input="data.currItem.disable_reason"] label,
+	.report_efficacy [hc-input="data.currItem.disable_reason"] input {
+		color: red;
+	}
+	/* .btnMap {
+		position: relative;
+		left: -155px;
+	} 
+
+	#allmap {
+		width: 800px;
+		height: 500px;
+	}
+
+	.mapdiv {
+		display: none;
+		position: absolute;
+		z-index: 1000;
+		top: 50px;
+		left: calc(50% - 400px);
+	}
+
+	.mapHeader {
+		background: #fff;
+		padding: 10px 20px;
+		text-align: center;
+	}
+
+	.mapBtn {
+		float: right;
+	}
+
+	.mapBtn>button {
+		background: #ffF;
+		padding: 2px;
+	}
+
+	.title {
+		font-size: 16px;
+		font-weight: 500;
+	} */
+</style>

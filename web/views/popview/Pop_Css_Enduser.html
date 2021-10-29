@@ -1,0 +1,316 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal"></a>
+        <h3>用户新增编辑</h3>
+    </div>
+    <div class="modal-body">
+        <div class="ibox-content clearborder">
+            <div class="row">
+                <div class="col-lg-1">
+                    <label class="form-label-mini not-null">用户姓名</label>
+                </div>
+                <div class="col-lg-2">
+                    <input  type="text" class=" form-control input-sm"
+                            ng-model="data.currItem.enduser_name">
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label-mini">用户编码</label>
+                </div>
+                <div class="col-lg-2">
+                    <input  type="text" class=" form-control input-sm " ng-readonly = "true"
+                            ng-model="data.currItem.enduser_code">
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label-mini">新增人</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class=" form-control input-sm" ng-readonly="true" ng-model="data.currItem.creator">
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label-mini">新增时间</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" bs-datepacker ng-readonly="true" ng-disabled="data.currItem.stat!=1" ng-model="data.currItem.create_time" class="input-sm form-control" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                    <label class="form-label-mini not-null">详细地址</label>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <input type="text" class="input-sm form-control" ng-readonly="true"  ng-model="data.currItem.area_name">
+                        <a class="input-group-addon" ng-disabled="data.currItem.stat!=1" ng-click="selectAdress(2)"><i class="fa fa-ellipsis-h"></i> </a>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <input  type="text" class=" form-control input-sm "
+                            ng-model="data.currItem.enduser_address">
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label-mini not-null">电话一</label>
+                </div>
+                <div class="col-lg-2">
+                    <input  type="text" class=" form-control input-sm "
+                            ng-model="data.currItem.mobile">
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label-mini ">电话二</label>
+                </div>
+                <div class="col-lg-2">
+                    <input  type="text" class=" form-control input-sm "
+                            ng-model="data.currItem.tel">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                    <label class="form-label-mini not-null">所属网点</label>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <input type="text" class="input-sm form-control" ng-readonly="true"  ng-model="data.currItem.fix_org_name">
+                        <a class="input-group-addon" ng-disabled="data.currItem.stat!=1" ng-click="selectFix(2)"><i class="fa fa-ellipsis-h"></i> </a>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label-mini ">管理中心</label>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <input type="text" class="input-sm form-control" ng-readonly="true"  ng-model="data.currItem.org_name">
+                        <a class="input-group-addon" ng-disabled="data.currItem.stat!=1" ng-click="selectApart(2)"><i class="fa fa-ellipsis-h"></i> </a>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label-mini">回访时间</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" bs-datepacker ng-readonly="true" ng-disabled = "true" ng-model="data.currItem.last_visit_time" class="input-sm form-control" >
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label-mini ">服务代表</label>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <input type="text" class="input-sm form-control" ng-readonly="true"  ng-model="data.currItem.guider_name">
+                        <a class="input-group-addon" ng-disabled="data.currItem.stat!=1" ng-click="selectGuider(2)"><i class="fa fa-ellipsis-h"></i> </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                    <label class="form-label-mini not-null">服务网点</label>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <input type="text" class="input-sm form-control" ng-readonly="true"  ng-model="data.currItem.s_fix_org_name">
+                        <a class="input-group-addon" ng-disabled="data.currItem.stat!=1" ng-click="selectSFix(2)"><i class="fa fa-ellipsis-h"></i> </a>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label-mini">回访人</label>
+                </div>
+                <div class="col-lg-2">
+                    <input  type="text" class=" form-control input-sm "  ng-readonly = "true"
+                            ng-model="data.currItem.last_visit_man">
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label-mini">单据类型</label>
+                </div>
+                <div class="col-lg-2">
+                    <select data-placeholder=" " chosen-select ng-model="data.currItem.last_visit_type"
+                            class="input-sm chosen-select form-control" ng-disabled = "true"
+                            ng-options="s.id as s.name  for s in last_visit_types">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-label-mini">单据号</label>
+                </div>
+                <div class="col-lg-2">
+                    <input  type="text" class=" form-control input-sm " ng-readonly ="true"
+                            ng-model="data.currItem.last_visit_no">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-2">
+                    <label style="align:left">
+                        <input type="checkbox" ng-model="data.currItem.usable" ng-false-value="1" ng-true-value="2">是否有效</label>
+                </div>
+                <div class="col-lg-2">
+                    <label style="align:left">
+                        <input type="checkbox" ng-model="data.currItem.is_vip" ng-false-value="1" ng-true-value="2">是否VIP</label>
+                </div>
+                <div class="col-lg-2">
+                    <label style="align:left">
+                        <input type="checkbox" ng-model="data.currItem.is_pj" ng-false-value="1" ng-true-value="2">是否工程用户</label>
+                </div>
+                <div class="col-lg-2">
+                    <label style="align:left">
+                        <input type="checkbox" ng-model="data.currItem.is_sync" ng-false-value="1" ng-true-value="2">是否电商用户</label>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"><label class="form-label-mini">备注:</label></div>
+                <div class="col-md-11">
+                    <input ng-model="item.note" type="text" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul id="tabs1" class="tri-nav-tabs">
+                    <li class="active"><a data-target="#tab1" data-toggle="tab" class="tab-nav"><i
+                            class="fa fa-pencil-square">用户信息</i></a></li>
+                    <li><a data-target="#tab2" data-toggle="tab" class="tab-nav"><i class="fa fa-shopping-cart">业务信息</i></a>
+                    </li>
+                    <div class="btn-group pull-right form-topright-btn">
+                        <a ng-click="close()" class="btn-close"><i class="fa fa-times"></i></a>
+                    </div>
+                </ul>
+                <div id="content1" class="first tab-content">
+                    <div id="tab1" class="tab-pane active">
+                        <div class="row">
+                            <div class = "col-lg-12 btn-group">
+                                <button data-target="#tab11" data-toggle="tab" class="tab-nav" style = "width:100px">联系人</button>
+                                <button data-target="#tab12" data-toggle="tab" class="tab-nav" style = "width:100px">标签</button>
+                                <button data-target="#tab13" data-toggle="tab" class="tab-nav" style = "width:100px">资产</button>
+                            </div>
+                            <div class="col-lg-12">
+                                <div id="content2" class="first tab-content">
+                                    <div id="tab11" class="tab-pane active">
+                                        <div class="ibox-content active">
+                                            <div slick-grid sg-options="teloptions"
+                                                 sg-data="data.currItem.css_enduser_tel_lineofcss_endusers" sg-columns="telcolumns"
+                                                 style="width:100%;height:180px;" class="slick-grid">
+                                            </div>
+                                            <button class="btn btn-toolbar" type="button"  ng-click="additem11()">
+                                                <i class="fa fa-plus-square-o"></i>增加联系人</button>
+                                            <button class="btn btn-toolbar" type="button"  ng-click="delitem11()">
+                                                <i class="fa fa-minus-square-o"></i>删除联系人</button>
+                                        </div>
+                                    </div>
+                                    <div id="tab12" class="tab-pane">
+                                        <div class="ibox-content">
+                                            <div slick-grid sg-options="labeloptions"
+                                                 sg-data="data.currItem.css_enduser_labelofcss_endusers" sg-columns="labelcolumns"
+                                                 style="width:100%;height:180px;" class="slick-grid">
+                                            </div>
+                                            <button class="btn btn-toolbar" type="button"  ng-click="additem12()">
+                                                <i class="fa fa-plus-square-o"></i>增加标签</button>
+                                            <button class="btn btn-toolbar" type="button"  ng-click="delitem12()">
+                                                <i class="fa fa-minus-square-o"></i>删除标签</button>
+                                        </div>
+                                    </div>
+                                    <div id="tab13" class="tab-pane">
+                                        <div class="ibox-content icons-box">
+                                            <div class="ibox-content">
+                                                <div slick-grid sg-options="lineoptions"
+                                                     sg-data="data.currItem.css_enduser_lineofcss_endusers" sg-columns="linecolumns"
+                                                     style="width:100%;height:180px;" class="slick-grid">
+                                                </div>
+                                                <button class="btn btn-toolbar" type="button"  ng-click="additem13()">
+                                                    <i class="fa fa-plus-square-o"></i>增加明细</button>
+                                                <button class="btn btn-toolbar" type="button"  ng-click="delitem13()">
+                                                    <i class="fa fa-minus-square-o"></i>删除明细</button>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <ul id="tabs111" class="tri-nav-tabs">
+                                                        <li class = "active"><a data-target="#tab131" data-toggle="tab" class="tab-nav"><i class="fa fa-pencil-square">滤芯明细</i></a></li>
+                                                        <li><a data-target="#tab132" data-toggle="tab" class="tab-nav"><i class="fa fa-shopping-cart">保养明细</i></a>
+                                                        </li>
+                                                        <div class="btn-group pull-right form-topright-btn">
+                                                            <a ng-click="close()" class="btn-close"><i class="fa fa-times"></i></a>
+                                                        </div>
+                                                    </ul>
+                                                    <div id="content3" class="first tab-content">
+                                                        <div id="tab131" class="tab-pane active">
+                                                            <div class="ibox-content active">
+                                                                <div slick-grid sg-options="filteroptions"
+                                                                     sg-data="data.currItem.css_enduser_filter_lineofcss_endusers" sg-columns="filtercolumns"
+                                                                     style="width:100%;height:180px;" class="slick-grid">
+                                                                </div>
+                                                                <button class="btn btn-toolbar" type="button" ng-click="additem131()">
+                                                                    <i class="fa fa-plus-square-o"></i>增加滤芯明细</button>
+                                                                <button class="btn btn-toolbar" type="button" ng-click="delitem131()">
+                                                                    <i class="fa fa-minus-square-o"></i>删除滤芯明细</button>
+                                                            </div>
+                                                        </div>
+                                                        <div id="tab132" class="tab-pane">
+                                                            <div class="ibox-content">
+                                                                <div slick-grid sg-options="maintainoptions" sg-data="data.currItem.css_enduser_maintain_lineofcss_endusers" sg-columns="maintaincolumns" style="width:100%;height:180px;" class="slick-grid"></div>
+                                                                <button class="btn btn-toolbar" type="button" ng-click="additem132()"><i class="fa fa-plus-square-o"></i>增加行</button>
+                                                                <button class="btn btn-toolbar" type="button" ng-click="delitem132()"><i class="fa fa-minus-square-o"></i>删除行</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab2" class="tab-pane">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class = "col-lg-12 btn-group">
+                                    <button data-target="#tab21" data-toggle="tab" class="tab-nav active">受理单</button>
+                                    <button data-target="#tab22" data-toggle="tab" class="tab-nav">安装单</button>
+                                    <button data-target="#tab23" data-toggle="tab" class="tab-nav">工程安装单</button>
+                                    <button data-target="#tab24" data-toggle="tab" class="tab-nav">维修单</button>
+                                    <button data-target="#tab25" data-toggle="tab" class="tab-nav">保养单</button>
+                                    <button data-target="#tab26" data-toggle="tab" class="tab-nav">滤芯礼盒/服务卡销售单</button>
+                                </div>
+                                <ul id="tabs21" class="tri-nav-tabs">
+                                    <div class="btn-group pull-right form-topright-btn">
+                                        <a ng-click="close()" class="btn-close"><i class="fa fa-times"></i></a>
+                                    </div>
+                                </ul>
+                                <div id="content4" class="first tab-content">
+                                    <div id="tab21" class="tab-pane active">
+                                        <div class="ibox-content active">
+                                            <div slick-grid sg-options="newoptions" sg-data="data.currItem.css_appeal_newofcss_endusers" sg-columns="newcolumns" style="width:100%;height:180px;" class="slick-grid"></div>
+                                        </div>
+                                    </div>
+                                    <div id="tab22" class="tab-pane">
+                                        <div class="ibox-content">
+                                            <div slick-grid sg-options="installoptions" sg-data="data.currItem.css_install_headerofcss_endusers" sg-columns="installcolumns" style="width:100%;height:180px;" class="slick-grid"></div>
+                                        </div>
+                                    </div>
+                                    <div id="tab23" class="tab-pane">
+                                        <div class="ibox-content">
+                                            <div slick-grid sg-options="installoptions" sg-data="data.currItem.css_install_headerofcss_endusers" sg-columns="installcolumns" style="width:100%;height:180px;" class="slick-grid"></div>
+                                        </div>
+                                    </div>
+                                    <div id="tab24" class="tab-pane">
+                                        <div class="ibox-content">
+                                            <div slick-grid sg-options="fixoptions" sg-data="data.currItem.css_fix_headerofcss_endusers" sg-columns="fixcolumns" style="width:100%;height:180px;" class="slick-grid"></div>
+                                        </div>
+                                    </div>
+                                    <div id="tab25" class="tab-pane">
+                                        <div class="ibox-content">
+                                            <div slick-grid sg-options="serviceoptions" sg-data="data.currItem.css_item_service_headerofcss_endusers" sg-columns="servicecolumns" style="width:100%;height:180px;" class="slick-grid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+            确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+            取消
+        </a>
+    </div>
+</div>

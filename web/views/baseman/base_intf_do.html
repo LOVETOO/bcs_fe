@@ -1,0 +1,315 @@
+﻿<div class="bill-form" ng-controller="base_intf_do">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <div style="float: left;font-size: 18px">
+                接口使用
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-title">
+                    <h5>接口使用</h5>
+                    <div ibox-tools></div>
+                </div>
+                <div id="content" class="first tab-content">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <button class="btn btn-sm btn-info" type="button" ng-click="test()"
+                                    style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                测试
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test1()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    同步SAP开票数据
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">同步开始日期</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" bs-datepacker ng-model="data.currItem.end_date1" ng-readonly="false"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test7()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    生产单写SAP
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">生产单号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text"
+                                           ng-readonly="false" class="input-sm form-control"
+                                           ng-model="data.currItem.note3">
+                                    <a class="input-group-addon" ng-click="selectno()"><i
+                                            class="fa fa-ellipsis-h"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">同步结束日期</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" bs-datepacker ng-model="data.currItem.end_date4" ng-readonly="false"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test8()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    生产变更单写SAP
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">变更单号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text"
+                                           ng-readonly="false" class="input-sm form-control"
+                                           ng-model="data.currItem.note6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test2()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    同步SAP出入库数据
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">同步开始日期</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" bs-datepacker ng-model="data.currItem.end_date2" ng-readonly="false"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test9()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    PI变更单价写SAP
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">PI对应变更单号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text"
+                                           ng-readonly="false" class="input-sm form-control"
+                                           ng-model="data.currItem.note7">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">同步结束日期</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" bs-datepacker ng-model="data.currItem.end_date3" ng-readonly="false"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">PI对应变商检批号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text"
+                                           ng-readonly="false" class="input-sm form-control"
+                                           ng-model="data.currItem.note8">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test3()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    出库单引SAP生成交发货单
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">出库单号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="data.currItem.note" ng-readonly="false"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test10()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    PI到款调整写SAP
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">调整单号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text"
+                                           ng-readonly="false" class="input-sm form-control"
+                                           ng-model="data.currItem.note9">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test4()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    出库单引SAP生成交货单
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">出库单号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="data.currItem.note1" ng-readonly="false"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test5()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;
+                                        border-right-width: 0px;">
+                                    出库单引SAP生成发货单
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">出库单号</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text"
+                                           ng-readonly="false" class="input-sm form-control"
+                                           ng-model="data.currItem.note2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test6()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    测算标机或物料价格
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-label-mini ">物料号码</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="data.currItem.note5" ng-readonly="false"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test11()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    测试标准价
+                                </button>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text"
+                                           ng-readonly="false" class="input-sm form-control"
+                                           ng-model="data.currItem.price1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test12()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    测试预算价
+                                </button>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" ng-model="data.currItem.price2" ng-readonly="false"
+                                       class="input-sm form-control">
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test13()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    测试条码系统连接
+                                </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test14()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    测试包装方案接口
+                                </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" type="button" ng-click="test15()"
+                                        style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                    测试排柜计划接口
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label rows="1" class="form-label-mini ">
+                                    <button class="btn btn-sm btn-info" type="button" ng-click="test16()"
+                                            style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                        执行OMS
+                                    </button>
+                                </label><br clear=right>
+                                <label rows="1" class="form-label-mini ">
+                                    <button class="btn btn-sm btn-info" type="button" ng-click="test17()"
+                                            style="border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;">
+                                        执行PDM
+                                    </button>
+                                </label>
+
+                            </div>
+                            <div class="col-md-8">
+									 <textarea ng-readonly="false"
+                                               ng-model="data.currItem.sql"
+                                               rows="3"
+                                               class="form-control noresize ng-pristine ng-valid ng-touched">
+									 </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

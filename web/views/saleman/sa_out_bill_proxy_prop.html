@@ -1,0 +1,129 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div hc-box class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.sa_salebillno"
+                     hc-label="委托代销单号"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.date_invbill"
+                     hc-label="单据日期"
+                     hc-required="true"
+                     hc-type="date">
+                </div>
+
+                <div hc-input="data.currItem.crm_entid"
+                     hc-label="品类"
+                     hc-required="true"
+                     hc-dict-code="crm_entid">
+                </div>
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-readonly="true"
+                     hc-dict-code="stat">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.customer_name"
+                     hc-label="客户"
+                     hc-required="true"
+                     hc-col-count="4"
+                     hc-btn-click="chooseCustomer()">
+                </div>
+                <div hc-input="data.currItem.dept_name"
+                     hc-label="部门"
+                     hc-btn-click="chooseOrg()">
+                </div>
+
+                <div hc-input="data.currItem.created_by"
+                     hc-label="创建人"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div hc-input="data.currItem.warehouse_name"
+                     hc-label="发货仓"
+                     hc-required="true"
+                     hc-btn-click="chooseWarehouse()">
+                </div>
+                <div hc-input="data.currItem.proxy_warehouse_name"
+                     hc-label="代销仓"
+                     hc-required="true"
+                     hc-btn-click="chooseWarehouse('proxy')">
+                </div>
+                <div hc-input="data.currItem.employee_name"
+                     hc-label="业务员"
+                     hc-readonly="true">
+                </div>
+
+                <div hc-input="data.currItem.creation_date"
+                     hc-label="创建时间"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.address1"
+                     hc-label="收货地址"
+                     hc-btn-click="chooseAddress()"
+                     hc-col-count="4"
+                     hc-readonly="data.currItem.is_singleAddr == 2">
+                </div>
+
+                <div hc-input="data.currItem.take_man"
+                     hc-label="收货人">
+                </div>
+
+                <div hc-input="data.currItem.phone_code"
+                     hc-label="收货人电话">
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-type="textarea"
+                     hc-col-count="4">
+                </div>
+                <div hc-input="data.currItem.shipmode_name"
+                     hc-label="发运方式"
+                     hc-btn-click="chooseShipmod()">
+                </div>
+
+                <div hc-input="data.currItem.deliver_area_name"
+                     hc-label="配送区域"
+                     hc-class-id="sa_deliver_area"
+                     hc-common-search="commonSearchSetting.deliverArea">
+                </div>
+
+
+                <!--<div hc-input="data.currItem.qty_sum"-->
+                     <!--hc-label="合计数量"-->
+                     <!--hc-type="number"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+
+                <!--<div hc-input="data.currItem.amount_total"-->
+                     <!--hc-label="合计金额"-->
+                     <!--hc-type="money"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+
+                <!--<div hc-input="data.currItem.total_cubage"-->
+                     <!--hc-label="合计体积"-->
+                     <!--hc-type="volume"-->
+                     <!--hc-readonly="true">-->
+                <!--</div>-->
+            </div>
+        </div>
+
+        <div hc-box hc-grid="gridOptions" hc-auto-height></div>
+
+    </div>
+
+</div>

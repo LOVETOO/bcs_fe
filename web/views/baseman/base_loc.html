@@ -1,0 +1,55 @@
+<div hc-diy-page>
+    <!-- 自定义表格 -->
+    <div hc-grid="gridOptions" class="hc-grid m" hc-auto-height="grid"></div>
+    <!-- 模态框 -->
+    <div class="modal inmodal fade" id="locModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" style="width:800px">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                   <!--  <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                    </button> -->
+                    <div class="modal-header-btns">
+                        <button type="button" class="btn" data-dismiss="modal" ng-click="$dismiss('头部关闭')">
+                            <i class="iconfont hc-close"></i>
+                        </button>
+                    </div>
+                    <h4 class="modal-title">电子仓明细</h4>
+                </div>
+                <div class="modal-body p-w-sm"  style="width:800px">
+                        <div class="row">
+                            <div hc-input="data.currItem.locname" hc-label="名称"></div>
+                            <div hc-input="data.currItem.url" hc-label="文件服务器" hc-col-count="4"></div>
+                        </div>
+                        <div class="row">
+                            <div hc-input="data.currItem.wsid" hc-label="关联工作区"></div>
+                            <div hc-input="data.currItem.path" hc-label="本地路径" hc-col-count="4"></div>
+                        </div>
+                        <div class="row">
+                            <div hc-input="data.currItem.sizes" hc-label="容量"  hc-unit="M"></div>
+                            <div hc-input="data.currItem.sharepath" hc-label="共享路径" hc-col-count="4"></div>
+                        </div>
+                        <div class="row">
+                            <div hc-input="data.currItem.used" hc-label="已用容量" hc-unit="M"></div>
+                            <div hc-input="data.currItem.fdrtype" hc-label="存储类型" hc-select-options="[{name:'单一目录',value:'1'},{name:'按年份分目录',value:'2'},{name:'按季度分目录',value:'3'},{name:'按月份分目录',value:'4'}]"></div>
+                            <div hc-input="data.currItem.splitdate" hc-label="分目录时间" hc-type="date"></div>
+                        </div>
+                        <div class="row">
+                            <div hc-input="data.currItem.creator" hc-label="创建者"></div>
+                            <div hc-input="data.currItem.createtime" hc-label="创建时间"></div>
+                            <div hc-input="data.currItem.isdefault " hc-label="电子仓只读" hc-type="checkbox"></div>
+                        </div>
+                        <div class="row">
+                            <div hc-input="data.currItem.shareurl" hc-label="远程访问" hc-col-count="6"></div>
+                        </div>
+                        <div class="row">
+                            <div hc-input="data.currItem.note" hc-label="备注" hc-col-count="6"></div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>

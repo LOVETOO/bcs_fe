@@ -1,0 +1,115 @@
+<!-- 
+/**
+ * 家装单体解冻申请
+ * 2020/3/23
+ * zengjinhua
+ */
+ -->
+ <div hc-obj-prop>
+    <!--基本信息-->
+     <div id="base" class="active">
+          <div hc-box>
+               <div class="row">
+                    <div hc-label="单体家装编码" hc-input="data.currItem.project_code" hc-required="true"
+                         hc-btn-click="searchObjectEpmProject()"></div>
+
+                    <div hc-label="申报日期" hc-input="data.currItem.report_time" hc-type="time" hc-readonly="true"></div>
+               
+                    <div hc-label="产品线" hc-input="data.currItem.pdt_line" hc-dict-code="epm.pdt_line" hc-readonly="true"></div>
+               
+                    <div hc-label="单据状态" hc-input="data.currItem.stat" hc-dict-code="stat" hc-readonly="true"></div>
+               </div>
+          
+               <div class="row">
+
+                    <div hc-label="交易公司" hc-input="data.currItem.trading_company_name" hc-class-id="epm_trading_company"
+                         hc-common-search="commonSearch.trading_company_name" hc-col-count="4" hc-readonly="true"></div>
+
+                    <div hc-label="竞争品牌" hc-input="data.currItem.competitive_brand" hc-readonly="true"></div>
+
+                    <div hc-label="合作区域" hc-input="data.currItem.cooperation_area" hc-readonly="true"></div>
+               </div>
+
+               <div class="row">
+                    <div hc-label="报备有效期至" hc-input="data.currItem.project_valid_date" hc-type="date"
+                         hc-readonly="true"></div>
+
+                    <div hc-label="审批经办人意见" hc-input="data.currItem.agent_opinion" hc-readonly="true"></div>
+
+                    <div hc-label="审批经办人" hc-input="data.currItem.agent" hc-readonly="true"></div>
+
+                    <div hc-label="战略合作范围涉及区域" hc-input="data.currItem.strac_coop_inv_region" hc-readonly="true"></div>
+               </div>
+          </div>
+
+          <div hc-box="经销商信息">
+               <div class="row">
+                    <div hc-label="经销商编码" hc-input="data.currItem.customer_code" hc-class-id="customer_org"
+                         hc-common-search="commonSearch.customer_code"
+                         hc-delete-together="division_name belong_to rel_project_id rel_project_code rel_project_name operating_mode"
+                         hc-readonly="true"></div>
+
+                    <div hc-label="经销商名称" hc-input="data.currItem.customer_name" hc-readonly="true"></div>
+
+                    <div hc-label="经办人" hc-input="data.currItem.dealer_follower" hc-readonly="true"></div>
+
+                    <div hc-label="经办人电话" hc-input="data.currItem.dealer_follower_phone" hc-readonly="true"></div>
+               </div>
+          </div>
+
+          <div hc-box="家装公司信息">
+               <div class="row">
+                    <div hc-label="公司名称" hc-input="data.currItem.project_name" hc-readonly="true"></div>
+
+                    <div hc-label="公司性质" hc-input="data.currItem.natureb_usiness" hc-dict-code="epm.natureb_usiness" hc-readonly="true"></div>
+
+                    <div hc-label="业务范围" hc-input="data.currItem.line_business" hc-dict-code="epm.line_business" hc-readonly="true"></div>
+
+                    <div hc-label="背景关系" hc-input="data.currItem.background" hc-dict-code="epm.background" hc-readonly="true"></div>
+               </div>
+
+               <div class="row">
+                    <div hc-label="公司所在地" hc-input="data.currItem.area_full_name" hc-class-id="scparea"
+                         hc-common-search="commonSearch.area_full_name"
+                         hc-delete-together="province_id province_name city_id city_name area_id area_name"
+                         hc-readonly="data.currItem.is_foreign == 2" hc-readonly="true"></div>
+
+                    <div hc-label="详细地址" hc-input="data.currItem.address" hc-col-count="4" hc-readonly="true"></div>
+
+                    <div hc-button="showMap()" hc-icon="fa fa-map-marker" hc-title="地图"></div>
+               </div>
+          
+               <div class="row">
+                    <div hc-label="联系人" hc-input="data.currItem.own_follower" hc-readonly="true"></div>
+
+                    <div hc-label="联系人职务" hc-input="data.currItem.follow_people_duty" hc-readonly="true"></div>
+
+                    <div hc-label="联系人电话" hc-input="data.currItem.own_follower_phone" hc-readonly="true"></div>
+
+                    <div hc-label="年销售额" hc-input="data.currItem.predict_sales_amount" hc-type="money" hc-unit="万元" hc-readonly="true"></div>
+               </div>
+
+               <div class="row">
+                    <div hc-label="营业执照名称" hc-input="data.currItem.business_name" hc-col-count="4" hc-readonly="true"></div>
+
+                    <div hc-label="公司法人" hc-input="data.currItem.project_legal_name" hc-col-count="4" hc-readonly="true"></div>
+               </div>
+
+               <div class="row">
+                    <div hc-label="意向产品" hc-input="data.currItem.intent_product" hc-col-count="8" hc-readonly="true"></div>
+               </div>
+
+               <div class="row">
+                    <div hc-label="失效原因" hc-input="data.currItem.reason" hc-col-count="8" hc-required="true"></div>
+               </div>
+          </div>
+ 
+          <div hc-box="家装网点信息" class="flex-column flex1">
+               <div hc-grid="stageGridOptions"  class="flex1" style="min-height: 208px;"></div>
+          </div>
+     </div>
+</div>
+
+
+
+

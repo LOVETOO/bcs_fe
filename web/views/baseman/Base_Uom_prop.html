@@ -1,0 +1,102 @@
+<div hc-obj-prop>
+    <div id="base" hc-box='基本信息' class="active">
+        <div class="row">
+            <div hc-input="data.currItem.uom_code" hc-label="单位编码"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.uom_name" hc-label="单位名称"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.note" hc-label="备注"></div>
+        </div>
+    </div>
+    <div id="other" hc-box='其他'>
+        <div class="row">
+            <div hc-input="data.currItem.created_by" hc-label="创建用户"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.creation_date" hc-label="创建日期"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.last_updated_by" hc-label="最后修改用户"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.last_update_date" hc-label="最后修改时间"></div>
+        </div>
+    </div>
+</div>
+<!-- <div local-storage ng-model="data.currItem" class="bill-form" ng-controller="base_uom">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="init();">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    注释<h5>计量单位</h5>
+                    <div class="ibox-tools">
+                        <form class="pull-right">
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip"
+                                    ng-click="save()"><i class="fa fa-save"></i> 保存
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left"
+                                    ng-click="refresh()"><i class="fa fa-refresh"></i> 刷新
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal"
+                                    ng-click="add()" title="新建单位"><i class="fa fa-plus"></i> 新建单位
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="TreeGridBox">
+                    <div class="ibox-titleq" style="width:50%;height:100%;">
+                        <div id="headerGrid" class="headerGrid"></div>
+                        <div class="page_modal modal-open" page-pagination></div>
+                    </div>
+                    <div class="grid_modal tabs-container" id="attributeModal" style="border: 0px solid #E2EBF1;width:50%;height:100%">
+                        <ul class="nav nav-tabs">
+                            <li class="active m-l-sm">
+                                <a data-toggle="tab" href="tabs.html#tab-cg">基本信息</a>
+                            </li>
+                            <li><a data-toggle="tab" href="tabs.html#tab-qt">其他</a></li>
+                        </ul>
+                        <div class="tab-content ibox-content">
+                            <div id="tab-cg" class="tab-pane active form-inline mline">
+                                <div class="row">
+                                    <label class="control-label">单位编码</label>
+                                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid non-empty" ng-model="data.currItem.uom_code">
+                                    <label class="control-label">单位名称</label>
+                                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid non-empty" ng-model="data.currItem.uom_name">
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">备注</label>
+                                    <textarea class="form-control width_ml" name="mainfields"  ng-model="data.currItem.note"></textarea>
+                                </div>
+                            </div>
+                            <div id="tab-qt" class="tab-pane form-inline mline" >
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">创建用户</label>
+                                        <input type="text" class="form-control"
+                                               ng-model="data.currItem.created_by" ng-readonly="true">
+                                        <label class="control-label">创建时间</label>
+                                        <input type="text" class="form-control"
+                                               ng-model="data.currItem.creation_date" ng-readonly="true">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label">最后修改用户</label>
+                                        <input type="text" class="form-control"
+                                               ng-model="data.currItem.last_updated_by" ng-readonly="true">
+                                        <label class="control-label">最后修改时间</label>
+                                        <input type="text" class="form-control"
+                                               ng-model="data.currItem.last_update_date" ng-readonly="true">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+

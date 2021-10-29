@@ -1,0 +1,712 @@
+<!-- Wrapper-->
+
+<div id="wrapper" ng-controller="MainCtrl as main" style="height: 100%;">
+
+  <!-- Navigation -->
+  <div ng-include="'views/common/navigation.jsp'" style="overflow-y: auto;"></div>
+
+  <!-- <div ng-if="showmode == 1" ng-include="'views/common/navigation.jsp'"></div> -->
+
+  <!-- Page wraper -->
+  <!-- ng-class with current state name give you the ability to extended customization your view -->
+  <div id="page-wrapper" class="flex-column" style="height: 100%">
+
+    <!-- Page wrapper -->
+    <div class="herder" ng-include="'views/common/topnavbar.html'"></div>
+    <!-- <div class="wrapper" id="msgView">
+      <div class="message">
+        <div class="tool">
+          <div>
+            <img src="/downloadfile?docid=6910&viewtype=1">
+          </div>
+          <div ng-click="changeMsgView('message')">
+            <i class="fa fa-comment" style="font-size: 24px;" ng-style="{'color' : (msgactive=='message'?'red':'')}"
+              aria-hidden="true"></i>
+          </div>
+          <div ng-click="changeMsgView('user')">
+            <i class="fa fa-users" style="font-size: 24px;" ng-style="{'color' : (msgactive =='user'?'red':'')}"
+              aria-hidden="true"></i>
+          </div>
+          <div ng-click="changeMsgView('business')">
+            <i class="iconfont hc-setting" style="font-size: 24px;"
+              ng-style="{'color' : (msgactive=='business'?'red':'')}"></i>
+          </div>
+          <div ng-click="changeMsgView('notice')">
+            <i class="iconfont hc-notices" style="font-size: 24px;"
+              ng-style="{'color' : (msgactive=='notice'?'red':'')}"></i>
+          </div>
+          <div ng-click="hideMsgView()">
+            <i class="fa fa-arrow-right" style="font-size: 24px;"></i>
+          </div>
+        </div>
+
+        <div class="left">
+          <div class="top">
+            <input type="text" placeholder="Search" />
+            <a href="javascript:;" class="search"></a>
+          </div>
+          <div ng-show="msgactive == 'message'">
+              <ul class="people" ng-show="peoples.length > 0">
+                <li class="person" ng-repeat="people in peoples" ng-class="{'active':$index == active_people}"
+                  ng-click="showPeople($index,people.name)">
+                  <img src="{{people.imgsrc}}" ng-if="people.imgsrc !=''" />
+                  <div ng-if="people.imgsrc == ''" class="headName" style="float: left;">
+                    {{people.showname}}
+                  </div>
+                  <span class="name">{{people.name}}</span>
+                  <span class="time">{{people.time}}</span>
+                  <span class="preview">{{people.preview}}</span>
+                </li>
+              </ul>
+              <p ng-show="peoples.length == 0" style="text-align: center;margin-top: 10px;">暂时没有会话</p>
+          </div>
+          <div ng-show="msgactive == 'user'">
+            <ul class="people">
+              <li class="person" ng-repeat="user in onlineUser" ng-class="{'active':$index == active_user}"
+                style="line-height: 40px;display: flex" ng-click="showUser($index,user)">
+                <img ng-show="user.imgsrc != ''" src="{{user.imgsrc}}" />
+                <div ng-show="user.imgsrc == ''" class="headName">
+                  {{user.showname}}
+                </div>
+                <span class="name">{{user.username}}</span>
+              </li>
+            </ul>
+          </div>
+          
+
+          <div ng-show="msgactive == 'business'">
+            <ul class="people">
+              <li class="person">业务消息1</li>
+              <li class="person">业务消息2</li>
+            </ul>
+          </div> 
+
+          <div ng-show="msgactive == 'notice'">
+            <ul class="people" >
+              <li class="person" ng-repeat="notice in notices" ng-class="{'active':$index == active_notice}">
+                <h4>{{notice.title}}</h4>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>{{notice.author}}</span>
+                    <span>{{notice.time}}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="right">
+          <div ng-show="msgactive == 'message'">
+            <div class="top">
+              <span class="name">{{chatname}}</span>
+            </div>
+            <div class="chat" ng-repeat="chat in chats" ng-class="{'active-chat': $index == active_people}">
+              
+              <div ng-repeat="msg in chat.message">
+                <div ng-if="msg.fromuser != userbean.username" class="left-chat">
+                  <img src="{{msg.imgsrc}}" ng-if="msg.imgsrc !=''" />
+                  <div ng-if="msg.imgsrc ==''" class="headName" style="margin: 0;width: 50px;height: 50px;line-height: 50px;">
+                    {{msg.showname}}
+                  </div>
+                  <div class="bubble you">
+                    {{msg.msgcontent}}
+                  </div>
+                </div>
+                <div ng-if="msg.fromuser == userbean.username" class="right-chat">
+                  <div class="bubble me">
+                    {{msg.msgcontent}}
+                  </div>
+                  <img src="{{msg.imgsrc}}" ng-if="msg.imgsrc !=''" />
+                  <div ng-if="msg.imgsrc ==''" class="headName" style="margin: 0;width: 50px;height: 50px;line-height: 50px;">
+                    {{msg.showname}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="chatBottomdiv" ng-show="peoples.length>0">
+              <textarea ng-model="content" class="msgTextarea" id="msgTextarea"></textarea>
+              <div class="chatBtndiv">
+                <button class="btn" ng-click="chatSend()">发消息</button>
+              </div>
+            </div>
+          </div>
+
+          <div ng-show="msgactive == 'user'">
+            <div class="userInfo">
+              <div class="userInfoTop">
+                <span>{{userInfo.username}}</span>
+                <img ng-show="userInfo.imgsrc != ''" src="{{userInfo.imgsrc}}" />
+                <div ng-show="userInfo.imgsrc == ''" class="headName" style="width: 80px;height: 80px;line-height: 80px;">
+                  {{userInfo.showname}}
+                </div>
+              </div>
+            </div>
+            <div class="userInfoMid">
+              <div>
+                <span>邮箱：</span>
+                <span ng-if="userInfo.email != ''">
+                  {{userInfo.email}}
+                </span>
+                <span ng-if="userInfo.email == ''">
+                  用户暂未填写邮箱
+                </span>
+              </div>
+              <div>
+                <span>手机：</span>
+                <span ng-if="userInfo.mobil != ''">
+                  {{userInfo.mobil}}
+                </span>
+                <span ng-if="userInfo.mobil == ''">
+                  用户暂未填写手机
+                </span>
+              </div>
+            </div>
+            <div class="userInfoBottom">
+              <button class="btn" ng-click="peopleSend(userInfo)">发消息</button>
+            </div>
+          </div>
+          <div ng-show="msgactive == 'business'">
+            
+          </div>
+          <div ng-show="msgactive == 'notice'">
+              <div ng-repeat="notice in notices" class="noticediv" ng-class="{'active':$index == active_notice}">
+                <h2 style="text-align: center;font-weight:600;">{{notice.title}}</h2>
+                <div style="text-align: center;">
+                    <span>{{notice.author}}</span>
+                    <span>{{notice.time}}</span>
+                </div>
+                <div ng-bind-html="notice.content"></div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div> --> 
+    <!-- Main view  -->
+    <!-- Main view  id="iframe_{{$id}}:{{tab.state.name}}"-->
+
+    <!-- <iframe id="iframe_{{$id}}" class="row" ng-repeat="tab in allTabs" ng-show="tab.active" ng-src="{{tab.url}}"
+      style="width: 100%; height: calc(100vh - 68px);">
+    </iframe> -->
+    <hc-view id="hc_view_{{ $id }}" class="flex1 flex-column animated fadeInRight" style="width: 100%;" ng-repeat="tab in allTabs" ng-show="tab.active" hc-state="tab.state" hc-params="tab.params">
+    </hc-view>
+
+    <!--<iframe tabindex="5003" class="row ng-scope" id="crmman.fin_fee_header" src="http://192.168.1.201:8081/web/index.jsp#/crmman/fin_fee_header" style="width: 100%; height: 673px; -ms-overflow-x: hidden; -ms-overflow-y: hidden; -ms-touch-action: none;" ng-show="true" ng-src="http://192.168.1.201:8081/web/index.jsp#/crmman/fin_fee_header" wrap-height="">-->
+    <!--</iframe>-->
+    <!-- Footer -->
+    <!--<div ng-include="'views/common/footer.html'" style="background-color: #e2e5ec;"></div>-->
+  </div>
+  <!-- End page wrapper-->
+</div>
+<!-- End wrapper-->
+<style>
+  /* *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  } */
+
+
+
+  #msgView {
+    position: absolute;
+    right: -850px;
+    top: 10%;
+    transition: all .5s linear;
+    -moz-transition: all .5s linear;
+    /* Firefox 4 */
+    -webkit-transition: all .5s linear;
+    /* Safari 和 Chrome */
+    -o-transition: all .5s linear;
+  }
+
+  .message {
+    position: relative;
+    width: 850px;
+    height: 600px;
+    background-color: #fff;
+    padding: 0;
+    display: flex;
+  }
+
+  .message .left {
+    width: 33%;
+    height: 100%;
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+  }
+
+  .message .tool {
+    width: 6%;
+    height: 100%;
+    border: 1px solid #e6e6e6;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .message .tool>div {
+    padding-top: 20px;
+    cursor: pointer;
+  }
+
+  .message .tool img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .message .left .top {
+    position: relative;
+    width: 100%;
+    height: 90px;
+    padding: 20px;
+    display: flex;
+  }
+
+  .message .left .top:after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: block;
+    width: 80%;
+    height: 1px;
+    content: '';
+    background-color: #e6e6e6;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+  }
+
+  .message .left input {
+    width: 188px;
+    height: 42px;
+    padding: 0 15px;
+    border: 1px solid #e6e6e6;
+    background-color: #eceff1;
+    border-radius: 21px;
+    font-weight: 400;
+  }
+
+  .message .left input:focus {
+    outline: none;
+  }
+
+  .message .left a.search {
+    display: block;
+    width: 42px;
+    height: 42px;
+    margin-left: 10px;
+    border: 1px solid #e6e6e6;
+    background-color: #00b0ff;
+    background-image: url("../img//name-type.png");
+    background-repeat: no-repeat;
+    background-position: top 12px left 14px;
+    border-radius: 50%;
+  }
+
+  .message .left .people {
+    margin-left: -1px;
+    border-right: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+    width: calc(100% + 2px);
+  }
+
+  .message .left .people .person {
+    position: relative;
+    width: 100%;
+    padding: 12px 10% 16px;
+    cursor: pointer;
+    align-items: center;
+    background-color: #fff;
+  }
+
+  .message .left .people .person:after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: block;
+    width: 80%;
+    height: 1px;
+    content: '';
+    background-color: #e6e6e6;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+  }
+
+  .message .left .people .person img {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    border-radius: 50%;
+  }
+
+  .message .left .people .person .name {
+    font-size: 14px;
+    line-height: 22px;
+    color: #1a1a1a;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+  }
+
+  .message .left .people .person .time {
+    font-size: 14px;
+    position: absolute;
+    top: 16px;
+    right: 10%;
+    color: #999;
+    background-color: #fff;
+  }
+
+  .message .left .people .person .preview {
+    font-size: 14px;
+    display: inline-block;
+    overflow: hidden !important;
+    width: 70%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #999;
+  }
+
+  .message .left .people .person.active,
+  .message .left .people .person:hover {
+    margin-top: -1px;
+    margin-left: -1px;
+    padding-top: 13px;
+    border: 0;
+    background-color: #00b0ff;
+    padding-left: calc(10% + 1px);
+    align-items: center;
+  }
+
+  .message .left .people .person.active span,
+  .message .left .people .person:hover span {
+    color: #fff;
+    background: transparent;
+  }
+
+  .message .left .people .person.active:after,
+  .message .left .people .person:hover:after {
+    display: none;
+  }
+
+  .message .right {
+    position: relative;
+    width: 61%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .message .right .top {
+    width: 100%;
+    height: 47px;
+    padding: 15px 29px;
+    background-color: #eceff1;
+  }
+
+  .message .right .top span {
+    font-size: 15px;
+    color: #999;
+  }
+
+  .message .right .top span .name {
+    color: #1a1a1a;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+  }
+
+  .message .right .chat {
+    display: none;
+    position: relative;
+    overflow: auto;
+    padding: 0 35px 0;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: #e6e6e6;
+    height: 430px;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  .message .right .chat.active-chat {
+    display: flex;
+  }
+
+  .message .right .chat.active-chat .bubble {
+    transition-timing-function: cubic-bezier(0.4, -0.04, 1, 1);
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+  }
+
+  .message .right .bubble {
+    font-size: 16px;
+    position: relative;
+    display: inline-block;
+    clear: both;
+    margin-bottom: 8px;
+    padding: 13px 14px;
+    vertical-align: top;
+    border-radius: 5px;
+  }
+
+  .message .right .bubble:before {
+    position: absolute;
+    top: 19px;
+    display: block;
+    width: 8px;
+    height: 6px;
+    content: '\00a0';
+    -webkit-transform: rotate(29deg) skew(-35deg);
+    transform: rotate(29deg) skew(-35deg);
+  }
+
+  .message .right .bubble.you {
+    color: #fff;
+    background-color: #00b0ff;
+    align-self: flex-start;
+    -webkit-animation-name: slideFromLeft;
+    animation-name: slideFromLeft;
+    white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word
+  }
+
+  .message .right .bubble.you:before {
+    left: -3px;
+    background-color: #00b0ff;
+  }
+
+  .message .right .bubble.me {
+    color: #1a1a1a;
+    background-color: #eceff1;
+    align-self: flex-end;
+    -webkit-animation-name: slideFromRight;
+    animation-name: slideFromRight;
+    white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word
+  }
+
+  .message .right .bubble.me:before {
+    right: -3px;
+    background-color: #eceff1;
+  }
+
+  .message .right .conversation-start {
+    position: relative;
+    width: 100%;
+    margin: 30px 0;
+    text-align: center;
+  }
+
+  .message .right .conversation-start span {
+    font-size: 14px;
+    display: inline-block;
+    color: #999;
+  }
+
+  .message .right .conversation-start span:before,
+  .message .right .conversation-start span:after {
+    position: absolute;
+    top: 10px;
+    display: inline-block;
+    width: 30%;
+    height: 1px;
+    content: '';
+    background-color: #e6e6e6;
+  }
+
+  .message .right .conversation-start span:before {
+    left: 0;
+  }
+
+  .message .right .conversation-start span:after {
+    right: 0;
+  }
+
+  .right img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition-timing-function: cubic-bezier(0.4, -0.04, 1, 1);
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+  }
+  .right div.headName{
+    transition-timing-function: cubic-bezier(0.4, -0.04, 1, 1);
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+  }
+  .left-chat {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+
+  .left-chat img {
+    -webkit-animation-name: slideFromLeft;
+    animation-name: slideFromLeft;
+  }
+  .left-chat div.headName{
+    -webkit-animation-name: slideFromLeft;
+    animation-name: slideFromLeft;
+  }
+
+  .right-chat {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  .right-chat img {
+    -webkit-animation-name: slideFromRight;
+    animation-name: slideFromRight;
+  }
+  .right-chat div.headName{
+    -webkit-animation-name: slideFromRight;
+    animation-name: slideFromRight;
+  }
+
+  .headName {
+    height: 40px;
+    width: 40px;
+    background: #f6f6f6;
+    border-radius: 50%;
+    /* display: flex; */
+    text-align: center;
+    margin-right: 12px;
+    font-size: 16px;
+    line-height: 40px;
+  }
+
+  .userInfo {}
+
+  .userInfoTop {
+    width: 70%;
+    padding: 60px 0;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .userInfoTop span {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  div.userInfo img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .userInfoMid {
+    width: 70%;
+    padding: 40px 0;
+    margin: 0 auto;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .userInfoMid>div {
+    padding: 10px 0;
+    font-size: 14px;
+  }
+
+  .userInfoMid>div span:first-child {
+    color: #ccc;
+    padding-right: 20px;
+  }
+
+  .userInfoBottom {
+    padding: 40px 0;
+  }
+
+  .userInfoBottom button {
+    margin: 0 auto;
+    display: block;
+    width: 100px;
+    background: #00b0ff;
+    color: white;
+  }
+
+  .msgTextarea {
+    border: none;
+    resize: none;
+    width: 100%;
+    height: 75px;
+    font-size: 16px;
+  }
+
+  .chatBottomdiv {
+    width: 90%;
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+  }
+
+  .chatBtndiv {
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .noticediv{
+    display: none;
+  }
+  .noticediv>div,.noticediv>h2{
+    margin-top: 10px;
+  }
+  .noticediv.active{
+    display: block;
+  }
+  @keyframes slideFromLeft {
+    0% {
+      margin-left: -200px;
+      opacity: 0;
+    }
+
+    100% {
+      margin-left: 0;
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes slideFromLeft {
+    0% {
+      margin-left: -200px;
+    }
+
+    100% {
+      margin-left: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideFromRight {
+    0% {
+      margin-right: -200px;
+      opacity: 0;
+    }
+
+    100% {
+      margin-right: 0;
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes slideFromRight {
+    0% {
+      margin-right: -200px;
+      opacity: 0;
+    }
+
+    100% {
+      margin-right: 0;
+      opacity: 1;
+    }
+  }
+</style>

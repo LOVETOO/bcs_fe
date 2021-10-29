@@ -1,0 +1,35 @@
+<div hc-edit-list>
+    <div hc-box class="other-h">
+        <div class="row">
+            <div hc-input="data.currItem.dentname"
+                 hc-label="采购单位账套"
+                 hc-required="true"
+                 hc-col-count="4"
+                 hc-btn-click="chooseDent()">
+            </div>
+            <div hc-input="data.currItem.sentname"
+                 hc-label="供货单位账套"
+                 hc-col-count="4"
+                 hc-required="true"
+                 hc-btn-click="chooseSent()">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.vendor_code"
+                 hc-label="供应商"
+                 hc-required="true"
+                 hc-btn-click="chooseVendor()">
+            </div>
+            <div hc-input="data.currItem.vendor_name"></div>
+            <div hc-input="data.currItem.customer_code"
+                 hc-label="客户"
+                 hc-required="true"
+                 hc-btn-click="chooseCustomer()">
+            </div>
+            <div hc-input="data.currItem.customer_name"
+                 hc-readonly="true"
+                hc-label="">
+            </div>
+        </div>
+    </div>
+</div>

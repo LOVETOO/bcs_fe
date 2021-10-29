@@ -1,0 +1,196 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>{{FrmInfo.title}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row m-b-sm">
+        	<!-- <div class="col-md-1"><label class="form-label-mini font-noraml">类型:</label></div>
+        	<div class="col-md-2">
+        		<select data-placeholder=" " chosen-select 
+        		ng-model="type_id" ng-change="typechange()"
+        		ng-options="type.id as type.name for type in typelist" 
+        		class="input-sm chosen-select form-control">
+        			<option value=""></option>
+        		</select>
+			</div> -->
+			<div class="col-md-1"><label class="form-label-mini font-noraml">出口型号:</label></div>
+			<div class="col-md-2"><input id="autofocus" autofocus auto-focus ng-keyup="enter($event)" ng-model="searchcode" class="input-sm form-control"></div>
+			<div class="col-md-2"><label class="form-label-mini font-noraml">出口型号名称:</label></div>
+			<div class="col-md-2"><input ng-keyup="enter($event)" ng-model="searchname" class="input-sm form-control"></div>
+			<div class="col-md-1">
+				<button class="btn btn-sm btn-primary" ng-click="search()">查询</button>
+			</div>
+        </div>
+        <!-- <div class="row m-b-sm" style="padding-top: 5px;border-top: 1px solid #ccc;">
+        	<div class="col-md-1"><label class="form-label-mini font-noraml">特征值:</label></div>
+        	冰箱特征值
+	        <div class="col-md-10" ng-show="typeobj.showOne">
+	        	<div class="row m-b-sm">
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">电压/频率:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="icebox.voltage" data-placeholder=" " chosen-select class="input-sm chosen-select form-control">
+		        			<option value="-1"></option>
+		        			<option value="220V-240V/50Hz">220V-240V/50Hz</option>
+		        			<option value="220V/60Hz">220V/60Hz</option>
+		        			<option value="208V-230V/60Hz">208V-230V/60Hz</option>
+		        			<option value="110V/50Hz-60Hz">110V/50Hz-60Hz</option>
+		        			<option value="115V/60Hz">115V/60Hz</option>
+		        			<option value="127V/60Hz">127V/60Hz</option>
+		        			<option value="127V-240V/50Hz-60Hz">127V-240V/50Hz-60Hz</option>
+		        		</select>
+					</div>
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">温度补偿:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="icebox.tempe_comp" data-placeholder=" " chosen-select class="input-sm chosen-select form-control" ng-model="item.prop">
+		        			<option value=""></option>
+		        			<option value="无补偿">无补偿</option>
+		        			<option value="手动补偿">手动补偿</option>
+		        			<option value="自动补偿">自动补偿</option>
+		        			<option value="电脑补偿">电脑补偿</option>
+		        		</select>
+					</div>
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">箱体特征:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="icebox.box_feature"  data-placeholder=" " chosen-select class="input-sm chosen-select form-control" ng-model="item.prop">
+		        			<option value="U型">U型</option>
+		        			<option value="拼装">拼装</option>
+		        		</select>
+					</div>
+		        
+		        </div>
+		        <div class="row m-b-sm">
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">冷凝器特征:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="icebox.cold_feature"  data-placeholder=" " chosen-select class="input-sm chosen-select form-control" ng-model="item.prop">
+		        			<option value="内置">内置</option>
+		        			<option value="内置+背挂">内置+背挂</option>
+		        			<option value="背挂">背挂</option>
+		        		</select>
+					</div>
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">后板特征:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="icebox.cold_feature"  data-placeholder=" " chosen-select class="input-sm chosen-select form-control" ng-model="item.prop">
+		        			<option value="中空">中空</option>
+		        			<option value="金属">金属</option>
+		        			<option value="塑料">塑料</option>
+		        		</select>
+					</div>
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">其它需求:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="icebox.other_needs" data-placeholder=" " chosen-select class="input-sm chosen-select form-control" ng-model="item.prop">
+		        			<option value="无">无</option>
+		        			<option value="T型气候">T型气候</option>
+		        			<option value="带风扇">带风扇</option>
+		        			<option value="变频">变频</option>
+		        			<option value="带导轨">带导轨</option>
+		        			<option value="带风扇 带导轨">带风扇 带导轨</option>
+		        			<option value="变频 带导轨">变频 带导轨</option>
+		        		</select>
+					</div>
+		        
+		        </div>
+	        </div>
+	        冷柜
+	        <div class="col-md-10" ng-show="typeobj.showTwo">
+	        	<div class="row m-b-sm">
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">电压/频率:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="collbox.voltage" data-placeholder=" " chosen-select class="input-sm chosen-select form-control">
+		        			<option value=""></option>
+		        			<option value="220V-240V/50Hz">220V-240V/50Hz</option>
+		        			<option value="220V/60Hz">220V/60Hz</option>
+		        			<option value="208V-230V/60Hz">208V-230V/60Hz</option>
+		        			<option value="110V/50Hz-60Hz">110V/50Hz-60Hz</option>
+		        			<option value="115V/60Hz">115V/60Hz</option>
+		        			<option value="127V/60Hz">127V/60Hz</option>
+		        			<option value="127V-240V/50Hz-60Hz">127V-240V/50Hz-60Hz</option>
+		        		</select>
+					</div>
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">冷凝器特征:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="collbox.cold_feature" data-placeholder=" " chosen-select class="input-sm chosen-select form-control" ng-model="item.prop">
+		        			<option value="内置">内置</option>
+		        			<option value="内置+背挂">内置+背挂</option>
+		        			<option value="背挂">背挂</option>
+		        			<option value="内置+丝管">内置+丝管</option>
+		        		</select>
+					</div>
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">底板侧挡板:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="collbox.floor_side" data-placeholder=" " chosen-select class="input-sm chosen-select form-control" ng-model="item.prop">
+		        			<option value="中空">中空</option>
+		        			<option value="金属">金属</option>
+		        		</select>
+					</div>
+		        	
+		        </div>
+		        <div class="row m-b-sm">
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">是否带锁:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="collbox.have_lock" data-placeholder=" " chosen-select  class="input-sm chosen-select form-control" ng-model="item.prop">
+		        			<option value="不带锁">不带锁</option>
+		        			<option value="带外置锁">带外置锁</option>
+		        			<option value="带嵌入式锁">带嵌入式锁</option>
+		        			<option value="带蝶形门锁">带蝶形门锁</option>
+		        		</select>
+					</div>
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">是否带灯:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="collbox.have_light" data-placeholder=" " chosen-select class="input-sm chosen-select form-control" ng-model="item.prop">
+		        			<option value="带灯">带灯</option>
+		        			<option value="不带灯">不带灯</option>
+		        		</select>
+					</div>
+		        	<div class="col-md-2"><label class="form-label-mini font-noraml">其它需求:</label></div>
+		        	<div class="col-md-2">
+		        		<select ng-model="collbox.other_needs" data-placeholder=" " chosen-select class="input-sm chosen-select form-control" ng-model="item.prop">
+		        			<option value="无">无</option>
+		        			<option value="温控器横放">温控器横放</option>
+		        			<option value="内置玻璃门">内置玻璃门</option>
+		        			<option value="蝶形门+内置玻璃门">蝶形门+内置玻璃门</option>
+		        			<option value="带风扇">带风扇</option>
+		        		</select>
+					</div>
+		        
+		        </div>
+	        </div>
+        </div> -->
+         
+        <!-- <table class="table table-striped table-bordered no-paging footable-loaded">
+              <tr style="display: table-row;">
+                  <td width="70%">
+                  	<span class="footable-toggle"></span>
+                  	<input ng-model="searchtext" type="text" name="keyword" placeholder="输入文本..." class="form-control">
+                  </td>
+                  <td>
+                      <button class="btn btn-sm btn-primary" ng-click="search()"><strong>搜索</strong></button>  
+                  </td>
+              </tr>
+         </table> -->
+	        <div class="row" style="max-height:200px;overflow-y:auto;">
+		         <table class="table  table-bordered table-striped">
+		            <thead>
+		                <th>序号</th>
+		                <th>出口型号编码</th>
+		                <th>出口型号名称</th>
+		            </thead>
+		            <tbody>
+		                <tr ng-click="addLine($index,$event)" ng-dblclick="addConfirm($index)" ng-repeat="item in items" >
+							<td ng-bind="$index+1"></td>
+							<td>{{item.item_h_code}}</td>
+							<td>{{item.item_h_name}}</td>
+						</tr>
+		            </tbody>
+		         </table>
+         </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-sm btn-primary" ng-click="ok()">
+          确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel()">
+          取消
+        </a>
+     </div>
+</div>

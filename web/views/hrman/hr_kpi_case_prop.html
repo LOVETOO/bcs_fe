@@ -1,0 +1,86 @@
+<div hc-obj-prop>
+    <!--基本信息：-->
+    <div id="base" class="active">
+        <div hc-box class="other-h">
+            <div class="row" >
+                <div hc-input="data.currItem.kpicase_name"
+                     hc-label="考核方案名称"
+                     hc-required="true"
+                     hc-col-count="4"
+                     hc-readonly="data.currItem.stat==5"></div>
+                <div hc-input="data.currItem.kpicase_type"
+                     hc-label="方案类别"
+                     hc-change="changeType()"
+                     hc-dict-code="kpicase_type"
+                     hc-required="true"
+                     hc-readonly="data.currItem.stat==5"></div>
+
+                <div hc-input="data.currItem.stat"
+                     hc-label="单据状态"
+                     hc-dict-code="check_stat"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row" >
+                <div hc-input="data.currItem.kpi_period"
+                     hc-label="考核周期类型"
+                     hc-dict-code="kpi_period"
+                     hc-change="changeKpiPeriod()"
+                     hc-required="true"
+                     hc-readonly="data.currItem.stat==5"></div>
+                <div hc-input="data.currItem.cyear"
+                     hc-label="考核年度"
+                     hc-type="year"
+                     hc-required="true"
+                     hc-readonly="data.currItem.stat==5"></div>
+                <div hc-input="data.currItem.seasonmth"
+                     hc-label="考核期间"
+                     ng-show="data.currItem.kpi_period==1"
+                     hc-type="year"
+                     hc-required="data.currItem.kpi_period==1"
+                     hc-readonly="data.currItem.stat==5"></div>
+                <div hc-input="data.currItem.seasonmth"
+                     hc-label="考核期间"
+                     ng-show="data.currItem.kpi_period==4"
+                     hc-type="month"
+                     hc-required="data.currItem.kpi_period==4"
+                     hc-readonly="data.currItem.stat==5"></div>
+                <div hc-input="data.currItem.seasonmth"
+                     hc-label="考核期间"
+                     ng-click="clickKpi()"
+                     ng-show="data.currItem.kpi_period!=1&&data.currItem.kpi_period!=4"
+                     hc-select-options="assess_time"
+                     hc-required="data.currItem.kpi_period!=1&&data.currItem.kpi_period!=4"
+                     hc-readonly="data.currItem.stat==5"></div>
+                <div hc-input="data.currItem.kpi_deptkpimode"
+                     hc-label="部门考核方式"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row" >
+                <div hc-input="data.currItem.note"
+                     hc-label="备注"
+                     hc-col-count="4"
+                     hc-readonly="data.currItem.stat==5"></div>
+                <div hc-input="data.currItem.masterscale"
+                     hc-label="主评人权重"
+                     type="number"
+                     hc-readonly="data.currItem.stat==5"
+                     hc-required="true"></div>
+                <div hc-input="data.currItem.selfscale"
+                     hc-label="自评人权重"
+                     type="number"
+                     hc-required="true"
+                     hc-readonly="data.currItem.stat==5"></div>
+            </div>
+        </div>
+        <div >
+            <div  hc-grid="gridOptions" hc-auto-height></div>
+        </div>
+
+    </div>
+</div>
+<style>
+    .approval—status {
+        display: none;
+    }
+</style>

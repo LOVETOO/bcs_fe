@@ -1,0 +1,100 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fin_bud_make">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{headername}}</h5>
+                    <div class="ibox-tools form-inline">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="saveBtn()"><i
+                                class="fa fa-save"></i> 保存
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm"
+                                ng-click="f5()"><i class="fa fa-refresh"></i> 刷新
+                        </button>
+                        <from method="post" enctype="multipart/form-data" active="">
+                            <button class="btn btn-default btn-sm fileinput-button" ng-click="doUploadFile()">
+                                <i class="glyphicon glyphicon-log-in"></i> 导入
+                            </button>
+                        </from>
+                        <div type="button" class="btn btn-default btn-sm"><i class="fa fa-plus-square-o"></i>
+                            <a href="" target="_blank" id="budtmpdocid" >下载导入格式</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <!--编辑栏-->
+                    <form method="get" class="form-inline mline title-form">
+                        <div class="row">
+                            <label class="control-label">预算年度</label>
+                            <input type="number" class="form-control" ng-model="data.currItem.bud_year">
+                            <label class="control-label">预算类别</label>
+                            <div class="input-group width_m">
+                                <input type="text" class="form-control" ng-model="data.currItem.bud_type_code"
+                                       ng-readonly="true">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary"
+                                                                      ng-click="viewTypeSearch()">•••</button></span>
+                            </div>
+                            <input type="text" class="form-control width_xm" ng-readonly="true"
+                                   ng-model="data.currItem.bud_type_name">
+                            <label class="control-label">费用项目</label>
+                            <!--<input type="text" class="form-control" ng-model="data.currItem.object_name" ng-readonly="true">-->
+                            <select ng-model="data.currItem.object_id"
+                                    class="input-sm chosen-select form-control"
+                                    ng-options="s.id as s.name for s in object_ids"
+                                    ng-selected="s.id==data.currItem.object_id">
+                            </select>
+                        </div>
+                    </form>
+                    <!--列表-->
+                    <div class="TreeGridBox">
+                        <!--left-->
+                        <div class="ibox-titleq" style="min-width: 254px;max-width: 254px;width: 254px">
+                            <div id="deptGrid"></div>
+                        </div>
+                        <!--right-->
+                        <div class="grid_modal dbgridR">
+                            <div id="budGrid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<style>
+    /*设置上传按钮样式*/
+    .fileinput-button {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    .fileinput-button input {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        opacity: 0;
+        -ms-filter: "alpha(opacity=0)";
+        font-size: 200px;
+        cursor: pointer;
+    }
+
+    /*可编辑颜色*/
+    #budGrid .l1.r1{
+        background: #e2fedb !important;
+    }
+
+    /*禁用颜色*/
+    #budGrid .slick-row.totals, #budGrid .slick-row.totals .l1.r1{
+        background: #fff8f0 !important;
+    }
+
+    /*合计颜色*/
+    #budGrid .slick-row.totals:last-child, #budGrid .slick-row.totals:last-child .l1.r1, #budGrid .slick-row.totals:last-child .l2.r2 {
+        background: #efefef !important
+    }
+</style>
+

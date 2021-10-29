@@ -1,0 +1,46 @@
+<div class="modal-content" local-storage ng-model="data.currItem">
+    <div draggable-model class="modal-header" style="width: 100%">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel(e)">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h3>邮件阅读情况</h3>
+    </div>
+    <div class="modal-body" style="width: 100%">
+        <!--<div class="row" style="margin-top: 0px;">
+            <div style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                主题:&nbsp;&nbsp;{{data.currItem.subject}}
+            </div>
+        </div>-->
+        <div class="">
+            <div hc-grid="options_acl" style="width:100%;height:300px"
+                 class=""></div>
+        </div>
+
+    </div>
+    <div class="modal-footer" style="width: 100%">
+        <a class="btn btn-sm btn-primary" ng-click="ok(e)">
+            确定
+        </a>
+        <a class="btn btn-sm btn-default" ng-click="cancel(e)">
+            取消
+        </a>
+    </div>
+</div>
+</div>
+</div>
+<style>
+    .modal-body, .modal-footer {
+        padding: 15px;
+        margin: 0px;
+    }
+
+    .div_modal {
+        margin-left: 4px;
+        padding-right: 7px !important;
+    }
+
+    .row_div {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+</style>

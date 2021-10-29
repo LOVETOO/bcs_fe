@@ -1,0 +1,120 @@
+<div local-storage ng-model="data.currItem" class="bill-form" ng-controller="fd_verification_head">
+    <div class="wrapper wrapper-content animated fadeInRight" ng-init="">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <div class="ibox-tools">
+                        <form class="pull-right">
+                            <button class="btn btn-white btn-sm"  ng-click="searchBySql()">
+                                <i class="fa fa-search"></i> 查询
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="刷新"
+                                    ng-click="searchData()"><i class="fa fa-refresh"></i>刷新
+                            </button>
+                            <button class="btn btn-white btn-sm" data-toggle="modal" data-target="#attributeModal"
+                                    ng-click="detail('','add')" ><i class="fa fa-plus"></i> 新增
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div id="headerGridView" slick-grid sg-options="headerOptions"
+                         sg-columns="headerColumns"
+                         class="slick-grid">
+                    </div>
+                    <div class="page_modal modal-open" page-pagination></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--详情框-->
+    <div class="modal inmodal fade" id="detailModal" role="dialog" data-backdrop="static"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal_lgmax" >
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">工程回款核销</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <form method="get" class="form-inline mline" name="entityForm" novalidate>
+                            <div class="row">
+                                <label class="control-label width_s">核销单号</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.verification_code"
+                                       ng-disabled="true">
+                                <label class="control-label width_s">回款单号</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control  non-empty" ng-model="data.currItem.fd_fund_business_code"
+                                           ng-readonly="true" name="fd_fund_business_code" required="true">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-disabled="data.currItem.stat==5"
+                                                ng-click="businessSearch()">•••</button>
+                                    </span>
+                                </div>
+                                <label class="control-label width_s">回款日期</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.fund_date" ng-disabled="true"/>
+                                <label class="control-label not-null">单据状态</label>
+                                <select ng-model="data.currItem.stat"
+                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                        ng-options="s.id as s.name for s in billStats"
+                                        ng-disabled="true">
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label class="control-label width_s">客户</label>
+                                <div class="input-group width_m">
+                                    <input type="text" class="form-control" ng-model="data.currItem.customer_code" ng-disabled="true">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" ng-disabled="true">•••</button>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control width_xm"
+                                       ng-model="data.currItem.customer_name" ng-disabled="true"/>
+                                <label class="control-label width_s">回款方式</label>
+                                <select ng-model="data.currItem.fund_type"
+                                    class="input-sm chosen-select non-empty form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                    ng-options="s.id as s.name for s in ReturnType" ng-disabled="true">
+                                </select>
+                                <label class="control-label width_s">回款金额</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.fund_amt"
+                                       ng-disabled="true">
+                            </div>
+                            <div class="row">
+                                <label class="control-label width_s">核销日期</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.verificate_date" ng-disabled="true"/>
+                                <label class="control-label width_s">本次核销总额</label>
+                                <input type="text" class="form-control non-empty" ng-model="data.currItem.verificate_amt" ng-readonly="true">
+                                <label class="control-label width_s">已核销金额</label>
+                                <input type="text" class="form-control" ng-model="data.currItem.verificated_amt" ng-disabled="true">
+                                <label class="control-label width_s">备注</label>
+                                <textarea style="height: 30px;" class="form-control ng-pristine ng-untouched ng-valid width_m"
+                                          ng-model="data.currItem.note">
+                                </textarea>
+                            </div>
+
+                        </form>
+                        <div id="lineViewGrid"
+                             slick-grid sg-options="lineOptions"
+                             sg-columns="lineColumns"
+                             style="width:100%;height:160px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left" ng-disabled="entityForm.$invalid||data.currItem.stat==5"
+                            ng-click="addLine()">增加明细</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveData()"
+                            ng-disabled="entityForm.$invalid || data.currItem.fd_verification_lineoffd_verification_heads.length==0
+                             || data.currItem.stat==5"
+                            >保存</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

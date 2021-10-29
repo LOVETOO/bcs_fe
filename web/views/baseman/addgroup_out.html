@@ -1,0 +1,50 @@
+<div class="modal-content modal_new" local-storage ng-model="data.currItem">
+    <div draggable-model class="modal-header" style="width: 100%">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel(e)">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h3>新增分组</h3>
+    </div>
+    <div class="modal-body" style="width: 100%">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="ibox-contant">
+                <div class="row">
+                    <div hc-input="data.currItem.list_name"
+                         hc-label="分组名称"
+                         hc-col-count="6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="width: 100%">
+        <a class="btn btn-sm btn-primary" ng-click="ok(e)">
+            确定
+        </a>
+        <a class="btn btn-sm btn-info" ng-click="cancel(e)">
+            取消
+        </a>
+    </div>
+</div>
+<style>
+    .modal-body ,.modal-footer{
+        padding: 15px;
+        margin: 0px;
+    }
+
+    .cpcwf-contant {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .subtitle {
+        margin-right: 0px;
+        border-bottom: 1px #e7eaec solid;
+        padding-bottom: 10px;
+    }
+
+    .row {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+</style>

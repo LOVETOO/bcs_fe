@@ -1,0 +1,453 @@
+<div hc-obj-prop>
+    <!--基本信息-->
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+            <div hc-input="data.currItem.adjust_no"
+                 hc-label="调整单编码">
+            </div>
+
+            <div hc-input="data.currItem.stats"
+                 hc-label="单据状态"
+                 hc-dict-code="stat"
+            >
+            </div>
+            <!--<div hc-input="data.currItem.uom_name"-->
+            <!--class="width_xm">-->
+            <!--</div>-->
+
+            <div hc-input="data.currItem.bud_year"
+                 hc-label="预算年度">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.org_code"
+                 hc-label="制单部门"
+                 hc-btn-click="chooseDept()">
+            </div>
+            <div hc-input="data.currItem.org_name">
+            </div>
+
+            <div hc-input="data.currItem.creator"
+                 hc-label="制单人">
+            </div>
+
+            <div hc-input="data.currItem.create_time"
+                 hc-label="制单时间">
+            </div>
+        </div>
+
+        <div class="row">
+            <div hc-input="data.currItem.bill_date"
+                 hc-label="调整日期">
+            </div>
+
+            <div hc-input="data.currItem.style"
+                 hc-label="调整类型"
+                 hc-dict-code="style">
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div hc-input="addTotal"
+                 hc-label="调增金额"
+                 hc-type="number">
+            </div>
+            <div hc-input="decTotal"
+                 hc-label="调减金额"
+                 hc-type="number">
+            </div>
+
+            <div hc-input="data.currItem.note"
+                 hc-label="备注">
+            </div>
+        </div>
+    </div>
+
+    <!-- 增加明细 -->
+    <div class="modal inmodal fade" id="AddDetailModal" role="dialog" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">预算调整明细</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="get" class="form-inline mline" id="AddItemForm" name="AddItemForm">
+                        <div>
+                            <div class="m-t-sm m-b-sm border-bottom">
+                                <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;调增</h4>
+                            </div>
+                            <div class="row">
+                                <label class=" control-label not-null">预算机构</label>
+                                <div class="input-group width_m">
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.AddItem.org_code"
+                                           ng-disabled="data.currItem.style ==2"
+                                           ng-readonly="true"
+                                           data-rule-required="true"
+                                           data-msg-required="预算机构不能为空">
+                                    <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary"
+                                                    ng-click="searchDept('AddDetail')"
+                                                    ng-disabled="data.currItem.style ==2">•••</button>
+                                        </span>
+                                </div>
+                                <input type="text" class="form-control width_m ng-pristine ng-untouched ng-valid"
+                                       ng-model="data.AddItem.org_name" ng-disabled="true"
+                                       disabled="disabled">
+                                <label class=" control-label not-null">预算类别</label>
+                                <div class="input-group width_m">
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.AddItem.bud_type_code"
+                                           ng-readonly="true"
+                                           ng-disabled="data.currItem.style == 2"
+                                           data-rule-required="true"
+                                           data-msg-required="预算类别不能为空">
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"
+                                            ng-click="searchBudType('AddDetail')"
+                                            ng-disabled="data.currItem.style == 2">•••</button>
+                                </span>
+                                </div>
+                                <input type="text" class="form-control width_m  ng-pristine ng-untouched ng-valid"
+                                       ng-model="data.AddItem.bud_type_name" ng-disabled="true"
+                                       disabled="disabled">
+
+                            </div>
+                            <div class="row">
+
+                                <label class="control-label not-null">费用项目</label>
+                                <div class="input-group width_m">
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.AddItem.object_code" ng-readonly="true"
+                                           data-rule-required="true"
+                                           data-msg-required="费用项目不能为空">
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"
+                                            ng-disabled="data.currItem.style ==2 "
+                                            ng-click="searchFeeObject('AddItem')">•••</button>
+                                </span>
+                                </div>
+                                <input type="text" class="form-control width_m  ng-pristine ng-untouched ng-valid"
+                                       ng-model="data.AddItem.object_name" ng-readonly="true">
+                                <label class=" control-label not-null">预算期间</label>
+                                <div class="input-group width_m">
+                                    <input type="text"
+                                           class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                           ng-model="data.AddItem.dname"
+                                           ng-readonly="true"
+                                           ng-disabled="data.currItem.style ==2"
+                                           data-rule-required="true"
+                                           data-msg-required="预算期间不能为空">
+                                    </input>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"
+                                                ng-disabled="data.currItem.style ==2"
+                                                ng-click="searchBudPeriod('AddItem')">•••</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="5 control-label not-null">调整类型</label>
+                                <select ng-model="data.AddItem.style"
+                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                        ng-options="s.id as s.name for s in styles"
+                                        ng-selected="s.id == data.AddItem.style" ng-disabled="true">
+                                </select>
+                                <label class=" control-label not-null">调整金额</label>
+                                <input type="text" money-format
+                                       class=" input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                       ng-model="data.AddItem.adjust_amt"
+                                       ng-disabled="data.currItem.style ==2"
+                                       data-rule-required="true"
+                                       data-msg-required="调整金额不能为空"
+                                       ng-change="same('addItem')">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="m-t-sm m-b-sm border-bottom">
+                        <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;调减</h4>
+                    </div>
+                    <form method="get" class="form-inline mline" name="DecItemForm" id="DecItemForm">
+                        <div>
+                            <div class="row">
+                                <label class=" control-label not-null">预算机构</label>
+                                <div class="input-group width_m">
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.DecreaseItem.org_code"
+                                           ng-readonly="true"
+                                           data-rule-required="true"
+                                           data-msg-required="预算机构不能为空">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"
+                                                ng-click="searchDept('DecreaseDetail')"
+                                                ng-disabled="data.currItem.style ==1">•••</button>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control width_m ng-pristine ng-untouched ng-valid"
+                                       ng-model="data.DecreaseItem.org_name" ng-readonly="true"><label
+                                    class=" control-label not-null">预算类别</label>
+
+                                <div class="input-group width_m">
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.DecreaseItem.bud_type_code"
+                                           ng-readonly="true"
+                                           ng-disabled="data.currItem.style ==1"
+                                           data-rule-required="true"
+                                           data-msg-required="预算类别不能为空">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"
+                                                ng-click="searchBudType('DecreaseDetail')"
+                                                ng-disabled="data.currItem.style ==1">•••</button>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control width_m ng-pristine ng-untouched ng-valid"
+                                       ng-model="data.DecreaseItem.bud_type_name" ng-readonly="true">
+
+                            </div>
+                            <div class="row">
+                                <label class=" control-label not-null">费用项目</label>
+                                <div class="input-group width_m">
+                                    <input type="text"
+                                           class="form-control ng-pristine ng-untouched ng-valid"
+                                           ng-model="data.DecreaseItem.object_code" ng-readonly="true"
+                                           data-rule-required="true"
+                                           data-msg-required="费用项目不能为空">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"
+                                                ng-disabled="data.currItem.style ==1"
+                                                ng-click="searchFeeObject('DecreaseItem')">•••</button>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control width_m  ng-pristine ng-untouched ng-valid"
+                                       ng-model="data.DecreaseItem.object_name" ng-readonly="true">
+                                <label class=" control-label not-null">预算期间</label>
+                                <div class="input-group width_m">
+                                    <input type="text"
+                                           class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                           ng-model="data.DecreaseItem.dname"
+                                           ng-disabled="data.currItem.style ==1"
+                                           ng-readonly="true"
+                                           data-rule-required="true"
+                                           data-msg-required="预算期间不能为空">
+                                    </input>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"
+                                                ng-disabled="data.currItem.style ==1"
+                                                ng-click="searchBudPeriod('DecreaseItem')">•••</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class=" control-label not-null">调整类型</label>
+
+                                <select ng-model="data.DecreaseItem.style"
+                                        class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                        ng-options="s.id as s.name for s in styles"
+                                        ng-selected="s.id== data.DecreaseItem.style"
+                                        ng-disabled="true">
+                                </select>
+                                <label class=" control-label not-null">调整金额</label>
+                                <input type="text" money-format
+                                       class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                       ng-model="data.DecreaseItem.adjust_amt"
+                                       ng-disabled="data.currItem.style ==1"
+                                       data-rule-required="true"
+                                       data-msg-required="调整金额不能为空"
+                                       ng-change="same('decItem')">
+                                <label class="control-label">可调减金额</label>
+                                <input type="text" money-format
+                                       class="input-sm chosen-select form-control ng-pristine ng-untouched ng-valid localytics-chosen loading"
+                                       ng-model="canuseamt"
+                                       ng-readonly="true">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="saveDetail()">保存</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                    <!-- data-dismiss="modal"-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--附件模态框-->
+    <div class="modal inmodal fade" id="attModal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">附件</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content">
+                        <table class="table table-bordered ui-widget m-n">
+                            <thead>
+                            <tr>
+                                <td style="width: 50px;">序号</td>
+                                <td>文件名称</td>
+                                <td>操作</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="doc in data.currItem.objattachs">
+                                <td>{{$index+1}}</td>
+                                <td><a href="/downloadfile.do?docid={{doc.docid}}" target="_blank">{{doc.docname}}</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-info viewbtn" ng-click="deleteFile(doc)"
+                                            ng-show="data.currItem.stat == 1">删除
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="addFile()"
+                            ng-show="data.currItem.stat == 1">添加附件
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--请选择流程模版模态框-->
+    <div class="modal inmodal fade" id="selectWfTempModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" draggable-model>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">请选择流程模版</h4>
+                </div>
+                <div class="modal-bodys">
+                    <div class="ibox-content">
+                        <ul class="list-group clear-list" style="margin: 0px 40px;">
+                            <li class="list-group-item fist-item" ng-repeat="wftmp in data.wftemps"
+                                ng-click="selectWfTemp(wftmp.wftempid)">
+                                <span class="label label-info">{{$index+1}}</span>{{wftmp.wftempname}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-primary">确定-->
+                    <!--</button>-->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 打印模板 -->
+    <div class="modal inmodal fade" role="dialog" aria-hidden="true">
+        <div id="div_print" ng-hide="true">
+            <div id='div1' style='font-size:12px;font-weight: normal;'>
+                <DIV style='LINE-HEIGHT: 30px' class=size16 align=center>
+                    <STRONG><H2>预算调整单</H2></STRONG></DIV>
+
+                <TABLE border=0 cellSpacing=1 cellPadding=3 width='100%' style='border-collapse:collapse'
+                       bordercolor='#333333'>
+                    <TBODY>
+                    <TR>
+                        <TD><b>调整单编码：</b><SPAN>{{data.currItem.adjust_no}}</SPAN></TD>
+                        <TD><b>预算年度：</b><span>{{data.currItem.bud_year}}</span></TD>
+                    </TR>
+                    <TR>
+                        <TD><b>制单部门：</b><SPAN>{{data.currItem.org_name}}</SPAN></TD>
+                        <TD><b>制单人：</b><SPAN>{{data.currItem.creator}}</SPAN></TD>
+                        <TD><b>制单时间：</b><SPAN>{{data.currItem.create_time}}</SPAN></TD>
+                    </TR>
+                    <TR>
+                        <TD><b>调整日期：</b><SPAN>{{data.currItem.bill_date}}</SPAN></TD>
+                        <TD>
+                            <b>调整类型：</b><SPAN>{{data.currItem.style}}</SPAN>
+                        </TD>
+                    </TR>
+                    <TR>
+                        <TD><b>调增金额：</b><SPAN>{{data.currItem.addTotal}}</SPAN></TD>
+                        <TD><b>调减金额：</b><SPAN>{{data.currItem.decTotal}}</SPAN></TD>
+                    </TR>
+                    <tr>
+                        <td colspan="3"><b>备注：</b><SPAN>{{data.currItem.note}}</SPAN></td>
+                    </tr>
+                    </TBODY>
+                </TABLE>
+            </div>
+            <div>
+                <div id="div2">
+                    <TABLE border=1 cellSpacing=0 cellPadding=3 width='100%' style='border-collapse:collapse'
+                           bordercolor='#333333'>
+                        <thead>
+                        <TR style="">
+                            <td colspan="7" stype="font-weight: bold;"><b>借款明细：</b></td>
+                        </TR>
+                        <TR style="">
+                            <td><b>序号</b></td>
+                            <td><b>调整类型</b></td>
+                            <td><b>调整金额</b></td>
+                            <td><b>预算期间</b></td>
+                            <td><b>预算类别</b></td>
+                            <td><b>费用对象</b></td>
+                            <td><b>机构名称</b></td>
+                        </TR>
+                        </thead>
+                        <TBODY>
+                        <TR ng-repeat="item in data.currItem.mkt_loan_lineofmkt_loan_headers">
+                            <td>{{$index}}</td>
+                            <TD>{{item.style}}</TD>
+                            <TD>{{item.adjust_amt}}</TD>
+                            <TD>{{item.dname}}</TD>
+                            <TD>{{item.bud_type_name}}</TD>
+                            <TD>{{item.object_name}}</TD>
+                            <TD>{{item.org_name}}</TD>
+                        </TR>
+                    </TABLE>
+                </div>
+            </div>
+            <div id="div3">
+                <TABLE border=1 rules="rows" cellSpacing=0 cellPadding=0 width="100%"
+                       style="font-size: small;height:90px">
+                    <thead>
+                    <TR style="">
+                        <td colspan="5" stype="font-weight: bold;"><b>审核记录：</b></td>
+                    </TR>
+                    <TR style="">
+                        <td><b>时间</b></td>
+                        <td><b>节点名称</b></td>
+                        <td><b>操作者</b></td>
+                        <td><b>操作</b></td>
+                        <td><b>处理意见</b></td>
+                    </TR>
+                    </thead>
+                    <TBODY>
+                    <TR ng-repeat="item in opinions">
+                        <TD>{{item.signtime}}</TD>
+                        <TD>{{item.procname}}</TD>
+                        <TD>{{item.username}}</TD>
+                        <TD>{{item.stat}}</TD>
+                        <TD>{{item.opinion}}</TD>
+                    </TR>
+                </TABLE>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

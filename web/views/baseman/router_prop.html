@@ -1,0 +1,73 @@
+<div hc-obj-prop>
+    <div id="base" hc-box="" class="active">
+        <div class="row">
+			<div
+				hc-input="data.currItem.pkgname"
+				hc-label="包名称"
+                hc-dict-code="router.pkg"
+				hc-required="true"
+			></div>
+            <div hc-input="data.currItem.routename"
+                hc-label="路由名称"
+                hc-required="true"></div>
+            <div hc-input="data.currItem.pagetitle"
+                hc-label="页面标题"
+                hc-required="true"></div>
+            <div hc-input="data.currItem.type"
+                hc-label="页面类型"
+                hc-required="true"
+                hc-select-options="[{name:'对象列表页面',value:'1'},{name:'对象属性页面',value:'2'},{name:'左树右列表页面',value:'3'},{name:'空白自定义页面',value:'4'},{name:'编辑面板+列表页面',value:'5'}]"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.statename"
+            	hc-label="状态名称"></div>
+            <div hc-input="data.currItem.url"
+            	hc-label="url"></div>
+            <div hc-input="data.currItem.templateurl"
+            	hc-label="模板文件名称"></div>
+            <div hc-input="data.currItem.params"
+            	hc-label="路由参数"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.creator"
+            	hc-label="创建人" hc-readonly="true"></div>
+            <div hc-input="data.currItem.createtime"
+            	hc-label="创建时间" hc-readonly="true"></div>
+            <div hc-input="data.currItem.updator"
+            	hc-label="更新人" hc-readonly="true"></div>
+            <div hc-input="data.currItem.updatetime"
+            	hc-label="更新时间" hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.objtypeid"
+            	hc-label="对象配置id"></div>
+            <div hc-input="data.currItem.usable"
+            	hc-label="可用"
+                hc-type="checkbox"></div>
+            <div hc-input="data.currItem.diy_html"
+            	hc-label="自定义html"
+                hc-type="checkbox"></div>
+
+            <div
+                style="margin-left: 4px;"
+                hc-title="添加到菜单"
+                hc-button="addToMenu()"
+                hc-disabled="!data.currItem.pkgname||!data.currItem.routename"
+			></div>
+
+            <a
+                class="btn btn-white btn-sm"
+                style="margin-left: 4px;"
+                target="_blank"
+                ng-href="{{url}}"
+                ng-disabled="!url"
+            >打开路由</a>
+
+        </div>
+        <div class="row">
+            <div hc-input="data.currItem.note"
+            	hc-label="备注"
+            hc-col-count="8"></div>
+        </div>
+    </div>
+</div>

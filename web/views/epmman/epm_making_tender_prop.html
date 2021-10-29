@@ -1,0 +1,47 @@
+<div hc-obj-prop>
+    <div id="base" class="active">
+        <div class="hc-box  other-h">
+            <div class="row">
+                <div hc-input="data.currItem.project_code"
+                     hc-label="项目编码"
+                     hc-class-id="epm_project"
+                     hc-common-search="commonSearchSettingOfEpmProject"
+                     hc-required="true">
+                </div>
+
+                <div hc-input="data.currItem.project_name"
+                     hc-label="项目名称"
+                     hc-col-count="4"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.contract_amount"
+                     hc-label="合同金额"
+                     hc-type="money"
+                     hc-unit="元"
+                     hc-readonly="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.project_status"
+                     hc-label="项目阶段"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.bid_open_time"
+                     hc-label="开标时间"
+                     hc-type="date"
+                     hc-readonly="true">
+                </div>
+                <div hc-input="data.currItem.making_type"
+                     hc-label="标书类型"
+                     hc-required="true">
+                </div>
+                <div hc-input="data.currItem.producer"
+                     hc-label="标书制作人"
+                     hc-required="true">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

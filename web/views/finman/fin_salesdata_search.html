@@ -1,0 +1,46 @@
+<div hc-diy-page>
+    <div hc-box="" class="other-h">
+        <div class="row">
+            <div hc-input="data.currItem.sales_year"
+                 hc-label="预算年度"
+                 hc-type="year">
+            </div>
+            <div hc-label="客户" hc-input="data.currItem.customer_code"
+                 hc-class-id="customer_org"
+                 hc-common-search="customerObj">
+            </div>
+            <div hc-input="data.currItem.customer_name"
+                 hc-readonly="true">
+            </div>
+        </div>
+        <div class="row">
+            <div hc-label="部门"
+                 hc-input="data.currItem.org_name"
+                 hc-class-id="dept"
+                 hc-common-search="deptObj">
+            </div>
+            <div hc-label="产品" hc-input="data.currItem.item_code"
+                 hc-class-id="item_org"
+                 hc-common-search="itemObj">
+            </div>
+            <div hc-input="data.currItem.item_name"
+                 hc-readonly="true">
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs other-h" id="detailtab">
+        <li class="active">
+            <a data-toggle="tab" id="tab11" href="tabs.html#tab1">销售明细</a>
+        </li>
+    </ul>
+
+    <div class="tabs-container">
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active">
+                <div hc-grid="gridOptions"  hc-auto-height="grid"></div>
+            </div>
+        </div>
+    </div>
+
+</div>

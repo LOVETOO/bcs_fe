@@ -1,0 +1,210 @@
+<div hc-obj-prop ng-class="'valid-' + data.currItem.valid">
+
+    <!--基本信息-->
+    <div id="base" hc-box class="active flex-column">
+        <div class="other-h">
+            <div class="row">
+                <div hc-input="data.currItem.customer_code"
+                     hc-label="客户编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.short_name"
+                     hc-readonly="initData"
+                     hc-label="客户简称"></div>
+                <div hc-input="data.currItem.customer_class"
+                     hc-label="客户分类"
+                     hc-required="!initData"
+                     hc-readonly="initData"
+                     hc-dict-code="epm.customer_class"></div>
+                <div hc-input="data.currItem.valid"
+                     hc-label="状态"
+                     hc-dict-code="valid"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.customer_name"
+                     hc-label="客户名称"
+                     hc-readonly="initData"
+                     hc-col-count="4"
+                     hc-required="!initData"></div>
+
+                <div hc-input="data.currItem.crm_cust_code"
+                     hc-label="旧编码"
+                     hc-col-count="4"
+                     hc-readonly="true"></div>
+            </div>
+
+            <div class="row">
+                <div hc-input="data.currItem.manager"
+                     hc-label="责任人"
+                     hc-readonly="initData"
+                     hc-required="!initData"></div>
+                <div hc-input="data.currItem.contact"
+                     hc-label="联系电话"
+                     hc-readonly="initData"
+                     hc-required="!initData"></div>
+                <div hc-input="data.currItem.fax"
+                     hc-label="传真"
+                     hc-readonly="initData"></div>
+                <div hc-input="data.currItem.email"
+                     hc-label="电子邮箱"
+                     hc-readonly="initData"></div>
+            </div>
+            <div class="row"><!--province_id-->
+                <div hc-input="data.currItem.area_full_name"
+                     hc-label="地址"
+                     hc-readonly="initData"
+                     hc-required="!initData"
+                     hc-placeholder="省/市/区"
+                     hc-class-id="scparea"
+                     hc-common-search="commonSearchSettingOfOrigin"></div>
+                <div hc-input="data.currItem.address"
+                     hc-placeholder="详细地址"
+                     hc-readonly="initData"></div>
+                <div hc-input="data.currItem.is_project_entity"
+                     hc-label="是否工程法人"
+                     hc-type="checkbox"
+                     hc-readonly="initData"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     class="oneis"></div>
+                <div hc-input="data.currItem.is_base"
+                     hc-label="是否基地"
+                     hc-type="checkbox"
+                     hc-readonly="initData"
+                     hc-true-value="2"
+                     hc-false-value="1"
+                     class="oneis"></div>
+            </div>
+        </div>
+        <div hc-box="财务信息" hc-if="showTaxCodeMode != 2">
+            <div class="row">
+                <div hc-input="data.currItem.invoice_type"
+                     hc-label="发票类型"
+                     hc-readonly="initData"
+                     hc-required="!initData"
+                     hc-dict-code="epm.invoice_type"></div>
+                <!--base_currency_id,Currency表-->
+                <div hc-input="data.currItem.currency_name"
+                     hc-label="结算货币"
+                     hc-readonly="initData"
+                     hc-required="!initData"
+                     hc-class-id="base_currency"
+                     hc-common-search="commonSearchCurrency"></div>
+                <div hc-input="data.currItem.tax_rate"
+                     hc-label="默认税率"
+                     hc-readonly="initData"
+                     hc-required="!initData"></div>
+                <div hc-input="data.currItem.attribute1"
+                     hc-label="现金流量表项"
+                     hc-readonly="initData"
+                     hc-required="!initData"
+                     hc-dict-code="epm.cash_flow_item"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.tax_type"
+                     hc-label="纳税人类型"
+                     hc-readonly="initData"
+                     hc-required="!initData"
+                     hc-dict-code="tax_type"></div>
+                <div hc-input="data.currItem.tax_no"
+                     hc-required="!initData"
+                     hc-readonly="initData"
+                     hc-label="纳税人识别号"></div>
+                <div hc-input="data.currItem.bank"
+                     hc-required="!initData"
+                     hc-readonly="initData"
+                     hc-label="开户银行"></div>
+                <div hc-input="data.currItem.bank_accno"
+                     hc-required="!initData"
+                     hc-readonly="initData"
+                     hc-label="银行账号"></div>
+            </div>
+        </div >
+        <div hc-box="财务信息" hc-if="showTaxCodeMode == 2">
+            <div class="row">
+                <div hc-input="data.currItem.invoice_type"
+                     hc-label="发票类型"
+                     hc-readonly="initData"
+                     hc-required="!initData"
+                     hc-dict-code="epm.invoice_type"></div>
+                <div hc-input="data.currItem.tax_code"
+                     hc-label="税种编码"
+                     hc-readonly="true"></div>
+                <div hc-input="data.currItem.tax_name"
+                     hc-label="税种名称"
+                     hc-change="changeTaxName()"
+                     hc-readonly="initData"
+                     hc-required="!initData"
+                     hc-dict-code="epm.tax_code"></div>
+                <div hc-input="data.currItem.tax_rate"
+                     hc-label="默认税率"
+                     hc-readonly="true"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.tax_type"
+                     hc-label="纳税人类型"
+                     hc-readonly="initData"
+                     hc-required="!initData"
+                     hc-dict-code="tax_type"></div>
+                <div hc-input="data.currItem.tax_no"
+                     hc-required="!initData"
+                     hc-readonly="initData"
+                     hc-label="纳税人识别号"></div>
+                <!--base_currency_id,Currency表-->
+                <div hc-input="data.currItem.currency_name"
+                     hc-label="结算货币"
+                     hc-readonly="initData"
+                     hc-required="!initData"
+                     hc-class-id="base_currency"
+                     hc-common-search="commonSearchCurrency"></div>
+                <div hc-input="data.currItem.attribute1"
+                     hc-label="现金流量表项"
+                     hc-required="!initData"
+                     hc-readonly="initData"
+                     hc-dict-code="epm.cash_flow_item"></div>
+            </div>
+            <div class="row">
+                <div hc-input="data.currItem.bank"
+                     hc-required="!initData"
+                     hc-readonly="initData"
+                     hc-col-count="4"
+                     hc-label="开户银行"></div>
+                <div hc-input="data.currItem.bank_accno"
+                     hc-required="!initData"
+                     hc-readonly="initData"
+                     hc-col-count="4"
+                     hc-label="银行账号"></div>
+            </div>
+        </div >
+        <div hc-tab="epm_tab" hc-tab-change="onTabChange(params)"></div>
+        <div hc-tab-page class="flex1">
+            <div id="out" class="active">
+                <div hc-box hc-grid="gridOptions"  class="flex1" style="height:204px"></div>
+            </div>
+            <div id="in">
+                <div hc-box hc-grid="gridOptions_in"  class="flex1" style="height:204px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .oneis{
+        padding-left: 60px;
+        padding-top: 3px;
+    }
+    /* 未生效 */
+    .valid-1 [hc-input="data.currItem.valid"] input {
+        color: gray;
+    }
+    /* 已生效 */
+    .valid-2 [hc-input="data.currItem.valid"] input {
+        color: green;
+    }
+    /* 已失效 */
+    .valid-3 [hc-input="data.currItem.valid"] input {
+        color: red;
+    }
+</style>
+
+

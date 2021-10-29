@@ -1,0 +1,39 @@
+<div class="modal-content inmodal">
+    <div class="modal-header" draggable-model>
+        <a class="close" data-dismiss="modal"></a>
+        <h4 class="modal-title">工程特价申请审批</h4>
+    </div>
+    <div class="modal-body" style="height: 280px;">
+        <form name="planHeaderEdit" class="form-horizontal form-inline">
+            <div class="ibox-content" style="padding: 20px">
+                <div class="row">
+                    <label class="control-label">申请返利点%</label>
+                    <input type="number" class="form-control ng-pristine ng-untouched ng-valid"
+                           ng-model="data.bizObj.apply_rebate" ng-readonly="true">
+                    <label class="control-label">申请返利金额</label>
+                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                           ng-model="data.bizObj.apply_rebate_amt" ng-readonly="true">
+                </div>
+                <div class="row">
+                    <label class="control-label">批准返利点%</label>
+                    <input type="number" class="form-control ng-pristine ng-untouched ng-valid"
+                           ng-change="setAllowAmt()"
+                           ng-model="data.bizObj.allow_rebate">
+                    <label class="control-label">批准返利金额</label>
+                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                           ng-model="data.bizObj.allow_rebate_amt"
+                           ng-readonly="true">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer" style="padding-bottom: 5px;padding-top: 5px;">
+        <a class="btn btn-primary" ng-click="ok()">
+            确定
+        </a>
+        <a class="btn btn-white" ng-click="cancel()">
+            取消
+        </a>
+    </div>
+</div>

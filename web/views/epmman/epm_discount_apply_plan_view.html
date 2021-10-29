@@ -1,0 +1,36 @@
+<!-- 
+  zengjinhua
+  2020/02/13.
+  提货计划分析
+-->
+<div hc-diy-page>
+    <div hc-box class="ibox-title other-h" ng-show="notPackQuery">
+        <div class="row">
+            <div hc-label="年份" hc-input="data.currItem.year" hc-type="year"></div>
+
+            <div hc-label="月份" hc-input="data.currItem.month" hc-type="month"></div>
+
+            <div hc-label="客户信息" hc-input="data.currItem.customer_code" hc-class-id="customer_org" hc-common-search="commonSearchSetting.customer" hc-can-delete="true"></div>
+
+            <div hc-input="data.currItem.customer_name" hc-readonly="true"></div>
+        </div>
+        <div class="row">
+            <div hc-label="产品编码" hc-input="data.currItem.item_code" hc-col-count="4"></div>
+
+            <div hc-label="工程合同" hc-input="data.currItem.contract_code" hc-class-id="epm_project_contract" hc-common-search="commonSearchSetting.contract" hc-can-delete="true"></div>
+
+            <div hc-input="data.currItem.contract_name"></div>
+        </div>
+    </div>
+    <div hc-box class="other-h" hc-tab="contract_tab" hc-tab-as="invTabController" hc-tab-change="onContractTabChange(params)"></div>
+    <div hc-tab-page class="flex1 flex-column">
+        <!--产品维度-->
+        <div id="data"  class="active" style="padding: 0px;">
+            <div hc-box hc-grid="gridOptionsItem" class="flex1"></div>
+        </div>
+        <!--合同维度-->
+        <div id="line" style="padding: 0px;">
+            <div hc-box hc-grid="gridOptionsCustomer" class="flex1"></div>
+        </div>
+    </div>
+</div>
