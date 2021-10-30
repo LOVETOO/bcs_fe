@@ -1,16 +1,24 @@
 <!-- 条码扫码打印 -->
-<div hc-obj-list>
-  <!-- 查询条件面板-->
-  <hc-obj-list-search-panel>
-    <!--单体-->
-    <div class="row">
-      <div
-        hc-input="searchObj.temp_name"
-        hc-label="模板选择"
-        hc-class-id="bcs_print_template"
-        hc-common-search="searchprint"
-      ></div>
-      <div hc-input="searchObj.barcode" hc-label="条码号" hc-press-enter="handlePressEnter"></div>
-    </div>
-  </hc-obj-list-search-panel>
+<div
+  class="row"
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 10%;
+  "
+>
+  <div
+    hc-input="searchObj.temp_name"
+    hc-label="模板选择"
+    hc-class-id="bcs_print_template"
+    hc-common-search="searchprint"
+  ></div>
+  <div
+    hc-input="searchObj.barcode"
+    hc-label="条码号"
+    hc-press-enter="handlePressEnter($event)"
+  ></div>
+  <span style="font-size: 12px; color: #888">( 回车打印 )</span>
 </div>
