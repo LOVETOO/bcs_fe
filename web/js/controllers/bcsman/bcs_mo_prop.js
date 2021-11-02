@@ -104,7 +104,9 @@ define(
                             produce_code:$scope.data.currItem.produce_code,
                             pack_no:$scope.data.currItem.pack_no,
                             gweight:$scope.data.currItem.gweight,
-                            factory_workshop:$scope.data.currItem.factory_workshop
+                            factory_workshop:$scope.data.currItem.factory_workshop,
+                            organizationid:$scope.data.currItem.organizationid,
+                            pack_num:$scope.data.currItem.pack_num
                         }
                     }).then(function (val) { 
                         data['barcodes'] = val.barcodes;
@@ -225,16 +227,18 @@ define(
                                 var serialno = item.serialno;
                                 //产品名称
                                 var item_name = item.item_name;
+                                //产品颜色
+                                var itme_colour = item.itme_colour;
+                                //产品型号
+                                var item_model = item.item_model;
+                                //二维码地址
+                                var barcodeno = item.barcodeno;
                                 //产品料号
                                 var erpno = item.erpno;
                                 //包件数
                                 var pack_qty = item.pack_qty;
-                                //包装箱号
-                                var pack_no = item.pack_no;
                                 //毛重
                                 var gweight = item.gweight;
-                                //加工车间
-                                var factory_workshop = item.factory_workshop;
                                 //包装尺寸
                                 var pack_size = item.pack_size;
                                 //包装工号
@@ -247,6 +251,14 @@ define(
                                 var factory_name = item.attribute6;
                                 //生产地址
                                 var factory_address = item.attribute7;
+                                //包装箱号
+                                var pack_no = item.attribute8;
+                                //加工车间
+                                var factory_workshop = item.attribute9;
+                                //每套总件数
+                                var pack_num = item.attribute10;
+                                //生产日期
+                                var production_date = item.production_date;
                                 var strStyle = "<style> table,td,th {border-width: 1px;}</style>";
                                 var req = /\"\[/g;
                                 var req0 = /\]\"/g;
