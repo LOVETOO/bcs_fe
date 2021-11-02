@@ -240,7 +240,7 @@ define(
                                 //毛重
                                 var gweight = item.gweight;
                                 //包装尺寸
-                                var pack_size = item.pack_size;
+                                var pack_size = item.packsize;
                                 //包装工号
                                 var pakageno = item.pakageno;
                                 //qc

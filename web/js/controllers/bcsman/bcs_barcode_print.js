@@ -39,7 +39,7 @@ define([
       };
 
       $scope.hideLoading = function () {
-        $(".desabled-window .shelter").hide();
+        $(".desabled-window, .shelter").hide();
       };
 
       /**搜索模板 */
@@ -91,18 +91,12 @@ define([
               swalApi.error("没有找到对应产品");
               return;
             }
-            var noTempList = res.bcs_mo_barcode_lists.filter(
-              (it) => !it.temp_content
+            res.bcs_mo_barcode_lists.forEach(
+              (it) =>
+                (it.production_date = new Date(it.production_date || "").Format(
+                  "yyyy-MM-dd"
+                ))
             );
-            if (noTempList && noTempList.length) {
-              var noStr = noTempList.map((it) => it.serialno).join(",");
-              swalApi.error("产品没有关联打印模板，产品编号: " + noStr);
-              return;
-            }
-            // if (!Number.isInteger(parseInt(value)) || !/^\d+$/.test(value)) {
-            //   swalApi.error("请输入正整数");
-            //   return;
-            // }
             $scope.data.barcode_lists = res.bcs_mo_barcode_lists;
             $scope.print();
           });
@@ -142,15 +136,6 @@ define([
                 sserialno += "," + item.serialno;
               }
             });
-            // requestApi
-            //   .post({
-            //     classId: "bcs_mo",
-            //     action: "print",
-            //     data: {
-            //       serialno: sserialno,
-            //     },
-            //   })
-            //   .then(function () {});
           };
 
           var iLength = barcode_lists.length;
@@ -198,7 +183,7 @@ define([
         var erpno = item.erpno; //产品料号
         var pack_qty = item.pack_qty; //包件数
         var gweight = item.gweight; //毛重
-        var pack_size = item.pack_size; //包装尺寸
+        var pack_size = item.packsize; //包装尺寸
         var pakageno = item.pakageno; //包装工号
         var qc = item.attribute4; //qc
         var produce_code = item.attribute5; //生产码
