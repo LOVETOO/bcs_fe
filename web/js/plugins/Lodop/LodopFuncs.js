@@ -65,6 +65,7 @@ function getLodop(oOBJECT, oEMBED) {
 
     var strCLodopInstall_1 = "<br>Web打印服务CLodop未安装启动（若此前已安装过，可<a color='#FF00FF' href='CLodop.protocol:setup' target='_self'><font color='#FF00FF'>点这里直接再次启动</font></a>），成功后请刷新本页面。";
     var strCLodopUpdate = "<br>Web打印服务CLodop需升级!点击这里<a href='CLodop_Setup_for_Win32NT.exe' target='_self'><font color='#FF00FF'>执行升级</font></a>,升级后请刷新页面。";
+    var privateNetMsg = "<br><br>若重复提示安装，则可关闭浏览器设置：private-network-requests；谷歌浏览器可访问链接：<font color='#FF00FF'>chrome://flags/#block-insecure-private-network-requests</font>，把Default设置为Disabled，然后点击页面下面relaunch按钮即可！";
     var LODOP;
     try {
         //=====判断浏览器类型:===============
@@ -78,7 +79,7 @@ function getLodop(oOBJECT, oEMBED) {
         } catch (err) {
         }
         if (!LODOP) {
-            Lod.swalError(strCLodopInstall_1, function (bool) {
+            Lod.swalError(strCLodopInstall_1 + privateNetMsg, function (bool) {
                 if (bool && CLodopIsLocal) {
                     window.location.href = "CLodop_Setup_for_Win32NT.exe";
                 } else if (bool && !CLodopIsLocal) {
@@ -106,7 +107,7 @@ function getLodop(oOBJECT, oEMBED) {
         //============================================================
         return LODOP;
     } catch (err) {
-        Lod.swalError(strCLodopInstall_1, function (bool) {
+        Lod.swalError(strCLodopInstall_1 + privateNetMsg, function (bool) {
             if (bool) {
                 window.location.href = "CLodop_Setup_for_Win32NT.exe"
             }

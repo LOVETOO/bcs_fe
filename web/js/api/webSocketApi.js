@@ -43,8 +43,8 @@ define(['swalApi'],function (swalApi) {
 
 			setTimeout(function () {
 				console.warn('WebSocket 正在重新连接');
-
-				createWebSocket();
+                var sId = getCookie && getCookie('syssessionid');
+				sId && createWebSocket(sId);
 			}, 1 * 60 * 1000); //1分钟后重连
 		};
 
