@@ -46,9 +46,9 @@ define(
                                         if (!Number.isInteger(parseInt(value)) || !check.test(value)) {
                                             return '请输入正整数';
                                         }
-                                        if (value > $scope.data.currItem.surplus_qty) {
-                                            return '超出剩余数量';
-                                        }
+                                        // if (value > $scope.data.currItem.surplus_qty) {
+                                        //     return '超出剩余数量';
+                                        // }
                                         if ($scope.data.currItem.temp_content == "" || $scope.data.currItem.temp_content == undefined) {
                                             return '该产品没有关联打印模板';
                                         }
