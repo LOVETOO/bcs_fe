@@ -233,6 +233,8 @@ define(
                                 var item_model = item.item_model;
                                 //二维码地址
                                 var barcodeno = item.barcodeno;
+                                //二维码 底下数字
+                                var barcodeno_num = HczyCommon.getQueryObject(barcodeno)['c'] || "";
                                 //产品料号
                                 var erpno = item.erpno;
                                 //包件数

@@ -180,6 +180,7 @@ define([
         var item_model = item.item_model; //产品型号
         var itme_colour = item.itme_colour; //产品颜色
         var barcodeno = item.barcodeno; //二维码地址
+        var barcodeno_num = HczyCommon.getQueryObject(barcodeno)["c"] || ""; //二维码 底下数字
         var erpno = item.erpno; //产品料号
         var pack_qty = item.pack_qty; //包件数
         var gweight = item.gweight; //毛重

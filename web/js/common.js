@@ -1761,6 +1761,25 @@ define(['jquery', 'angular', 'app', 'requestApi'], function ($, angular, app, re
         return HczyCommon.mainModule();
     };
 
+    /**
+     * 获取链接参数
+     * @since 2021-11-04
+     */
+     HczyCommon.getQueryObject = function (url) {
+        url = url || window.location.href;
+        var search = url.substring(url.lastIndexOf("?") + 1);
+        var obj = {};
+        var reg = /([^?&=]+)=([^?&=]*)/g;
+        search.replace(reg, (rs, $1, $2) => {
+            var name = decodeURIComponent($1);
+            var val = decodeURIComponent($2);
+            val = String(val);
+            obj[name] = val;
+            return rs;
+        });
+        return obj;
+    };
+
     window.curr_Url = window.location.pathname;//打开页面用的url
     if (window.location.origin) {
         window.curr_Url = window.location.origin + window.location.pathname;//打开页面用的url
