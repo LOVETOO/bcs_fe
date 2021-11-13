@@ -206,7 +206,7 @@ define([
         var req = /\"\[/g;
         var req0 = /\]\"/g;
         // 打印模板
-        if (!is_install) {
+        if (is_install != "是") {
           temp_content = temp_content.replace(
             "/web/img/contain-circle.png",
             "/web/img/transparent.png"
