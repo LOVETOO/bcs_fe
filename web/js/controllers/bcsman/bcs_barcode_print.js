@@ -176,9 +176,16 @@ define([
       // 添加打印模块
       $scope.handleAddPrintItem = function (item, temp_content) {
         var serialno = item.serialno; //序号
-        var item_name = item.item_name; //产品名称
+        var item_name = item.item_name; //产品品名
         var item_model = item.item_model; //产品型号
         var itme_colour = item.itme_colour; //产品颜色
+        var item_specs = item.item_specs; //产品规格
+        var is_install = item.is_install; //是否包安装
+        var inner_specs = item.inner_specs; //内箱规格
+        var out_specs = item.out_specs; //外箱规格
+        var iso_standard = item.iso_standard; //ISO标准(执行标准)
+        var classication = item.classication; //等级
+        var material = item.material; //材质
         var barcodeno = item.barcodeno; //二维码地址
         var barcodeno_num = HczyCommon.getQueryObject(barcodeno)["c"] || ""; //二维码 底下数字
         var erpno = item.erpno; //产品料号
@@ -198,6 +205,13 @@ define([
         var strStyle = "<style>table,td,th{border-width:1px;}</style>";
         var req = /\"\[/g;
         var req0 = /\]\"/g;
+        // 打印模板
+        if (!is_install) {
+          temp_content = temp_content.replace(
+            "/web/img/contain-circle.png",
+            "/web/img/transparent.png"
+          );
+        }
         try {
           eval(temp_content.replace(req, "").replace(req0, ""));
         } catch (err) {

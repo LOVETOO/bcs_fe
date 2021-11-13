@@ -225,12 +225,26 @@ define(
                             $scope.data.currItem.barcodes.forEach(function (item, index) {
                                 //序号
                                 var serialno = item.serialno;
-                                //产品名称
+                                //产品品名
                                 var item_name = item.item_name;
                                 //产品颜色
                                 var itme_colour = item.itme_colour;
                                 //产品型号
                                 var item_model = item.item_model;
+                                //产品规格
+                                var item_specs = item.item_specs;
+                                //是否包安装
+                                var is_install = item.is_install;
+                                //内箱规格
+                                var inner_specs = item.inner_specs;
+                                //外箱规格
+                                var out_specs = item.out_specs;
+                                //ISO标准(执行标准)
+                                var iso_standard = item.iso_standard;
+                                //等级
+                                var classication = item.classication;
+                                //材质
+                                var material = item.material;
                                 //二维码地址
                                 var barcodeno = item.barcodeno;
                                 //二维码 底下数字
@@ -264,9 +278,14 @@ define(
                                 var strStyle = "<style> table,td,th {border-width: 1px;}</style>";
                                 var req = /\"\[/g;
                                 var req0 = /\]\"/g;
+                                // 打印模板
+                                var temp_content = $scope.data.currItem.temp_content;
+                                if (!is_install) {
+                                    temp_content = temp_content.replace("/web/img/contain-circle.png", "/web/img/transparent.png");
+                                }
 
                                 try {
-                                    eval(($scope.data.currItem.temp_content).replace(req, "").replace(req0, ""));
+                                    eval(temp_content.replace(req, "").replace(req0, ""));
                                 } catch (err) {
                                     alert(err);
                                 }
