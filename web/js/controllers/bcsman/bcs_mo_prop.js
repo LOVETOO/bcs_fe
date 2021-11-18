@@ -275,6 +275,12 @@ define(
                                 var pack_num = item.attribute10;
                                 //生产日期
                                 var production_date = item.production_date;
+                                var brand = item.brand; //品牌
+                                var manufacturer = item.manufacturer; //制造商
+                                var manufacturer_address = item.manufacturer_address; //制造商地址
+                                var telephone = item.telephone; //电话
+                                var website = item.website; //官网
+                                var zip_code = item.zip_code; //邮编
                                 var strStyle = "<style> table,td,th {border-width: 1px;}</style>";
                                 var req = /\"\[/g;
                                 var req0 = /\]\"/g;
