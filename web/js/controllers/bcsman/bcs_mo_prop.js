@@ -180,6 +180,9 @@ define(
                         }
 
                         var iLength = $scope.data.currItem.barcodes.length;
+                        var temp_content = $scope.data.currItem.temp_content;
+                        var hasPageSize = temp_content.indexOf("LODOP.SET_PRINT_PAGESIZE") > -1;
+                        var hasPrintMode = temp_content.indexOf("LODOP.SET_PRINT_MODE") > -1;
                         if (iLength > 49) {
                             $scope.data.currItem.barcodes.forEach(function (item, index) {
                                 var serialno = item.serialno;
@@ -285,7 +288,6 @@ define(
                                 var req = /\"\[/g;
                                 var req0 = /\]\"/g;
                                 // 打印模板
-                                var temp_content = $scope.data.currItem.temp_content;
                                 if (is_install != "是") {
                                     temp_content = temp_content.replace("/web/img/contain-circle.png", "/web/img/transparent.png");
                                 }
@@ -296,10 +298,11 @@ define(
                                     alert(err);
                                 }
                                 $scope.LODOP.NEWPAGEA();
-                                $scope.LODOP.SET_PRINT_PAGESIZE(0, $scope.data.currItem.temp_width + "mm", $scope.data.currItem.temp_height + "mm", "工单打印");
+                                !hasPageSize && $scope.LODOP.SET_PRINT_PAGESIZE(0, $scope.data.currItem.temp_width + "mm", $scope.data.currItem.temp_height + "mm", "工单打印");
                             });
-                            //调用打印
-                            $scope.LODOP.SET_PRINT_MODE("CUSTOM_TASK_NAME", "条码打印" + iLength);
+                            // 为每个打印单独设置任务名
+                            !hasPrintMode && $scope.LODOP.SET_PRINT_MODE("CUSTOM_TASK_NAME", "条码打印" + iLength);
+                            // 调用打印
                             if($scope.data.printtype == 1){
                                 return $scope.LODOP.PRINT();
                             }else{

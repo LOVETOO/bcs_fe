@@ -121,6 +121,8 @@ define([
           var temp_width = $scope.searchObj.temp_width;
           var temp_height = $scope.searchObj.temp_height;
           var barcode_lists = $scope.data.barcode_lists;
+          var hasPageSize = temp_content.indexOf("LODOP.SET_PRINT_PAGESIZE") > -1;
+          var hasPrintMode = temp_content.indexOf("LODOP.SET_PRINT_MODE") > -1;
           $scope.showLoading();
 
           // 返回事件
@@ -153,7 +155,7 @@ define([
           if (iLength > 0) {
             barcode_lists.forEach(function (item, index) {
               $scope.handleAddPrintItem(item, temp_content);
-              $scope.LODOP.SET_PRINT_PAGESIZE(
+              !hasPageSize && $scope.LODOP.SET_PRINT_PAGESIZE(
                 0,
                 temp_width + "mm",
                 temp_height + "mm",
@@ -161,7 +163,7 @@ define([
               );
             });
             // 调用打印
-            $scope.LODOP.SET_PRINT_MODE(
+            !hasPrintMode && $scope.LODOP.SET_PRINT_MODE(
               "CUSTOM_TASK_NAME",
               "条码打印" + iLength
             );
@@ -228,8 +230,11 @@ define([
 
       // 调用打印
       $scope.doPrint = function (index) {
-        $scope.LODOP.SET_PRINT_MODE("CUSTOM_TASK_NAME", "条码打印" + index);
-        $scope.LODOP.SET_PRINT_PAGESIZE(
+        var temp_content = $scope.searchObj.temp_content || "";
+        var hasPageSize = temp_content.indexOf("LODOP.SET_PRINT_PAGESIZE") > -1;
+        var hasPrintMode = temp_content.indexOf("LODOP.SET_PRINT_MODE") > -1;
+        !hasPrintMode && $scope.LODOP.SET_PRINT_MODE("CUSTOM_TASK_NAME", "条码打印" + index);
+        !hasPageSize && $scope.LODOP.SET_PRINT_PAGESIZE(
           0,
           $scope.searchObj.temp_width + "mm",
           $scope.searchObj.temp_height + "mm",
