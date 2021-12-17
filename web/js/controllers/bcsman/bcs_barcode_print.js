@@ -56,6 +56,7 @@ define([
             temp_width: result.temp_width,
             temp_height: result.temp_height,
           });
+          $('.row .input-barcode .form-control').focus();
           console.log("searchprint $scope.searchObj", $scope.searchObj);
         },
       };
@@ -128,6 +129,8 @@ define([
           // 返回事件
           $scope.LODOP.On_Return = function (TaskID, Value) {
             $scope.hideLoading();
+            $scope.searchObj.barcode = "";
+            $('.row .input-barcode .form-control').focus();
             // 打印成功记录打印数据
             if (Value <= 0) return;
             var sserialno = "";
