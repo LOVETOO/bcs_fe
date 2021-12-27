@@ -1765,7 +1765,7 @@ define(['jquery', 'angular', 'app', 'requestApi'], function ($, angular, app, re
      * 获取链接参数
      * @since 2021-11-04
      */
-     HczyCommon.getQueryObject = function (url) {
+    HczyCommon.getQueryObject = function (url) {
         url = url || window.location.href;
         var search = url.substring(url.lastIndexOf("?") + 1);
         var obj = {};
@@ -1778,6 +1778,14 @@ define(['jquery', 'angular', 'app', 'requestApi'], function ($, angular, app, re
             return rs;
         });
         return obj;
+    };
+
+    /**
+     * 判断正整数
+     * @since 2021-11-04
+     */
+    HczyCommon.isPositiveInteger = function (val) {
+        return /^[1-9]\d*$/.test(val);
     };
 
     window.curr_Url = window.location.pathname;//打开页面用的url

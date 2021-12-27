@@ -70,7 +70,22 @@
                 </div>
                 <div hc-input="data.currItem.factory_workshop" hc-label="加工车间">
                 </div>
-                <div hc-input="data.currItem.pack_num" hc-label="每套总件数">
+                <div class="pack-select-input">
+                    <div
+                        hc-input="data.currItem.pack_num"
+                        hc-label="每套总件数"
+                        hc-focus="handlePackFocus($event)"
+                        hc-blur="handlePackBlur($event)"
+                        hc-change="handlePackChange()"
+                    ></div>
+                    <!-- 下拉选择 - 每套总件数 -->
+                    <div class="pack-select-picker dropdown-menu pull-right">
+                        <li ng-click="handlePackSelect(2)">2件/套</li>
+                        <li ng-click="handlePackSelect(3)">3件/套</li>
+                        <li ng-click="handlePackSelect(4)">4件/套</li>
+                        <li ng-click="handlePackSelect(5)">5件/套</li>
+                        <li ng-click="handlePackSelect(6)">6件/套</li>
+                    </div>
                 </div>
             </div>
             <div class="row"> 
@@ -95,3 +110,29 @@
         </div>
     </div>
 </div>
+
+<style>
+.pack-select-input {
+    position: relative;
+    width: calc(25% - 18px);
+}
+.pack-select-input .input-inline {
+    width: 100%;
+}
+.pack-select-picker {
+    border-radius: 2px;
+    overflow: hidden;
+    position: absolute;
+}
+.pack-select-picker li {
+    padding: 8px 10px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.pack-select-picker li:hover {
+    background-color: #f3f3f3;
+}
+.pack-select-picker li:not(:first-child) {
+    border-top: 1px solid #f5f5f5;
+}
+</style>

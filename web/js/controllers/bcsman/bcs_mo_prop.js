@@ -185,25 +185,13 @@ define(
                         var hasPrintMode = temp_content.indexOf("LODOP.SET_PRINT_MODE") > -1;
                         if (iLength > 49) {
                             $scope.data.currItem.barcodes.forEach(function (item, index) {
-                                var serialno = item.serialno;
-                                //var productname = item.productname;
-
-                                var strStyle = "<style> table,td,th {border-width: 1px;}</style>";
-                                var req = /\"\[/g;
-                                var req0 = /\]\"/g;
-
-                                try {
-                                    eval(($scope.data.currItem.temp_content).replace(req, "").replace(req0, ""));
-                                } catch (err) {
-                                    alert(err);
-                                }
-                                $scope.LODOP.NEWPAGEA();
+                                $scope.handleAddPrintItem(item, temp_content);
 
                                 //每10条记录一组打印
                                 if ((index + 1) % 50 == 0) {
                                     //调用打印
-                                    $scope.LODOP.SET_PRINT_MODE("CUSTOM_TASK_NAME", "条码打印" + index);
-                                    $scope.LODOP.SET_PRINT_PAGESIZE(0, $scope.data.currItem.temp_width + "mm", $scope.data.currItem.temp_height + "mm", "工单打印");
+                                    !hasPrintMode && $scope.LODOP.SET_PRINT_MODE("CUSTOM_TASK_NAME", "条码打印" + index);
+                                    !hasPageSize && $scope.LODOP.SET_PRINT_PAGESIZE(0, $scope.data.currItem.temp_width + "mm", $scope.data.currItem.temp_height + "mm", "工单打印");
                                     if($scope.data.printtype == 1){
                                         $scope.LODOP.PRINT();
                                     }else{
@@ -215,89 +203,16 @@ define(
                             //最后判断不是整除的话打印剩余数据
                             if (iLength % 50 > 0) {
                                 //调用打印
-                                $scope.LODOP.SET_PRINT_MODE("CUSTOM_TASK_NAME", "条码打印" + iLength);
-                                $scope.LODOP.SET_PRINT_PAGESIZE(0, $scope.data.currItem.temp_width + "mm", $scope.data.currItem.temp_height + "mm", "工单打印");
+                                !hasPrintMode && $scope.LODOP.SET_PRINT_MODE("CUSTOM_TASK_NAME", "条码打印" + iLength);
+                                !hasPageSize && $scope.LODOP.SET_PRINT_PAGESIZE(0, $scope.data.currItem.temp_width + "mm", $scope.data.currItem.temp_height + "mm", "工单打印");
                                 if($scope.data.printtype == 1){
                                     return $scope.LODOP.PRINT();
-                                }else{
-                                    return $scope.LODOP.PREVIEW();
                                 }
-                                //return $scope.LODOP.PREVIEW();
+                                return $scope.LODOP.PREVIEW();
                             }
                         } else if (iLength > 0) {
                             $scope.data.currItem.barcodes.forEach(function (item, index) {
-                                //序号
-                                var serialno = item.serialno;
-                                //产品品名
-                                var item_name = item.item_name;
-                                //产品颜色
-                                var itme_colour = item.itme_colour;
-                                //产品型号
-                                var item_model = item.item_model;
-                                //产品规格
-                                var item_specs = item.item_specs;
-                                //是否包安装
-                                var is_install = item.is_install;
-                                //内箱规格
-                                var inner_specs = item.inner_specs;
-                                //外箱规格
-                                var out_specs = item.out_specs;
-                                //ISO标准(执行标准)
-                                var iso_standard = item.iso_standard;
-                                //等级
-                                var classication = item.classication;
-                                //材质
-                                var material = item.material;
-                                //二维码地址
-                                var barcodeno = item.barcodeno;
-                                //二维码 底下数字
-                                var barcodeno_num = HczyCommon.getQueryObject(barcodeno)['c'] || "";
-                                //产品料号
-                                var erpno = item.erpno;
-                                //包件数
-                                var pack_qty = item.pack_qty;
-                                //毛重
-                                var gweight = item.gweight;
-                                //包装尺寸
-                                var pack_size = item.packsize;
-                                //包装工号
-                                var pakageno = item.pakageno;
-                                //qc
-                                var qc = item.attribute4;
-                                //生产码
-                                var produce_code = item.attribute5;
-                                //生产企业
-                                var factory_name = item.attribute6;
-                                //生产地址
-                                var factory_address = item.attribute7;
-                                //包装箱号
-                                var pack_no = item.attribute8;
-                                //加工车间
-                                var factory_workshop = item.attribute9;
-                                //每套总件数
-                                var pack_num = item.attribute10;
-                                //生产日期
-                                var production_date = item.production_date;
-                                var brand = item.brand; //品牌
-                                var manufacturer = item.manufacturer; //制造商
-                                var manufacturer_address = item.manufacturer_address; //制造商地址
-                                var telephone = item.telephone; //电话
-                                var website = item.website; //官网
-                                var zip_code = item.zip_code; //邮编
-                                var strStyle = "<style> table,td,th {border-width: 1px;}</style>";
-                                var req = /\"\[/g;
-                                var req0 = /\]\"/g;
-                                // 打印模板
-                                if (is_install != "是") {
-                                    temp_content = temp_content.replace("/web/img/contain-circle.png", "/web/img/transparent.png");
-                                }
-
-                                try {
-                                    eval(temp_content.replace(req, "").replace(req0, ""));
-                                } catch (err) {
-                                    alert(err);
-                                }
-                                $scope.LODOP.NEWPAGEA();
+                                $scope.handleAddPrintItem(item, temp_content);
                                 !hasPageSize && $scope.LODOP.SET_PRINT_PAGESIZE(0, $scope.data.currItem.temp_width + "mm", $scope.data.currItem.temp_height + "mm", "工单打印");
                             });
                             // 为每个打印单独设置任务名
@@ -305,10 +220,8 @@ define(
                             // 调用打印
                             if($scope.data.printtype == 1){
                                 return $scope.LODOP.PRINT();
-                            }else{
-                                return $scope.LODOP.PREVIEW();
                             }
-                            //return $scope.LODOP.PREVIEW();
+                            return $scope.LODOP.PREVIEW();
                         }
                     });
                 }
@@ -385,6 +298,8 @@ define(
                 }
 
                 $scope.doBeforeSave = function (postParams) {
+                    var flag = $scope.handlePackChange();
+                    if (!flag) return;
                     //处理item对象
                     if (postParams.data.item) {
                         postParams.data = angular.copy(postParams.data);
@@ -397,9 +312,108 @@ define(
                 $scope.footerRightButtons.generate = {
                     title: "打印预览",
                     icon: "iconfont hc-print",
-                    click: function () { 
+                    click: function () {
+                        var flag = $scope.handlePackChange();
+                        if (!flag) return;
                         $scope.print(2);
                     }
+                }
+
+                // 添加打印模块
+                $scope.handleAddPrintItem = function (item, temp_content) {
+                    //序号
+                    var serialno = item.serialno;
+                    //产品品名
+                    var item_name = item.item_name;
+                    //产品颜色
+                    var itme_colour = item.itme_colour;
+                    //产品型号
+                    var item_model = item.item_model;
+                    //产品规格
+                    var item_specs = item.item_specs;
+                    //是否包安装
+                    var is_install = item.is_install;
+                    //内箱规格
+                    var inner_specs = item.inner_specs;
+                    //外箱规格
+                    var out_specs = item.out_specs;
+                    //ISO标准(执行标准)
+                    var iso_standard = item.iso_standard;
+                    //等级
+                    var classication = item.classication;
+                    //材质
+                    var material = item.material;
+                    //二维码地址
+                    var barcodeno = item.barcodeno;
+                    //二维码 底下数字
+                    var barcodeno_num = HczyCommon.getQueryObject(barcodeno)['c'] || "";
+                    //产品料号
+                    var erpno = item.erpno;
+                    //包件数
+                    var pack_qty = item.pack_qty;
+                    //毛重
+                    var gweight = item.gweight;
+                    //包装尺寸
+                    var pack_size = item.packsize;
+                    //包装工号
+                    var pakageno = item.pakageno;
+                    //qc
+                    var qc = item.attribute4;
+                    //生产码
+                    var produce_code = item.attribute5;
+                    //生产企业
+                    var factory_name = item.attribute6;
+                    //生产地址
+                    var factory_address = item.attribute7;
+                    //包装箱号
+                    var pack_no = item.attribute8;
+                    //加工车间
+                    var factory_workshop = item.attribute9;
+                    //每套总件数
+                    var pack_num = item.attribute10;
+                    //生产日期
+                    var production_date = item.production_date;
+                    var brand = item.brand; //品牌
+                    var manufacturer = item.manufacturer; //制造商
+                    var manufacturer_address = item.manufacturer_address; //制造商地址
+                    var telephone = item.telephone; //电话
+                    var website = item.website; //官网
+                    var zip_code = item.zip_code; //邮编
+                    var strStyle = "<style> table,td,th {border-width: 1px;}</style>";
+                    var req = /\"\[/g;
+                    var req0 = /\]\"/g;
+                    // 打印模板
+                    if (is_install != "是") {
+                        temp_content = temp_content.replace("/web/img/contain-circle.png", "/web/img/transparent.png");
+                    }
+
+                    try {
+                        eval(temp_content.replace(req, "").replace(req0, ""));
+                    } catch (err) {
+                        alert(err);
+                    }
+                    $scope.LODOP.NEWPAGEA();
+                }
+
+                // 每套总件数 - 选择
+                $scope.handlePackFocus = function(e) {
+                    $(".pack-select-picker").show();
+                }
+                $scope.handlePackBlur = function(e) {
+                    setTimeout(function() {
+                        $(".pack-select-picker").hide();
+                    }, 130)
+                }
+                $scope.handlePackSelect = function(e) {
+                    e && ($scope.data.currItem.pack_num = e);
+                }
+                $scope.handlePackChange = function() {
+                    var pack_num = $scope.data.currItem.pack_num;
+                    if (pack_num && !HczyCommon.isPositiveInteger(pack_num)) {
+                        swalApi.error("每套总件数应为正整数");
+                        return false;
+                    }
+                    return true;
                 }
             }];
 
