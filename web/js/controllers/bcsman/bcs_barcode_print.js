@@ -180,6 +180,7 @@ define([
 
       // 添加打印模块
       $scope.handleAddPrintItem = function (item, temp_content) {
+        var transparentPng = "/web/img/transparent.png"; // 透明图片
         var serialno = item.serialno; //序号
         var item_name = item.item_name; //产品品名
         var item_model = item.item_model; //产品型号
@@ -212,17 +213,37 @@ define([
         var telephone = item.telephone; //电话
         var website = item.website; //官网
         var zip_code = item.zip_code; //邮编
+        var frequency = item.frequency; //额定频率
+        var power = item.power; //额定功率
+        var voltage = item.voltage; //额定电压
+        var waterproofGrade = item.waterproofGrade; //防水等级
+        var groups = item.groups; //组别
+        var workorder = item.workorder; //工单号
+        var imgPath = item.imgPath || transparentPng; //商品图片
+        var netWeight = item.netWeight; // 净重
+        imgPath = "<img src='" + imgPath + "'/>";
 
         var strStyle = "<style>table,td,th{border-width:1px;}</style>";
         var req = /\"\[/g;
         var req0 = /\]\"/g;
         // 打印模板
         if (is_install != "是") {
-          temp_content = temp_content.replace(
-            "/web/img/contain-circle.png",
-            "/web/img/transparent.png"
-          );
+          temp_content = temp_content.replace("/web/img/contain-circle.png", transparentPng);
         }
+        var logoUrl = transparentPng;
+        switch (brand) {
+          case "箭牌":
+            logoUrl = "/web/img/logo/arrow.png";
+            break;
+          case "法恩莎":
+            logoUrl = "/web/img/logo/faenza.png";
+            break;
+          case "安华":
+            logoUrl = "/web/img/logo/annwa.png";
+            break;
+        }
+        temp_content = temp_content.replace("/web/img/logo/arrow.png", logoUrl);
+
         try {
           eval(temp_content.replace(req, "").replace(req0, ""));
         } catch (err) {

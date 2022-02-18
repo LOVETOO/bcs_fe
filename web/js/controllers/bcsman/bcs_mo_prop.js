@@ -3,7 +3,7 @@
  * @since 2019-12-25
  * 巫奕海
  */
-define(
+ define(
     ['module', 'controllerApi', 'base_obj_prop', '$q', 'swalApi', 'requestApi', 'numberApi', 'fileApi','lodop'],
     function (module, controllerApi, base_obj_prop, $q, swalApi, requestApi, numberApi, fileApi, lodop) {
 
@@ -106,7 +106,8 @@ define(
                             gweight:$scope.data.currItem.gweight,
                             factory_workshop:$scope.data.currItem.factory_workshop,
                             organizationid:$scope.data.currItem.organizationid,
-                            pack_num:$scope.data.currItem.pack_num
+                            pack_num:$scope.data.currItem.pack_num,
+                            groups:$scope.data.currItem.groups
                         }
                     }).then(function (val) { 
                         data['barcodes'] = val.barcodes;
@@ -321,6 +322,7 @@ define(
 
                 // 添加打印模块
                 $scope.handleAddPrintItem = function (item, temp_content) {
+                    var transparentPng = "/web/img/transparent.png"; // 透明图片
                     //序号
                     var serialno = item.serialno;
                     //产品品名
@@ -382,10 +384,39 @@ define(
                     var strStyle = "<style> table,td,th {border-width: 1px;}</style>";
                     var req = /\"\[/g;
                     var req0 = /\]\"/g;
+                    //额定频率
+                    var frequency = item.frequency;
+                    //额定功率
+                    var power = item.power;
+                    //额定电压
+                    var voltage = item.voltage;
+                    //防水等级
+                    var waterproofGrade = item.waterproofGrade;
+                    //组别
+                    var groups = item.groups;
+                    //工单号
+                    var workorder = item.workorder;
+                    var netWeight = item.netWeight; // 净重
+                    var imgPath = item.imgPath || transparentPng; //商品图片
+                    imgPath = "<img src='" + imgPath + "'/>";
+
                     // 打印模板
                     if (is_install != "是") {
-                        temp_content = temp_content.replace("/web/img/contain-circle.png", "/web/img/transparent.png");
+                        temp_content = temp_content.replace("/web/img/contain-circle.png", transparentPng);
                     }
+                    var logoUrl = transparentPng;
+                    switch (brand) {
+                        case "箭牌":
+                            logoUrl = "/web/img/logo/arrow.png";
+                            break;
+                        case "法恩莎":
+                            logoUrl = "/web/img/logo/faenza.png";
+                            break;
+                        case "安华":
+                            logoUrl = "/web/img/logo/annwa.png";
+                            break;
+                    }
+                    temp_content = temp_content.replace("/web/img/logo/arrow.png", logoUrl);
 
                     try {
                         eval(temp_content.replace(req, "").replace(req0, ""));
